@@ -1,0 +1,1244 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+    "title": "Transporteur vers Woop",
+    "description": "Contrat d'interface des APIs des transporteurs vers Woop.",
+    "version": "1.3.0"
+  },
+  "servers": [
+    {
+      "url": "car-api.recette.gcp.last-mile.fr",
+      "description": "URL de recette"
+    },
+    {
+      "url": "car-api.preprod.gcp.last-mile.fr",
+      "description": "URL de preprod"
+    },
+    {
+      "url": "carrier.last-mile.fr",
+      "description": "URL de prod"
+    }
+  ],
+  "paths": {
+    "/health": {
+      "get": {
+        "tags": [
+          "Health"
+        ],
+        "description": "Test si l'application est UP",
+        "operationId": "getHealth",
+        "responses": {
+          "204": {
+            "description": "Le service est opérationnel"
+          }
+        },
+        "security": []
+      }
+    },
+    "/deliveries/{deliveryId}/status": {
+      "put": {
+        "tags": [
+          "Delivery"
+        ],
+        "description": "Evolution de status de livraison.",
+        "operationId": "putDeliveryStatus",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/components/parameters/pathDeliveryId"
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/putDeliveryStatus"
+        },
+        "responses": {
+          "204": {
+            "description": "Requête traitée avec succès"
+          },
+          "400": {
+            "$ref": "#/components/responses/badRequest"
+          },
+          "401": {
+            "description": "Vous n'êtes pas autorisé à accéder à cet élément."
+          },
+          "403": {
+            "description": "Le status ne peut plus être edité"
+          },
+          "404": {
+            "description": "Le 'deliveryId' n'a pas été trouvé"
+          }
+        },
+        "security": [
+          {
+            "client_credentials": []
+          }
+        ]
+      }
+    },
+    "/deliveries/{deliveryId}/deltaCosts": {
+      "put": {
+        "tags": [
+          "Delivery"
+        ],
+        "description": "Ajout de frais supplémentaire ou de remise sur la commande.",
+        "operationId": "putDeliveryDeltaCosts",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/components/parameters/pathDeliveryId"
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/putDeliveryDeltaCosts"
+        },
+        "responses": {
+          "204": {
+            "description": "Requête traitée avec succès"
+          },
+          "400": {
+            "$ref": "#/components/responses/badRequest"
+          },
+          "401": {
+            "description": "Vous n'êtes pas autorisé à accéder à cet élément."
+          },
+          "403": {
+            "description": "Des frais supplémentaires ne peuvent plus être envoyés"
+          },
+          "404": {
+            "description": "Le 'deliveryId' n'a pas été trouvé"
+          }
+        },
+        "security": [
+          {
+            "client_credentials": []
+          }
+        ]
+      }
+    },
+    "/deliveries/{deliveryId}/closure": {
+      "post": {
+        "tags": [
+          "Delivery"
+        ],
+        "description": "Envoi des informations de facturation.",
+        "operationId": "postDeliveryClosure",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/components/parameters/pathDeliveryId"
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/postDeliveryClosure"
+        },
+        "responses": {
+          "204": {
+            "description": "Requête traitée avec succès"
+          },
+          "400": {
+            "$ref": "#/components/responses/badRequest"
+          },
+          "401": {
+            "description": "Vous n'êtes pas autorisé à accéder à cet élément."
+          },
+          "403": {
+            "description": "Des frais supplémentaires ne peuvent plus être envoyés"
+          },
+          "404": {
+            "description": "Le 'deliveryId' n'a pas été trouvé"
+          }
+        },
+        "security": [
+          {
+            "client_credentials": []
+          }
+        ]
+      }
+    },
+    "/deliveries/{deliveryId}/events": {
+      "post": {
+        "tags": [
+          "Delivery"
+        ],
+        "description": "Envoi d'un évènement.",
+        "operationId": "postDeliveryEvent",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/components/parameters/pathDeliveryId"
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/postDeliveryEvent"
+        },
+        "responses": {
+          "204": {
+            "description": "Requête traitée avec succès"
+          },
+          "400": {
+            "$ref": "#/components/responses/badRequest"
+          },
+          "401": {
+            "description": "Vous n'êtes pas autorisé à accéder à cet élément."
+          },
+          "404": {
+            "description": "Le 'deliveryId' n'a pas été trouvé"
+          }
+        },
+        "security": [
+          {
+            "client_credentials": []
+          }
+        ]
+      }
+    },
+    "/subscriptions": {
+      "post": {
+        "tags": [
+          "Subscription"
+        ],
+        "description": "Endpoint d'initialisation d'échanges avec les APIs transporteur.",
+        "operationId": "postSubscription",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/postSubscription"
+        },
+        "responses": {
+          "204": {
+            "description": "Requête traitée avec succès"
+          },
+          "400": {
+            "$ref": "#/components/responses/badRequest"
+          },
+          "401": {
+            "description": "Vous n'êtes pas autorisé à accéder à cet élément."
+          }
+        },
+        "security": [
+          {
+            "client_credentials": []
+          }
+        ]
+      }
+    },
+    "/deliveries/{deliveryId}/documents": {
+      "post": {
+        "tags": [
+          "Delivery"
+        ],
+        "description": "Envoi d'un document",
+        "operationId": "postDeliveryDocument",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/pathDeliveryId"
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/postDeliveryDocument"
+        },
+        "responses": {
+          "204": {
+            "description": "Requête traitée avec succès"
+          },
+          "400": {
+            "$ref": "#/components/responses/badRequest"
+          },
+          "401": {
+            "description": "Vous n'êtes pas autorisé à accéder à cet élément."
+          },
+          "404": {
+            "description": "Le 'deliveryId' n'a pas été trouvé"
+          }
+        },
+        "security": [
+          {
+            "client_credentials": []
+          }
+        ]
+      }
+    },
+    "/webhook/updateStatus": {
+      "post": {
+        "tags": [
+          "Webhook"
+        ],
+        "description": "Endpoint pour les retours d'update de Stuart",
+        "operationId": "processStatusHook",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/components/parameters/webhookAuth"
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/postStuartHook"
+        },
+        "responses": {
+          "204": {
+            "description": "Requête traitée avec succès"
+          },
+          "400": {
+            "$ref": "#/components/responses/badRequest"
+          },
+          "401": {
+            "description": "Vous n'êtes pas autorisé à accéder à cet élément."
+          }
+        },
+        "security": [
+          {
+            "client_credentials": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "currency": {
+        "type": "string",
+        "enum": [
+          "EUR"
+        ]
+      },
+      "deliveryStatus": {
+        "type": "string",
+        "enum": [
+          "DELIVERY_STARTED",
+          "DELIVERY_PICK_UP_REACHED",
+          "DELIVERY_PICK_UP_OK",
+          "DELIVERY_PICK_UP_PARTIALLY",
+          "DELIVERY_IN_PROGRESS",
+          "DELIVERY_AT_DROP_OF_LOCATION",
+          "DELIVERY_PICK_UP_FAILED",
+          "DELIVERY_DELIVERED_WITH_CLAIM",
+          "DELIVERY_CANCELLED_WITH_RETURN",
+          "DELIVERY_FAILED_WITH_RETURN",
+          "DELIVERY_RETURNED_TO_PICK_UP",
+          "DELIVERY_DELIVERED_OK",
+          "DELIVERY_DELIVERED_PARTIALLY"
+        ]
+      },
+      "deltaCostReason": {
+        "type": "string",
+        "enum": [
+          "DELTACOST_EXTEND_WAITING_WAREHOUSE",
+          "DELTACOST_EXTEND_WAITING_CUSTOMER",
+          "DELTACOST_WRONG_FLOOR",
+          "DELTACOST_WRONG_CONTENT",
+          "DELTACOST_WAREHOUSE_RETURN",
+          "DELTACOST_LATE_CANCELLATION",
+          "DELTACOST_PICKUP_FAILED",
+          "DELTACOST_PARTIALLY_DELIVERED",
+          "DELTACOST_UNKNOWN"
+        ]
+      },
+      "length": {
+        "required": [
+          "value",
+          "unit"
+        ],
+        "properties": {
+          "value": {
+            "type": "number",
+            "format": "float"
+          },
+          "unit": {
+            "$ref": "#/components/schemas/lengthUnits"
+          }
+        }
+      },
+      "mass": {
+        "required": [
+          "value",
+          "unit"
+        ],
+        "properties": {
+          "value": {
+            "type": "number",
+            "format": "float"
+          },
+          "unit": {
+            "$ref": "#/components/schemas/massUnits"
+          }
+        }
+      },
+      "lengthUnits": {
+        "type": "string",
+        "enum": [
+          "mm",
+          "cm",
+          "m",
+          "in",
+          "ft-us",
+          "ft",
+          "mi"
+        ]
+      },
+      "massUnits": {
+        "type": "string",
+        "enum": [
+          "mcg",
+          "mg",
+          "g",
+          "kg",
+          "oz",
+          "lb",
+          "mt",
+          "t"
+        ]
+      },
+      "postSubscriptionBasic": {
+        "properties": {
+          "basic": {
+            "type": "object",
+            "description": "A definir si la méthode d'authentification à l'API voulue est basic",
+            "required": [
+              "username",
+              "password"
+            ],
+            "properties": {
+              "username": {
+                "type": "string"
+              },
+              "password": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "postSubscriptionOAuth2": {
+        "properties": {
+          "oauth2": {
+            "type": "object",
+            "description": "A definir si la méthode d'authentification à l'API voulue est oauth2",
+            "required": [
+              "client_id",
+              "client_secret",
+              "tokenEndPoint"
+            ],
+            "properties": {
+              "client_id": {
+                "type": "string"
+              },
+              "client_secret": {
+                "type": "string"
+              },
+              "audience": {
+                "type": "string"
+              },
+              "grant_type": {
+                "type": "string"
+              },
+              "tokenEndPoint": {
+                "type": "string",
+                "description": "Url permettant de recupérer le token d'accès en fonction du clientId et du clientSecret"
+              }
+            }
+          }
+        }
+      },
+      "postSubscriptionToken": {
+        "properties": {
+          "token": {
+            "type": "object",
+            "description": "A définir si la méthode d'authentification donne un bearer token à partir d'un username/password",
+            "required": [
+              "username",
+              "password",
+              "endpoint"
+            ],
+            "properties": {
+              "username": {
+                "type": "string"
+              },
+              "password": {
+                "type": "string"
+              },
+              "endpoint": {
+                "type": "string",
+                "description": "Url permettant de recupérer le token d'accès"
+              }
+            }
+          }
+        }
+      },
+      "team": {
+        "required": [
+          "members"
+        ],
+        "properties": {
+          "members": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "vehicleType": {
+        "type": "string",
+        "enum": [
+          "VEHICLE_TYPE_BIKE",
+          "VEHICLE_TYPE_SCOOTER",
+          "VEHICLE_TYPE_E_SCOOTER",
+          "VEHICLE_TYPE_VAN_SMALL",
+          "VEHICLE_TYPE_E_VAN_SMALL",
+          "VEHICLE_TYPE_VAN_MEDIUM",
+          "VEHICLE_TYPE_PEDESTRIAN",
+          "VEHICLE_TYPE_TRUCK",
+          "VEHICLE_TYPE_VAN_BIG",
+          "VEHICLE_TYPE_E_VAN_BIG",
+          "VEHICLE_TYPE_BIKE_CARGO",
+          "VEHICLE_TYPE_CAR",
+          "VEHICLE_TYPE_E_CAR",
+          "VEHICLE_TYPE_UNKNOWN"
+        ]
+      }
+    },
+    "responses": {
+      "badRequest": {
+        "description": "Elements manquants et/ou incorrect dans le body",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "reasons": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "example": "Missing argument 'xxxxx'"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "parameters": {
+      "apiVersion": {
+        "in": "header",
+        "name": "x-api-version",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "example": "1.1.0"
+        }
+      },
+      "webhookAuth": {
+        "in": "header",
+        "name": "x-webhook-auth",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "example": "B99187F4FF3426ED1D62FDA468267"
+        }
+      },
+      "pathDeliveryId": {
+        "in": "path",
+        "name": "deliveryId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      }
+    },
+    "requestBodies": {
+      "putDeliveryStatus": {
+        "required": true,
+        "description": "Contient les informations du nouveau status de delivery.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "required": [
+                "status",
+                "date",
+                "comment"
+              ],
+              "properties": {
+                "status": {
+                  "$ref": "#/components/schemas/deliveryStatus"
+                },
+                "date": {
+                  "type": "string",
+                  "format": "datetime"
+                },
+                "comment": {
+                  "type": "string"
+                },
+                "team": {
+                  "$ref": "#/components/schemas/team"
+                }
+              }
+            },
+            "examples": {
+              "Livraison livrée conforme": {
+                "$ref": "#/components/examples/putDeliveryStatus"
+              }
+            }
+          }
+        }
+      },
+      "putDeliveryDeltaCosts": {
+        "required": true,
+        "description": "Contient les informations du delta cost.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "required": [
+                "amount",
+                "reason",
+                "currency",
+                "date"
+              ],
+              "properties": {
+                "amount": {
+                  "type": "number",
+                  "format": "float"
+                },
+                "reason": {
+                  "$ref": "#/components/schemas/deltaCostReason"
+                },
+                "currency": {
+                  "$ref": "#/components/schemas/currency"
+                },
+                "comment": {
+                  "type": "string"
+                },
+                "date": {
+                  "type": "string",
+                  "format": "datetime"
+                }
+              }
+            },
+            "examples": {
+              "Annulation tardive": {
+                "$ref": "#/components/examples/putDeliveryDeltaCosts"
+              }
+            }
+          }
+        }
+      },
+      "postDeliveryClosure": {
+        "required": true,
+        "description": "Contient les informations de facturation.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "required": [
+                "emittedCarbonDioxide",
+                "billedDistance",
+                "vehicleType"
+              ],
+              "properties": {
+                "emittedCarbonDioxide": {
+                  "$ref": "#/components/schemas/mass"
+                },
+                "billedDistance": {
+                  "$ref": "#/components/schemas/length"
+                },
+                "vehicleType": {
+                  "$ref": "#/components/schemas/vehicleType"
+                }
+              }
+            },
+            "example": {
+              "emittedCarbonDioxide": {
+                "value": 13.5,
+                "unit": "mg"
+              },
+              "billedDistance": {
+                "value": 5,
+                "unit": "km"
+              },
+              "vehicleType": "VEHICLE_TYPE_SCOOTER"
+            }
+          }
+        }
+      },
+      "postDeliveryDocument": {
+        "required": true,
+        "description": "Contient les informations du document envoyé.",
+        "content": {
+          "multipart/form-data": {
+            "schema": {
+              "required": [
+                "document",
+                "type",
+                "date"
+              ],
+              "properties": {
+                "document": {
+                  "type": "string",
+                  "description": "Le document sour format binaire, max 10mb",
+                  "format": "binary"
+                },
+                "type": {
+                  "type": "string",
+                  "description": "Type de document",
+                  "enum": [
+                    "EVIDENCE",
+                    "INVOICE",
+                    "CONTRACT"
+                  ]
+                },
+                "date": {
+                  "type": "string",
+                  "description": "Date de création du document",
+                  "format": "datetime"
+                }
+              }
+            },
+            "example": {
+              "document": "file stream",
+              "type": "EVIDENCE",
+              "date": "2019-11-27T10:30:00+0000"
+            }
+          }
+        }
+      },
+      "postDeliveryEvent": {
+        "required": true,
+        "description": "Contient les informations de la notification envoyée.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "required": [
+                "status",
+                "type",
+                "date",
+                "subject",
+                "message"
+              ],
+              "properties": {
+                "status": {
+                  "type": "boolean",
+                  "description": "'true' si l'évènement est réussi"
+                },
+                "type": {
+                  "type": "string",
+                  "description": "Type de notification",
+                  "enum": [
+                    "EVENT_TYPE_SMS",
+                    "EVENT_TYPE_MAIL",
+                    "EVENT_TYPE_CALL"
+                  ]
+                },
+                "date": {
+                  "type": "string",
+                  "description": "Heure de l'évènement",
+                  "format": "datetime"
+                },
+                "subject": {
+                  "type": "string",
+                  "description": "Sujet de l'évènement",
+                  "enum": [
+                    "DELIVERY_INIT",
+                    "DELIVERY_STARTED",
+                    "DELIVERY_PICK_UP_REACHED",
+                    "DELIVERY_PICK_UP_OK",
+                    "DELIVERY_IN_PROGRESS",
+                    "DELIVERY_AT_DROP_OF_LOCATION",
+                    "DELIVERY_PICK_UP_FAILED",
+                    "DELIVERY_DELIVERED_WITH_CLAIM",
+                    "DELIVERY_CANCELLED_WITH_RETURN",
+                    "DELIVERY_FAILED_WITH_RETURN",
+                    "DELIVERY_RETURNED_TO_PICK_UP",
+                    "DELIVERY_DELIVERED_OK",
+                    "DELIVERY_CANCELLED"
+                  ]
+                },
+                "message": {
+                  "type": "string",
+                  "description": "Message d'information à propos de l'évènement"
+                },
+                "failReason": {
+                  "type": "string",
+                  "description": "Raison de l'échec de l'évènement"
+                }
+              }
+            },
+            "example": {
+              "status": true,
+              "type": "EVENT_TYPE_SMS",
+              "date": "2019-11-27T10:30:00+0000",
+              "subject": "DELIVERY_INIT",
+              "message": "Bonjour, votre commande a bien été confirmée."
+            }
+          }
+        }
+      },
+      "postStuartHook": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "required": [
+                "event",
+                "type",
+                "data"
+              ],
+              "properties": {
+                "event": {
+                  "type": "string",
+                  "example": "delivery",
+                  "enum": [
+                    "delivery"
+                  ]
+                },
+                "type": {
+                  "type": "string",
+                  "example": "create",
+                  "enum": [
+                    "create",
+                    "update"
+                  ]
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "status"
+                  ],
+                  "properties": {
+                    "id": {
+                      "type": "number",
+                      "example": 110456,
+                      "description": "ID de la delivery Stuart"
+                    },
+                    "status": {
+                      "type": "string",
+                      "example": "pending",
+                      "description": "Statut de la delivery chez Stuart",
+                      "enum": [
+                        "waiting_at_dropoff",
+                        "cancelled",
+                        "delivered",
+                        "almost_delivering",
+                        "pending",
+                        "delivering",
+                        "waiting_at_pickup",
+                        "picking",
+                        "almost_picking"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "postSubscription": {
+        "required": true,
+        "description": "Contient les informations de subscription.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "required": [
+                "callbacks"
+              ],
+              "properties": {
+                "callbacks": {
+                  "type": "object",
+                  "required": [
+                    "quote",
+                    "delivery",
+                    "cancelDelivery"
+                  ],
+                  "properties": {
+                    "quote": {
+                      "type": "object",
+                      "required": [
+                        "url"
+                      ],
+                      "properties": {
+                        "url": {
+                          "type": "string",
+                          "description": "Url de la route permettant d'obtenir des devis"
+                        },
+                        "version": {
+                          "type": "string",
+                          "description": "Version d'API pour ce callback (voir lastmile_to_carrier)",
+                          "example": "1.1.0"
+                        }
+                      }
+                    },
+                    "delivery": {
+                      "type": "object",
+                      "required": [
+                        "url"
+                      ],
+                      "properties": {
+                        "url": {
+                          "type": "string",
+                          "description": "Url de la route permettant de valider un devis"
+                        },
+                        "version": {
+                          "type": "string",
+                          "description": "Version d'API pour ce callback (voir lastmile_to_carrier)",
+                          "example": "1.1.0"
+                        }
+                      }
+                    },
+                    "cancelDelivery": {
+                      "type": "object",
+                      "required": [
+                        "url"
+                      ],
+                      "properties": {
+                        "url": {
+                          "type": "string",
+                          "description": "Url de la route permettant d'annuler un ordre de livraison"
+                        },
+                        "version": {
+                          "type": "string",
+                          "description": "Version d'API pour ce callback (voir lastmile_to_carrier)",
+                          "example": "1.1.0"
+                        }
+                      }
+                    },
+                    "cancelQuote": {
+                      "type": "object",
+                      "required": [
+                        "url"
+                      ],
+                      "properties": {
+                        "url": {
+                          "type": "string",
+                          "description": "Url de la route permettant d'annuler un devis"
+                        },
+                        "version": {
+                          "type": "string",
+                          "description": "Version d'API pour ce callback (voir lastmile_to_carrier)",
+                          "example": "1.1.0"
+                        }
+                      }
+                    },
+                    "score": {
+                      "type": "object",
+                      "properties": {
+                        "url": {
+                          "type": "string",
+                          "description": "Url de la route permettant de fournir la note du transporteur d'une commande"
+                        },
+                        "version": {
+                          "type": "string",
+                          "description": "Version d'API pour ce callback (voir lastmile_to_carrier)",
+                          "example": "1.1.0"
+                        }
+                      }
+                    },
+                    "pickupPoint": {
+                      "type": "object",
+                      "required": [
+                        "url"
+                      ],
+                      "properties": {
+                        "url": {
+                          "type": "string",
+                          "description": "Url de la route permettant de fournir la liste des points relais"
+                        },
+                        "version": {
+                          "type": "string",
+                          "description": "Version d'API pour ce callback (voir lastmile_to_carrier)",
+                          "example": "1.1.0"
+                        }
+                      }
+                    },
+                    "price": {
+                      "type": "object",
+                      "required": [
+                        "url"
+                      ],
+                      "properties": {
+                        "url": {
+                          "type": "string",
+                          "description": "Url de la route permettant de faire une demande de prix"
+                        },
+                        "version": {
+                          "type": "string",
+                          "description": "Version d'API pour ce callback (voir lastmile_to_carrier)",
+                          "example": "1.1.0"
+                        }
+                      }
+                    },
+                    "label": {
+                      "type": "object",
+                      "required": [
+                        "url"
+                      ],
+                      "properties": {
+                        "url": {
+                          "type": "string",
+                          "description": "Url de la route permettant de générer et récupérer une étiquette"
+                        },
+                        "version": {
+                          "type": "string",
+                          "description": "Version d'API pour ce callback (voir lastmile_to_carrier)",
+                          "example": "1.1.0"
+                        }
+                      }
+                    },
+                    "status": {
+                      "type": "object",
+                      "required": [
+                        "url"
+                      ],
+                      "properties": {
+                        "url": {
+                          "type": "string",
+                          "description": "Url de la route permettant de récupérer les statuts par 'package'"
+                        },
+                        "version": {
+                          "type": "string",
+                          "description": "Version d'API pour ce callback (voir lastmile_to_carrier)",
+                          "example": "1.1.0"
+                        }
+                      }
+                    },
+                    "update": {
+                      "type": "object",
+                      "required": [
+                        "url"
+                      ],
+                      "properties": {
+                        "url": {
+                          "type": "string",
+                          "description": "Url de la route permettant de mettre à jour un ordre de livraison"
+                        },
+                        "version": {
+                          "type": "string",
+                          "description": "Version d'API pour ce callback (voir lastmile_to_carrier)",
+                          "example": "1.1.0"
+                        }
+                      }
+                    }
+                  }
+                },
+                "adapter": {
+                  "type": "string",
+                  "description": "Permet d'indiquer le nom du service utilisé dans LMMP pour convertir le format de données de certaines APIs du Transporteur.",
+                  "example": "XMLAdapter"
+                },
+                "headers": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "key",
+                      "value"
+                    ],
+                    "properties": {
+                      "key": {
+                        "type": "string"
+                      },
+                      "value": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "auth": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/postSubscriptionBasic"
+                    },
+                    {
+                      "$ref": "#/components/schemas/postSubscriptionOAuth2"
+                    },
+                    {
+                      "$ref": "#/components/schemas/postSubscriptionToken"
+                    }
+                  ]
+                }
+              }
+            },
+            "examples": {
+              "Basic": {
+                "$ref": "#/components/examples/postSubscriptionBasic"
+              },
+              "OAuth2": {
+                "$ref": "#/components/examples/postSubscriptionOAuth2"
+              },
+              "Token": {
+                "$ref": "#/components/examples/postSubscriptionToken"
+              }
+            }
+          }
+        }
+      }
+    },
+    "examples": {
+      "putDeliveryStatus": {
+        "value": {
+          "status": "DELIVERY_DELIVERED_OK",
+          "date": "2019-11-27T10:30:00+0000",
+          "comment": "J'ai attendu 5min dehors.",
+          "team": {
+            "members": [
+              {
+                "id": "ZER784"
+              }
+            ]
+          }
+        }
+      },
+      "putDeliveryDeltaCosts": {
+        "value": {
+          "amount": 165.98,
+          "currency": "EUR",
+          "reason": "DELTACOST_LATE_CANCELLATION",
+          "comment": "Commande annulée 5min avant livraison.",
+          "date": "2019-11-27T10:30:00+0000"
+        }
+      },
+      "postSubscriptionBasic": {
+        "value": {
+          "callbacks": {
+            "quote": {
+              "url": "https://my_url/quote",
+              "version": "1.1.0"
+            },
+            "delivery": {
+              "url": "https://my_url/delivery",
+              "version": "1.1.0"
+            },
+            "cancelDelivery": {
+              "url": "https://my_url/cancelDelivery",
+              "version": "1.1.0"
+            },
+            "cancelQuote": {
+              "url": "https://my_url/cancelQuote",
+              "version": "1.1.0"
+            },
+            "score": {
+              "url": "https://my_url/score",
+              "version": "1.1.0"
+            }
+          },
+          "headers": [
+            {
+              "key": "x-api-key",
+              "value": "KHJKO8U9"
+            }
+          ],
+          "auth": {
+            "basic": {
+              "username": "admin",
+              "password": "1234"
+            }
+          }
+        }
+      },
+      "postSubscriptionOAuth2": {
+        "value": {
+          "callbacks": {
+            "quote": {
+              "url": "https://my_url/quote",
+              "version": "1.1.0"
+            },
+            "delivery": {
+              "url": "https://my_url/delivery",
+              "version": "1.1.0"
+            },
+            "cancelDelivery": {
+              "url": "https://my_url/cancelDelivery",
+              "version": "1.1.0"
+            },
+            "cancelQuote": {
+              "url": "https://my_url/cancelQuote",
+              "version": "1.1.0"
+            },
+            "score": {
+              "url": "https://my_url/score",
+              "version": "1.1.0"
+            },
+            "price": {
+              "url": "https://my_url/price",
+              "version": "1.1.0"
+            }
+          },
+          "auth": {
+            "oauth2": {
+              "client_id": "8664fb6e578be877cdd16e2c13e1db3e",
+              "client_secret": "4bb43097953c6d3ffae77b77f4716bba",
+              "audience": "carrier.last-mile.fr",
+              "grant_type": "client_credentials",
+              "tokenEndPoint": "token.last-mile.fr"
+            }
+          }
+        }
+      },
+      "postSubscriptionToken": {
+        "value": {
+          "callbacks": {
+            "quote": {
+              "url": "https://my_url/quote",
+              "version": "1.1.0"
+            },
+            "delivery": {
+              "url": "https://my_url/delivery",
+              "version": "1.1.0"
+            },
+            "cancelDelivery": {
+              "url": "https://my_url/cancelDelivery",
+              "version": "1.1.0"
+            },
+            "cancelQuote": {
+              "url": "https://my_url/cancelQuote",
+              "version": "1.1.0"
+            },
+            "score": {
+              "url": "https://my_url/score",
+              "version": "1.1.0"
+            }
+          },
+          "auth": {
+            "token": {
+              "username": "admin",
+              "password": "1234",
+              "endpoint": "token.last-mile.fr"
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "oAuth2ClientCredentials": {
+        "type": "oauth2",
+        "flows": {
+          "clientCredentials": {
+            "tokenUrl": "https://last-mile.eu.auth0.com/oauth/token",
+            "x-google-issuer": "https://last-mile.eu.auth0.com/",
+            "x-google-jwks_uri": "https://last-mile.eu.auth0.com/.well-known/jwks.json",
+            "x-google-audiences": "https://carrier.api.meltingpoint.fr/"
+          }
+        }
+      }
+    }
+  }
+}
