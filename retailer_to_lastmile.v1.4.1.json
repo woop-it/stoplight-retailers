@@ -1,0 +1,3442 @@
+{
+  "openapi": "3.0.2",
+  "tags": [
+    {
+      "name": "Ordre de livraison"
+    },
+    {
+      "name": "Etiquette"
+    },
+    {
+      "name": "Documents"
+    },
+    {
+      "name": "Prix"
+    },
+    {
+      "name": "Retrait"
+    },
+    {
+      "name": "Health"
+    },
+    {
+      "name": "Retour produit"
+    },
+    {
+      "name": "Point relais"
+    },
+    {
+      "name": "Souscriptions"
+    }
+  ],
+  "info": {
+    "title": "Enseigne vers Woop",
+    "description": "Contrat d'interface des APIs des enseignes vers Woop.\nVersion 1.4.1",
+    "version": "1.4.1"
+  },
+  "servers": [
+    {
+      "url": "ret-api.recette.gcp.last-mile.fr",
+      "description": "URL de recette"
+    },
+    {
+      "url": "ret-api.preprod.gcp.last-mile.fr",
+      "description": "URL de preprod"
+    },
+    {
+      "url": "retailer.last-mile.fr",
+      "description": "URL de prod"
+    }
+  ],
+  "paths": {
+    "/health": {
+      "get": {
+        "tags": [
+          "Health"
+        ],
+        "description": "Test si l'application est UP",
+        "operationId": "getHealth",
+        "responses": {
+          "204": {
+            "description": "Le service est opérationnel"
+          }
+        },
+        "security": [],
+        "summary": "Health"
+      }
+    },
+    "/collects": {
+      "post": {
+        "tags": [
+          "Retrait"
+        ],
+        "description": "Créer une demande de retrait",
+        "operationId": "postCollects",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "description": "Contient les informations de création de la demande de retrait.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/postCollects"
+              },
+              "examples": {
+                "Exemple": {
+                  "value": {
+                    "reference": "CN123456789FR59",
+                    "storeId": "MAG01",
+                    "location": {
+                      "type": "exchangePlace",
+                      "id": "DRIVE-59-001"
+                    },
+                    "customer": {
+                      "firstName": "Michel",
+                      "lastName": "Dupont",
+                      "phone": "+33600000000",
+                      "email": "michel.dupont@mail.fr"
+                    },
+                    "packages": [
+                      {
+                        "length": {
+                          "value": 15,
+                          "unit": "cm"
+                        },
+                        "width": {
+                          "value": 15,
+                          "unit": "cm"
+                        },
+                        "height": {
+                          "value": 1.2,
+                          "unit": "m"
+                        },
+                        "weight": {
+                          "value": 560,
+                          "unit": "g"
+                        },
+                        "products": [
+                          {
+                            "type": "TYPOLOGY_GENERIC",
+                            "ean": "978020137962",
+                            "cug": "123456",
+                            "label": "T-Shirt XL Jaune",
+                            "quantity": 1
+                          }
+                        ],
+                        "quantity": 1
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Création de la demande de retrait réussie",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "4f802782-bf37-4499-a50d-c7d0169c670d"
+                    }
+                  }
+                },
+                "examples": {}
+              }
+            }
+          },
+          "400": {
+            "description": "Elements manquants et/ou incorrect dans le body",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "reasons": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "example": "Missing argument 'xxxxx'"
+                      }
+                    }
+                  }
+                }
+              },
+              "examples": {
+                "Exemple": {
+                  "value": {
+                    "reasons": [
+                      "Missing argument 'xxxxx'"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Vous n'êtes pas autorisé à accéder à cet élément."
+          },
+          "403": {
+            "description": "Création de demande de retrait impossible pour ce 'storeId'"
+          },
+          "409": {
+            "description": "Une demande de retrait avec cette réference existe dèjà dans la plateforme."
+          }
+        },
+        "security": [
+          {
+            "oAuth2ClientCredentials": []
+          }
+        ],
+        "summary": "Demande de retrait"
+      }
+    },
+    "/orders": {
+      "post": {
+        "tags": [
+          "Ordre de livraison"
+        ],
+        "description": "Ordre de livraison.",
+        "operationId": "postOrders",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "description": "Contient les informations de création de la commande.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "oneOf": [
+                  {
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/postOrders"
+                      },
+                      {
+                        "properties": {
+                          "productsPrice": {
+                            "$ref": "#/components/schemas/price"
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/postOrders"
+                      }
+                    ]
+                  }
+                ]
+              },
+              "examples": {
+                "Exemple par défaut": {
+                  "value": {
+                    "orderId": "65z4eq1d6q54zd1",
+                    "referenceNumber": "65q41zdq65z14",
+                    "storeId": "AX645",
+                    "picking": {
+                      "location": {
+                        "type": "address",
+                        "addressLine1": "237 rue du ballon",
+                        "postalCode": "59110",
+                        "city": "La Madeleine",
+                        "country": "FR"
+                      },
+                      "interval": [
+                        {
+                          "start": "2019-11-27T12:00:00+0000",
+                          "end": "2019-11-27T14:00:00+0000"
+                        }
+                      ],
+                      "contact": {
+                        "firstName": "Michel",
+                        "lastName": "Dupont",
+                        "phone": "+33600000000",
+                        "email": "michel.dupont@mail.fr",
+                        "language": "fr-BE",
+                        "timezone": "Europe/Paris"
+                      }
+                    },
+                    "delivery": {
+                      "location": {
+                        "type": "address",
+                        "addressLine1": "165 avenue de Bretagne",
+                        "elevator": true,
+                        "floor": 3,
+                        "postalCode": "59000",
+                        "city": "Lille",
+                        "country": "FR"
+                      },
+                      "infos": "La rue est en travaux",
+                      "interval": [
+                        {
+                          "start": "2019-11-28T13:30:00+0000",
+                          "end": "2019-11-28T14:30:00+0000"
+                        }
+                      ],
+                      "contact": {
+                        "firstName": "Pierre",
+                        "lastName": "Dupond",
+                        "phone": "+33600000000",
+                        "email": "pierre.dupond@mail.fr"
+                      }
+                    },
+                    "packages": [
+                      {
+                        "length": {
+                          "value": 15,
+                          "unit": "cm"
+                        },
+                        "width": {
+                          "value": 15,
+                          "unit": "cm"
+                        },
+                        "height": {
+                          "value": 1.2,
+                          "unit": "m"
+                        },
+                        "weight": {
+                          "value": 560,
+                          "unit": "g"
+                        },
+                        "reference": [
+                          "123456789A",
+                          "123456789B",
+                          "123456789C",
+                          "123456789D",
+                          "123456789E"
+                        ],
+                        "products": [
+                          {
+                            "type": "TYPOLOGY_GENERIC",
+                            "ean": "4dq86zd4q6zd4q64",
+                            "cug": "q56zd4q65d4q",
+                            "label": "Lampe",
+                            "quantity": 1
+                          }
+                        ],
+                        "quantity": 5
+                      }
+                    ],
+                    "services": [
+                      "SERVICE_SELECTED_ROOM"
+                    ]
+                  }
+                },
+                "Exemple avec assemblage": {
+                  "value": {
+                    "orderId": "65z4eq1d6q54zd1",
+                    "referenceNumber": "65q41zdq65z14",
+                    "storeId": "AX645",
+                    "picking": {
+                      "location": {
+                        "type": "address",
+                        "addressLine1": "237 rue du ballon",
+                        "postalCode": "59110",
+                        "city": "La Madeleine",
+                        "country": "FR"
+                      },
+                      "interval": [
+                        {
+                          "start": "2019-11-27T12:00:00+0000",
+                          "end": "2019-11-27T14:00:00+0000"
+                        }
+                      ],
+                      "contact": {
+                        "firstName": "Michel",
+                        "lastName": "Dupont",
+                        "phone": "+33600000000",
+                        "email": "michel.dupont@mail.fr"
+                      }
+                    },
+                    "delivery": {
+                      "location": {
+                        "type": "address",
+                        "addressLine1": "165 avenue de Bretagne",
+                        "elevator": true,
+                        "floor": 3,
+                        "postalCode": "59000",
+                        "city": "Lille",
+                        "country": "FR"
+                      },
+                      "infos": "La rue est en travaux",
+                      "interval": [
+                        {
+                          "start": "2019-11-28T13:30:00+0000",
+                          "end": "2019-11-28T14:30:00+0000"
+                        }
+                      ],
+                      "contact": {
+                        "firstName": "Pierre",
+                        "lastName": "Dupond",
+                        "phone": "+33600000000",
+                        "email": "pierre.dupond@mail.fr"
+                      }
+                    },
+                    "packages": [
+                      {
+                        "length": {
+                          "value": 15,
+                          "unit": "cm"
+                        },
+                        "width": {
+                          "value": 15,
+                          "unit": "cm"
+                        },
+                        "height": {
+                          "value": 1.2,
+                          "unit": "m"
+                        },
+                        "weight": {
+                          "value": 560,
+                          "unit": "g"
+                        },
+                        "reference": [
+                          "123456789A",
+                          "123456789B",
+                          "123456789C",
+                          "123456789D",
+                          "123456789E"
+                        ],
+                        "products": [
+                          {
+                            "type": "TYPOLOGY_GENERIC",
+                            "ean": "4dq86zd4q6zd4q64",
+                            "cug": "q56zd4q65d4q",
+                            "label": "Lampe",
+                            "quantity": 1
+                          }
+                        ],
+                        "quantity": 5
+                      }
+                    ],
+                    "services": [
+                      "SERVICE_ASSEMBLY"
+                    ],
+                    "productsPrice": {
+                      "value": 30,
+                      "currrency": "EUR"
+                    }
+                  }
+                },
+                "Exemple de livraison point relais": {
+                  "value": {
+                    "orderId": "65z4eq1d6q54zd1",
+                    "referenceNumber": "65q41zdq65z14",
+                    "storeId": "AX645",
+                    "picking": {
+                      "location": {
+                        "type": "pickupPoint",
+                        "carrierCode": "carrierX",
+                        "id": "36JGZ7"
+                      },
+                      "interval": [
+                        {
+                          "start": "2019-11-27T12:00:00+0000",
+                          "end": "2019-11-27T14:00:00+0000"
+                        }
+                      ],
+                      "contact": {
+                        "firstName": "Michel",
+                        "lastName": "Dupont",
+                        "phone": "+33600000000",
+                        "email": "michel.dupont@mail.fr",
+                        "language": "fr-BE",
+                        "timezone": "Europe/Paris"
+                      }
+                    },
+                    "delivery": {
+                      "location": {
+                        "type": "pickupPoint",
+                        "carrierCode": "carrierX",
+                        "id": "19GON"
+                      },
+                      "infos": "La rue est en travaux",
+                      "interval": [
+                        {
+                          "start": "2019-11-28T13:30:00+0000",
+                          "end": "2019-11-28T14:30:00+0000"
+                        }
+                      ],
+                      "contact": {
+                        "firstName": "Pierre",
+                        "lastName": "Dupond",
+                        "phone": "+33600000000",
+                        "email": "pierre.dupond@mail.fr"
+                      }
+                    },
+                    "packages": [
+                      {
+                        "length": {
+                          "value": 15,
+                          "unit": "cm"
+                        },
+                        "width": {
+                          "value": 15,
+                          "unit": "cm"
+                        },
+                        "height": {
+                          "value": 1.2,
+                          "unit": "m"
+                        },
+                        "weight": {
+                          "value": 560,
+                          "unit": "g"
+                        },
+                        "reference": [
+                          "123456789A",
+                          "123456789B",
+                          "123456789C",
+                          "123456789D",
+                          "123456789E"
+                        ],
+                        "products": [
+                          {
+                            "type": "TYPOLOGY_GENERIC",
+                            "ean": "4dq86zd4q6zd4q64",
+                            "cug": "q56zd4q65d4q",
+                            "label": "Lampe",
+                            "quantity": 1
+                          }
+                        ],
+                        "quantity": 5
+                      }
+                    ],
+                    "services": [
+                      "SERVICE_SELECTED_ROOM"
+                    ]
+                  }
+                },
+                "Exemple de livraison en point de prélèvement": {
+                  "value": {
+                    "orderId": "65z4eq1d6q54zd1",
+                    "referenceNumber": "65q41zdq65z14",
+                    "storeId": "AX645",
+                    "picking": {
+                      "location": {
+                        "type": "exchangePlace",
+                        "id": "EXCHANGE PLACE 1"
+                      },
+                      "interval": [
+                        {
+                          "start": "2019-11-27T12:00:00+0000",
+                          "end": "2019-11-27T14:00:00+0000"
+                        }
+                      ],
+                      "contact": {
+                        "firstName": "Michel",
+                        "lastName": "Dupont",
+                        "phone": "+33600000000",
+                        "email": "michel.dupont@mail.fr",
+                        "language": "fr-BE",
+                        "timezone": "Europe/Paris"
+                      }
+                    },
+                    "delivery": {
+                      "location": {
+                        "type": "exchangePlace",
+                        "id": "EXCHANGE PLACE 2"
+                      },
+                      "infos": "La rue est en travaux",
+                      "interval": [
+                        {
+                          "start": "2019-11-28T13:30:00+0000",
+                          "end": "2019-11-28T14:30:00+0000"
+                        }
+                      ],
+                      "contact": {
+                        "firstName": "Pierre",
+                        "lastName": "Dupond",
+                        "phone": "+33600000000",
+                        "email": "pierre.dupond@mail.fr"
+                      }
+                    },
+                    "packages": [
+                      {
+                        "length": {
+                          "value": 15,
+                          "unit": "cm"
+                        },
+                        "width": {
+                          "value": 15,
+                          "unit": "cm"
+                        },
+                        "height": {
+                          "value": 1.2,
+                          "unit": "m"
+                        },
+                        "weight": {
+                          "value": 560,
+                          "unit": "g"
+                        },
+                        "reference": [
+                          "123456789A",
+                          "123456789B",
+                          "123456789C",
+                          "123456789D",
+                          "123456789E"
+                        ],
+                        "products": [
+                          {
+                            "type": "TYPOLOGY_GENERIC",
+                            "ean": "4dq86zd4q6zd4q64",
+                            "cug": "q56zd4q65d4q",
+                            "label": "Lampe",
+                            "quantity": 1
+                          }
+                        ],
+                        "quantity": 5
+                      }
+                    ],
+                    "services": [
+                      "SERVICE_ASSEMBLY"
+                    ],
+                    "tags": [
+                      {
+                        "key": "origin",
+                        "value": "web"
+                      }
+                    ],
+                    "productsPrice": {
+                      "value": 30,
+                      "currrency": "EUR"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "L'ordre de livraison a bien été enregistrée"
+          },
+          "202": {
+            "description": "L'ordre de livraison doit être complétée"
+          },
+          "400": {
+            "description": "Elements manquants et/ou incorrect dans le body",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "reasons": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "example": "Missing argument 'xxxxx'"
+                      }
+                    }
+                  }
+                }
+              },
+              "examples": {
+                "Exemple": {
+                  "value": {
+                    "reasons": [
+                      "Missing argument 'xxxxx'"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Vous n'êtes pas autorisé à accéder à cet élément."
+          },
+          "403": {
+            "description": "Création de commande impossible pour le 'storeId'"
+          },
+          "409": {
+            "description": "Création de commande avec cet 'orderId' impossible"
+          }
+        },
+        "summary": "Demande d'ordre de livraison"
+      },
+      "get": {
+        "tags": [
+          "Ordre de livraison"
+        ],
+        "description": "Retourne des ordres de livraison filtrés selon les paramètres disponibles.",
+        "operationId": "getOrders",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/components/parameters/queryDeliveryStatus"
+          },
+          {
+            "$ref": "#/components/parameters/queryPickingDate"
+          },
+          {
+            "$ref": "#/components/parameters/queryStoreIdRequired"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Contient les ordres de livraison récupérées.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/responseOrder"
+                },
+                "examples": {
+                  "Exemple par défaut": {
+                    "value": {
+                      "orders": [
+                        {
+                          "delivery": {
+                            "externalDeliveryId": "123457",
+                            "currentStatus": "DELIVERY_DELIVERED_OK",
+                            "updatedAt": "2019-12-03T15:25:00+0000",
+                            "interval": {
+                              "start": "2019-12-03T15:00:00+0000",
+                              "end": "2019-12-03T16:00:00+0000"
+                            },
+                            "trackingPageUrl:": "https://url_suivi_livraison"
+                          },
+                          "carrier": {
+                            "name": "Transporteur A",
+                            "contact": "Michel",
+                            "claimUrl": "https://url_reclamation"
+                          },
+                          "order": {
+                            "id": "q54zd65qzd465qz4d",
+                            "currentStatus": "ORDER_DELIVERED",
+                            "updatedAt": "2019-12-03T15:25:00+0000",
+                            "referenceNumber": "q54zd65qzd465qz4d"
+                          },
+                          "picking": {
+                            "interval": {
+                              "start": "2019-12-02T13:00:00+0000",
+                              "end": "2019-12-02T15:00:00+0000"
+                            }
+                          },
+                          "packages": [
+                            {
+                              "id": "1324",
+                              "reference": "B8413DD"
+                            }
+                          ]
+                        },
+                        {
+                          "delivery": {
+                            "externalDeliveryId": "123456",
+                            "currentStatus": "DELIVERY_INIT",
+                            "updatedAt": "2019-12-03T12:00:00+0000",
+                            "interval": {
+                              "start": "2019-12-07T12:00:00+0000",
+                              "end": "2019-12-07T14:00:00+0000"
+                            },
+                            "trackingPageUrl:": "https://url_suivi_livraison"
+                          },
+                          "carrier": {
+                            "name": "Transporteur A",
+                            "contact": "Michel",
+                            "claimUrl": "https://url_reclamation"
+                          },
+                          "order": {
+                            "id": "65z4eq1d6q54zd1",
+                            "currentStatus": "ORDER_CREATED",
+                            "updatedAt": "2019-12-03T12:00:00+0000",
+                            "referenceNumber": "65q41zdq65z14"
+                          },
+                          "picking": {
+                            "interval": {
+                              "start": "2019-12-06T13:30:00+0000",
+                              "end": "2019-12-06T15:30:00+0000"
+                            }
+                          },
+                          "packages": [
+                            {
+                              "id": "999",
+                              "reference": "1323A"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Elements manquants et/ou incorrect"
+          },
+          "401": {
+            "description": "Vous n'êtes pas autorisé à accéder à cet élément."
+          },
+          "403": {
+            "description": "Demande impossible pour ce 'storeId'"
+          }
+        },
+        "summary": "Récupération d'ordres de livraison"
+      }
+    },
+    "/orders/{orderId}": {
+      "delete": {
+        "tags": [
+          "Ordre de livraison"
+        ],
+        "description": "Annulation d'un ordre de livraison",
+        "operationId": "deleteOrders",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/components/parameters/pathOrderId"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "description": "Contient les informations d'annulation de la commande.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "reasons"
+                ],
+                "properties": {
+                  "reasons": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/cancelledReasons"
+                    }
+                  },
+                  "comment": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "L'annulation a bien été prise en compte, mais peut engendrer des frais supplémentaires"
+          },
+          "204": {
+            "description": "Requête traitée avec succès"
+          },
+          "401": {
+            "description": "Vous n'êtes pas autorisé à accéder à cet élément."
+          },
+          "403": {
+            "description": "L'ordre de livraison ne peut être annulée"
+          },
+          "404": {
+            "description": "Le 'orderId' n'existe pas"
+          }
+        },
+        "summary": "Annulation d'un ordre de livraison"
+      },
+      "get": {
+        "tags": [
+          "Ordre de livraison"
+        ],
+        "description": "Récuperation d'un ordre de livraison par orderId.",
+        "operationId": "getOrder",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/components/parameters/pathOrderId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Contient la commande récupérée.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/responseOrder"
+                },
+                "examples": {
+                  "Exemple par défaut": {
+                    "value": {
+                      "orders": [
+                        {
+                          "delivery": {
+                            "externalDeliveryId": "123456",
+                            "currentStatus": "DELIVERY_INIT",
+                            "updatedAt": "2019-12-03T12:00:00+0000",
+                            "interval": {
+                              "start": "2019-12-07T12:00:00+0000",
+                              "end": "2019-12-07T14:00:00+0000"
+                            },
+                            "trackingPageUrl:": "https://url_suivi_livraison"
+                          },
+                          "carrier": {
+                            "name": "Transporteur A",
+                            "contact": "Michel",
+                            "claimUrl": "https://url_reclamation"
+                          },
+                          "order": {
+                            "id": "65z4eq1d6q54zd1",
+                            "currentStatus": "ORDER_CREATED",
+                            "updatedAt": "2019-12-03T12:00:00+0000",
+                            "referenceNumber": "65q41zdq65z14"
+                          },
+                          "picking": {
+                            "interval": {
+                              "start": "2019-12-06T13:30:00+0000",
+                              "end": "2019-12-06T15:30:00+0000"
+                            }
+                          },
+                          "packages": [
+                            {
+                              "id": "999",
+                              "reference": "A123"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Vous n'êtes pas autorisé à accéder à cet élément."
+          }
+        },
+        "summary": "Récupération d'un ordre de livraison"
+      },
+      "patch": {
+        "tags": [
+          "Ordre de livraison"
+        ],
+        "description": "Mise à jour d'un ordre de livraison par orderId.",
+        "operationId": "patchOrder",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/components/parameters/pathOrderId"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "description": "Contient les informations de mise à jour.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "orderId",
+                  "storeId",
+                  "picking",
+                  "delivery",
+                  "services",
+                  "packages"
+                ],
+                "properties": {
+                  "picking": {
+                    "required": [
+                      "location",
+                      "interval",
+                      "contact"
+                    ],
+                    "properties": {
+                      "location": {
+                        "$ref": "#/components/schemas/location"
+                      },
+                      "infos": {
+                        "type": "string"
+                      },
+                      "interval": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/components/schemas/interval"
+                        }
+                      },
+                      "contact": {
+                        "$ref": "#/components/schemas/contact"
+                      }
+                    }
+                  },
+                  "delivery": {
+                    "required": [
+                      "location",
+                      "interval",
+                      "contact"
+                    ],
+                    "properties": {
+                      "location": {
+                        "$ref": "#/components/schemas/location"
+                      },
+                      "infos": {
+                        "type": "string"
+                      },
+                      "interval": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/components/schemas/interval"
+                        }
+                      },
+                      "contact": {
+                        "$ref": "#/components/schemas/contact"
+                      }
+                    }
+                  },
+                  "packages": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/packages"
+                    }
+                  },
+                  "services": {
+                    "$ref": "#/components/schemas/services"
+                  }
+                }
+              },
+              "examples": {
+                "Exemple": {
+                  "value": {
+                    "picking": {
+                      "contact": {
+                        "firstName": "Michel",
+                        "lastName": "Dupont"
+                      },
+                      "location": {
+                        "type": "address",
+                        "addressLine1": "237 rue du ballon",
+                        "postalCode": "59110",
+                        "city": "La Madeleine",
+                        "country": "FR"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Requête traitée avec succès."
+          },
+          "401": {
+            "description": "Vous n'êtes pas autorisé à accéder à cet élément."
+          }
+        },
+        "summary": "Mise à jour d'un ordre de livraison"
+      }
+    },
+    "/orders/{orderId}/label": {
+      "get": {
+        "tags": [
+          "Etiquette"
+        ],
+        "description": "Récupération de l'étiquette par orderId.",
+        "operationId": "getLabelByOrder",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/components/parameters/pathOrderId"
+          },
+          {
+            "$ref": "#/components/parameters/queryMode"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Contient l'étiquette récupérée.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "base64",
+                    "trackingPageUrl"
+                  ],
+                  "properties": {
+                    "base64": {
+                      "type": "string"
+                    },
+                    "trackingPageUrl": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Exemple": {
+                    "value": {
+                      "base64": "AxfzFZEGEg ...",
+                      "trackingPageUrl:": "https://url_suivi_livraison"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Vous n'êtes pas autorisé à accéder à cet élément."
+          },
+          "403": {
+            "description": "Demande impossible pour ce 'orderId'"
+          },
+          "404": {
+            "description": "Le 'orderId' n'existe pas"
+          }
+        },
+        "summary": "Récupération d'étiquette de l'ordre de livraison"
+      }
+    },
+    "/orders/{orderId}/return": {
+      "post": {
+        "tags": [
+          "Retour produit"
+        ],
+        "description": "Demande de retour d'un produit.",
+        "operationId": "postProductReturn",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/components/parameters/pathOrderId"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "description": "Contient les informations de la demande de retour produit.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/postProductReturn"
+                  }
+                ]
+              },
+              "examples": {
+                "Exemple par défaut": {
+                  "value": {
+                    "orderReturnId": "65z4eq1d6q54zd1",
+                    "initialReferenceNumber": "65q41zdq65z14",
+                    "storeId": "AX645",
+                    "initialCarrier": true,
+                    "picking": {
+                      "location": {
+                        "type": "address",
+                        "addressLine1": "165 avenue de Bretagne",
+                        "elevator": true,
+                        "floor": 3,
+                        "postalCode": "59000",
+                        "city": "Lille",
+                        "country": "FR"
+                      },
+                      "contact": {
+                        "firstName": "Michel",
+                        "lastName": "Dupont",
+                        "phone": "+33600000000",
+                        "email": "michel.dupont@mail.fr",
+                        "language": "fr-FR",
+                        "timezone": "Europe/Paris"
+                      }
+                    },
+                    "delivery": {
+                      "location": {
+                        "type": "address",
+                        "addressLine1": "237 rue du ballon",
+                        "postalCode": "59110",
+                        "city": "La Madeleine",
+                        "country": "FR"
+                      },
+                      "infos": "La rue est en travaux",
+                      "contact": {
+                        "firstName": "Pierre",
+                        "lastName": "Dupond",
+                        "phone": "+33600000000",
+                        "email": "pierre.dupond@mail.fr",
+                        "language": "fr-FR",
+                        "timezone": "Europe/Paris"
+                      }
+                    },
+                    "packages": [
+                      {
+                        "length": {
+                          "value": 15,
+                          "unit": "cm"
+                        },
+                        "width": {
+                          "value": 15,
+                          "unit": "cm"
+                        },
+                        "height": {
+                          "value": 1.2,
+                          "unit": "m"
+                        },
+                        "weight": {
+                          "value": 560,
+                          "unit": "g"
+                        },
+                        "products": [
+                          {
+                            "type": "TYPOLOGY_GENERIC",
+                            "ean": "4dq86zd4q6zd4q64",
+                            "cug": "q56zd4q65d4q",
+                            "label": "Lampe",
+                            "quantity": 1
+                          }
+                        ],
+                        "quantity": 5
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Le retour a bien été enregistrée"
+          },
+          "400": {
+            "description": "Elements manquants et/ou incorrect dans le body",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "reasons": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "example": "Missing argument 'xxxxx'"
+                      }
+                    }
+                  }
+                }
+              },
+              "examples": {
+                "Exemple": {
+                  "value": {
+                    "reasons": [
+                      "Missing argument 'xxxxx'"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Vous n'êtes pas autorisé à accéder à cet élément."
+          },
+          "403": {
+            "description": "Création d'un retour impossible pour le 'storeId'"
+          },
+          "409": {
+            "description": "Création de retour de prouit avec ce 'referenceNumber' impossible"
+          }
+        },
+        "summary": "Demande de retour produit"
+      }
+    },
+    "/prices": {
+      "post": {
+        "tags": [
+          "Prix"
+        ],
+        "description": "Demande de prix.",
+        "operationId": "postPrices",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "description": "Contient les informations de demande de prix.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "delivery",
+                  "picking",
+                  "services",
+                  "storeId",
+                  "packages"
+                ],
+                "properties": {
+                  "storeId": {
+                    "type": "string"
+                  },
+                  "picking": {
+                    "required": [
+                      "address"
+                    ],
+                    "properties": {
+                      "address": {
+                        "$ref": "#/components/schemas/address"
+                      }
+                    }
+                  },
+                  "delivery": {
+                    "required": [
+                      "address"
+                    ],
+                    "properties": {
+                      "address": {
+                        "allOf": [
+                          {
+                            "$ref": "#/components/schemas/address"
+                          },
+                          {
+                            "properties": {
+                              "title": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "packages": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/packages"
+                    }
+                  },
+                  "services": {
+                    "type": "array",
+                    "description": "Liste des services pour lesquels on souhaite un prix (chaque service donnera un prix)",
+                    "items": {
+                      "$ref": "#/components/schemas/deliveryServices"
+                    }
+                  }
+                }
+              },
+              "examples": {
+                "Exemple": {
+                  "value": {
+                    "storeId": "AX758",
+                    "picking": {
+                      "address": {
+                        "addressLine1": "237 rue du Ballon",
+                        "postalCode": "59110",
+                        "city": "La Madeleine",
+                        "country": "FR"
+                      }
+                    },
+                    "delivery": {
+                      "address": {
+                        "addressLine1": "165 Avenue de Bretagne",
+                        "elevator": true,
+                        "floor": 3,
+                        "postalCode": "59000",
+                        "city": "Lille",
+                        "country": "FR"
+                      }
+                    },
+                    "packages": [
+                      {
+                        "reference": [
+                          "12354"
+                        ],
+                        "length": {
+                          "value": 50,
+                          "unit": "cm"
+                        },
+                        "width": {
+                          "value": 50,
+                          "unit": "cm"
+                        },
+                        "height": {
+                          "value": 150,
+                          "unit": "cm"
+                        },
+                        "weight": {
+                          "value": 12.55,
+                          "unit": "kg"
+                        },
+                        "products": [
+                          {
+                            "type": "TYPOLOGY_GENERIC",
+                            "ean": "16478945684",
+                            "cug": "z5d1qzqzd1q",
+                            "label": "Armoire",
+                            "quantity": 1
+                          }
+                        ],
+                        "quantity": 1
+                      }
+                    ],
+                    "services": [
+                      "SERVICE_PICKUP_POINT"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "CREATED. Contient le(s) prix créés.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "prices": {
+                      "type": "array",
+                      "items": {
+                        "required": [
+                          "id",
+                          "price",
+                          "service",
+                          "carrier"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "service": {
+                            "$ref": "#/components/schemas/deliveryServices"
+                          },
+                          "carrier": {
+                            "type": "object",
+                            "required": [
+                              "name"
+                            ],
+                            "properties": {
+                              "name": {
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "price": {
+                            "$ref": "#/components/schemas/price"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Exemple": {
+                    "value": {
+                      "prices": [
+                        {
+                          "id": "123456",
+                          "service": "SERVICE_PICKUP_POINT",
+                          "carrier": {
+                            "name": "Transporteur B"
+                          },
+                          "price": {
+                            "value": 56.32,
+                            "currency": "EUR"
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Elements manquants et/ou incorrect dans le body",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "reasons": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "example": "Missing argument 'xxxxx'"
+                      }
+                    }
+                  }
+                }
+              },
+              "examples": {
+                "Exemple": {
+                  "value": {
+                    "reasons": [
+                      "Missing argument 'xxxxx'"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Vous n'êtes pas autorisé à accéder à cet élément."
+          },
+          "403": {
+            "description": "Demande impossible pour ce 'storeId'"
+          }
+        },
+        "summary": "Demande de prix"
+      }
+    },
+    "/orders/{orderId}/documents": {
+      "get": {
+        "tags": [
+          "Documents"
+        ],
+        "description": "Récupération des documents de l'ordre de livraison.",
+        "operationId": "getOrderDocuments",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/pathOrderId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Contient les documents.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "documents": {
+                      "type": "array",
+                      "items": {
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "date": {
+                            "type": "string",
+                            "format": "datetime"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "type": {
+                            "type": "string",
+                            "description": "Type de document",
+                            "enum": [
+                              "EVIDENCE",
+                              "INVOICE",
+                              "CONTRACT"
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Exemple": {
+                    "value": {
+                      "documents": [
+                        {
+                          "id": "5efda342ajkj700012064b57",
+                          "date": "2020-07-02T09:05:06.361Z",
+                          "type": "EVIDENCE",
+                          "name": "picture_1593680706.pdf"
+                        },
+                        {
+                          "id": "5efda342ajkj700012064b55",
+                          "date": "2020-07-02T09:06:06.361Z",
+                          "type": "INVOICE",
+                          "name": "invoice_1593680706.pdf"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "Pas de documents sur cet ordre de livraison."
+          },
+          "401": {
+            "description": "Vous n'êtes pas autorisé à accéder à cet élément."
+          },
+          "404": {
+            "description": "Le 'orderId' n'existe pas"
+          }
+        },
+        "summary": "Récupération des documents de l'ordre de livraison."
+      }
+    },
+    "/orders/{orderId}/documents/download": {
+      "get": {
+        "tags": [
+          "Documents"
+        ],
+        "description": "Téléchargement des documents de l'ordre de livraison en zip.",
+        "operationId": "downloadOrderDocuments",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/pathOrderId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Contient les documents au format zip.",
+            "content": {
+              "application/zip": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "Pas de documents sur cet ordre de livraison."
+          },
+          "401": {
+            "description": "Vous n'êtes pas autorisé à accéder à cet élément."
+          },
+          "404": {
+            "description": "Le 'orderId' n'existe pas"
+          }
+        },
+        "summary": "Téléchargement des documents de l'ordre de livraison"
+      }
+    },
+    "/orders/{orderId}/documents/{documentId}/download": {
+      "get": {
+        "tags": [
+          "Documents"
+        ],
+        "description": "Téléchargement d'un document de l'ordre de livraison",
+        "operationId": "downloadOrderDocument",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/pathOrderId"
+          },
+          {
+            "$ref": "#/components/parameters/pathDocumentId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Contient le document au format original du document",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Vous n'êtes pas autorisé à accéder à cet élément."
+          },
+          "404": {
+            "description": "Le 'orderId' ou 'documentId' n'existe pas"
+          }
+        },
+        "summary": "Téléchargement d'un document de l'ordre de livraison"
+      }
+    },
+    "/prices/{priceId}": {
+      "put": {
+        "tags": [
+          "Prix"
+        ],
+        "description": "Mise à jour de demande de prix.",
+        "operationId": "updatePrice",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/components/parameters/pathPriceId"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "description": "Contient les informations du prix à modifier.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "orderId"
+                ],
+                "properties": {
+                  "orderId": {
+                    "type": "string"
+                  },
+                  "pickupPointId": {
+                    "type": "string"
+                  }
+                }
+              },
+              "examples": {
+                "Exemple": {
+                  "value": {
+                    "orderId": "5q1zd65qdqz",
+                    "pickupPointId": "123456"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Requête traitée avec succès"
+          },
+          "401": {
+            "description": "Vous n'êtes pas autorisé à accéder à cet élément."
+          },
+          "403": {
+            "description": "Demande impossible pour ce 'priceId'"
+          },
+          "404": {
+            "description": "Le 'priceId' n'existe pas"
+          },
+          "409": {
+            "description": "Le 'orderId' est déjà associé à un 'price'"
+          }
+        },
+        "summary": "Mise à jour de demande de prix"
+      }
+    },
+    "/prices/orders": {
+      "post": {
+        "tags": [
+          "Prix"
+        ],
+        "description": "Ordre de livraison depuis une demande de prix.",
+        "operationId": "postOrderFromPrice",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "description": "Contient les informations de création d'order depuis le prix.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "orderId",
+                  "picking",
+                  "delivery",
+                  "packages"
+                ],
+                "properties": {
+                  "orderId": {
+                    "type": "string"
+                  },
+                  "referenceNumber": {
+                    "type": "string"
+                  },
+                  "picking": {
+                    "required": [
+                      "address",
+                      "interval",
+                      "contact"
+                    ],
+                    "properties": {
+                      "address": {
+                        "$ref": "#/components/schemas/address"
+                      },
+                      "infos": {
+                        "type": "string"
+                      },
+                      "interval": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/components/schemas/interval"
+                        }
+                      },
+                      "contact": {
+                        "$ref": "#/components/schemas/contact"
+                      }
+                    }
+                  },
+                  "delivery": {
+                    "required": [
+                      "address",
+                      "interval",
+                      "contact"
+                    ],
+                    "properties": {
+                      "address": {
+                        "allOf": [
+                          {
+                            "$ref": "#/components/schemas/address"
+                          },
+                          {
+                            "properties": {
+                              "title": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        ]
+                      },
+                      "infos": {
+                        "type": "string"
+                      },
+                      "interval": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/components/schemas/interval"
+                        }
+                      },
+                      "contact": {
+                        "$ref": "#/components/schemas/contactWithLocalization"
+                      }
+                    }
+                  },
+                  "packages": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/packages"
+                    }
+                  }
+                }
+              },
+              "examples": {
+                "Exemple": {
+                  "value": {
+                    "orderId": "q5z1dq1zd",
+                    "referenceNumber": "q5z1dq1zd-5d5zq",
+                    "picking": {
+                      "address": {
+                        "addressLine1": "237 rue du Ballon",
+                        "postalCode": "59110",
+                        "city": "La Madeleine",
+                        "country": "FR"
+                      },
+                      "interval": [
+                        {
+                          "start": "2019-12-03T12:00:00+0000",
+                          "end": "2019-12-03T13:00:00+0000"
+                        }
+                      ],
+                      "contact": {
+                        "firstName": "Michel",
+                        "lastName": "Dupont",
+                        "phone": "+33600000000",
+                        "email": "michel.dupont@mail.fr"
+                      }
+                    },
+                    "delivery": {
+                      "address": {
+                        "addressLine1": "165 Avenue de Bretagne",
+                        "elevator": true,
+                        "floor": 3,
+                        "postalCode": "59000",
+                        "city": "Lille",
+                        "country": "FR"
+                      },
+                      "infos": "Sonnez à côté",
+                      "interval": [
+                        {
+                          "start": "2019-12-04T08:30:00+0000",
+                          "end": "2019-12-04T10:30:00+0000"
+                        }
+                      ],
+                      "contact": {
+                        "firstName": "Pierre",
+                        "lastName": "Dupond",
+                        "phone": "+33600000000",
+                        "email": "pierre.dupond@mail.fr",
+                        "language": "fr-BE",
+                        "timezone": "Europe/Paris"
+                      }
+                    },
+                    "packages": [
+                      {
+                        "reference": [
+                          "azerty1"
+                        ],
+                        "length": {
+                          "value": 1,
+                          "unit": "m"
+                        },
+                        "width": {
+                          "value": 1.2,
+                          "unit": "m"
+                        },
+                        "height": {
+                          "value": 12,
+                          "unit": "cm"
+                        },
+                        "weight": {
+                          "value": 525,
+                          "unit": "g"
+                        },
+                        "products": [
+                          {
+                            "type": "TYPOLOGY_GENERIC",
+                            "ean": "4579156874625",
+                            "cug": "5zd4q564zdz",
+                            "label": "Planche",
+                            "quantity": 2
+                          }
+                        ],
+                        "quantity": 1
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "La commande a bien été enregistrée"
+          },
+          "202": {
+            "description": "La commande doit être complétée"
+          },
+          "400": {
+            "description": "Elements manquants et/ou incorrect dans le body",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "reasons": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "example": "Missing argument 'xxxxx'"
+                      }
+                    }
+                  }
+                }
+              },
+              "examples": {
+                "Exemple": {
+                  "value": {
+                    "reasons": [
+                      "Missing argument 'xxxxx'"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Vous n'êtes pas autorisé à accéder à cet élément."
+          },
+          "403": {
+            "description": "Création de commande impossible pour le 'storeId'"
+          },
+          "404": {
+            "description": "Pas de  demande de prix correspondant à cet 'orderId'"
+          },
+          "409": {
+            "description": "Création de commande avec ce 'priceId' impossible"
+          }
+        },
+        "summary": "Demande ordre de livraison depuis une demande de prix"
+      }
+    },
+    "/pickupPoints": {
+      "get": {
+        "tags": [
+          "Point relais"
+        ],
+        "description": "Récupération des points relais",
+        "operationId": "getPickupPoints",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/components/parameters/queryLatitude"
+          },
+          {
+            "$ref": "#/components/parameters/queryLongitude"
+          },
+          {
+            "$ref": "#/components/parameters/queryNumber"
+          },
+          {
+            "$ref": "#/components/parameters/queryKilometricDistance"
+          },
+          {
+            "$ref": "#/components/parameters/queryPickupPointType"
+          },
+          {
+            "$ref": "#/components/parameters/queryStoreId"
+          },
+          {
+            "$ref": "#/components/parameters/queryPickupPointCarrierCode"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Contient les point relais récupérés.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "pickupPoints": {
+                      "type": "array",
+                      "items": {
+                        "required": [
+                          "address",
+                          "coordinates",
+                          "id",
+                          "openingHours",
+                          "maxWeight",
+                          "carrier"
+                        ],
+                        "properties": {
+                          "address": {
+                            "allOf": [
+                              {
+                                "$ref": "#/components/schemas/address"
+                              },
+                              {
+                                "required": [
+                                  "title"
+                                ],
+                                "properties": {
+                                  "title": {
+                                    "type": "string"
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          "coordinates": {
+                            "$ref": "#/components/schemas/coordinates"
+                          },
+                          "id": {
+                            "type": "string"
+                          },
+                          "carrier": {
+                            "$ref": "#/components/schemas/pickupPointCarrier"
+                          },
+                          "openingHours": {
+                            "type": "object",
+                            "properties": {
+                              "monday": {
+                                "type": "array",
+                                "items": {
+                                  "$ref": "#/components/schemas/interval_hour"
+                                }
+                              },
+                              "tuesday": {
+                                "type": "array",
+                                "items": {
+                                  "$ref": "#/components/schemas/interval_hour"
+                                }
+                              },
+                              "wednesday": {
+                                "type": "array",
+                                "items": {
+                                  "$ref": "#/components/schemas/interval_hour"
+                                }
+                              },
+                              "thursday": {
+                                "type": "array",
+                                "items": {
+                                  "$ref": "#/components/schemas/interval_hour"
+                                }
+                              },
+                              "friday": {
+                                "type": "array",
+                                "items": {
+                                  "$ref": "#/components/schemas/interval_hour"
+                                }
+                              },
+                              "saturday": {
+                                "type": "array",
+                                "items": {
+                                  "$ref": "#/components/schemas/interval_hour"
+                                }
+                              },
+                              "sunday": {
+                                "type": "array",
+                                "items": {
+                                  "$ref": "#/components/schemas/interval_hour"
+                                }
+                              }
+                            }
+                          },
+                          "maxWeight": {
+                            "$ref": "#/components/schemas/mass"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Exemple": {
+                    "value": {
+                      "pickupPoints": [
+                        {
+                          "address": {
+                            "addressLine1": "237 rue du Ballon",
+                            "postalCode": "59110",
+                            "city": "La Madeleine",
+                            "country": "FR",
+                            "title": "Niji"
+                          },
+                          "coordinates": {
+                            "latitude": 50.638386,
+                            "longitude": 3.077183
+                          },
+                          "id": "q251zd564qz",
+                          "carrier": {
+                            "code": "transporteur1",
+                            "name": "Transporteur A"
+                          },
+                          "openingHours": {
+                            "monday": [
+                              {
+                                "start": "08:00",
+                                "end": "19:30"
+                              }
+                            ],
+                            "tuesday": [
+                              {
+                                "start": "08:00",
+                                "end": "19:30"
+                              }
+                            ],
+                            "wednesday": [
+                              {
+                                "start": "08:00",
+                                "end": "19:30"
+                              }
+                            ],
+                            "thursday": [
+                              {
+                                "start": "08:00",
+                                "end": "19:30"
+                              }
+                            ],
+                            "friday": [
+                              {
+                                "start": "08:00",
+                                "end": "19:30"
+                              }
+                            ],
+                            "saturday": [
+                              {
+                                "start": "08:00",
+                                "end": "16:00"
+                              }
+                            ],
+                            "sunday": [
+                              {
+                                "start": "08:00",
+                                "end": "12:00"
+                              }
+                            ]
+                          },
+                          "maxWeight": {
+                            "value": 250,
+                            "unit": "kg"
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Elements manquants et/ou incorrect dans le body",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "reasons": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "example": "Missing argument 'xxxxx'"
+                      }
+                    }
+                  }
+                }
+              },
+              "examples": {
+                "Exemple": {
+                  "value": {
+                    "reasons": [
+                      "Missing argument 'xxxxx'"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Vous n'êtes pas autorisé à accéder à cet élément."
+          },
+          "403": {
+            "description": "Demande impossible pour le 'storeId'"
+          }
+        },
+        "summary": "Récupération des points relais"
+      }
+    },
+    "/subscriptions": {
+      "post": {
+        "tags": [
+          "Souscriptions"
+        ],
+        "description": "Endpoint d'initialisation d'échanges avec les APIs enseignes.",
+        "operationId": "postSubscription",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "description": "Contient les informations des souscriptions.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "callbacks"
+                ],
+                "properties": {
+                  "callbacks": {
+                    "type": "object",
+                    "required": [
+                      "carrier",
+                      "status",
+                      "score"
+                    ],
+                    "properties": {
+                      "carrier": {
+                        "type": "object",
+                        "required": [
+                          "url"
+                        ],
+                        "properties": {
+                          "url": {
+                            "type": "string",
+                            "description": "Url de la route permettant d'obtenir le choix du transporteur."
+                          },
+                          "version": {
+                            "type": "string",
+                            "description": "Version d'API pour ce callback (voir woop vers retailer)",
+                            "example": "1.1.1"
+                          }
+                        }
+                      },
+                      "status": {
+                        "type": "object",
+                        "required": [
+                          "url"
+                        ],
+                        "properties": {
+                          "url": {
+                            "type": "string",
+                            "description": "Url de la route permettant de communiquer les changements de statut."
+                          },
+                          "version": {
+                            "type": "string",
+                            "description": "Version d'API pour ce callback (voir woop vers retailer)",
+                            "example": "1.1.1"
+                          }
+                        }
+                      },
+                      "score": {
+                        "type": "object",
+                        "required": [
+                          "url"
+                        ],
+                        "properties": {
+                          "url": {
+                            "type": "string",
+                            "description": "Url de la route permettant d'obtenir la note client."
+                          },
+                          "version": {
+                            "type": "string",
+                            "description": "Version d'API pour ce callback (voir woop vers retailer)",
+                            "example": "1.1.1"
+                          }
+                        }
+                      },
+                      "deliveryClosure": {
+                        "type": "object",
+                        "required": [
+                          "url"
+                        ],
+                        "properties": {
+                          "url": {
+                            "type": "string",
+                            "description": "Url de la route permettant de communiquer les informations finales de facturation."
+                          },
+                          "version": {
+                            "type": "string",
+                            "description": "Version d'API pour ce callback (voir woop vers retailer)",
+                            "example": "1.1.1"
+                          }
+                        }
+                      },
+                      "event": {
+                        "type": "object",
+                        "required": [
+                          "url"
+                        ],
+                        "properties": {
+                          "url": {
+                            "type": "string",
+                            "description": "Url de la route permettant de communiquer les notifications envoyées au client."
+                          },
+                          "version": {
+                            "type": "string",
+                            "description": "Version d'API pour ce callback (voir woop vers retailer)",
+                            "example": "1.1.1"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "headers": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "key",
+                        "value"
+                      ],
+                      "properties": {
+                        "key": {
+                          "type": "string"
+                        },
+                        "value": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "auth": {
+                    "type": "object",
+                    "properties": {
+                      "basic": {
+                        "type": "object",
+                        "description": "A definir si la méthode d'authentification à l'API voulue est basic",
+                        "required": [
+                          "username",
+                          "password"
+                        ],
+                        "properties": {
+                          "username": {
+                            "type": "string"
+                          },
+                          "password": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "oauth2": {
+                        "type": "object",
+                        "description": "A definir si la méthode d'authentification à l'API voulue est oauth2",
+                        "required": [
+                          "client_id",
+                          "client_secret",
+                          "tokenEndPoint"
+                        ],
+                        "properties": {
+                          "client_id": {
+                            "type": "string"
+                          },
+                          "client_secret": {
+                            "type": "string"
+                          },
+                          "audience": {
+                            "type": "string"
+                          },
+                          "grant_type": {
+                            "type": "string"
+                          },
+                          "tokenEndPoint": {
+                            "type": "string",
+                            "description": "Url permettant de recupérer le token d'accès en fonction du clientId et du clientSecret"
+                          }
+                        }
+                      },
+                      "token": {
+                        "type": "object",
+                        "description": "A définir si la méthode d'authentification donne un bearer token à partir d'un username/password",
+                        "required": [
+                          "username",
+                          "password",
+                          "endpoint"
+                        ],
+                        "properties": {
+                          "username": {
+                            "type": "string"
+                          },
+                          "password": {
+                            "type": "string"
+                          },
+                          "endpoint": {
+                            "type": "string",
+                            "description": "Url permettant de recupérer le token d'accès"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "examples": {
+                "Basic": {
+                  "value": {
+                    "callbacks": {
+                      "quote": {
+                        "url": "https://my_url/quote",
+                        "version": "1.0.0"
+                      },
+                      "delivery": {
+                        "url": "https://my_url/delivery",
+                        "version": "1.0.0"
+                      },
+                      "cancel": {
+                        "url": "https://my_url/cancel",
+                        "version": "1.0.0"
+                      },
+                      "score": {
+                        "url": "https://my_url/score",
+                        "version": "1.0.0"
+                      }
+                    },
+                    "headers": [
+                      {
+                        "key": "x-api-key",
+                        "value": "KJK13I7Y12"
+                      }
+                    ],
+                    "auth": {
+                      "basic": {
+                        "username": "admin",
+                        "password": "1234"
+                      }
+                    }
+                  }
+                },
+                "OAuth2": {
+                  "value": {
+                    "callbacks": {
+                      "quote": {
+                        "url": "https://my_url/quote",
+                        "version": "1.0.0"
+                      },
+                      "delivery": {
+                        "url": "https://my_url/delivery",
+                        "version": "1.0.0"
+                      },
+                      "cancel": {
+                        "url": "https://my_url/cancel",
+                        "version": "1.0.0"
+                      },
+                      "score": {
+                        "url": "https://my_url/score",
+                        "version": "1.0.0"
+                      },
+                      "price": {
+                        "url": "https://my_url/price",
+                        "version": "1.0.0"
+                      }
+                    },
+                    "auth": {
+                      "oauth2": {
+                        "client_id": "8664fb6e578be877cdd16e2c13e1db3e",
+                        "client_secret": "4bb43097953c6d3ffae77b77f4716bba",
+                        "audience": "carrier.last-mile.fr",
+                        "grant_type": "oAuth2ClientCredentials",
+                        "tokenEndPoint": "token.last-mile.fr"
+                      }
+                    }
+                  }
+                },
+                "Token": {
+                  "value": {
+                    "callbacks": {
+                      "quote": {
+                        "url": "https://my_url/quote",
+                        "version": "1.0.0"
+                      },
+                      "delivery": {
+                        "url": "https://my_url/delivery",
+                        "version": "1.0.0"
+                      },
+                      "cancel": {
+                        "url": "https://my_url/cancel",
+                        "version": "1.0.0"
+                      },
+                      "score": {
+                        "url": "https://my_url/score",
+                        "version": "1.0.0"
+                      }
+                    },
+                    "auth": {
+                      "token": {
+                        "username": "admin",
+                        "password": "1234",
+                        "endpoint": "token.last-mile.fr"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Requête traitée avec succès"
+          },
+          "400": {
+            "description": "Elements manquants et/ou incorrect dans le body",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "reasons": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "example": "Missing argument 'xxxxx'"
+                      }
+                    }
+                  }
+                }
+              },
+              "examples": {
+                "Exemple": {
+                  "value": {
+                    "reasons": [
+                      "Missing argument 'xxxxx'"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Ajout de souscriptions"
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "oAuth2ClientCredentials": {
+        "type": "oauth2",
+        "flows": {
+          "clientCredentials": {
+            "tokenUrl": "https://last-mile.eu.auth0.com/oauth/token",
+            "x-google-issuer": "https://last-mile.eu.auth0.com/",
+            "x-google-jwks_uri": "https://last-mile.eu.auth0.com/.well-known/jwks.json",
+            "x-google-audiences": "https://retailer.api.meltingpoint.fr/"
+          }
+        }
+      }
+    },
+    "schemas": {
+      "responseOrder": {
+        "properties": {
+          "orders": {
+            "type": "array",
+            "items": {
+              "properties": {
+                "delivery": {
+                  "type": "object",
+                  "properties": {
+                    "externalDeliveryId": {
+                      "type": "string"
+                    },
+                    "currentStatus": {
+                      "type": "string"
+                    },
+                    "updatedAt": {
+                      "type": "string"
+                    },
+                    "interval": {
+                      "type": "object",
+                      "properties": {
+                        "start": {
+                          "type": "string",
+                          "format": "datetime"
+                        },
+                        "end": {
+                          "type": "string",
+                          "format": "datetime"
+                        }
+                      }
+                    },
+                    "trackingPageUrl:": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "carrier": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "contact": {
+                      "type": "string"
+                    },
+                    "claimUrl": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "order": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "currentStatus": {
+                      "type": "string"
+                    },
+                    "updatedAt": {
+                      "type": "string"
+                    },
+                    "referenceNumber": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "picking": {
+                  "type": "object",
+                  "properties": {
+                    "interval": {
+                      "type": "object",
+                      "properties": {
+                        "start": {
+                          "type": "string",
+                          "format": "datetime"
+                        },
+                        "end": {
+                          "type": "string",
+                          "format": "datetime"
+                        }
+                      }
+                    }
+                  }
+                },
+                "packages": {
+                  "type": "array",
+                  "items": {
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "reference": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "postCollects": {
+        "type": "object",
+        "required": [
+          "reference",
+          "storeId",
+          "customer",
+          "location",
+          "packages"
+        ],
+        "properties": {
+          "reference": {
+            "type": "string"
+          },
+          "storeId": {
+            "type": "string"
+          },
+          "customer": {
+            "$ref": "#/components/schemas/contact"
+          },
+          "location": {
+            "$ref": "#/components/schemas/location"
+          },
+          "packages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/packages"
+            }
+          }
+        }
+      },
+      "postOrders": {
+        "type": "object",
+        "required": [
+          "orderId",
+          "storeId",
+          "picking",
+          "delivery",
+          "services",
+          "packages"
+        ],
+        "properties": {
+          "orderId": {
+            "type": "string"
+          },
+          "referenceNumber": {
+            "type": "string"
+          },
+          "storeId": {
+            "type": "string"
+          },
+          "picking": {
+            "required": [
+              "location",
+              "interval",
+              "contact"
+            ],
+            "properties": {
+              "location": {
+                "$ref": "#/components/schemas/location"
+              },
+              "infos": {
+                "type": "string"
+              },
+              "interval": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/interval"
+                }
+              },
+              "contact": {
+                "$ref": "#/components/schemas/contact"
+              }
+            }
+          },
+          "delivery": {
+            "required": [
+              "location",
+              "interval",
+              "contact"
+            ],
+            "properties": {
+              "location": {
+                "$ref": "#/components/schemas/location"
+              },
+              "infos": {
+                "type": "string"
+              },
+              "interval": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/interval"
+                }
+              },
+              "contact": {
+                "$ref": "#/components/schemas/contactWithLocalization"
+              }
+            }
+          },
+          "numberOfPackages": {
+            "description": "Ce champ est à utiliser si vous souhaitez n'envoyer qu'un colis mais diviser son poids par X NumberOfPackage. La plateforme LMMP va regarder l'info NumberOfPackage puis calculer le nombre de package non générique. Puis va soustraire ce nombre au NumberOfPackage pour diviser le package contenant la marchandse générique par le résultat. ATTENTION : ce champ est spécifique à un besoin Décathlon, merci de ne pas en tenir compte pour le MVP si vous n'êtes pas ce retailer ",
+            "type": "integer",
+            "deprecated": true
+          },
+          "packages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/packages"
+            }
+          },
+          "services": {
+            "$ref": "#/components/schemas/services"
+          },
+          "tags": {
+            "$ref": "#/components/schemas/tags"
+          }
+        }
+      },
+      "postProductReturn": {
+        "type": "object",
+        "required": [
+          "orderReturnId",
+          "storeId",
+          "picking",
+          "delivery",
+          "services",
+          "packages",
+          "initialReferenceNumber",
+          "initialCarrier"
+        ],
+        "properties": {
+          "orderReturnId": {
+            "type": "string"
+          },
+          "initialReferenceNumber": {
+            "type": "string"
+          },
+          "storeId": {
+            "type": "string"
+          },
+          "initialCarrier": {
+            "type": "string"
+          },
+          "picking": {
+            "required": [
+              "location",
+              "interval",
+              "contact"
+            ],
+            "properties": {
+              "location": {
+                "$ref": "#/components/schemas/location"
+              },
+              "infos": {
+                "type": "string"
+              },
+              "interval": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/interval"
+                }
+              },
+              "contact": {
+                "$ref": "#/components/schemas/contactWithLocalization"
+              }
+            }
+          },
+          "delivery": {
+            "required": [
+              "location",
+              "interval",
+              "contact"
+            ],
+            "properties": {
+              "location": {
+                "$ref": "#/components/schemas/location"
+              },
+              "infos": {
+                "type": "string"
+              },
+              "interval": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/interval"
+                }
+              },
+              "contact": {
+                "$ref": "#/components/schemas/contactWithLocalization"
+              }
+            }
+          },
+          "packages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/packages"
+            }
+          }
+        }
+      },
+      "tags": {
+        "type": "array",
+        "description": "Permet de définir des \"marqueurs\" sur cette commande",
+        "items": {
+          "type": "object",
+          "required": [
+            "key",
+            "value"
+          ],
+          "properties": {
+            "key": {
+              "type": "string",
+              "example": "origin"
+            },
+            "value": {
+              "type": "string",
+              "example": "web"
+            }
+          }
+        }
+      },
+      "address": {
+        "required": [
+          "addressLine1",
+          "postalCode",
+          "city",
+          "country"
+        ],
+        "properties": {
+          "addressLine1": {
+            "type": "string"
+          },
+          "addressLine2": {
+            "type": "string"
+          },
+          "elevator": {
+            "type": "boolean"
+          },
+          "floor": {
+            "type": "integer"
+          },
+          "doorCode": {
+            "type": "string"
+          },
+          "postalCode": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "district": {
+            "type": "string"
+          },
+          "country": {
+            "$ref": "#/components/schemas/country"
+          },
+          "comment": {
+            "type": "string"
+          }
+        }
+      },
+      "location": {
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "address",
+              "pickupPoint",
+              "exchangePlace"
+            ]
+          },
+          "id": {
+            "type": "string"
+          },
+          "carrierCode": {
+            "type": "string"
+          },
+          "addressLine1": {
+            "type": "string"
+          },
+          "addressLine2": {
+            "type": "string"
+          },
+          "elevator": {
+            "type": "boolean"
+          },
+          "floor": {
+            "type": "integer"
+          },
+          "doorCode": {
+            "type": "string"
+          },
+          "postalCode": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "district": {
+            "type": "string"
+          },
+          "country": {
+            "$ref": "#/components/schemas/country"
+          },
+          "comment": {
+            "type": "string"
+          }
+        }
+      },
+      "interval": {
+        "required": [
+          "start",
+          "end"
+        ],
+        "properties": {
+          "start": {
+            "type": "string",
+            "format": "datetime"
+          },
+          "end": {
+            "type": "string",
+            "format": "datetime"
+          }
+        }
+      },
+      "interval_hour": {
+        "required": [
+          "start",
+          "end"
+        ],
+        "properties": {
+          "start": {
+            "type": "string",
+            "format": "datetime"
+          },
+          "end": {
+            "type": "string",
+            "format": "datetime"
+          }
+        }
+      },
+      "contact": {
+        "required": [
+          "firstName",
+          "lastName",
+          "phone",
+          "email",
+          "language",
+          "timezone"
+        ],
+        "properties": {
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          },
+          "timezone": {
+            "type": "string"
+          }
+        }
+      },
+      "contactWithLocalization": {
+        "required": [
+          "firstName",
+          "lastName",
+          "phone",
+          "email",
+          "language",
+          "timezone"
+        ],
+        "properties": {
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          },
+          "timezone": {
+            "type": "string"
+          }
+        }
+      },
+      "services": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/deliveryServices"
+        }
+      },
+      "packages": {
+        "required": [
+          "length",
+          "width",
+          "height",
+          "weight",
+          "products"
+        ],
+        "properties": {
+          "reference": {
+            "$ref": "#/components/schemas/packagesReferences"
+          },
+          "length": {
+            "$ref": "#/components/schemas/length"
+          },
+          "width": {
+            "$ref": "#/components/schemas/length"
+          },
+          "height": {
+            "$ref": "#/components/schemas/length"
+          },
+          "weight": {
+            "$ref": "#/components/schemas/mass"
+          },
+          "products": {
+            "type": "array",
+            "items": {
+              "required": [
+                "type"
+              ],
+              "properties": {
+                "type": {
+                  "$ref": "#/components/schemas/productTypes"
+                },
+                "ean": {
+                  "type": "string"
+                },
+                "cug": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "quantity": {
+                  "type": "integer",
+                  "default": 1
+                }
+              }
+            }
+          },
+          "quantity": {
+            "type": "integer",
+            "default": 1
+          }
+        }
+      },
+      "coordinates": {
+        "type": "object",
+        "required": [
+          "latitude",
+          "longitude"
+        ],
+        "properties": {
+          "latitude": {
+            "type": "number"
+          },
+          "longitude": {
+            "type": "number"
+          }
+        }
+      },
+      "length": {
+        "required": [
+          "unit",
+          "value"
+        ],
+        "properties": {
+          "value": {
+            "type": "number"
+          },
+          "unit": {
+            "$ref": "#/components/schemas/lengthUnits"
+          }
+        }
+      },
+      "mass": {
+        "required": [
+          "unit",
+          "value"
+        ],
+        "properties": {
+          "value": {
+            "type": "number"
+          },
+          "unit": {
+            "$ref": "#/components/schemas/massUnits"
+          }
+        }
+      },
+      "packagesReferences": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "price": {
+        "properties": {
+          "value": {
+            "type": "number"
+          },
+          "currency": {
+            "$ref": "#/components/schemas/currencies"
+          }
+        }
+      },
+      "pickupPointCarrier": {
+        "required": [
+          "name",
+          "code"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        }
+      },
+      "cancelledReasons": {
+        "type": "string",
+        "enum": [
+          "CANCELLED_CANNOT_SERVICE",
+          "CANCELLED_UNKNOWN",
+          "CANCELLED_PREPARATION_DELAYED",
+          "CANCELLED_BY_CLIENT",
+          "CANCELLED_NEW_ADDRESS",
+          "CANCELLED_INCOMPLETE"
+        ]
+      },
+      "deliveryServices": {
+        "type": "string",
+        "enum": [
+          "SERVICE_PICKUP_POINT",
+          "SERVICE_REGULAR_FRONT_HOME",
+          "SERVICE_SELECTED_ROOM",
+          "SERVICE_FRONT_HOME",
+          "SERVICE_UNPACKING",
+          "SERVICE_INSTALL",
+          "SERVICE_RECOVERY",
+          "SERVICE_SIMPLE_INSTALL",
+          "SERVICE_COMPLEX_INSTALL"
+        ]
+      },
+      "productTypes": {
+        "type": "string",
+        "enum": [
+          "TYPOLOGY_GENERIC",
+          "TYPOLOGY_GROCERY",
+          "TYPOLOGY_FRESH",
+          "TYPOLOGY_FROZEN",
+          "TYPOLOGY_DANGEROUS",
+          "TYPOLOGY_HOUSEHOLD",
+          "TYPOLOGY_VOLUMINOUS",
+          "TYPOLOGY_FRAGILE",
+          "TYPOLOGY_VOLUMINOUS_FRAGILE",
+          "TYPOLOGY_LARGE_HOUSEHOLD",
+          "TYPOLOGY_PALLET_GENERIC"
+        ]
+      },
+      "currencies": {
+        "type": "string",
+        "enum": [
+          "EUR"
+        ]
+      },
+      "lengthUnits": {
+        "type": "string",
+        "enum": [
+          "mm",
+          "cm",
+          "m",
+          "km",
+          "in",
+          "ft-us",
+          "ft",
+          "mi"
+        ]
+      },
+      "massUnits": {
+        "type": "string",
+        "enum": [
+          "kg",
+          "mcg",
+          "mg",
+          "g",
+          "oz",
+          "lb",
+          "mt",
+          "t"
+        ]
+      },
+      "country": {
+        "type": "string",
+        "enum": [
+          "FR",
+          "BE"
+        ]
+      }
+    },
+    "parameters": {
+      "apiVersion": {
+        "in": "header",
+        "name": "x-api-version",
+        "schema": {
+          "type": "string",
+          "example": "1.4.1"
+        }
+      },
+      "queryDeliveryStatus": {
+        "in": "query",
+        "required": true,
+        "name": "deliveryStatus",
+        "schema": {
+          "type": "string",
+          "enum": [
+            "DELIVERY_INIT"
+          ]
+        }
+      },
+      "queryPickingDate": {
+        "in": "query",
+        "required": false,
+        "name": "pickingDate",
+        "description": "Filtre par date de prélèvement. Permet de récupérer les commandes antérieures à cette date.",
+        "schema": {
+          "type": "string",
+          "format": "datetime",
+          "example": "2019-12-06T12:00:00Z"
+        }
+      },
+      "queryPickupPointCarrierCode": {
+        "in": "query",
+        "name": "carrierCode",
+        "description": "Code du transporteur sur lequel filtrer",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "queryStoreId": {
+        "in": "query",
+        "name": "storeId",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "queryStoreIdRequired": {
+        "in": "query",
+        "required": true,
+        "name": "storeId",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "queryMode": {
+        "in": "query",
+        "name": "mode",
+        "schema": {
+          "type": "string",
+          "default": "pdf",
+          "enum": [
+            "pdf",
+            "zpl"
+          ]
+        }
+      },
+      "queryLatitude": {
+        "in": "query",
+        "required": true,
+        "name": "latitude",
+        "schema": {
+          "type": "number"
+        }
+      },
+      "queryLongitude": {
+        "in": "query",
+        "required": true,
+        "name": "longitude",
+        "schema": {
+          "type": "number"
+        }
+      },
+      "queryNumber": {
+        "in": "query",
+        "required": false,
+        "name": "number",
+        "schema": {
+          "type": "integer",
+          "maximum": 25,
+          "default": 10
+        }
+      },
+      "queryKilometricDistance": {
+        "in": "query",
+        "required": false,
+        "name": "kilometricDistance",
+        "schema": {
+          "type": "integer",
+          "maximum": 40,
+          "default": 5
+        }
+      },
+      "queryPickupPointType": {
+        "in": "query",
+        "required": false,
+        "name": "type",
+        "description": "Types de point relais",
+        "schema": {
+          "type": "string",
+          "enum": [
+            "PICKUP_POINT_AGENCY",
+            "PICKUP_POINT_POST_OFFICE",
+            "PICKUP_POINT_RELAY_WITH_LOCKER",
+            "PICKUP_POINT_RELAY_WITHOUT_LOCKER",
+            "PICKUP_POINT_ALL"
+          ],
+          "default": "PICKUP_POINT_RELAY_WITH_LOCKER"
+        }
+      },
+      "pathOrderId": {
+        "in": "path",
+        "required": true,
+        "name": "orderId",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "pathDocumentId": {
+        "in": "path",
+        "required": true,
+        "name": "documentId",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "pathPriceId": {
+        "in": "path",
+        "required": true,
+        "name": "priceId",
+        "schema": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
