@@ -8,7 +8,7 @@
       "name": "Etiquette"
     },
     {
-      "name": "Documents"
+      "name": "Document"
     },
     {
       "name": "Prix"
@@ -1505,7 +1505,7 @@
     "/orders/{orderId}/documents": {
       "get": {
         "tags": [
-          "Documents"
+          "Document"
         ],
         "description": "Récupération des documents de l'ordre de livraison.",
         "operationId": "getOrderDocuments",
@@ -1588,7 +1588,7 @@
     "/orders/{orderId}/documents/download": {
       "get": {
         "tags": [
-          "Documents"
+          "Document"
         ],
         "description": "Téléchargement des documents de l'ordre de livraison en zip.",
         "operationId": "downloadOrderDocuments",
@@ -1625,7 +1625,7 @@
     "/orders/{orderId}/documents/{documentId}/download": {
       "get": {
         "tags": [
-          "Documents"
+          "Document"
         ],
         "description": "Téléchargement d'un document de l'ordre de livraison",
         "operationId": "downloadOrderDocument",
@@ -2935,6 +2935,24 @@
           }
         }
       },
+      "deliveryStatus": {
+        "type": "string",
+        "enum": [
+          "DELIVERY_STARTED",
+          "DELIVERY_PICK_UP_REACHED",
+          "DELIVERY_PICK_UP_OK",
+          "DELIVERY_PICK_UP_PARTIALLY",
+          "DELIVERY_IN_PROGRESS",
+          "DELIVERY_AT_DROP_OF_LOCATION",
+          "DELIVERY_PICK_UP_FAILED",
+          "DELIVERY_DELIVERED_WITH_CLAIM",
+          "DELIVERY_CANCELLED_WITH_RETURN",
+          "DELIVERY_FAILED_WITH_RETURN",
+          "DELIVERY_RETURNED_TO_PICK_UP",
+          "DELIVERY_DELIVERED_OK",
+          "DELIVERY_DELIVERED_PARTIALLY"
+        ]
+      },
       "location": {
         "required": [
           "type"
@@ -3298,6 +3316,8 @@
       "apiVersion": {
         "in": "header",
         "name": "x-api-version",
+        "description": "Version d'api ciblée",
+        "required": true,
         "schema": {
           "type": "string",
           "example": "1.4.1"
@@ -3307,11 +3327,24 @@
         "in": "query",
         "required": true,
         "name": "deliveryStatus",
+        "description": "Filtre par statut de livraison",
         "schema": {
-          "type": "string",
-          "enum": [
-            "DELIVERY_INIT"
-          ]
+         "type": "string",
+        "enum": [
+          "DELIVERY_STARTED",
+          "DELIVERY_PICK_UP_REACHED",
+          "DELIVERY_PICK_UP_OK",
+          "DELIVERY_PICK_UP_PARTIALLY",
+          "DELIVERY_IN_PROGRESS",
+          "DELIVERY_AT_DROP_OF_LOCATION",
+          "DELIVERY_PICK_UP_FAILED",
+          "DELIVERY_DELIVERED_WITH_CLAIM",
+          "DELIVERY_CANCELLED_WITH_RETURN",
+          "DELIVERY_FAILED_WITH_RETURN",
+          "DELIVERY_RETURNED_TO_PICK_UP",
+          "DELIVERY_DELIVERED_OK",
+          "DELIVERY_DELIVERED_PARTIALLY"
+        ]
         }
       },
       "queryPickingDate": {
