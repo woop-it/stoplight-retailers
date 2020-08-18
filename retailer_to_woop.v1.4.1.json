@@ -205,7 +205,7 @@
         "tags": [
           "Ordre de livraison"
         ],
-        "description": "Ordre de livraison.",
+        "description": "Cette méthode permet de créer une demande d'ordre de livraison côté Woop.\nDès l'ordre validée, un ensemble de devis sera envoyé aux différents transporteurs. L’ordre de transport sera alors créé lorsque l’un des devis aura été validé.",
         "operationId": "postOrders",
         "parameters": [
           {
@@ -227,7 +227,7 @@
                       {
                         "properties": {
                           "productsPrice": {
-                            "$ref": "#/components/schemas/price"
+                            "$ref": "#/components/schemas/productsPrice"
                           }
                         }
                       }
@@ -672,7 +672,7 @@
         "tags": [
           "Ordre de livraison"
         ],
-        "description": "Retourne des ordres de livraison filtrés selon les paramètres disponibles.",
+        "description": "Cette méthode retourne les détails du ou de plusieurs ordres de livraison en fonction des filtres sélectionnés.",
         "operationId": "getOrders",
         "parameters": [
           {
@@ -2580,6 +2580,7 @@
             "items": {
               "properties": {
                 "delivery": {
+                  "description": "Informations de l’adresse de livraison finale",
                   "type": "object",
                   "properties": {
                     "externalDeliveryId": {
@@ -2611,6 +2612,7 @@
                 },
                 "carrier": {
                   "type": "object",
+                  "description": "Informations du transporteur sélectionné",
                   "properties": {
                     "name": {
                       "type": "string"
@@ -2625,6 +2627,7 @@
                 },
                 "order": {
                   "type": "object",
+                  "description": "Informations de l'ordre de transport",
                   "properties": {
                     "id": {
                       "type": "string"
@@ -2642,6 +2645,7 @@
                 },
                 "picking": {
                   "type": "object",
+                  "description": "Informations de l'adresse de prélèvement",
                   "properties": {
                     "interval": {
                       "type": "object",
@@ -2660,6 +2664,7 @@
                 },
                 "packages": {
                   "type": "array",
+                  "description": "Informations des paquets",
                   "items": {
                     "properties": {
                       "id": {
@@ -2718,15 +2723,19 @@
         ],
         "properties": {
           "orderId": {
-            "type": "string"
+            "type": "string",
+            "description": "Identifiant unique de la commande"
           },
           "referenceNumber": {
-            "type": "string"
+            "type": "string",
+            "description": "Référence de la commande, numéro associé à un magasin. Pouvant être égal à l’orderId."
           },
           "storeId": {
-            "type": "string"
+            "type": "string",
+            "description": "Identifiant du magasin émettant la demande"
           },
           "picking": {
+            "description": "Correspond aux informations à destination de l’adresse de prélèvement",
             "required": [
               "location",
               "interval",
@@ -2751,6 +2760,7 @@
             }
           },
           "delivery": {
+            "description": "Correspond aux informations à destination de  l’adresse de livraison finale",
             "required": [
               "location",
               "interval",
@@ -2780,6 +2790,7 @@
             "deprecated": true
           },
           "packages": {
+            "description": "Ensemble des paquets de la commande",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/packages"
@@ -2868,6 +2879,7 @@
           },
           "packages": {
             "type": "array",
+            "description": "Ensemble des paquets de la commande",
             "items": {
               "$ref": "#/components/schemas/packages"
             }
@@ -3098,11 +3110,13 @@
       },
       "services": {
         "type": "array",
+        "description": "Ensemble des services de livraison",
         "items": {
           "$ref": "#/components/schemas/deliveryServices"
         }
       },
       "packages": {
+        "description": "Ensemble des paquets de la commande",
         "required": [
           "length",
           "width",
@@ -3205,6 +3219,17 @@
         "type": "array",
         "items": {
           "type": "string"
+        }
+      },
+      "productsPrice": {
+        "description": "Correspond au prix de vente des produits. A renseigner pour le service “SERVICE_INSTALL”",
+        "properties": {
+          "value": {
+            "type": "number"
+          },
+          "currency": {
+            "$ref": "#/components/schemas/currencies"
+          }
         }
       },
       "price": {
@@ -3334,9 +3359,9 @@
         "in": "query",
         "required": true,
         "name": "deliveryStatus",
-        "description": "Filtre par statut de livraison (voir deliveryStatus)",
+        "description": "Filtre la liste des commande en fonction du statut de livraison",
         "schema": {
-         "type": "string",
+          "type": "string",
           "example": "DELIVERY_INIT"
         }
       },
