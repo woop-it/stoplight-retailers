@@ -10,8 +10,14 @@ title: Adresse
 -->
 
 ```json
-{ 
+{
   "type": "address",
+  "addressLine1": "165 avenue de Bretagne",
+  "elevator": true,
+  "floor": 3,
+  "postalCode": "59000",
+  "city": "Lille",
+  "country": "FR"
 }
 ```
 
@@ -20,7 +26,11 @@ type: tab
 title: Point relais
 -->
 ```json
-
+{
+  "type": "pickupPoint",
+  "id": "76761",
+  "carrierCode": "bpost"
+}
 ```
 
 <!--
@@ -29,7 +39,10 @@ title: Point de prélèvement
 -->
 
 ```json
-
+{
+  "type": "exchangePlace",
+  "id": "1"
+}
 ````
 <!-- type: tab-end -->
 

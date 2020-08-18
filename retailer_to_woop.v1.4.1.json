@@ -3040,21 +3040,17 @@
             "type": "string"
           }
         },
-        "title": "Emplacement",
+        "title": "Location",
         "description": "Un emplacement représente un lieu de prélevement ou de livraison.",
         "x-examples": {
-          "Address": {
+          "Adresse": {
             "type": "address",
-            "addressLine1": "string",
-            "addressLine2": "string",
+            "addressLine1": "165 avenue de Bretagne",
             "elevator": true,
-            "floor": 0,
-            "doorCode": "string",
-            "postalCode": "string",
-            "city": "string",
-            "district": "string",
-            "country": "FR",
-            "comment": "string"
+            "floor": 3,
+            "postalCode": "59000",
+            "city": "Lille",
+            "country": "FR"
           },
           "Point relais": {
             "type": "pickupPoint",
