@@ -3327,24 +3327,10 @@
         "in": "query",
         "required": true,
         "name": "deliveryStatus",
-        "description": "Filtre par statut de livraison",
+        "description": "Filtre par statut de livraison (voir deliveryStatus)",
         "schema": {
          "type": "string",
-        "enum": [
-          "DELIVERY_STARTED",
-          "DELIVERY_PICK_UP_REACHED",
-          "DELIVERY_PICK_UP_OK",
-          "DELIVERY_PICK_UP_PARTIALLY",
-          "DELIVERY_IN_PROGRESS",
-          "DELIVERY_AT_DROP_OF_LOCATION",
-          "DELIVERY_PICK_UP_FAILED",
-          "DELIVERY_DELIVERED_WITH_CLAIM",
-          "DELIVERY_CANCELLED_WITH_RETURN",
-          "DELIVERY_FAILED_WITH_RETURN",
-          "DELIVERY_RETURNED_TO_PICK_UP",
-          "DELIVERY_DELIVERED_OK",
-          "DELIVERY_DELIVERED_PARTIALLY"
-        ]
+          "example": "DELIVERY_INIT"
         }
       },
       "queryPickingDate": {
@@ -3361,14 +3347,16 @@
       "queryPickupPointCarrierCode": {
         "in": "query",
         "name": "carrierCode",
-        "description": "Code du transporteur sur lequel filtrer",
+        "description": "Filtre par code du transporteur",
         "schema": {
-          "type": "string"
+          "type": "string",
+          "example": "bpost"
         }
       },
       "queryStoreId": {
         "in": "query",
         "name": "storeId",
+        "description": "Filtre par id magasin",
         "schema": {
           "type": "string"
         }
@@ -3376,6 +3364,7 @@
       "queryStoreIdRequired": {
         "in": "query",
         "required": true,
+        "description": "Filtre par id magasin",
         "name": "storeId",
         "schema": {
           "type": "string"
@@ -3384,6 +3373,7 @@
       "queryMode": {
         "in": "query",
         "name": "mode",
+        "description": "Format de l'étiquette",
         "schema": {
           "type": "string",
           "default": "pdf",
@@ -3396,6 +3386,7 @@
       "queryLatitude": {
         "in": "query",
         "required": true,
+        "description": "Latitude du point de recherche",
         "name": "latitude",
         "schema": {
           "type": "number"
@@ -3403,6 +3394,7 @@
       },
       "queryLongitude": {
         "in": "query",
+        "description": "Longitude du point de recherche",
         "required": true,
         "name": "longitude",
         "schema": {
@@ -3412,6 +3404,7 @@
       "queryNumber": {
         "in": "query",
         "required": false,
+        "description": "Nombre de point relais retournés",
         "name": "number",
         "schema": {
           "type": "integer",
@@ -3422,6 +3415,7 @@
       "queryKilometricDistance": {
         "in": "query",
         "required": false,
+        "description": "Distance en kilomètres du rayon de recherche",
         "name": "kilometricDistance",
         "schema": {
           "type": "integer",
@@ -3433,7 +3427,7 @@
         "in": "query",
         "required": false,
         "name": "type",
-        "description": "Types de point relais",
+        "description": "Type de point relais",
         "schema": {
           "type": "string",
           "enum": [
@@ -3449,6 +3443,7 @@
       "pathOrderId": {
         "in": "path",
         "required": true,
+        "description": "id de l'ordre de livraison",
         "name": "orderId",
         "schema": {
           "type": "string"
@@ -3457,6 +3452,7 @@
       "pathDocumentId": {
         "in": "path",
         "required": true,
+        "description": "id du document",
         "name": "documentId",
         "schema": {
           "type": "string"
@@ -3465,6 +3461,7 @@
       "pathPriceId": {
         "in": "path",
         "required": true,
+        "description": "id de la demande de prix",
         "name": "priceId",
         "schema": {
           "type": "string"
