@@ -70,7 +70,7 @@
         "tags": [
           "Retrait"
         ],
-        "description": "Créer une demande de retrait",
+        "description": "Cette méthode permet d’effectuer une demande de retrait dans un emplacement de prélèvement précis. Dès la demande validée, l’ordre de retrait sera alors créé instantanément.",
         "operationId": "postCollects",
         "parameters": [
           {
@@ -817,13 +817,15 @@
                 ],
                 "properties": {
                   "reasons": {
+                    "description": "Raisons d’annulation",
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/cancelledReasons"
                     }
                   },
                   "comment": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Commentaire optionnel à ajouté si besoin lors de l’annulation"
                   }
                 }
               }
@@ -927,7 +929,7 @@
         "tags": [
           "Ordre de livraison"
         ],
-        "description": "Mise à jour d'un ordre de livraison par orderId.",
+        "description": "Cette méthode permet de modifier un ordre de livraison. La mise à jour peut déclencher une annulation de l'ordre de transport + création d’un nouvel ordre de transport si les informations modifiées sont jugées importantes ou non et impacte directement la livraison.",
         "operationId": "patchOrder",
         "parameters": [
           {
@@ -954,6 +956,7 @@
                 ],
                 "properties": {
                   "picking": {
+                    "description": "Informations de l'emplacement de prélèvement",
                     "required": [
                       "location",
                       "interval",
@@ -978,6 +981,7 @@
                     }
                   },
                   "delivery": {
+                    "description": "Informations de l'emplacement de livraison",
                     "required": [
                       "location",
                       "interval",
@@ -1003,6 +1007,7 @@
                   },
                   "packages": {
                     "type": "array",
+                    "description": "Ensemble des paquets",
                     "items": {
                       "$ref": "#/components/schemas/packages"
                     }
@@ -1050,7 +1055,7 @@
         "tags": [
           "Etiquette"
         ],
-        "description": "Récupération de l'étiquette par orderId.",
+        "description": "Cette méthode permet de récupérer une étiquette de transport en fonction de l'identifiant de la commande. \nL’étiquette peut être récupérée sous plusieurs formats (à condition que le transporteur soit compatible avec ce format).",
         "operationId": "getLabelByOrder",
         "parameters": [
           {
@@ -1070,18 +1075,21 @@
               "application/json": {
                 "schema": {
                   "type": "object",
+                  "description": "Informations de l'étiquette",
+                  "properties": {
+                    "base64": {
+                      "type": "string",
+                      "description": "L’étiquette est retournée en base64 au format indiqué lors de l’appel"
+                    },
+                    "trackingPageUrl": {
+                      "type": "string",
+                      "description": "Lien de la page de suivi de l'ordre de transport"
+                    }
+                  },
                   "required": [
                     "base64",
                     "trackingPageUrl"
-                  ],
-                  "properties": {
-                    "base64": {
-                      "type": "string"
-                    },
-                    "trackingPageUrl": {
-                      "type": "string"
-                    }
-                  }
+                  ]
                 },
                 "examples": {
                   "Exemple": {
@@ -1811,7 +1819,7 @@
                         }
                       },
                       "contact": {
-                        "$ref": "#/components/schemas/contactWithLocalization"
+                        "$ref": "#/components/schemas/contact"
                       }
                     }
                   },
@@ -1968,7 +1976,7 @@
         "tags": [
           "Point relais"
         ],
-        "description": "Récupération des points relais",
+        "description": "Cette méthode permet de récupérer la liste des point-relais des transporteurs situés autour d’une géolocalisation donnée.",
         "operationId": "getPickupPoints",
         "parameters": [
           {
@@ -2002,18 +2010,13 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "type": "object",
                   "properties": {
                     "pickupPoints": {
                       "type": "array",
+                      "description": "Informations sur les point relais",
                       "items": {
-                        "required": [
-                          "address",
-                          "coordinates",
-                          "id",
-                          "openingHours",
-                          "maxWeight",
-                          "carrier"
-                        ],
+                        "type": "object",
                         "properties": {
                           "address": {
                             "allOf": [
@@ -2021,67 +2024,78 @@
                                 "$ref": "#/components/schemas/address"
                               },
                               {
-                                "required": [
-                                  "title"
-                                ],
+                                "type": "object",
                                 "properties": {
                                   "title": {
                                     "type": "string"
                                   }
-                                }
+                                },
+                                "required": [
+                                  "title"
+                                ]
                               }
-                            ]
+                            ],
+                            "description": "Adresse du point relais"
                           },
                           "coordinates": {
                             "$ref": "#/components/schemas/coordinates"
                           },
                           "id": {
-                            "type": "string"
+                            "type": "string",
+                            "description": "Id du point relais"
                           },
                           "carrier": {
                             "$ref": "#/components/schemas/pickupPointCarrier"
                           },
                           "openingHours": {
                             "type": "object",
+                            "description": "Horaires d'ouverture du point relais",
                             "properties": {
                               "monday": {
                                 "type": "array",
+                                "description": "Horaires du lundi",
                                 "items": {
                                   "$ref": "#/components/schemas/interval_hour"
                                 }
                               },
                               "tuesday": {
                                 "type": "array",
+                                "description": "Horaires du mardi",
                                 "items": {
                                   "$ref": "#/components/schemas/interval_hour"
                                 }
                               },
                               "wednesday": {
                                 "type": "array",
+                                "description": "Horaires du mercredi",
                                 "items": {
                                   "$ref": "#/components/schemas/interval_hour"
                                 }
                               },
                               "thursday": {
                                 "type": "array",
+                                "description": "Horaires du jeudi",
                                 "items": {
                                   "$ref": "#/components/schemas/interval_hour"
                                 }
                               },
                               "friday": {
                                 "type": "array",
+                                "description": "Horaires du vendredi",
                                 "items": {
                                   "$ref": "#/components/schemas/interval_hour"
                                 }
                               },
                               "saturday": {
                                 "type": "array",
+                                "description": "Horaires du samedi",
                                 "items": {
                                   "$ref": "#/components/schemas/interval_hour"
                                 }
                               },
                               "sunday": {
                                 "type": "array",
+                                "description": "Horaires du dimanche",
                                 "items": {
                                   "$ref": "#/components/schemas/interval_hour"
                                 }
@@ -2091,7 +2105,15 @@
                           "maxWeight": {
                             "$ref": "#/components/schemas/mass"
                           }
-                        }
+                        },
+                        "required": [
+                          "address",
+                          "coordinates",
+                          "id",
+                          "carrier",
+                          "openingHours",
+                          "maxWeight"
+                        ]
                       }
                     }
                   }
@@ -2580,7 +2602,7 @@
             "items": {
               "properties": {
                 "delivery": {
-                  "description": "Informations de l’adresse de livraison finale",
+                  "description": "Informations sur la livraison",
                   "type": "object",
                   "properties": {
                     "externalDeliveryId": {
@@ -2645,7 +2667,7 @@
                 },
                 "picking": {
                   "type": "object",
-                  "description": "Informations de l'adresse de prélèvement",
+                  "description": "Informations sur le prélèvement",
                   "properties": {
                     "interval": {
                       "type": "object",
@@ -2692,10 +2714,12 @@
         ],
         "properties": {
           "reference": {
-            "type": "string"
+            "type": "string",
+            "description": "Identifiant de la demande de retrait"
           },
           "storeId": {
-            "type": "string"
+            "type": "string",
+            "description": "Identifiant du magasin émettant la demande"
           },
           "customer": {
             "$ref": "#/components/schemas/contact"
@@ -2704,6 +2728,7 @@
             "$ref": "#/components/schemas/location"
           },
           "packages": {
+            "description": "Ensemble des paquets",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/packages"
@@ -2735,7 +2760,7 @@
             "description": "Identifiant du magasin émettant la demande"
           },
           "picking": {
-            "description": "Correspond aux informations à destination de l’adresse de prélèvement",
+            "description": "Informations de l'emplacement de prélèvement",
             "required": [
               "location",
               "interval",
@@ -2760,7 +2785,7 @@
             }
           },
           "delivery": {
-            "description": "Correspond aux informations à destination de  l’adresse de livraison finale",
+            "description": "Informations de l'emplacement de livraison",
             "required": [
               "location",
               "interval",
@@ -2780,7 +2805,7 @@
                 }
               },
               "contact": {
-                "$ref": "#/components/schemas/contactWithLocalization"
+                "$ref": "#/components/schemas/contact"
               }
             }
           },
@@ -2790,7 +2815,7 @@
             "deprecated": true
           },
           "packages": {
-            "description": "Ensemble des paquets de la commande",
+            "description": "Ensemble des paquets",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/packages"
@@ -2849,7 +2874,7 @@
                 }
               },
               "contact": {
-                "$ref": "#/components/schemas/contactWithLocalization"
+                "$ref": "#/components/schemas/contact"
               }
             }
           },
@@ -2873,13 +2898,13 @@
                 }
               },
               "contact": {
-                "$ref": "#/components/schemas/contactWithLocalization"
+                "$ref": "#/components/schemas/contact"
               }
             }
           },
           "packages": {
             "type": "array",
-            "description": "Ensemble des paquets de la commande",
+            "description": "Ensemble des paquets",
             "items": {
               "$ref": "#/components/schemas/packages"
             }
@@ -3014,6 +3039,32 @@
           "comment": {
             "type": "string"
           }
+        },
+        "title": "Emplacement",
+        "description": "Un emplacement représente un lieu de prélevement ou de livraison.",
+        "x-examples": {
+          "Address": {
+            "type": "address",
+            "addressLine1": "string",
+            "addressLine2": "string",
+            "elevator": true,
+            "floor": 0,
+            "doorCode": "string",
+            "postalCode": "string",
+            "city": "string",
+            "district": "string",
+            "country": "FR",
+            "comment": "string"
+          },
+          "Point relais": {
+            "type": "pickupPoint",
+            "id": "76761",
+            "carrierCode": "bpost"
+          },
+          "Point de prélèvement": {
+            "type": "exchangePlace",
+            "id": "1"
+          }
         }
       },
       "interval": {
@@ -3049,6 +3100,33 @@
         }
       },
       "contact": {
+        "title": "Contact",
+        "description": "Informations de contact",
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string",
+            "description": "Prénom"
+          },
+          "lastName": {
+            "type": "string",
+            "description": "Nom"
+          },
+          "phone": {
+            "type": "string",
+            "description": "Téléphone"
+          },
+          "email": {
+            "type": "string",
+            "description": "Email"
+          },
+          "language": {
+            "$ref": "#/components/schemas/language"
+          },
+          "timezone": {
+            "$ref": "#/components/schemas/timezone"
+          }
+        },
         "required": [
           "firstName",
           "lastName",
@@ -3056,57 +3134,7 @@
           "email",
           "language",
           "timezone"
-        ],
-        "properties": {
-          "firstName": {
-            "type": "string"
-          },
-          "lastName": {
-            "type": "string"
-          },
-          "phone": {
-            "type": "string"
-          },
-          "email": {
-            "type": "string"
-          },
-          "language": {
-            "type": "string"
-          },
-          "timezone": {
-            "type": "string"
-          }
-        }
-      },
-      "contactWithLocalization": {
-        "required": [
-          "firstName",
-          "lastName",
-          "phone",
-          "email",
-          "language",
-          "timezone"
-        ],
-        "properties": {
-          "firstName": {
-            "type": "string"
-          },
-          "lastName": {
-            "type": "string"
-          },
-          "phone": {
-            "type": "string"
-          },
-          "email": {
-            "type": "string"
-          },
-          "language": {
-            "type": "string"
-          },
-          "timezone": {
-            "type": "string"
-          }
-        }
+        ]
       },
       "services": {
         "type": "array",
@@ -3116,7 +3144,7 @@
         }
       },
       "packages": {
-        "description": "Ensemble des paquets de la commande",
+        "description": "Ensemble des paquets",
         "required": [
           "length",
           "width",
@@ -3342,6 +3370,29 @@
           "FR",
           "BE"
         ]
+      },
+      "language": {
+        "type": "string",
+        "title": "language",
+        "description": "Code langue",
+        "x-examples": {},
+        "example": "fr-FR",
+        "enum": [
+          "en",
+          "en-GB",
+          "en-US",
+          "en-CA",
+          "fr",
+          "fr-CA",
+          "fr-FR",
+          "fr-BE"
+        ]
+      },
+      "timezone": {
+        "type": "string",
+        "title": "timezone",
+        "description": "Fuseau horaire\n(https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)",
+        "example": "Europe/Paris"
       }
     },
     "parameters": {
