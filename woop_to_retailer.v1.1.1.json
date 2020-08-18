@@ -1,0 +1,840 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+    "title": "Woop vers Enseigne",
+    "description": "Contrat d'interface des APIs de Woop vers les enseignes.",
+    "version": "1.1.1"
+  },
+  "tags": [{"name": "Ordre de livraison"}],
+  "paths": {
+    "/orders/{orderId}/carrier": {
+      "put": {
+        "tags": [
+          "Ordre de livraison"
+        ],
+        "operationId": "putOrderCarrier",
+        "description": "Mise à jour du transporteur sélectionné d'un ordre de livraison.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/pathOrderId"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "description": "Contient les informations du transporteur sélectionné.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "deliveryId",
+                  "orderId",
+                  "trackingPageUrl",
+                  "vehicleType",
+                  "price",
+                  "carrier"
+                ],
+                "properties": {
+                  "deliveryId": {
+                    "type": "string"
+                  },
+                  "externalReference": {
+                    "type": "string"
+                  },
+                  "orderId": {
+                    "type": "string"
+                  },
+                  "trackingPageUrl": {
+                    "type": "string"
+                  },
+                  "vehicleType": {
+                    "$ref": "#/components/schemas/vehicleType"
+                  },
+                  "price": {
+                    "$ref": "#/components/schemas/price"
+                  },
+                  "carrier": {
+                    "$ref": "#/components/schemas/carrier"
+                  }
+                }
+              },
+              "examples": {
+                "Exemple": {
+                  "value": {
+                    "deliveryId": "4qz64zd5qdq",
+                    "externalReference": "6546465-FH",
+                    "orderId": "zd8qz4dq4dz6q",
+                    "trackingPageUrl": "https://url_suivi_livraison",
+                    "vehicleType": "VEHICLE_TYPE_BIKE",
+                    "price": {
+                      "value": 36.5,
+                      "currency": "EUR"
+                    },
+                    "carrier": {
+                      "name": "Transporteur A",
+                      "contact": {
+                        "firstName": "Michel",
+                        "lastName": "Dupont",
+                        "phone": "+33600000000",
+                        "email": "michel.dupont@mail.fr"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Requête traitée avec succès"
+          },
+          "400": {
+            "description": "Elements manquants et/ou incorrect dans le body",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "reasons": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "example": "Missing argument 'xxxxx'"
+                      }
+                    }
+                  }
+                }
+              },
+              "examples": {
+                "Exemple": {
+                  "value": {
+                    "reasons": [
+                      "Missing argument 'xxxxx'"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "L'information ne peut plus être envoyée"
+          },
+          "404": {
+            "description": "Le 'orderId' n'a pas été trouvé"
+          }
+        },
+        "summary": "Mise à jour du transporteur sélectionné d'un ordre de livraison"
+      }
+    },
+    "/orders/{orderId}/status": {
+      "put": {
+        "tags": [
+          "Ordre de livraison"
+        ],
+        "operationId": "putOrderStatus",
+        "description": "Mise à jour du statut d'un ordre de livraison.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/pathOrderId"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "description": "Contient les informations du changement de statut.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/putOrderStatus"
+                  },
+                  {
+                    "$ref": "#/components/schemas/putDeliveryStatus"
+                  }
+                ]
+              },
+              "examples": {
+                "Statut de commande": {
+                  "value": {
+                    "orderId": "5z8d4q465zdq65d",
+                    "status": "ORDER_CREATED",
+                    "date": "2019-11-27T12:00:00+0000"
+                  }
+                },
+                "Statut de livraison": {
+                  "value": {
+                    "deliveryId": "kzqfq41q561gq5ge1q5",
+                    "orderId": "5z8d4q465zdq65d",
+                    "status": "DELIVERY_STARTED",
+                    "date": "2019-11-27T12:00:00+0000",
+                    "comment": "Ceci est un commentaire utile.",
+                    "team": {
+                      "members": [
+                        {
+                          "id": "q6z4qz4dq"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Requête traitée avec succès"
+          },
+          "400": {
+            "description": "Elements manquants et/ou incorrect dans le body",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "reasons": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "example": "Missing argument 'xxxxx'"
+                      }
+                    }
+                  }
+                }
+              },
+              "examples": {
+                "Exemple": {
+                  "value": {
+                    "reasons": [
+                      "Missing argument 'xxxxx'"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "L'information ne peut plus être envoyée"
+          },
+          "404": {
+            "description": "Le 'orderId' n'a pas été trouvé"
+          }
+        },
+        "summary": "Mise à jour du statut d'un ordre de livraison"
+      }
+    },
+    "/orders/{orderId}/score": {
+      "put": {
+        "tags": [
+          "Ordre de livraison"
+        ],
+        "operationId": "putOrderScore",
+        "description": "Ajout d'une note d'un ordre de livraison.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/pathOrderId"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "description": "Contient les informations de la note.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "orderId",
+                  "score",
+                  "comment"
+                ],
+                "properties": {
+                  "orderId": {
+                    "type": "string"
+                  },
+                  "score": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/score"
+                    }
+                  },
+                  "comment": {
+                    "type": "string"
+                  }
+                }
+              },
+              "examples": {
+                "Exemple": {
+                  "value": {
+                    "orderId": "54s54z65z4r14e6",
+                    "score": [
+                      {
+                        "note": 9,
+                        "type": "SCORE_TYPE_SATISFACTION"
+                      }
+                    ],
+                    "comment": "J'ai été très satisfaite de ma livraison !"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Requête traitée avec succès"
+          },
+          "400": {
+            "description": "Elements manquants et/ou incorrect dans le body",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "reasons": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "example": "Missing argument 'xxxxx'"
+                      }
+                    }
+                  }
+                }
+              },
+              "examples": {
+                "Exemple": {
+                  "value": {
+                    "reasons": [
+                      "Missing argument 'xxxxx'"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "L'information ne peut plus être envoyée"
+          },
+          "404": {
+            "description": "Le 'orderId' n'a pas été trouvé"
+          }
+        },
+        "summary": "Ajout d'une note d'un ordre de livraison"
+      }
+    },
+    "/orders/{orderId}/deliveryClosure": {
+      "post": {
+        "tags": [
+          "Ordre de livraison"
+        ],
+        "operationId": "postOrderDeliveryClosure",
+        "description": "Notification d'informations de facturation pour un ordre de livraison.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/pathOrderId"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "description": "Contient les informations de facturation.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "deliveryId",
+                  "orderId",
+                  "billedDistance",
+                  "emittedCarbonDioxide",
+                  "vehicleType"
+                ],
+                "properties": {
+                  "deliveryId": {
+                    "type": "string"
+                  },
+                  "externalReference": {
+                    "type": "string"
+                  },
+                  "orderId": {
+                    "type": "string"
+                  },
+                  "billedDistance": {
+                    "$ref": "#/components/schemas/length"
+                  },
+                  "emittedCarbonDioxide": {
+                    "$ref": "#/components/schemas/mass"
+                  },
+                  "vehicleType": {
+                    "$ref": "#/components/schemas/vehicleType"
+                  }
+                }
+              },
+              "examples": {
+                "Exemple": {
+                  "value": {
+                    "deliveryId": "654eg65ze4g65z",
+                    "externalReference": "564654-FT",
+                    "orderId": "a54efa65e4a",
+                    "billedDistance": {
+                      "value": 56.85,
+                      "unit": "km"
+                    },
+                    "emittedCarbonDioxide": {
+                      "value": 12.3,
+                      "unit": "g"
+                    },
+                    "vehicleType": "VEHICLE_TYPE_TRUCK"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Requête traitée avec succès"
+          },
+          "400": {
+            "description": "Elements manquants et/ou incorrect dans le body",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "reasons": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "example": "Missing argument 'xxxxx'"
+                      }
+                    }
+                  }
+                }
+              },
+              "examples": {
+                "Exemple": {
+                  "value": {
+                    "reasons": [
+                      "Missing argument 'xxxxx'"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "L'information ne peut plus être envoyée"
+          },
+          "404": {
+            "description": "Le 'orderId' n'a pas été trouvé"
+          }
+        },
+        "summary": "Ajout d'informations de facturation d'un ordre de livraison"
+      }
+    },
+    "/orders/{orderId}/events": {
+      "post": {
+        "tags": [
+          "Ordre de livraison"
+        ],
+        "operationId": "postOrderEvents",
+        "description": "Ajout d'un évènement d'un ordre de livraison.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/pathOrderId"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "description": "Contient les informations de l'évenement.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "status",
+                  "type",
+                  "date",
+                  "subject",
+                  "message",
+                  "sender"
+                ],
+                "properties": {
+                  "status": {
+                    "type": "boolean"
+                  },
+                  "type": {
+                    "type": "string",
+                    "enum": [
+                      "EVENT_TYPE_SMS",
+                      "EVENT_TYPE_MAIL",
+                      "EVENT_TYPE_CALL"
+                    ]
+                  },
+                  "date": {
+                    "type": "string",
+                    "format": "datetime"
+                  },
+                  "subject": {
+                    "type": "string",
+                    "enum": [
+                      "TECHNICAL_DELIVERY_PICKUP_SOON",
+                      "DELIVERY_INIT",
+                      "DELIVERY_STARTED",
+                      "DELIVERY_PICK_UP_REACHED",
+                      "DELIVERY_PICK_UP_OK",
+                      "DELIVERY_IN_PROGRESS",
+                      "DELIVERY_AT_DROP_OF_LOCATION",
+                      "DELIVERY_PICK_UP_FAILED",
+                      "DELIVERY_DELIVERED_WITH_CLAIM",
+                      "DELIVERY_CANCELLED_WITH_RETURN",
+                      "DELIVERY_FAILED_WITH_RETURN",
+                      "DELIVERY_RETURNED_TO_PICK_UP",
+                      "DELIVERY_DELIVERED_OK",
+                      "DELIVERY_CANCELLED",
+                      "DELIVERY_BLOCKED",
+                      "DELIVERY_DELAYED",
+                      "DELIVERY_AVAILABLE"
+                    ]
+                  },
+                  "message": {
+                    "type": "string"
+                  },
+                  "failReason": {
+                    "type": "string"
+                  },
+                  "sender": {
+                    "type": "string"
+                  }
+                }
+              },
+              "examples": {
+                "Exemple": {
+                  "value": {
+                    "status": true,
+                    "type": "EVENT_TYPE_MAIL",
+                    "date": "2019-11-27T12:00:00+0000",
+                    "subject": "DELIVERY_DELAYED",
+                    "message": "Je vais avoir 15min de retard.",
+                    "sender": "sender@mail.fr"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Requête traitée avec succès"
+          },
+          "400": {
+            "description": "Elements manquants et/ou incorrect dans le body",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "reasons": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "example": "Missing argument 'xxxxx'"
+                      }
+                    }
+                  }
+                }
+              },
+              "examples": {
+                "Exemple": {
+                  "value": {
+                    "reasons": [
+                      "Missing argument 'xxxxx'"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "L'information ne peut plus être envoyée"
+          },
+          "404": {
+            "description": "Le 'orderId' n'a pas été trouvé"
+          }
+        },
+        "summary": "Ajout d'un évènement d'un ordre de livraison"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "score": {
+        "required": [
+          "note",
+          "type"
+        ],
+        "properties": {
+          "note": {
+            "type": "number"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "SCORE_TYPE_RECOMMENDATION",
+              "SCORE_TYPE_SATISFACTION"
+            ]
+          }
+        }
+      },
+      "contact": {
+        "required": [
+          "firstname",
+          "lastname",
+          "phone",
+          "email"
+        ],
+        "properties": {
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          }
+        }
+      },
+      "orderStatus": {
+        "type": "string",
+        "enum": [
+          "ORDER_CREATED",
+          "ORDER_UPDATED",
+          "ORDER_TO_BE_COMPLETED",
+          "ORDER_WITH_NO_CARRIER_ELIGIBLE",
+          "ORDER_TO_BE_QUOTED",
+          "ORDER_QUOTED",
+          "ORDER_WITH_NO_QUOTE",
+          "ORDER_QUOTE_TO_BE_CONFIRMED",
+          "ORDER_TO_BE_SENT_TO_CARRIER",
+          "ORDER_WITH_NO_CARRIER_AVAILABLE",
+          "ORDER_REFUSED_DELIVERY",
+          "ORDER_TO_DELIVER",
+          "ORDER_BEING_DELIVERED",
+          "ORDER_DELIVERY_UNCOMPLETED",
+          "ORDER_DELIVERED",
+          "ORDER_CANCELLED"
+        ]
+      },
+      "deliveryStatus": {
+        "type": "string",
+        "enum": [
+          "DELIVERY_STARTED",
+          "DELIVERY_PICK_UP_REACHED",
+          "DELIVERY_PICK_UP_OK",
+          "DELIVERY_PICK_UP_PARTIALLY",
+          "DELIVERY_IN_PROGRESS",
+          "DELIVERY_AT_DROP_OF_LOCATION",
+          "DELIVERY_PICK_UP_FAILED",
+          "DELIVERY_DELIVERED_WITH_CLAIM",
+          "DELIVERY_CANCELLED_WITH_RETURN",
+          "DELIVERY_FAILED_WITH_RETURN",
+          "DELIVERY_RETURNED_TO_PICK_UP",
+          "DELIVERY_DELIVERED_OK",
+          "DELIVERY_DELIVERED_PARTIALLY"
+        ]
+      },
+      "length": {
+        "required": [
+          "value",
+          "unit"
+        ],
+        "properties": {
+          "value": {
+            "type": "number",
+            "format": "float"
+          },
+          "unit": {
+            "$ref": "#/components/schemas/lengthUnit"
+          }
+        }
+      },
+      "mass": {
+        "required": [
+          "value",
+          "unit"
+        ],
+        "properties": {
+          "value": {
+            "type": "number",
+            "format": "float"
+          },
+          "unit": {
+            "$ref": "#/components/schemas/massUnit"
+          }
+        }
+      },
+      "lengthUnit": {
+        "type": "string",
+        "description": "Unité de mesure",
+        "enum": [
+          "mm",
+          "cm",
+          "m",
+          "in",
+          "ft-us",
+          "ft",
+          "mi"
+        ]
+      },
+      "massUnit": {
+        "type": "string",
+        "description": "Unité de masse",
+        "enum": [
+          "mcg",
+          "mg",
+          "g",
+          "kg",
+          "oz",
+          "lb",
+          "mt",
+          "t"
+        ]
+      },
+      "vehicleType": {
+        "type": "string",
+        "enum": [
+          "VEHICLE_TYPE_BIKE",
+          "VEHICLE_TYPE_SCOOTER",
+          "VEHICLE_TYPE_E_SCOOTER",
+          "VEHICLE_TYPE_VAN_SMALL",
+          "VEHICLE_TYPE_E_VAN_SMALL",
+          "VEHICLE_TYPE_VAN_MEDIUM",
+          "VEHICLE_TYPE_PEDESTRIAN",
+          "VEHICLE_TYPE_TRUCK",
+          "VEHICLE_TYPE_VAN_BIG",
+          "VEHICLE_TYPE_E_VAN_BIG",
+          "VEHICLE_TYPE_BIKE_CARGO",
+          "VEHICLE_TYPE_CAR",
+          "VEHICLE_TYPE_E_CAR",
+          "VEHICLE_TYPE_UNKNOWN"
+        ]
+      },
+      "currency": {
+        "type": "string",
+        "description": "Devise",
+        "enum": [
+          "EUR"
+        ]
+      },
+      "team": {
+        "type": "object",
+        "properties": {
+          "members": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "price": {
+        "required": [
+          "value",
+          "currency"
+        ],
+        "properties": {
+          "value": {
+            "type": "number",
+            "format": "float"
+          },
+          "currency": {
+            "$ref": "#/components/schemas/currency"
+          }
+        }
+      },
+      "carrier": {
+        "required": [
+          "name",
+          "contact"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "contact": {
+            "$ref": "#/components/schemas/contact"
+          }
+        }
+      },
+      "putDeliveryStatus": {
+        "required": [
+          "deliveryId",
+          "orderId",
+          "status",
+          "comment",
+          "date"
+        ],
+        "properties": {
+          "deliveryId": {
+            "type": "string"
+          },
+          "orderId": {
+            "type": "string"
+          },
+          "status": {
+            "$ref": "#/components/schemas/deliveryStatus"
+          },
+          "date": {
+            "type": "string",
+            "format": "datetime"
+          },
+          "comment": {
+            "type": "string"
+          },
+          "team": {
+            "$ref": "#/components/schemas/team"
+          }
+        }
+      },
+      "putOrderStatus": {
+        "required": [
+          "orderId",
+          "status",
+          "date"
+        ],
+        "properties": {
+          "orderId": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string",
+            "format": "datetime"
+          },
+          "status": {
+            "$ref": "#/components/schemas/orderStatus"
+          }
+        }
+      }
+    },
+    "parameters": {
+      "pathOrderId": {
+        "in": "path",
+        "description": "Id de l'ordre de livraison",
+        "name": "orderId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "servers": []
+}

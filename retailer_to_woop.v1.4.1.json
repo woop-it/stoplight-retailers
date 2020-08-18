@@ -36,15 +36,15 @@
   },
   "servers": [
     {
-      "url": "ret-api.recette.gcp.last-mile.fr",
+      "url": "https://ret-api.recette.gcp.last-mile.fr",
       "description": "URL de recette"
     },
     {
-      "url": "ret-api.preprod.gcp.last-mile.fr",
+      "url": "https://ret-api.preprod.gcp.last-mile.fr",
       "description": "URL de preprod"
     },
     {
-      "url": "retailer.last-mile.fr",
+      "url": "https://retailer.last-mile.fr",
       "description": "URL de prod"
     }
   ],
@@ -3233,6 +3233,7 @@
       },
       "cancelledReasons": {
         "type": "string",
+        "description": "Raison d'annulation",
         "enum": [
           "CANCELLED_CANNOT_SERVICE",
           "CANCELLED_UNKNOWN",
@@ -3243,6 +3244,7 @@
         ]
       },
       "deliveryServices": {
+        "description": "Services de livraison possible",
         "type": "string",
         "enum": [
           "SERVICE_PICKUP_POINT",
@@ -3258,6 +3260,7 @@
       },
       "productTypes": {
         "type": "string",
+        "description": "Typologies des produit",
         "enum": [
           "TYPOLOGY_GENERIC",
           "TYPOLOGY_GROCERY",
@@ -3274,12 +3277,14 @@
       },
       "currencies": {
         "type": "string",
+        "description": "Devise",
         "enum": [
           "EUR"
         ]
       },
       "lengthUnits": {
         "type": "string",
+        "description": "Unité de mesure",
         "enum": [
           "mm",
           "cm",
@@ -3293,6 +3298,7 @@
       },
       "massUnits": {
         "type": "string",
+        "description": "Unité de masse",
         "enum": [
           "kg",
           "mcg",
@@ -3306,6 +3312,7 @@
       },
       "country": {
         "type": "string",
+        "description": "Pays",
         "enum": [
           "FR",
           "BE"
@@ -3404,7 +3411,7 @@
       "queryNumber": {
         "in": "query",
         "required": false,
-        "description": "Nombre de point relais retournés",
+        "description": "Nombre de points relais retournés",
         "name": "number",
         "schema": {
           "type": "integer",
@@ -3443,7 +3450,7 @@
       "pathOrderId": {
         "in": "path",
         "required": true,
-        "description": "id de l'ordre de livraison",
+        "description": "Id de l'ordre de livraison",
         "name": "orderId",
         "schema": {
           "type": "string"
@@ -3452,7 +3459,7 @@
       "pathDocumentId": {
         "in": "path",
         "required": true,
-        "description": "id du document",
+        "description": "Id du document",
         "name": "documentId",
         "schema": {
           "type": "string"
@@ -3461,7 +3468,7 @@
       "pathPriceId": {
         "in": "path",
         "required": true,
-        "description": "id de la demande de prix",
+        "description": "Id de la demande de prix",
         "name": "priceId",
         "schema": {
           "type": "string"
