@@ -2,7 +2,7 @@
   "openapi": "3.0.2",
   "tags": [
     {
-      "name": "Ordre de livraison"
+      "name": "Commande"
     },
     {
       "name": "Etiquette"
@@ -200,9 +200,9 @@
     "/orders": {
       "post": {
         "tags": [
-          "Ordre de livraison"
+          "Commande"
         ],
-        "description": "Cette méthode permet de créer une demande d'ordre de livraison côté Woop.\nDès l'ordre validée, un ensemble de devis sera envoyé aux différents transporteurs. L’ordre de transport sera alors créé lorsque l’un des devis aura été validé.",
+        "description": "Cette méthode permet de créer une commande côté Woop.\nDès la commande validée, un ensemble de devis sera envoyé aux différents transporteurs. L'Commande sera alors créé lorsque l’un des devis aura été validé.",
         "operationId": "postOrders",
         "parameters": [
           {
@@ -211,7 +211,7 @@
         ],
         "requestBody": {
           "required": true,
-          "description": "Contient les informations de création d'ordre de livraison.",
+          "description": "Contient les informations de création de la commande.",
           "content": {
             "application/json": {
               "schema": {
@@ -598,10 +598,10 @@
         },
         "responses": {
           "201": {
-            "description": "L'ordre de livraison a bien été enregistrée"
+            "description": "la commande a bien été enregistrée"
           },
           "202": {
-            "description": "L'ordre de livraison doit être complétée"
+            "description": "la commande doit être complétée"
           },
           "400": {
             "description": "Elements manquants et/ou incorrect dans le body",
@@ -641,13 +641,13 @@
             "description": "Création de commande avec cet 'orderId' impossible"
           }
         },
-        "summary": "Demande d'ordre de livraison"
+        "summary": "Demande de la commande"
       },
       "get": {
         "tags": [
-          "Ordre de livraison"
+          "Commande"
         ],
-        "description": "Cette méthode retourne les détails du ou de plusieurs ordres de livraison en fonction des filtres sélectionnés.",
+        "description": "Cette méthode retourne les détails du ou de plusieurs commandes en fonction des filtres sélectionnés.",
         "operationId": "getOrders",
         "parameters": [
           {
@@ -665,7 +665,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK. Contient les ordres de livraison récupérées.",
+            "description": "OK. Contient les commandes récupérées.",
             "content": {
               "application/json": {
                 "schema": {
@@ -762,15 +762,15 @@
             "description": "Demande impossible pour ce 'storeId'"
           }
         },
-        "summary": "Récupération d'ordres de livraison"
+        "summary": "Récupération d'commandes"
       }
     },
     "/orders/{orderId}": {
       "delete": {
         "tags": [
-          "Ordre de livraison"
+          "Commande"
         ],
-        "description": "Annulation d'un ordre de livraison",
+        "description": "Annulation d'un Commande",
         "operationId": "deleteOrders",
         "parameters": [
           {
@@ -818,19 +818,19 @@
             "description": "Vous n'êtes pas autorisé à accéder à cet élément."
           },
           "403": {
-            "description": "L'ordre de livraison ne peut être annulée"
+            "description": "la commande ne peut être annulée"
           },
           "404": {
             "description": "Le 'orderId' n'existe pas"
           }
         },
-        "summary": "Annulation d'un ordre de livraison"
+        "summary": "Annulation d'un Commande"
       },
       "get": {
         "tags": [
-          "Ordre de livraison"
+          "Commande"
         ],
-        "description": "Cette méthode retourne le détail d'un ordre de livraison.",
+        "description": "Cette méthode retourne le détail d'un Commande.",
         "operationId": "getOrder",
         "parameters": [
           {
@@ -842,7 +842,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK. Contient l'ordre de livraison récupéré.",
+            "description": "OK. Contient la commande récupéré.",
             "content": {
               "application/json": {
                 "schema": {
@@ -898,13 +898,13 @@
             "description": "Vous n'êtes pas autorisé à accéder à cet élément."
           }
         },
-        "summary": "Récupération d'un ordre de livraison"
+        "summary": "Récupération d'un Commande"
       },
       "patch": {
         "tags": [
-          "Ordre de livraison"
+          "Commande"
         ],
-        "description": "Cette méthode permet de modifier un ordre de livraison. La mise à jour peut déclencher une annulation de l'ordre de transport + création d’un nouvel ordre de transport si les informations modifiées sont jugées importantes ou non et impacte directement la livraison.",
+        "description": "Cette méthode permet de modifier un Commande. La mise à jour peut déclencher une annulation de la commande + création d’un nouvel ordre de transport si les informations modifiées sont jugées importantes ou non et impacte directement la livraison.",
         "operationId": "patchOrder",
         "parameters": [
           {
@@ -1022,7 +1022,7 @@
             "description": "Vous n'êtes pas autorisé à accéder à cet élément."
           }
         },
-        "summary": "Mise à jour d'un ordre de livraison"
+        "summary": "Mise à jour d'un Commande"
       }
     },
     "/orders/{orderId}/label": {
@@ -1030,7 +1030,7 @@
         "tags": [
           "Etiquette"
         ],
-        "description": "Cette méthode permet de récupérer une étiquette de transport en fonction de l'identifiant de l'ordre de livraison. \nL’étiquette peut être récupérée sous plusieurs formats (à condition que le transporteur soit compatible avec ce format).",
+        "description": "Cette méthode permet de récupérer une étiquette de transport en fonction de l'identifiant de la commande. \nL’étiquette peut être récupérée sous plusieurs formats (à condition que le transporteur soit compatible avec ce format).",
         "operationId": "getLabelByOrder",
         "parameters": [
           {
@@ -1058,7 +1058,7 @@
                     },
                     "trackingPageUrl": {
                       "type": "string",
-                      "description": "Lien de la page de suivi de l'ordre de transport"
+                      "description": "Lien de la page de suivi de la commande"
                     }
                   },
                   "required": [
@@ -1087,7 +1087,7 @@
             "description": "Le 'orderId' n'existe pas"
           }
         },
-        "summary": "Récupération d'étiquette de l'ordre de livraison"
+        "summary": "Récupération d'étiquette de la commande"
       }
     },
     "/orders/{orderId}/return": {
@@ -1095,7 +1095,7 @@
         "tags": [
           "Retour produit"
         ],
-        "description": "Cette méthode permet d'effectuer une demande de retour de produit d'un ordre de livraison.",
+        "description": "Cette méthode permet d'effectuer une demande de retour de produit d'un Commande.",
         "operationId": "postProductReturn",
         "parameters": [
           {
@@ -1247,7 +1247,7 @@
         "tags": [
           "Document"
         ],
-        "description": "Cette méthode permet de récupérer les informations des documents attachés à un ordre de livraison.",
+        "description": "Cette méthode permet de récupérer les informations des documents attachés à un Commande.",
         "operationId": "getOrderDocuments",
         "parameters": [
           {
@@ -1319,7 +1319,7 @@
             }
           },
           "204": {
-            "description": "Pas de documents sur cet ordre de livraison."
+            "description": "Pas de documents sur cet Commande."
           },
           "401": {
             "description": "Vous n'êtes pas autorisé à accéder à cet élément."
@@ -1328,7 +1328,7 @@
             "description": "Le 'orderId' n'existe pas"
           }
         },
-        "summary": "Récupération des documents de l'ordre de livraison."
+        "summary": "Récupération des documents de la commande."
       }
     },
     "/orders/{orderId}/documents/download": {
@@ -1336,7 +1336,7 @@
         "tags": [
           "Document"
         ],
-        "description": "Cette méthode permet de télécharger les documents de l'ordre de livraison en zip.",
+        "description": "Cette méthode permet de télécharger les documents de la commande en zip.",
         "operationId": "downloadOrderDocuments",
         "parameters": [
           {
@@ -1358,7 +1358,7 @@
             }
           },
           "204": {
-            "description": "Pas de documents sur cet ordre de livraison."
+            "description": "Pas de documents sur cet Commande."
           },
           "401": {
             "description": "Vous n'êtes pas autorisé à accéder à cet élément."
@@ -1367,7 +1367,7 @@
             "description": "Le 'orderId' n'existe pas"
           }
         },
-        "summary": "Téléchargement des documents de l'ordre de livraison"
+        "summary": "Téléchargement des documents de la commande"
       }
     },
     "/orders/{orderId}/documents/{documentId}/download": {
@@ -1375,7 +1375,7 @@
         "tags": [
           "Document"
         ],
-        "description": "Cette méthode permet de télécharger un document d'un ordre de livraison",
+        "description": "Cette méthode permet de télécharger un document d'un Commande",
         "operationId": "downloadOrderDocument",
         "parameters": [
           {
@@ -1404,7 +1404,7 @@
             "description": "Le 'orderId' ou 'documentId' n'existe pas"
           }
         },
-        "summary": "Téléchargement d'un document de l'ordre de livraison"
+        "summary": "Téléchargement d'un document de la commande"
       }
     },
     "/pickupPoints": {
@@ -2032,13 +2032,13 @@
     },
     "schemas": {
       "responseOrder": {
-        "title": "Réponse ordre de livraison",
+        "title": "Réponse Commande",
         "type": "object",
-        "description": "Réponse ordre de livraison",
+        "description": "Réponse Commande",
         "properties": {
           "orders": {
             "type": "array",
-            "description": "Liste des ordres de livraison",
+            "description": "Liste des commandes",
             "items": {
               "type": "object",
               "properties": {
@@ -2086,11 +2086,11 @@
                 },
                 "order": {
                   "type": "object",
-                  "description": "Informations de l'ordre de transport",
+                  "description": "Informations de la commande",
                   "properties": {
                     "id": {
                       "type": "string",
-                      "description": "Identifiant de l'ordre de livraison"
+                      "description": "Identifiant de la commande"
                     },
                     "currentStatus": {
                       "$ref": "#/components/schemas/orderStatus"
@@ -2101,7 +2101,7 @@
                     },
                     "referenceNumber": {
                       "type": "string",
-                      "description": "Référence de l'ordre de livraison"
+                      "description": "Référence de la commande"
                     }
                   }
                 },
@@ -2173,7 +2173,7 @@
       },
       "postOrders": {
         "type": "object",
-        "description": "Demande d'ordre de livraison",
+        "description": "Demande de la commande",
         "properties": {
           "orderId": {
             "type": "string",
@@ -2273,7 +2273,7 @@
           "packages",
           "services"
         ],
-        "title": "Demande d'ordre de livraison"
+        "title": "Demande de la commande"
       },
       "postProductReturn": {
         "type": "object",
@@ -2282,7 +2282,7 @@
         "properties": {
           "orderReturnId": {
             "type": "string",
-            "description": "Nouvel identifiant de l'ordre de transport"
+            "description": "Nouvel identifiant de la commande"
           },
           "initialReferenceNumber": {
             "type": "string",
@@ -3047,7 +3047,7 @@
         }
       },
       "orderStatus": {
-        "title": "Statut de l'ordre de livraison",
+        "title": "Statut de la commande",
         "type": "string",
         "enum": [
           "ORDER_CREATED",
@@ -3067,7 +3067,7 @@
           "ORDER_DELIVERED",
           "ORDER_CANCELLED"
         ],
-        "description": "Statut de l'ordre de livraison"
+        "description": "Statut de la commande"
       }
     },
     "parameters": {
@@ -3201,7 +3201,7 @@
       "pathOrderId": {
         "in": "path",
         "required": true,
-        "description": "Id de l'ordre de livraison",
+        "description": "Id de la commande",
         "name": "orderId",
         "schema": {
           "type": "string"
