@@ -11,9 +11,6 @@
       "name": "Document"
     },
     {
-      "name": "Prix"
-    },
-    {
       "name": "Retrait"
     },
     {
@@ -31,7 +28,7 @@
   ],
   "info": {
     "title": "Enseigne vers Woop",
-    "description": "Contrat d'interface des APIs des enseignes vers Woop.\nVersion 1.4.1",
+    "description": "Contrat d'interface des APIs des enseignes vers Woop. \n\n<b>Version 1.4.1</b>",
     "version": "1.4.1"
   },
   "servers": [
@@ -855,7 +852,7 @@
         "tags": [
           "Ordre de livraison"
         ],
-        "description": "Récuperation d'un ordre de livraison par orderId.",
+        "description": "Cette méthode retourne le détail d'un ordre de livraison.",
         "operationId": "getOrder",
         "parameters": [
           {
@@ -874,7 +871,7 @@
                   "$ref": "#/components/schemas/responseOrder"
                 },
                 "examples": {
-                  "Exemple par défaut": {
+                  "Exemple": {
                     "value": {
                       "orders": [
                         {
@@ -1055,7 +1052,7 @@
         "tags": [
           "Etiquette"
         ],
-        "description": "Cette méthode permet de récupérer une étiquette de transport en fonction de l'identifiant de la commande. \nL’étiquette peut être récupérée sous plusieurs formats (à condition que le transporteur soit compatible avec ce format).",
+        "description": "Cette méthode permet de récupérer une étiquette de transport en fonction de l'identifiant de l'ordre de livraison. \nL’étiquette peut être récupérée sous plusieurs formats (à condition que le transporteur soit compatible avec ce format).",
         "operationId": "getLabelByOrder",
         "parameters": [
           {
@@ -1120,7 +1117,7 @@
         "tags": [
           "Retour produit"
         ],
-        "description": "Demande de retour d'un produit.",
+        "description": "Cette méthode permet d'effectuer une demande de retour de produit d'un ordre de livraison.",
         "operationId": "postProductReturn",
         "parameters": [
           {
@@ -1267,255 +1264,12 @@
         "summary": "Demande de retour produit"
       }
     },
-    "/prices": {
-      "post": {
-        "tags": [
-          "Prix"
-        ],
-        "description": "Demande de prix.",
-        "operationId": "postPrices",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/apiVersion"
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "description": "Contient les informations de demande de prix.",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "required": [
-                  "delivery",
-                  "picking",
-                  "services",
-                  "storeId",
-                  "packages"
-                ],
-                "properties": {
-                  "storeId": {
-                    "type": "string"
-                  },
-                  "picking": {
-                    "required": [
-                      "address"
-                    ],
-                    "properties": {
-                      "address": {
-                        "$ref": "#/components/schemas/address"
-                      }
-                    }
-                  },
-                  "delivery": {
-                    "required": [
-                      "address"
-                    ],
-                    "properties": {
-                      "address": {
-                        "allOf": [
-                          {
-                            "$ref": "#/components/schemas/address"
-                          },
-                          {
-                            "properties": {
-                              "title": {
-                                "type": "string"
-                              }
-                            }
-                          }
-                        ]
-                      }
-                    }
-                  },
-                  "packages": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/packages"
-                    }
-                  },
-                  "services": {
-                    "type": "array",
-                    "description": "Liste des services pour lesquels on souhaite un prix (chaque service donnera un prix)",
-                    "items": {
-                      "$ref": "#/components/schemas/deliveryServices"
-                    }
-                  }
-                }
-              },
-              "examples": {
-                "Exemple": {
-                  "value": {
-                    "storeId": "AX758",
-                    "picking": {
-                      "address": {
-                        "addressLine1": "237 rue du Ballon",
-                        "postalCode": "59110",
-                        "city": "La Madeleine",
-                        "country": "FR"
-                      }
-                    },
-                    "delivery": {
-                      "address": {
-                        "addressLine1": "165 Avenue de Bretagne",
-                        "elevator": true,
-                        "floor": 3,
-                        "postalCode": "59000",
-                        "city": "Lille",
-                        "country": "FR"
-                      }
-                    },
-                    "packages": [
-                      {
-                        "reference": [
-                          "12354"
-                        ],
-                        "length": {
-                          "value": 50,
-                          "unit": "cm"
-                        },
-                        "width": {
-                          "value": 50,
-                          "unit": "cm"
-                        },
-                        "height": {
-                          "value": 150,
-                          "unit": "cm"
-                        },
-                        "weight": {
-                          "value": 12.55,
-                          "unit": "kg"
-                        },
-                        "products": [
-                          {
-                            "type": "TYPOLOGY_GENERIC",
-                            "ean": "16478945684",
-                            "cug": "z5d1qzqzd1q",
-                            "label": "Armoire",
-                            "quantity": 1
-                          }
-                        ],
-                        "quantity": 1
-                      }
-                    ],
-                    "services": [
-                      "SERVICE_PICKUP_POINT"
-                    ]
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "CREATED. Contient le(s) prix créés.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "prices": {
-                      "type": "array",
-                      "items": {
-                        "required": [
-                          "id",
-                          "price",
-                          "service",
-                          "carrier"
-                        ],
-                        "properties": {
-                          "id": {
-                            "type": "string"
-                          },
-                          "service": {
-                            "$ref": "#/components/schemas/deliveryServices"
-                          },
-                          "carrier": {
-                            "type": "object",
-                            "required": [
-                              "name"
-                            ],
-                            "properties": {
-                              "name": {
-                                "type": "string"
-                              }
-                            }
-                          },
-                          "price": {
-                            "$ref": "#/components/schemas/price"
-                          }
-                        }
-                      }
-                    }
-                  }
-                },
-                "examples": {
-                  "Exemple": {
-                    "value": {
-                      "prices": [
-                        {
-                          "id": "123456",
-                          "service": "SERVICE_PICKUP_POINT",
-                          "carrier": {
-                            "name": "Transporteur B"
-                          },
-                          "price": {
-                            "value": 56.32,
-                            "currency": "EUR"
-                          }
-                        }
-                      ]
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Elements manquants et/ou incorrect dans le body",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "reasons": {
-                      "type": "array",
-                      "items": {
-                        "type": "string",
-                        "example": "Missing argument 'xxxxx'"
-                      }
-                    }
-                  }
-                }
-              },
-              "examples": {
-                "Exemple": {
-                  "value": {
-                    "reasons": [
-                      "Missing argument 'xxxxx'"
-                    ]
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Vous n'êtes pas autorisé à accéder à cet élément."
-          },
-          "403": {
-            "description": "Demande impossible pour ce 'storeId'"
-          }
-        },
-        "summary": "Demande de prix"
-      }
-    },
     "/orders/{orderId}/documents": {
       "get": {
         "tags": [
           "Document"
         ],
-        "description": "Récupération des documents de l'ordre de livraison.",
+        "description": "Cette méthode permet de récupérer les informations des documents attachés à un ordre de livraison.",
         "operationId": "getOrderDocuments",
         "parameters": [
           {
@@ -1528,20 +1282,26 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "type": "object",
                   "properties": {
                     "documents": {
                       "type": "array",
+                      "description": "Liste des documents",
                       "items": {
+                        "type": "object",
                         "properties": {
                           "id": {
-                            "type": "string"
+                            "type": "string",
+                            "description": "Identifiant du document"
                           },
                           "date": {
                             "type": "string",
-                            "format": "datetime"
+                            "format": "date-time",
+                            "description": "Date du document"
                           },
                           "name": {
-                            "type": "string"
+                            "type": "string",
+                            "description": "Nom du document"
                           },
                           "type": {
                             "type": "string",
@@ -1598,7 +1358,7 @@
         "tags": [
           "Document"
         ],
-        "description": "Téléchargement des documents de l'ordre de livraison en zip.",
+        "description": "Cette méthode permet de télécharger les documents de l'ordre de livraison en zip.",
         "operationId": "downloadOrderDocuments",
         "parameters": [
           {
@@ -1612,8 +1372,10 @@
               "application/zip": {
                 "schema": {
                   "type": "string",
-                  "format": "binary"
-                }
+                  "format": "binary",
+                  "description": ""
+                },
+                "examples": {}
               }
             }
           },
@@ -1635,7 +1397,7 @@
         "tags": [
           "Document"
         ],
-        "description": "Téléchargement d'un document de l'ordre de livraison",
+        "description": "Cette méthode permet de télécharger un document d'un ordre de livraison",
         "operationId": "downloadOrderDocument",
         "parameters": [
           {
@@ -1667,316 +1429,12 @@
         "summary": "Téléchargement d'un document de l'ordre de livraison"
       }
     },
-    "/prices/{priceId}": {
-      "put": {
-        "tags": [
-          "Prix"
-        ],
-        "description": "Mise à jour de demande de prix.",
-        "operationId": "updatePrice",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/apiVersion"
-          },
-          {
-            "$ref": "#/components/parameters/pathPriceId"
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "description": "Contient les informations du prix à modifier.",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "required": [
-                  "orderId"
-                ],
-                "properties": {
-                  "orderId": {
-                    "type": "string"
-                  },
-                  "pickupPointId": {
-                    "type": "string"
-                  }
-                }
-              },
-              "examples": {
-                "Exemple": {
-                  "value": {
-                    "orderId": "5q1zd65qdqz",
-                    "pickupPointId": "123456"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "204": {
-            "description": "Requête traitée avec succès"
-          },
-          "401": {
-            "description": "Vous n'êtes pas autorisé à accéder à cet élément."
-          },
-          "403": {
-            "description": "Demande impossible pour ce 'priceId'"
-          },
-          "404": {
-            "description": "Le 'priceId' n'existe pas"
-          },
-          "409": {
-            "description": "Le 'orderId' est déjà associé à un 'price'"
-          }
-        },
-        "summary": "Mise à jour de demande de prix"
-      }
-    },
-    "/prices/orders": {
-      "post": {
-        "tags": [
-          "Prix"
-        ],
-        "description": "Ordre de livraison depuis une demande de prix.",
-        "operationId": "postOrderFromPrice",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/apiVersion"
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "description": "Contient les informations de création d'order depuis le prix.",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "required": [
-                  "orderId",
-                  "picking",
-                  "delivery",
-                  "packages"
-                ],
-                "properties": {
-                  "orderId": {
-                    "type": "string"
-                  },
-                  "referenceNumber": {
-                    "type": "string"
-                  },
-                  "picking": {
-                    "required": [
-                      "address",
-                      "interval",
-                      "contact"
-                    ],
-                    "properties": {
-                      "address": {
-                        "$ref": "#/components/schemas/address"
-                      },
-                      "infos": {
-                        "type": "string"
-                      },
-                      "interval": {
-                        "type": "array",
-                        "items": {
-                          "$ref": "#/components/schemas/interval"
-                        }
-                      },
-                      "contact": {
-                        "$ref": "#/components/schemas/contact"
-                      }
-                    }
-                  },
-                  "delivery": {
-                    "required": [
-                      "address",
-                      "interval",
-                      "contact"
-                    ],
-                    "properties": {
-                      "address": {
-                        "allOf": [
-                          {
-                            "$ref": "#/components/schemas/address"
-                          },
-                          {
-                            "properties": {
-                              "title": {
-                                "type": "string"
-                              }
-                            }
-                          }
-                        ]
-                      },
-                      "infos": {
-                        "type": "string"
-                      },
-                      "interval": {
-                        "type": "array",
-                        "items": {
-                          "$ref": "#/components/schemas/interval"
-                        }
-                      },
-                      "contact": {
-                        "$ref": "#/components/schemas/contact"
-                      }
-                    }
-                  },
-                  "packages": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/packages"
-                    }
-                  }
-                }
-              },
-              "examples": {
-                "Exemple": {
-                  "value": {
-                    "orderId": "q5z1dq1zd",
-                    "referenceNumber": "q5z1dq1zd-5d5zq",
-                    "picking": {
-                      "address": {
-                        "addressLine1": "237 rue du Ballon",
-                        "postalCode": "59110",
-                        "city": "La Madeleine",
-                        "country": "FR"
-                      },
-                      "interval": [
-                        {
-                          "start": "2019-12-03T12:00:00+0000",
-                          "end": "2019-12-03T13:00:00+0000"
-                        }
-                      ],
-                      "contact": {
-                        "firstName": "Michel",
-                        "lastName": "Dupont",
-                        "phone": "+33600000000",
-                        "email": "michel.dupont@mail.fr"
-                      }
-                    },
-                    "delivery": {
-                      "address": {
-                        "addressLine1": "165 Avenue de Bretagne",
-                        "elevator": true,
-                        "floor": 3,
-                        "postalCode": "59000",
-                        "city": "Lille",
-                        "country": "FR"
-                      },
-                      "infos": "Sonnez à côté",
-                      "interval": [
-                        {
-                          "start": "2019-12-04T08:30:00+0000",
-                          "end": "2019-12-04T10:30:00+0000"
-                        }
-                      ],
-                      "contact": {
-                        "firstName": "Pierre",
-                        "lastName": "Dupond",
-                        "phone": "+33600000000",
-                        "email": "pierre.dupond@mail.fr",
-                        "language": "fr-BE",
-                        "timezone": "Europe/Paris"
-                      }
-                    },
-                    "packages": [
-                      {
-                        "reference": [
-                          "azerty1"
-                        ],
-                        "length": {
-                          "value": 1,
-                          "unit": "m"
-                        },
-                        "width": {
-                          "value": 1.2,
-                          "unit": "m"
-                        },
-                        "height": {
-                          "value": 12,
-                          "unit": "cm"
-                        },
-                        "weight": {
-                          "value": 525,
-                          "unit": "g"
-                        },
-                        "products": [
-                          {
-                            "type": "TYPOLOGY_GENERIC",
-                            "ean": "4579156874625",
-                            "cug": "5zd4q564zdz",
-                            "label": "Planche",
-                            "quantity": 2
-                          }
-                        ],
-                        "quantity": 1
-                      }
-                    ]
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "La commande a bien été enregistrée"
-          },
-          "202": {
-            "description": "La commande doit être complétée"
-          },
-          "400": {
-            "description": "Elements manquants et/ou incorrect dans le body",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "reasons": {
-                      "type": "array",
-                      "items": {
-                        "type": "string",
-                        "example": "Missing argument 'xxxxx'"
-                      }
-                    }
-                  }
-                }
-              },
-              "examples": {
-                "Exemple": {
-                  "value": {
-                    "reasons": [
-                      "Missing argument 'xxxxx'"
-                    ]
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Vous n'êtes pas autorisé à accéder à cet élément."
-          },
-          "403": {
-            "description": "Création de commande impossible pour le 'storeId'"
-          },
-          "404": {
-            "description": "Pas de  demande de prix correspondant à cet 'orderId'"
-          },
-          "409": {
-            "description": "Création de commande avec ce 'priceId' impossible"
-          }
-        },
-        "summary": "Demande ordre de livraison depuis une demande de prix"
-      }
-    },
     "/pickupPoints": {
       "get": {
         "tags": [
           "Point relais"
         ],
-        "description": "Cette méthode permet de récupérer la liste des point-relais des transporteurs situés autour d’une géolocalisation donnée.",
+        "description": "Cette méthode permet de récupérer la liste des point relais des transporteurs situés autour d’une géolocalisation donnée.",
         "operationId": "getPickupPoints",
         "parameters": [
           {
@@ -2725,7 +2183,7 @@
             "$ref": "#/components/schemas/contact"
           },
           "location": {
-            "$ref": "#/components/schemas/location"
+            "$ref": "#/components/schemas/locationTest"
           },
           "packages": {
             "description": "Ensemble des paquets",
@@ -2738,14 +2196,6 @@
       },
       "postOrders": {
         "type": "object",
-        "required": [
-          "orderId",
-          "storeId",
-          "picking",
-          "delivery",
-          "services",
-          "packages"
-        ],
         "properties": {
           "orderId": {
             "type": "string",
@@ -2761,6 +2211,7 @@
           },
           "picking": {
             "description": "Informations de l'emplacement de prélèvement",
+            "type": "object",
             "required": [
               "location",
               "interval",
@@ -2786,6 +2237,7 @@
           },
           "delivery": {
             "description": "Informations de l'emplacement de livraison",
+            "type": "object",
             "required": [
               "location",
               "interval",
@@ -2827,34 +2279,40 @@
           "tags": {
             "$ref": "#/components/schemas/tags"
           }
-        }
-      },
-      "postProductReturn": {
-        "type": "object",
+        },
         "required": [
-          "orderReturnId",
+          "orderId",
           "storeId",
           "picking",
           "delivery",
-          "services",
           "packages",
-          "initialReferenceNumber",
-          "initialCarrier"
+          "services"
         ],
+        "description": ""
+      },
+      "postProductReturn": {
+        "type": "object",
+        "description": "",
+        "title": "",
         "properties": {
           "orderReturnId": {
-            "type": "string"
+            "type": "string",
+            "description": "Nouvel identifiant de l'ordre de transport"
           },
           "initialReferenceNumber": {
-            "type": "string"
+            "type": "string",
+            "description": "Référence de la commande original"
           },
           "storeId": {
-            "type": "string"
+            "type": "string",
+            "description": "Identifiant du magasin émettant la demande"
           },
           "initialCarrier": {
-            "type": "string"
+            "type": "string",
+            "description": "Booléan précisant si le retour doit être effectué avec le même transporteur que la commande initiale"
           },
           "picking": {
+            "type": "object",
             "required": [
               "location",
               "interval",
@@ -2879,6 +2337,7 @@
             }
           },
           "delivery": {
+            "type": "object",
             "required": [
               "location",
               "interval",
@@ -2909,7 +2368,16 @@
               "$ref": "#/components/schemas/packages"
             }
           }
-        }
+        },
+        "required": [
+          "orderReturnId",
+          "initialReferenceNumber",
+          "storeId",
+          "initialCarrier",
+          "picking",
+          "delivery",
+          "packages"
+        ]
       },
       "tags": {
         "type": "array",
@@ -2991,9 +2459,30 @@
         ]
       },
       "location": {
-        "required": [
-          "type"
-        ],
+        "title": "Location",
+        "description": "Un emplacement représente un lieu de prélevement ou de livraison.",
+
+        "x-examples": {
+          "Adresse": {
+            "type": "address",
+            "addressLine1": "165 avenue de Bretagne",
+            "elevator": true,
+            "floor": 3,
+            "postalCode": "59000",
+            "city": "Lille",
+            "country": "FR"
+          },
+          "Point relais": {
+            "type": "pickupPoint",
+            "id": "76761",
+            "carrierCode": "bpost"
+          },
+          "Point de prélèvement": {
+            "type": "exchangePlace",
+            "id": "1"
+          }
+        },
+        "type": "object",
         "properties": {
           "type": {
             "type": "string",
@@ -3004,7 +2493,8 @@
             ]
           },
           "id": {
-            "type": "string"
+            "type": "string",
+            "description": "Id du point relais ou du point de prélevement ( type est pickupPoint ou exchangePlace)"
           },
           "carrierCode": {
             "type": "string"
@@ -3040,28 +2530,71 @@
             "type": "string"
           }
         },
-        "title": "Location",
-        "description": "Un emplacement représente un lieu de prélevement ou de livraison.",
-        "x-examples": {
-          "Adresse": {
-            "type": "address",
-            "addressLine1": "165 avenue de Bretagne",
-            "elevator": true,
-            "floor": 3,
-            "postalCode": "59000",
-            "city": "Lille",
-            "country": "FR"
+        "required": [
+          "type"
+        ]
+      },
+      "locationTest": {
+        "oneOf": [
+          {
+            "allOf": [
+               { "type": "object",
+            "description": "Emplacement de type adresse",
+            "required": [
+              "type"
+            ],
+            "properties": {
+              "type": {
+            "type": "string",
+            "enum": ["address"]}}},
+              {"$ref": "#/components/schemas/address"}
+             
+            ]
+          
           },
-          "Point relais": {
-            "type": "pickupPoint",
-            "id": "76761",
-            "carrierCode": "bpost"
+          {
+            "type": "object",
+            "description": "Emplacement de type point relais",
+             "required": [
+              "type",
+              "id",
+              "carrierCode"
+            ],
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": ["pickupPoint"]
+              },
+              "id": {
+                "type": "string",
+                "description": "Id du point relais"
+              },
+              "carrierCode": {
+                "type": "string",
+                "descriprion": "Code du transporteur",
+                "exmample": "bpost"
+              }
+            }
           },
-          "Point de prélèvement": {
-            "type": "exchangePlace",
-            "id": "1"
-          }
-        }
+          {
+            "type": "object",
+            "description": "Emplacement de type point de prélèvement",
+             "required": [
+              "type",
+              "id"
+            ],
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": ["exchangePlace"]
+              },
+              "id": {
+                "type": "string",
+                "description": "Id du point de prélèvement"
+              }
+            }
+          }                     
+        ]  
       },
       "interval": {
         "required": [
@@ -3247,16 +2780,6 @@
       },
       "productsPrice": {
         "description": "Correspond au prix de vente des produits. A renseigner pour le service “SERVICE_INSTALL”",
-        "properties": {
-          "value": {
-            "type": "number"
-          },
-          "currency": {
-            "$ref": "#/components/schemas/currencies"
-          }
-        }
-      },
-      "price": {
         "properties": {
           "value": {
             "type": "number"
