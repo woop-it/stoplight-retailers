@@ -2871,7 +2871,7 @@
         "properties": {
           "value": {
             "type": "number",
-            "description": "valeure"
+            "description": "valeur"
           },
           "currency": {
             "$ref": "#/components/schemas/currencies"
