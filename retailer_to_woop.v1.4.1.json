@@ -2093,7 +2093,7 @@
                       "description": "Identifiant de l'ordre de livraison"
                     },
                     "currentStatus": {
-                      "$ref": "./woop_to_retailer.v1.1.1.json#/components/schemas/orderStatus"
+                      "$ref": "#/components/schemas/orderStatus"
                     },
                     "updatedAt": {
                       "type": "string",
@@ -3045,6 +3045,29 @@
         "x-examples": {
           "Exemple": "Europe/Paris"
         }
+      },
+      "orderStatus": {
+        "title": "Statut de l'ordre de livraison",
+        "type": "string",
+        "enum": [
+          "ORDER_CREATED",
+          "ORDER_UPDATED",
+          "ORDER_TO_BE_COMPLETED",
+          "ORDER_WITH_NO_CARRIER_ELIGIBLE",
+          "ORDER_TO_BE_QUOTED",
+          "ORDER_QUOTED",
+          "ORDER_WITH_NO_QUOTE",
+          "ORDER_QUOTE_TO_BE_CONFIRMED",
+          "ORDER_TO_BE_SENT_TO_CARRIER",
+          "ORDER_WITH_NO_CARRIER_AVAILABLE",
+          "ORDER_REFUSED_DELIVERY",
+          "ORDER_TO_DELIVER",
+          "ORDER_BEING_DELIVERED",
+          "ORDER_DELIVERY_UNCOMPLETED",
+          "ORDER_DELIVERED",
+          "ORDER_CANCELLED"
+        ],
+        "description": "Statut de l'ordre de livraison"
       }
     },
     "parameters": {
