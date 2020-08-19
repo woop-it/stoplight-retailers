@@ -2032,39 +2032,37 @@
     },
     "schemas": {
       "responseOrder": {
+        "title": "Réponse ordre de livraison",
+        "type": "object",
+        "description": "Réponse ordre de livraison",
         "properties": {
           "orders": {
             "type": "array",
+            "description": "Liste des ordres de livraison",
             "items": {
+              "type": "object",
               "properties": {
                 "delivery": {
                   "description": "Informations sur la livraison",
                   "type": "object",
                   "properties": {
                     "externalDeliveryId": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Identifiant de la livraison"
                     },
                     "currentStatus": {
-                      "type": "string"
+                      "$ref": "#/components/schemas/deliveryStatus"
                     },
                     "updatedAt": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Date de dernière mise à jour"
                     },
                     "interval": {
-                      "type": "object",
-                      "properties": {
-                        "start": {
-                          "type": "string",
-                          "format": "datetime"
-                        },
-                        "end": {
-                          "type": "string",
-                          "format": "datetime"
-                        }
-                      }
+                      "$ref": "#/components/schemas/interval"
                     },
                     "trackingPageUrl:": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Url de la page de suivi de livraison"
                     }
                   }
                 },
@@ -2073,13 +2071,16 @@
                   "description": "Informations du transporteur sélectionné",
                   "properties": {
                     "name": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Nom du transporteur"
                     },
                     "contact": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Information de contact du transporteur"
                     },
                     "claimUrl": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Url de réclamation du transporteur"
                     }
                   }
                 },
@@ -2088,16 +2089,19 @@
                   "description": "Informations de l'ordre de transport",
                   "properties": {
                     "id": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Identifiant de l'ordre de livraison"
                     },
                     "currentStatus": {
-                      "type": "string"
+                      "$ref": "./woop_to_retailer.v1.1.1.json#/components/schemas/orderStatus"
                     },
                     "updatedAt": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Date de dernière mise à jour"
                     },
                     "referenceNumber": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Référence de l'ordre de livraison"
                     }
                   }
                 },
@@ -2106,17 +2110,7 @@
                   "description": "Informations sur le prélèvement",
                   "properties": {
                     "interval": {
-                      "type": "object",
-                      "properties": {
-                        "start": {
-                          "type": "string",
-                          "format": "datetime"
-                        },
-                        "end": {
-                          "type": "string",
-                          "format": "datetime"
-                        }
-                      }
+                      "$ref": "#/components/schemas/interval"
                     }
                   }
                 },
@@ -2124,12 +2118,15 @@
                   "type": "array",
                   "description": "Informations des colis",
                   "items": {
+                    "type": "object",
                     "properties": {
                       "id": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Identifiant du colis"
                       },
                       "reference": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Référence du colis"
                       }
                     }
                   }
@@ -2137,8 +2134,7 @@
               }
             }
           }
-        },
-        "title": "Réponse ordre de livraison"
+        }
       },
       "postCollects": {
         "type": "object",
@@ -2172,12 +2168,12 @@
             }
           }
         },
-        "description": "",
+        "description": "Demande de retrait",
         "title": "Demande de retrait"
       },
       "postOrders": {
         "type": "object",
-        "description": "",
+        "description": "Demande d'ordre de livraison",
         "properties": {
           "orderId": {
             "type": "string",
@@ -2281,7 +2277,7 @@
       },
       "postProductReturn": {
         "type": "object",
-        "description": "",
+        "description": "Demande de retour",
         "title": "Demande de retour",
         "properties": {
           "orderReturnId": {
@@ -2307,6 +2303,7 @@
               "interval",
               "contact"
             ],
+            "description": "Informations de prélèvement",
             "properties": {
               "location": {
                 "$ref": "#/components/schemas/location"
@@ -2334,6 +2331,7 @@
               "interval",
               "contact"
             ],
+            "description": "Informations de livraison",
             "properties": {
               "location": {
                 "$ref": "#/components/schemas/location"
@@ -2395,9 +2393,20 @@
         "title": "Tags"
       },
       "address": {
-        "description": "",
+        "description": "Adresse",
         "title": "Adresse",
         "type": "object",
+        "x-examples": {
+          "Exemple": {
+            "addressLine1": "179 boulevard de Turien",
+            "addressLine2": "Woop",
+            "elevator": true,
+            "floor": 8,
+            "postalCode": "59000",
+            "city": "Lille",
+            "country": "FR"
+          }
+        },
         "properties": {
           "addressLine1": {
             "type": "string",
@@ -2444,18 +2453,7 @@
           "postalCode",
           "city",
           "country"
-        ],
-        "x-examples": {
-          "Exemple": {
-            "addressLine1": "179 boulevard de Turien",
-            "addressLine2": "Woop",
-            "elevator": true,
-            "floor": 8,
-            "postalCode": "59000",
-            "city": "Lille",
-            "country": "FR"
-          }
-        }
+        ]
       },
       "deliveryStatus": {
         "type": "string",
@@ -2474,7 +2472,7 @@
           "DELIVERY_DELIVERED_OK",
           "DELIVERY_DELIVERED_PARTIALLY"
         ],
-        "description": "",
+        "description": "Statut de livraison",
         "x-examples": {
           "Exemple": "DELIVERY_STARTED"
         },
@@ -2575,7 +2573,7 @@
         ]
       },
       "interval": {
-        "description": "",
+        "description": "Créneau de dates",
         "type": "object",
         "properties": {
           "start": {
@@ -2623,13 +2621,23 @@
             "end": "18:00"
           }
         },
-        "description": "",
+        "description": "Créneau horaires",
         "title": "Créneau horaires"
       },
       "contact": {
         "title": "Contact",
-        "description": "",
+        "description": "Contact",
         "type": "object",
+        "x-examples": {
+          "Exemple": {
+            "firstName": "Jogn",
+            "lastName": "Doe",
+            "phone": "+33610101010",
+            "email": "johndoe@mail.com",
+            "language": "fr-FR",
+            "timezone": "Europe/Paris"
+          }
+        },
         "properties": {
           "firstName": {
             "type": "string",
@@ -2661,21 +2669,11 @@
           "email",
           "language",
           "timezone"
-        ],
-        "x-examples": {
-          "Exemple": {
-            "firstName": "Jogn",
-            "lastName": "Doe",
-            "phone": "+33610101010",
-            "email": "johndoe@mail.com",
-            "language": "fr-FR",
-            "timezone": "Europe/Paris"
-          }
-        }
+        ]
       },
       "services": {
         "type": "array",
-        "description": "",
+        "description": "Services de livraison",
         "items": {
           "$ref": "#/components/schemas/deliveryServices"
         },
@@ -2687,7 +2685,7 @@
         "title": "Services de livraison"
       },
       "packages": {
-        "description": "",
+        "description": "Ensemble de colis",
         "type": "object",
         "properties": {
           "reference": {
@@ -2799,7 +2797,7 @@
             "type": "number"
           }
         },
-        "description": "",
+        "description": "Coordonnées géographiques",
         "x-examples": {
           "Exemple": {
             "latitude": 50.63833,
@@ -2821,7 +2819,7 @@
             "$ref": "#/components/schemas/lengthUnits"
           }
         },
-        "description": "",
+        "description": "Dimension",
         "x-examples": {
           "Exemple": {
             "value": 200,
@@ -2843,7 +2841,7 @@
             "$ref": "#/components/schemas/massUnits"
           }
         },
-        "description": "",
+        "description": "Masse",
         "x-examples": {
           "Exemple": {
             "value": 1,
@@ -2857,29 +2855,31 @@
         "items": {
           "type": "string"
         },
-        "description": "",
+        "description": "Références des colis",
         "title": "Références des colis"
       },
       "productsPrice": {
         "description": "Correspond au prix de vente des produits. A renseigner pour le service “SERVICE_INSTALL”",
-        "properties": {
-          "value": {
-            "type": "number"
-          },
-          "currency": {
-            "$ref": "#/components/schemas/currencies"
-          }
-        },
         "x-examples": {
           "Exemple": {
             "value": 300,
             "currency": "EUR"
           }
         },
-        "title": "Prix des produits"
+        "title": "Prix des produits",
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "number",
+            "description": "valeure"
+          },
+          "currency": {
+            "$ref": "#/components/schemas/currencies"
+          }
+        }
       },
       "pickupPointCarrier": {
-        "description": "",
+        "description": "Transporteur du point relais",
         "type": "object",
         "properties": {
           "name": {
@@ -2905,7 +2905,7 @@
       },
       "cancelledReasons": {
         "type": "string",
-        "description": "",
+        "description": "Raison d'annulation",
         "enum": [
           "CANCELLED_CANNOT_SERVICE",
           "CANCELLED_UNKNOWN",
@@ -2920,7 +2920,7 @@
         "title": "Raison d'annulation"
       },
       "deliveryServices": {
-        "description": "",
+        "description": "Service de livraison",
         "type": "string",
         "enum": [
           "SERVICE_PICKUP_POINT",
@@ -2940,7 +2940,7 @@
       },
       "productTypes": {
         "type": "string",
-        "description": "",
+        "description": "Typologie du produit",
         "enum": [
           "TYPOLOGY_GENERIC",
           "TYPOLOGY_GROCERY",
@@ -2957,11 +2957,11 @@
         "x-examples": {
           "Exemple": "TYPOLOGY_GENERIC"
         },
-        "title": "Typologies des produit"
+        "title": "Typologie du produit"
       },
       "currencies": {
         "type": "string",
-        "description": "",
+        "description": "Devise",
         "enum": [
           "EUR"
         ],
@@ -2972,7 +2972,7 @@
       },
       "lengthUnits": {
         "type": "string",
-        "description": "",
+        "description": "Unité de mesure",
         "enum": [
           "mm",
           "cm",
@@ -2990,7 +2990,7 @@
       },
       "massUnits": {
         "type": "string",
-        "description": "",
+        "description": "Unité de masse",
         "enum": [
           "kg",
           "mcg",
@@ -3008,7 +3008,7 @@
       },
       "country": {
         "type": "string",
-        "description": "",
+        "description": "Code pays",
         "enum": [
           "FR",
           "BE"
@@ -3020,8 +3020,8 @@
       },
       "language": {
         "type": "string",
-        "title": "Code langue",
-        "description": "",
+        "title": "Langue",
+        "description": "Code langue",
         "x-examples": {
           "Exemple": "fr-FR"
         },

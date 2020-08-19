@@ -5,7 +5,11 @@
     "description": "Contrat d'interface des APIs de Woop vers les enseignes.",
     "version": "1.1.1"
   },
-  "tags": [{"name": "Ordre de livraison"}],
+  "tags": [
+    {
+      "name": "Ordre de livraison"
+    }
+  ],
   "paths": {
     "/orders/{orderId}/carrier": {
       "put": {
@@ -26,26 +30,22 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": [
-                  "deliveryId",
-                  "orderId",
-                  "trackingPageUrl",
-                  "vehicleType",
-                  "price",
-                  "carrier"
-                ],
                 "properties": {
                   "deliveryId": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Identifiant de livraison"
                   },
                   "externalReference": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Référence de l'ordre de livraison"
                   },
                   "orderId": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Identifiant de l'ordre de livraison"
                   },
                   "trackingPageUrl": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Url de la page de suivi de la livraison"
                   },
                   "vehicleType": {
                     "$ref": "#/components/schemas/vehicleType"
@@ -56,7 +56,15 @@
                   "carrier": {
                     "$ref": "#/components/schemas/carrier"
                   }
-                }
+                },
+                "required": [
+                  "deliveryId",
+                  "orderId",
+                  "trackingPageUrl",
+                  "vehicleType",
+                  "price",
+                  "carrier"
+                ]
               },
               "examples": {
                 "Exemple": {
@@ -124,7 +132,7 @@
             "description": "Le 'orderId' n'a pas été trouvé"
           }
         },
-        "summary": "Mise à jour du transporteur sélectionné d'un ordre de livraison"
+        "summary": "Notification du transporteur sélectionné d'un ordre de livraison"
       }
     },
     "/orders/{orderId}/status": {
@@ -221,7 +229,7 @@
             "description": "Le 'orderId' n'a pas été trouvé"
           }
         },
-        "summary": "Mise à jour du statut d'un ordre de livraison"
+        "summary": "Notification  de mise à jour de statut d'un ordre de livraison"
       }
     },
     "/orders/{orderId}/score": {
@@ -230,7 +238,7 @@
           "Ordre de livraison"
         ],
         "operationId": "putOrderScore",
-        "description": "Ajout d'une note d'un ordre de livraison.",
+        "description": "Notification d'une note d'un ordre de livraison.",
         "parameters": [
           {
             "$ref": "#/components/parameters/pathOrderId"
@@ -242,25 +250,29 @@
           "content": {
             "application/json": {
               "schema": {
-                "required": [
-                  "orderId",
-                  "score",
-                  "comment"
-                ],
+                "type": "object",
                 "properties": {
                   "orderId": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Identifiant de l'ordre de livraison"
                   },
                   "score": {
                     "type": "array",
+                    "description": "Note de la livraison",
                     "items": {
                       "$ref": "#/components/schemas/score"
                     }
                   },
                   "comment": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Commentaire libre"
                   }
-                }
+                },
+                "required": [
+                  "orderId",
+                  "score",
+                  "comment"
+                ]
               },
               "examples": {
                 "Exemple": {
@@ -318,7 +330,7 @@
             "description": "Le 'orderId' n'a pas été trouvé"
           }
         },
-        "summary": "Ajout d'une note d'un ordre de livraison"
+        "summary": "Notification d'une note d'un ordre de livraison"
       }
     },
     "/orders/{orderId}/deliveryClosure": {
@@ -340,22 +352,18 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": [
-                  "deliveryId",
-                  "orderId",
-                  "billedDistance",
-                  "emittedCarbonDioxide",
-                  "vehicleType"
-                ],
                 "properties": {
                   "deliveryId": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Identifiant de la livraison"
                   },
                   "externalReference": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Référence de l'ordre de livraison"
                   },
                   "orderId": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Identifiant de l'ordre de livraison"
                   },
                   "billedDistance": {
                     "$ref": "#/components/schemas/length"
@@ -366,7 +374,14 @@
                   "vehicleType": {
                     "$ref": "#/components/schemas/vehicleType"
                   }
-                }
+                },
+                "required": [
+                  "deliveryId",
+                  "orderId",
+                  "billedDistance",
+                  "emittedCarbonDioxide",
+                  "vehicleType"
+                ]
               },
               "examples": {
                 "Exemple": {
@@ -428,7 +443,7 @@
             "description": "Le 'orderId' n'a pas été trouvé"
           }
         },
-        "summary": "Ajout d'informations de facturation d'un ordre de livraison"
+        "summary": "Notification d'informations de facturation d'un ordre de livraison"
       }
     },
     "/orders/{orderId}/events": {
@@ -437,7 +452,7 @@
           "Ordre de livraison"
         ],
         "operationId": "postOrderEvents",
-        "description": "Ajout d'un évènement d'un ordre de livraison.",
+        "description": "Notification d'un évènement d'un ordre de livraison.",
         "parameters": [
           {
             "$ref": "#/components/parameters/pathOrderId"
@@ -450,17 +465,10 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": [
-                  "status",
-                  "type",
-                  "date",
-                  "subject",
-                  "message",
-                  "sender"
-                ],
                 "properties": {
                   "status": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "description": "Indique si l'événement à été envoyé correctement au client"
                   },
                   "type": {
                     "type": "string",
@@ -468,11 +476,13 @@
                       "EVENT_TYPE_SMS",
                       "EVENT_TYPE_MAIL",
                       "EVENT_TYPE_CALL"
-                    ]
+                    ],
+                    "description": "Type de l'évènement"
                   },
                   "date": {
                     "type": "string",
-                    "format": "datetime"
+                    "format": "datetime",
+                    "description": "Date de l’événement"
                   },
                   "subject": {
                     "type": "string",
@@ -494,18 +504,30 @@
                       "DELIVERY_BLOCKED",
                       "DELIVERY_DELAYED",
                       "DELIVERY_AVAILABLE"
-                    ]
+                    ],
+                    "description": "Sujet de l'évènement"
                   },
                   "message": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Message envoyé au client"
                   },
                   "failReason": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Raison de l'échec si status est false"
                   },
                   "sender": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Expéditeur"
                   }
-                }
+                },
+                "required": [
+                  "status",
+                  "type",
+                  "date",
+                  "subject",
+                  "message",
+                  "sender"
+                ]
               },
               "examples": {
                 "Exemple": {
@@ -561,51 +583,75 @@
             "description": "Le 'orderId' n'a pas été trouvé"
           }
         },
-        "summary": "Ajout d'un évènement d'un ordre de livraison"
+        "summary": "Notification d'un évènement d'un ordre de livraison"
       }
     }
   },
   "components": {
     "schemas": {
       "score": {
-        "required": [
-          "note",
-          "type"
-        ],
+        "title": "Note de livraison",
+        "type": "object",
+        "x-examples": {
+          "Exemple": {
+            "note": 5,
+            "type": "SCORE_TYPE_RECOMMENDATION"
+          }
+        },
+        "description": "Note",
         "properties": {
           "note": {
-            "type": "number"
+            "type": "number",
+            "description": "Note"
           },
           "type": {
             "type": "string",
             "enum": [
               "SCORE_TYPE_RECOMMENDATION",
               "SCORE_TYPE_SATISFACTION"
-            ]
+            ],
+            "description": "Type de note"
           }
-        }
+        },
+        "required": [
+          "note",
+          "type"
+        ]
       },
       "contact": {
-        "required": [
-          "firstname",
-          "lastname",
-          "phone",
-          "email"
-        ],
+        "title": "Contact",
+        "type": "object",
+        "x-examples": {
+          "Exemple": {
+            "firstName": "John",
+            "lastName": "Doe",
+            "phone": "+33610101010",
+            "email": "johndoe@mail.com"
+          }
+        },
+        "description": "Contact",
         "properties": {
           "firstName": {
-            "type": "string"
+            "type": "string",
+            "description": "Prénom"
           },
           "lastName": {
-            "type": "string"
+            "type": "string",
+            "description": "Nom"
           },
           "phone": {
-            "type": "string"
+            "type": "string",
+            "description": "Téléphone"
           },
           "email": {
-            "type": "string"
+            "type": "string",
+            "description": "Email"
           }
-        }
+        },
+        "required": [
+          "phone",
+          "email"
+        ]
       },
       "orderStatus": {
         "type": "string",
@@ -626,7 +672,11 @@
           "ORDER_DELIVERY_UNCOMPLETED",
           "ORDER_DELIVERED",
           "ORDER_CANCELLED"
-        ]
+        ],
+        "title": "Statut de l'ordre de livraison",
+        "x-examples": {
+          "Exemple": "ORDER_CREATED"
+        }
       },
       "deliveryStatus": {
         "type": "string",
@@ -644,13 +694,23 @@
           "DELIVERY_RETURNED_TO_PICK_UP",
           "DELIVERY_DELIVERED_OK",
           "DELIVERY_DELIVERED_PARTIALLY"
-        ]
+        ],
+        "title": "Statut de livraison",
+        "x-examples": {
+          "Exemple": "DELIVERY_STARTED"
+        },
+        "description": "Statut de livraison"
       },
       "length": {
-        "required": [
-          "value",
-          "unit"
-        ],
+        "title": "Distance",
+        "x-examples": {
+          "Exemple": {
+            "value": 200,
+            "unit": "mm"
+          }
+        },
+        "type": "object",
+        "description": "Distance",
         "properties": {
           "value": {
             "type": "number",
@@ -659,7 +719,11 @@
           "unit": {
             "$ref": "#/components/schemas/lengthUnit"
           }
-        }
+        },
+        "required": [
+          "value",
+          "unit"
+        ]
       },
       "mass": {
         "required": [
@@ -674,6 +738,13 @@
           "unit": {
             "$ref": "#/components/schemas/massUnit"
           }
+        },
+        "title": "Masse",
+        "x-examples": {
+          "Exemple": {
+            "value": 1,
+            "unit": "kg"
+          }
         }
       },
       "lengthUnit": {
@@ -687,11 +758,14 @@
           "ft-us",
           "ft",
           "mi"
-        ]
+        ],
+        "title": "Unité de mesure",
+        "x-examples": {
+          "Exemple": "mm"
+        }
       },
       "massUnit": {
-        "type": "string",
-        "description": "Unité de masse",
+        "description": "",
         "enum": [
           "mcg",
           "mg",
@@ -701,7 +775,12 @@
           "lb",
           "mt",
           "t"
-        ]
+        ],
+        "title": "Unité de masse",
+        "x-examples": {
+          "Exemple": "mcg"
+        },
+        "type": "string"
       },
       "vehicleType": {
         "type": "string",
@@ -720,14 +799,23 @@
           "VEHICLE_TYPE_CAR",
           "VEHICLE_TYPE_E_CAR",
           "VEHICLE_TYPE_UNKNOWN"
-        ]
+        ],
+        "title": "Type de véhicule du transport",
+        "x-examples": {
+          "Exemple": "VEHICLE_TYPE_BIKE"
+        },
+        "description": "Type de véhicule"
       },
       "currency": {
         "type": "string",
         "description": "Devise",
         "enum": [
           "EUR"
-        ]
+        ],
+        "title": "Devise",
+        "x-examples": {
+          "Exemple": "EUR"
+        }
       },
       "team": {
         "type": "object",
@@ -743,85 +831,130 @@
               }
             }
           }
+        },
+        "title": "Informations de l'équipe ayant contribué à la livraison",
+        "x-examples": {
+          "Exemple": {
+            "members": [
+              {
+                "id": "176867"
+              }
+            ]
+          }
         }
       },
       "price": {
-        "required": [
-          "value",
-          "currency"
-        ],
+        "title": "Prix",
+        "x-examples": {
+          "Exemple": {
+            "value": 20,
+            "currency": "EUR"
+          }
+        },
+        "type": "object",
+        "description": "Prix",
         "properties": {
           "value": {
             "type": "number",
-            "format": "float"
+            "format": "float",
+            "description": "valeur"
           },
           "currency": {
             "$ref": "#/components/schemas/currency"
           }
-        }
+        },
+        "required": [
+          "value",
+          "currency"
+        ]
       },
       "carrier": {
-        "required": [
-          "name",
-          "contact"
-        ],
+        "title": "Transporteur",
+        "x-examples": {
+          "Exemple": {
+            "name": "Bpost",
+            "contact": {
+              "firstName": "John",
+              "lastName": "Doe",
+              "phone": "+33610101010",
+              "email": "johndoe@mail.com"
+            }
+          }
+        },
+        "type": "object",
+        "description": "Transporteur",
         "properties": {
           "name": {
-            "type": "string"
+            "type": "string",
+            "description": "Nom du transporteur"
           },
           "contact": {
             "$ref": "#/components/schemas/contact"
           }
-        }
+        },
+        "required": [
+          "name",
+          "contact"
+        ]
       },
       "putDeliveryStatus": {
-        "required": [
-          "deliveryId",
-          "orderId",
-          "status",
-          "comment",
-          "date"
-        ],
+        "title": "Mise à jour de statut de l'ordre de livraison",
+        "type": "object",
         "properties": {
           "deliveryId": {
-            "type": "string"
+            "type": "string",
+            "description": "Identifiant de la livraison"
           },
           "orderId": {
-            "type": "string"
+            "type": "string",
+            "description": "Identifiant de l'ordre de livraison"
           },
           "status": {
             "$ref": "#/components/schemas/deliveryStatus"
           },
           "date": {
             "type": "string",
-            "format": "datetime"
+            "format": "datetime",
+            "description": "Date de la modification"
           },
           "comment": {
-            "type": "string"
+            "type": "string",
+            "description": "Commentaire libre"
           },
           "team": {
             "$ref": "#/components/schemas/team"
           }
-        }
-      },
-      "putOrderStatus": {
+        },
         "required": [
+          "deliveryId",
           "orderId",
           "status",
-          "date"
-        ],
+          "date",
+          "comment"
+        ]
+      },
+      "putOrderStatus": {
+        "title": "Mise à jour du statut de la livraison",
+        "type": "object",
         "properties": {
           "orderId": {
-            "type": "string"
+            "type": "string",
+            "description": "Identifiant de l'ordre de livraison"
           },
           "date": {
             "type": "string",
-            "format": "datetime"
+            "format": "datetime",
+            "description": "Date de mise à jour"
           },
           "status": {
             "$ref": "#/components/schemas/orderStatus"
           }
-        }
+        },
+        "required": [
+          "orderId",
+          "date",
+          "status"
+        ]
       }
     },
     "parameters": {
