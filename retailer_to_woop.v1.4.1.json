@@ -211,33 +211,11 @@
         ],
         "requestBody": {
           "required": true,
-          "description": "Contient les informations de création de la commande.",
+          "description": "Contient les informations de création d'ordre de livraison.",
           "content": {
             "application/json": {
               "schema": {
-                "oneOf": [
-                  {
-                    "allOf": [
-                      {
-                        "$ref": "#/components/schemas/postOrders"
-                      },
-                      {
-                        "properties": {
-                          "productsPrice": {
-                            "$ref": "#/components/schemas/productsPrice"
-                          }
-                        }
-                      }
-                    ]
-                  },
-                  {
-                    "allOf": [
-                      {
-                        "$ref": "#/components/schemas/postOrders"
-                      }
-                    ]
-                  }
-                ]
+                "$ref": "#/components/schemas/postOrders"
               },
               "examples": {
                 "Exemple par défaut": {
@@ -657,7 +635,7 @@
             "description": "Vous n'êtes pas autorisé à accéder à cet élément."
           },
           "403": {
-            "description": "Création de commande impossible pour le 'storeId'"
+            "description": "Création de l'ordre impossible pour le 'storeId'"
           },
           "409": {
             "description": "Création de commande avec cet 'orderId' impossible"
@@ -864,7 +842,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK. Contient la commande récupérée.",
+            "description": "OK. Contient l'ordre de livraison récupéré.",
             "content": {
               "application/json": {
                 "schema": {
@@ -1004,7 +982,7 @@
                   },
                   "packages": {
                     "type": "array",
-                    "description": "Ensemble des paquets",
+                    "description": "Ensemble des colis",
                     "items": {
                       "$ref": "#/components/schemas/packages"
                     }
@@ -1582,11 +1560,11 @@
                       "pickupPoints": [
                         {
                           "address": {
-                            "addressLine1": "237 rue du Ballon",
-                            "postalCode": "59110",
-                            "city": "La Madeleine",
+                            "addressLine1": "168 RUE DES POSTES",
+                            "postalCode": "59000",
+                            "city": "Lille",
                             "country": "FR",
-                            "title": "Niji"
+                            "title": "Point relais"
                           },
                           "coordinates": {
                             "latitude": 50.638386,
@@ -2144,7 +2122,7 @@
                 },
                 "packages": {
                   "type": "array",
-                  "description": "Informations des paquets",
+                  "description": "Informations des colis",
                   "items": {
                     "properties": {
                       "id": {
@@ -2186,16 +2164,18 @@
             "$ref": "#/components/schemas/location"
           },
           "packages": {
-            "description": "Ensemble des paquets",
+            "description": "Ensemble des colis",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/packages"
             }
           }
-        }
+        },
+        "description": ""
       },
       "postOrders": {
         "type": "object",
+        "description": "",
         "properties": {
           "orderId": {
             "type": "string",
@@ -2222,10 +2202,12 @@
                 "$ref": "#/components/schemas/location"
               },
               "infos": {
-                "type": "string"
+                "type": "string",
+                "description": "Commentaire libre"
               },
               "interval": {
                 "type": "array",
+                "description": "Créneaux de prélèvement",
                 "items": {
                   "$ref": "#/components/schemas/interval"
                 }
@@ -2248,10 +2230,12 @@
                 "$ref": "#/components/schemas/location"
               },
               "infos": {
-                "type": "string"
+                "type": "string",
+                "description": "Commentaire libre"
               },
               "interval": {
                 "type": "array",
+                "description": "Créneaux de livraison",
                 "items": {
                   "$ref": "#/components/schemas/interval"
                 }
@@ -2267,7 +2251,7 @@
             "deprecated": true
           },
           "packages": {
-            "description": "Ensemble des paquets",
+            "description": "Ensemble des colis",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/packages"
@@ -2276,6 +2260,9 @@
           "services": {
             "$ref": "#/components/schemas/services"
           },
+          "productsPrice": {
+                            "$ref": "#/components/schemas/productsPrice"
+                          },
           "tags": {
             "$ref": "#/components/schemas/tags"
           }
@@ -2287,8 +2274,7 @@
           "delivery",
           "packages",
           "services"
-        ],
-        "description": ""
+        ]
       },
       "postProductReturn": {
         "type": "object",
@@ -2323,10 +2309,12 @@
                 "$ref": "#/components/schemas/location"
               },
               "infos": {
-                "type": "string"
+                "type": "string",
+                "description": "Commentaire libre"
               },
               "interval": {
                 "type": "array",
+                "description": "Créneaux de prélèvement",
                 "items": {
                   "$ref": "#/components/schemas/interval"
                 }
@@ -2348,10 +2336,12 @@
                 "$ref": "#/components/schemas/location"
               },
               "infos": {
-                "type": "string"
+                "type": "string",
+                "description": "Commentaire libre"
               },
               "interval": {
                 "type": "array",
+                "description": "Créneaux de livraison",
                 "items": {
                   "$ref": "#/components/schemas/interval"
                 }
@@ -2363,7 +2353,7 @@
           },
           "packages": {
             "type": "array",
-            "description": "Ensemble des paquets",
+            "description": "Ensemble des colis",
             "items": {
               "$ref": "#/components/schemas/packages"
             }
@@ -2401,42 +2391,65 @@
         }
       },
       "address": {
+        "description": "Adresse",
+        "title": "",
+        "type": "object",
+        "properties": {
+          "addressLine1": {
+            "type": "string",
+            "description": "Adresse ligne 1"
+          },
+          "addressLine2": {
+            "type": "string",
+            "description": "Adresse ligne 2"
+          },
+          "elevator": {
+            "type": "boolean",
+            "description": "Indique si l’adresse possède un ascenseur"
+          },
+          "floor": {
+            "type": "integer",
+            "description": "Numéro de l'étage"
+          },
+          "doorCode": {
+            "type": "string",
+            "description": "Code de la porte"
+          },
+          "postalCode": {
+            "type": "string",
+            "description": "Code postale"
+          },
+          "city": {
+            "type": "string",
+            "description": "Ville"
+          },
+          "district": {
+            "type": "string",
+            "description": "Intitulé de l’arrondissement"
+          },
+          "country": {
+            "$ref": "#/components/schemas/country"
+          },
+          "comment": {
+            "type": "string",
+            "description": "Commentaire libre d’utilisation"
+          }
+        },
         "required": [
           "addressLine1",
           "postalCode",
           "city",
           "country"
         ],
-        "properties": {
-          "addressLine1": {
-            "type": "string"
-          },
-          "addressLine2": {
-            "type": "string"
-          },
-          "elevator": {
-            "type": "boolean"
-          },
-          "floor": {
-            "type": "integer"
-          },
-          "doorCode": {
-            "type": "string"
-          },
-          "postalCode": {
-            "type": "string"
-          },
-          "city": {
-            "type": "string"
-          },
-          "district": {
-            "type": "string"
-          },
-          "country": {
-            "$ref": "#/components/schemas/country"
-          },
-          "comment": {
-            "type": "string"
+        "x-examples": {
+          "Exemple": {
+            "addressLine1": "179 boulevard de Turien",
+            "addressLine2": "Woop",
+            "elevator": true,
+            "floor": 8,
+            "postalCode": "59000",
+            "city": "Lille",
+            "country": "FR"
           }
         }
       },
@@ -2456,18 +2469,21 @@
           "DELIVERY_RETURNED_TO_PICK_UP",
           "DELIVERY_DELIVERED_OK",
           "DELIVERY_DELIVERED_PARTIALLY"
-        ]
+        ],
+        "description": "Statut de livraison",
+        "x-examples": {
+          "Exemple": "DELIVERY_STARTED"
+        }
       },
       "location": {
         "title": "Location",
         "description": "Un emplacement représente un lieu de prélevement ou de livraison.",
-
         "x-examples": {
           "Adresse": {
             "type": "address",
-            "addressLine1": "165 avenue de Bretagne",
+            "addressLine1": "179 boulevard de Turin",
             "elevator": true,
-            "floor": 3,
+            "floor": 8,
             "postalCode": "59000",
             "city": "Lille",
             "country": "FR"
@@ -2485,24 +2501,30 @@
         "oneOf": [
           {
             "allOf": [
-               { "type": "object",
-            "description": "Emplacement de type adresse",
-            "required": [
-              "type"
-            ],
-            "properties": {
-              "type": {
-            "type": "string",
-            "enum": ["address"]}}},
-              {"$ref": "#/components/schemas/address"}
-             
+              {
+                "type": "object",
+                "description": "Emplacement de type adresse",
+                "required": [
+                  "type"
+                ],
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "enum": [
+                      "address"
+                    ]
+                  }
+                }
+              },
+              {
+                "$ref": "#/components/schemas/address"
+              }
             ]
-          
           },
           {
             "type": "object",
             "description": "Emplacement de type point relais",
-             "required": [
+            "required": [
               "type",
               "id",
               "carrierCode"
@@ -2510,7 +2532,9 @@
             "properties": {
               "type": {
                 "type": "string",
-                "enum": ["pickupPoint"]
+                "enum": [
+                  "pickupPoint"
+                ]
               },
               "id": {
                 "type": "string",
@@ -2526,54 +2550,74 @@
           {
             "type": "object",
             "description": "Emplacement de type point de prélèvement",
-             "required": [
+            "required": [
               "type",
               "id"
             ],
             "properties": {
               "type": {
                 "type": "string",
-                "enum": ["exchangePlace"]
+                "enum": [
+                  "exchangePlace"
+                ]
               },
               "id": {
                 "type": "string",
                 "description": "Id du point de prélèvement"
               }
             }
-          }                     
-        ]  
+          }
+        ]
       },
       "interval": {
+        "description": "Créneau de dates",
+        "type": "object",
+        "properties": {
+          "start": {
+            "type": "string",
+            "format": "datetime",
+            "description": "Début du créneau"
+          },
+          "end": {
+            "type": "string",
+            "format": "datetime",
+            "description": "Fin du créneau"
+          }
+        },
         "required": [
           "start",
           "end"
         ],
-        "properties": {
-          "start": {
-            "type": "string",
-            "format": "datetime"
-          },
-          "end": {
-            "type": "string",
-            "format": "datetime"
+        "x-examples": {
+          "Exemple": {
+            "start": "2019-05-02T15:52:01+0000",
+            "end": "2019-05-02T17:52:01+0000"
           }
         }
       },
       "interval_hour": {
+        "type": "object",
+        "properties": {
+          "start": {
+            "type": "string",
+            "format": "time"
+          },
+          "end": {
+            "type": "string",
+            "format": "time"
+          }
+        },
         "required": [
           "start",
           "end"
         ],
-        "properties": {
-          "start": {
-            "type": "string",
-            "format": "datetime"
-          },
-          "end": {
-            "type": "string",
-            "format": "datetime"
+        "x-examples": {
+          "Exemple": {
+            "start": "14:00",
+            "end": "18:00"
           }
-        }
+        },
+        "description": "Créneau horaires"
       },
       "contact": {
         "title": "Contact",
@@ -2610,24 +2654,33 @@
           "email",
           "language",
           "timezone"
-        ]
+        ],
+        "x-examples": {
+          "Exemple": {
+            "firstName": "Jogn",
+            "lastName": "Doe",
+            "phone": "+33610101010",
+            "email": "johndoe@mail.com",
+            "language": "fr-FR",
+            "timezone": "Europe/Paris"
+          }
+        }
       },
       "services": {
         "type": "array",
         "description": "Ensemble des services de livraison",
         "items": {
           "$ref": "#/components/schemas/deliveryServices"
+        },
+        "x-examples": {
+          "Exemple": [
+            "SERVICE_PICKUP_POINT"
+          ]
         }
       },
       "packages": {
-        "description": "Ensemble des paquets",
-        "required": [
-          "length",
-          "width",
-          "height",
-          "weight",
-          "products"
-        ],
+        "description": "Ensemble des colis",
+        "type": "object",
         "properties": {
           "reference": {
             "$ref": "#/components/schemas/packagesReferences"
@@ -2646,33 +2699,80 @@
           },
           "products": {
             "type": "array",
+            "description": "List des produits dans le colis",
             "items": {
-              "required": [
-                "type"
-              ],
+              "type": "object",
               "properties": {
                 "type": {
                   "$ref": "#/components/schemas/productTypes"
                 },
                 "ean": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Ean du produit"
                 },
                 "cug": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Cug du produit"
                 },
                 "label": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Description du produit"
                 },
                 "quantity": {
                   "type": "integer",
-                  "default": 1
+                  "default": 1,
+                  "description": "Quantité du produit"
                 }
-              }
+              },
+              "required": [
+                "type"
+              ]
             }
           },
           "quantity": {
             "type": "integer",
-            "default": 1
+            "default": 1,
+            "description": "Quantité de paquet"
+          }
+        },
+        "required": [
+          "length",
+          "width",
+          "height",
+          "weight",
+          "products"
+        ],
+        "x-examples": {
+          "Exemple": {
+            "reference": [
+              "12345B"
+            ],
+            "length": {
+              "value": 200,
+              "unit": "mm"
+            },
+            "width": {
+              "value": 200,
+              "unit": "mm"
+            },
+            "height": {
+              "value": 100,
+              "unit": "mm"
+            },
+            "weight": {
+              "value": 1,
+              "unit": "kg"
+            },
+            "products": [
+              {
+                "type": "TYPOLOGY_GENERIC",
+                "ean": "11233",
+                "cug": "KJJNN",
+                "label": "Ordinateur",
+                "quantity": 1
+              }
+            ],
+            "quantity": 1
           }
         }
       },
@@ -2689,6 +2789,13 @@
           "longitude": {
             "type": "number"
           }
+        },
+        "description": "Coordonnées géographiques",
+        "x-examples": {
+          "Exemple": {
+            "latitude": 50.63833,
+            "longitude": 3.077359
+          }
         }
       },
       "length": {
@@ -2702,6 +2809,13 @@
           },
           "unit": {
             "$ref": "#/components/schemas/lengthUnits"
+          }
+        },
+        "description": "Longueur",
+        "x-examples": {
+          "Exemple": {
+            "value": 200,
+            "unit": "mm"
           }
         }
       },
@@ -2717,13 +2831,21 @@
           "unit": {
             "$ref": "#/components/schemas/massUnits"
           }
+        },
+        "description": "Masse",
+        "x-examples": {
+          "Exemple": {
+            "value": 1,
+            "unit": "kg"
+          }
         }
       },
       "packagesReferences": {
         "type": "array",
         "items": {
           "type": "string"
-        }
+        },
+        "description": "Références des colis"
       },
       "productsPrice": {
         "description": "Correspond au prix de vente des produits. A renseigner pour le service “SERVICE_INSTALL”",
@@ -2734,19 +2856,35 @@
           "currency": {
             "$ref": "#/components/schemas/currencies"
           }
+        },
+        "x-examples": {
+          "Exemple": {
+            "value": 300,
+            "currency": "EUR"
+          }
         }
       },
       "pickupPointCarrier": {
+        "description": "Transporteur du point relais",
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Nom du transporteur"
+          },
+          "code": {
+            "type": "string",
+            "description": "Code interne du transporteur"
+          }
+        },
         "required": [
           "name",
           "code"
         ],
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "code": {
-            "type": "string"
+        "x-examples": {
+          "Exemple": {
+            "name": "Bpost",
+            "code": "bpost"
           }
         }
       },
@@ -2760,7 +2898,10 @@
           "CANCELLED_BY_CLIENT",
           "CANCELLED_NEW_ADDRESS",
           "CANCELLED_INCOMPLETE"
-        ]
+        ],
+        "x-examples": {
+          "Exemple": "CANCELLED_CANNOT_SERVICE"
+        }
       },
       "deliveryServices": {
         "description": "Services de livraison possible",
@@ -2775,7 +2916,10 @@
           "SERVICE_RECOVERY",
           "SERVICE_SIMPLE_INSTALL",
           "SERVICE_COMPLEX_INSTALL"
-        ]
+        ],
+        "x-examples": {
+          "Exemple": "SERVICE_PICKUP_POINT"
+        }
       },
       "productTypes": {
         "type": "string",
@@ -2792,14 +2936,20 @@
           "TYPOLOGY_VOLUMINOUS_FRAGILE",
           "TYPOLOGY_LARGE_HOUSEHOLD",
           "TYPOLOGY_PALLET_GENERIC"
-        ]
+        ],
+        "x-examples": {
+          "Exemple": "TYPOLOGY_GENERIC"
+        }
       },
       "currencies": {
         "type": "string",
         "description": "Devise",
         "enum": [
           "EUR"
-        ]
+        ],
+        "x-examples": {
+          "Exemple": "EUR"
+        }
       },
       "lengthUnits": {
         "type": "string",
@@ -2813,7 +2963,10 @@
           "ft-us",
           "ft",
           "mi"
-        ]
+        ],
+        "x-examples": {
+          "Exemple": "mm"
+        }
       },
       "massUnits": {
         "type": "string",
@@ -2827,7 +2980,10 @@
           "lb",
           "mt",
           "t"
-        ]
+        ],
+        "x-examples": {
+          "Exemple": "kg"
+        }
       },
       "country": {
         "type": "string",
@@ -2835,13 +2991,18 @@
         "enum": [
           "FR",
           "BE"
-        ]
+        ],
+        "x-examples": {
+          "Exemple": "FR"
+        }
       },
       "language": {
         "type": "string",
         "title": "language",
         "description": "Code langue",
-        "x-examples": {},
+        "x-examples": {
+          "Exemple": "fr-FR"
+        },
         "example": "fr-FR",
         "enum": [
           "en",
@@ -2858,7 +3019,10 @@
         "type": "string",
         "title": "timezone",
         "description": "Fuseau horaire\n(https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)",
-        "example": "Europe/Paris"
+        "example": "Europe/Paris",
+        "x-examples": {
+          "Exemple": "Europe/Paris"
+        }
       }
     },
     "parameters": {
