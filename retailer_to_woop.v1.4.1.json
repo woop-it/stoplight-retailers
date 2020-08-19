@@ -2183,7 +2183,7 @@
             "$ref": "#/components/schemas/contact"
           },
           "location": {
-            "$ref": "#/components/schemas/locationTest"
+            "$ref": "#/components/schemas/location"
           },
           "packages": {
             "description": "Ensemble des paquets",
@@ -2482,59 +2482,6 @@
             "id": "1"
           }
         },
-        "type": "object",
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "address",
-              "pickupPoint",
-              "exchangePlace"
-            ]
-          },
-          "id": {
-            "type": "string",
-            "description": "Id du point relais ou du point de prélevement ( type est pickupPoint ou exchangePlace)"
-          },
-          "carrierCode": {
-            "type": "string"
-          },
-          "addressLine1": {
-            "type": "string"
-          },
-          "addressLine2": {
-            "type": "string"
-          },
-          "elevator": {
-            "type": "boolean"
-          },
-          "floor": {
-            "type": "integer"
-          },
-          "doorCode": {
-            "type": "string"
-          },
-          "postalCode": {
-            "type": "string"
-          },
-          "city": {
-            "type": "string"
-          },
-          "district": {
-            "type": "string"
-          },
-          "country": {
-            "$ref": "#/components/schemas/country"
-          },
-          "comment": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "type"
-        ]
-      },
-      "locationTest": {
         "oneOf": [
           {
             "allOf": [
