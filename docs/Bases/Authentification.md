@@ -1,20 +1,24 @@
+---
+tags: ['Bases']
+---
+
 # Authentification
 
-Un token est nécessaire pour échange avec nos APIs, une fois récupéré il est valide pendant 24h et doit être fourni à chaque appel dans un header HTTP : ``` Authorization: Bearer {token} ```
-
+Un token est nécessaire pour échange avec nos APIs, une fois récupéré il est valide pendant 24h et doit être fourni à chaque appel dans un header HTTP : `Authorization: Bearer {token}`
 
 ### Urls
 
-| Environnement |      Url     |
-| ------------- | :-----------: |
-| Production    | <https://token.last-mile.fr/oauth/token> |
+| Environnement |                             Url                            |
+| ------------- | :--------------------------------------------------------: |
+| Production    |          <https://token.last-mile.fr/oauth/token>          |
 | Preproduction | <https://connect.preprod.gcp.last-mile.fr/api/oauth/token> |
 | Recette       | <https://connect.recette.gcp.last-mile.fr/api/oauth/token> |
 
 ### Récupérer un token
+
 <!-- theme: info -->
 
-> 💡   &nbsp; Les paramètres client_id et client_secret vous seront communiqués ultérieurement.
+> 💡     Les paramètres client_id et client_secret vous seront communiqués ultérieurement.
 
 ```json http
 {
