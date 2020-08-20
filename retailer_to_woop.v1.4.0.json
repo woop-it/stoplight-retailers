@@ -28,8 +28,8 @@
   ],
   "info": {
     "title": "Enseigne vers Woop",
-    "description": "Contrat d'interface des APIs des enseignes vers Woop. \n\n<b>Version 1.4.1</b>",
-    "version": "1.4.1"
+    "description": "Contrat d'interface des APIs des enseignes vers Woop. \n\n<b>Version 1.4.0</b>",
+    "version": "1.4.0"
   },
   "servers": [
     {
@@ -1741,7 +1741,7 @@
                           "version": {
                             "type": "string",
                             "description": "Version d'API pour ce callback (voir woop vers retailer)",
-                            "example": "1.1.1"
+                            "example": "1.1.0"
                           }
                         }
                       },
@@ -1758,7 +1758,7 @@
                           "version": {
                             "type": "string",
                             "description": "Version d'API pour ce callback (voir woop vers retailer)",
-                            "example": "1.1.1"
+                            "example": "1.1.0"
                           }
                         }
                       },
@@ -1775,7 +1775,7 @@
                           "version": {
                             "type": "string",
                             "description": "Version d'API pour ce callback (voir woop vers retailer)",
-                            "example": "1.1.1"
+                            "example": "1.1.0"
                           }
                         }
                       },
@@ -1792,7 +1792,7 @@
                           "version": {
                             "type": "string",
                             "description": "Version d'API pour ce callback (voir woop vers retailer)",
-                            "example": "1.1.1"
+                            "example": "1.1.0"
                           }
                         }
                       },
@@ -1809,7 +1809,7 @@
                           "version": {
                             "type": "string",
                             "description": "Version d'API pour ce callback (voir woop vers retailer)",
-                            "example": "1.1.1"
+                            "example": "1.1.0"
                           }
                         }
                       }
@@ -3107,7 +3107,7 @@
         "required": true,
         "schema": {
           "type": "string",
-          "example": "1.4.1"
+          "example": "1.4.0"
         }
       },
       "queryDeliveryStatus": {
