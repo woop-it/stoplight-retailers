@@ -152,32 +152,7 @@
             }
           },
           "400": {
-            "description": "Elements manquants et/ou incorrect dans le body",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "reasons": {
-                      "type": "array",
-                      "items": {
-                        "type": "string",
-                        "example": "Missing argument 'xxxxx'"
-                      }
-                    }
-                  }
-                }
-              },
-              "examples": {
-                "Exemple": {
-                  "value": {
-                    "reasons": [
-                      "Missing argument 'xxxxx'"
-                    ]
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/badRequest"
           },
           "401": {
             "description": "Vous n'êtes pas autorisé à accéder à cet élément."
@@ -202,7 +177,7 @@
         "tags": [
           "Commande"
         ],
-        "description": "Cette méthode permet de créer une commande côté Woop.\nDès la commande validée, un ensemble de devis sera envoyé aux différents transporteurs. L'Commande sera alors créé lorsque l’un des devis aura été validé.",
+        "description": "Cette méthode permet de créer une commande côté Woop.\nDès la commande validée, un ensemble de devis sera envoyé aux différents transporteurs. L'ordre de transport sera alors créé lorsque l’un des devis aura été validé.",
         "operationId": "postOrders",
         "parameters": [
           {
@@ -618,9 +593,8 @@
                       }
                     }
                   }
-                }
-              },
-              "examples": {
+                },
+                "examples": {
                 "Exemple": {
                   "value": {
                     "reasons": [
@@ -628,6 +602,7 @@
                     ]
                   }
                 }
+              }
               }
             }
           },
@@ -641,13 +616,13 @@
             "description": "Création de commande avec cet 'orderId' impossible"
           }
         },
-        "summary": "Demande de la commande"
+        "summary": "Création de commande"
       },
       "get": {
         "tags": [
           "Commande"
         ],
-        "description": "Cette méthode retourne les détails du ou de plusieurs commandes en fonction des filtres sélectionnés.",
+        "description": "Cette méthode retourne les détails d'une ou de plusieurs commandes en fonction des filtres sélectionnés.",
         "operationId": "getOrders",
         "parameters": [
           {
@@ -753,7 +728,33 @@
             }
           },
           "400": {
-            "description": "Elements manquants et/ou incorrect"
+            
+            "description": "Elements manquants et/ou incorrect dans le body",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "reasons": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "example": "Missing argument 'xxxxx'"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                "Exemple": {
+                  "value": {
+                    "reasons": [
+                      "Missing argument 'xxxxx'"
+                    ]
+                  }
+                }
+              }
+              }
+            }
           },
           "401": {
             "description": "Vous n'êtes pas autorisé à accéder à cet élément."
@@ -762,7 +763,7 @@
             "description": "Demande impossible pour ce 'storeId'"
           }
         },
-        "summary": "Récupération d'commandes"
+        "summary": "Récupération de commandes"
       }
     },
     "/orders/{orderId}": {
@@ -770,7 +771,7 @@
         "tags": [
           "Commande"
         ],
-        "description": "Annulation d'un Commande",
+        "description": "Annulation d'une commande",
         "operationId": "deleteOrders",
         "parameters": [
           {
@@ -824,13 +825,13 @@
             "description": "Le 'orderId' n'existe pas"
           }
         },
-        "summary": "Annulation d'un Commande"
+        "summary": "Annulation d'une commande"
       },
       "get": {
         "tags": [
           "Commande"
         ],
-        "description": "Cette méthode retourne le détail d'un Commande.",
+        "description": "Cette méthode retourne le détail d'une commande.",
         "operationId": "getOrder",
         "parameters": [
           {
@@ -842,7 +843,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK. Contient la commande récupéré.",
+            "description": "OK. Contient la commande récupérée.",
             "content": {
               "application/json": {
                 "schema": {
@@ -898,13 +899,13 @@
             "description": "Vous n'êtes pas autorisé à accéder à cet élément."
           }
         },
-        "summary": "Récupération d'un Commande"
+        "summary": "Récupération d'une commande"
       },
       "patch": {
         "tags": [
           "Commande"
         ],
-        "description": "Cette méthode permet de modifier un Commande. La mise à jour peut déclencher une annulation de la commande + création d’un nouvel ordre de transport si les informations modifiées sont jugées importantes ou non et impacte directement la livraison.",
+        "description": "Cette méthode permet de modifier une commande. La mise à jour peut déclencher une annulation de la commande + création d’une nouvelle commande si les informations modifiées sont jugées importantes ou non et impacte directement la livraison.",
         "operationId": "patchOrder",
         "parameters": [
           {
@@ -1022,7 +1023,7 @@
             "description": "Vous n'êtes pas autorisé à accéder à cet élément."
           }
         },
-        "summary": "Mise à jour d'un Commande"
+        "summary": "Mise à jour d'une commande"
       }
     },
     "/orders/{orderId}/label": {
@@ -1058,7 +1059,7 @@
                     },
                     "trackingPageUrl": {
                       "type": "string",
-                      "description": "Lien de la page de suivi de la commande"
+                      "description": "Lien de la page de suivi de livraison"
                     }
                   },
                   "required": [
@@ -1095,7 +1096,7 @@
         "tags": [
           "Retour produit"
         ],
-        "description": "Cette méthode permet d'effectuer une demande de retour de produit d'un Commande.",
+        "description": "Cette méthode permet d'effectuer une demande de retour de produit d'une commande.",
         "operationId": "postProductReturn",
         "parameters": [
           {
@@ -1216,9 +1217,8 @@
                       }
                     }
                   }
-                }
-              },
-              "examples": {
+                },
+                "examples": {
                 "Exemple": {
                   "value": {
                     "reasons": [
@@ -1226,6 +1226,7 @@
                     ]
                   }
                 }
+              }
               }
             }
           },
@@ -1247,7 +1248,7 @@
         "tags": [
           "Document"
         ],
-        "description": "Cette méthode permet de récupérer les informations des documents attachés à un Commande.",
+        "description": "Cette méthode permet de récupérer les informations des documents attachés à une commande.",
         "operationId": "getOrderDocuments",
         "parameters": [
           {
@@ -1319,7 +1320,7 @@
             }
           },
           "204": {
-            "description": "Pas de documents sur cet Commande."
+            "description": "Pas de documents sur cette commande."
           },
           "401": {
             "description": "Vous n'êtes pas autorisé à accéder à cet élément."
@@ -1358,7 +1359,7 @@
             }
           },
           "204": {
-            "description": "Pas de documents sur cet Commande."
+            "description": "Pas de documents sur cette commande."
           },
           "401": {
             "description": "Vous n'êtes pas autorisé à accéder à cet élément."
@@ -1375,7 +1376,7 @@
         "tags": [
           "Document"
         ],
-        "description": "Cette méthode permet de télécharger un document d'un Commande",
+        "description": "Cette méthode permet de télécharger un document d'une commande",
         "operationId": "downloadOrderDocument",
         "parameters": [
           {
@@ -1646,9 +1647,8 @@
                       }
                     }
                   }
-                }
-              },
-              "examples": {
+                }, 
+                 "examples": {
                 "Exemple": {
                   "value": {
                     "reasons": [
@@ -1656,6 +1656,7 @@
                     ]
                   }
                 }
+              }
               }
             }
           },
@@ -1998,9 +1999,8 @@
                       }
                     }
                   }
-                }
-              },
-              "examples": {
+                },
+                "examples": {
                 "Exemple": {
                   "value": {
                     "reasons": [
@@ -2008,6 +2008,7 @@
                     ]
                   }
                 }
+              }
               }
             }
           }
@@ -2030,11 +2031,41 @@
         }
       }
     },
+    "responses": {
+      "badRequest": {
+          "description": "Elements manquants et/ou incorrect dans le body",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "reasons": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "example": "Missing argument 'xxxxx'"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                "Exemple": {
+                  "value": {
+                    "reasons": [
+                      "Missing argument 'xxxxx'"
+                    ]
+                  }
+                }
+              }
+              }
+            }
+      }
+    },
     "schemas": {
       "responseOrder": {
-        "title": "Réponse Commande",
+        "title": "Réponse récupération commande",
         "type": "object",
-        "description": "Réponse Commande",
+        "description": "Réponse récupération commande",
         "properties": {
           "orders": {
             "type": "array",
@@ -2173,7 +2204,7 @@
       },
       "postOrders": {
         "type": "object",
-        "description": "Demande de la commande",
+        "description": "Création de la commande",
         "properties": {
           "orderId": {
             "type": "string",
@@ -2273,7 +2304,7 @@
           "packages",
           "services"
         ],
-        "title": "Demande de la commande"
+        "title": "Création de la commande"
       },
       "postProductReturn": {
         "type": "object",
@@ -2545,8 +2576,8 @@
               },
               "carrierCode": {
                 "type": "string",
-                "descriprion": "Code du transporteur",
-                "exmample": "bpost"
+                "description": "Code du transporteur",
+                "example": "bpost"
               }
             }
           },
@@ -2738,7 +2769,7 @@
           "quantity": {
             "type": "integer",
             "default": 1,
-            "description": "Quantité de paquet"
+            "description": "Quantité de colis"
           }
         },
         "required": [
@@ -3085,7 +3116,7 @@
         "in": "query",
         "required": true,
         "name": "deliveryStatus",
-        "description": "Filtre la liste des commande en fonction du statut de livraison",
+        "description": "Filtre la liste des commandes en fonction du statut de livraison",
         "schema": {
           "type": "string",
           "example": "DELIVERY_INIT"
@@ -3201,7 +3232,7 @@
       "pathOrderId": {
         "in": "path",
         "required": true,
-        "description": "Id de la commande",
+        "description": "Identifiant de la commande",
         "name": "orderId",
         "schema": {
           "type": "string"
@@ -3210,7 +3241,7 @@
       "pathDocumentId": {
         "in": "path",
         "required": true,
-        "description": "Id du document",
+        "description": "Identifiant du document",
         "name": "documentId",
         "schema": {
           "type": "string"
@@ -3219,7 +3250,7 @@
       "pathPriceId": {
         "in": "path",
         "required": true,
-        "description": "Id de la demande de prix",
+        "description": "Identifiant de la demande de prix",
         "name": "priceId",
         "schema": {
           "type": "string"
