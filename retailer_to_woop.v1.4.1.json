@@ -152,7 +152,32 @@
             }
           },
           "400": {
-            "$ref": "#/components/responses/badRequest"
+            "description": "Elements manquants et/ou incorrect dans le body",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "reasons": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "example": "Missing argument 'xxxxx'"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Exemple": {
+                    "value": {
+                      "reasons": [
+                        "Missing argument 'xxxxx'"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
           },
           "401": {
             "description": "Vous n'êtes pas autorisé à accéder à cet élément."
@@ -595,14 +620,14 @@
                   }
                 },
                 "examples": {
-                "Exemple": {
-                  "value": {
-                    "reasons": [
-                      "Missing argument 'xxxxx'"
-                    ]
+                  "Exemple": {
+                    "value": {
+                      "reasons": [
+                        "Missing argument 'xxxxx'"
+                      ]
+                    }
                   }
                 }
-              }
               }
             }
           },
@@ -728,7 +753,6 @@
             }
           },
           "400": {
-            
             "description": "Elements manquants et/ou incorrect dans le body",
             "content": {
               "application/json": {
@@ -745,14 +769,14 @@
                   }
                 },
                 "examples": {
-                "Exemple": {
-                  "value": {
-                    "reasons": [
-                      "Missing argument 'xxxxx'"
-                    ]
+                  "Exemple": {
+                    "value": {
+                      "reasons": [
+                        "Missing argument 'xxxxx'"
+                      ]
+                    }
                   }
                 }
-              }
               }
             }
           },
@@ -1219,14 +1243,14 @@
                   }
                 },
                 "examples": {
-                "Exemple": {
-                  "value": {
-                    "reasons": [
-                      "Missing argument 'xxxxx'"
-                    ]
+                  "Exemple": {
+                    "value": {
+                      "reasons": [
+                        "Missing argument 'xxxxx'"
+                      ]
+                    }
                   }
                 }
-              }
               }
             }
           },
@@ -1647,16 +1671,16 @@
                       }
                     }
                   }
-                }, 
-                 "examples": {
-                "Exemple": {
-                  "value": {
-                    "reasons": [
-                      "Missing argument 'xxxxx'"
-                    ]
+                },
+                "examples": {
+                  "Exemple": {
+                    "value": {
+                      "reasons": [
+                        "Missing argument 'xxxxx'"
+                      ]
+                    }
                   }
                 }
-              }
               }
             }
           },
@@ -2001,14 +2025,14 @@
                   }
                 },
                 "examples": {
-                "Exemple": {
-                  "value": {
-                    "reasons": [
-                      "Missing argument 'xxxxx'"
-                    ]
+                  "Exemple": {
+                    "value": {
+                      "reasons": [
+                        "Missing argument 'xxxxx'"
+                      ]
+                    }
                   }
                 }
-              }
               }
             }
           }
@@ -2029,36 +2053,6 @@
             "x-google-audiences": "https://retailer.api.meltingpoint.fr/"
           }
         }
-      }
-    },
-    "responses": {
-      "badRequest": {
-          "description": "Elements manquants et/ou incorrect dans le body",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "reasons": {
-                      "type": "array",
-                      "items": {
-                        "type": "string",
-                        "example": "Missing argument 'xxxxx'"
-                      }
-                    }
-                  }
-                },
-                "examples": {
-                "Exemple": {
-                  "value": {
-                    "reasons": [
-                      "Missing argument 'xxxxx'"
-                    ]
-                  }
-                }
-              }
-              }
-            }
       }
     },
     "schemas": {
@@ -2205,10 +2199,12 @@
       "postOrders": {
         "type": "object",
         "description": "Création de la commande",
+        "title": "Création de la commande",
         "properties": {
           "orderId": {
             "type": "string",
-            "description": "Identifiant unique de la commande"
+            "description": "Identifiant unique de la commande (maximum 36 charactères)",
+            "maxLength": 36
           },
           "referenceNumber": {
             "type": "string",
@@ -2303,8 +2299,7 @@
           "delivery",
           "packages",
           "services"
-        ],
-        "title": "Création de la commande"
+        ]
       },
       "postProductReturn": {
         "type": "object",
