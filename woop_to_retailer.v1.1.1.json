@@ -7,17 +7,17 @@
   },
   "tags": [
     {
-      "name": "Ordre de livraison"
+      "name": "Commande"
     }
   ],
   "paths": {
     "/orders/{orderId}/carrier": {
       "put": {
         "tags": [
-          "Ordre de livraison"
+          "Commande"
         ],
         "operationId": "putOrderCarrier",
-        "description": "Mise à jour du transporteur sélectionné d'un ordre de livraison.",
+        "description": "Notification du transporteur sélectionné d'une commande",
         "parameters": [
           {
             "$ref": "#/components/parameters/pathOrderId"
@@ -37,15 +37,15 @@
                   },
                   "externalReference": {
                     "type": "string",
-                    "description": "Référence de l'ordre de livraison"
+                    "description": "Référence de commmande"
                   },
                   "orderId": {
                     "type": "string",
-                    "description": "Identifiant de l'ordre de livraison"
+                    "description": "Identifiant de commande"
                   },
                   "trackingPageUrl": {
                     "type": "string",
-                    "description": "Url de la page de suivi de la livraison"
+                    "description": "Lien de la page de suivi de la livraison"
                   },
                   "vehicleType": {
                     "$ref": "#/components/schemas/vehicleType"
@@ -112,9 +112,8 @@
                       }
                     }
                   }
-                }
-              },
-              "examples": {
+                },
+                "examples": {
                 "Exemple": {
                   "value": {
                     "reasons": [
@@ -122,6 +121,7 @@
                     ]
                   }
                 }
+              }
               }
             }
           },
@@ -132,16 +132,16 @@
             "description": "Le 'orderId' n'a pas été trouvé"
           }
         },
-        "summary": "Notification du transporteur sélectionné d'un ordre de livraison"
+        "summary": "Notification du transporteur sélectionné d'une commande"
       }
     },
     "/orders/{orderId}/status": {
       "put": {
         "tags": [
-          "Ordre de livraison"
+          "Commande"
         ],
         "operationId": "putOrderStatus",
-        "description": "Mise à jour du statut d'un ordre de livraison.",
+        "description": "Notification d'une mise à jour de statut.",
         "parameters": [
           {
             "$ref": "#/components/parameters/pathOrderId"
@@ -209,9 +209,8 @@
                       }
                     }
                   }
-                }
-              },
-              "examples": {
+                },
+                "examples": {
                 "Exemple": {
                   "value": {
                     "reasons": [
@@ -219,6 +218,7 @@
                     ]
                   }
                 }
+              }
               }
             }
           },
@@ -229,16 +229,16 @@
             "description": "Le 'orderId' n'a pas été trouvé"
           }
         },
-        "summary": "Notification  de mise à jour de statut d'un ordre de livraison"
+        "summary": "Notification de mise à jour de statut"
       }
     },
     "/orders/{orderId}/score": {
       "put": {
         "tags": [
-          "Ordre de livraison"
+          "Commande"
         ],
         "operationId": "putOrderScore",
-        "description": "Notification d'une note d'un ordre de livraison.",
+        "description": "Notification d'une note d'une livraison.",
         "parameters": [
           {
             "$ref": "#/components/parameters/pathOrderId"
@@ -254,7 +254,7 @@
                 "properties": {
                   "orderId": {
                     "type": "string",
-                    "description": "Identifiant de l'ordre de livraison"
+                    "description": "Identifiant de commande"
                   },
                   "score": {
                     "type": "array",
@@ -310,9 +310,8 @@
                       }
                     }
                   }
-                }
-              },
-              "examples": {
+                },
+                "examples": {
                 "Exemple": {
                   "value": {
                     "reasons": [
@@ -320,6 +319,7 @@
                     ]
                   }
                 }
+              }
               }
             }
           },
@@ -330,16 +330,16 @@
             "description": "Le 'orderId' n'a pas été trouvé"
           }
         },
-        "summary": "Notification d'une note d'un ordre de livraison"
+        "summary": "Notification d'une note d'une livraison"
       }
     },
     "/orders/{orderId}/deliveryClosure": {
       "post": {
         "tags": [
-          "Ordre de livraison"
+          "Commande"
         ],
         "operationId": "postOrderDeliveryClosure",
-        "description": "Notification d'informations de facturation pour un ordre de livraison.",
+        "description": "Notification d'informations de facturation d'une livraison.",
         "parameters": [
           {
             "$ref": "#/components/parameters/pathOrderId"
@@ -359,11 +359,11 @@
                   },
                   "externalReference": {
                     "type": "string",
-                    "description": "Référence de l'ordre de livraison"
+                    "description": "Référence de commande"
                   },
                   "orderId": {
                     "type": "string",
-                    "description": "Identifiant de l'ordre de livraison"
+                    "description": "Identifiant de commmande"
                   },
                   "billedDistance": {
                     "$ref": "#/components/schemas/length"
@@ -423,9 +423,8 @@
                       }
                     }
                   }
-                }
-              },
-              "examples": {
+                },
+                "examples": {
                 "Exemple": {
                   "value": {
                     "reasons": [
@@ -433,6 +432,7 @@
                     ]
                   }
                 }
+              }
               }
             }
           },
@@ -443,16 +443,16 @@
             "description": "Le 'orderId' n'a pas été trouvé"
           }
         },
-        "summary": "Notification d'informations de facturation d'un ordre de livraison"
+        "summary": "Notification d'informations de facturation d'une livraison"
       }
     },
     "/orders/{orderId}/events": {
       "post": {
         "tags": [
-          "Ordre de livraison"
+          "Commande"
         ],
         "operationId": "postOrderEvents",
-        "description": "Notification d'un évènement d'un ordre de livraison.",
+        "description": "Notification d'un évènement d'une commande.",
         "parameters": [
           {
             "$ref": "#/components/parameters/pathOrderId"
@@ -563,9 +563,8 @@
                       }
                     }
                   }
-                }
-              },
-              "examples": {
+                },
+                "examples": {
                 "Exemple": {
                   "value": {
                     "reasons": [
@@ -573,6 +572,7 @@
                     ]
                   }
                 }
+              }
               }
             }
           },
@@ -583,7 +583,7 @@
             "description": "Le 'orderId' n'a pas été trouvé"
           }
         },
-        "summary": "Notification d'un évènement d'un ordre de livraison"
+        "summary": "Notification d'un évènement d'une commande"
       }
     }
   },
@@ -673,7 +673,8 @@
           "ORDER_DELIVERED",
           "ORDER_CANCELLED"
         ],
-        "title": "Statut de l'ordre de livraison",
+        "title": "Statut de commande",
+        "description": "Statut de commande",
         "x-examples": {
           "Exemple": "ORDER_CREATED"
         }
@@ -898,7 +899,7 @@
         ]
       },
       "putDeliveryStatus": {
-        "title": "Mise à jour de statut de l'ordre de livraison",
+        "title": "Mise à jour de statut de livraison",
         "type": "object",
         "properties": {
           "deliveryId": {
@@ -907,7 +908,7 @@
           },
           "orderId": {
             "type": "string",
-            "description": "Identifiant de l'ordre de livraison"
+            "description": "Identifiant de commande"
           },
           "status": {
             "$ref": "#/components/schemas/deliveryStatus"
@@ -934,12 +935,12 @@
         ]
       },
       "putOrderStatus": {
-        "title": "Mise à jour du statut de la livraison",
+        "title": "Mise à jour du statut de la commande",
         "type": "object",
         "properties": {
           "orderId": {
             "type": "string",
-            "description": "Identifiant de l'ordre de livraison"
+            "description": "Identifiant de la commande"
           },
           "date": {
             "type": "string",
@@ -960,7 +961,7 @@
     "parameters": {
       "pathOrderId": {
         "in": "path",
-        "description": "Id de l'ordre de livraison",
+        "description": "Identifiant de la commande",
         "name": "orderId",
         "required": true,
         "schema": {

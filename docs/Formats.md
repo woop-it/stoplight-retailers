@@ -1,6 +1,6 @@
 # Formats
 
-## Dates
+## Date
 
 Toutes les dates utilisées dans nos APIs sont au format **ISO 8601**.
 

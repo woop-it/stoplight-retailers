@@ -1459,6 +1459,9 @@
             "$ref": "#/components/parameters/queryPickupPointType"
           },
           {
+            "$ref": "#/components/parameters/queryPickupPointCategory"
+          },
+          {
             "$ref": "#/components/parameters/queryStoreId"
           },
           {
@@ -3222,6 +3225,21 @@
             "PICKUP_POINT_ALL"
           ],
           "default": "PICKUP_POINT_RELAY_WITH_LOCKER"
+        }
+      },
+       "queryPickupPointCategory": {
+        "in": "query",
+        "required": false,
+        "name": "category",
+        "description": "Catégorie de point relais",
+        "schema": {
+          "type": "string",
+          "enum": [
+            "PICKUP_POINT_STANDARD",
+            "PICKUP_POINT_XL",
+            "PICKUP_POINT_XXL",
+            "PICKUP_POINT_DRIVE"
+          ]
         }
       },
       "pathOrderId": {
