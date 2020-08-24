@@ -230,7 +230,7 @@
             "oAuth2ClientCredentials": []
           }
         ],
-        "summary": "Demande de retrait"
+        "summary": "Effectuer une demande de retrait de commande"
       }
     },
     "/orders": {
@@ -713,7 +713,7 @@
             }
           }
         },
-        "summary": "Création de commande"
+        "summary": "Créer une commande"
       },
       "get": {
         "tags": [
@@ -879,7 +879,7 @@
             }
           }
         },
-        "summary": "Récupération de commandes"
+        "summary": "Récupérer des commandes"
       }
     },
     "/orders/{orderId}": {
@@ -972,7 +972,7 @@
             }
           }
         },
-        "summary": "Annulation d'une commande"
+        "summary": "Annuler une commande"
       },
       "get": {
         "tags": [
@@ -1053,7 +1053,7 @@
             }
           }
         },
-        "summary": "Récupération d'une commande"
+        "summary": "Récupérer une commande spécifique"
       },
       "patch": {
         "tags": [
@@ -1184,7 +1184,7 @@
             }
           }
         },
-        "summary": "Mise à jour d'une commande"
+        "summary": "Modifier une commande"
       }
     },
     "/orders/{orderId}/label": {
@@ -1288,7 +1288,7 @@
             }
           }
         },
-        "summary": "Récupération d'étiquette de la commande"
+        "summary": "Récupérer une étiquette de transport"
       }
     },
     "/orders/{orderId}/return": {
@@ -1468,7 +1468,7 @@
             }
           }
         },
-        "summary": "Demande de retour produit"
+        "summary": "Effectuer un retour produit"
       }
     },
     "/orders/{orderId}/documents": {
@@ -1580,7 +1580,7 @@
             }
           }
         },
-        "summary": "Récupération des documents de la commande."
+        "summary": "Récupérer les documents d'une commande"
       }
     },
     "/orders/{orderId}/documents/download": {
@@ -1642,7 +1642,7 @@
             }
           }
         },
-        "summary": "Téléchargement des documents de la commande"
+        "summary": "Télécharger les documents d'une commande"
       }
     },
     "/orders/{orderId}/documents/{documentId}/download": {
@@ -1702,7 +1702,7 @@
             }
           }
         },
-        "summary": "Téléchargement d'un document de la commande"
+        "summary": "Télécharger un document pour une commande"
       }
     },
     "/pickupPoints": {
@@ -1990,7 +1990,7 @@
             }
           }
         },
-        "summary": "Récupération des points relais"
+        "summary": "Rechercher un ensemble de point-relais"
       }
     },
     "/subscriptions": {
@@ -2336,7 +2336,7 @@
             }
           }
         },
-        "summary": "Ajout de souscriptions"
+        "summary": "Souscrire aux services"
       }
     }
   },
