@@ -17,7 +17,7 @@
           "Commande"
         ],
         "operationId": "putOrderCarrier",
-        "description": "Notification du transporteur sélectionné d'une commande",
+        "description": "Cette méthode permet de recevoir la notification du transporteur sélectionné d'une commande",
         "parameters": [
           {
             "$ref": "#/components/parameters/pathOrderId"
@@ -114,14 +114,14 @@
                   }
                 },
                 "examples": {
-                "Exemple": {
-                  "value": {
-                    "reasons": [
-                      "Missing argument 'xxxxx'"
-                    ]
+                  "Exemple": {
+                    "value": {
+                      "reasons": [
+                        "Missing argument 'xxxxx'"
+                      ]
+                    }
                   }
                 }
-              }
               }
             }
           },
@@ -141,7 +141,7 @@
           "Commande"
         ],
         "operationId": "putOrderStatus",
-        "description": "Notification d'une mise à jour de statut.",
+        "description": "Cette méthode permet de recevoir la notification d'une mise à jour de statut.",
         "parameters": [
           {
             "$ref": "#/components/parameters/pathOrderId"
@@ -211,14 +211,14 @@
                   }
                 },
                 "examples": {
-                "Exemple": {
-                  "value": {
-                    "reasons": [
-                      "Missing argument 'xxxxx'"
-                    ]
+                  "Exemple": {
+                    "value": {
+                      "reasons": [
+                        "Missing argument 'xxxxx'"
+                      ]
+                    }
                   }
                 }
-              }
               }
             }
           },
@@ -238,7 +238,7 @@
           "Commande"
         ],
         "operationId": "putOrderScore",
-        "description": "Notification d'une note d'une livraison.",
+        "description": "Cette méthode permet de recevoir la notification d'une note d'une livraison.",
         "parameters": [
           {
             "$ref": "#/components/parameters/pathOrderId"
@@ -312,14 +312,14 @@
                   }
                 },
                 "examples": {
-                "Exemple": {
-                  "value": {
-                    "reasons": [
-                      "Missing argument 'xxxxx'"
-                    ]
+                  "Exemple": {
+                    "value": {
+                      "reasons": [
+                        "Missing argument 'xxxxx'"
+                      ]
+                    }
                   }
                 }
-              }
               }
             }
           },
@@ -339,7 +339,7 @@
           "Commande"
         ],
         "operationId": "postOrderDeliveryClosure",
-        "description": "Notification d'informations de facturation d'une livraison.",
+        "description": "Cette méthode permet de recevoir la notification d'informations de facturation d'une livraison.",
         "parameters": [
           {
             "$ref": "#/components/parameters/pathOrderId"
@@ -425,14 +425,14 @@
                   }
                 },
                 "examples": {
-                "Exemple": {
-                  "value": {
-                    "reasons": [
-                      "Missing argument 'xxxxx'"
-                    ]
+                  "Exemple": {
+                    "value": {
+                      "reasons": [
+                        "Missing argument 'xxxxx'"
+                      ]
+                    }
                   }
                 }
-              }
               }
             }
           },
@@ -452,7 +452,7 @@
           "Commande"
         ],
         "operationId": "postOrderEvents",
-        "description": "Notification d'un évènement d'une commande.",
+        "description": "Cette méthode permet de recevroi la notification d'un évènement d'une commande.",
         "parameters": [
           {
             "$ref": "#/components/parameters/pathOrderId"
@@ -513,7 +513,7 @@
                   },
                   "failReason": {
                     "type": "string",
-                    "description": "Raison de l'échec si status est false"
+                    "description": "Motif de l'échec si status est false"
                   },
                   "sender": {
                     "type": "string",
@@ -565,14 +565,14 @@
                   }
                 },
                 "examples": {
-                "Exemple": {
-                  "value": {
-                    "reasons": [
-                      "Missing argument 'xxxxx'"
-                    ]
+                  "Exemple": {
+                    "value": {
+                      "reasons": [
+                        "Missing argument 'xxxxx'"
+                      ]
+                    }
                   }
                 }
-              }
               }
             }
           },
@@ -590,7 +590,7 @@
   "components": {
     "schemas": {
       "score": {
-        "title": "Note de livraison",
+        "title": "Note de livraison (score)",
         "type": "object",
         "x-examples": {
           "Exemple": {
@@ -619,7 +619,7 @@
         ]
       },
       "contact": {
-        "title": "Contact",
+        "title": "Contact (contact)",
         "type": "object",
         "x-examples": {
           "Exemple": {
@@ -629,7 +629,7 @@
             "email": "johndoe@mail.com"
           }
         },
-        "description": "Contact",
+        "description": "Informations de contact",
         "properties": {
           "firstName": {
             "type": "string",
@@ -673,7 +673,7 @@
           "ORDER_DELIVERED",
           "ORDER_CANCELLED"
         ],
-        "title": "Statut de commande",
+        "title": "Statut de commande (orderStatus)",
         "description": "Statut de commande",
         "x-examples": {
           "Exemple": "ORDER_CREATED"
@@ -696,14 +696,14 @@
           "DELIVERY_DELIVERED_OK",
           "DELIVERY_DELIVERED_PARTIALLY"
         ],
-        "title": "Statut de livraison",
+        "title": "Statut de livraison (deliveryStatus)",
         "x-examples": {
           "Exemple": "DELIVERY_STARTED"
         },
         "description": "Statut de livraison"
       },
       "length": {
-        "title": "Distance",
+        "title": "Distance (length)",
         "x-examples": {
           "Exemple": {
             "value": 200,
@@ -740,13 +740,14 @@
             "$ref": "#/components/schemas/massUnit"
           }
         },
-        "title": "Masse",
+        "title": "Poids (mass)",
         "x-examples": {
           "Exemple": {
             "value": 1,
             "unit": "kg"
           }
-        }
+        },
+        "description": "Poids"
       },
       "lengthUnit": {
         "type": "string",
@@ -760,13 +761,13 @@
           "ft",
           "mi"
         ],
-        "title": "Unité de mesure",
+        "title": "Unité de mesure (lengthUnit)",
         "x-examples": {
           "Exemple": "mm"
         }
       },
       "massUnit": {
-        "description": "",
+        "description": "Unité de poids",
         "enum": [
           "mcg",
           "mg",
@@ -777,7 +778,7 @@
           "mt",
           "t"
         ],
-        "title": "Unité de masse",
+        "title": "Unité de poids (massUnit)",
         "x-examples": {
           "Exemple": "mcg"
         },
@@ -801,7 +802,7 @@
           "VEHICLE_TYPE_E_CAR",
           "VEHICLE_TYPE_UNKNOWN"
         ],
-        "title": "Type de véhicule du transport",
+        "title": "Type de véhicule de transport (vehicleType)",
         "x-examples": {
           "Exemple": "VEHICLE_TYPE_BIKE"
         },
@@ -813,7 +814,7 @@
         "enum": [
           "EUR"
         ],
-        "title": "Devise",
+        "title": "Devise (currency)",
         "x-examples": {
           "Exemple": "EUR"
         }
@@ -833,7 +834,7 @@
             }
           }
         },
-        "title": "Informations de l'équipe ayant contribué à la livraison",
+        "title": "Équipe (team)",
         "x-examples": {
           "Exemple": {
             "members": [
@@ -842,10 +843,11 @@
               }
             ]
           }
-        }
+        },
+        "description": "Informations de l'équipe ayant contribué à la livraison"
       },
       "price": {
-        "title": "Prix",
+        "title": "Prix (price)",
         "x-examples": {
           "Exemple": {
             "value": 20,
@@ -870,7 +872,7 @@
         ]
       },
       "carrier": {
-        "title": "Transporteur",
+        "title": "Transporteur (carrier)",
         "x-examples": {
           "Exemple": {
             "name": "Bpost",
@@ -899,7 +901,7 @@
         ]
       },
       "putDeliveryStatus": {
-        "title": "Mise à jour de statut de livraison",
+        "title": "Mise à jour de statut de livraison (putDeliveryStatus)",
         "type": "object",
         "properties": {
           "deliveryId": {
@@ -932,10 +934,11 @@
           "status",
           "date",
           "comment"
-        ]
+        ],
+        "description": "Mise à jour de statut de livraison"
       },
       "putOrderStatus": {
-        "title": "Mise à jour du statut de la commande",
+        "title": "Mise à jour du statut de la commande (putOrderStatus)",
         "type": "object",
         "properties": {
           "orderId": {
@@ -955,7 +958,8 @@
           "orderId",
           "date",
           "status"
-        ]
+        ],
+        "description": "Mise à jour du statut de la commande"
       }
     },
     "parameters": {

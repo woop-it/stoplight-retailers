@@ -817,7 +817,7 @@
                 ],
                 "properties": {
                   "reasons": {
-                    "description": "Raisons d’annulation",
+                    "description": "Motifs d’annulation",
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/cancelledReasons"
@@ -2060,7 +2060,7 @@
     },
     "schemas": {
       "responseOrder": {
-        "title": "Réponse récupération commande",
+        "title": "Réponse récupération commande (responseOrder)",
         "type": "object",
         "description": "Réponse récupération commande",
         "properties": {
@@ -2197,12 +2197,12 @@
           }
         },
         "description": "Demande de retrait",
-        "title": "Demande de retrait"
+        "title": "Demande de retrait (postCollects)"
       },
       "postOrders": {
         "type": "object",
         "description": "Création de la commande",
-        "title": "Création de la commande",
+        "title": "Création de la commande (postOrders)",
         "properties": {
           "orderId": {
             "type": "string",
@@ -2307,7 +2307,7 @@
       "postProductReturn": {
         "type": "object",
         "description": "Demande de retour",
-        "title": "Demande de retour",
+        "title": "Demande de retour (postProductReturn)",
         "properties": {
           "orderReturnId": {
             "type": "string",
@@ -2422,8 +2422,8 @@
         "title": "Tags"
       },
       "address": {
-        "description": "Adresse",
-        "title": "Adresse",
+        "description": "Informations d'un adresse",
+        "title": "Adresse (address)",
         "type": "object",
         "x-examples": {
           "Exemple": {
@@ -2439,23 +2439,23 @@
         "properties": {
           "addressLine1": {
             "type": "string",
-            "description": "Adresse ligne 1"
+            "description": "Adresse compléte du lieu principal"
           },
           "addressLine2": {
             "type": "string",
-            "description": "Adresse ligne 2"
+            "description": "Adresse complémentaire du lieu"
           },
           "elevator": {
             "type": "boolean",
-            "description": "Indique si l’adresse possède un ascenseur"
+            "description": "Indique si l’adresse possède un ascenseur, Valeur par défaut: false"
           },
           "floor": {
             "type": "integer",
-            "description": "Numéro de l'étage"
+            "description": "Précise l'étage de l'adresse en question, Valeur par défaut: 0"
           },
           "doorCode": {
             "type": "string",
-            "description": "Code de la porte"
+            "description": "Digicode"
           },
           "postalCode": {
             "type": "string",
@@ -2505,10 +2505,10 @@
         "x-examples": {
           "Exemple": "DELIVERY_STARTED"
         },
-        "title": "Statut de livraison"
+        "title": "Statut de livraison (deliveryStatus)"
       },
       "location": {
-        "title": "Emplacement",
+        "title": "Emplacement (location)",
         "description": "Un emplacement représente un lieu de prélevement ou de livraison.",
         "x-examples": {
           "Adresse": {
@@ -2626,7 +2626,7 @@
             "end": "2019-05-02T17:52:01+0000"
           }
         },
-        "title": "Créneau de dates"
+        "title": "Créneau de dates (interval)"
       },
       "interval_hour": {
         "type": "object",
@@ -2651,11 +2651,11 @@
           }
         },
         "description": "Créneau horaires",
-        "title": "Créneau horaires"
+        "title": "Créneau horaires (interval_hour)"
       },
       "contact": {
-        "title": "Contact",
-        "description": "Contact",
+        "title": "Contact (contact)",
+        "description": "Informations de contact",
         "type": "object",
         "x-examples": {
           "Exemple": {
@@ -2704,14 +2704,14 @@
         "type": "array",
         "description": "Services de livraison",
         "items": {
-          "$ref": "#/components/schemas/deliveryServices"
+          "$ref": "#/components/schemas/deliveryService"
         },
         "x-examples": {
           "Exemple": [
             "SERVICE_PICKUP_POINT"
           ]
         },
-        "title": "Services de livraison"
+        "title": "Services de livraison (services)"
       },
       "packages": {
         "description": "Ensemble de colis",
@@ -2739,7 +2739,7 @@
               "type": "object",
               "properties": {
                 "type": {
-                  "$ref": "#/components/schemas/productTypes"
+                  "$ref": "#/components/schemas/productType"
                 },
                 "ean": {
                   "type": "string",
@@ -2810,7 +2810,7 @@
             "quantity": 1
           }
         },
-        "title": "Colis"
+        "title": "Colis (packages)"
       },
       "coordinates": {
         "type": "object",
@@ -2833,7 +2833,7 @@
             "longitude": 3.077359
           }
         },
-        "title": "Coordonnées géographiques"
+        "title": "Coordonnées géographiques (coordinates)"
       },
       "length": {
         "required": [
@@ -2855,7 +2855,7 @@
             "unit": "mm"
           }
         },
-        "title": "Dimension"
+        "title": "Dimension (length)"
       },
       "mass": {
         "required": [
@@ -2870,14 +2870,14 @@
             "$ref": "#/components/schemas/massUnits"
           }
         },
-        "description": "Masse",
+        "description": "Poids",
         "x-examples": {
           "Exemple": {
             "value": 1,
             "unit": "kg"
           }
         },
-        "title": "Masse"
+        "title": "Poids (mass)"
       },
       "packagesReferences": {
         "type": "array",
@@ -2885,7 +2885,7 @@
           "type": "string"
         },
         "description": "Références des colis",
-        "title": "Références des colis"
+        "title": "Références des colis (packagesReferences)"
       },
       "productsPrice": {
         "description": "Correspond au prix de vente des produits. A renseigner pour le service “SERVICE_INSTALL”",
@@ -2895,7 +2895,7 @@
             "currency": "EUR"
           }
         },
-        "title": "Prix des produits",
+        "title": "Prix des produits (productsPrice)",
         "type": "object",
         "properties": {
           "value": {
@@ -2903,7 +2903,7 @@
             "description": "valeur"
           },
           "currency": {
-            "$ref": "#/components/schemas/currencies"
+            "$ref": "#/components/schemas/currency"
           }
         }
       },
@@ -2930,11 +2930,11 @@
             "code": "bpost"
           }
         },
-        "title": "Transporteur du point relais"
+        "title": "Transporteur du point relais (pickupPointCarrier)"
       },
       "cancelledReasons": {
         "type": "string",
-        "description": "Raison d'annulation",
+        "description": "Motif d'annulation",
         "enum": [
           "CANCELLED_CANNOT_SERVICE",
           "CANCELLED_UNKNOWN",
@@ -2946,10 +2946,10 @@
         "x-examples": {
           "Exemple": "CANCELLED_CANNOT_SERVICE"
         },
-        "title": "Raison d'annulation"
+        "title": "Motif d'annulation (cancelledReasons)"
       },
-      "deliveryServices": {
-        "description": "Service de livraison",
+      "deliveryService": {
+        "description": "Service de livraison possible",
         "type": "string",
         "enum": [
           "SERVICE_PICKUP_POINT",
@@ -2965,9 +2965,9 @@
         "x-examples": {
           "Exemple": "SERVICE_PICKUP_POINT"
         },
-        "title": "Services de livraison possible"
+        "title": "Service de livraison (deliveryService)"
       },
-      "productTypes": {
+      "productType": {
         "type": "string",
         "description": "Typologie du produit",
         "enum": [
@@ -2986,9 +2986,9 @@
         "x-examples": {
           "Exemple": "TYPOLOGY_GENERIC"
         },
-        "title": "Typologie du produit"
+        "title": "Typologie du produit (productType)"
       },
-      "currencies": {
+      "currency": {
         "type": "string",
         "description": "Devise",
         "enum": [
@@ -2997,7 +2997,7 @@
         "x-examples": {
           "Exemple": "EUR"
         },
-        "title": "Devise"
+        "title": "Devise (currency)"
       },
       "lengthUnits": {
         "type": "string",
@@ -3015,11 +3015,11 @@
         "x-examples": {
           "Exemple": "mm"
         },
-        "title": "Unité de mesure"
+        "title": "Unité de mesure (lenghtUnits)"
       },
       "massUnits": {
         "type": "string",
-        "description": "Unité de masse",
+        "description": "Unité de poids",
         "enum": [
           "kg",
           "mcg",
@@ -3033,11 +3033,11 @@
         "x-examples": {
           "Exemple": "kg"
         },
-        "title": "Unité de masse"
+        "title": "Unité de poids (massUnits)"
       },
       "country": {
         "type": "string",
-        "description": "Code pays",
+        "description": "Code pays (ISO 3166 alpha-2)",
         "enum": [
           "FR",
           "BE"
@@ -3045,11 +3045,11 @@
         "x-examples": {
           "Exemple": "FR"
         },
-        "title": "Pays"
+        "title": "Pays (country)"
       },
       "language": {
         "type": "string",
-        "title": "Langue",
+        "title": "Langue (language)",
         "description": "Code langue",
         "x-examples": {
           "Exemple": "fr-FR"
@@ -3068,7 +3068,7 @@
       },
       "timezone": {
         "type": "string",
-        "title": "Fuseau horaire",
+        "title": "Fuseau horaire (timezone)",
         "description": "(https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)",
         "example": "Europe/Paris",
         "x-examples": {
@@ -3076,7 +3076,7 @@
         }
       },
       "orderStatus": {
-        "title": "Statut de la commande",
+        "title": "Statut de la commande (orderStatus)",
         "type": "string",
         "enum": [
           "ORDER_CREATED",
@@ -3227,7 +3227,7 @@
           "default": "PICKUP_POINT_RELAY_WITH_LOCKER"
         }
       },
-       "queryPickupPointCategory": {
+      "queryPickupPointCategory": {
         "in": "query",
         "required": false,
         "name": "category",
