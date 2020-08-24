@@ -1,14 +1,12 @@
 # Emplacement (Location)
 
-Un emplacement (location) représente un lieu de prélevement ou de livraison, trois types d'emplacement sont disponibles :
+Un emplacement dit `location` représente un lieu de prélevement ou de livraison physique. Au travers des API, trois types d'emplacement sont disponibles :
 
 <!--
 type: tab
 title: Adresse
 -->
-type: "**address**"
-
-Représente une addresse postale classique.
+Le type "**address**" représente une addresse postale classique à saisir entièrement lors de la création de commande. Il correspond à l'appel standard le plus classique lors de la création d'une commande. Si l'adresse de prélèvement et/ou de livraison ne sont pas connues, vous avez alors la possibilité d'indiquer en entièrement l'emplacement. 
 ```json
 {
   "type": "address",
@@ -24,11 +22,9 @@ Représente une addresse postale classique.
 type: tab
 title: Point relais
 -->
-type: "**pickupPoint**"
+Le type "**pickupPoint**" représente l'emplacement d'un point-relais ou centre de distribution précis d'un transporteur. Il correspond à l'adresse enregistrée pour un transporteur donné associé à ce lieu. Pour utiliser ce type d'emplacement, il est nécessaire de connaitre l'identifiant du point-relais par transporteur.
 
-Représente un point relais précis d'un transporteur.
-
-(Point relais récupéré via [la recherche de point relais](https://woop.stoplight.io/docs/retailer/retailer_to_woop.v1.4.0.json/paths/~1pickupPoints/get))
+L'identifiant du point-relais doit être récupéré par [la recherche de point relais](https://woop.stoplight.io/docs/retailer/retailer_to_woop.v1.4.0.json/paths/~1pickupPoints/get)
 ```json
 {
   "type": "pickupPoint",
@@ -41,9 +37,9 @@ Représente un point relais précis d'un transporteur.
 type: tab
 title: Point de prélèvement
 -->
-type: "**exchangePlace**"
+Le type "**exchangePlace**" représente un point de prélévement précis d'un des magasins de l'enseigne. Configuré dans le back-office de Woop, ces informations sont propre au magasin. A la création, vous pouvez définir l'identifiant de votre choix pour chaque point de prélèvement. 
 
-Représente un point de prélévement de votre enseigne (configuré dans le back-office)
+Consulter la page [Point de prélevement (ExchangePlace)](docs/Modèles/ExchangePlace.md)pour plus de détail.
 ```json
 {
   "type": "exchangePlace",
