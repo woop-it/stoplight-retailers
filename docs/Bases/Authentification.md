@@ -18,7 +18,7 @@ Un token est nécessaire pour échange avec nos APIs, une fois récupéré il es
 
 <!-- theme: info -->
 
-> 💡     Les paramètres client_id et client_secret vous seront communiqués ultérieurement.
+> 💡     Les paramètres client_id et client_secret vous seront communiqués ultérieurement. 
 
 ```json http
 {
