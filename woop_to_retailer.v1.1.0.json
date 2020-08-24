@@ -126,10 +126,42 @@
             }
           },
           "403": {
-            "description": "L'information ne peut plus être envoyée"
+            "description": "L'information ne peut plus être envoyée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./retailer_to_woop.v1.4.0.json#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "statusCode": 403,
+                      "error": "Forbidden",
+                      "message": "Store doesn't exist or is inactive"
+                    }
+                  }
+                }
+              }
+            }
           },
           "404": {
-            "description": "Le 'orderId' n'a pas été trouvé"
+            "description": "Le 'orderId' n'a pas été trouvé",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./retailer_to_woop.v1.4.0.json#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "statusCode": 404,
+                      "error": "Not Found",
+                      "message": "Not Found"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "summary": "Notification du transporteur sélectionné d'une commande"
@@ -223,10 +255,42 @@
             }
           },
           "403": {
-            "description": "L'information ne peut plus être envoyée"
+            "description": "L'information ne peut plus être envoyée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./retailer_to_woop.v1.4.0.json#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "statusCode": 403,
+                      "error": "Forbidden",
+                      "message": "Store doesn't exist or is inactive"
+                    }
+                  }
+                }
+              }
+            }
           },
           "404": {
-            "description": "Le 'orderId' n'a pas été trouvé"
+            "description": "Le 'orderId' n'a pas été trouvé",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./retailer_to_woop.v1.4.0.json#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "statusCode": 404,
+                      "error": "Not Found",
+                      "message": "Not Found"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "summary": "Notification de mise à jour de statut"
@@ -324,10 +388,42 @@
             }
           },
           "403": {
-            "description": "L'information ne peut plus être envoyée"
+            "description": "L'information ne peut plus être envoyée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./retailer_to_woop.v1.4.0.json#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "statusCode": 403,
+                      "error": "Forbidden",
+                      "message": "Store doesn't exist or is inactive"
+                    }
+                  }
+                }
+              }
+            }
           },
           "404": {
-            "description": "Le 'orderId' n'a pas été trouvé"
+            "description": "Le 'orderId' n'a pas été trouvé",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./retailer_to_woop.v1.4.0.json#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "statusCode": 404,
+                      "error": "Not Found",
+                      "message": "Not Found"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "summary": "Notification d'une note d'une livraison"
@@ -437,10 +533,34 @@
             }
           },
           "403": {
-            "description": "L'information ne peut plus être envoyée"
+            "description": "L'information ne peut plus être envoyée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./retailer_to_woop.v1.4.0.json#/components/schemas/errorCode"
+                },
+                "examples": {}
+              }
+            }
           },
           "404": {
-            "description": "Le 'orderId' n'a pas été trouvé"
+            "description": "Le 'orderId' n'a pas été trouvé",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./retailer_to_woop.v1.4.0.json#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "statusCode": 404,
+                      "error": "Not Found",
+                      "message": "Not Found"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "summary": "Notification d'informations de facturation d'une livraison"
@@ -577,10 +697,33 @@
             }
           },
           "403": {
-            "description": "L'information ne peut plus être envoyée"
+            "description": "L'information ne peut plus être envoyée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./retailer_to_woop.v1.4.0.json#/components/schemas/errorCode"
+                }
+              }
+            }
           },
           "404": {
-            "description": "Le 'orderId' n'a pas été trouvé"
+            "description": "Le 'orderId' n'a pas été trouvé",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./retailer_to_woop.v1.4.0.json#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "statusCode": 404,
+                      "error": "Not Found",
+                      "message": "Not Found"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "summary": "Notification d'un évènement d'une commande"

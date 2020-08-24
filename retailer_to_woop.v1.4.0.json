@@ -147,7 +147,13 @@
                     }
                   }
                 },
-                "examples": {}
+                "examples": {
+                  "example": {
+                    "value": {
+                      "id": "4f802782-bf37-4499-a50d-c7d0169c670d"
+                    }
+                  }
+                }
               }
             }
           },
@@ -156,23 +162,21 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "reasons": {
-                      "type": "array",
-                      "items": {
-                        "type": "string",
-                        "example": "Missing argument 'xxxxx'"
-                      }
-                    }
-                  }
+                  "$ref": "#/components/schemas/errorCode"
                 },
                 "examples": {
                   "Exemple": {
                     "value": {
-                      "reasons": [
-                        "Missing argument 'xxxxx'"
-                      ]
+                      "statusCode": 400,
+                      "error": "Bad Request",
+                      "message": "child \"location\" fails because [child \"addressLine1\" fails because [\"addressLine1\" is required], child \"id\" fails because [\"id\" is required]]",
+                      "validation": {
+                        "source": "payload",
+                        "keys": [
+                          "location.addressLine1",
+                          "location.id"
+                        ]
+                      }
                     }
                   }
                 }
@@ -180,13 +184,45 @@
             }
           },
           "401": {
-            "description": "Vous n'êtes pas autorisé à accéder à cet élément."
+            "description": "Vous n'êtes pas autorisé à accéder à cet élément"
           },
           "403": {
-            "description": "Création de demande de retrait impossible pour ce 'storeId'"
+            "description": "Création de demande de retrait impossible pour ce 'storeId'",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "statusCode": 403,
+                      "error": "Forbidden",
+                      "message": "Store doesn't exist or is inactive"
+                    }
+                  }
+                }
+              }
+            }
           },
           "409": {
-            "description": "Une demande de retrait avec cette réference existe dèjà dans la plateforme."
+            "description": "Une demande de retrait avec cette réference existe dèjà dans la plateforme.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "statusCode": 409,
+                      "error": "Conflict",
+                      "message": "Request failed with status code 409"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "security": [
@@ -608,23 +644,20 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "reasons": {
-                      "type": "array",
-                      "items": {
-                        "type": "string",
-                        "example": "Missing argument 'xxxxx'"
-                      }
-                    }
-                  }
+                  "$ref": "#/components/schemas/errorCode"
                 },
                 "examples": {
                   "Exemple": {
                     "value": {
-                      "reasons": [
-                        "Missing argument 'xxxxx'"
-                      ]
+                      "statusCode": 400,
+                      "error": "Bad Request",
+                      "message": "child \"picking\" fails because [child \"interval\" fails because [\"interval\" at position 0 fails because [child \"start\" fails because [\"start\" is required]]]]",
+                      "validation": {
+                        "source": "payload",
+                        "keys": [
+                          "picking.interval.0.start"
+                        ]
+                      }
                     }
                   }
                 }
@@ -632,13 +665,52 @@
             }
           },
           "401": {
-            "description": "Vous n'êtes pas autorisé à accéder à cet élément."
+            "description": "Vous n'êtes pas autorisé à accéder à cet élément",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
           },
           "403": {
-            "description": "Création de l'ordre impossible pour le 'storeId'"
+            "description": "Création de l'ordre impossible pour le 'storeId'",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "statusCode": 403,
+                      "error": "Forbidden",
+                      "message": "Store doesn't exist or is inactive"
+                    }
+                  }
+                }
+              }
+            }
           },
           "409": {
-            "description": "Création de commande avec cet 'orderId' impossible"
+            "description": "Création de commande avec cet 'orderId' impossible",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "statusCode": 409,
+                      "error": "Conflict",
+                      "message": "Conflict"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "summary": "Création de commande"
@@ -665,7 +737,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK. Contient les commandes récupérées.",
+            "description": "OK. Contient les commandes récupérées",
             "content": {
               "application/json": {
                 "schema": {
@@ -753,27 +825,24 @@
             }
           },
           "400": {
-            "description": "Elements manquants et/ou incorrect dans le body",
+            "description": "Elements manquants et/ou incorrect",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "reasons": {
-                      "type": "array",
-                      "items": {
-                        "type": "string",
-                        "example": "Missing argument 'xxxxx'"
-                      }
-                    }
-                  }
+                  "$ref": "#/components/schemas/errorCode"
                 },
                 "examples": {
                   "Exemple": {
                     "value": {
-                      "reasons": [
-                        "Missing argument 'xxxxx'"
-                      ]
+                      "statusCode": 400,
+                      "error": "Bad Request",
+                      "message": "child \"deliveryStatus\" fails because [\"deliveryStatus\" must be one of [DELIVERY_INIT]]",
+                      "validation": {
+                        "source": "query",
+                        "keys": [
+                          "deliveryStatus"
+                        ]
+                      }
                     }
                   }
                 }
@@ -781,10 +850,33 @@
             }
           },
           "401": {
-            "description": "Vous n'êtes pas autorisé à accéder à cet élément."
+            "description": "Vous n'êtes pas autorisé à accéder à cet élément",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
           },
           "403": {
-            "description": "Demande impossible pour ce 'storeId'"
+            "description": "Demande impossible pour ce 'storeId'",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "statusCode": 403,
+                      "error": "Forbidden",
+                      "message": "Store doesn't exist or is inactive"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "summary": "Récupération de commandes"
@@ -840,13 +932,44 @@
             "description": "Requête traitée avec succès"
           },
           "401": {
-            "description": "Vous n'êtes pas autorisé à accéder à cet élément."
+            "description": "Vous n'êtes pas autorisé à accéder à cet élément",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
           },
           "403": {
-            "description": "la commande ne peut être annulée"
+            "description": "la commande ne peut être annulée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                },
+                "examples": {}
+              }
+            }
           },
           "404": {
-            "description": "Le 'orderId' n'existe pas"
+            "description": "Le 'orderId' n'existe pas",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "statusCode": 404,
+                      "error": "Not Found",
+                      "message": "Not Found"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "summary": "Annulation d'une commande"
@@ -867,7 +990,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK. Contient la commande récupérée.",
+            "description": "OK. Contient la commande récupérée",
             "content": {
               "application/json": {
                 "schema": {
@@ -920,7 +1043,14 @@
             }
           },
           "401": {
-            "description": "Vous n'êtes pas autorisé à accéder à cet élément."
+            "description": "Vous n'êtes pas autorisé à accéder à cet élément",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
           }
         },
         "summary": "Récupération d'une commande"
@@ -1041,10 +1171,17 @@
         },
         "responses": {
           "204": {
-            "description": "Requête traitée avec succès."
+            "description": "Requête traitée avec succès"
           },
           "401": {
-            "description": "Vous n'êtes pas autorisé à accéder à cet élément."
+            "description": "Vous n'êtes pas autorisé à accéder à cet élément",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
           }
         },
         "summary": "Mise à jour d'une commande"
@@ -1103,13 +1240,52 @@
             }
           },
           "401": {
-            "description": "Vous n'êtes pas autorisé à accéder à cet élément."
+            "description": "Vous n'êtes pas autorisé à accéder à cet élément",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
           },
           "403": {
-            "description": "Demande impossible pour ce 'orderId'"
+            "description": "Demande impossible pour ce 'orderId'",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "statusCode": 403,
+                      "error": "Forbidden",
+                      "message": "Store doesn't exist or is inactive"
+                    }
+                  }
+                }
+              }
+            }
           },
           "404": {
-            "description": "Le 'orderId' n'existe pas"
+            "description": "Le 'orderId' n'existe pas",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "statusCode": 404,
+                      "error": "Not Found",
+                      "message": "Not Found"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "summary": "Récupération d'étiquette de la commande"
@@ -1231,23 +1407,21 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "reasons": {
-                      "type": "array",
-                      "items": {
-                        "type": "string",
-                        "example": "Missing argument 'xxxxx'"
-                      }
-                    }
-                  }
+                  "$ref": "#/components/schemas/errorCode"
                 },
                 "examples": {
                   "Exemple": {
                     "value": {
-                      "reasons": [
-                        "Missing argument 'xxxxx'"
-                      ]
+                      "statusCode": 400,
+                      "error": "Bad Request",
+                      "message": "child \"location\" fails because [child \"addressLine1\" fails because [\"addressLine1\" is required], child \"id\" fails because [\"id\" is required]]",
+                      "validation": {
+                        "source": "payload",
+                        "keys": [
+                          "location.addressLine1",
+                          "location.id"
+                        ]
+                      }
                     }
                   }
                 }
@@ -1255,13 +1429,43 @@
             }
           },
           "401": {
-            "description": "Vous n'êtes pas autorisé à accéder à cet élément."
+            "description": "Vous n'êtes pas autorisé à accéder à cet élément",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
           },
           "403": {
-            "description": "Création d'un retour impossible pour le 'storeId'"
+            "description": "Création d'un retour impossible pour le 'storeId'",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "statusCode": 403,
+                      "error": "Forbidden",
+                      "message": "Store doesn't exist or is inactive"
+                    }
+                  }
+                }
+              }
+            }
           },
           "409": {
-            "description": "Création de retour de prouit avec ce 'referenceNumber' impossible"
+            "description": "Création de retour de produit avec ce 'referenceNumber' impossible",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
           }
         },
         "summary": "Demande de retour produit"
@@ -1281,7 +1485,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK. Contient les documents.",
+            "description": "OK. Contient les documents",
             "content": {
               "application/json": {
                 "schema": {
@@ -1344,13 +1548,36 @@
             }
           },
           "204": {
-            "description": "Pas de documents sur cette commande."
+            "description": "Pas de documents sur cette commande"
           },
           "401": {
-            "description": "Vous n'êtes pas autorisé à accéder à cet élément."
+            "description": "Vous n'êtes pas autorisé à accéder à cet élément",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
           },
           "404": {
-            "description": "Le 'orderId' n'existe pas"
+            "description": "Le 'orderId' n'existe pas",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "statusCode": 404,
+                      "error": "Not Found",
+                      "message": "Not Found"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "summary": "Récupération des documents de la commande."
@@ -1386,10 +1613,33 @@
             "description": "Pas de documents sur cette commande."
           },
           "401": {
-            "description": "Vous n'êtes pas autorisé à accéder à cet élément."
+            "description": "Vous n'êtes pas autorisé à accéder à cet élément.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
           },
           "404": {
-            "description": "Le 'orderId' n'existe pas"
+            "description": "Le 'orderId' n'existe pas",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "statusCode": 404,
+                      "error": "Not Found",
+                      "message": "Not Found"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "summary": "Téléchargement des documents de la commande"
@@ -1423,10 +1673,33 @@
             }
           },
           "401": {
-            "description": "Vous n'êtes pas autorisé à accéder à cet élément."
+            "description": "Vous n'êtes pas autorisé à accéder à cet élément",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
           },
           "404": {
-            "description": "Le 'orderId' ou 'documentId' n'existe pas"
+            "description": "Le 'orderId' ou 'documentId' n'existe pas",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "statusCode": 404,
+                      "error": "Not Found",
+                      "message": "Not Found"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "summary": "Téléchargement d'un document de la commande"
@@ -1688,10 +1961,33 @@
             }
           },
           "401": {
-            "description": "Vous n'êtes pas autorisé à accéder à cet élément."
+            "description": "Vous n'êtes pas autorisé à accéder à cet élément.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
           },
           "403": {
-            "description": "Demande impossible pour le 'storeId'"
+            "description": "Demande impossible pour le 'storeId'",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "statusCode": 403,
+                      "error": "Forbidden",
+                      "message": "Store doesn't exist or is inactive"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "summary": "Récupération des points relais"
@@ -3097,6 +3393,32 @@
           "ORDER_CANCELLED"
         ],
         "description": "Statut de la commande"
+      },
+      "errorCode": {
+        "title": "errorCode",
+        "type": "object",
+        "x-examples": {
+          "409 - Conflict ": {
+            "statusCode": 409,
+            "error": "Conflict",
+            "message": "Conflict"
+          }
+        },
+        "description": "Correspond au modèle retrouné en cas d'erreur API",
+        "properties": {
+          "statusCode": {
+            "type": "string",
+            "description": "Status Code HTTP"
+          },
+          "error": {
+            "type": "string",
+            "description": "Intitulé de l'erreur retournée"
+          },
+          "message": {
+            "type": "string",
+            "description": "Description du message d'erreur"
+          }
+        }
       }
     },
     "parameters": {
