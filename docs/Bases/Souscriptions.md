@@ -8,7 +8,7 @@ Par exemple : Mis à jour du statut ou choix du transporteur de votre commande.
 
 Ces évènements sont décrits dans la partie **Woop vers Enseigne** de notre documentation.
 
-## Initialisation des échanges
+## Initialisation des souscriptions
 
 
 Pour vous abonner aux divers événements un premier appel à **l'API [/souscriptions](https://woop.stoplight.io/docs/retailer/retailer_to_woop.v1.4.0.json/paths/~1subscriptions/post)** est nécessaire.
@@ -232,7 +232,7 @@ score | Callback permettant de recevoir les notes client | [/orders/{orderId}/sc
 deliveryClosure | Callback permettant de recevoir les informations de facturation | [/orders/{orderId}/deliveryClosure](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1deliveryClosure/post) | NON
 event | Callback permettant de recevoir les notifications envoyées au client | [/orders/{orderId}/events](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1events/post) | NON
 
-### Composition d'un callback
+**Description d'un callback**
 
 ```json json_schema
 {
@@ -263,7 +263,7 @@ Url de la route d'API vers laquelle la plateforme Woop enverra l’événement l
 
 > **Variable d'url**
 >
-> Pour récupérer l'orderId dans vos APIs, il est fortement conseillé d’incorporer la variable `{orderId}` dans vos urls > de callbacks.
+> Pour récupérer l'orderId dans vos APIs, il est fortement conseillé d’incorporer la variable `{orderId}` dans vos urls de callbacks.
 > Cette variable sera remplacé par la valeur de l'orderId lors des appels.
 >
 > Exemple: **https://my_url/orders/{orderId}/status** 
@@ -275,4 +275,186 @@ Version d'API ciblé du callback.
 Comme toutes nos APIs, les callbacks sont versionnés, **lorsque vous souscrivez à un callback il faut préciser à quelle version**.
 
 La version est disponible dans la documentation [Woop vers Enseigne](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json).
+
+Exemple :
+```json
+{
+  "callbacks": {
+    "status" : {
+      "url": "https://my_url/orders/{orderId}/status",
+      "version": "1.1.0"
+    }
+  }
+}
+```
+
+
+### Headers
+
+Si votre API a besoin de headers HTTP supplémentaires, il est possible configurer plusieurs couples clé-valeur qui seront envoyées à chaque appel.
+
+Exemple :
+```json
+{
+  "headers" : [
+    {
+      "x-api-key": "78YJHBG738knkh3"
+    }
+  ]
+}
+```
+
+### Auth
+
+Si votre API nécessite une authentification, il est possible de la configurer.
+
+Trois méthodes d’authentification sont disponibles :
+
+
+<!--
+type: tab
+title: Méthode Basic
+-->
+Configuration:
+```json
+{
+  "auth": {
+    "basic": {
+      "username": "admin",
+      "password": "1234"
+    }
+  }
+}
+```
+Un header HTTP `Authorization : Basic YWRtaW46MTIzNA==` sera envoyé à votre API.
+
+`YWRtaW46MTIzNA==` étant la représentation en Base64 du texte admin:1234
+<!--
+type: tab
+title: Méthode OAuth2
+-->
+Configuration:
+```json
+{
+  "auth": {
+    "oauth2": {
+      "client_id": "XXXXXXXXXXX",
+      "client_secret": "xxxxxxXXXXXXx",
+      "audience": "my-audience.fr",
+      "grant_type": "client_credentials",
+      "tokenEndPoint": "https://my-token-url.fr"
+    }
+  }
+}
+```
+Un échange de token respectant la spécification [OAuth2 client_credentials](https://tools.ietf.org/html/rfc6749#section-4.4) sera éffectué à chaque appel.
+
+<!--
+type: tab
+title: Méthode Token
+-->
+Configuration:
+```json
+{
+  "auth": {
+    "token": {
+      "token": {
+      "username": "admin",
+      "password": "1234",
+      "endpoint": "https://my-token-url.fr"
+    }
+  }
+}
+```
+Cette méthode effectuera un appel **HTTP POST** vers l'endpoint configuré avec les paramètres suivant :
+```json
+{
+  "username": "{username}",
+  "password": "{password}"
+}
+```
+Le endpoint appelé devra retourné un token : 
+```json
+{
+  "token": "87YB1K2B312K3",
+}
+```
+Ce token sera envoyé dans le header HTTP `Authorization: Bearer {token}`
+<!-- type: tab-end -->
+
+
+### Exemples de souscriptions
+
+<!--
+type: tab
+title: Exemple 1
+-->
+Je m'abonne aux souscriptions obligatoires, mon API est protégé par une simple API Key.
+```json
+{
+  "callbacks": {
+    "carrier": {
+      "url": "https://my_url/orders/{orderId}/carrier",
+      "version": "1.1.0"
+    },
+    "status": {
+      "url": "https://my_url/orders/{orderId}/status",
+      "version": "1.1.0"
+    },
+    "score": {
+      "url": "https://my_url/orders/{orderId}/score",
+      "version": "1.1.0"
+    }
+  },
+  "headers": [
+    {
+      "x-api-key": "514541VVNB"
+    }
+  ]
+}
+```
+
+<!--
+type: tab
+title: Exemple 2
+-->
+Je m'abonne à toutes les souscriptions, mon API est protégé par une authentification OAuth2.
+```json
+{
+  "callbacks": {
+    "carrier": {
+      "url": "https://my_url/orders/{orderId}/carrier",
+      "version": "1.1.0"
+    },
+    "status": {
+      "url": "https://my_url/orders/{orderId}/status",
+      "version": "1.1.0"
+    },
+    "score": {
+      "url": "https://my_url/orders/{orderId}/score",
+      "version": "1.1.0"
+    },
+    "deliveryClosure": {
+      "url": "https://my_url/orders/{orderId}/deliveryClosure",
+      "version": "1.1.0"
+    },
+    "event": {
+      "url": "https://my_url/orders/{orderId}/events",
+      "version": "1.1.0"
+    },
+  },
+  "auth": {
+    "oauth2": {
+      "client_id": "XXXXXXXXXXX",
+      "client_secret": "xxxxxxXXXXXXx",
+      "audience": "my-audience.fr",
+      "grant_type": "client_credentials",
+      "tokenEndPoint": "https://my-token-url.fr"
+    }
+  }
+}
+```
+
+<!-- type: tab-end -->
+
 
