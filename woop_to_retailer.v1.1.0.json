@@ -17,7 +17,7 @@
           "Commande"
         ],
         "operationId": "putOrderCarrier",
-        "description": "Cette méthode permet de recevoir la notification du transporteur sélectionné d'une commande",
+        "description": "Cette méthode permet de recevoir la notification du transporteur sélectionné pour une commande donnée. Lorsque le choix du transporteur assurant la livraison de la commande est établi, l'information est envoyée. ",
         "parameters": [
           {
             "$ref": "#/components/parameters/pathOrderId"
@@ -126,13 +126,45 @@
             }
           },
           "403": {
-            "description": "L'information ne peut plus être envoyée"
+            "description": "L'information ne peut plus être envoyée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./retailer_to_woop.v1.4.0.json#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "statusCode": 403,
+                      "error": "Forbidden",
+                      "message": "Store doesn't exist or is inactive"
+                    }
+                  }
+                }
+              }
+            }
           },
           "404": {
-            "description": "Le 'orderId' n'a pas été trouvé"
+            "description": "Le 'orderId' n'a pas été trouvé",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./retailer_to_woop.v1.4.0.json#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "statusCode": 404,
+                      "error": "Not Found",
+                      "message": "Not Found"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
-        "summary": "Notification du transporteur sélectionné d'une commande"
+        "summary": "Recevoir la notification du transporteur sélectionné pour une commande"
       }
     },
     "/orders/{orderId}/status": {
@@ -141,7 +173,7 @@
           "Commande"
         ],
         "operationId": "putOrderStatus",
-        "description": "Cette méthode permet de recevoir la notification d'une mise à jour de statut.",
+        "description": "Cette méthode permet de recevoir les mises à jour des statuts de livraison du transporteur.",
         "parameters": [
           {
             "$ref": "#/components/parameters/pathOrderId"
@@ -223,13 +255,45 @@
             }
           },
           "403": {
-            "description": "L'information ne peut plus être envoyée"
+            "description": "L'information ne peut plus être envoyée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./retailer_to_woop.v1.4.0.json#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "statusCode": 403,
+                      "error": "Forbidden",
+                      "message": "Store doesn't exist or is inactive"
+                    }
+                  }
+                }
+              }
+            }
           },
           "404": {
-            "description": "Le 'orderId' n'a pas été trouvé"
+            "description": "Le 'orderId' n'a pas été trouvé",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./retailer_to_woop.v1.4.0.json#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "statusCode": 404,
+                      "error": "Not Found",
+                      "message": "Not Found"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
-        "summary": "Notification de mise à jour de statut"
+        "summary": "Recevoir les notifications de mise à jour des statuts de livraison"
       }
     },
     "/orders/{orderId}/score": {
@@ -238,7 +302,7 @@
           "Commande"
         ],
         "operationId": "putOrderScore",
-        "description": "Cette méthode permet de recevoir la notification d'une note d'une livraison.",
+        "description": "Cette méthode permet de recevoir la note finale de la livraison effectuée.",
         "parameters": [
           {
             "$ref": "#/components/parameters/pathOrderId"
@@ -324,13 +388,45 @@
             }
           },
           "403": {
-            "description": "L'information ne peut plus être envoyée"
+            "description": "L'information ne peut plus être envoyée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./retailer_to_woop.v1.4.0.json#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "statusCode": 403,
+                      "error": "Forbidden",
+                      "message": "Store doesn't exist or is inactive"
+                    }
+                  }
+                }
+              }
+            }
           },
           "404": {
-            "description": "Le 'orderId' n'a pas été trouvé"
+            "description": "Le 'orderId' n'a pas été trouvé",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./retailer_to_woop.v1.4.0.json#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "statusCode": 404,
+                      "error": "Not Found",
+                      "message": "Not Found"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
-        "summary": "Notification d'une note d'une livraison"
+        "summary": "Recevoir les notes transporteur pour une livraison"
       }
     },
     "/orders/{orderId}/deliveryClosure": {
@@ -339,7 +435,7 @@
           "Commande"
         ],
         "operationId": "postOrderDeliveryClosure",
-        "description": "Cette méthode permet de recevoir la notification d'informations de facturation d'une livraison.",
+        "description": "Cette méthode permet de recevoir les informations de facturation pour une livraison donnée.",
         "parameters": [
           {
             "$ref": "#/components/parameters/pathOrderId"
@@ -437,13 +533,37 @@
             }
           },
           "403": {
-            "description": "L'information ne peut plus être envoyée"
+            "description": "L'information ne peut plus être envoyée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./retailer_to_woop.v1.4.0.json#/components/schemas/errorCode"
+                },
+                "examples": {}
+              }
+            }
           },
           "404": {
-            "description": "Le 'orderId' n'a pas été trouvé"
+            "description": "Le 'orderId' n'a pas été trouvé",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./retailer_to_woop.v1.4.0.json#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "statusCode": 404,
+                      "error": "Not Found",
+                      "message": "Not Found"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
-        "summary": "Notification d'informations de facturation d'une livraison"
+        "summary": "Recevoir les informations de facturation pour une livraison"
       }
     },
     "/orders/{orderId}/events": {
@@ -452,7 +572,7 @@
           "Commande"
         ],
         "operationId": "postOrderEvents",
-        "description": "Cette méthode permet de recevroi la notification d'un évènement d'une commande.",
+        "description": "Cette méthode permet de recevoir la notification d'un évènement d'une commande.",
         "parameters": [
           {
             "$ref": "#/components/parameters/pathOrderId"
@@ -577,13 +697,36 @@
             }
           },
           "403": {
-            "description": "L'information ne peut plus être envoyée"
+            "description": "L'information ne peut plus être envoyée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./retailer_to_woop.v1.4.0.json#/components/schemas/errorCode"
+                }
+              }
+            }
           },
           "404": {
-            "description": "Le 'orderId' n'a pas été trouvé"
+            "description": "Le 'orderId' n'a pas été trouvé",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./retailer_to_woop.v1.4.0.json#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "statusCode": 404,
+                      "error": "Not Found",
+                      "message": "Not Found"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
-        "summary": "Notification d'un évènement d'une commande"
+        "summary": "Recevoir les événements pour une commande donnée"
       }
     }
   },
