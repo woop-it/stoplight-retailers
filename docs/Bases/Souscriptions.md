@@ -1,7 +1,7 @@
 # Souscriptions
 
 
-Le système de souscriptions permet de **s'abonner à des événements** liés à vos commandes qui se passe sur la plateforme Woop.
+Le système de souscriptions permet de **s'abonner à des événements** liés à vos commandes qui se passent sur la plateforme Woop.
 
 Par exemple : Mis à jour du statut ou choix du transporteur de votre commande.
 
@@ -11,7 +11,7 @@ Ces évènements sont décrits dans la partie **Woop vers Enseigne** de notre do
 ## Initialisation des souscriptions
 
 
-Pour vous abonner aux divers événements un premier appel à **l'API [/souscriptions](https://woop.stoplight.io/docs/retailer/retailer_to_woop.v1.4.0.json/paths/~1subscriptions/post)** est nécessaire.
+Pour vous abonner aux événements un premier appel à **l'API [/souscriptions](https://woop.stoplight.io/docs/retailer/retailer_to_woop.v1.4.0.json/paths/~1subscriptions/post)** est nécessaire.
 
 Les données à envoyées sont :
 
@@ -34,7 +34,7 @@ Les données à envoyées sont :
       "properties": {
         "carrier": {
           "type": "object",
-          "description": "Callback permettant de recevoir le choix du transporteur."
+          "description": "Callback permettant de recevoir le choix du transporteur.",
           "required": [
             "url"
           ],
@@ -70,7 +70,7 @@ Les données à envoyées sont :
         },
         "score": {
           "type": "object",
-          "description": "Callback permettant de recevoir les notes client"
+          "description": "Callback permettant de recevoir les notes client",
           "required": [
             "url"
           ],
@@ -88,7 +88,7 @@ Les données à envoyées sont :
         },
         "deliveryClosure": {
           "type": "object",
-          "description": "Callback permettant de recevoir les informations de facturation"
+          "description": "Callback permettant de recevoir les informations de facturation",
           "required": [
             "url"
           ],
@@ -106,7 +106,7 @@ Les données à envoyées sont :
         },
         "event": {
           "type": "object",
-          "description": "Callback permettant de recevoir les notifications envoyées au client"
+          "description": "Callback permettant de recevoir les notifications envoyées au client",
           "required": [
             "url"
           ],
@@ -221,10 +221,10 @@ Les données à envoyées sont :
 
 ### Callbacks
 
-Les `callbacks` ou autrement dit `webhooks` permettent de définir l'URL appelée lors des divers événements, différents callbacks sont possible sur notre plateforme :
+Les `callbacks` ou autrement dit `webhooks` permettent de définir l'URL appelée pour chaque événement, différents callbacks sont disponible **dont certains sont obligatoires** :
 
 
-Callback  | Description | Endpoint | Requis
+Callback  | Description | Contrat d'interface | Requis
 ---------|----------|---------
 carrier | Callback permettant de recevoir le choix du transporteur | [/orders/{orderId}/carrier](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1carrier/put) | **OUI**
 status | Callback permettant de recevoir les changements de statut | [/orders/{orderId}/status](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1status/put) | **OUI**
@@ -264,13 +264,13 @@ Url de la route d'API vers laquelle la plateforme Woop enverra l’événement l
 > **Variable d'url**
 >
 > Pour récupérer l'orderId dans vos APIs, il est fortement conseillé d’incorporer la variable `{orderId}` dans vos urls de callbacks.
-> Cette variable sera remplacé par la valeur de l'orderId lors des appels.
+> Cette variable sera remplacée par la valeur de l'orderId lors des appels.
 >
 > Exemple: **https://my_url/orders/{orderId}/status** 
 
 **Version**
 
-Version d'API ciblé du callback.
+Version d'API ciblée du callback.
 
 Comme toutes nos APIs, les callbacks sont versionnés, **lorsque vous souscrivez à un callback il faut préciser à quelle version**.
 
@@ -291,7 +291,7 @@ Exemple :
 
 ### Headers
 
-Si votre API a besoin de headers HTTP supplémentaires, il est possible configurer plusieurs couples clé-valeur qui seront envoyées à chaque appel.
+Si votre API a besoin de headers HTTP supplémentaires, il est possible de configurer plusieurs couples de clé-valeur qui seront envoyés à chaque appel.
 
 Exemple :
 ```json
@@ -373,7 +373,7 @@ Cette méthode effectuera un appel **HTTP POST** vers l'endpoint configuré avec
   "password": "{password}"
 }
 ```
-Le endpoint appelé devra retourné un token : 
+Le endpoint appelé devra retourner un token : 
 ```json
 {
   "token": "87YB1K2B312K3",
@@ -389,7 +389,7 @@ Ce token sera envoyé dans le header HTTP `Authorization: Bearer {token}`
 type: tab
 title: Exemple 1
 -->
-Je m'abonne aux souscriptions obligatoires, mon API est protégé par une simple API Key.
+Je m'abonne aux souscriptions obligatoires, mon API est protégée par une simple API Key.
 ```json
 {
   "callbacks": {
@@ -418,7 +418,7 @@ Je m'abonne aux souscriptions obligatoires, mon API est protégé par une simple
 type: tab
 title: Exemple 2
 -->
-Je m'abonne à toutes les souscriptions, mon API est protégé par une authentification OAuth2.
+Je m'abonne à toutes les souscriptions, mon API est protégée par une authentification OAuth2.
 ```json
 {
   "callbacks": {
@@ -457,4 +457,23 @@ Je m'abonne à toutes les souscriptions, mon API est protégé par une authentif
 
 <!-- type: tab-end -->
 
+## Implémentation des souscriptions
 
+Pour chaque *callback* configuré il est nécessaire d'implémenter le contrat d'interface lié a celui-ci.
+
+Pour rappel :
+
+Callback  | Contrat d'interface | Requis
+---------|----------|---------
+carrier  | [/orders/{orderId}/carrier](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1carrier/put) | **OUI**
+status | [/orders/{orderId}/status](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1status/put) | **OUI**
+score |  [/orders/{orderId}/score](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1score/put) | **OUI**
+deliveryClosure | [/orders/{orderId}/deliveryClosure](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1deliveryClosure/post) | NON
+event | [/orders/{orderId}/events](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1events/post) | NON
+
+
+<!-- theme: warning -->
+
+> **Méthodes et codes HTTP**
+>
+> Lors de l'implémentation des contrats d'interfaces, il est **important** de bien respecter les **méthodes HTTP** (POST. PATCH etc...) ainsi que les **codes HTTP retours** (201, 400 etc..) spécifié dans le contrat d'interface.

@@ -1998,7 +1998,7 @@
         "tags": [
           "Souscriptions"
         ],
-        "description": "Endpoint d'initialisation d'échanges avec les APIs enseignes.",
+        "description": "Cette méthode permet d'initialiser les souscriptions à nos APIs.\n\nPlus d'informations dans la documentation dédiée \"Souscriptions\"",
         "operationId": "postSubscription",
         "parameters": [
           {
@@ -2012,12 +2012,14 @@
             "application/json": {
               "schema": {
                 "type": "object",
+                "description": "Informations de souscriptions",
                 "required": [
                   "callbacks"
                 ],
                 "properties": {
                   "callbacks": {
                     "type": "object",
+                    "description": "Callbacks des événements",
                     "required": [
                       "carrier",
                       "status",
@@ -2026,17 +2028,18 @@
                     "properties": {
                       "carrier": {
                         "type": "object",
+                        "description": "Callback permettant de recevoir le choix du transporteur.",
                         "required": [
                           "url"
                         ],
                         "properties": {
                           "url": {
                             "type": "string",
-                            "description": "Url de la route permettant d'obtenir le choix du transporteur."
+                            "description": "Url de la route d'API"
                           },
                           "version": {
                             "type": "string",
-                            "description": "Version d'API pour ce callback (voir woop vers retailer)",
+                            "description": "Version d'API pour ce callback",
                             "example": "1.1.0"
                           }
                         }
@@ -2046,65 +2049,69 @@
                         "required": [
                           "url"
                         ],
+                        "description": "Callback permettant de recevoir les changements de statut",
                         "properties": {
                           "url": {
                             "type": "string",
-                            "description": "Url de la route permettant de communiquer les changements de statut."
+                            "description": "Url de la route d'API"
                           },
                           "version": {
                             "type": "string",
-                            "description": "Version d'API pour ce callback (voir woop vers retailer)",
+                            "description": "Version d'API pour ce callback",
                             "example": "1.1.0"
                           }
                         }
                       },
                       "score": {
                         "type": "object",
+                        "description": "Callback permettant de recevoir les notes client",
                         "required": [
                           "url"
                         ],
                         "properties": {
                           "url": {
                             "type": "string",
-                            "description": "Url de la route permettant d'obtenir la note client."
+                            "description": "Url de la route d'API."
                           },
                           "version": {
                             "type": "string",
-                            "description": "Version d'API pour ce callback (voir woop vers retailer)",
+                            "description": "Version d'API pour ce callback.",
                             "example": "1.1.0"
                           }
                         }
                       },
                       "deliveryClosure": {
                         "type": "object",
+                        "description": "Callback permettant de recevoir les informations de facturation",
                         "required": [
                           "url"
                         ],
                         "properties": {
                           "url": {
                             "type": "string",
-                            "description": "Url de la route permettant de communiquer les informations finales de facturation."
+                            "description": "Url de la route d'API."
                           },
                           "version": {
                             "type": "string",
-                            "description": "Version d'API pour ce callback (voir woop vers retailer)",
+                            "description": "Version d'API pour ce callback",
                             "example": "1.1.0"
                           }
                         }
                       },
                       "event": {
                         "type": "object",
+                        "description": "Callback permettant de recevoir les notifications envoyées au client",
                         "required": [
                           "url"
                         ],
                         "properties": {
                           "url": {
                             "type": "string",
-                            "description": "Url de la route permettant de communiquer les notifications envoyées au client."
+                            "description": "Url de la route d'API"
                           },
                           "version": {
                             "type": "string",
-                            "description": "Version d'API pour ce callback (voir woop vers retailer)",
+                            "description": "Version d'API pour ce callback",
                             "example": "1.1.0"
                           }
                         }
@@ -2113,6 +2120,7 @@
                   },
                   "headers": {
                     "type": "array",
+                    "description": "Headers HTTP supplémentaires à envoyer lors des callbacks",
                     "items": {
                       "type": "object",
                       "required": [
@@ -2121,16 +2129,19 @@
                       ],
                       "properties": {
                         "key": {
-                          "type": "string"
+                          "type": "string",
+                          "description": "Clé/nom du header"
                         },
                         "value": {
-                          "type": "string"
+                          "type": "string",
+                          "description": "Valeur du header"
                         }
                       }
                     }
                   },
                   "auth": {
                     "type": "object",
+                    "description": "Configuration de l'authentification à votre API",
                     "properties": {
                       "basic": {
                         "type": "object",
@@ -2204,21 +2215,25 @@
                 "Basic": {
                   "value": {
                     "callbacks": {
-                      "quote": {
-                        "url": "https://my_url/quote",
-                        "version": "1.0.0"
+                      "carrier": {
+                        "url": "https://my_url/orders/{orderId}/carrier",
+                        "version": "1.1.0"
                       },
-                      "delivery": {
-                        "url": "https://my_url/delivery",
-                        "version": "1.0.0"
-                      },
-                      "cancel": {
-                        "url": "https://my_url/cancel",
-                        "version": "1.0.0"
+                      "status": {
+                        "url": "https://my_url/orders/{orderId}/status",
+                        "version": "1.1.0"
                       },
                       "score": {
-                        "url": "https://my_url/score",
-                        "version": "1.0.0"
+                        "url": "https://my_url/orders/{orderId}/score",
+                        "version": "1.1.0"
+                      },
+                      "deliveryClosure": {
+                        "url": "https://my_url/orders/{orderId}/deliveryClosure",
+                        "version": "1.1.0"
+                      },
+                      "event": {
+                        "url": "https://my_url/orders/{orderId}/event",
+                        "version": "1.1.0"
                       }
                     },
                     "headers": [
@@ -2238,25 +2253,25 @@
                 "OAuth2": {
                   "value": {
                     "callbacks": {
-                      "quote": {
-                        "url": "https://my_url/quote",
-                        "version": "1.0.0"
+                      "carrier": {
+                        "url": "https://my_url/orders/{orderId}/carrier",
+                        "version": "1.1.0"
                       },
-                      "delivery": {
-                        "url": "https://my_url/delivery",
-                        "version": "1.0.0"
-                      },
-                      "cancel": {
-                        "url": "https://my_url/cancel",
-                        "version": "1.0.0"
+                      "status": {
+                        "url": "https://my_url/orders/{orderId}/status",
+                        "version": "1.1.0"
                       },
                       "score": {
-                        "url": "https://my_url/score",
-                        "version": "1.0.0"
+                        "url": "https://my_url/orders/{orderId}/score",
+                        "version": "1.1.0"
                       },
-                      "price": {
-                        "url": "https://my_url/price",
-                        "version": "1.0.0"
+                      "deliveryClosure": {
+                        "url": "https://my_url/orders/{orderId}/deliveryClosure",
+                        "version": "1.1.0"
+                      },
+                      "event": {
+                        "url": "https://my_url/orders/{orderId}/event",
+                        "version": "1.1.0"
                       }
                     },
                     "auth": {
@@ -2273,21 +2288,25 @@
                 "Token": {
                   "value": {
                     "callbacks": {
-                      "quote": {
-                        "url": "https://my_url/quote",
-                        "version": "1.0.0"
+                      "carrier": {
+                        "url": "https://my_url/orders/{orderId}/carrier",
+                        "version": "1.1.0"
                       },
-                      "delivery": {
-                        "url": "https://my_url/delivery",
-                        "version": "1.0.0"
-                      },
-                      "cancel": {
-                        "url": "https://my_url/cancel",
-                        "version": "1.0.0"
+                      "status": {
+                        "url": "https://my_url/orders/{orderId}/status",
+                        "version": "1.1.0"
                       },
                       "score": {
-                        "url": "https://my_url/score",
-                        "version": "1.0.0"
+                        "url": "https://my_url/orders/{orderId}/score",
+                        "version": "1.1.0"
+                      },
+                      "deliveryClosure": {
+                        "url": "https://my_url/orders/{orderId}/deliveryClosure",
+                        "version": "1.1.0"
+                      },
+                      "event": {
+                        "url": "https://my_url/orders/{orderId}/event",
+                        "version": "1.1.0"
                       }
                     },
                     "auth": {
@@ -2336,7 +2355,7 @@
             }
           }
         },
-        "summary": "Souscrire aux services"
+        "summary": "Initialisation souscriptions"
       }
     }
   },
