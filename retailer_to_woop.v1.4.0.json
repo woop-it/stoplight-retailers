@@ -28,7 +28,7 @@
   ],
   "info": {
     "title": "Enseigne vers Woop",
-    "description": "Contrat d'interface des APIs des enseignes vers Woop. \n\n<b>Version 1.4.0</b>",
+    "description": "Pour commencer, toutes les informations technique concernant les API Woop à destination des enseignes sont centralisées dans cette documentation. Pour toute question ou précision, merci de contacter l'équipe technique interne. \n\nPour utiliser les API \"Enseigne vers Woop\", vous devez vous munir des vos accès identifiants secret fournis lors de la création de votre compte enseigne au sein de la palteforme. \n\nLa version actuellement proposée dans la documentation est la <b>Version 1.4.0</b>",
     "version": "1.4.0"
   },
   "servers": [

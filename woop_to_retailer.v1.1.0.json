@@ -2,7 +2,7 @@
   "openapi": "3.0.2",
   "info": {
     "title": "Woop vers Enseigne",
-    "description": "Contrat d'interface des APIs de Woop vers les enseignes.\n\n**Version 1.1.0**",
+    "description": "Pour commencer, toutes les informations technique concernant les API Woop à destination des enseignes sont centralisées dans cette documentation. Pour toute question ou précision, merci de contacter l'équipe technique interne. \n\nPour utiliser les API \"Woop vers Enseigne\", vous devez vous munir des vos accès identifiants secret fournis lors de la création de votre compte enseigne au sein de la palteforme. \n\nLa version actuellement proposée dans la documentation est la <b>Version 1.1.0</b>",
     "version": "1.1.1"
   },
   "tags": [
