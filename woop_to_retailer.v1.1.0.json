@@ -2,7 +2,7 @@
   "openapi": "3.0.2",
   "info": {
     "title": "Woop vers Enseigne",
-    "description": "Contrat d'interface des APIs de Woop vers les enseignes.",
+    "description": "Contrat d'interface des APIs de Woop vers les enseignes.\n\n**Version 1.1.0**",
     "version": "1.1.1"
   },
   "tags": [
