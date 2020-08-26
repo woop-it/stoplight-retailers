@@ -1,6 +1,5 @@
 # Raison d'annulation
 
-Au cours de son cible de vie la commande passe tour à tour par plusieurs statuts. Ce que nous identifions ici ce sont les différents stade de la livraison. 
 
 Code | Intitulé
 ---------|----------

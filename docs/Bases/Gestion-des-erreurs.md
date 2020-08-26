@@ -1,3 +1,7 @@
+---
+tags: ['Bases']
+---
+
 # Gestion des erreurs
 
 Les réponses erreur des API comprennent le détail de ce qui s'est mal passé. Le format de la réponse est décrit comme suit :

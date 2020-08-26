@@ -2737,7 +2737,7 @@
         "title": "Tags"
       },
       "address": {
-        "description": "Informations d'un adresse",
+        "description": "Ensemble des informations utiles pour une adresse livraison/prélèvement.",
         "title": "Adresse (address)",
         "type": "object",
         "x-examples": {
@@ -2774,7 +2774,7 @@
           },
           "postalCode": {
             "type": "string",
-            "description": "Code postale"
+            "description": "Code postal"
           },
           "city": {
             "type": "string",
@@ -2970,7 +2970,7 @@
       },
       "contact": {
         "title": "Contact (contact)",
-        "description": "Informations de contact",
+        "description": "Informations de contact de livraison/prélèvement ",
         "type": "object",
         "x-examples": {
           "Exemple": {
@@ -2985,19 +2985,19 @@
         "properties": {
           "firstName": {
             "type": "string",
-            "description": "Prénom"
+            "description": "Prénom du client"
           },
           "lastName": {
             "type": "string",
-            "description": "Nom"
+            "description": "Nom du client"
           },
           "phone": {
             "type": "string",
-            "description": "Téléphone"
+            "description": "Téléphone du client"
           },
           "email": {
             "type": "string",
-            "description": "Email"
+            "description": "Email du client"
           },
           "language": {
             "$ref": "#/components/schemas/language"
@@ -3249,7 +3249,7 @@
       },
       "cancelledReasons": {
         "type": "string",
-        "description": "Motif d'annulation",
+        "description": "Précise l'ensemble des motifs pour une annulation de la part du transporteur.",
         "enum": [
           "CANCELLED_CANNOT_SERVICE",
           "CANCELLED_UNKNOWN",
