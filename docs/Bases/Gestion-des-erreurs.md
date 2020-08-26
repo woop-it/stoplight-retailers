@@ -1,7 +1,5 @@
 # Gestion des erreurs
 
-The beginning of an awesome article...
-
 Les réponses erreur des API comprennent le détail de ce qui s'est mal passé. Le format de la réponse est décrit comme suit :
 
 ```json

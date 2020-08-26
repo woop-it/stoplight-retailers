@@ -1,4 +1,4 @@
-# Emplacement (Location)
+# Emplacement 
 
 Un emplacement dit `location` représente un lieu de prélevement ou de livraison physique. Au travers des API, trois types d'emplacement sont disponibles :
 

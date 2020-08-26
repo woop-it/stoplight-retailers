@@ -3365,7 +3365,7 @@
       "timezone": {
         "type": "string",
         "title": "Fuseau horaire (timezone)",
-        "description": "(https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)",
+        "description": "Référence à la page ci-dessous https://en.wikipedia.org/wiki/List_of_tz_database_time_zones",
         "example": "Europe/Paris",
         "x-examples": {
           "Exemple": "Europe/Paris"
