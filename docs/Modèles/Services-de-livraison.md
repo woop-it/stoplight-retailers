@@ -1,6 +1,6 @@
 # Services de livraison
 
-à compléter 
+Liste des différents services de livraison possible lors de la création d'une commande. 
 
 Code| Intitulé
 ---------|----------
