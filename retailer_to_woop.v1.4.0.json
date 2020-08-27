@@ -3416,7 +3416,7 @@
         "description": "Précise le statut d'une commande."
       },
       "errorCode": {
-        "title": "errorCode",
+        "title": "Code erreur (errorCode)",
         "type": "object",
         "x-examples": {
           "409 - Conflict ": {
