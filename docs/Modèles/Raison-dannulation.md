@@ -10,6 +10,3 @@ Code | Intitulé
  `CANCELLED_BY_CLIENT`|Annulation effectuée par le client
  `CANCELLED_NEW_ADDRESS`|Annulation pour changement d’adresse
  `CANCELLED_INCOMPLETE `|Annulation car commande incomplète 
-
-
-![get-started-icon](../../assets/images/test.png)
