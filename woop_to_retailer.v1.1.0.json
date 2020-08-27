@@ -173,7 +173,7 @@
           "Commande"
         ],
         "operationId": "putOrderStatus",
-        "description": "Cette méthode permet de recevoir les mises à jour des statuts de livraison du transporteur.",
+        "description": "Cette méthode permet de recevoir les mises à jour des statuts de livraison de la part du transporteur.",
         "parameters": [
           {
             "$ref": "#/components/parameters/pathOrderId"
@@ -741,7 +741,7 @@
             "type": "SCORE_TYPE_RECOMMENDATION"
           }
         },
-        "description": "Note",
+        "description": "Précise la note obtenu de la part du client final pour la livraison effectuée. ",
         "properties": {
           "note": {
             "type": "number",
@@ -772,7 +772,7 @@
             "email": "johndoe@mail.com"
           }
         },
-        "description": "Informations de contact",
+        "description": "Informations de contact de livraison/prélèvement.",
         "properties": {
           "firstName": {
             "type": "string",
@@ -817,7 +817,7 @@
           "ORDER_CANCELLED"
         ],
         "title": "Statut de commande (orderStatus)",
-        "description": "Statut de commande",
+        "description": "Précise le statut d'une commande.",
         "x-examples": {
           "Exemple": "ORDER_CREATED"
         }
@@ -843,10 +843,10 @@
         "x-examples": {
           "Exemple": "DELIVERY_STARTED"
         },
-        "description": "Statut de livraison"
+        "description": "Précise le statut de livraison pouvant être utilisé."
       },
       "length": {
-        "title": "Distance (length)",
+        "title": "Dimension (length)",
         "x-examples": {
           "Exemple": {
             "value": 200,
@@ -854,7 +854,7 @@
           }
         },
         "type": "object",
-        "description": "Distance",
+        "description": "Précise la dimension d'un colis.",
         "properties": {
           "value": {
             "type": "number",
@@ -890,11 +890,11 @@
             "unit": "kg"
           }
         },
-        "description": "Poids"
+        "description": "Précise le poids d'un colis/produit."
       },
       "lengthUnit": {
         "type": "string",
-        "description": "Unité de mesure",
+        "description": "Précise l'unité de mesure pour les dimensions.",
         "enum": [
           "mm",
           "cm",
@@ -910,7 +910,7 @@
         }
       },
       "massUnit": {
-        "description": "Unité de poids",
+        "description": "Précise l'unité de poids.",
         "enum": [
           "mcg",
           "mg",
@@ -949,11 +949,11 @@
         "x-examples": {
           "Exemple": "VEHICLE_TYPE_BIKE"
         },
-        "description": "Type de véhicule"
+        "description": "Précise le type de véhicule utilisé pour le transport. "
       },
       "currency": {
         "type": "string",
-        "description": "Devise",
+        "description": "Devise, précise la monnaie utilisée.",
         "enum": [
           "EUR"
         ],
@@ -987,7 +987,7 @@
             ]
           }
         },
-        "description": "Informations de l'équipe ayant contribué à la livraison"
+        "description": "Informations de l'équipe ayant contribué à la livraison."
       },
       "price": {
         "title": "Prix (price)",
@@ -998,7 +998,7 @@
           }
         },
         "type": "object",
-        "description": "Prix",
+        "description": "Précise le prix d'achât du produit. ",
         "properties": {
           "value": {
             "type": "number",
@@ -1028,7 +1028,7 @@
           }
         },
         "type": "object",
-        "description": "Transporteur",
+        "description": "Précise les informations néccesaire au transporteur.",
         "properties": {
           "name": {
             "type": "string",
@@ -1078,7 +1078,7 @@
           "date",
           "comment"
         ],
-        "description": "Mise à jour de statut de livraison"
+        "description": "Mise à jour de statut de livraison."
       },
       "putOrderStatus": {
         "title": "Mise à jour du statut de la commande (putOrderStatus)",
@@ -1102,7 +1102,7 @@
           "date",
           "status"
         ],
-        "description": "Mise à jour du statut de la commande"
+        "description": "Mise à jour du statut de la commande."
       }
     },
     "parameters": {

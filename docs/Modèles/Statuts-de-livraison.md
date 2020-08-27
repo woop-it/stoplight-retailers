@@ -20,5 +20,5 @@ Statut | Intitulé
  `DELIVERY_CANCELLED`|Livraison annulée
  `DELIVERY_CANCELLED_WITH_RETURN`|Livraison annulée avec retour magasin
  `DELIVERY_BLOCKED`|Livraison bloquée
- `DELIVERY_DELAYED`|Livraison retardée
- `DELIVERY_AVAILABLE`|Livraison disponible
+ `DELIVERY_DELAYED`|Livraison retardée 
+ `DELIVERY_AVAILABLE`|Livraison disponible en point de retrait

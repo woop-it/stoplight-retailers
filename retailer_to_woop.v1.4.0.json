@@ -51,7 +51,7 @@
         "tags": [
           "Health"
         ],
-        "description": "Test si l'application est UP",
+        "description": "Contrôle si l'application est opérationnelle",
         "operationId": "getHealth",
         "responses": {
           "204": {
@@ -2377,7 +2377,7 @@
       "responseOrder": {
         "title": "Réponse récupération commande (responseOrder)",
         "type": "object",
-        "description": "Réponse récupération commande",
+        "description": "Précise la réponse lors de la récupération d'une commande.",
         "properties": {
           "orders": {
             "type": "array",
@@ -2511,12 +2511,12 @@
             }
           }
         },
-        "description": "Demande de retrait",
+        "description": "Précise les informations utiles à la création d'une demande de retrait (click and collect).",
         "title": "Demande de retrait (postCollects)"
       },
       "postOrders": {
         "type": "object",
-        "description": "Création de la commande",
+        "description": "Précise les informations utiles pour la création de la commande.",
         "title": "Création de la commande (postOrders)",
         "properties": {
           "orderId": {
@@ -2621,7 +2621,7 @@
       },
       "postProductReturn": {
         "type": "object",
-        "description": "Demande de retour",
+        "description": "Précise les informations utiles pour créer effectuer un retour produit. ",
         "title": "Demande de retour (postProductReturn)",
         "properties": {
           "orderReturnId": {
@@ -2716,7 +2716,7 @@
       },
       "tags": {
         "type": "array",
-        "description": "Permet de définir des \"marqueurs\" sur cette commande",
+        "description": "Permet de définir des \"marqueurs\" sur cette commande.",
         "items": {
           "type": "object",
           "required": [
@@ -2816,7 +2816,7 @@
           "DELIVERY_DELIVERED_OK",
           "DELIVERY_DELIVERED_PARTIALLY"
         ],
-        "description": "Statut de livraison",
+        "description": "Précise le statut de livraison pouvant être utilisé.",
         "x-examples": {
           "Exemple": "DELIVERY_STARTED"
         },
@@ -2917,7 +2917,7 @@
         ]
       },
       "interval": {
-        "description": "Créneau de dates",
+        "description": "Précise l'interval de date pour un prélèvement/livraison.",
         "type": "object",
         "properties": {
           "start": {
@@ -2965,12 +2965,12 @@
             "end": "18:00"
           }
         },
-        "description": "Créneau horaires",
+        "description": "Précise l'interval de date d'ouverture.",
         "title": "Créneau horaires (interval_hour)"
       },
       "contact": {
         "title": "Contact (contact)",
-        "description": "Informations de contact de livraison/prélèvement ",
+        "description": "Informations de contact de livraison/prélèvement.",
         "type": "object",
         "x-examples": {
           "Exemple": {
@@ -3017,7 +3017,7 @@
       },
       "services": {
         "type": "array",
-        "description": "Services de livraison",
+        "description": "Précie le services de livraison à utiliser. ",
         "items": {
           "$ref": "#/components/schemas/deliveryService"
         },
@@ -3029,7 +3029,7 @@
         "title": "Services de livraison (services)"
       },
       "packages": {
-        "description": "Ensemble de colis",
+        "description": "Précise les informations utiles à l'édition d'un colis. L'unité de manutention est à définir avec la structure colis/produit. ",
         "type": "object",
         "properties": {
           "reference": {
@@ -3129,26 +3129,28 @@
       },
       "coordinates": {
         "type": "object",
-        "required": [
-          "latitude",
-          "longitude"
-        ],
-        "properties": {
-          "latitude": {
-            "type": "number"
-          },
-          "longitude": {
-            "type": "number"
-          }
-        },
-        "description": "Coordonnées géographiques",
+        "description": "Précise les coordonnées géographiques à utiliser pour la création. ",
         "x-examples": {
           "Exemple": {
             "latitude": 50.63833,
             "longitude": 3.077359
           }
         },
-        "title": "Coordonnées géographiques (coordinates)"
+        "title": "Coordonnées géographiques (coordinates)",
+        "properties": {
+          "latitude": {
+            "type": "number",
+            "description": "Latitude"
+          },
+          "longitude": {
+            "type": "number",
+            "description": "Longitude"
+          }
+        },
+        "required": [
+          "latitude",
+          "longitude"
+        ]
       },
       "length": {
         "required": [
@@ -3163,7 +3165,7 @@
             "$ref": "#/components/schemas/lengthUnits"
           }
         },
-        "description": "Dimension",
+        "description": "Précise la dimension d'un colis.",
         "x-examples": {
           "Exemple": {
             "value": 200,
@@ -3185,7 +3187,7 @@
             "$ref": "#/components/schemas/massUnits"
           }
         },
-        "description": "Poids",
+        "description": "Précise le poids d'un colis/produit.",
         "x-examples": {
           "Exemple": {
             "value": 1,
@@ -3199,11 +3201,11 @@
         "items": {
           "type": "string"
         },
-        "description": "Références des colis",
+        "description": "Précise le numéro de colis choisi pour le suivi par le transporteur.",
         "title": "Références des colis (packagesReferences)"
       },
       "productsPrice": {
-        "description": "Correspond au prix de vente des produits. A renseigner pour le service “SERVICE_INSTALL”",
+        "description": "Correspond au prix de vente des produits. A renseigner pour le service “SERVICE_INSTALL”.",
         "x-examples": {
           "Exemple": {
             "value": 300,
@@ -3223,7 +3225,7 @@
         }
       },
       "pickupPointCarrier": {
-        "description": "Transporteur du point relais",
+        "description": "Précise le transporteur sélectionné pour un point relais.",
         "type": "object",
         "properties": {
           "name": {
@@ -3264,7 +3266,7 @@
         "title": "Motif d'annulation (cancelledReasons)"
       },
       "deliveryService": {
-        "description": "Service de livraison possible",
+        "description": "Précise le service de livraison pouvant être utilisé.",
         "type": "string",
         "enum": [
           "SERVICE_PICKUP_POINT",
@@ -3284,7 +3286,7 @@
       },
       "productType": {
         "type": "string",
-        "description": "Typologie du produit",
+        "description": "Précise la typologie d'un produit.",
         "enum": [
           "TYPOLOGY_GENERIC",
           "TYPOLOGY_GROCERY",
@@ -3305,7 +3307,7 @@
       },
       "currency": {
         "type": "string",
-        "description": "Devise",
+        "description": "Devise, précise la monnaie utilisée.",
         "enum": [
           "EUR"
         ],
@@ -3316,7 +3318,7 @@
       },
       "lengthUnits": {
         "type": "string",
-        "description": "Unité de mesure",
+        "description": "Précise l'unité de mesure pour les dimensions.",
         "enum": [
           "mm",
           "cm",
@@ -3334,7 +3336,7 @@
       },
       "massUnits": {
         "type": "string",
-        "description": "Unité de poids",
+        "description": "Précise l'unité de poids.",
         "enum": [
           "kg",
           "mcg",
@@ -3352,7 +3354,7 @@
       },
       "country": {
         "type": "string",
-        "description": "Code pays (ISO 3166 alpha-2)",
+        "description": "Code pays (ISO 3166 alpha-2).",
         "enum": [
           "FR",
           "BE"
@@ -3365,7 +3367,7 @@
       "language": {
         "type": "string",
         "title": "Langue (language)",
-        "description": "Code langue",
+        "description": "Précise le code-langue à utiliser pour le contact de prélèvement/livraison.",
         "x-examples": {
           "Exemple": "fr-FR"
         },
@@ -3384,7 +3386,7 @@
       "timezone": {
         "type": "string",
         "title": "Fuseau horaire (timezone)",
-        "description": "Référence à la page ci-dessous https://en.wikipedia.org/wiki/List_of_tz_database_time_zones",
+        "description": "Référence à la page ci-dessous https://en.wikipedia.org/wiki/List_of_tz_database_time_zones.",
         "example": "Europe/Paris",
         "x-examples": {
           "Exemple": "Europe/Paris"
@@ -3411,7 +3413,7 @@
           "ORDER_DELIVERED",
           "ORDER_CANCELLED"
         ],
-        "description": "Statut de la commande"
+        "description": "Précise le statut d'une commande."
       },
       "errorCode": {
         "title": "errorCode",
@@ -3423,10 +3425,10 @@
             "message": "Conflict"
           }
         },
-        "description": "Correspond au modèle retrouné en cas d'erreur API",
+        "description": "Correspond au modèle retrouné en cas d'erreur API.",
         "properties": {
           "statusCode": {
-            "type": "string",
+            "type": "integer",
             "description": "Status Code HTTP"
           },
           "error": {
