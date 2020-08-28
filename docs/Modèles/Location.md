@@ -1,12 +1,12 @@
 # Emplacement 
 
-Un emplacement dit `location` représente un lieu de prélevement ou de livraison physique. Au travers des API, trois types d'emplacement sont disponibles :
+Un emplacement dit `location` représente un lieu de prélèvement ou de livraison physique. Au travers des API, trois types d'emplacement sont disponibles :
 
 <!--
 type: tab
 title: Adresse
 -->
-Le type "**address**" représente une addresse postale classique à saisir entièrement lors de la création de commande. Il correspond à l'appel standard le plus classique lors de la création d'une commande. Si l'adresse de prélèvement et/ou de livraison ne sont pas connues, vous avez alors la possibilité d'indiquer en entièrement l'emplacement. 
+Le type "**address**" représente une addresse postale classique à saisir entièrement lors de la création de commande. Il correspond à l'appel standard le plus classique lors de la création d'une commande. Si l'adresse de prélèvement et/ou de livraison ne sont pas connues, vous avez alors la possibilité d'indiquer l'emplacement complet. 
 ```json
 {
   "type": "address",
@@ -37,9 +37,9 @@ L'identifiant du point-relais doit être récupéré par [la recherche de point 
 type: tab
 title: Point de prélèvement
 -->
-Le type "**exchangePlace**" représente un point de prélévement précis d'un des magasins de l'enseigne. Configuré dans le back-office de Woop, ces informations sont propre au magasin. A la création, vous pouvez définir l'identifiant de votre choix pour chaque point de prélèvement. 
+Le type "**exchangePlace**" représente un point de prélèvement précis d'un des magasins de l'enseigne. Configuré dans le back-office de Woop, ces informations sont propres au magasin. A la création, vous pouvez définir l'identifiant de votre choix pour chaque point de prélèvement. 
 
-Consulter la page [Point de prélevement (ExchangePlace)](docs/Modèles/ExchangePlace.md)pour plus de détail.
+Consulter la page [Point de prélevement (ExchangePlace)](docs/Modèles/ExchangePlace.md)pour plus de détails.
 ```json
 {
   "type": "exchangePlace",

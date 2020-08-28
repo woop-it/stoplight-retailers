@@ -1,6 +1,6 @@
 # Gestion des points-relais
 
-Lors de la recherche de point-relais autour d'un point géographique, il est possible d'affiner les résultats en fonction de deux types de sous-service :  
+Lors de la recherche de points-relais autour d'un point géographique, il est possible d'affiner les résultats en fonction de deux types de sous-service :  
 
 - Le type de point-relais 
 - La catégorie de point-relais

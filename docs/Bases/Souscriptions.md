@@ -7,7 +7,7 @@ tags: ['Bases']
 
 Le système de souscriptions permet de **s'abonner à des événements** liés à vos commandes qui se passent sur la plateforme Woop.
 
-Par exemple : Mis à jour du statut ou choix du transporteur de votre commande.
+Par exemple : Mise à jour du statut ou choix du transporteur de votre commande.
 
 
 Ces évènements sont décrits dans la partie **Woop vers Enseigne** de notre documentation.
@@ -15,9 +15,9 @@ Ces évènements sont décrits dans la partie **Woop vers Enseigne** de notre do
 ## Initialisation des souscriptions
 
 
-Pour vous abonner aux événements un premier appel à **l'API [/souscriptions](https://woop.stoplight.io/docs/retailer/retailer_to_woop.v1.4.0.json/paths/~1subscriptions/post)** est nécessaire.
+Pour vous abonner aux évènements un premier appel à **l'API [/souscriptions](https://woop.stoplight.io/docs/retailer/retailer_to_woop.v1.4.0.json/paths/~1subscriptions/post)** est nécessaire.
 
-Les données à envoyées sont :
+Les données à envoyer sont :
 
 ```json json_schema
 {
@@ -225,7 +225,7 @@ Les données à envoyées sont :
 
 ### Callbacks
 
-Les `callbacks` ou autrement dit `webhooks` permettent de définir l'URL appelée pour chaque événement, différents callbacks sont disponible **dont certains sont obligatoires** :
+Les `callbacks` ou autrement dit `webhooks` permettent de définir l'URL appelée pour chaque événement, différents callbacks sont disponibles **dont certains sont obligatoires** :
 
 
 Callback  | Description | Contrat d'interface | Requis
@@ -276,7 +276,7 @@ Url de la route d'API vers laquelle la plateforme Woop enverra l’événement l
 
 Version d'API ciblée du callback.
 
-Comme toutes nos APIs, les callbacks sont versionnés, **lorsque vous souscrivez à un callback il faut préciser à quelle version**.
+Comme toutes nos APIs, les callbacks sont versionnées, **lorsque vous souscrivez à un callback il faut préciser à quelle version**.
 
 La version est disponible dans la documentation [Woop vers Enseigne](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json).
 
@@ -351,7 +351,7 @@ Configuration:
   }
 }
 ```
-Un échange de token respectant la spécification [OAuth2 client_credentials](https://tools.ietf.org/html/rfc6749#section-4.4) sera éffectué à chaque appel.
+Un échange de token respectant la spécification [OAuth2 client_credentials](https://tools.ietf.org/html/rfc6749#section-4.4) sera effectué à chaque appel.
 
 <!--
 type: tab
@@ -370,7 +370,7 @@ Configuration:
   }
 }
 ```
-Cette méthode effectuera un appel **HTTP POST** vers l'endpoint configuré avec les paramètres suivant :
+Cette méthode effectuera un appel **HTTP POST** vers l'endpoint configuré avec les paramètres suivants :
 ```json
 {
   "username": "{username}",
@@ -463,7 +463,7 @@ Je m'abonne à toutes les souscriptions, mon API est protégée par une authenti
 
 ## Implémentation des souscriptions
 
-Pour chaque *callback* configuré il est nécessaire d'implémenter le contrat d'interface lié a celui-ci.
+Pour chaque *callback* configuré il est nécessaire d'implémenter le contrat d'interface lié à celui-ci.
 
 Pour rappel :
 
@@ -480,4 +480,4 @@ event | [/orders/{orderId}/events](https://woop.stoplight.io/docs/retailer/woop_
 
 > **Méthodes et codes HTTP**
 >
-> Lors de l'implémentation des contrats d'interfaces, il est **important** de bien respecter les **méthodes HTTP** (POST. PATCH etc...) ainsi que les **codes HTTP retours** (201, 400 etc..) spécifié dans le contrat d'interface.
+> Lors de l'implémentation des contrats d'interfaces, il est **important** de bien respecter les **méthodes HTTP** (POST. PATCH etc...) ainsi que les **codes HTTP retours** (201, 400 etc..) spécifiés dans le contrat d'interface.

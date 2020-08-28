@@ -1,6 +1,6 @@
 # Statuts de livraison
 
-Au cours de son cible de vie la commande passe tour à tour par plusieurs statuts. Ce que nous identifions ici ce sont les différents stade de la livraison. 
+Au cours de son cycle de vie la commande passe tour à tour par plusieurs statuts. Ceux que nous identifions sont les différents stades de la livraison. 
 
 Statut | Intitulé
 ---------|----------

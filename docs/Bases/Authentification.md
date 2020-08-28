@@ -4,7 +4,7 @@ tags: ['Bases']
 
 # Authentification
 
-Un token est nécessaire pour échange avec nos APIs, une fois récupéré il est valide pendant 24h et doit être fourni à chaque appel dans un header HTTP : `Authorization: Bearer {token}`
+Un token est nécessaire pour échanger avec nos APIs, une fois récupéré il est valide pendant 24h et doit être fourni à chaque appel dans un header HTTP : `Authorization: Bearer {token}`
 
 ### Urls
 
