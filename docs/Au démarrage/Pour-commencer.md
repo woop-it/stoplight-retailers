@@ -2,7 +2,7 @@
 
 Pour commencer, toutes les informations technique concernant les API Woop à destination des enseignes sont centralisées dans cette documentation. Pour toute question ou précision, merci de contacter l'équipe technique interne.
 
-Pour utiliser les API, vous devez vous munir des vos accès récupérés lors de la création de votre compte au sein de la palteforme.
+Pour utiliser les API, vous devez vous munir des vos accès récupérés lors de la création de votre compte au sein de la plateforme.
 
 
 Ce document se décompose en 2 sections illustrant les échanges possible Woop <> Enseigne :
