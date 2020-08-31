@@ -2,6 +2,12 @@
 
 Au cours de son cycle de vie la commande passe tour à tour par plusieurs statuts. Ceux que nous identifions sont les différents stades de la livraison. 
 
+### Parcours d'une commande
+
+![get-started-icon](../../assets/images/Workflow_status_livraison.png)
+
+### Liste des statuts de livraison possible
+
 Statut | Intitulé
 ---------|----------
  `DELIVERY_INIT`|Validée transporteur
@@ -22,3 +28,7 @@ Statut | Intitulé
  `DELIVERY_BLOCKED`|Livraison bloquée
  `DELIVERY_DELAYED`|Livraison retardée 
  `DELIVERY_AVAILABLE`|Livraison disponible en point de retrait
+
+### Gestion des retours et des erreurs
+
+![get-started-icon](../../assets/images/Workflow_retours.png)
