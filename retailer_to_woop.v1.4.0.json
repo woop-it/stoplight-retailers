@@ -26,7 +26,7 @@
       "name": "Souscriptions"
     },
     {
-      "name": "Modes de livraison"
+      "name": "Éligibilité"
     }
   ],
   "info": {
@@ -2362,18 +2362,77 @@
         "summary": "Initialisation souscriptions"
       }
     },
-    "/modes": {
+    "/services": {
       "post": {
-        "summary": "Éligibilité des modes de livraison",
-        "operationId": "postModes",
+        "summary": "Éligibilité des services",
+        "operationId": "postServices",
         "responses": {
           "200": {
-            "description": "Liste des modes de livraison éligibles.",
+            "description": "Liste des services éligibles.",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "properties": {}
+                  "description": "Liste des services",
+                  "properties": {
+                    "services": {
+                      "type": "array",
+                      "items": {
+                        "type" : "object",
+                        "required": ["type"],
+                        "properties": {
+                            "type": {
+                              "$ref": "#/components/schemas/deliveryService"
+                            },
+                             "pickupPointTypes": {
+                               "type": "array",
+                               "description": "Liste des types des point relais éligibles (pour le service SERVICE_PICKUP_POINT)",
+                               "items" : {
+                                 "$ref": "#/components/parameters/queryPickupPointType"
+                               }
+                            },
+                            "pickupPointCategories": {
+                               "type": "array",
+                               "description": "Liste des catégories des point relais éligibles (pour le service SERVICE_PICKUP_POINT)",
+                               "items" : {
+                                 "$ref": "#/components/parameters/queryPickupPointCategory"
+                               }
+                            }
+                        }
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Exemple": {
+                    "value": {
+                      "services": [
+                        {
+                          "type": "SERVICE_PICKUP_POINT",
+                          "pickupPointTypes": [
+                            "PICKUP_POINT_AGENCY",
+                            "PICKUP_POINT_POST_OFFICE",
+                            "PICKUP_POINT_RELAY_WITH_LOCKER",
+                            "PICKUP_POINT_RELAY_WITHOUT_LOCKER",
+                            "PICKUP_POINT_ALL"
+                          ],
+                          "pickupPointCategories": [
+                            "PICKUP_POINT_STANDARD",
+                            "PICKUP_POINT_XL",
+                            "PICKUP_POINT_XXL",
+                            "PICKUP_POINT_DRIVE"
+                          ]
+                        },
+                        {
+                          "type": "SERVICE_FRONT_HOME"
+                        },
+                        {
+                          "type": "SERVICE_INSTALL"
+                        }
+                      ]
+                    }
+                    
+                  }
                 }
               }
             }
@@ -2413,15 +2472,15 @@
             "$ref": "#/components/parameters/apiVersion"
           }
         ],
-        "description": "Cette méthode retourne les services de livraison possible pour une commande. En fonction du point de départ de la commande et du contenu du panier client, la méthode retourne l'ensemble des modes de livraison disponible. ",
+        "description": "Cette méthode retourne les services de livraison possible pour une commande. En fonction du point de départ de la commande et du contenu du panier client, la méthode retourne l'ensemble des services disponibles. ",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/postModes"
+                "$ref": "#/components/schemas/postServices"
               },
               "examples": {
-                "example": {
+                "Exemple": {
                   "value": {
                     "picking": {
                       "location": {
@@ -2434,6 +2493,18 @@
                     },
                     "packages": [
                       {
+                        "length": {
+                          "value": 15,
+                          "unit": "cm"
+                        },
+                        "width": {
+                          "value": 15,
+                          "unit": "cm"
+                        },
+                        "height": {
+                          "value": 1.2,
+                          "unit": "m"
+                        },
                         "weight": {
                           "value": 560,
                           "unit": "g"
@@ -2449,40 +2520,31 @@
                         ],
                         "quantity": 1
                       }
-                    ]
+                    ],
+                    "storeId": "MAG01"
                   }
                 }
               }
             }
           },
-          "description": "Contient les informations utiles à la recherche de modes de livraison d'une commande."
+          "description": "Contient les informations de demande d'éligibilité."
         },
         "tags": [
-          "Modes de livraison"
+          "Éligibilité"
         ]
       }
     },
-    "/modes/{mode}/carriers": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "mode",
-          "in": "path",
-          "required": true
-        }
-      ],
+    "/carriers": {
       "post": {
-        "summary": "Transporteurs éligible aux modes de livraison",
-        "operationId": "postModesCarriers",
+        "summary": "Éligibilité  des transporteurs",
+        "operationId": "postServicesCarriers",
         "responses": {
           "200": {
             "description": "OK"
           }
         },
         "tags": [
-          "Modes de livraison"
+          "Éligibilité"
         ]
       }
     }
@@ -2642,10 +2704,10 @@
         "description": "Précise les informations utiles à la création d'une demande de retrait (click and collect).",
         "title": "Demande de retrait (postCollects)"
       },
-      "postModes": {
+      "postServices": {
         "type": "object",
         "description": "Précise la demande des services de livraison possible en fonction d'un point de départ et du contenu d'un panier client. ",
-        "title": "Modes de livraison possible (postModes)",
+        "title": "Demande d'éligibilité des services (postServices)",
         "x-examples": {
           "example": {
             "picking": {
@@ -2708,10 +2770,10 @@
           "storeId"
         ]
       },
-      "postModesCarriers": {
+      "postServicesCarriers": {
         "type": "object",
-        "description": "Précise la liste des transporteurs disponible pour le mode de livraison sélectionné. ",
-        "title": "Transporteurs éligibles au mode de livraison (postModesCarriers)",
+        "description": "Précise la demande des transporteurs éligibles.",
+        "title": "Transporteurs éligibles aux services de livraison (postServicesCarriers)",
         "x-examples": {
           "example": {
             "mode": "DELIVERY_SELECTED_ROOM",
