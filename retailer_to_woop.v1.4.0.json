@@ -24,6 +24,9 @@
     },
     {
       "name": "Souscriptions"
+    },
+    {
+      "name": "Modes de livraison"
     }
   ],
   "info": {
@@ -855,7 +858,8 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/errorCode"
-                }
+                },
+                "examples": {}
               }
             }
           },
@@ -2357,6 +2361,130 @@
         },
         "summary": "Initialisation souscriptions"
       }
+    },
+    "/modes": {
+      "post": {
+        "summary": "Éligibilité des modes de livraison",
+        "operationId": "postModes",
+        "responses": {
+          "200": {
+            "description": "Liste des modes de livraison éligibles.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Elements manquants et/ou incorrect dans le body.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "reasons": [
+                        "Missing argument 'xxxxx'"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Vous n'êtes pas autorisé à accéder à cet élément.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          }
+        ],
+        "description": "Cette méthode retourne les services de livraison possible pour une commande. En fonction du point de départ de la commande et du contenu du panier client, la méthode retourne l'ensemble des modes de livraison disponible. ",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/postModes"
+              },
+              "examples": {
+                "example": {
+                  "value": {
+                    "picking": {
+                      "location": {
+                        "type": "address",
+                        "addressLine1": "237 rue du ballon",
+                        "postalCode": "59110",
+                        "city": "La Madeleine",
+                        "country": "FR"
+                      }
+                    },
+                    "packages": [
+                      {
+                        "weight": {
+                          "value": 560,
+                          "unit": "g"
+                        },
+                        "products": [
+                          {
+                            "type": "TYPOLOGY_GENERIC",
+                            "ean": "4dq86zd4q6zd4q64",
+                            "cug": "q56zd4q65d4q",
+                            "label": "Lampe",
+                            "quantity": 1
+                          }
+                        ],
+                        "quantity": 1
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "description": "Contient les informations utiles à la recherche de modes de livraison d'une commande."
+        },
+        "tags": [
+          "Modes de livraison"
+        ]
+      }
+    },
+    "/modes/{mode}/carriers": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "mode",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "post": {
+        "summary": "Transporteurs éligible aux modes de livraison",
+        "operationId": "postModesCarriers",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "Modes de livraison"
+        ]
+      }
     }
   },
   "components": {
@@ -2513,6 +2641,143 @@
         },
         "description": "Précise les informations utiles à la création d'une demande de retrait (click and collect).",
         "title": "Demande de retrait (postCollects)"
+      },
+      "postModes": {
+        "type": "object",
+        "description": "Précise la demande des services de livraison possible en fonction d'un point de départ et du contenu d'un panier client. ",
+        "title": "Modes de livraison possible (postModes)",
+        "x-examples": {
+          "example": {
+            "picking": {
+              "location": {
+                "type": "address",
+                "addressLine1": "237 rue du ballon",
+                "postalCode": "59110",
+                "city": "La Madeleine",
+                "country": "FR"
+              }
+            },
+            "packages": [
+              {
+                "weight": {
+                  "value": 560,
+                  "unit": "g"
+                },
+                "products": [
+                  {
+                    "type": "TYPOLOGY_GENERIC",
+                    "ean": "4dq86zd4q6zd4q64",
+                    "cug": "q56zd4q65d4q",
+                    "label": "Lampe",
+                    "quantity": 1
+                  }
+                ],
+                "quantity": 1
+              }
+            ]
+          }
+        },
+        "properties": {
+          "picking": {
+            "description": "Informations de l'emplacement de prélèvement",
+            "type": "object",
+            "required": [
+              "location"
+            ],
+            "properties": {
+              "location": {
+                "$ref": "#/components/schemas/location"
+              }
+            }
+          },
+          "packages": {
+            "description": "Ensemble des colis",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/packages"
+            }
+          },
+          "storeId": {
+            "type": "string",
+            "description": "Identifiant du magasin émettant la demande"
+          }
+        },
+        "required": [
+          "picking",
+          "packages",
+          "storeId"
+        ]
+      },
+      "postModesCarriers": {
+        "type": "object",
+        "description": "Précise la liste des transporteurs disponible pour le mode de livraison sélectionné. ",
+        "title": "Transporteurs éligibles au mode de livraison (postModesCarriers)",
+        "x-examples": {
+          "example": {
+            "mode": "DELIVERY_SELECTED_ROOM",
+            "picking": {
+              "location": {
+                "type": "address",
+                "addressLine1": "237 rue du ballon",
+                "postalCode": "59110",
+                "city": "La Madeleine",
+                "country": "FR"
+              }
+            },
+            "packages": [
+              {
+                "weight": {
+                  "value": 560,
+                  "unit": "g"
+                },
+                "products": [
+                  {
+                    "type": "TYPOLOGY_GENERIC",
+                    "ean": "4dq86zd4q6zd4q64",
+                    "cug": "q56zd4q65d4q",
+                    "label": "Lampe",
+                    "quantity": 1
+                  }
+                ],
+                "quantity": 1
+              }
+            ],
+            "services": [
+              "SERVICE_UNPACKING"
+            ]
+          }
+        },
+        "properties": {
+          "picking": {
+            "description": "Informations de l'emplacement de prélèvement",
+            "type": "object",
+            "required": [
+              "location"
+            ],
+            "properties": {
+              "location": {
+                "$ref": "#/components/schemas/location"
+              }
+            }
+          },
+          "packages": {
+            "description": "Ensemble des colis",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/packages"
+            }
+          },
+          "services": {
+            "$ref": "#/components/schemas/services"
+          },
+          "mode": {
+            "$ref": "#/components/schemas/deliveryService"
+          }
+        },
+        "required": [
+          "picking",
+          "packages"
+        ]
       },
       "postOrders": {
         "type": "object",
@@ -3267,7 +3532,6 @@
       },
       "deliveryService": {
         "description": "Précise le service de livraison pouvant être utilisé.",
-        "type": "string",
         "enum": [
           "SERVICE_PICKUP_POINT",
           "SERVICE_REGULAR_FRONT_HOME",
@@ -3282,7 +3546,8 @@
         "x-examples": {
           "Exemple": "SERVICE_PICKUP_POINT"
         },
-        "title": "Service de livraison (deliveryService)"
+        "title": "Service de livraison (deliveryService)",
+        "type": "string"
       },
       "productType": {
         "type": "string",
