@@ -29,7 +29,7 @@ Code | Intitulé
 ---------|----------
  `PICKUP_POINT_STANDARD`|Point relais standard
  `PICKUP_POINT_XL`|Point relais XL 
- `PICKUP_POINT_RELAY_WITH_LOCKER`|Point relais XXL 
- `PICKUP_POINT_RELAY_WITHOUT_LOCKER`|Points relais drive
+ `PICKUP_POINT_XXL`|Point relais XXL 
+ `PICKUP_POINT_DRIVE`|Points relais drive
 
 Default value : `PICKUP_POINT_STANDARD`
