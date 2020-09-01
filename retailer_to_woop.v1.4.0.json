@@ -98,7 +98,9 @@
                       "firstName": "Michel",
                       "lastName": "Dupont",
                       "phone": "+33600000000",
-                      "email": "michel.dupont@mail.fr"
+                      "email": "michel.dupont@mail.fr",
+                      "language": "fr-BE",
+                      "timezone": "Europe/Paris"
                     },
                     "packages": [
                       {
@@ -306,7 +308,9 @@
                         "firstName": "Pierre",
                         "lastName": "Dupond",
                         "phone": "+33600000000",
-                        "email": "pierre.dupond@mail.fr"
+                        "email": "pierre.dupond@mail.fr",
+                        "language": "fr-FR",
+                        "timezone": "Europe/Paris"
                       }
                     },
                     "packages": [
@@ -374,7 +378,9 @@
                         "firstName": "Michel",
                         "lastName": "Dupont",
                         "phone": "+33600000000",
-                        "email": "michel.dupont@mail.fr"
+                        "email": "michel.dupont@mail.fr",
+                        "language": "fr-FR",
+                        "timezone": "Europe/Paris"
                       }
                     },
                     "delivery": {
@@ -398,7 +404,9 @@
                         "firstName": "Pierre",
                         "lastName": "Dupond",
                         "phone": "+33600000000",
-                        "email": "pierre.dupond@mail.fr"
+                        "email": "pierre.dupond@mail.fr",
+                        "language": "fr-FR",
+                        "timezone": "Europe/Paris"
                       }
                     },
                     "packages": [
@@ -490,7 +498,9 @@
                         "firstName": "Pierre",
                         "lastName": "Dupond",
                         "phone": "+33600000000",
-                        "email": "pierre.dupond@mail.fr"
+                        "email": "pierre.dupond@mail.fr",
+                        "language": "fr-BE",
+                        "timezone": "Europe/Paris"
                       }
                     },
                     "packages": [
@@ -576,7 +586,9 @@
                         "firstName": "Pierre",
                         "lastName": "Dupond",
                         "phone": "+33600000000",
-                        "email": "pierre.dupond@mail.fr"
+                        "email": "pierre.dupond@mail.fr",
+                        "language": "fr-BE",
+                        "timezone": "Europe/Paris"
                       }
                     },
                     "packages": [
@@ -2362,7 +2374,7 @@
         "summary": "Initialisation souscriptions"
       }
     },
-    "/services": {
+    "/eligibilities/services": {
       "post": {
         "summary": "Éligibilité des services",
         "operationId": "postServices",
@@ -2378,7 +2390,7 @@
                     "services": {
                       "type": "array",
                       "items": {
-                        "type" : "object",
+                        "type": "object",
                         "required": ["type"],
                         "properties": {
                             "type": {
@@ -2388,7 +2400,7 @@
                                "type": "array",
                                "description": "Liste des types des point relais éligibles (pour le service SERVICE_PICKUP_POINT)",
                                "items" : {
-                                 "$ref": "#/components/parameters/queryPickupPointType"
+                                 "$ref": "#/components/schemas/pickupPointType"
                                }
                             },
                             "pickupPointCategories": {
@@ -2528,20 +2540,6 @@
             }
           },
           "description": "Contient les informations de demande d'éligibilité."
-        },
-        "tags": [
-          "Éligibilité"
-        ]
-      }
-    },
-    "/carriers": {
-      "post": {
-        "summary": "Éligibilité  des transporteurs",
-        "operationId": "postServicesCarriers",
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
         },
         "tags": [
           "Éligibilité"
@@ -2770,77 +2768,6 @@
           "storeId"
         ]
       },
-      "postServicesCarriers": {
-        "type": "object",
-        "description": "Précise la demande des transporteurs éligibles.",
-        "title": "Transporteurs éligibles aux services de livraison (postServicesCarriers)",
-        "x-examples": {
-          "example": {
-            "mode": "DELIVERY_SELECTED_ROOM",
-            "picking": {
-              "location": {
-                "type": "address",
-                "addressLine1": "237 rue du ballon",
-                "postalCode": "59110",
-                "city": "La Madeleine",
-                "country": "FR"
-              }
-            },
-            "packages": [
-              {
-                "weight": {
-                  "value": 560,
-                  "unit": "g"
-                },
-                "products": [
-                  {
-                    "type": "TYPOLOGY_GENERIC",
-                    "ean": "4dq86zd4q6zd4q64",
-                    "cug": "q56zd4q65d4q",
-                    "label": "Lampe",
-                    "quantity": 1
-                  }
-                ],
-                "quantity": 1
-              }
-            ],
-            "services": [
-              "SERVICE_UNPACKING"
-            ]
-          }
-        },
-        "properties": {
-          "picking": {
-            "description": "Informations de l'emplacement de prélèvement",
-            "type": "object",
-            "required": [
-              "location"
-            ],
-            "properties": {
-              "location": {
-                "$ref": "#/components/schemas/location"
-              }
-            }
-          },
-          "packages": {
-            "description": "Ensemble des colis",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/packages"
-            }
-          },
-          "services": {
-            "$ref": "#/components/schemas/services"
-          },
-          "mode": {
-            "$ref": "#/components/schemas/deliveryService"
-          }
-        },
-        "required": [
-          "picking",
-          "packages"
-        ]
-      },
       "postOrders": {
         "type": "object",
         "description": "Précise les informations utiles pour la création de la commande.",
@@ -2964,7 +2891,7 @@
             "description": "Identifiant du magasin émettant la demande"
           },
           "initialCarrier": {
-            "type": "string",
+            "type": "boolean",
             "description": "Booléan précisant si le retour doit être effectué avec le même transporteur que la commande initiale"
           },
           "picking": {
@@ -3129,6 +3056,7 @@
       "deliveryStatus": {
         "type": "string",
         "enum": [
+          "DELIVERY_INIT",
           "DELIVERY_STARTED",
           "DELIVERY_PICK_UP_REACHED",
           "DELIVERY_PICK_UP_OK",
@@ -3344,7 +3272,7 @@
       },
       "services": {
         "type": "array",
-        "description": "Précie le services de livraison à utiliser. ",
+        "description": "Précise les services de livraison à utiliser. ",
         "items": {
           "$ref": "#/components/schemas/deliveryService"
         },
@@ -3603,7 +3531,8 @@
           "SERVICE_INSTALL",
           "SERVICE_RECOVERY",
           "SERVICE_SIMPLE_INSTALL",
-          "SERVICE_COMPLEX_INSTALL"
+          "SERVICE_COMPLEX_INSTALL",
+          "SERVICE_ASSEMBLY"
         ],
         "x-examples": {
           "Exemple": "SERVICE_PICKUP_POINT"
@@ -3741,6 +3670,28 @@
           "ORDER_CANCELLED"
         ],
         "description": "Précise le statut d'une commande."
+      },
+      "pickupPointType": {
+        "title": "Type de point relais",
+        "type": "string",
+        "enum": [
+            "PICKUP_POINT_AGENCY",
+            "PICKUP_POINT_POST_OFFICE",
+            "PICKUP_POINT_RELAY_WITH_LOCKER",
+            "PICKUP_POINT_RELAY_WITHOUT_LOCKER",
+            "PICKUP_POINT_ALL"
+          ],
+          "default": "PICKUP_POINT_RELAY_WITH_LOCKER"
+      },
+       "pickupPointCategory": {
+        "title": "Catégorie de point relais",
+        "type": "string",
+        "enum": [
+            "PICKUP_POINT_STANDARD",
+            "PICKUP_POINT_XL",
+            "PICKUP_POINT_XXL",
+            "PICKUP_POINT_DRIVE"
+          ]
       },
       "errorCode": {
         "title": "Code erreur (errorCode)",
@@ -3886,15 +3837,7 @@
         "name": "type",
         "description": "Type de point relais",
         "schema": {
-          "type": "string",
-          "enum": [
-            "PICKUP_POINT_AGENCY",
-            "PICKUP_POINT_POST_OFFICE",
-            "PICKUP_POINT_RELAY_WITH_LOCKER",
-            "PICKUP_POINT_RELAY_WITHOUT_LOCKER",
-            "PICKUP_POINT_ALL"
-          ],
-          "default": "PICKUP_POINT_RELAY_WITH_LOCKER"
+          "$ref": "#/components/schemas/pickupPointType" 
         }
       },
       "queryPickupPointCategory": {
@@ -3903,13 +3846,7 @@
         "name": "category",
         "description": "Catégorie de point relais",
         "schema": {
-          "type": "string",
-          "enum": [
-            "PICKUP_POINT_STANDARD",
-            "PICKUP_POINT_XL",
-            "PICKUP_POINT_XXL",
-            "PICKUP_POINT_DRIVE"
-          ]
+          "$ref": "#/components/schemas/pickupPointCategory" 
         }
       },
       "pathOrderId": {
