@@ -2391,25 +2391,27 @@
                       "type": "array",
                       "items": {
                         "type": "object",
-                        "required": ["type"],
+                        "required": [
+                          "type"
+                        ],
                         "properties": {
-                            "type": {
-                              "$ref": "#/components/schemas/deliveryService"
-                            },
-                             "pickupPointTypes": {
-                               "type": "array",
-                               "description": "Liste des types des point relais éligibles (pour le service SERVICE_PICKUP_POINT)",
-                               "items" : {
-                                 "$ref": "#/components/schemas/pickupPointType"
-                               }
-                            },
-                            "pickupPointCategories": {
-                               "type": "array",
-                               "description": "Liste des catégories des point relais éligibles (pour le service SERVICE_PICKUP_POINT)",
-                               "items" : {
-                                 "$ref": "#/components/parameters/queryPickupPointCategory"
-                               }
+                          "type": {
+                            "$ref": "#/components/schemas/deliveryService"
+                          },
+                          "pickupPointTypes": {
+                            "type": "array",
+                            "description": "Liste des types des point relais éligibles (pour le service SERVICE_PICKUP_POINT)",
+                            "items": {
+                              "$ref": "#/components/schemas/pickupPointType"
                             }
+                          },
+                          "pickupPointCategories": {
+                            "type": "array",
+                            "description": "Liste des catégories des point relais éligibles (pour le service SERVICE_PICKUP_POINT)",
+                            "items": {
+                              "$ref": "#/components/parameters/queryPickupPointCategory"
+                            }
+                          }
                         }
                       }
                     }
@@ -2443,7 +2445,6 @@
                         }
                       ]
                     }
-                    
                   }
                 }
               }
@@ -2704,16 +2705,54 @@
       },
       "postServices": {
         "type": "object",
-        "description": "Précise la demande des services de livraison possible en fonction d'un point de départ et du contenu d'un panier client. ",
+        "description": "Précise la demande des services de livraison possible en fonction d'un point de départ, d'un point d'arrivé (non obligatoire) et du contenu d'un panier client. ",
         "title": "Demande d'éligibilité des services (postServices)",
         "x-examples": {
-          "example": {
+          "Exemple par défaut": {
             "picking": {
               "location": {
                 "type": "address",
                 "addressLine1": "237 rue du ballon",
                 "postalCode": "59110",
                 "city": "La Madeleine",
+                "country": "FR"
+              }
+            },
+            "packages": [
+              {
+                "weight": {
+                  "value": 560,
+                  "unit": "g"
+                },
+                "products": [
+                  {
+                    "type": "TYPOLOGY_GENERIC",
+                    "ean": "4dq86zd4q6zd4q64",
+                    "cug": "q56zd4q65d4q",
+                    "label": "Lampe",
+                    "quantity": 1
+                  }
+                ],
+                "quantity": 1
+              }
+            ]
+          },
+          "Exemple avec emplacement de livraison": {
+            "picking": {
+              "location": {
+                "type": "address",
+                "addressLine1": "237 rue du ballon",
+                "postalCode": "59110",
+                "city": "La Madeleine",
+                "country": "FR"
+              }
+            },
+            "delivery": {
+              "location": {
+                "type": "address",
+                "addressLine1": "179 Boulevard de Turin",
+                "postalCode": "59000",
+                "city": "Lille",
                 "country": "FR"
               }
             },
@@ -2744,6 +2783,15 @@
             "required": [
               "location"
             ],
+            "properties": {
+              "location": {
+                "$ref": "#/components/schemas/location"
+              }
+            }
+          },
+          "delivery": {
+            "type": "object",
+            "description": "Informations de l'emplacement de livraison",
             "properties": {
               "location": {
                 "$ref": "#/components/schemas/location"
@@ -3675,23 +3723,23 @@
         "title": "Type de point relais",
         "type": "string",
         "enum": [
-            "PICKUP_POINT_AGENCY",
-            "PICKUP_POINT_POST_OFFICE",
-            "PICKUP_POINT_RELAY_WITH_LOCKER",
-            "PICKUP_POINT_RELAY_WITHOUT_LOCKER",
-            "PICKUP_POINT_ALL"
-          ],
-          "default": "PICKUP_POINT_RELAY_WITH_LOCKER"
+          "PICKUP_POINT_AGENCY",
+          "PICKUP_POINT_POST_OFFICE",
+          "PICKUP_POINT_RELAY_WITH_LOCKER",
+          "PICKUP_POINT_RELAY_WITHOUT_LOCKER",
+          "PICKUP_POINT_ALL"
+        ],
+        "default": "PICKUP_POINT_RELAY_WITH_LOCKER"
       },
-       "pickupPointCategory": {
+      "pickupPointCategory": {
         "title": "Catégorie de point relais",
         "type": "string",
         "enum": [
-            "PICKUP_POINT_STANDARD",
-            "PICKUP_POINT_XL",
-            "PICKUP_POINT_XXL",
-            "PICKUP_POINT_DRIVE"
-          ]
+          "PICKUP_POINT_STANDARD",
+          "PICKUP_POINT_XL",
+          "PICKUP_POINT_XXL",
+          "PICKUP_POINT_DRIVE"
+        ]
       },
       "errorCode": {
         "title": "Code erreur (errorCode)",
@@ -3837,7 +3885,7 @@
         "name": "type",
         "description": "Type de point relais",
         "schema": {
-          "$ref": "#/components/schemas/pickupPointType" 
+          "$ref": "#/components/schemas/pickupPointType"
         }
       },
       "queryPickupPointCategory": {
@@ -3846,7 +3894,7 @@
         "name": "category",
         "description": "Catégorie de point relais",
         "schema": {
-          "$ref": "#/components/schemas/pickupPointCategory" 
+          "$ref": "#/components/schemas/pickupPointCategory"
         }
       },
       "pathOrderId": {
