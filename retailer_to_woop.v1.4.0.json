@@ -2485,7 +2485,7 @@
             "$ref": "#/components/parameters/apiVersion"
           }
         ],
-        "description": "Cette méthode retourne les services de livraison possible pour une commande. En fonction du point de départ de la commande et du contenu du panier client, la méthode retourne l'ensemble des services disponibles. ",
+        "description": "Cette méthode retourne les services de livraison possible pour une commande. En fonction du point de départ de la commande, du point d'arrivé (optionnel) et du contenu du panier client, la méthode retourne l'ensemble des services disponibles. ",
         "requestBody": {
           "content": {
             "application/json": {
@@ -2493,7 +2493,7 @@
                 "$ref": "#/components/schemas/postServices"
               },
               "examples": {
-                "Exemple": {
+                "Exemple par défaut": {
                   "value": {
                     "picking": {
                       "location": {
@@ -2501,6 +2501,59 @@
                         "addressLine1": "237 rue du ballon",
                         "postalCode": "59110",
                         "city": "La Madeleine",
+                        "country": "FR"
+                      }
+                    },
+                    "packages": [
+                      {
+                        "length": {
+                          "value": 15,
+                          "unit": "cm"
+                        },
+                        "width": {
+                          "value": 15,
+                          "unit": "cm"
+                        },
+                        "height": {
+                          "value": 1.2,
+                          "unit": "m"
+                        },
+                        "weight": {
+                          "value": 560,
+                          "unit": "g"
+                        },
+                        "products": [
+                          {
+                            "type": "TYPOLOGY_GENERIC",
+                            "ean": "4dq86zd4q6zd4q64",
+                            "cug": "q56zd4q65d4q",
+                            "label": "Lampe",
+                            "quantity": 1
+                          }
+                        ],
+                        "quantity": 1
+                      }
+                    ],
+                    "storeId": "MAG01"
+                  }
+                },
+                "Exemple avec point d'arrivé": {
+                  "value": {
+                    "picking": {
+                      "location": {
+                        "type": "address",
+                        "addressLine1": "237 rue du ballon",
+                        "postalCode": "59110",
+                        "city": "La Madeleine",
+                        "country": "FR"
+                      }
+                    },
+                    "delivery": {
+                      "location": {
+                        "type": "address",
+                        "addressLine1": "179 Boulevard de Turin",
+                        "postalCode": "59000",
+                        "city": "Lille",
                         "country": "FR"
                       }
                     },
@@ -2720,6 +2773,18 @@
             },
             "packages": [
               {
+                "length": {
+                  "value": 15,
+                  "unit": "cm"
+                },
+                "width": {
+                  "value": 15,
+                  "unit": "cm"
+                },
+                "height": {
+                  "value": 1.2,
+                  "unit": "m"
+                },
                 "weight": {
                   "value": 560,
                   "unit": "g"
@@ -2735,9 +2800,10 @@
                 ],
                 "quantity": 1
               }
-            ]
+            ],
+            "storeId": "MAG01"
           },
-          "Exemple avec emplacement de livraison": {
+          "Exemple avec point d'arrivé": {
             "picking": {
               "location": {
                 "type": "address",
@@ -2758,6 +2824,18 @@
             },
             "packages": [
               {
+                "length": {
+                  "value": 15,
+                  "unit": "cm"
+                },
+                "width": {
+                  "value": 15,
+                  "unit": "cm"
+                },
+                "height": {
+                  "value": 1.2,
+                  "unit": "m"
+                },
                 "weight": {
                   "value": 560,
                   "unit": "g"
@@ -2773,7 +2851,8 @@
                 ],
                 "quantity": 1
               }
-            ]
+            ],
+            "storeId": "MAG01"
           }
         },
         "properties": {
