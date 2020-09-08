@@ -331,7 +331,7 @@
                           "value": 560,
                           "unit": "g"
                         },
-                        "reference": [
+                        "references": [
                           "123456789A",
                           "123456789B",
                           "123456789C",
@@ -427,7 +427,7 @@
                           "value": 560,
                           "unit": "g"
                         },
-                        "reference": [
+                        "references": [
                           "123456789A",
                           "123456789B",
                           "123456789C",
@@ -521,7 +521,7 @@
                           "value": 560,
                           "unit": "g"
                         },
-                        "reference": [
+                        "references": [
                           "123456789A",
                           "123456789B",
                           "123456789C",
@@ -609,7 +609,7 @@
                           "value": 560,
                           "unit": "g"
                         },
-                        "reference": [
+                        "references": [
                           "123456789A",
                           "123456789B",
                           "123456789C",
@@ -3413,8 +3413,42 @@
       "packages": {
         "description": "Précise les informations utiles à l'édition d'un colis. L'unité de manutention est à définir avec la structure colis/produit. ",
         "type": "object",
+        "x-examples": {
+          "Exemple": {
+            "reference": [
+              "12345B"
+            ],
+            "length": {
+              "value": 200,
+              "unit": "mm"
+            },
+            "width": {
+              "value": 200,
+              "unit": "mm"
+            },
+            "height": {
+              "value": 100,
+              "unit": "mm"
+            },
+            "weight": {
+              "value": 1,
+              "unit": "kg"
+            },
+            "products": [
+              {
+                "type": "TYPOLOGY_GENERIC",
+                "ean": "11233",
+                "cug": "KJJNN",
+                "label": "Ordinateur",
+                "quantity": 1
+              }
+            ],
+            "quantity": 1
+          }
+        },
+        "title": "Colis (packages)",
         "properties": {
-          "reference": {
+          "references": {
             "$ref": "#/components/schemas/packagesReferences"
           },
           "length": {
@@ -3473,41 +3507,7 @@
           "height",
           "weight",
           "products"
-        ],
-        "x-examples": {
-          "Exemple": {
-            "reference": [
-              "12345B"
-            ],
-            "length": {
-              "value": 200,
-              "unit": "mm"
-            },
-            "width": {
-              "value": 200,
-              "unit": "mm"
-            },
-            "height": {
-              "value": 100,
-              "unit": "mm"
-            },
-            "weight": {
-              "value": 1,
-              "unit": "kg"
-            },
-            "products": [
-              {
-                "type": "TYPOLOGY_GENERIC",
-                "ean": "11233",
-                "cug": "KJJNN",
-                "label": "Ordinateur",
-                "quantity": 1
-              }
-            ],
-            "quantity": 1
-          }
-        },
-        "title": "Colis (packages)"
+        ]
       },
       "coordinates": {
         "type": "object",
@@ -3584,7 +3584,12 @@
           "type": "string"
         },
         "description": "Précise le numéro de colis choisi pour le suivi par le transporteur.",
-        "title": "Références des colis (packagesReferences)"
+        "title": "Références des colis (packagesReferences)",
+        "x-examples": {
+          "example-1": [
+            "string"
+          ]
+        }
       },
       "productsPrice": {
         "description": "Correspond au prix de vente des produits. A renseigner pour le service “SERVICE_INSTALL”.",
