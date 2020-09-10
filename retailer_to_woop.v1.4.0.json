@@ -2965,7 +2965,7 @@
                 }
               },
               "contact": {
-                "$ref": "#/components/schemas/contact"
+                "$ref": "#/components/schemas/contactDelivery"
               }
             }
           },
@@ -3352,7 +3352,7 @@
       },
       "contact": {
         "title": "Contact (contact)",
-        "description": "Informations de contact de livraison/prélèvement.",
+        "description": "Informations de contact prélèvement.",
         "type": "object",
         "x-examples": {
           "Exemple": {
@@ -3850,6 +3850,51 @@
             "description": "Description du message d'erreur"
           }
         }
+      },
+      "contactDelivery": {
+        "title": "Contact de livraison (contactDelivery)",
+         "description": "Informations de contact de livraison. (téléphone non obligatoire)",
+        "type": "object",
+        "x-examples": {
+          "Exemple": {
+            "firstName": "Jogn",
+            "lastName": "Doe",
+            "email": "johndoe@mail.com",
+            "language": "fr-FR",
+            "timezone": "Europe/Paris"
+          }
+        },
+        "properties": {
+          "firstName": {
+            "type": "string",
+            "description": "Prénom du client"
+          },
+          "lastName": {
+            "type": "string",
+            "description": "Nom du client"
+          },
+          "phone": {
+            "type": "string",
+            "description": "Téléphone du client"
+          },
+          "email": {
+            "type": "string",
+            "description": "Email du client"
+          },
+          "language": {
+            "$ref": "#/components/schemas/language"
+          },
+          "timezone": {
+            "$ref": "#/components/schemas/timezone"
+          }
+        },
+        "required": [
+          "firstName",
+          "lastName",
+          "email",
+          "language",
+          "timezone"
+        ]
       }
     },
     "parameters": {
