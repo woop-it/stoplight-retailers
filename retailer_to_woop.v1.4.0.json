@@ -778,6 +778,10 @@
                             "contact": "Michel",
                             "claimUrl": "https://url_reclamation"
                           },
+                          "price": {
+                            "price": 15.12,
+                            "currency": "EUR"
+                          },
                           "order": {
                             "id": "q54zd65qzd465qz4d",
                             "currentStatus": "ORDER_DELIVERED",
@@ -1031,6 +1035,10 @@
                             "name": "Transporteur A",
                             "contact": "Michel",
                             "claimUrl": "https://url_reclamation"
+                          },
+                          "price": {
+                            "price": 15.12,
+                            "currency": "EUR"
                           },
                           "order": {
                             "id": "65z4eq1d6q54zd1",
@@ -2715,6 +2723,17 @@
                       }
                     }
                   }
+                },
+                "price": {
+                  "type": "object",
+                  "properties": {
+                    "price": {
+                      "type": "number"
+                    },
+                    "currency": {
+                      "type": "string"
+                    }
+                  }
                 }
               }
             }
@@ -3853,7 +3872,7 @@
       },
       "contactDelivery": {
         "title": "Contact de livraison (contactDelivery)",
-         "description": "Informations de contact de livraison. (téléphone non obligatoire)",
+        "description": "Informations de contact de livraison. (téléphone non obligatoire)",
         "type": "object",
         "x-examples": {
           "Exemple": {
