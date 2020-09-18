@@ -2726,6 +2726,7 @@
                 },
                 "price": {
                   "type": "object",
+                  "description": "Le prix associé à la commande",
                   "properties": {
                     "price": {
                       "type": "number"
