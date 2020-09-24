@@ -2607,6 +2607,84 @@
           "Éligibilité"
         ]
       }
+    },
+    "/orders/download": {
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK. Contient le document au format original du document",
+            "headers": {},
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "Aucune commande trouvée"
+          },
+          "401": {
+            "description": "Vous n'êtes pas autorisé à accéder à cet élément",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Vous ne pouvez pas accéder a cette ressource"
+          }
+        },
+        "operationId": "get-orders-download",
+        "description": "Cette méthode permet de récupérer un pdf comprenant les livraisons par transporteur, date de prélévement et status de livraison",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "deliveryStatus",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "storeId",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "carrierCode",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "pickingDate"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "exchangePlaceId",
+            "required": true
+          }
+        ]
+      }
     }
   },
   "components": {
