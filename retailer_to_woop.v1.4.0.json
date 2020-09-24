@@ -2610,7 +2610,7 @@
     },
     "/orders/download": {
       "get": {
-        "summary": "Your GET endpoint",
+        "summary": "Télécharger le bordereau de prélévement",
         "tags": [],
         "responses": {
           "200": {
@@ -2642,7 +2642,7 @@
           }
         },
         "operationId": "get-orders-download",
-        "description": "Cette méthode permet de récupérer un pdf comprenant les livraisons par transporteur, date de prélévement et status de livraison",
+        "description": "Cette méthode permet de récupérer un pdf comprenant les livraisons par transporteur, date de prélévement et statut de livraison",
         "parameters": [
           {
             "schema": {
@@ -2650,7 +2650,8 @@
             },
             "in": "query",
             "name": "deliveryStatus",
-            "required": true
+            "required": true,
+            "description": "Statut de la livraison\n"
           },
           {
             "schema": {
@@ -2658,7 +2659,8 @@
             },
             "in": "query",
             "name": "storeId",
-            "required": true
+            "required": true,
+            "description": "Identifiant du magasin"
           },
           {
             "schema": {
@@ -2666,14 +2668,16 @@
             },
             "in": "query",
             "name": "carrierCode",
-            "required": true
+            "required": true,
+            "description": "Code du transporteur"
           },
           {
             "schema": {
               "type": "string"
             },
             "in": "query",
-            "name": "pickingDate"
+            "name": "pickingDate",
+            "description": "Date de prélévement"
           },
           {
             "schema": {
@@ -2681,7 +2685,8 @@
             },
             "in": "query",
             "name": "exchangePlaceId",
-            "required": true
+            "required": true,
+            "description": "Id du point de prélévement"
           }
         ]
       }
