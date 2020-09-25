@@ -2610,7 +2610,7 @@
     },
     "/orders/download": {
       "get": {
-        "summary": "Télécharger le bordereau de prélévement",
+        "summary": "Télécharger le bordereau de remise par transporteur",
         "tags": [],
         "responses": {
           "200": {
@@ -2620,12 +2620,17 @@
               "application/octet-stream": {
                 "schema": {
                   "type": "string"
+                },
+                "examples": {
+                  "example": {
+                    "value": "string"
+                  }
                 }
               }
             }
           },
           "204": {
-            "description": "Aucune commande trouvée"
+            "description": "Pas de documents sur cette commande"
           },
           "401": {
             "description": "Vous n'êtes pas autorisé à accéder à cet élément",
@@ -2642,7 +2647,7 @@
           }
         },
         "operationId": "get-orders-download",
-        "description": "Cette méthode permet de récupérer un pdf comprenant les livraisons par transporteur, date de prélévement et statut de livraison",
+        "description": "Cette méthode permet de télécharger un bordereau de remise listant l'ensemble descommandes, au format PDF, en fonction des paramètres indiqués; Code transporteur, date de prélévement et statut de livraison. ",
         "parameters": [
           {
             "schema": {
