@@ -2611,7 +2611,9 @@
     "/orders/download": {
       "get": {
         "summary": "Télécharger le bordereau de remise par transporteur",
-        "tags": [],
+        "tags": [
+          "Document"
+        ],
         "responses": {
           "200": {
             "description": "OK. Contient le document au format original du document",
