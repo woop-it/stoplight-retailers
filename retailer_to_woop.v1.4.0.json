@@ -778,6 +778,10 @@
                             "contact": "Michel",
                             "claimUrl": "https://url_reclamation"
                           },
+                          "price": {
+                            "price": 15.12,
+                            "currency": "EUR"
+                          },
                           "order": {
                             "id": "q54zd65qzd465qz4d",
                             "currentStatus": "ORDER_DELIVERED",
@@ -1031,6 +1035,10 @@
                             "name": "Transporteur A",
                             "contact": "Michel",
                             "claimUrl": "https://url_reclamation"
+                          },
+                          "price": {
+                            "price": 15.12,
+                            "currency": "EUR"
                           },
                           "order": {
                             "id": "65z4eq1d6q54zd1",
@@ -2599,6 +2607,96 @@
           "Éligibilité"
         ]
       }
+    },
+    "/orders/download": {
+      "get": {
+        "summary": "Télécharger le bordereau de remise par transporteur",
+        "tags": [
+          "Document"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Contient le document au format original du document",
+            "headers": {},
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string"
+                },
+                "examples": {
+                  "example": {
+                    "value": "string"
+                  }
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "Pas de documents sur cette commande"
+          },
+          "401": {
+            "description": "Vous n'êtes pas autorisé à accéder à cet élément",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Vous ne pouvez pas accéder a cette ressource"
+          }
+        },
+        "operationId": "get-orders-download",
+        "description": "Cette méthode permet de télécharger un bordereau de remise listant l'ensemble descommandes, au format PDF, en fonction des paramètres indiqués; Code transporteur, date de prélévement et statut de livraison. ",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "deliveryStatus",
+            "required": true,
+            "description": "Statut de la livraison\n"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "storeId",
+            "required": true,
+            "description": "Identifiant du magasin"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "carrierCode",
+            "required": true,
+            "description": "Code du transporteur"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "pickingDate",
+            "description": "Date de prélévement"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "exchangePlaceId",
+            "required": true,
+            "description": "Id du point de prélévement"
+          }
+        ]
+      }
     }
   },
   "components": {
@@ -2713,6 +2811,18 @@
                         "type": "string",
                         "description": "Référence du colis"
                       }
+                    }
+                  }
+                },
+                "price": {
+                  "type": "object",
+                  "description": "Le prix associé à la commande",
+                  "properties": {
+                    "price": {
+                      "type": "number"
+                    },
+                    "currency": {
+                      "type": "string"
                     }
                   }
                 }
@@ -3853,7 +3963,7 @@
       },
       "contactDelivery": {
         "title": "Contact de livraison (contactDelivery)",
-         "description": "Informations de contact de livraison. (téléphone non obligatoire)",
+        "description": "Informations de contact de livraison. (téléphone non obligatoire)",
         "type": "object",
         "x-examples": {
           "Exemple": {
