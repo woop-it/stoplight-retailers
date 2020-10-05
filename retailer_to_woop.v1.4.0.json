@@ -701,7 +701,10 @@
                     "value": {
                       "statusCode": 403,
                       "error": "Forbidden",
-                      "message": "Store doesn't exist or is inactive"
+                      "message": "Store doesn't exist or is inactive",
+                      "reasons": [
+                        "STORE_NOT_FOUND"
+                      ]
                     }
                   }
                 }
