@@ -3966,7 +3966,12 @@
             "type": "array",
             "description": "Liste des raisons techniques possibles",
             "items": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "STORE_NOT_FOUND",
+                "EXCHANGE_PLACE_NOT_FOUND",
+                "PICKUP_POINT_NOT_FOUND"
+              ]
             }
           }
         }
