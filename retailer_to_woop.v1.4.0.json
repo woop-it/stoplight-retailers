@@ -3961,6 +3961,13 @@
           "message": {
             "type": "string",
             "description": "Description du message d'erreur"
+          },
+          "reasons": {
+            "type": "array",
+            "description": "Liste des raisons techniques possibles",
+            "items": {
+              "type": "string"
+            }
           }
         }
       },
