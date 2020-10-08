@@ -99,7 +99,7 @@
                       "lastName": "Dupont",
                       "phone": "+33600000000",
                       "email": "michel.dupont@mail.fr",
-                      "language": "fr-BE",
+                      "language": "fr",
                       "timezone": "Europe/Paris"
                     },
                     "packages": [
@@ -283,7 +283,7 @@
                         "lastName": "Dupont",
                         "phone": "+33600000000",
                         "email": "michel.dupont@mail.fr",
-                        "language": "fr-BE",
+                        "language": "fr",
                         "timezone": "Europe/Paris"
                       }
                     },
@@ -309,7 +309,7 @@
                         "lastName": "Dupond",
                         "phone": "+33600000000",
                         "email": "pierre.dupond@mail.fr",
-                        "language": "fr-FR",
+                        "language": "fr",
                         "timezone": "Europe/Paris"
                       }
                     },
@@ -379,7 +379,7 @@
                         "lastName": "Dupont",
                         "phone": "+33600000000",
                         "email": "michel.dupont@mail.fr",
-                        "language": "fr-FR",
+                        "language": "fr",
                         "timezone": "Europe/Paris"
                       }
                     },
@@ -405,7 +405,7 @@
                         "lastName": "Dupond",
                         "phone": "+33600000000",
                         "email": "pierre.dupond@mail.fr",
-                        "language": "fr-FR",
+                        "language": "fr",
                         "timezone": "Europe/Paris"
                       }
                     },
@@ -477,7 +477,7 @@
                         "lastName": "Dupont",
                         "phone": "+33600000000",
                         "email": "michel.dupont@mail.fr",
-                        "language": "fr-BE",
+                        "language": "fr",
                         "timezone": "Europe/Paris"
                       }
                     },
@@ -499,7 +499,7 @@
                         "lastName": "Dupond",
                         "phone": "+33600000000",
                         "email": "pierre.dupond@mail.fr",
-                        "language": "fr-BE",
+                        "language": "fr",
                         "timezone": "Europe/Paris"
                       }
                     },
@@ -566,7 +566,7 @@
                         "lastName": "Dupont",
                         "phone": "+33600000000",
                         "email": "michel.dupont@mail.fr",
-                        "language": "fr-BE",
+                        "language": "fr",
                         "timezone": "Europe/Paris"
                       }
                     },
@@ -587,7 +587,7 @@
                         "lastName": "Dupond",
                         "phone": "+33600000000",
                         "email": "pierre.dupond@mail.fr",
-                        "language": "fr-BE",
+                        "language": "fr",
                         "timezone": "Europe/Paris"
                       }
                     },
@@ -1367,7 +1367,7 @@
                         "lastName": "Dupont",
                         "phone": "+33600000000",
                         "email": "michel.dupont@mail.fr",
-                        "language": "fr-FR",
+                        "language": "fr",
                         "timezone": "Europe/Paris"
                       }
                     },
@@ -1385,7 +1385,7 @@
                         "lastName": "Dupond",
                         "phone": "+33600000000",
                         "email": "pierre.dupond@mail.fr",
-                        "language": "fr-FR",
+                        "language": "fr",
                         "timezone": "Europe/Paris"
                       }
                     },
@@ -3473,7 +3473,7 @@
             "lastName": "Doe",
             "phone": "+33610101010",
             "email": "johndoe@mail.com",
-            "language": "fr-FR",
+            "language": "fr",
             "timezone": "Europe/Paris"
           }
         },
@@ -3870,18 +3870,14 @@
         "title": "Langue (language)",
         "description": "Précise le code-langue à utiliser pour le contact de prélèvement/livraison.",
         "x-examples": {
-          "Exemple": "fr-FR"
+          "Exemple": "fr"
         },
-        "example": "fr-FR",
+        "example": "fr",
         "enum": [
           "en",
-          "en-GB",
-          "en-US",
-          "en-CA",
           "fr",
-          "fr-CA",
-          "fr-FR",
-          "fr-BE"
+          "es",
+          "nl"
         ]
       },
       "timezone": {
@@ -3985,7 +3981,7 @@
             "firstName": "Jogn",
             "lastName": "Doe",
             "email": "johndoe@mail.com",
-            "language": "fr-FR",
+            "language": "fr",
             "timezone": "Europe/Paris"
           }
         },
