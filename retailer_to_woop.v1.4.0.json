@@ -1466,7 +1466,7 @@
             }
           },
           "403": {
-            "description": "Création d'un retour impossible pour le 'storeId'",
+            "description": "Création d'un retour impossible pour le 'storeId' ou l'état de la commande ne permet pas un retour produit",
             "content": {
               "application/json": {
                 "schema": {
