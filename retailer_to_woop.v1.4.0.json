@@ -1362,6 +1362,12 @@
                         "city": "Lille",
                         "country": "FR"
                       },
+                      "interval": [
+                        {
+                          "start": "2019-11-27T12:00:00+0000",
+                          "end": "2019-11-27T14:00:00+0000"
+                        }
+                      ],
                       "contact": {
                         "firstName": "Michel",
                         "lastName": "Dupont",
@@ -1380,6 +1386,12 @@
                         "country": "FR"
                       },
                       "infos": "La rue est en travaux",
+                      "interval": [
+                        {
+                          "start": "2019-11-28T13:00:00+0000",
+                          "end": "2019-11-28T15:00:00+0000"
+                        }
+                      ],
                       "contact": {
                         "firstName": "Pierre",
                         "lastName": "Dupond",
