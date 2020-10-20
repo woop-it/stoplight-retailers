@@ -99,7 +99,7 @@
                       "lastName": "Dupont",
                       "phone": "+33600000000",
                       "email": "michel.dupont@mail.fr",
-                      "language": "fr-BE",
+                      "language": "fr",
                       "timezone": "Europe/Paris"
                     },
                     "packages": [
@@ -283,7 +283,7 @@
                         "lastName": "Dupont",
                         "phone": "+33600000000",
                         "email": "michel.dupont@mail.fr",
-                        "language": "fr-BE",
+                        "language": "fr",
                         "timezone": "Europe/Paris"
                       }
                     },
@@ -309,7 +309,7 @@
                         "lastName": "Dupond",
                         "phone": "+33600000000",
                         "email": "pierre.dupond@mail.fr",
-                        "language": "fr-FR",
+                        "language": "fr",
                         "timezone": "Europe/Paris"
                       }
                     },
@@ -379,7 +379,7 @@
                         "lastName": "Dupont",
                         "phone": "+33600000000",
                         "email": "michel.dupont@mail.fr",
-                        "language": "fr-FR",
+                        "language": "fr",
                         "timezone": "Europe/Paris"
                       }
                     },
@@ -405,7 +405,7 @@
                         "lastName": "Dupond",
                         "phone": "+33600000000",
                         "email": "pierre.dupond@mail.fr",
-                        "language": "fr-FR",
+                        "language": "fr",
                         "timezone": "Europe/Paris"
                       }
                     },
@@ -477,7 +477,7 @@
                         "lastName": "Dupont",
                         "phone": "+33600000000",
                         "email": "michel.dupont@mail.fr",
-                        "language": "fr-BE",
+                        "language": "fr",
                         "timezone": "Europe/Paris"
                       }
                     },
@@ -499,7 +499,7 @@
                         "lastName": "Dupond",
                         "phone": "+33600000000",
                         "email": "pierre.dupond@mail.fr",
-                        "language": "fr-BE",
+                        "language": "fr",
                         "timezone": "Europe/Paris"
                       }
                     },
@@ -566,7 +566,7 @@
                         "lastName": "Dupont",
                         "phone": "+33600000000",
                         "email": "michel.dupont@mail.fr",
-                        "language": "fr-BE",
+                        "language": "fr",
                         "timezone": "Europe/Paris"
                       }
                     },
@@ -587,7 +587,7 @@
                         "lastName": "Dupond",
                         "phone": "+33600000000",
                         "email": "pierre.dupond@mail.fr",
-                        "language": "fr-BE",
+                        "language": "fr",
                         "timezone": "Europe/Paris"
                       }
                     },
@@ -701,7 +701,10 @@
                     "value": {
                       "statusCode": 403,
                       "error": "Forbidden",
-                      "message": "Store doesn't exist or is inactive"
+                      "message": "Store doesn't exist or is inactive",
+                      "reasons": [
+                        "STORE_NOT_FOUND"
+                      ]
                     }
                   }
                 }
@@ -1359,12 +1362,18 @@
                         "city": "Lille",
                         "country": "FR"
                       },
+                      "interval": [
+                        {
+                          "start": "2019-11-27T12:00:00+0000",
+                          "end": "2019-11-27T14:00:00+0000"
+                        }
+                      ],
                       "contact": {
                         "firstName": "Michel",
                         "lastName": "Dupont",
                         "phone": "+33600000000",
                         "email": "michel.dupont@mail.fr",
-                        "language": "fr-FR",
+                        "language": "fr",
                         "timezone": "Europe/Paris"
                       }
                     },
@@ -1377,12 +1386,18 @@
                         "country": "FR"
                       },
                       "infos": "La rue est en travaux",
+                      "interval": [
+                        {
+                          "start": "2019-11-28T13:00:00+0000",
+                          "end": "2019-11-28T15:00:00+0000"
+                        }
+                      ],
                       "contact": {
                         "firstName": "Pierre",
                         "lastName": "Dupond",
                         "phone": "+33600000000",
                         "email": "pierre.dupond@mail.fr",
-                        "language": "fr-FR",
+                        "language": "fr",
                         "timezone": "Europe/Paris"
                       }
                     },
@@ -1463,7 +1478,7 @@
             }
           },
           "403": {
-            "description": "Création d'un retour impossible pour le 'storeId'",
+            "description": "Création d'un retour impossible pour le 'storeId' ou l'état de la commande ne permet pas un retour produit",
             "content": {
               "application/json": {
                 "schema": {
@@ -3470,7 +3485,7 @@
             "lastName": "Doe",
             "phone": "+33610101010",
             "email": "johndoe@mail.com",
-            "language": "fr-FR",
+            "language": "fr",
             "timezone": "Europe/Paris"
           }
         },
@@ -3867,18 +3882,14 @@
         "title": "Langue (language)",
         "description": "Précise le code-langue à utiliser pour le contact de prélèvement/livraison.",
         "x-examples": {
-          "Exemple": "fr-FR"
+          "Exemple": "fr"
         },
-        "example": "fr-FR",
+        "example": "fr",
         "enum": [
           "en",
-          "en-GB",
-          "en-US",
-          "en-CA",
           "fr",
-          "fr-CA",
-          "fr-FR",
-          "fr-BE"
+          "es",
+          "nl"
         ]
       },
       "timezone": {
@@ -3958,6 +3969,18 @@
           "message": {
             "type": "string",
             "description": "Description du message d'erreur"
+          },
+          "reasons": {
+            "type": "array",
+            "description": "Liste des raisons techniques possibles",
+            "items": {
+              "type": "string",
+              "enum": [
+                "STORE_NOT_FOUND",
+                "EXCHANGE_PLACE_NOT_FOUND",
+                "PICKUP_POINT_NOT_FOUND"
+              ]
+            }
           }
         }
       },
@@ -3970,7 +3993,7 @@
             "firstName": "Jogn",
             "lastName": "Doe",
             "email": "johndoe@mail.com",
-            "language": "fr-FR",
+            "language": "fr",
             "timezone": "Europe/Paris"
           }
         },
