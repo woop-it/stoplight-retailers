@@ -690,7 +690,7 @@
             }
           },
           "403": {
-            "description": "Création de l'ordre impossible pour le 'storeId'\n\n[Voir la liste des raisons]()",
+            "description": "Création de l'ordre impossible pour le 'storeId'\n\n[Voir la liste des raisons](https://woop.stoplight.io/docs/retailer/docs/Mod%C3%A8les/reasons.md)",
             "content": {
               "application/json": {
                 "schema": {
