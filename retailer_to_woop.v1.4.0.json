@@ -2644,28 +2644,21 @@
             "description": "OK. Contient le document au format original du document",
             "headers": {},
             "content": {
-              "application/octet-stream": {
-                "schema": {
-                  "type": "string"
-                },
-                "examples": {
-                  "example": {
-                    "value": "string"
-                  }
-                }
-              },
               "application/json": {
                 "schema": {
-                  "description": "",
-                  "type": "object",
-                  "properties": {
-                    "base64": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "base64": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    {
                       "type": "string",
-                      "minLength": 1
+                      "description": "Contenu du fichier"
                     }
-                  },
-                  "required": [
-                    "base64"
                   ]
                 }
               }
