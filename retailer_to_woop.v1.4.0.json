@@ -2653,6 +2653,21 @@
                     "value": "string"
                   }
                 }
+              },
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "base64": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "required": [
+                    "base64"
+                  ]
+                }
               }
             }
           },
@@ -2719,6 +2734,14 @@
             "name": "exchangePlaceId",
             "required": true,
             "description": "Id du point de prélévement"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "Accept",
+            "description": "Pour avoir un retour en json qui contient une base64, mettre en valeur \"application/json\""
           }
         ]
       }
