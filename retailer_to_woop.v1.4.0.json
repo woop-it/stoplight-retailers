@@ -192,7 +192,7 @@
             "description": "Vous n'êtes pas autorisé à accéder à cet élément"
           },
           "403": {
-            "description": "Création de demande de retrait impossible pour ce 'storeId'",
+            "description": "Création de demande de retrait impossible\n\n[Voir la liste des raisons](https://woop.stoplight.io/docs/retailer/docs/Mod%C3%A8les/reasons.md)",
             "content": {
               "application/json": {
                 "schema": {
@@ -690,7 +690,7 @@
             }
           },
           "403": {
-            "description": "Création de l'ordre impossible pour le 'storeId'\n\n[Voir la liste des raisons](https://woop.stoplight.io/docs/retailer/docs/Mod%C3%A8les/reasons.md)",
+            "description": "Création de l'ordre impossible\n\n[Voir la liste des raisons](https://woop.stoplight.io/docs/retailer/docs/Mod%C3%A8les/reasons.md)",
             "content": {
               "application/json": {
                 "schema": {
@@ -1197,11 +1197,21 @@
           }
         },
         "responses": {
-          "204": {
+          "200": {
             "description": "Requête traitée avec succès"
           },
           "401": {
             "description": "Vous n'êtes pas autorisé à accéder à cet élément",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Mise à jour de l'ordre impossible\n\n[Voir la liste des raisons](https://woop.stoplight.io/docs/retailer/docs/Mod%C3%A8les/reasons.md)",
             "content": {
               "application/json": {
                 "schema": {
@@ -1478,7 +1488,7 @@
             }
           },
           "403": {
-            "description": "Création d'un retour impossible pour le 'storeId' ou l'état de la commande ne permet pas un retour produit",
+            "description": "Création d'un retour impossible ou l'état de la commande ne permet pas un retour produit\n\n[Voir la liste des raisons](https://woop.stoplight.io/docs/retailer/docs/Mod%C3%A8les/reasons.md)",
             "content": {
               "application/json": {
                 "schema": {
