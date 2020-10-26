@@ -728,6 +728,116 @@
         },
         "summary": "Recevoir les événements pour une commande donnée"
       }
+    },
+    "/orders/{orderId}/appointment": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "orderId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "put": {
+        "summary": "Recevoir la date de livraison établie avec le client final",
+        "operationId": "put-orders-orderId-appointment",
+        "responses": {
+          "204": {
+            "description": "Requête traitée avec succès"
+          },
+          "400": {
+            "description": "Elements manquants et/ou incorrect dans le body",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "reasons": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "reasons": [
+                        "string"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "L'information ne peut plus être mise à jour car la livraison est terminée. ",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./retailer_to_woop.v1.4.0.json#/components/schemas/errorCode"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Le 'orderId' n'a pas été trouvé",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./retailer_to_woop.v1.4.0.json#/components/schemas/errorCode"
+                }
+              }
+            }
+          }
+        },
+        "description": "Permet de recevoir la date de livraison en fonction de l'intervalle de livraison défini avec le transporteur et le client final.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "comment": {
+                    "type": "string"
+                  },
+                  "date": {
+                    "type": "string"
+                  },
+                  "interval": {
+                    "$ref": "./retailer_to_woop.v1.4.0.json#/components/schemas/interval"
+                  }
+                },
+                "required": [
+                  "comment",
+                  "date",
+                  "interval"
+                ]
+              },
+              "examples": {
+                "example": {
+                  "value": {
+                    "comment": "Client absent le 26/11/2020",
+                    "date": "2020-11-22T10:30:00+0000",
+                    "interval": {
+                      "start": "2020-11-28T15:52:01+0000",
+                      "end": "2020-11-28T17:52:01+0000"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "description": "Contient les informations du changement de date de livraison."
+        },
+        "tags": [
+          "Commande"
+        ]
+      }
     }
   },
   "components": {
