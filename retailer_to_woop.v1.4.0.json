@@ -4157,10 +4157,10 @@
       "queryPickupPointCarrierCode": {
         "in": "query",
         "name": "carrierCode",
-        "description": "Filtre par code du transporteur (plusieurs codes possibles séparé par ','",
+        "description": "Filtre par code du transporteur (plusieurs codes possibles séparés par une virgule)",
         "schema": {
           "type": "string",
-          "example": "bpost,dpd"
+          "example": "bpost ou bpost,dpd"
         }
       },
       "queryStoreId": {
