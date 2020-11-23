@@ -1923,11 +1923,7 @@
                           "id": "q251zd564qz",
                           "carrier": {
                             "code": "transporteur1",
-                            "name": "Transporteur A",
-                            "categories": [
-                              "CAT1",
-                              "CAT2"
-                            ]
+                            "name": "Transporteur A"
                           },
                           "openingHours": {
                             "monday": [
@@ -4046,22 +4042,17 @@
           "PICKUP_POINT_RELAY_WITHOUT_LOCKER",
           "PICKUP_POINT_ALL"
         ],
-        "default": "PICKUP_POINT_RELAY_WITH_LOCKER"
+        "default": "PICKUP_POINT_RELAY_WITH_LOCKER",
       },
       "pickupPointCategory": {
-        "type": "array",
-        "description": "Précise la catégorie interne de point relais du transporteur ",
-        "minItems": 1,
-        "uniqueItems": true,
-        "items": {
-          "type": "string"
-        },
-        "x-examples": {
-          "example": [
-            "string"
-          ]
-        },
-        "title": "Catégorie de point relais du transporteur (pickupPointCategory)"
+        "title": "Catégorie de point relais",
+        "type": "string",
+        "enum": [
+          "PICKUP_POINT_STANDARD",
+          "PICKUP_POINT_XL",
+          "PICKUP_POINT_XXL",
+          "PICKUP_POINT_DRIVE"
+        ]
       },
       "errorCode": {
         "title": "Code erreur (errorCode)",
@@ -4182,10 +4173,10 @@
       "queryPickupPointCarrierCode": {
         "in": "query",
         "name": "carrierCode",
-        "description": "Filtre par code du transporteur (plusieurs codes possibles séparés par une virgule)",
+        "description": "Filtre par code du transporteur (Pour plusieurs transporteurs : ?carrierCode=dpd&carrierCode=bpost",
         "schema": {
           "type": "string",
-          "example": "bpost ou bpost,dpd"
+          "example": "bpost",
         }
       },
       "queryStoreId": {
@@ -4262,7 +4253,7 @@
         "in": "query",
         "required": false,
         "name": "type",
-        "description": "Type de point relais",
+        "description": "Type de point relais (Pour des transporteurs particuliers: ?type[bpost]=PICKUP_POINT_AGENCY&type[bpost]=PICKUP_POINT_RELAY_WITH_LOCKER&type[dpd]=PICKUP_POINT_POST_OFFICE",
         "schema": {
           "$ref": "#/components/schemas/pickupPointType"
         }
@@ -4271,7 +4262,7 @@
         "in": "query",
         "required": false,
         "name": "category",
-        "description": "Catégorie de point relais",
+        "description": "Catégorie de point relais (Pour des transporteurs particuliers: ?category[bpost]=PICKUP_POINT_STANDARD&category[bpost]=PICKUP_POINT_XL&category[dpd]=PICKUP_POINT_STANDARD",
         "schema": {
           "$ref": "#/components/schemas/pickupPointCategory"
         }
