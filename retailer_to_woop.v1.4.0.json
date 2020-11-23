@@ -2463,9 +2463,12 @@
                             }
                           },
                           "price": {
-                              "type": "object",
+                            "type": "object",
                             "description": "Prix du service",
-                            "required": ["price", "currency"],
+                            "required": [
+                              "price",
+                              "currency"
+                            ],
                             "properties": {
                               "price": {
                                 "type": "number"
@@ -2476,16 +2479,22 @@
                             }
                           },
                           "delay": {
-                              "type": "object",
+                            "type": "object",
                             "description": "Délai d'execution du service",
-                            "required": ["value", "unit"],
+                            "required": [
+                              "value",
+                              "unit"
+                            ],
                             "properties": {
                               "value": {
                                 "type": "number"
                               },
                               "unit": {
                                 "type": "enum",
-                                "enum": ["day", "hour"]
+                                "enum": [
+                                  "day",
+                                  "hour"
+                                ]
                               }
                             }
                           }
@@ -2524,10 +2533,10 @@
                           "delay": {
                             "value": 3,
                             "unit": "day"
-                          } 
+                          }
                         },
                         {
-                           "carrier": {
+                          "carrier": {
                             "code": "chronopost",
                             "name": "Chronopost"
                           },
@@ -3831,6 +3840,13 @@
       "pickupPointCarrier": {
         "description": "Précise le transporteur sélectionné pour un point relais.",
         "type": "object",
+        "x-examples": {
+          "Exemple": {
+            "name": "Bpost",
+            "code": "bpost"
+          }
+        },
+        "title": "Transporteur du point relais (pickupPointCarrier)",
         "properties": {
           "name": {
             "type": "string",
@@ -3839,19 +3855,15 @@
           "code": {
             "type": "string",
             "description": "Code interne du transporteur"
+          },
+          "categories": {
+            "$ref": "#/components/schemas/pickupPointCategory"
           }
         },
         "required": [
           "name",
           "code"
-        ],
-        "x-examples": {
-          "Exemple": {
-            "name": "Bpost",
-            "code": "bpost"
-          }
-        },
-        "title": "Transporteur du point relais (pickupPointCarrier)"
+        ]
       },
       "cancelledReasons": {
         "type": "string",
