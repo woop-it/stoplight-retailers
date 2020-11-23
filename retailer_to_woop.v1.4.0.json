@@ -1923,7 +1923,11 @@
                           "id": "q251zd564qz",
                           "carrier": {
                             "code": "transporteur1",
-                            "name": "Transporteur A"
+                            "name": "Transporteur A",
+                            "categories": [
+                              "CAT1",
+                              "CAT2"
+                            ]
                           },
                           "openingHours": {
                             "monday": [
