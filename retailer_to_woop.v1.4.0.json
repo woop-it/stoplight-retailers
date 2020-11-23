@@ -4045,14 +4045,19 @@
         "default": "PICKUP_POINT_RELAY_WITH_LOCKER"
       },
       "pickupPointCategory": {
-        "title": "Catégorie de point relais",
-        "type": "string",
-        "enum": [
-          "PICKUP_POINT_STANDARD",
-          "PICKUP_POINT_XL",
-          "PICKUP_POINT_XXL",
-          "PICKUP_POINT_DRIVE"
-        ]
+        "type": "array",
+        "description": "Précise la catégorie interne de point relais du transporteur ",
+        "minItems": 1,
+        "uniqueItems": true,
+        "items": {
+          "type": "string"
+        },
+        "x-examples": {
+          "example": [
+            "string"
+          ]
+        },
+        "title": "Catégorie de point relais du transporteur (pickupPointCategory)"
       },
       "errorCode": {
         "title": "Code erreur (errorCode)",
