@@ -3843,7 +3843,11 @@
         "x-examples": {
           "Exemple": {
             "name": "Bpost",
-            "code": "bpost"
+            "code": "bpost",
+            "categories": [
+              "CAT1",
+              "CAT2"
+            ]
           }
         },
         "title": "Transporteur du point relais (pickupPointCarrier)",
