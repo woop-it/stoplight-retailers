@@ -2407,42 +2407,86 @@
         "summary": "Initialisation souscriptions"
       }
     },
-    "/eligibilities/services": {
+    "/eligibilities": {
       "post": {
-        "summary": "Éligibilité des services",
-        "operationId": "postServices",
+        "summary": "Éligibilité des transporteurs et services",
+        "operationId": "postEligibilities",
         "responses": {
           "200": {
-            "description": "Liste des services éligibles.",
+            "description": "Liste des transporteurs et services éligibles.",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "description": "Liste des services",
+                  "description": "Liste des transporteurs et services éligibles",
                   "properties": {
-                    "services": {
+                    "eligibilities": {
                       "type": "array",
                       "items": {
                         "type": "object",
                         "required": [
-                          "type"
+                          "carrier",
+                          "service",
+                          "price",
+                          "delay"
                         ],
                         "properties": {
-                          "type": {
+                          "carrier": {
+                            "type": "object",
+                            "description": "Transporteur éligible",
+                            "properties": {
+                              "name": {
+                                "type": "string",
+                                "description": "Nom du transporteur"
+                              },
+                              "code": {
+                                "type": "string",
+                                "description": "Code interne du transporteur"
+                              }
+                            }
+                          },
+                          "service": {
                             "$ref": "#/components/schemas/deliveryService"
                           },
-                          "pickupPointTypes": {
+                          "types": {
                             "type": "array",
                             "description": "Liste des types des point relais éligibles (pour le service SERVICE_PICKUP_POINT)",
                             "items": {
                               "$ref": "#/components/schemas/pickupPointType"
                             }
                           },
-                          "pickupPointCategories": {
+                          "categories": {
                             "type": "array",
                             "description": "Liste des catégories des point relais éligibles (pour le service SERVICE_PICKUP_POINT)",
                             "items": {
                               "$ref": "#/components/parameters/queryPickupPointCategory"
+                            }
+                          },
+                          "price": {
+                              "type": "object",
+                            "description": "Prix du service",
+                            "required": ["price", "currency"],
+                            "properties": {
+                              "price": {
+                                "type": "number"
+                              },
+                              "currency": {
+                                "$ref": "#/components/schemas/currency"
+                              }
+                            }
+                          },
+                          "delay": {
+                              "type": "object",
+                            "description": "Délai d'execution du service",
+                            "required": ["value", "unit"],
+                            "properties": {
+                              "value": {
+                                "type": "number"
+                              },
+                              "unit": {
+                                "type": "enum",
+                                "enum": ["day", "hour"]
+                              }
                             }
                           }
                         }
@@ -2453,28 +2497,49 @@
                 "examples": {
                   "Exemple": {
                     "value": {
-                      "services": [
+                      "eligibilities": [
                         {
-                          "type": "SERVICE_PICKUP_POINT",
-                          "pickupPointTypes": [
+                          "carrier": {
+                            "code": "bpost",
+                            "name": "Bpost"
+                          },
+                          "service": "SERVICE_PICKUP_POINT",
+                          "types": [
                             "PICKUP_POINT_AGENCY",
                             "PICKUP_POINT_POST_OFFICE",
                             "PICKUP_POINT_RELAY_WITH_LOCKER",
                             "PICKUP_POINT_RELAY_WITHOUT_LOCKER",
                             "PICKUP_POINT_ALL"
                           ],
-                          "pickupPointCategories": [
+                          "categories": [
                             "PICKUP_POINT_STANDARD",
                             "PICKUP_POINT_XL",
                             "PICKUP_POINT_XXL",
                             "PICKUP_POINT_DRIVE"
-                          ]
+                          ],
+                          "price": {
+                            "value": 2.99,
+                            "currency": "EUR"
+                          },
+                          "delay": {
+                            "value": 3,
+                            "unit": "day"
+                          } 
                         },
                         {
-                          "type": "SERVICE_FRONT_HOME"
-                        },
-                        {
-                          "type": "SERVICE_INSTALL"
+                           "carrier": {
+                            "code": "chronopost",
+                            "name": "Chronopost"
+                          },
+                          "service": "SERVICE_FRONT_HOME",
+                          "price": {
+                            "value": 5.99,
+                            "currency": "EUR"
+                          },
+                          "delay": {
+                            "value": 1,
+                            "unit": "day"
+                          }
                         }
                       ]
                     }
@@ -2518,12 +2583,12 @@
             "$ref": "#/components/parameters/apiVersion"
           }
         ],
-        "description": "Cette méthode retourne les services de livraison possible pour une commande. En fonction du point de départ de la commande, du point d'arrivé (optionnel) et du contenu du panier client, la méthode retourne l'ensemble des services disponibles. ",
+        "description": "Cette méthode retourne les transporteur et services de livraison possible pour une commande. En fonction du point de départ de la commande, du point d'arrivé (optionnel) et du contenu du panier client, la méthode retourne l'ensemble des services et transporteurs disponibles. ",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/postServices"
+                "$ref": "#/components/schemas/postEligibilities"
               },
               "examples": {
                 "Exemple par défaut": {
@@ -2631,7 +2696,8 @@
         "tags": [
           "Éligibilité"
         ]
-      }
+      },
+      "parameters": []
     },
     "/orders/download": {
       "get": {
@@ -2907,10 +2973,10 @@
         "description": "Précise les informations utiles à la création d'une demande de retrait (click and collect).",
         "title": "Demande de retrait (postCollects)"
       },
-      "postServices": {
+      "postEligibilities": {
         "type": "object",
-        "description": "Précise la demande des services de livraison possible en fonction d'un point de départ, d'un point d'arrivé (non obligatoire) et du contenu d'un panier client. ",
-        "title": "Demande d'éligibilité des services (postServices)",
+        "description": "Demande d'éligibilité ",
+        "title": "Demande d'éligibilité des services (postEligibilities)",
         "x-examples": {
           "Exemple par défaut": {
             "picking": {
@@ -4091,10 +4157,10 @@
       "queryPickupPointCarrierCode": {
         "in": "query",
         "name": "carrierCode",
-        "description": "Filtre par code du transporteur",
+        "description": "Filtre par code du transporteur (plusieurs codes possibles séparé par ','",
         "schema": {
           "type": "string",
-          "example": "bpost"
+          "example": "bpost,dpd"
         }
       },
       "queryStoreId": {
