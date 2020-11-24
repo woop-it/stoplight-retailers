@@ -1836,7 +1836,7 @@
                           "externalMinimalCategory": {
                             "type": "string",
                             "example": "Cat1",
-                            "description": "Catégories du point relais chez le constructeur"
+                            "description": "Retourne la catégorie du point relais la plus \"petite\" chez le constructeur."
                           },
                           "openingHours": {
                             "type": "object",
@@ -1930,7 +1930,7 @@
                             "code": "transporteur1",
                             "name": "Transporteur A"
                           },
-                          "externalCategory": "24R",
+                          "externalMinimalCategory": "24R",
                           "openingHours": {
                             "monday": [
                               {
