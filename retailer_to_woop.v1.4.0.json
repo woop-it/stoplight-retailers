@@ -1834,9 +1834,13 @@
                             "$ref": "#/components/schemas/pickupPointCarrier"
                           },
                           "externalCategory": {
-                            "type": "string",
+                            "type": "array",
                             "example": "24R",
-                            "description": "Catégorie du point relais chez le constructeur"
+                            "description": "Catégories du point relais chez le constructeur",
+                            "items": {
+                              "type": "string",
+                              "example": "[\"Cat1\", \"Cat2\"]"
+                            }
                           },
                           "openingHours": {
                             "type": "object",
