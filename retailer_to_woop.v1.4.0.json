@@ -1759,7 +1759,7 @@
         "tags": [
           "Point relais"
         ],
-        "description": "Cette méthode permet de récupérer la liste des point relais des transporteurs situés autour d’une géolocalisation donnée.\n\n[Voir l'explication](./docs/Modèles/Gestion-des-PR.md)",
+        "description": "Cette méthode permet de récupérer la liste des point relais des transporteurs situés autour d’une géolocalisation donnée.\n\n[Voir l'explication](https://woop.stoplight.io/docs/retailer/docs/Mod%C3%A8les/Gestion-des-PR.md)",
         "operationId": "getPickupPoints",
         "parameters": [
           {
