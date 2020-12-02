@@ -1,15 +1,15 @@
-# Point de prélèvement
+# Exchange Place
 
-Un point de prélèvement dit `exchangePlace` représente un point physique de ramasse rattaché directement à un magasin. 
+An exchange place (`exchangePlace`) represents a physical picking place directly attached to a store.
 
-Le point de prélèvement précise la nature du lieu ainsi que certaines informations sur l'adresse de prélèvement. Les paramètres, configurations et spécifications dépendent du magasin. 
+The exchange place specifies the place nature and some informations on picking address. Parameters, configurations and specifications depend on the store. 
 
 ![get-started-icon](../../assets/images/ExchangePlace.png)
 
-La congfiguration établie au sein de la plateforme est la suivante : 
-- L'enseigne contractualise avec un ensemble de transporteurs et configure ses magasins en son nom. 
-- Chaque magasin hérite de la configuration et des caractéristiques des transporteurs de son enseigne. 
-- Le magasin, en son propre chef, a la possibilité d'affiner la configuration de ses transporteurs hérités. 
-- Le magasin configure à son tour un ensemble de point de prélèvement (lieu de ramasse physique de la marchandise) en son nom. 
-- Chaque point de prélèvement hérite de la configuration et des caractéristiques des transporteurs de son magasin. 
-- Le point de prélèvement a également, à ce stade, la possibilité d'affiner la configuration de ses transporteurs hérités. 
+The established configuration in platformis the following : 
+- The retailer contractualises with a group of carriers and configures its stores. 
+- Each store inherits the configuration and carrier characteristics of its retailer. 
+- On its own command, the store can refine its inherited carriers configuration. 
+- Then the store configures a group of exchange places. 
+- Each exchange place inherits the configuration and carrier characteristics of its store. 
+- At this point, the exchange place can refine its inherited carriers configuration.
