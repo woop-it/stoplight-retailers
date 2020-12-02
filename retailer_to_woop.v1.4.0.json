@@ -1833,10 +1833,10 @@
                           "carrier": {
                             "$ref": "#/components/schemas/pickupPointCarrier"
                           },
-                          "externalMinimalCategory": {
+                          "externalCategory": {
                             "type": "string",
                             "example": "Cat1",
-                            "description": "Retourne la catégorie du point relais la plus \"petite\" chez le constructeur."
+                            "description": "Retourne la catégorie du point relais comme nommée chez le transporteur."
                           },
                           "openingHours": {
                             "type": "object",

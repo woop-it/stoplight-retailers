@@ -29,10 +29,6 @@ Code | Intitulé
 
 Default value : `PICKUP_POINT_RELAY_WITH_LOCKER`
 
-*Ex:*
-- Filtre sur un type: `?type=PICKUP_POINT_POST_OFFICE`
-- Filtre sur plusieurs types: `?type=PICKUP_POINT_POST_OFFICE&type=PICKUP_POINT_RELAY_WITH_LOCKER`
-- Filtre par transporteurs et types: `?carrierCode=bpost&carrierCode=dpd&type[bpost]=PICKUP_POINT_POST_OFFICE&type[dpd]=PICKUP_POINT_RELAY_WITH_LOCKER`
 
 
 ## Catégorie de point-relais
