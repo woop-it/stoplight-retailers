@@ -27,7 +27,7 @@ Code | Intitulé
  `PICKUP_POINT_RELAY_WITHOUT_LOCKER`|Points relais sans Locker
  `PICKUP_POINT_ALL`|Tous les points relais possible
 
-Default value : `PICKUP_POINT_RELAY_WITH_LOCKER`
+Default value : `PICKUP_POINT_RELAY_ALL`
 
 
 
