@@ -2746,12 +2746,13 @@
         "type": "oauth2",
         "flows": {
           "clientCredentials": {
-            "tokenUrl": "https://last-mile.eu.auth0.com/oauth/token",
+            "tokenUrl": "https://token.last-mile.fr/oauth/token",
             "x-google-issuer": "https://last-mile.eu.auth0.com/",
             "x-google-jwks_uri": "https://last-mile.eu.auth0.com/.well-known/jwks.json",
             "x-google-audiences": "https://retailer.api.meltingpoint.fr/"
           }
-        }
+        },
+        "description": "[Go to definition](https://woop.stoplight.io/docs/retailer/branches/english/docs/Bases/Authentification.md)"
       }
     },
     "schemas": {
@@ -3056,7 +3057,7 @@
             "description": "Order unique ID (max 36 characters)",
             "maxLength": 36
           },
-          "referenceNumber": { 
+          "referenceNumber": {
             "type": "string",
             "description": "Order reference, number associated to a store. Can equals to orderId."
           },
