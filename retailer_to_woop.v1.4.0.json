@@ -230,11 +230,6 @@
             }
           }
         },
-        "security": [
-          {
-            "oAuth2ClientCredentials": []
-          }
-        ],
         "summary": "Effectuer une demande de retrait de commande"
       }
     },
@@ -2742,16 +2737,9 @@
   },
   "components": {
     "securitySchemes": {
-      "oAuth2ClientCredentials": {
+      "Bearer": {
         "type": "oauth2",
-        "flows": {
-          "clientCredentials": {
-            "tokenUrl": "https://token.last-mile.fr/oauth/token",
-            "x-google-issuer": "https://last-mile.eu.auth0.com/",
-            "x-google-jwks_uri": "https://last-mile.eu.auth0.com/.well-known/jwks.json",
-            "x-google-audiences": "https://retailer.api.meltingpoint.fr/"
-          }
-        },
+        "flows": {},
         "description": "[Go to definition](https://woop.stoplight.io/docs/retailer/branches/english/docs/Bases/Authentification.md)"
       }
     },
@@ -4210,5 +4198,10 @@
         }
       }
     }
-  }
+  },
+  "security": [
+    {
+      "Bearer": []
+    }
+  ]
 }
