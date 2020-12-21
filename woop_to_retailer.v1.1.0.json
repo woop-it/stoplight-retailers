@@ -103,7 +103,7 @@
                         },
                         "ditanceMax": {
                           "value": 5,
-                          "unit": "km"
+                          "unit": "m"
                         }
                       }
                     }
@@ -507,7 +507,7 @@
                     "orderId": "a54efa65e4a",
                     "billedDistance": {
                       "value": 56.85,
-                      "unit": "km"
+                      "unit": "m"
                     },
                     "emittedCarbonDioxide": {
                       "value": 12.3,
