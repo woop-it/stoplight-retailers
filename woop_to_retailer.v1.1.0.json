@@ -1181,7 +1181,7 @@
         }
       },
       "specifications": {
-        "description": "Caractéristiques disponible pour une commande donnée avec un transporteur sélectionné",
+        "description": "Liste des caractéristiques enregistrées pour un transporteur sur une commande. ",
         "type": "object",
         "x-examples": {
           "example": {
@@ -1236,7 +1236,7 @@
             }
           }
         },
-        "title": "Capacités transporteur (deliveryCapacity)",
+        "title": "Capacités transporteur (deliveryCapacities)",
         "properties": {
           "weightMin": {
             "$ref": "#/components/schemas/weigh"
@@ -1282,23 +1282,23 @@
         "type": "object",
         "x-examples": {
           "exemple": {
-            "value": 0,
-            "unit": "string"
+            "value": 5,
+            "unit": "km"
           }
         },
+        "title": "Distance (distance)",
         "properties": {
           "value": {
             "type": "number"
           },
           "unit": {
-            "$ref": "#/components/schemas/lengthUnit"
+            "$ref": "#/components/schemas/distanceUnit"
           }
         },
         "required": [
           "value",
           "unit"
-        ],
-        "title": "Distance (distance)"
+        ]
       },
       "distanceUnit": {
         "type": "string",
@@ -1308,7 +1308,6 @@
         },
         "description": "Précise l'unité de mesure pour le calcul de distance.",
         "enum": [
-          "cm",
           "m",
           "km"
         ]
