@@ -85,6 +85,26 @@
                         "lastName": "Dupont",
                         "phone": "+33600000000",
                         "email": "michel.dupont@mail.fr"
+                      },
+                      "specifications": {
+                        "updateOrder": true,
+                        "cancelOrder": false,
+                        "carrierLabel": true,
+                        "storageCapacity": true
+                      },
+                      "deliveryCapacity": {
+                        "weightMin": {
+                          "value": 5,
+                          "unit": "kg"
+                        },
+                        "weightMax": {
+                          "value": 50,
+                          "unit": "kg"
+                        },
+                        "ditanceMax": {
+                          "value": 5,
+                          "unit": "km"
+                        }
                       }
                     }
                   }
@@ -1024,6 +1044,26 @@
               "lastName": "Doe",
               "phone": "+33610101010",
               "email": "johndoe@mail.com"
+            },
+            "specifications": {
+              "updateOrder": true,
+              "cancelOrder": false,
+              "carrierLabel": true,
+              "storageCapacity": true
+            },
+            "deliveryCapacity": {
+              "weightMin": {
+                "value": 5,
+                "unit": "kg"
+              },
+              "weightMax": {
+                "value": 50,
+                "unit": "kg"
+              },
+              "ditanceMax": {
+                "value": 5,
+                "unit": "km"
+              }
             }
           }
         },
@@ -1036,11 +1076,19 @@
           },
           "contact": {
             "$ref": "#/components/schemas/contact"
+          },
+          "specifications": {
+            "$ref": "#/components/schemas/specifications"
+          },
+          "deliveryCapacity": {
+            "$ref": "#/components/schemas/deliveryCapacity"
           }
         },
         "required": [
           "name",
-          "contact"
+          "contact",
+          "specifications",
+          "deliveryCapacity"
         ]
       },
       "putDeliveryStatus": {
@@ -1131,6 +1179,139 @@
             "value": "string"
           }
         }
+      },
+      "specifications": {
+        "description": "Caractéristiques disponible pour une commande donnée avec un transporteur sélectionné",
+        "type": "object",
+        "x-examples": {
+          "example": {
+            "updateOrder": true,
+            "cancelOrder": true,
+            "carrierLabel": true,
+            "storageCapacity": true
+          }
+        },
+        "title": "Caractéristiques (specifications)",
+        "properties": {
+          "updateOrder": {
+            "type": "boolean",
+            "description": "Indique si la modification de commande est autorisée"
+          },
+          "cancelOrder": {
+            "type": "boolean",
+            "description": "Indique si l'annulation de commande est autorisée"
+          },
+          "carrierLabel": {
+            "type": "boolean",
+            "description": "Indique si le transporteur possède une étiquette de transport"
+          },
+          "storageCapacity": {
+            "type": "boolean",
+            "description": "Indique si le transporteur possède une capacité de stockage"
+          }
+        },
+        "required": [
+          "updateOrder",
+          "cancelOrder",
+          "carrierLabel",
+          "storageCapacity"
+        ]
+      },
+      "deliveryCapacity": {
+        "description": "Précise les capacités transporteur autorisées.",
+        "type": "object",
+        "x-examples": {
+          "Exemple": {
+            "weightMin": {
+              "value": 0,
+              "unit": "string"
+            },
+            "weightMax": {
+              "value": 0,
+              "unit": "string"
+            },
+            "ditanceMax": {
+              "value": 0,
+              "unit": "string"
+            }
+          }
+        },
+        "title": "Capacités transporteur (deliveryCapacity)",
+        "properties": {
+          "weightMin": {
+            "$ref": "#/components/schemas/weigh"
+          },
+          "weightMax": {
+            "$ref": "#/components/schemas/weigh"
+          },
+          "ditanceMax": {
+            "$ref": "#/components/schemas/distance"
+          }
+        },
+        "required": [
+          "weightMin",
+          "weightMax",
+          "ditanceMax"
+        ]
+      },
+      "weigh": {
+        "description": "Précise le poids autorisé",
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "number"
+          },
+          "unit": {
+            "$ref": "#/components/schemas/massUnit"
+          }
+        },
+        "required": [
+          "value",
+          "unit"
+        ],
+        "x-examples": {
+          "example": {
+            "value": 5,
+            "unit": "kg"
+          }
+        },
+        "title": "Poids (weigh)"
+      },
+      "distance": {
+        "description": "Précise la distance entre deux points.",
+        "type": "object",
+        "x-examples": {
+          "exemple": {
+            "value": 0,
+            "unit": "string"
+          }
+        },
+        "properties": {
+          "value": {
+            "type": "number"
+          },
+          "unit": {
+            "$ref": "#/components/schemas/lengthUnit"
+          }
+        },
+        "required": [
+          "value",
+          "unit"
+        ],
+        "title": "Distance (distance)"
+      },
+      "distanceUnit": {
+        "type": "string",
+        "title": "Unité de distance (distanceUnit)",
+        "x-examples": {
+          "Exemple": "string"
+        },
+        "description": "Précise l'unité de mesure pour le calcul de distance.",
+        "enum": [
+          "cm",
+          "m",
+          "km"
+        ]
       }
     },
     "parameters": {
