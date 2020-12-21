@@ -1046,6 +1046,7 @@
       "putDeliveryStatus": {
         "title": "Mise à jour de statut de livraison (putDeliveryStatus)",
         "type": "object",
+        "description": "Mise à jour de statut de livraison.",
         "properties": {
           "deliveryId": {
             "type": "string",
@@ -1069,6 +1070,9 @@
           },
           "team": {
             "$ref": "#/components/schemas/team"
+          },
+          "additionalData": {
+            "$ref": "#/components/schemas/additionalData"
           }
         },
         "required": [
@@ -1077,8 +1081,7 @@
           "status",
           "date",
           "comment"
-        ],
-        "description": "Mise à jour de statut de livraison."
+        ]
       },
       "putOrderStatus": {
         "title": "Mise à jour du statut de la commande (putOrderStatus)",
@@ -1103,6 +1106,31 @@
           "status"
         ],
         "description": "Mise à jour du statut de la commande."
+      },
+      "additionalData": {
+        "title": "Données additionnelles",
+        "type": "object",
+        "description": "Permet de recevoir des informations/données personnalisées de la part du transporteur.",
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "Intitulé de l'information reçue"
+          },
+          "value": {
+            "type": "string",
+            "description": "Valeur de l'information"
+          }
+        },
+        "required": [
+          "key",
+          "value"
+        ],
+        "x-examples": {
+          "example": {
+            "key": "string",
+            "value": "string"
+          }
+        }
       }
     },
     "parameters": {
