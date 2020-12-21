@@ -1244,14 +1244,14 @@
           "weightMax": {
             "$ref": "#/components/schemas/weigh"
           },
-          "ditanceMax": {
+          "distanceMax": {
             "$ref": "#/components/schemas/distance"
           }
         },
         "required": [
           "weightMin",
           "weightMax",
-          "ditanceMax"
+          "distanceMax"
         ]
       },
       "weigh": {
