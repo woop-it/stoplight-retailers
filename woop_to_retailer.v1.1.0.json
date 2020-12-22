@@ -92,7 +92,7 @@
                         "carrierLabel": true,
                         "storageCapacity": true
                       },
-                      "deliveryCapacity": {
+                      "deliveryCapacities": {
                         "weightMin": {
                           "value": 5,
                           "unit": "kg"
@@ -1051,7 +1051,7 @@
               "carrierLabel": true,
               "storageCapacity": true
             },
-            "deliveryCapacity": {
+            "deliveryCapacities": {
               "weightMin": {
                 "value": 5,
                 "unit": "kg"
@@ -1068,7 +1068,7 @@
           }
         },
         "type": "object",
-        "description": "Précise les informations néccesaire au transporteur.",
+        "description": "Précise les informations du transporteur.",
         "properties": {
           "name": {
             "type": "string",
@@ -1080,15 +1080,15 @@
           "specifications": {
             "$ref": "#/components/schemas/specifications"
           },
-          "deliveryCapacity": {
-            "$ref": "#/components/schemas/deliveryCapacity"
+          "deliveryCapacities": {
+            "$ref": "#/components/schemas/deliveryCapacities"
           }
         },
         "required": [
           "name",
           "contact",
           "specifications",
-          "deliveryCapacity"
+          "deliveryCapacities"
         ]
       },
       "putDeliveryStatus": {
@@ -1217,8 +1217,8 @@
           "storageCapacity"
         ]
       },
-      "deliveryCapacity": {
-        "description": "Précise les capacités transporteur autorisées.",
+      "deliveryCapacities": {
+        "description": "Précise les capacités du transporteur.",
         "type": "object",
         "x-examples": {
           "Exemple": {
