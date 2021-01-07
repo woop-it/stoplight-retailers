@@ -3237,7 +3237,7 @@
       },
       "tags": {
         "type": "array",
-        "description": "Allowing defining \"markers\" on this order.",
+        "description": "Allowing to define \"markers\" on this order.",
         "items": {
           "type": "object",
           "required": [
@@ -3258,7 +3258,7 @@
         "title": "Tags"
       },
       "address": {
-        "description": "All ueful informations about a delivery/picking address.",
+        "description": "All useful informations about a delivery/picking address.",
         "title": "Address (address)",
         "type": "object",
         "x-examples": {
@@ -3339,7 +3339,7 @@
           "DELIVERY_CANCELLED"
         ],
         "title": "Delivery status (deliveryStatus)",
-        "description": "Specify the different possible delivery statuses in the platform.",
+        "description": "Specifies the different possible delivery statuses in the platform.",
         "x-examples": {
           "example": "DELIVERY_STARTED"
         }
@@ -3362,7 +3362,7 @@
             "id": "76761",
             "carrierCode": "bpost"
           },
-          "Point de prélèvement": {
+          "Exchange place": {
             "type": "exchangePlace",
             "id": "1"
           }
@@ -3487,7 +3487,7 @@
             "end": "18:00"
           }
         },
-        "description": "Specifies the openning dates.",
+        "description": "Specifies the opening hours.",
         "title": "Hour interval (interval_hour)"
       },
       "contact": {
@@ -3551,7 +3551,7 @@
         "title": "Delivery services (services)"
       },
       "packages": {
-        "description": "Specifies the useful informations to edit an order. L'unité de manutention est à définir avec la structure colis/produit.",
+        "description": "Specifies the useful informations to edit a package. Handling unit has to be defined within the package/product structure.",
         "type": "object",
         "x-examples": {
           "Example": {
@@ -3691,7 +3691,13 @@
         "required": [
           "value",
           "unit"
-        ]
+        ],
+        "x-examples": {
+          "Example": {
+            "value": 0,
+            "unit": "cm"
+          }
+        }
       },
       "mass": {
         "description": "Specifies the package/product weight.",
@@ -3710,25 +3716,31 @@
           "value",
           "unit"
         ],
-        "title": "Weight (mass)"
+        "title": "Weight (mass)",
+        "x-examples": {
+          "Example": {
+            "value": 1,
+            "unit": "kg"
+          }
+        }
       },
       "packagesReferences": {
         "type": "array",
         "items": {
           "type": "string"
         },
-        "description": "Specifies the package number chosen for carrier tracking.",
+        "description": "Specifies the tracking number chosen by the carrier for the packages.",
         "title": "Packages reference (packagesReferences)",
         "x-examples": {
-          "example-1": [
+          "Example": [
             "string"
           ]
         }
       },
       "productsPrice": {
-        "title": "Products selling price (price)",
+        "title": "Products price (productsPrice)",
         "type": "object",
-        "description": "Corresponds with products selling price. Filled if delivery is realized with service “SERVICE_INSTALL”.",
+        "description": "Corresponds to the selling price of the products. To be defined for the “SERVICE_INSTALL” service.",
         "properties": {
           "value": {
             "type": "number",
@@ -3771,7 +3783,7 @@
             "code": "bpost"
           }
         },
-        "title": "pickup point carrier (pickupPointCarrier)"
+        "title": "Pickup point carrier (pickupPointCarrier)"
       },
       "cancelledReasons": {
         "type": "string",
@@ -3853,9 +3865,12 @@
           "ft",
           "mi"
         ],
-        "description": "Specifies the length unit.",
+        "description": "Specifies the length unit of measure.",
         "default": "cm",
-        "title": "Measure unit (lengthUnit)"
+        "title": "Unit of measure (lengthUnit)",
+        "x-examples": {
+          "Example": "cm"
+        }
       },
       "massUnit": {
         "type": "string",
@@ -3967,7 +3982,7 @@
             "message": "Conflict"
           }
         },
-        "description": "Corresponds with the model returned in case of API error.",
+        "description": "Matches the model returned in case of API error.",
         "properties": {
           "statusCode": {
             "type": "integer",
