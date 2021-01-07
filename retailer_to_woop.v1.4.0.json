@@ -4148,7 +4148,7 @@
       "queryNumber": {
         "in": "query",
         "required": false,
-        "description": "Number of pickup points you want",
+        "description": "Number of pickup points to get",
         "name": "number",
         "schema": {
           "type": "integer",
@@ -4159,7 +4159,7 @@
       "queryKilometricDistance": {
         "in": "query",
         "required": false,
-        "description": "Distance in kilometers of searching radius",
+        "description": "Distance of searching radius in kilometers ",
         "name": "kilometricDistance",
         "schema": {
           "type": "integer",
