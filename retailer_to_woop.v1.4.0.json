@@ -2845,16 +2845,7 @@
                   }
                 },
                 "price": {
-                  "type": "object",
-                  "description": "Le prix associé à la commande",
-                  "properties": {
-                    "price": {
-                      "type": "number"
-                    },
-                    "currency": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/price"
                 }
               }
             }
@@ -4043,6 +4034,22 @@
           "language",
           "timezone"
         ]
+      },
+      "price": {
+        "title": "Prix (price)",
+        "type": "object",
+        "description": "Le prix",
+        "properties": {
+          "price": {
+            "type": "number",
+            "format": "float",
+            "exclusiveMinimum": true,
+            "minimum": 0
+          },
+          "currency": {
+            "$ref": "#/components/schemas/currency"
+          }
+        }
       }
     },
     "parameters": {
