@@ -13,17 +13,17 @@ The pickup point type allows filtering the research according to delivery place.
 
 Code | Label
 ---------|----------
- `PICKUP_POINT_AGENCY`|Picking up agency
- `PICKUP_POINT_POST_OFFICE`|Pickup point located in an agency La Poste
+ `PICKUP_POINT_AGENCY`|Pick up agency
+ `PICKUP_POINT_POST_OFFICE`|Pickup point located in a post office
  `PICKUP_POINT_RELAY_WITH_LOCKER`|Pickup point with locker
  `PICKUP_POINT_RELAY_WITHOUT_LOCKER`|Pickup point without locker
- `PICKUP_POINT_ALL`|All possible pickup points
+ `PICKUP_POINT_ALL`|All available pickup points
 
 Default value : `PICKUP_POINT_RELAY_WITH_LOCKER`
 
 ## Pickup point category
 
-The category specifies pickup point types handling according to a carrier. Each pickup point is able to take a product typology, accepting a size and a maximum volume. 
+The category specifies the support for pickup point types depending on a carrier. Each pickup point is able to take a product typology, accepting a size and a maximum volume. 
 
 Code | Label
 ---------|----------

@@ -12,7 +12,7 @@ Example :
 
 ```json
 {
-  "x-api-version": "1.3.0"
+  "x-api-version": "1.4.0"
 }
 ```
 

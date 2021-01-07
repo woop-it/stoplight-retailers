@@ -6,10 +6,10 @@ The exchange place specifies the place nature and some informations on picking a
 
 ![get-started-icon](../../assets/images/ExchangePlace.png)
 
-The established configuration in platformis the following : 
-- The retailer contractualises with a group of carriers and configures its stores. 
-- Each store inherits the configuration and carrier characteristics of its retailer. 
-- On its own command, the store can refine its inherited carriers configuration. 
+The configuration established within the platform is the following : 
+- The retailer contracts with a group of carriers and configures its stores. 
+- Each store inherits the configuration and characteristics of the carriers of its retailer. 
+- On its own command, the store can refine the configuration of its inherited carriers. 
 - Then the store configures a group of exchange places. 
-- Each exchange place inherits the configuration and carrier characteristics of its store. 
-- At this point, the exchange place can refine its inherited carriers configuration.
+- Each exchange place inherits the configuration and characteristics of the carriers of its store. 
+- At this point, the exchange place can refine the configuration of its inherited carriers.

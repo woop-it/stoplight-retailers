@@ -20,4 +20,4 @@ _Example: `2020-09-20T07:00:00Z`_
 
 All phone numbers are in international format : `country code + number`
 
-_Example: `+33610101010`_
+_Example: `+33610101010` or `0033610101010`_

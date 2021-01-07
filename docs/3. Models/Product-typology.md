@@ -1,8 +1,8 @@
-# Product typology
+# Product typologies
 
 In order to have the best delivery service, it is necessary to associate each product with a typology. It allows to identify the product and categorizing it correctly.
 
-Code| Label 
+Code | Label 
 ---------|----------
 `TYPOLOGY_DANGEROUS`| Hazardous product
 `TYPOLOGY_FRAGILE`| Fragile product

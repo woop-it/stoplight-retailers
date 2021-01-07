@@ -8,4 +8,4 @@ This document is separated in 2 sections showing possible exchanges between Woop
 
 - `Retailer to Woop` (retailer_to_woop.v1.4.0.json): Which describes how APIs (with informations coming from retailers) headed to Woop operate. Features like order creation and pickup point searching will be described in this section.
 
-- `Woop to Retailer` (woop_to_retailer.v1.1.0.json): Which describes how Woop APIs headed to retailers operate. These APIs allows Woop to give back necessary informations to retailers. Features like delivery status update and carrier choice will be described inthis sections.
+- `Woop to Retailer` (woop_to_retailer.v1.1.0.json): Which describes how Woop APIs headed to retailers operate. These APIs allows Woop to give back necessary informations to retailers. Features like delivery status update and carrier choice will be described in this sections.

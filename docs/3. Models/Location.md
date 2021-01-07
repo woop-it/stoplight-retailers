@@ -7,8 +7,7 @@ type: tab
 title: Address
 -->
 Type "**address**" represents a postal address to fill entirely during order creation. 
-
-It corresponds to a standard call during order creation. If picking and/or delivery address aare not known, you can specify the complete place.
+It corresponds to a standard call during order creation. If picking and/or delivery address are not known, you can specify the complete location.
 ```json
 {
   "type": "address",
@@ -24,9 +23,9 @@ It corresponds to a standard call during order creation. If picking and/or deliv
 type: tab
 title: Pickup point
 -->
-Type "**pickupPoint**" represents the location of a pickup point or a carrier ditribution center. It corresponds à l'adresse enregistrée pour un transporteur donné associé à ce lieu. Pour utiliser ce type d'emplacement, il est nécessaire de connaitre l'identifiant du point-relais par transporteur.
+Type "**pickupPoint**" represents the location of a pickup point or a ditribution center of a carrier. It corresponds to the address saved for a carrier in association with the pickup point. It is mandatory to have the identifier of the pickup point for the carrier.
 
-L'identifiant du point-relais doit être récupéré par [la recherche de point relais](https://woop.stoplight.io/docs/retailer/retailer_to_woop.v1.4.0.json/paths/~1pickupPoints/get)
+The identifier is obtained [by searching the pickup point](https://woop.stoplight.io/docs/retailer/retailer_to_woop.v1.4.0.json/paths/~1pickupPoints/get)
 ```json
 {
   "type": "pickupPoint",
@@ -37,11 +36,11 @@ L'identifiant du point-relais doit être récupéré par [la recherche de point 
 
 <!--
 type: tab
-title: Point de prélèvement
+title: Exchange place
 -->
-Le type "**exchangePlace**" représente un point de prélèvement précis d'un des magasins de l'enseigne. Configuré dans le back-office de Woop, ces informations sont propres au magasin. A la création, vous pouvez définir l'identifiant de votre choix pour chaque point de prélèvement. 
+Type "**exchangePlace**" represents the location of a place associated to a store. The configuration is set in Woop back-office and is specific to the location. The id can be defined on the creation.
 
-Consulter la page [Point de prélevement (ExchangePlace)](docs/Modèles/ExchangePlace.md)pour plus de détails.
+Go to the page [Exchange place](docs/Modèles/ExchangePlace.md) for more details.
 ```json
 {
   "type": "exchangePlace",

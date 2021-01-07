@@ -14,21 +14,30 @@ Those requests and events are described in **Woop to Retailer** section of our d
 
 To subscribe to requests and events, you will need to make a first call to **API [/souscriptions](https://woop.stoplight.io/docs/retailer/retailer_to_woop.v1.4.0.json/paths/~1subscriptions/post)**.
 
+
 ```json json_schema
 {
   "type": "object",
   "description": "Subscription informations",
-  "required": ["callbacks"],
+  "required": [
+    "callbacks"
+  ],
   "properties": {
     "callbacks": {
       "type": "object",
-      "description": "Events callbacks",
-      "required": ["carrier", "status", "score"],
+      "description" : "Events callbacks",
+      "required": [
+        "carrier",
+        "status",
+        "score"
+      ],
       "properties": {
         "carrier": {
           "type": "object",
-          "description": "Callback allowing receiving carrier choice.",
-          "required": ["url"],
+          "description": "Callback aloowing to receive carrier choice.",
+          "required": [
+            "url"
+          ],
           "properties": {
             "url": {
               "type": "string",
@@ -43,8 +52,28 @@ To subscribe to requests and events, you will need to make a first call to **API
         },
         "status": {
           "type": "object",
-          "required": ["url"],
-          "description": "Callback allowing receiving status updates",
+          "required": [
+            "url"
+          ],
+          "description": "Callback allowing to receive order status changes.",
+          "properties": {
+            "url": {
+                "type": "string",
+                "description": "API route URL"
+            },
+            "version": {
+              "type": "string",
+              "description": "API version for this callback",
+              "example": "1.1.0"
+            }
+          }
+        },
+        "score": {
+          "type": "object",
+          "description": "Callback allowing to receive the customer note",
+          "required": [
+            "url"
+          ],
           "properties": {
             "url": {
               "type": "string",
@@ -57,30 +86,16 @@ To subscribe to requests and events, you will need to make a first call to **API
             }
           }
         },
-        "score": {
-          "type": "object",
-          "description": "Callback allowing receiving client rating",
-          "required": ["url"],
-          "properties": {
-            "url": {
-              "type": "string",
-              "description": "API route URL."
-            },
-            "version": {
-              "type": "string",
-              "description": "API version for this callback.",
-              "example": "1.1.0"
-            }
-          }
-        },
         "deliveryClosure": {
           "type": "object",
-          "description": "Callback allowing receiving billing informations",
-          "required": ["url"],
+          "description": "Callback allowing to receive the billing informations",
+          "required": [
+            "url"
+          ],
           "properties": {
             "url": {
               "type": "string",
-              "description": "API route URL."
+              "description": "API route URL"
             },
             "version": {
               "type": "string",
@@ -91,8 +106,10 @@ To subscribe to requests and events, you will need to make a first call to **API
         },
         "event": {
           "type": "object",
-          "description": "Callback allowing receiving notifications sent to client",
-          "required": ["url"],
+          "description": "Callback allowing to receive the notifications send to customer",
+          "required": [
+            "url"
+          ],
           "properties": {
             "url": {
               "type": "string",
@@ -112,7 +129,10 @@ To subscribe to requests and events, you will need to make a first call to **API
       "description": "Additional HTTP Headers to send during callbacks",
       "items": {
         "type": "object",
-        "required": ["key", "value"],
+        "required": [
+          "key",
+          "value"
+        ],
         "properties": {
           "key": {
             "type": "string",
@@ -131,8 +151,11 @@ To subscribe to requests and events, you will need to make a first call to **API
       "properties": {
         "basic": {
           "type": "object",
-          "description": "To be defined if the desired authentication method is basic",
-          "required": ["username", "password"],
+          "description": "To be defined if you choose basic API authentication method",
+          "required": [
+            "username",
+            "password"
+          ],
           "properties": {
             "username": {
               "type": "string"
@@ -144,8 +167,12 @@ To subscribe to requests and events, you will need to make a first call to **API
         },
         "oauth2": {
           "type": "object",
-          "description": "To be defined if the desired authentication method is OAuth2",
-          "required": ["client_id", "client_secret", "tokenEndPoint"],
+          "description": "To be defined if you choose oauth2 API authentication method",
+          "required": [
+            "client_id",
+            "client_secret",
+            "tokenEndPoint"
+          ],
           "properties": {
             "client_id": {
               "type": "string"
@@ -161,14 +188,18 @@ To subscribe to requests and events, you will need to make a first call to **API
             },
             "tokenEndPoint": {
               "type": "string",
-              "description": "URL allowing retrieving access token according to clientId and clientSecret"
+              "description": "Url used to retrieve the access token according to clientId and clientSecret"
             }
           }
         },
         "token": {
           "type": "object",
-          "description": "To be defined if the authentication method gives a bearer from a username/password",
-          "required": ["username", "password", "endpoint"],
+          "description": "To be defined if the authentication method gives a bearer token from a username/password combination",
+          "required": [
+            "username",
+            "password",
+            "endpoint"
+          ],
           "properties": {
             "username": {
               "type": "string"
@@ -178,7 +209,7 @@ To subscribe to requests and events, you will need to make a first call to **API
             },
             "endpoint": {
               "type": "string",
-              "description": "URL allowing retrieving access token"
+              "description": "Url used to retrieve the access token"
             }
           }
         }
@@ -190,15 +221,15 @@ To subscribe to requests and events, you will need to make a first call to **API
 
 ### Callbacks
 
-`Callbacks` or in other words `webhooks` allow defining the called URL for each request or event. Differetn callbacks are available, **some of which are mandatory** :
+`Callbacks` or in other words `webhooks` allow to define the called URL for each request or event. Different callbacks are available, **some of which are mandatory** :
 
-| Callback        | Description                                              | Interface contract                                                                                                                                            | Required |
-| --------------- | -------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
-| carrier         | Callback allowing receiving carrier choice               | [/orders/{orderId}/carrier](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1carrier/put)                  | **YES**  |
-| status          | Callback allowing receiving status updates               | [/orders/{orderId}/status](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1status/put)                    | **YES**  |
-| score           | Callback allowing receiving client rating                | [/orders/{orderId}/score](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1score/put)                      | **YES**  |
-| deliveryClosure | Callback allowing receiving billing informations         | [/orders/{orderId}/deliveryClosure](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1deliveryClosure/post) | NO       |
-| event           | Callback allowing receiving notifications sent to client | [/orders/{orderId}/events](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1events/post)                   | NO       |
+Callback | Description | Interface contract | Required
+---------|-------------|--------------------|---------
+carrier         | Callback allowing receiving carrier choice               | [/orders/{orderId}/carrier](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1carrier/put)                  | **YES**
+status          | Callback allowing receiving status updates               | [/orders/{orderId}/status](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1status/put)                    | **YES**
+score           | Callback allowing receiving client rating                | [/orders/{orderId}/score](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1score/put)                      | **YES**
+deliveryClosure | Callback allowing receiving billing informations         | [/orders/{orderId}/deliveryClosure](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1deliveryClosure/post) | NO
+event           | Callback allowing receiving notifications sent to client | [/orders/{orderId}/events](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1events/post)                   | NO
 
 **Callback description**
 
@@ -236,9 +267,9 @@ API route URL to which Woop will send the event linked to the callback.
 
 **Version**
 
-The callback targeted API version.
+The version of the targeted API callback.
 
-Like all our APIs, callbacks are versionned, **when you subsribe to a callback, you must specify to which version**.
+Like all our APIs, callbacks are versioned, **when you subsribe to a callback, you must specify a version**.
 
 The version is available in the documentation [Woop to Retailer](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json).
 
@@ -447,16 +478,16 @@ For each configured _callback_, it is necessary to implement the interface contr
 
 Reminder :
 
-| Callback        | Interface contract                                                                                                                                            | Required |
-| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
-| carrier         | [/orders/{orderId}/carrier](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1carrier/put)                  | **YES**  |
-| status          | [/orders/{orderId}/status](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1status/put)                    | **YES**  |
-| score           | [/orders/{orderId}/score](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1score/put)                      | **YES**  |
-| deliveryClosure | [/orders/{orderId}/deliveryClosure](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1deliveryClosure/post) | NO       |
-| event           | [/orders/{orderId}/events](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1events/post)                   | NO       |
+Callback | Interface contract | Required
+---------|--------------------|---------
+carrier   | [/orders/{orderId}/carrier](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1carrier/put)                  | **YES**
+status    | [/orders/{orderId}/status](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1status/put)                    | **YES**
+score     | [/orders/{orderId}/score](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1score/put)                      | **YES**
+deliveryClosure | [/orders/{orderId}/deliveryClosure](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1deliveryClosure/post) | NO
+event     | [/orders/{orderId}/events](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1events/post)                   | NO
 
 <!-- theme: warning -->
 
 > **Methods and HTTP codes**
 >
-> During interface contracts implementation, it is **important** to respect **HTTP methods** (POST, PATCH , etc.) and **HTTP response codes** (201, 400, etc.) specified in interface contract.
+> During the implementation of interface contracts, it is **important** to respect **HTTP methods** (POST, PATCH , etc.) and **HTTP response codes** (201, 400, etc.) specified in interface contract.
