@@ -70,7 +70,7 @@
         "tags": [
           "Picking"
         ],
-        "description": "Cette méthode permet d’effectuer une demande de retrait dans un emplacement de prélèvement précis. Dès la demande validée, l’ordre de retrait sera alors créé instantanément.",
+        "description": "A method to create a collect request for a specific exchange place. As soon as the request is validated, the collect order is saved in the plateform.",
         "operationId": "postCollects",
         "parameters": [
           {
@@ -79,7 +79,7 @@
         ],
         "requestBody": {
           "required": true,
-          "description": "Contient les informations de création de la demande de retrait.",
+          "description": "Contains the informations to create a collect order",
           "content": {
             "application/json": {
               "schema": {
@@ -125,7 +125,7 @@
                             "type": "TYPOLOGY_GENERIC",
                             "ean": "978020137962",
                             "cug": "123456",
-                            "label": "T-Shirt XL Jaune",
+                            "label": "XL Yellow shirt",
                             "quantity": 1
                           }
                         ],
@@ -140,7 +140,7 @@
         },
         "responses": {
           "201": {
-            "description": "Création de la demande de retrait réussie",
+            "description": "Collect order created successfully",
             "content": {
               "application/json": {
                 "schema": {
@@ -153,7 +153,7 @@
                   }
                 },
                 "examples": {
-                  "example": {
+                  "Example": {
                     "value": {
                       "id": "4f802782-bf37-4499-a50d-c7d0169c670d"
                     }
@@ -163,7 +163,7 @@
             }
           },
           "400": {
-            "description": "Elements manquants et/ou incorrect dans le body",
+            "description": "Missing or incorrect elements in the request body",
             "content": {
               "application/json": {
                 "schema": {
@@ -189,17 +189,17 @@
             }
           },
           "401": {
-            "description": "Vous n'êtes pas autorisé à accéder à cet élément"
+            "description": "You are not allowed to access this resource"
           },
           "403": {
-            "description": "Création de demande de retrait impossible\n\n[Voir la liste des raisons](https://woop.stoplight.io/docs/retailer/docs/Mod%C3%A8les/reasons.md)",
+            "description": "Collect order can not be created\n\n[List the reasons](https://woop.stoplight.io/docs/retailer/docs/Mod%C3%A8les/reasons.md)",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/errorCode"
                 },
                 "examples": {
-                  "example": {
+                  "Example": {
                     "value": {
                       "statusCode": 403,
                       "error": "Forbidden",
@@ -211,14 +211,14 @@
             }
           },
           "409": {
-            "description": "Une demande de retrait avec cette réference existe dèjà dans la plateforme.",
+            "description": "A collect order with this reference already exists in the plateform",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/errorCode"
                 },
                 "examples": {
-                  "example": {
+                  "Example": {
                     "value": {
                       "statusCode": 409,
                       "error": "Conflict",
@@ -230,7 +230,7 @@
             }
           }
         },
-        "summary": "Effectuer une demande de retrait de commande"
+        "summary": "Request for a collect order"
       }
     },
     "/orders": {
@@ -238,7 +238,7 @@
         "tags": [
           "Order"
         ],
-        "description": "Cette méthode permet de créer une commande côté Woop.\nDès la commande validée, un ensemble de devis sera envoyé aux différents transporteurs. L'ordre de transport sera alors créé lorsque l’un des devis aura été validé.",
+        "description": "This method saves an order in Woop plateform.\nIf the order is validated, delivery quotes are requested to carriers and the delivery is created when one of them is accepted.",
         "operationId": "postOrders",
         "parameters": [
           {
@@ -247,14 +247,14 @@
         ],
         "requestBody": {
           "required": true,
-          "description": "Contient les informations de création de la commande.",
+          "description": "Contains informations to create an order",
           "content": {
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/postOrders"
               },
               "examples": {
-                "Exemple par défaut": {
+                "Default example": {
                   "value": {
                     "orderId": "65z4eq1d6q54zd1",
                     "referenceNumber": "65q41zdq65z14",
@@ -350,7 +350,7 @@
                     ]
                   }
                 },
-                "Exemple avec assemblage": {
+                "Example with service 'ASSEMBLY'": {
                   "value": {
                     "orderId": "65z4eq1d6q54zd1",
                     "referenceNumber": "65q41zdq65z14",
@@ -450,7 +450,7 @@
                     }
                   }
                 },
-                "Exemple de livraison point relais": {
+                "Example with pickup point": {
                   "value": {
                     "orderId": "65z4eq1d6q54zd1",
                     "referenceNumber": "65q41zdq65z14",
@@ -540,7 +540,7 @@
                     ]
                   }
                 },
-                "Exemple de livraison en point de prélèvement": {
+                "Exemple with exchange place": {
                   "value": {
                     "orderId": "65z4eq1d6q54zd1",
                     "referenceNumber": "65q41zdq65z14",
@@ -644,13 +644,13 @@
         },
         "responses": {
           "201": {
-            "description": "la commande a bien été enregistrée"
+            "description": "Order has been created in the platform"
           },
           "202": {
-            "description": "la commande doit être complétée"
+            "description": "Order to be completed"
           },
           "400": {
-            "description": "Elements manquants et/ou incorrect dans le body",
+            "description": "Missing or incorrect elements in the request body",
             "content": {
               "application/json": {
                 "schema": {
@@ -675,7 +675,7 @@
             }
           },
           "401": {
-            "description": "Vous n'êtes pas autorisé à accéder à cet élément",
+            "description": "You are not allowed to access this resource",
             "content": {
               "application/json": {
                 "schema": {
@@ -685,14 +685,14 @@
             }
           },
           "403": {
-            "description": "Création de l'ordre impossible\n\n[Voir la liste des raisons](https://woop.stoplight.io/docs/retailer/docs/Mod%C3%A8les/reasons.md)",
+            "description": "Order creation forbidden\n\n[Reasons list](https://woop.stoplight.io/docs/retailer/docs/Mod%C3%A8les/reasons.md)",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/errorCode"
                 },
                 "examples": {
-                  "example": {
+                  "Example": {
                     "value": {
                       "statusCode": 403,
                       "error": "Forbidden",
@@ -707,14 +707,14 @@
             }
           },
           "409": {
-            "description": "Création de commande avec cet 'orderId' impossible",
+            "description": "An order with specified 'orderId' already exists",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/errorCode"
                 },
                 "examples": {
-                  "example": {
+                  "Example": {
                     "value": {
                       "statusCode": 409,
                       "error": "Conflict",
@@ -726,13 +726,13 @@
             }
           }
         },
-        "summary": "Créer une commande"
+        "summary": "Order request"
       },
       "get": {
         "tags": [
           "Order"
         ],
-        "description": "Cette méthode retourne les détails d'une ou de plusieurs commandes en fonction des filtres sélectionnés.",
+        "description": "This method returns detailled orders according to the filters selected",
         "operationId": "getOrders",
         "parameters": [
           {
@@ -750,14 +750,14 @@
         ],
         "responses": {
           "200": {
-            "description": "OK. Contient les commandes récupérées",
+            "description": "OK. Contains one or many orders",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/responseOrder"
                 },
                 "examples": {
-                  "Exemple par défaut": {
+                  "Example": {
                     "value": {
                       "orders": [
                         {
@@ -842,7 +842,7 @@
             }
           },
           "400": {
-            "description": "Elements manquants et/ou incorrect",
+            "description": "Missing or incorrect elements",
             "content": {
               "application/json": {
                 "schema": {
@@ -867,7 +867,7 @@
             }
           },
           "401": {
-            "description": "Vous n'êtes pas autorisé à accéder à cet élément",
+            "description": "You are not allowed to access this resource",
             "content": {
               "application/json": {
                 "schema": {
@@ -878,14 +878,14 @@
             }
           },
           "403": {
-            "description": "Demande impossible pour ce 'storeId'",
+            "description": "Request can not be processed for the 'storeId' selected",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/errorCode"
                 },
                 "examples": {
-                  "example-1": {
+                  "Example": {
                     "value": {
                       "statusCode": 403,
                       "error": "Forbidden",
@@ -897,7 +897,7 @@
             }
           }
         },
-        "summary": "Récupérer des commandes"
+        "summary": "Orders search"
       }
     },
     "/orders/{orderId}": {
@@ -905,7 +905,7 @@
         "tags": [
           "Order"
         ],
-        "description": "Annulation d'une commande",
+        "description": "Cancel an order",
         "operationId": "deleteOrders",
         "parameters": [
           {
@@ -917,7 +917,7 @@
         ],
         "requestBody": {
           "required": true,
-          "description": "Contient les informations d'annulation de la commande.",
+          "description": "Contains details about the order cancellation",
           "content": {
             "application/json": {
               "schema": {
@@ -927,7 +927,7 @@
                 ],
                 "properties": {
                   "reasons": {
-                    "description": "Motifs d’annulation",
+                    "description": "Cancellation reasons",
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/cancelledReasons"
@@ -935,7 +935,7 @@
                   },
                   "comment": {
                     "type": "string",
-                    "description": "Commentaire optionnel à ajouté si besoin lors de l’annulation"
+                    "description": "Optional comment to fill if cancellation needs it"
                   }
                 }
               }
@@ -944,13 +944,13 @@
         },
         "responses": {
           "202": {
-            "description": "L'annulation a bien été prise en compte, mais peut engendrer des frais supplémentaires"
+            "description": "Cancellation has been processed. Additional fees may be incurred"
           },
           "204": {
-            "description": "Requête traitée avec succès"
+            "description": "Request successfully processed"
           },
           "401": {
-            "description": "Vous n'êtes pas autorisé à accéder à cet élément",
+            "description": "You are not allowed to access this resource",
             "content": {
               "application/json": {
                 "schema": {
@@ -960,7 +960,7 @@
             }
           },
           "403": {
-            "description": "la commande ne peut être annulée",
+            "description": "The order can not be cancelled",
             "content": {
               "application/json": {
                 "schema": {
@@ -971,14 +971,14 @@
             }
           },
           "404": {
-            "description": "Le 'orderId' n'existe pas",
+            "description": "Specified 'orderId' does not exist",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/errorCode"
                 },
                 "examples": {
-                  "example": {
+                  "Example": {
                     "value": {
                       "statusCode": 404,
                       "error": "Not Found",
@@ -990,13 +990,13 @@
             }
           }
         },
-        "summary": "Annuler une commande"
+        "summary": "Order cancellation"
       },
       "get": {
         "tags": [
           "Order"
         ],
-        "description": "Cette méthode retourne le détail d'une commande.",
+        "description": "This method returns a detailled order",
         "operationId": "getOrder",
         "parameters": [
           {
@@ -1008,7 +1008,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK. Contient la commande récupérée",
+            "description": "OK. Contains the requested order",
             "content": {
               "application/json": {
                 "schema": {
@@ -1065,7 +1065,7 @@
             }
           },
           "401": {
-            "description": "Vous n'êtes pas autorisé à accéder à cet élément",
+            "description": "You are not allowed to access this resource",
             "content": {
               "application/json": {
                 "schema": {
@@ -1075,13 +1075,13 @@
             }
           }
         },
-        "summary": "Récupérer une commande spécifique"
+        "summary": "Single order search"
       },
       "patch": {
         "tags": [
           "Order"
         ],
-        "description": "Cette méthode permet de modifier une commande. La mise à jour peut déclencher une annulation de la commande + création d’une nouvelle commande si les informations modifiées sont jugées importantes ou non et impacte directement la livraison.",
+        "description": "This method allows to update some informations of a specific order. Update can trigger a cancel + creation process if the modifications have an impact on the eligibility or delivery",
         "operationId": "patchOrder",
         "parameters": [
           {
@@ -1093,7 +1093,7 @@
         ],
         "requestBody": {
           "required": true,
-          "description": "Contient les informations de mise à jour.",
+          "description": "Contains informations to update",
           "content": {
             "application/json": {
               "schema": {
@@ -1108,7 +1108,7 @@
                 ],
                 "properties": {
                   "picking": {
-                    "description": "Informations de l'emplacement de prélèvement",
+                    "description": "Picking location informations",
                     "required": [
                       "location",
                       "interval",
@@ -1133,7 +1133,7 @@
                     }
                   },
                   "delivery": {
-                    "description": "Informations de l'emplacement de livraison",
+                    "description": "Delivery location informations",
                     "required": [
                       "location",
                       "interval",
@@ -1159,7 +1159,7 @@
                   },
                   "packages": {
                     "type": "array",
-                    "description": "Ensemble des colis",
+                    "description": "Set of packages",
                     "items": {
                       "$ref": "#/components/schemas/packages"
                     }
@@ -1193,10 +1193,10 @@
         },
         "responses": {
           "200": {
-            "description": "Requête traitée avec succès"
+            "description": "Request processed with success"
           },
           "401": {
-            "description": "Vous n'êtes pas autorisé à accéder à cet élément",
+            "description": "You are not allowed to access this resource",
             "content": {
               "application/json": {
                 "schema": {
@@ -1206,7 +1206,7 @@
             }
           },
           "403": {
-            "description": "Mise à jour de l'ordre impossible\n\n[Voir la liste des raisons](https://woop.stoplight.io/docs/retailer/docs/Mod%C3%A8les/reasons.md)",
+            "description": "Update order can not be processed\n\n[Reasons list](https://woop.stoplight.io/docs/retailer/docs/Mod%C3%A8les/reasons.md)",
             "content": {
               "application/json": {
                 "schema": {
@@ -1216,15 +1216,20 @@
             }
           }
         },
-        "summary": "Modifier une commande"
-      }
+        "summary": "Order update"
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/pathOrderId"
+        }
+      ]
     },
     "/orders/{orderId}/label": {
       "get": {
         "tags": [
           "Etiquette"
         ],
-        "description": "Cette méthode permet de récupérer une étiquette de transport en fonction de l'identifiant de la commande. \nL’étiquette peut être récupérée sous plusieurs formats (à condition que le transporteur soit compatible avec ce format).",
+        "description": "This method returns a delivery label according to the order ID. The label is available in different formats (if the carrier accepts the format)",
         "operationId": "getLabelByOrder",
         "parameters": [
           {
@@ -1239,20 +1244,20 @@
         ],
         "responses": {
           "200": {
-            "description": "OK. Contient l'étiquette récupérée.",
+            "description": "OK. Contains the label",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "description": "Informations de l'étiquette",
+                  "description": "Label informations",
                   "properties": {
                     "base64": {
                       "type": "string",
-                      "description": "L’étiquette est retournée en base64 au format indiqué lors de l’appel"
+                      "description": "The label format is either base64 or the one indicated in the request"
                     },
                     "trackingPageUrl": {
                       "type": "string",
-                      "description": "Lien de la page de suivi de livraison"
+                      "description": "Link to the tracking page url"
                     }
                   },
                   "required": [
@@ -1272,7 +1277,7 @@
             }
           },
           "401": {
-            "description": "Vous n'êtes pas autorisé à accéder à cet élément",
+            "description": "You are not allowed to access this resource",
             "content": {
               "application/json": {
                 "schema": {
@@ -1282,14 +1287,14 @@
             }
           },
           "403": {
-            "description": "Demande impossible pour ce 'orderId'",
+            "description": "Request can not be processed for the 'storeId' selected",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/errorCode"
                 },
                 "examples": {
-                  "example": {
+                  "Example": {
                     "value": {
                       "statusCode": 403,
                       "error": "Forbidden",
@@ -1301,14 +1306,14 @@
             }
           },
           "404": {
-            "description": "Le 'orderId' n'existe pas",
+            "description": "Specified 'orderId' does not exist",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/errorCode"
                 },
                 "examples": {
-                  "example": {
+                  "Example": {
                     "value": {
                       "statusCode": 404,
                       "error": "Not Found",
@@ -1320,7 +1325,7 @@
             }
           }
         },
-        "summary": "Récupérer une étiquette de transport"
+        "summary": "Label request"
       }
     },
     "/orders/{orderId}/return": {
@@ -1328,7 +1333,7 @@
         "tags": [
           "Retour produit"
         ],
-        "description": "Cette méthode permet d'effectuer une demande de retour de produit d'une commande.",
+        "description": "This methode places an order for product(s) return",
         "operationId": "postProductReturn",
         "parameters": [
           {
@@ -1340,7 +1345,7 @@
         ],
         "requestBody": {
           "required": true,
-          "description": "Contient les informations de la demande de retour produit.",
+          "description": "Contains informations for product return request",
           "content": {
             "application/json": {
               "schema": {
@@ -1351,7 +1356,7 @@
                 ]
               },
               "examples": {
-                "Exemple par défaut": {
+                "Example": {
                   "value": {
                     "orderReturnId": "65z4eq1d6q54zd1",
                     "initialReferenceNumber": "65q41zdq65z14",
@@ -1444,10 +1449,10 @@
         },
         "responses": {
           "201": {
-            "description": "Le retour a bien été enregistrée"
+            "description": "Return request has been saved"
           },
           "400": {
-            "description": "Elements manquants et/ou incorrect dans le body",
+            "description": "Missing or incorrect elements in the request body",
             "content": {
               "application/json": {
                 "schema": {
@@ -1473,7 +1478,7 @@
             }
           },
           "401": {
-            "description": "Vous n'êtes pas autorisé à accéder à cet élément",
+            "description": "You are not allowed to access this resource",
             "content": {
               "application/json": {
                 "schema": {
@@ -1483,14 +1488,14 @@
             }
           },
           "403": {
-            "description": "Création d'un retour impossible ou l'état de la commande ne permet pas un retour produit\n\n[Voir la liste des raisons](https://woop.stoplight.io/docs/retailer/docs/Mod%C3%A8les/reasons.md)",
+            "description": "Return creation forbidden or initial order state does not allow a product return\n\n[Resons list](https://woop.stoplight.io/docs/retailer/docs/Mod%C3%A8les/reasons.md)",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/errorCode"
                 },
                 "examples": {
-                  "example": {
+                  "Example": {
                     "value": {
                       "statusCode": 403,
                       "error": "Forbidden",
@@ -1502,7 +1507,7 @@
             }
           },
           "409": {
-            "description": "Création de retour de produit avec ce 'referenceNumber' impossible",
+            "description": "Request of a product return with the 'referenceNumber' already exists",
             "content": {
               "application/json": {
                 "schema": {
@@ -1512,7 +1517,7 @@
             }
           }
         },
-        "summary": "Effectuer un retour produit"
+        "summary": "Product return request"
       }
     },
     "/orders/{orderId}/documents": {
@@ -1520,7 +1525,7 @@
         "tags": [
           "Document"
         ],
-        "description": "Cette méthode permet de récupérer les informations des documents attachés à une commande.",
+        "description": "This method returns informations about the documents attached to an order",
         "operationId": "getOrderDocuments",
         "parameters": [
           {
@@ -1529,7 +1534,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK. Contient les documents",
+            "description": "OK. Contains documents",
             "content": {
               "application/json": {
                 "schema": {
@@ -1537,26 +1542,26 @@
                   "properties": {
                     "documents": {
                       "type": "array",
-                      "description": "Liste des documents",
+                      "description": "Documents Lists",
                       "items": {
                         "type": "object",
                         "properties": {
                           "id": {
                             "type": "string",
-                            "description": "Identifiant du document"
+                            "description": "Document ID"
                           },
                           "date": {
                             "type": "string",
                             "format": "date-time",
-                            "description": "Date du document"
+                            "description": "Document date"
                           },
                           "name": {
                             "type": "string",
-                            "description": "Nom du document"
+                            "description": "Document name"
                           },
                           "type": {
                             "type": "string",
-                            "description": "Type de document",
+                            "description": "Document type",
                             "enum": [
                               "EVIDENCE",
                               "INVOICE",
@@ -1592,10 +1597,10 @@
             }
           },
           "204": {
-            "description": "Pas de documents sur cette commande"
+            "description": "No documents attached to the order"
           },
           "401": {
-            "description": "Vous n'êtes pas autorisé à accéder à cet élément",
+            "description": "You are not allowed to access this resource",
             "content": {
               "application/json": {
                 "schema": {
@@ -1605,14 +1610,14 @@
             }
           },
           "404": {
-            "description": "Le 'orderId' n'existe pas",
+            "description": "Specified 'orderId' does not exist",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/errorCode"
                 },
                 "examples": {
-                  "example": {
+                  "Example": {
                     "value": {
                       "statusCode": 404,
                       "error": "Not Found",
@@ -1624,7 +1629,7 @@
             }
           }
         },
-        "summary": "Récupérer les documents d'une commande"
+        "summary": "Documents attached to an order"
       }
     },
     "/orders/{orderId}/documents/download": {
@@ -1632,7 +1637,7 @@
         "tags": [
           "Document"
         ],
-        "description": "Cette méthode permet de télécharger les documents de la commande en zip.",
+        "description": "This method returns all documents attached to an order in a zip format",
         "operationId": "downloadOrderDocuments",
         "parameters": [
           {
@@ -1641,7 +1646,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK. Contient les documents au format zip.",
+            "description": "OK. Contains the documents in a zip format",
             "content": {
               "application/zip": {
                 "schema": {
@@ -1654,10 +1659,10 @@
             }
           },
           "204": {
-            "description": "Pas de documents sur cette commande."
+            "description": "No documents attached to the order"
           },
           "401": {
-            "description": "Vous n'êtes pas autorisé à accéder à cet élément.",
+            "description": "You are not allowed to access this resource",
             "content": {
               "application/json": {
                 "schema": {
@@ -1667,14 +1672,14 @@
             }
           },
           "404": {
-            "description": "Le 'orderId' n'existe pas",
+            "description": "Specified 'orderId' does not exist",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/errorCode"
                 },
                 "examples": {
-                  "example": {
+                  "Example": {
                     "value": {
                       "statusCode": 404,
                       "error": "Not Found",
@@ -1686,7 +1691,7 @@
             }
           }
         },
-        "summary": "Télécharger les documents d'une commande"
+        "summary": "Download documents attached to an order"
       }
     },
     "/orders/{orderId}/documents/{documentId}/download": {
@@ -1694,7 +1699,7 @@
         "tags": [
           "Document"
         ],
-        "description": "Cette méthode permet de télécharger un document d'une commande",
+        "description": "This method returns specified document for an order",
         "operationId": "downloadOrderDocument",
         "parameters": [
           {
@@ -1706,7 +1711,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK. Contient le document au format original du document",
+            "description": "OK. Contains the document in its original format",
             "content": {
               "application/octet-stream": {
                 "schema": {
@@ -1717,7 +1722,7 @@
             }
           },
           "401": {
-            "description": "Vous n'êtes pas autorisé à accéder à cet élément",
+            "description": "You are not allowed to access this resource",
             "content": {
               "application/json": {
                 "schema": {
@@ -1727,14 +1732,14 @@
             }
           },
           "404": {
-            "description": "Le 'orderId' ou 'documentId' n'existe pas",
+            "description": "Specified 'orderId' or 'documentId' does not exist",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/errorCode"
                 },
                 "examples": {
-                  "example": {
+                  "Example": {
                     "value": {
                       "statusCode": 404,
                       "error": "Not Found",
@@ -1746,7 +1751,7 @@
             }
           }
         },
-        "summary": "Télécharger un document pour une commande"
+        "summary": "Download one document attached to an order"
       }
     },
     "/pickupPoints": {
@@ -1754,7 +1759,7 @@
         "tags": [
           "Point relais"
         ],
-        "description": "Cette méthode permet de récupérer la liste des point relais des transporteurs situés autour d’une géolocalisation donnée.",
+        "description": "This method returns a list of pickup points around a geolocation and optional parameters",
         "operationId": "getPickupPoints",
         "parameters": [
           {
@@ -1787,7 +1792,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK. Contient les point relais récupérés.",
+            "description": "OK. Contains pickup points detailled list",
             "content": {
               "application/json": {
                 "schema": {
@@ -1795,7 +1800,7 @@
                   "properties": {
                     "pickupPoints": {
                       "type": "array",
-                      "description": "Informations sur les point relais",
+                      "description": "Pickup points informations",
                       "items": {
                         "type": "object",
                         "properties": {
@@ -1816,67 +1821,67 @@
                                 ]
                               }
                             ],
-                            "description": "Adresse du point relais"
+                            "description": "Pickup point address"
                           },
                           "coordinates": {
                             "$ref": "#/components/schemas/coordinates"
                           },
                           "id": {
                             "type": "string",
-                            "description": "Id du point relais"
+                            "description": "Pickup point ID"
                           },
                           "carrier": {
                             "$ref": "#/components/schemas/pickupPointCarrier"
                           },
                           "openingHours": {
                             "type": "object",
-                            "description": "Horaires d'ouverture du point relais",
+                            "description": "Pickup point opening hours",
                             "properties": {
                               "monday": {
                                 "type": "array",
-                                "description": "Horaires du lundi",
+                                "description": "Monday hours",
                                 "items": {
                                   "$ref": "#/components/schemas/interval_hour"
                                 }
                               },
                               "tuesday": {
                                 "type": "array",
-                                "description": "Horaires du mardi",
+                                "description": "Tuesday hours",
                                 "items": {
                                   "$ref": "#/components/schemas/interval_hour"
                                 }
                               },
                               "wednesday": {
                                 "type": "array",
-                                "description": "Horaires du mercredi",
+                                "description": "Wednesday hours",
                                 "items": {
                                   "$ref": "#/components/schemas/interval_hour"
                                 }
                               },
                               "thursday": {
                                 "type": "array",
-                                "description": "Horaires du jeudi",
+                                "description": "Thursday hours",
                                 "items": {
                                   "$ref": "#/components/schemas/interval_hour"
                                 }
                               },
                               "friday": {
                                 "type": "array",
-                                "description": "Horaires du vendredi",
+                                "description": "Friday hours",
                                 "items": {
                                   "$ref": "#/components/schemas/interval_hour"
                                 }
                               },
                               "saturday": {
                                 "type": "array",
-                                "description": "Horaires du samedi",
+                                "description": "Saturday hours",
                                 "items": {
                                   "$ref": "#/components/schemas/interval_hour"
                                 }
                               },
                               "sunday": {
                                 "type": "array",
-                                "description": "Horaires du dimanche",
+                                "description": "Sunday hours",
                                 "items": {
                                   "$ref": "#/components/schemas/interval_hour"
                                 }
@@ -1977,7 +1982,7 @@
             }
           },
           "400": {
-            "description": "Elements manquants et/ou incorrect dans le body",
+            "description": "Missing or incorrect elements in the request body",
             "content": {
               "application/json": {
                 "schema": {
@@ -2005,7 +2010,7 @@
             }
           },
           "401": {
-            "description": "Vous n'êtes pas autorisé à accéder à cet élément.",
+            "description": "You are not allowed to access this resource",
             "content": {
               "application/json": {
                 "schema": {
@@ -2015,14 +2020,14 @@
             }
           },
           "403": {
-            "description": "Demande impossible pour le 'storeId'",
+            "description": "Request can not be processed for the 'storeId' selected",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/errorCode"
                 },
                 "examples": {
-                  "example": {
+                  "Example": {
                     "value": {
                       "statusCode": 403,
                       "error": "Forbidden",
@@ -2034,7 +2039,7 @@
             }
           }
         },
-        "summary": "Rechercher un ensemble de point-relais"
+        "summary": "Pickup points search"
       }
     },
     "/subscriptions": {
@@ -2042,7 +2047,7 @@
         "tags": [
           "Souscriptions"
         ],
-        "description": "Cette méthode permet d'initialiser les souscriptions à nos APIs.\n\nPlus d'informations dans la documentation dédiée \"Souscriptions\"",
+        "description": "This method initializes the subscriptions to our APIs.\n\nMore informations in the dedicated documentation \"Subscriptions\"",
         "operationId": "postSubscription",
         "parameters": [
           {
@@ -2051,19 +2056,19 @@
         ],
         "requestBody": {
           "required": true,
-          "description": "Contient les informations des souscriptions.",
+          "description": "Contains subscriptions informations",
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
-                "description": "Informations de souscriptions",
+                "description": "Subscriptions informations",
                 "required": [
                   "callbacks"
                 ],
                 "properties": {
                   "callbacks": {
                     "type": "object",
-                    "description": "Callbacks des événements",
+                    "description": "Events callbacks",
                     "required": [
                       "carrier",
                       "status",
@@ -2072,90 +2077,90 @@
                     "properties": {
                       "carrier": {
                         "type": "object",
-                        "description": "Callback permettant de recevoir le choix du transporteur.",
+                        "description": "Callback allowing to receive carrier choice",
                         "required": [
                           "url"
                         ],
                         "properties": {
                           "url": {
                             "type": "string",
-                            "description": "Url de la route d'API"
+                            "description": "API route URL"
                           },
                           "version": {
                             "type": "string",
-                            "description": "Version d'API pour ce callback",
+                            "description": "API version for this callback",
                             "example": "1.1.0"
                           }
                         }
                       },
                       "status": {
                         "type": "object",
+                        "description": "Callback allowing to receive order status changes",
                         "required": [
                           "url"
                         ],
-                        "description": "Callback permettant de recevoir les changements de statut",
                         "properties": {
                           "url": {
                             "type": "string",
-                            "description": "Url de la route d'API"
+                            "description": "API route URL"
                           },
                           "version": {
                             "type": "string",
-                            "description": "Version d'API pour ce callback",
+                            "description": "API version for this callback",
                             "example": "1.1.0"
                           }
                         }
                       },
                       "score": {
                         "type": "object",
-                        "description": "Callback permettant de recevoir les notes client",
+                        "description": "Callback allowing to rceive the customer notation",
                         "required": [
                           "url"
                         ],
                         "properties": {
                           "url": {
                             "type": "string",
-                            "description": "Url de la route d'API."
+                            "description": "API route URL"
                           },
                           "version": {
                             "type": "string",
-                            "description": "Version d'API pour ce callback.",
+                            "description": "API version for this callback",
                             "example": "1.1.0"
                           }
                         }
                       },
                       "deliveryClosure": {
                         "type": "object",
-                        "description": "Callback permettant de recevoir les informations de facturation",
+                        "description": "Callback allowing to receive the billing informations",
                         "required": [
                           "url"
                         ],
                         "properties": {
                           "url": {
                             "type": "string",
-                            "description": "Url de la route d'API."
+                            "description": "API route URL"
                           },
                           "version": {
                             "type": "string",
-                            "description": "Version d'API pour ce callback",
+                            "description": "API version for this callback",
                             "example": "1.1.0"
                           }
                         }
                       },
                       "event": {
                         "type": "object",
-                        "description": "Callback permettant de recevoir les notifications envoyées au client",
+                        "description": "Callback allowing to receive the notifications send to customer",
                         "required": [
                           "url"
                         ],
                         "properties": {
                           "url": {
                             "type": "string",
-                            "description": "Url de la route d'API"
+                            "description": "API route URL"
                           },
                           "version": {
                             "type": "string",
-                            "description": "Version d'API pour ce callback",
+                            "description": "API version for this callback",
                             "example": "1.1.0"
                           }
                         }
@@ -2164,36 +2169,32 @@
                   },
                   "headers": {
                     "type": "array",
-                    "description": "Headers HTTP supplémentaires à envoyer lors des callbacks",
+                    "description": "Additional HTTP Headers to send during callback",
                     "items": {
                       "type": "object",
-                      "required": [
-                        "key",
-                        "value"
-                      ],
                       "properties": {
                         "key": {
                           "type": "string",
-                          "description": "Clé/nom du header"
+                          "description": "Header key/name"
                         },
                         "value": {
                           "type": "string",
-                          "description": "Valeur du header"
+                          "description": "Header value"
                         }
-                      }
+                      },
+                      "required": [
+                        "key",
+                        "value"
+                      ]
                     }
                   },
                   "auth": {
                     "type": "object",
-                    "description": "Configuration de l'authentification à votre API",
+                    "description": "Configuration of your API autentication",
                     "properties": {
                       "basic": {
                         "type": "object",
-                        "description": "A definir si la méthode d'authentification à l'API voulue est basic",
-                        "required": [
-                          "username",
-                          "password"
-                        ],
+                        "description": "To be defined if you choose basic API authentication method",
                         "properties": {
                           "username": {
                             "type": "string"
@@ -2201,16 +2202,15 @@
                           "password": {
                             "type": "string"
                           }
-                        }
+                        },
+                        "required": [
+                          "username",
+                          "password"
+                        ]
                       },
                       "oauth2": {
                         "type": "object",
-                        "description": "A definir si la méthode d'authentification à l'API voulue est oauth2",
-                        "required": [
-                          "client_id",
-                          "client_secret",
-                          "tokenEndPoint"
-                        ],
+                        "description": "To be defined if you choose oauth2 API authentication method",
                         "properties": {
                           "client_id": {
                             "type": "string"
@@ -2226,18 +2226,18 @@
                           },
                           "tokenEndPoint": {
                             "type": "string",
-                            "description": "Url permettant de recupérer le token d'accès en fonction du clientId et du clientSecret"
+                            "description": "Url to retrieve the access token according to clientId and clientSecret"
                           }
-                        }
+                        },
+                        "required": [
+                          "client_id",
+                          "client_secret",
+                          "tokenEndPoint"
+                        ]
                       },
                       "token": {
                         "type": "object",
-                        "description": "A définir si la méthode d'authentification donne un bearer token à partir d'un username/password",
-                        "required": [
-                          "username",
-                          "password",
-                          "endpoint"
-                        ],
+                        "description": "To be defined if the authentication method gives a bearer token from a username/password combination",
                         "properties": {
                           "username": {
                             "type": "string"
@@ -2247,9 +2247,14 @@
                           },
                           "endpoint": {
                             "type": "string",
-                            "description": "Url permettant de recupérer le token d'accès"
+                            "description": "Url used to retrieve the access token"
                           }
-                        }
+                        },
+                        "required": [
+                          "username",
+                          "password",
+                          "endpoint"
+                        ]
                       }
                     }
                   }
@@ -2368,10 +2373,10 @@
         },
         "responses": {
           "204": {
-            "description": "Requête traitée avec succès"
+            "description": "Request processed successfully"
           },
           "400": {
-            "description": "Elements manquants et/ou incorrect dans le body",
+            "description": "Missing or incorrect elements in the body",
             "content": {
               "application/json": {
                 "schema": {
@@ -2399,48 +2404,48 @@
             }
           }
         },
-        "summary": "Initialisation souscriptions"
+        "summary": "Subscriptions initialization"
       }
     },
     "/eligibilities/services": {
       "post": {
-        "summary": "Éligibilité des services",
+        "summary": "Services eligibility",
         "operationId": "postServices",
         "responses": {
           "200": {
-            "description": "Liste des services éligibles.",
+            "description": "List of eligible services",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "description": "Liste des services",
+                  "description": "Services list",
                   "properties": {
                     "services": {
                       "type": "array",
                       "items": {
                         "type": "object",
-                        "required": [
-                          "type"
-                        ],
                         "properties": {
                           "type": {
                             "$ref": "#/components/schemas/deliveryService"
                           },
                           "pickupPointTypes": {
                             "type": "array",
-                            "description": "Liste des types des point relais éligibles (pour le service SERVICE_PICKUP_POINT)",
+                            "description": "Types of eligible pickup points (for SERVICE_PICKUP_POINT service)",
                             "items": {
                               "$ref": "#/components/schemas/pickupPointType"
                             }
                           },
                           "pickupPointCategories": {
                             "type": "array",
-                            "description": "Liste des catégories des point relais éligibles (pour le service SERVICE_PICKUP_POINT)",
+                            "description": "Categories of eligible pickup points (for SERVICE_PICKUP_POINT service)",
                             "items": {
                               "$ref": "#/components/parameters/queryPickupPointCategory"
                             }
                           }
-                        }
+                        },
+                        "required": [
+                          "type"
+                        ]
                       }
                     }
                   }
@@ -2479,18 +2484,24 @@
             }
           },
           "400": {
-            "description": "Elements manquants et/ou incorrect dans le body.",
+            "description": "Missing or incorrect elements in the request body",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/errorCode"
                 },
                 "examples": {
-                  "example": {
+                  "Example": {
                     "value": {
-                      "reasons": [
-                        "Missing argument 'xxxxx'"
-                      ]
+                      "statusCode": 400,
+                      "error": "Bad Request",
+                      "message": "child \"orderId\" fails because [\"storeId\" is required]",
+                      "validation": {
+                        "source": "payload",
+                        "keys": [
+                          "orderId"
+                        ]
+                      }
                     }
                   }
                 }
@@ -2498,7 +2509,7 @@
             }
           },
           "401": {
-            "description": "Vous n'êtes pas autorisé à accéder à cet élément.",
+            "description": "Vous n'êtes pas autorisé à accéder à cet élément",
             "content": {
               "application/json": {
                 "schema": {
@@ -2513,7 +2524,7 @@
             "$ref": "#/components/parameters/apiVersion"
           }
         ],
-        "description": "Cette méthode retourne les services de livraison possible pour une commande. En fonction du point de départ de la commande, du point d'arrivé (optionnel) et du contenu du panier client, la méthode retourne l'ensemble des services disponibles. ",
+        "description": "A method to retrieve the delivery services available for an order. The services returned depend on the picking location, delivery location (optional), the products/packages.",
         "requestBody": {
           "content": {
             "application/json": {
@@ -2521,7 +2532,7 @@
                 "$ref": "#/components/schemas/postServices"
               },
               "examples": {
-                "Exemple par défaut": {
+                "Default example": {
                   "value": {
                     "picking": {
                       "location": {
@@ -2565,7 +2576,7 @@
                     "storeId": "MAG01"
                   }
                 },
-                "Exemple avec point d'arrivé": {
+                "Example with arrival point": {
                   "value": {
                     "picking": {
                       "location": {
@@ -2621,7 +2632,7 @@
               }
             }
           },
-          "description": "Contient les informations de demande d'éligibilité."
+          "description": "Contains the eligibility informations"
         },
         "tags": [
           "Éligibilité"
@@ -2630,13 +2641,13 @@
     },
     "/orders/download": {
       "get": {
-        "summary": "Télécharger le bordereau de remise par transporteur",
+        "summary": "Download orders slip to a specific retailer",
         "tags": [
           "Document"
         ],
         "responses": {
           "200": {
-            "description": "OK. Contient le document au format original du document",
+            "description": "OK. Contains the document in its original format",
             "headers": {},
             "content": {
               "application/json": {
@@ -2652,18 +2663,19 @@
                     },
                     {
                       "type": "string",
-                      "description": "Contenu du fichier"
+                      "description": "Slip content"
                     }
                   ]
-                }
+                },
+                "examples": {}
               }
             }
           },
           "204": {
-            "description": "Pas de documents sur cette commande"
+            "description": "No document attached to the order"
           },
           "401": {
-            "description": "Vous n'êtes pas autorisé à accéder à cet élément",
+            "description": "You are not allowed to access this resource",
             "content": {
               "application/json": {
                 "schema": {
@@ -2673,11 +2685,27 @@
             }
           },
           "403": {
-            "description": "Vous ne pouvez pas accéder a cette ressource"
+            "description": "Request can not be processed for the 'storeId' or 'exchangePlaceId' selected",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "Example": {
+                    "value": {
+                      "statusCode": 403,
+                      "error": "Forbidden",
+                      "message": "This exchange place is not allowed to be used"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "operationId": "get-orders-download",
-        "description": "Cette méthode permet de télécharger un bordereau de remise listant l'ensemble descommandes, au format PDF, en fonction des paramètres indiqués; Code transporteur, date de prélévement et statut de livraison. ",
+        "description": "This method returns a single pdf document with a list of orders according to specified parameters (carrier, picking date and delivery status)",
         "parameters": [
           {
             "schema": {
@@ -2686,7 +2714,7 @@
             "in": "query",
             "name": "deliveryStatus",
             "required": true,
-            "description": "Statut de la livraison\n"
+            "description": "Filter by delivery status"
           },
           {
             "schema": {
@@ -2695,7 +2723,7 @@
             "in": "query",
             "name": "storeId",
             "required": true,
-            "description": "Identifiant du magasin"
+            "description": "Store ID"
           },
           {
             "schema": {
@@ -2704,7 +2732,7 @@
             "in": "query",
             "name": "carrierCode",
             "required": true,
-            "description": "Code du transporteur"
+            "description": "Filter by carrier"
           },
           {
             "schema": {
@@ -2712,7 +2740,7 @@
             },
             "in": "query",
             "name": "pickingDate",
-            "description": "Date de prélévement"
+            "description": "Filter by picking date"
           },
           {
             "schema": {
@@ -2721,7 +2749,7 @@
             "in": "query",
             "name": "exchangePlaceId",
             "required": true,
-            "description": "Id du point de prélévement"
+            "description": "Exchange place ID"
           },
           {
             "schema": {
@@ -2729,7 +2757,7 @@
             },
             "in": "header",
             "name": "Accept",
-            "description": "Pour avoir un retour en json qui contient une base64, mettre en valeur \"application/json\""
+            "description": "To obtain a Base64 response in json body, specify the value \"application/json\""
           }
         ]
       }
@@ -3279,7 +3307,7 @@
           },
           "addressLine2": {
             "type": "string",
-            "description": "Place additionnal address"
+            "description": "Place additional address"
           },
           "elevator": {
             "type": "boolean",
@@ -3291,7 +3319,7 @@
           },
           "postalCode": {
             "type": "string",
-            "description": "Corresponds with associated main place potal code"
+            "description": "Corresponds with associated main place postal code"
           },
           "doorCode": {
             "type": "string",
@@ -3336,12 +3364,13 @@
           "DELIVERY_RETURNED_TO_PICK_UP",
           "DELIVERY_DELIVERED_OK",
           "DELIVERY_DELIVERED_PARTIALLY",
-          "DELIVERY_CANCELLED"
+          "DELIVERY_CANCELLED",
+          "DELIVERY_INIT"
         ],
         "title": "Delivery status (deliveryStatus)",
         "description": "Specifies the different possible delivery statuses in the platform.",
         "x-examples": {
-          "example": "DELIVERY_STARTED"
+          "Example": "DELIVERY_STARTED"
         }
       },
       "location": {
@@ -3357,7 +3386,7 @@
             "city": "Lille",
             "country": "FR"
           },
-          "Point relais": {
+          "Pickup point": {
             "type": "pickupPoint",
             "id": "76761",
             "carrierCode": "bpost"
@@ -3507,19 +3536,19 @@
         "properties": {
           "firstName": {
             "type": "string",
-            "description": "Client first name"
+            "description": "Contact first name"
           },
           "lastName": {
             "type": "string",
-            "description": "Client last name"
+            "description": "Contact last name"
           },
           "phone": {
             "type": "string",
-            "description": "Client phone"
+            "description": "Contact phone number"
           },
           "email": {
             "type": "string",
-            "description": "Client email"
+            "description": "Contact email"
           },
           "language": {
             "$ref": "#/components/schemas/language"
@@ -4026,19 +4055,19 @@
         "properties": {
           "firstName": {
             "type": "string",
-            "description": "Contact first name"
+            "description": "Customer first name"
           },
           "lastName": {
             "type": "string",
-            "description": "Contact last name"
+            "description": "Customer last name"
           },
           "phone": {
             "type": "string",
-            "description": "Contact phone number"
+            "description": "Customer phone number"
           },
           "email": {
             "type": "string",
-            "description": "Contact email"
+            "description": "Customer email"
           },
           "language": {
             "$ref": "#/components/schemas/language"
