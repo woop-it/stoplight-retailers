@@ -192,7 +192,7 @@
             "description": "You are not allowed to access this resource"
           },
           "403": {
-            "description": "Collect order can not be created\n\n[List the reasons](https://woop.stoplight.io/docs/retailer/docs/Mod%C3%A8les/reasons.md)",
+            "description": "Collect order can not be created\n\n[Reasons](https://woop.stoplight.io/docs/retailer/branches/english/docs/3.%20Models/Reasons.md)",
             "content": {
               "application/json": {
                 "schema": {
@@ -685,7 +685,7 @@
             }
           },
           "403": {
-            "description": "Order creation forbidden\n\n[Reasons list](https://woop.stoplight.io/docs/retailer/branches/english/docs/3.%20Models/Reasons.md)",
+            "description": "Order creation forbidden\n\n[Reasons](https://woop.stoplight.io/docs/retailer/branches/english/docs/3.%20Models/Reasons.md)",
             "content": {
               "application/json": {
                 "schema": {
@@ -1206,7 +1206,7 @@
             }
           },
           "403": {
-            "description": "Update order can not be processed\n\n[Reasons list](https://woop.stoplight.io/docs/retailer/docs/Mod%C3%A8les/reasons.md)",
+            "description": "Update order can not be processed\n\n[Reasons](https://woop.stoplight.io/docs/retailer/branches/english/docs/3.%20Models/Reasons.md)",
             "content": {
               "application/json": {
                 "schema": {
@@ -1488,7 +1488,7 @@
             }
           },
           "403": {
-            "description": "Return creation forbidden or initial order state does not allow a product return\n\n[Resons list](https://woop.stoplight.io/docs/retailer/docs/Mod%C3%A8les/reasons.md)",
+            "description": "Return creation forbidden or initial order state does not allow a product return\n\n[Reasons](https://woop.stoplight.io/docs/retailer/branches/english/docs/3.%20Models/Reasons.md)",
             "content": {
               "application/json": {
                 "schema": {
