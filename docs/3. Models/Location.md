@@ -40,7 +40,7 @@ title: Exchange place
 -->
 Type "**exchangePlace**" represents the location of a place associated to a store. The configuration is set in Woop back-office and is specific to the location. The id can be defined on the creation.
 
-Go to the page [Exchange place](docs/3.%20Models/ExchangePlace.md) for more details.
+Go to the page [Exchange place](https://woop.stoplight.io/docs/retailer/branches/english/docs/3.%20Models/ExchangePlace.md) for more details.
 ```json
 {
   "type": "exchangePlace",
