@@ -1227,7 +1227,7 @@
     "/orders/{orderId}/label": {
       "get": {
         "tags": [
-          "Etiquette"
+          "Label"
         ],
         "description": "This method returns a delivery label according to the order ID. The label is available in different formats (if the carrier accepts the format)",
         "operationId": "getLabelByOrder",
@@ -1331,7 +1331,7 @@
     "/orders/{orderId}/return": {
       "post": {
         "tags": [
-          "Retour produit"
+          "Product return"
         ],
         "description": "This methode places an order for product(s) return",
         "operationId": "postProductReturn",
@@ -1757,7 +1757,7 @@
     "/pickupPoints": {
       "get": {
         "tags": [
-          "Point relais"
+          "Pickup point"
         ],
         "description": "This method returns a list of pickup points around a geolocation and optional parameters",
         "operationId": "getPickupPoints",
@@ -2045,7 +2045,7 @@
     "/subscriptions": {
       "post": {
         "tags": [
-          "Souscriptions"
+          "Subscriptions"
         ],
         "description": "This method initializes the subscriptions to our APIs.\n\nMore informations in the dedicated documentation \"Subscriptions\"",
         "operationId": "postSubscription",
@@ -2635,7 +2635,7 @@
           "description": "Contains the eligibility informations"
         },
         "tags": [
-          "Éligibilité"
+          "Eligibility"
         ]
       }
     },
