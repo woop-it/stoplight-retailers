@@ -2768,7 +2768,7 @@
       "Bearer": {
         "type": "oauth2",
         "flows": {},
-        "description": "[Go to definition](https://woop.stoplight.io/docs/retailer/branches/english/docs/Bases/Authentification.md)"
+        "description": "[Go to definition](https://woop.stoplight.io/docs/retailer/branches/english/docs/2.%20Basics/Authentication.md)"
       }
     },
     "schemas": {
