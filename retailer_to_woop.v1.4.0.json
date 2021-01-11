@@ -685,7 +685,7 @@
             }
           },
           "403": {
-            "description": "Order creation forbidden\n\n[Reasons list](https://woop.stoplight.io/docs/retailer/branches/english/docs/Mod%C3%A8les/reasons.md)",
+            "description": "Order creation forbidden\n\n[Reasons list](https://woop.stoplight.io/docs/retailer/branches/english/docs/3.%20Models/Reasons.md)",
             "content": {
               "application/json": {
                 "schema": {
