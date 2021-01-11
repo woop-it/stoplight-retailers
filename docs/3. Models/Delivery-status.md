@@ -4,7 +4,7 @@ During its life cycle, the order goes through different statuses. Those we ident
 
 ### Order workflow
 
-![get-started-icon](../../assets/images/Workflow_delivery-status.png)
+![get-started-icon](../../assets/images/delivery-status-workflow.png)
 
 ### List of possible delivery statuses
 
@@ -31,4 +31,4 @@ During its life cycle, the order goes through different statuses. Those we ident
 
 ### Returns and errors handling
 
-![get-started-icon](../../assets/images/Workflow_returns.png)
+![get-started-icon](../../assets/images/product-return-workflow.png)

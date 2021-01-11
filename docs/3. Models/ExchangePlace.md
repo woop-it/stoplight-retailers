@@ -4,7 +4,7 @@ An exchange place (`exchangePlace`) represents a physical picking place directly
 
 The exchange place specifies the place nature and some informations on picking address. Parameters, configurations and specifications depend on the store. 
 
-![get-started-icon](../../assets/images/ExchangePlace.png)
+![get-started-icon](../../assets/images/ExchangePlace-en.png)
 
 The configuration established within the platform is the following : 
 - The retailer contracts with a group of carriers and configures its stores. 
