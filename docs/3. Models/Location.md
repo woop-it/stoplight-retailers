@@ -25,7 +25,7 @@ title: Pickup point
 -->
 Type "**pickupPoint**" represents the location of a pickup point or a ditribution center of a carrier. It corresponds to the address saved for a carrier in association with the pickup point. It is mandatory to have the identifier of the pickup point for the carrier.
 
-The identifier is obtained [by searching the pickup point](https://woop.stoplight.io/docs/retailer/retailer_to_woop.v1.4.0.json/paths/~1pickupPoints/get)
+The identifier is obtained [by searching the pickup point](https://woop.stoplight.io/docs/retailer/branches/english/retailer_to_woop.v1.4.0.json/paths/~1pickupPoints/get)
 ```json
 {
   "type": "pickupPoint",
@@ -40,7 +40,7 @@ title: Exchange place
 -->
 Type "**exchangePlace**" represents the location of a place associated to a store. The configuration is set in Woop back-office and is specific to the location. The id can be defined on the creation.
 
-Go to the page [Exchange place](docs/Modèles/ExchangePlace.md) for more details.
+Go to the page [Exchange place](docs/3.%20Models/ExchangePlace.md) for more details.
 ```json
 {
   "type": "exchangePlace",
