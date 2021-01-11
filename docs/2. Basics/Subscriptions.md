@@ -12,7 +12,7 @@ Those requests and events are described in **Woop to Retailer** section of our d
 
 ## Subscription initialization
 
-To subscribe to requests and events, you will need to make a first call to **API [/subscriptions](https://woop.stoplight.io/docs/retailer/retailer_to_woop.v1.4.0.json/paths/~1subscriptions/post)**.
+To subscribe to requests and events, you will need to make a first call to **API [/subscriptions](https://woop.stoplight.io/docs/retailer/branches/english/retailer_to_woop.v1.4.0.json/paths/~1subscriptions/post)**.
 
 
 ```json json_schema
