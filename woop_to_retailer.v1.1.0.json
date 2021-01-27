@@ -90,9 +90,7 @@
                         "updateOrder": true,
                         "cancelOrder": false,
                         "carrierLabel": true,
-                        "storageCapacity": true
-                      },
-                      "deliveryCapacities": {
+                        "storageCapacity": true,
                         "weightMin": {
                           "value": 5,
                           "unit": "kg"
@@ -1049,9 +1047,7 @@
               "updateOrder": true,
               "cancelOrder": false,
               "carrierLabel": true,
-              "storageCapacity": true
-            },
-            "deliveryCapacities": {
+              "storageCapacity": true,
               "weightMin": {
                 "value": 5,
                 "unit": "kg"
@@ -1079,16 +1075,12 @@
           },
           "specifications": {
             "$ref": "#/components/schemas/specifications"
-          },
-          "deliveryCapacities": {
-            "$ref": "#/components/schemas/deliveryCapacities"
           }
         },
         "required": [
           "name",
           "contact",
-          "specifications",
-          "deliveryCapacities"
+          "specifications"
         ]
       },
       "putDeliveryStatus": {
@@ -1188,7 +1180,19 @@
             "updateOrder": true,
             "cancelOrder": true,
             "carrierLabel": true,
-            "storageCapacity": true
+            "storageCapacity": true,
+            "weightMin": {
+              "value": 0,
+              "unit": "string"
+            },
+            "weightMax": {
+              "value": 0,
+              "unit": "string"
+            },
+            "ditanceMax": {
+              "value": 0,
+              "unit": "string"
+            }
           }
         },
         "title": "Caractéristiques (specifications)",
@@ -1208,36 +1212,7 @@
           "storageCapacity": {
             "type": "boolean",
             "description": "Indique si le transporteur possède une capacité de stockage"
-          }
-        },
-        "required": [
-          "updateOrder",
-          "cancelOrder",
-          "carrierLabel",
-          "storageCapacity"
-        ]
-      },
-      "deliveryCapacities": {
-        "description": "Précise les capacités du transporteur.",
-        "type": "object",
-        "x-examples": {
-          "Exemple": {
-            "weightMin": {
-              "value": 0,
-              "unit": "string"
-            },
-            "weightMax": {
-              "value": 0,
-              "unit": "string"
-            },
-            "ditanceMax": {
-              "value": 0,
-              "unit": "string"
-            }
-          }
-        },
-        "title": "Capacités transporteur (deliveryCapacities)",
-        "properties": {
+          },
           "weightMin": {
             "$ref": "#/components/schemas/weigh"
           },
@@ -1249,6 +1224,10 @@
           }
         },
         "required": [
+          "updateOrder",
+          "cancelOrder",
+          "carrierLabel",
+          "storageCapacity",
           "weightMin",
           "weightMax",
           "distanceMax"
