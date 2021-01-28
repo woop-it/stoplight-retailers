@@ -1073,6 +1073,9 @@
           },
           "additionalData": {
             "$ref": "#/components/schemas/additionalData"
+          },
+          "interval": {
+            "$ref": "#/components/schemas/interval"
           }
         },
         "required": [
@@ -1131,6 +1134,33 @@
             "value": "string"
           }
         }
+      },
+      "interval": {
+        "description": "Précise un interval de dates avec heures.",
+        "type": "object",
+        "x-examples": {
+          "example": {
+            "start": "2019-05-02T15:52:01+0000",
+            "end": "2019-05-02T17:52:01+0000"
+          }
+        },
+        "properties": {
+          "start": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Début du créneau"
+          },
+          "end": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Fin du créneau"
+          }
+        },
+        "required": [
+          "start",
+          "end"
+        ],
+        "title": "Créneau de dates (interval)"
       }
     },
     "parameters": {
