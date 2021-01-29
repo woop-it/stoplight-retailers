@@ -837,7 +837,8 @@
           "DELIVERY_FAILED_WITH_RETURN",
           "DELIVERY_RETURNED_TO_PICK_UP",
           "DELIVERY_DELIVERED_OK",
-          "DELIVERY_DELIVERED_PARTIALLY"
+          "DELIVERY_DELIVERED_PARTIALLY",
+          "DELIVERY_REPLANNED"
         ],
         "title": "Statut de livraison (deliveryStatus)",
         "x-examples": {
@@ -1074,8 +1075,8 @@
           "additionalData": {
             "$ref": "#/components/schemas/additionalData"
           },
-          "interval": {
-            "$ref": "#/components/schemas/interval"
+          "appointment": {
+            "$ref": "#/components/schemas/appointment"
           }
         },
         "required": [
@@ -1111,7 +1112,7 @@
         "description": "Mise à jour du statut de la commande."
       },
       "additionalData": {
-        "title": "Données additionnelles",
+        "title": "Données additionnelles (additionalData)",
         "type": "object",
         "description": "Permet de recevoir des informations/données personnalisées de la part du transporteur.",
         "properties": {
@@ -1135,8 +1136,8 @@
           }
         }
       },
-      "interval": {
-        "description": "Précise un interval de dates avec heures.",
+      "appointment": {
+        "description": "Précise un interval de dates avec heures pour la prise de RDV client.",
         "type": "object",
         "x-examples": {
           "example": {
@@ -1160,7 +1161,7 @@
           "start",
           "end"
         ],
-        "title": "Créneau de dates (interval)"
+        "title": "Date de prise RDV (appointment)"
       }
     },
     "parameters": {
