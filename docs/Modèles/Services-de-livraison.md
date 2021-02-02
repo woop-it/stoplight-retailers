@@ -16,3 +16,4 @@ Code| Intitulé
 `SERVICE_COMPLEX_INSTALL`| Mise en service complexe
 `SERVICE_STANDARD_TAXI`| Livraison simple en taxi (type berline)
 `SERVICE_XL_TAXI`| Livraison simple en taxi (type Van)
+`SERVICE_WITH_SIGNATURE`| Livraison avec service de signature à la réception
