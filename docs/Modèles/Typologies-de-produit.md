@@ -15,4 +15,4 @@ Code| Intitulé
 `TYPOLOGY_VOLUMINOUS_FRAGILE`| Produit volumineux et fragile
 `TYPOLOGY_LARGE_HOUSEHOLD`| Gros électroménager (frigo américain piano cuisson...)
 `TYPOLOGY_PALLET_GENERIC`| Palette marchandise générale
-`TYPOLOGY_NON_STANDARD`| Produit non standard
+`TYPOLOGY_NON_STANDARD`| Produit non standard 

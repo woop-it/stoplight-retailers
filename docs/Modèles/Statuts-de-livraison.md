@@ -28,7 +28,8 @@ Statut | Intitulé
  `DELIVERY_BLOCKED`|Livraison bloquée
  `DELIVERY_DELAYED`|Livraison retardée 
  `DELIVERY_AVAILABLE`|Livraison disponible en point de retrait
-
+ `DELIVERY_REPLANNED`|Date de livraison replannifiée par une prise de RDV avec le client 
+ 
 ### Gestion des retours et des erreurs
 
 ![get-started-icon](../../assets/images/Workflow_retours.png)

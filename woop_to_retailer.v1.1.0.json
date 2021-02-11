@@ -855,7 +855,8 @@
           "DELIVERY_FAILED_WITH_RETURN",
           "DELIVERY_RETURNED_TO_PICK_UP",
           "DELIVERY_DELIVERED_OK",
-          "DELIVERY_DELIVERED_PARTIALLY"
+          "DELIVERY_DELIVERED_PARTIALLY",
+          "DELIVERY_REPLANNED"
         ],
         "title": "Statut de livraison (deliveryStatus)",
         "x-examples": {
@@ -1113,6 +1114,9 @@
           },
           "additionalData": {
             "$ref": "#/components/schemas/additionalData"
+          },
+          "appointment": {
+            "$ref": "#/components/schemas/appointment"
           }
         },
         "required": [
@@ -1148,7 +1152,7 @@
         "description": "Mise à jour du statut de la commande."
       },
       "additionalData": {
-        "title": "Données additionnelles",
+        "title": "Données additionnelles (additionalData)",
         "type": "object",
         "description": "Permet de recevoir des informations/données personnalisées de la part du transporteur.",
         "properties": {
@@ -1170,6 +1174,34 @@
             "key": "string",
             "value": "string"
           }
+        }
+      },
+      "appointment": {
+        "description": "Précise un interval de dates avec heures pour la prise de RDV client.",
+        "type": "object",
+        "x-examples": {
+          "example": {
+            "start": "2019-05-02T15:52:01+0000",
+            "end": "2019-05-02T17:52:01+0000"
+          }
+        },
+        "properties": {
+          "start": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Début du créneau"
+          },
+          "end": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Fin du créneau"
+          }
+        },
+        "required": [
+          "start",
+          "end"
+        ],
+        "title": "Date de prise RDV (appointment)"
         }
       },
       "specifications": {
