@@ -988,6 +988,9 @@
                 }
               }
             }
+          },
+          "409": {
+            "description": "La commande est déjà annulée"
           }
         },
         "summary": "Annuler une commande"
