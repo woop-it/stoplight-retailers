@@ -988,6 +988,9 @@
                 }
               }
             }
+          },
+          "409": {
+            "description": "Order already cancelled"
           }
         },
         "summary": "Order cancellation"
