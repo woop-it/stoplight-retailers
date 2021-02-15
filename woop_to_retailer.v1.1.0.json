@@ -1202,10 +1202,9 @@
           "end"
         ],
         "title": "Date de prise RDV (appointment)"
-        }
       },
       "specifications": {
-        "description": "Liste des caractéristiques enregistrées pour un transporteur sur une commande. ",
+        "description": "Liste des caractéristiques enregistrées pour un transporteur sur une commande.",
         "type": "object",
         "x-examples": {
           "example": {
@@ -1246,10 +1245,10 @@
             "description": "Indique si le transporteur possède une capacité de stockage"
           },
           "weightMin": {
-            "$ref": "#/components/schemas/weigh"
+            "$ref": "#/components/schemas/weight"
           },
           "weightMax": {
-            "$ref": "#/components/schemas/weigh"
+            "$ref": "#/components/schemas/weight"
           },
           "distanceMax": {
             "$ref": "#/components/schemas/distance"
@@ -1265,7 +1264,7 @@
           "distanceMax"
         ]
       },
-      "weigh": {
+      "weight": {
         "description": "Précise le poids autorisé",
         "type": "object",
         "properties": {
@@ -1286,7 +1285,7 @@
             "unit": "kg"
           }
         },
-        "title": "Poids (weigh)"
+        "title": "Poids (weight)"
       },
       "distance": {
         "description": "Précise la distance entre deux points.",
