@@ -14,3 +14,6 @@ List of different delivery services available during order creation.
 | `SERVICE_SELECTED_ROOM`      | Delivery in room of choice        
 | `SERVICE_SIMPLE_INSTALL`     | Simple putting into service       
 | `SERVICE_COMPLEX_INSTALL`    | Complex putting into service      
+| `SERVICE_STANDARD_TAXI`      | Simple delivery by taxi (sedan type)
+| `SERVICE_XL_TAXI`            | Simple delivery by taxi (Van type)
+| `SERVICE_WITH_SIGNATURE`     |  Delivery with signature service at reception

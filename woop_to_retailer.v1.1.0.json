@@ -85,6 +85,24 @@
                         "lastName": "Dupont",
                         "phone": "+33600000000",
                         "email": "michel.dupont@mail.fr"
+                      },
+                      "specifications": {
+                        "updateOrder": true,
+                        "cancelOrder": false,
+                        "carrierLabel": true,
+                        "storageCapacity": true,
+                        "weightMin": {
+                          "value": 5,
+                          "unit": "kg"
+                        },
+                        "weightMax": {
+                          "value": 50,
+                          "unit": "kg"
+                        },
+                        "ditanceMax": {
+                          "value": 5,
+                          "unit": "m"
+                        }
                       }
                     }
                   }
@@ -514,7 +532,7 @@
                     "orderId": "a54efa65e4a",
                     "billedDistance": {
                       "value": 56.85,
-                      "unit": "km"
+                      "unit": "m"
                     },
                     "emittedCarbonDioxide": {
                       "value": 12.3,
@@ -886,7 +904,8 @@
           "DELIVERY_FAILED_WITH_RETURN",
           "DELIVERY_RETURNED_TO_PICK_UP",
           "DELIVERY_DELIVERED_OK",
-          "DELIVERY_DELIVERED_PARTIALLY"
+          "DELIVERY_DELIVERED_PARTIALLY",
+          "DELIVERY_REPLANNED"
         ],
         "title": "Delivery status (deliveryStatus)",
         "x-examples": {
@@ -1074,6 +1093,24 @@
               "lastName": "Doe",
               "phone": "+33610101010",
               "email": "johndoe@mail.com"
+            },
+            "specifications": {
+              "updateOrder": true,
+              "cancelOrder": false,
+              "carrierLabel": true,
+              "storageCapacity": true,
+              "weightMin": {
+                "value": 5,
+                "unit": "kg"
+              },
+              "weightMax": {
+                "value": 50,
+                "unit": "kg"
+              },
+              "ditanceMax": {
+                "value": 5,
+                "unit": "km"
+              }
             }
           }
         },
@@ -1086,11 +1123,15 @@
           },
           "contact": {
             "$ref": "#/components/schemas/contact"
+          },
+          "specifications": {
+            "$ref": "#/components/schemas/specifications"
           }
         },
         "required": [
           "name",
-          "contact"
+          "contact",
+          "specifications"
         ]
       },
       "putDeliveryStatus": {
@@ -1120,6 +1161,12 @@
           },
           "team": {
             "$ref": "#/components/schemas/team"
+          },
+          "additionalData": {
+            "$ref": "#/components/schemas/additionalData"
+          },
+          "appointment": {
+            "$ref": "#/components/schemas/appointment"
           }
         },
         "required": [
@@ -1152,6 +1199,177 @@
           "orderId",
           "date",
           "status"
+        ]
+      },
+      "additionalData": {
+        "title": "Additional data",
+        "type": "object",
+        "description": "Allows you to receive personalized information/data from the carrier.",
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "Title of information received"
+          },
+          "value": {
+            "type": "string",
+            "description": "Value of information received"
+          }
+        },
+        "required": [
+          "key",
+          "value"
+        ],
+        "x-examples": {
+          "example": {
+            "key": "string",
+            "value": "string"
+          }
+        }
+      },
+      "appointment": {
+        "description": "Specifies an interval of dates with times for customer appointments.",
+        "type": "object",
+        "x-examples": {
+          "example": {
+            "start": "2019-05-02T15:52:01+0000",
+            "end": "2019-05-02T17:52:01+0000"
+          }
+        },
+        "properties": {
+          "start": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Beginning of the slot"
+          },
+          "end": {
+            "type": "string",
+            "minLength": 1,
+            "description": "End of the slot"
+          }
+        },
+        "required": [
+          "start",
+          "end"
+        ],
+        "title": "Date of appointment"
+      },
+      "specifications": {
+        "description": "List of characteristics recorded for a carrier on an order.",
+        "type": "object",
+        "x-examples": {
+          "example": {
+            "updateOrder": true,
+            "cancelOrder": true,
+            "carrierLabel": true,
+            "storageCapacity": true,
+            "weightMin": {
+              "value": 0,
+              "unit": "string"
+            },
+            "weightMax": {
+              "value": 0,
+              "unit": "string"
+            },
+            "ditanceMax": {
+              "value": 0,
+              "unit": "string"
+            }
+          }
+        },
+        "title": "Specifications",
+        "properties": {
+          "updateOrder": {
+            "type": "boolean",
+            "description": "Indicates whether the order change is authorized"
+          },
+          "cancelOrder": {
+            "type": "boolean",
+            "description": "Indicates whether order cancellation is allowed"
+          },
+          "carrierLabel": {
+            "type": "boolean",
+            "description": "Indicates if the carrier has a transport label."
+          },
+          "storageCapacity": {
+            "type": "boolean",
+            "description": "Indicates whether the carrier has storage capacity"
+          },
+          "weightMin": {
+            "$ref": "#/components/schemas/weight"
+          },
+          "weightMax": {
+            "$ref": "#/components/schemas/weight"
+          },
+          "distanceMax": {
+            "$ref": "#/components/schemas/distance"
+          }
+        },
+        "required": [
+          "updateOrder",
+          "cancelOrder",
+          "carrierLabel",
+          "storageCapacity",
+          "weightMin",
+          "weightMax",
+          "distanceMax"
+        ]
+      },
+      "weight": {
+        "description": "Specifies the allowed weight",
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "number"
+          },
+          "unit": {
+            "$ref": "#/components/schemas/massUnit"
+          }
+        },
+        "required": [
+          "value",
+          "unit"
+        ],
+        "x-examples": {
+          "example": {
+            "value": 5,
+            "unit": "kg"
+          }
+        },
+        "title": "Weight"
+      },
+      "distance": {
+        "description": "Specifies the distance between two points.",
+        "type": "object",
+        "x-examples": {
+          "exemple": {
+            "value": 5,
+            "unit": "km"
+          }
+        },
+        "title": "Distance",
+        "properties": {
+          "value": {
+            "type": "number"
+          },
+          "unit": {
+            "$ref": "#/components/schemas/distanceUnit"
+          }
+        },
+        "required": [
+          "value",
+          "unit"
+        ]
+      },
+      "distanceUnit": {
+        "type": "string",
+        "title": "Distance unit",
+        "x-examples": {
+          "Exemple": "string"
+        },
+        "description": "Specifies the unit of measurement for distance calculation.",
+        "enum": [
+          "m",
+          "km"
         ]
       }
     },

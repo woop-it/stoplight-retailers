@@ -27,7 +27,8 @@ During its life cycle, the order goes through different statuses. Those we ident
 | `DELIVERY_CANCELLED_WITH_RETURN` | Delivery cancelled with return to store 
 | `DELIVERY_BLOCKED`               | Delivery is blocked                  
 | `DELIVERY_DELAYED`               | Delivery is delayed                  
-| `DELIVERY_AVAILABLE`             | Delivery available in pickup point   
+| `DELIVERY_AVAILABLE`             | Delivery available in pickup point
+| `DELIVERY_REPLANNED`             | Delivery date replanned by an appointment with the customer
 
 ### Returns and errors handling
 
