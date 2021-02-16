@@ -1323,8 +1323,19 @@
             }
           }
         },
-        "summary": "Récupérer une étiquette de transport"
-      }
+        "summary": "Récupérer une étiquette de transport pour une commande"
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "orderId",
+          "in": "path",
+          "required": true,
+          "description": "Identifiant de la commande"
+        }
+      ]
     },
     "/orders/{orderId}/return": {
       "post": {
@@ -2814,6 +2825,147 @@
             "in": "header",
             "name": "Accept",
             "description": "Pour avoir un retour en json qui contient une base64, mettre en valeur \"application/json\""
+          }
+        ]
+      }
+    },
+    "/orders/{orderId}/packages/{packageId}/label": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "orderId",
+          "in": "path",
+          "required": true,
+          "description": "Identifiant de la commande"
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "packageId",
+          "in": "path",
+          "required": true,
+          "description": " N° de colis"
+        }
+      ],
+      "get": {
+        "summary": "Etiquette de transport pour un colis donné",
+        "tags": [
+          "Etiquette"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Contient l'étiquette récupérée.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Informations de l'étiquette",
+                  "type": "object",
+                  "properties": {
+                    "base64": {
+                      "type": "string",
+                      "minLength": 1,
+                      "description": "L’étiquette est retournée en base64 au format indiqué lors de l’appel"
+                    },
+                    "trackingPageUrl:": {
+                      "type": "string",
+                      "minLength": 1,
+                      "description": "Lien de la page de suivi de livraison"
+                    }
+                  },
+                  "required": [
+                    "base64",
+                    "trackingPageUrl:"
+                  ]
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "base64": "AxfzFZEGEg ...",
+                      "trackingPageUrl:": "https://url_suivi_livraison"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Vous n'êtes pas autorisé à accéder à cet élément.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "statusCode": 0,
+                      "error": "string",
+                      "message": "string",
+                      "reasons": [
+                        "STORE_NOT_FOUND"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Demande impossible pour ce numéro de colis.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "statusCode": 0,
+                      "error": "string",
+                      "message": "string",
+                      "reasons": [
+                        "STORE_NOT_FOUND"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Le numéro de colis indiqué n'existe pas.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "statusCode": 0,
+                      "error": "string",
+                      "message": "string",
+                      "reasons": [
+                        "STORE_NOT_FOUND"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getLabelByPackage",
+        "description": "Cette méthode permet de récupérer une étiquette de transport pour un colis donné d’une commande client. L’étiquette peut être récupérée sous plusieurs formats (à condition que le transporteur soit compatible avec ce format).\n\nL'étiquette récupérée est unique et est rattachée à un seul colis de la commande. ",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/components/parameters/queryMode"
           }
         ]
       }
