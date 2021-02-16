@@ -1,23 +1,23 @@
 {
   "openapi": "3.0.2",
   "info": {
-    "title": "Woop vers Enseigne",
-    "description": "Pour commencer, toutes les informations technique concernant les API Woop à destination des enseignes sont centralisées dans cette documentation. Pour toute question ou précision, merci de contacter l'équipe technique interne. \n\nPour utiliser les API \"Woop vers Enseigne\", vous devez vous munir des vos accès identifiants secret fournis lors de la création de votre compte enseigne au sein de la palteforme. \n\nLa version actuellement proposée dans la documentation est la <b>Version 1.1.0</b>",
+    "title": "Woop to Retailer",
+    "description": "First, all informations about Woop API headed to retailers are centralized in this documentation. If you need precisions or have any questions, please contact internal technical team.\n\nTo use the API, you need to take your access you got during the creation of your account on Woop platform.\n\nThe current offered version is <b>Version 1.1.0</b>",
     "version": "1.1.1"
   },
   "tags": [
     {
-      "name": "Commande"
+      "name": "Order"
     }
   ],
   "paths": {
     "/orders/{orderId}/carrier": {
       "put": {
         "tags": [
-          "Commande"
+          "Order"
         ],
         "operationId": "putOrderCarrier",
-        "description": "Cette méthode permet de recevoir la notification du transporteur sélectionné pour une commande donnée. Lorsque le choix du transporteur assurant la livraison de la commande est établi, l'information est envoyée. ",
+        "description": "A method to receive the notification when a carrier is selected to achieve a delivery.",
         "parameters": [
           {
             "$ref": "#/components/parameters/pathOrderId"
@@ -25,7 +25,7 @@
         ],
         "requestBody": {
           "required": true,
-          "description": "Contient les informations du transporteur sélectionné.",
+          "description": "Contains informations about the selected carrier",
           "content": {
             "application/json": {
               "schema": {
@@ -33,19 +33,19 @@
                 "properties": {
                   "deliveryId": {
                     "type": "string",
-                    "description": "Identifiant de livraison"
+                    "description": "Delivery ID"
                   },
                   "externalReference": {
                     "type": "string",
-                    "description": "Référence de commmande"
+                    "description": "Order reference"
                   },
                   "orderId": {
                     "type": "string",
-                    "description": "Identifiant de commande"
+                    "description": "Order ID"
                   },
                   "trackingPageUrl": {
                     "type": "string",
-                    "description": "Lien de la page de suivi de la livraison"
+                    "description": "Link to tracking page"
                   },
                   "vehicleType": {
                     "$ref": "#/components/schemas/vehicleType"
@@ -67,7 +67,7 @@
                 ]
               },
               "examples": {
-                "Exemple": {
+                "Example": {
                   "value": {
                     "deliveryId": "4qz64zd5qdq",
                     "externalReference": "6546465-FH",
@@ -113,10 +113,10 @@
         },
         "responses": {
           "204": {
-            "description": "Requête traitée avec succès"
+            "description": "Request processed successfully"
           },
           "400": {
-            "description": "Elements manquants et/ou incorrect dans le body",
+            "description": "Missing or incorrect elements in the request body",
             "content": {
               "application/json": {
                 "schema": {
@@ -132,7 +132,7 @@
                   }
                 },
                 "examples": {
-                  "Exemple": {
+                  "Example": {
                     "value": {
                       "reasons": [
                         "Missing argument 'xxxxx'"
@@ -144,14 +144,14 @@
             }
           },
           "403": {
-            "description": "L'information ne peut plus être envoyée",
+            "description": "The information can no longer be comminucated",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "./retailer_to_woop.v1.4.0.json#/components/schemas/errorCode"
                 },
                 "examples": {
-                  "example": {
+                  "Example": {
                     "value": {
                       "statusCode": 403,
                       "error": "Forbidden",
@@ -163,14 +163,14 @@
             }
           },
           "404": {
-            "description": "Le 'orderId' n'a pas été trouvé",
+            "description": "Specified 'orderId' can not be found",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "./retailer_to_woop.v1.4.0.json#/components/schemas/errorCode"
                 },
                 "examples": {
-                  "example": {
+                  "Example": {
                     "value": {
                       "statusCode": 404,
                       "error": "Not Found",
@@ -182,16 +182,21 @@
             }
           }
         },
-        "summary": "Recevoir la notification du transporteur sélectionné pour une commande"
-      }
+        "summary": "Receive notification of the selected carrier for an order"
+      },
+      "parameters": [
+        {
+          "$ref": "./retailer_to_woop.v1.4.0.json#/components/parameters/pathOrderId"
+        }
+      ]
     },
     "/orders/{orderId}/status": {
       "put": {
         "tags": [
-          "Commande"
+          "Order"
         ],
         "operationId": "putOrderStatus",
-        "description": "Cette méthode permet de recevoir les mises à jour des statuts de livraison de la part du transporteur.",
+        "description": "A method to receive the status update from the carrier",
         "parameters": [
           {
             "$ref": "#/components/parameters/pathOrderId"
@@ -199,7 +204,7 @@
         ],
         "requestBody": {
           "required": true,
-          "description": "Contient les informations du changement de statut.",
+          "description": "Contains informations about de status update",
           "content": {
             "application/json": {
               "schema": {
@@ -213,14 +218,14 @@
                 ]
               },
               "examples": {
-                "Statut de commande": {
+                "Order status": {
                   "value": {
                     "orderId": "5z8d4q465zdq65d",
                     "status": "ORDER_CREATED",
                     "date": "2019-11-27T12:00:00+0000"
                   }
                 },
-                "Statut de livraison": {
+                "Delivery status": {
                   "value": {
                     "deliveryId": "kzqfq41q561gq5ge1q5",
                     "orderId": "5z8d4q465zdq65d",
@@ -242,10 +247,10 @@
         },
         "responses": {
           "204": {
-            "description": "Requête traitée avec succès"
+            "description": "Request processed successfully"
           },
           "400": {
-            "description": "Elements manquants et/ou incorrect dans le body",
+            "description": "Missing or incorrect elements in the request body",
             "content": {
               "application/json": {
                 "schema": {
@@ -261,7 +266,7 @@
                   }
                 },
                 "examples": {
-                  "Exemple": {
+                  "Example": {
                     "value": {
                       "reasons": [
                         "Missing argument 'xxxxx'"
@@ -273,14 +278,14 @@
             }
           },
           "403": {
-            "description": "L'information ne peut plus être envoyée",
+            "description": "The information can no longer be comminucated",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "./retailer_to_woop.v1.4.0.json#/components/schemas/errorCode"
                 },
                 "examples": {
-                  "example": {
+                  "Example": {
                     "value": {
                       "statusCode": 403,
                       "error": "Forbidden",
@@ -292,14 +297,14 @@
             }
           },
           "404": {
-            "description": "Le 'orderId' n'a pas été trouvé",
+            "description": "Specified 'orderId' does not exist",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "./retailer_to_woop.v1.4.0.json#/components/schemas/errorCode"
                 },
                 "examples": {
-                  "example": {
+                  "Example": {
                     "value": {
                       "statusCode": 404,
                       "error": "Not Found",
@@ -311,16 +316,27 @@
             }
           }
         },
-        "summary": "Recevoir les notifications de mise à jour des statuts de livraison"
-      }
+        "summary": "Receive notification of status update for a delivery"
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "orderId",
+          "in": "path",
+          "required": true,
+          "description": "Order ID"
+        }
+      ]
     },
     "/orders/{orderId}/score": {
       "put": {
         "tags": [
-          "Commande"
+          "Order"
         ],
         "operationId": "putOrderScore",
-        "description": "Cette méthode permet de recevoir la note finale de la livraison effectuée.",
+        "description": "A method to receive a notification when a customer put a score on a delivery",
         "parameters": [
           {
             "$ref": "#/components/parameters/pathOrderId"
@@ -328,7 +344,7 @@
         ],
         "requestBody": {
           "required": true,
-          "description": "Contient les informations de la note.",
+          "description": "Contains informations about the score",
           "content": {
             "application/json": {
               "schema": {
@@ -336,18 +352,18 @@
                 "properties": {
                   "orderId": {
                     "type": "string",
-                    "description": "Identifiant de commande"
+                    "description": "Order ID"
                   },
                   "score": {
                     "type": "array",
-                    "description": "Note de la livraison",
+                    "description": "Score",
                     "items": {
                       "$ref": "#/components/schemas/score"
                     }
                   },
                   "comment": {
                     "type": "string",
-                    "description": "Commentaire libre"
+                    "description": "Free comment"
                   }
                 },
                 "required": [
@@ -357,7 +373,7 @@
                 ]
               },
               "examples": {
-                "Exemple": {
+                "Example": {
                   "value": {
                     "orderId": "54s54z65z4r14e6",
                     "score": [
@@ -375,10 +391,10 @@
         },
         "responses": {
           "204": {
-            "description": "Requête traitée avec succès"
+            "description": "Request processed successfully"
           },
           "400": {
-            "description": "Elements manquants et/ou incorrect dans le body",
+            "description": "Missing or incorrect elements in the request body",
             "content": {
               "application/json": {
                 "schema": {
@@ -394,7 +410,7 @@
                   }
                 },
                 "examples": {
-                  "Exemple": {
+                  "Example": {
                     "value": {
                       "reasons": [
                         "Missing argument 'xxxxx'"
@@ -406,14 +422,14 @@
             }
           },
           "403": {
-            "description": "L'information ne peut plus être envoyée",
+            "description": "The information can no longer be communicated",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "./retailer_to_woop.v1.4.0.json#/components/schemas/errorCode"
                 },
                 "examples": {
-                  "example": {
+                  "Example": {
                     "value": {
                       "statusCode": 403,
                       "error": "Forbidden",
@@ -425,14 +441,14 @@
             }
           },
           "404": {
-            "description": "Le 'orderId' n'a pas été trouvé",
+            "description": "Specified 'orderId' does not exist",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "./retailer_to_woop.v1.4.0.json#/components/schemas/errorCode"
                 },
                 "examples": {
-                  "example": {
+                  "Example": {
                     "value": {
                       "statusCode": 404,
                       "error": "Not Found",
@@ -444,16 +460,27 @@
             }
           }
         },
-        "summary": "Recevoir les notes transporteur pour une livraison"
-      }
+        "summary": "Receive customer notation on a delivery"
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "orderId",
+          "in": "path",
+          "required": true,
+          "description": "Order ID"
+        }
+      ]
     },
     "/orders/{orderId}/deliveryClosure": {
       "post": {
         "tags": [
-          "Commande"
+          "Order"
         ],
         "operationId": "postOrderDeliveryClosure",
-        "description": "Cette méthode permet de recevoir les informations de facturation pour une livraison donnée.",
+        "description": "A method to receive billing informations on a delivery",
         "parameters": [
           {
             "$ref": "#/components/parameters/pathOrderId"
@@ -461,7 +488,7 @@
         ],
         "requestBody": {
           "required": true,
-          "description": "Contient les informations de facturation.",
+          "description": "Contains billing informations",
           "content": {
             "application/json": {
               "schema": {
@@ -469,15 +496,15 @@
                 "properties": {
                   "deliveryId": {
                     "type": "string",
-                    "description": "Identifiant de la livraison"
+                    "description": "Delivery ID"
                   },
                   "externalReference": {
                     "type": "string",
-                    "description": "Référence de commande"
+                    "description": "Order reference"
                   },
                   "orderId": {
                     "type": "string",
-                    "description": "Identifiant de commmande"
+                    "description": "Order ID"
                   },
                   "billedDistance": {
                     "$ref": "#/components/schemas/length"
@@ -498,7 +525,7 @@
                 ]
               },
               "examples": {
-                "Exemple": {
+                "Example": {
                   "value": {
                     "deliveryId": "654eg65ze4g65z",
                     "externalReference": "564654-FT",
@@ -520,10 +547,10 @@
         },
         "responses": {
           "204": {
-            "description": "Requête traitée avec succès"
+            "description": "Request processed successfully"
           },
           "400": {
-            "description": "Elements manquants et/ou incorrect dans le body",
+            "description": "Missing or incorrect elements in the request body",
             "content": {
               "application/json": {
                 "schema": {
@@ -539,7 +566,7 @@
                   }
                 },
                 "examples": {
-                  "Exemple": {
+                  "Example": {
                     "value": {
                       "reasons": [
                         "Missing argument 'xxxxx'"
@@ -551,7 +578,7 @@
             }
           },
           "403": {
-            "description": "L'information ne peut plus être envoyée",
+            "description": "The information can no longer be communicated",
             "content": {
               "application/json": {
                 "schema": {
@@ -562,14 +589,14 @@
             }
           },
           "404": {
-            "description": "Le 'orderId' n'a pas été trouvé",
+            "description": "Specified 'orderId' does not exist",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "./retailer_to_woop.v1.4.0.json#/components/schemas/errorCode"
                 },
                 "examples": {
-                  "example": {
+                  "Example": {
                     "value": {
                       "statusCode": 404,
                       "error": "Not Found",
@@ -581,16 +608,27 @@
             }
           }
         },
-        "summary": "Recevoir les informations de facturation pour une livraison"
-      }
+        "summary": "Receive billing informations on a delivery"
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "orderId",
+          "in": "path",
+          "required": true,
+          "description": "Order ID"
+        }
+      ]
     },
     "/orders/{orderId}/events": {
       "post": {
         "tags": [
-          "Commande"
+          "Order"
         ],
         "operationId": "postOrderEvents",
-        "description": "Cette méthode permet de recevoir la notification d'un évènement d'une commande.",
+        "description": "A method to reveive event notification about an order",
         "parameters": [
           {
             "$ref": "#/components/parameters/pathOrderId"
@@ -598,7 +636,7 @@
         ],
         "requestBody": {
           "required": true,
-          "description": "Contient les informations de l'évenement.",
+          "description": "Contains informations about event",
           "content": {
             "application/json": {
               "schema": {
@@ -606,7 +644,7 @@
                 "properties": {
                   "status": {
                     "type": "boolean",
-                    "description": "Indique si l'événement à été envoyé correctement au client"
+                    "description": "Indicates whether the event was sent correctly to the customer"
                   },
                   "type": {
                     "type": "string",
@@ -615,12 +653,12 @@
                       "EVENT_TYPE_MAIL",
                       "EVENT_TYPE_CALL"
                     ],
-                    "description": "Type de l'évènement"
+                    "description": "Event type"
                   },
                   "date": {
                     "type": "string",
                     "format": "datetime",
-                    "description": "Date de l’événement"
+                    "description": "Event date"
                   },
                   "subject": {
                     "type": "string",
@@ -643,19 +681,19 @@
                       "DELIVERY_DELAYED",
                       "DELIVERY_AVAILABLE"
                     ],
-                    "description": "Sujet de l'évènement"
+                    "description": "Event subject"
                   },
                   "message": {
                     "type": "string",
-                    "description": "Message envoyé au client"
+                    "description": "Message send to customer"
                   },
                   "failReason": {
                     "type": "string",
-                    "description": "Motif de l'échec si status est false"
+                    "description": "Failed reason if status is false"
                   },
                   "sender": {
                     "type": "string",
-                    "description": "Expéditeur"
+                    "description": "Message sender"
                   }
                 },
                 "required": [
@@ -668,7 +706,7 @@
                 ]
               },
               "examples": {
-                "Exemple": {
+                "Example": {
                   "value": {
                     "status": true,
                     "type": "EVENT_TYPE_MAIL",
@@ -684,10 +722,10 @@
         },
         "responses": {
           "204": {
-            "description": "Requête traitée avec succès"
+            "description": "Request processed successfully"
           },
           "400": {
-            "description": "Elements manquants et/ou incorrect dans le body",
+            "description": "Missing or incorrect elements in the request body",
             "content": {
               "application/json": {
                 "schema": {
@@ -703,7 +741,7 @@
                   }
                 },
                 "examples": {
-                  "Exemple": {
+                  "Example": {
                     "value": {
                       "reasons": [
                         "Missing argument 'xxxxx'"
@@ -715,7 +753,7 @@
             }
           },
           "403": {
-            "description": "L'information ne peut plus être envoyée",
+            "description": "The information can no longer be communicated",
             "content": {
               "application/json": {
                 "schema": {
@@ -725,14 +763,14 @@
             }
           },
           "404": {
-            "description": "Le 'orderId' n'a pas été trouvé",
+            "description": "Specified 'orderId' does not exist",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "./retailer_to_woop.v1.4.0.json#/components/schemas/errorCode"
                 },
                 "examples": {
-                  "example": {
+                  "Example": {
                     "value": {
                       "statusCode": 404,
                       "error": "Not Found",
@@ -744,26 +782,37 @@
             }
           }
         },
-        "summary": "Recevoir les événements pour une commande donnée"
-      }
+        "summary": "Receive events about an order"
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "orderId",
+          "in": "path",
+          "required": true,
+          "description": "Order ID"
+        }
+      ]
     }
   },
   "components": {
     "schemas": {
       "score": {
-        "title": "Note de livraison (score)",
+        "title": "Delivery notation (score)",
         "type": "object",
         "x-examples": {
-          "Exemple": {
+          "Example": {
             "note": 5,
             "type": "SCORE_TYPE_RECOMMENDATION"
           }
         },
-        "description": "Précise la note obtenu de la part du client final pour la livraison effectuée. ",
+        "description": "Corresponds to the delivery notation by the customer",
         "properties": {
           "note": {
             "type": "number",
-            "description": "Note"
+            "description": "Score"
           },
           "type": {
             "type": "string",
@@ -771,7 +820,7 @@
               "SCORE_TYPE_RECOMMENDATION",
               "SCORE_TYPE_SATISFACTION"
             ],
-            "description": "Type de note"
+            "description": "Score type"
           }
         },
         "required": [
@@ -783,30 +832,30 @@
         "title": "Contact (contact)",
         "type": "object",
         "x-examples": {
-          "Exemple": {
+          "Example": {
             "firstName": "John",
             "lastName": "Doe",
             "phone": "+33610101010",
             "email": "johndoe@mail.com"
           }
         },
-        "description": "Informations de contact de livraison/prélèvement.",
+        "description": "Picking/Delivery contact informations",
         "properties": {
           "firstName": {
             "type": "string",
-            "description": "Prénom"
+            "description": "Contact firstname"
           },
           "lastName": {
             "type": "string",
-            "description": "Nom"
+            "description": "Contact lastname"
           },
           "phone": {
             "type": "string",
-            "description": "Téléphone"
+            "description": "Contact phone number"
           },
           "email": {
             "type": "string",
-            "description": "Email"
+            "description": "Contact email"
           }
         },
         "required": [
@@ -834,10 +883,10 @@
           "ORDER_DELIVERED",
           "ORDER_CANCELLED"
         ],
-        "title": "Statut de commande (orderStatus)",
-        "description": "Précise le statut d'une commande.",
+        "title": "Order status (orderStatus)",
+        "description": "Specifies the order status",
         "x-examples": {
-          "Exemple": "ORDER_CREATED"
+          "Example": "ORDER_CREATED"
         }
       },
       "deliveryStatus": {
@@ -858,22 +907,22 @@
           "DELIVERY_DELIVERED_PARTIALLY",
           "DELIVERY_REPLANNED"
         ],
-        "title": "Statut de livraison (deliveryStatus)",
+        "title": "Delivery status (deliveryStatus)",
         "x-examples": {
-          "Exemple": "DELIVERY_STARTED"
+          "Example": "DELIVERY_STARTED"
         },
-        "description": "Précise le statut de livraison pouvant être utilisé."
+        "description": "Specifies the different possible delivery statuses in the platform"
       },
       "length": {
         "title": "Dimension (length)",
         "x-examples": {
-          "Exemple": {
+          "Example": {
             "value": 200,
             "unit": "mm"
           }
         },
         "type": "object",
-        "description": "Précise la dimension d'un colis.",
+        "description": "Specifies the package dimension",
         "properties": {
           "value": {
             "type": "number",
@@ -902,18 +951,18 @@
             "$ref": "#/components/schemas/massUnit"
           }
         },
-        "title": "Poids (mass)",
+        "title": "Weight (mass)",
         "x-examples": {
-          "Exemple": {
+          "Example": {
             "value": 1,
             "unit": "kg"
           }
         },
-        "description": "Précise le poids d'un colis/produit."
+        "description": "Specifies the package/product weight"
       },
       "lengthUnit": {
         "type": "string",
-        "description": "Précise l'unité de mesure pour les dimensions.",
+        "description": "Specifies the length unit of measure",
         "enum": [
           "mm",
           "cm",
@@ -923,13 +972,14 @@
           "ft",
           "mi"
         ],
-        "title": "Unité de mesure (lengthUnit)",
+        "title": "Unit of measure (lengthUnit)",
         "x-examples": {
-          "Exemple": "mm"
+          "Example": "mm"
         }
       },
       "massUnit": {
-        "description": "Précise l'unité de poids.",
+        "type": "string",
+        "description": "Specifies the weight unit",
         "enum": [
           "mcg",
           "mg",
@@ -940,11 +990,11 @@
           "mt",
           "t"
         ],
-        "title": "Unité de poids (massUnit)",
+        "title": "Weight unit (massUnit)",
         "x-examples": {
-          "Exemple": "mcg"
+          "Example": "mcg"
         },
-        "type": "string"
+        "example": "g"
       },
       "vehicleType": {
         "type": "string",
@@ -964,21 +1014,21 @@
           "VEHICLE_TYPE_E_CAR",
           "VEHICLE_TYPE_UNKNOWN"
         ],
-        "title": "Type de véhicule de transport (vehicleType)",
+        "title": "Vehicule type (vehicleType)",
         "x-examples": {
-          "Exemple": "VEHICLE_TYPE_BIKE"
+          "Example": "VEHICLE_TYPE_BIKE"
         },
-        "description": "Précise le type de véhicule utilisé pour le transport. "
+        "description": "Define the vehicule used for the delivery"
       },
       "currency": {
         "type": "string",
-        "description": "Devise, précise la monnaie utilisée.",
+        "description": "Specifies the currency used",
         "enum": [
           "EUR"
         ],
-        "title": "Devise (currency)",
+        "title": "Currency (currency)",
         "x-examples": {
-          "Exemple": "EUR"
+          "Example": "EUR"
         }
       },
       "team": {
@@ -996,9 +1046,9 @@
             }
           }
         },
-        "title": "Équipe (team)",
+        "title": "Team (team)",
         "x-examples": {
-          "Exemple": {
+          "Example": {
             "members": [
               {
                 "id": "176867"
@@ -1006,23 +1056,23 @@
             ]
           }
         },
-        "description": "Informations de l'équipe ayant contribué à la livraison."
+        "description": "Information about the team that contributed to the delivery"
       },
       "price": {
-        "title": "Prix (price)",
+        "title": "Price (price)",
         "x-examples": {
-          "Exemple": {
+          "Example": {
             "value": 20,
             "currency": "EUR"
           }
         },
         "type": "object",
-        "description": "Précise le prix d'achât du produit. ",
+        "description": "Corresponds to the selling price of the products",
         "properties": {
           "value": {
             "type": "number",
             "format": "float",
-            "description": "valeur"
+            "description": "Price value"
           },
           "currency": {
             "$ref": "#/components/schemas/currency"
@@ -1034,9 +1084,9 @@
         ]
       },
       "carrier": {
-        "title": "Transporteur (carrier)",
+        "title": "Carrier (carrier)",
         "x-examples": {
-          "Exemple": {
+          "Example": {
             "name": "Bpost",
             "contact": {
               "firstName": "John",
@@ -1065,11 +1115,11 @@
           }
         },
         "type": "object",
-        "description": "Précise les informations du transporteur.",
+        "description": "Specifies the required informations for the carrier",
         "properties": {
           "name": {
             "type": "string",
-            "description": "Nom du transporteur"
+            "description": "Carrier name"
           },
           "contact": {
             "$ref": "#/components/schemas/contact"
@@ -1085,17 +1135,17 @@
         ]
       },
       "putDeliveryStatus": {
-        "title": "Mise à jour de statut de livraison (putDeliveryStatus)",
+        "title": "Update delivery status (putDeliveryStatus)",
         "type": "object",
-        "description": "Mise à jour de statut de livraison.",
+        "description": "Update the delivery status",
         "properties": {
           "deliveryId": {
             "type": "string",
-            "description": "Identifiant de la livraison"
+            "description": "Delivery ID"
           },
           "orderId": {
             "type": "string",
-            "description": "Identifiant de commande"
+            "description": "Order ID"
           },
           "status": {
             "$ref": "#/components/schemas/deliveryStatus"
@@ -1103,11 +1153,11 @@
           "date": {
             "type": "string",
             "format": "datetime",
-            "description": "Date de la modification"
+            "description": "Date of modification"
           },
           "comment": {
             "type": "string",
-            "description": "Commentaire libre"
+            "description": "Free comment"
           },
           "team": {
             "$ref": "#/components/schemas/team"
@@ -1128,17 +1178,18 @@
         ]
       },
       "putOrderStatus": {
-        "title": "Mise à jour du statut de la commande (putOrderStatus)",
+        "title": "Update order status (putOrderStatus)",
         "type": "object",
+        "description": "Update of the order status",
         "properties": {
           "orderId": {
             "type": "string",
-            "description": "Identifiant de la commande"
+            "description": "Order ID"
           },
           "date": {
             "type": "string",
             "format": "datetime",
-            "description": "Date de mise à jour"
+            "description": "Date of modification"
           },
           "status": {
             "$ref": "#/components/schemas/orderStatus"
@@ -1148,21 +1199,20 @@
           "orderId",
           "date",
           "status"
-        ],
-        "description": "Mise à jour du statut de la commande."
+        ]
       },
       "additionalData": {
-        "title": "Données additionnelles (additionalData)",
+        "title": "Additional data",
         "type": "object",
-        "description": "Permet de recevoir des informations/données personnalisées de la part du transporteur.",
+        "description": "Allows you to receive personalized information/data from the carrier.",
         "properties": {
           "key": {
             "type": "string",
-            "description": "Intitulé de l'information reçue"
+            "description": "Title of information received"
           },
           "value": {
             "type": "string",
-            "description": "Valeur de l'information"
+            "description": "Value of information received"
           }
         },
         "required": [
@@ -1177,7 +1227,7 @@
         }
       },
       "appointment": {
-        "description": "Précise un interval de dates avec heures pour la prise de RDV client.",
+        "description": "Specifies an interval of dates with times for customer appointments.",
         "type": "object",
         "x-examples": {
           "example": {
@@ -1189,22 +1239,22 @@
           "start": {
             "type": "string",
             "minLength": 1,
-            "description": "Début du créneau"
+            "description": "Beginning of the slot"
           },
           "end": {
             "type": "string",
             "minLength": 1,
-            "description": "Fin du créneau"
+            "description": "End of the slot"
           }
         },
         "required": [
           "start",
           "end"
         ],
-        "title": "Date de prise RDV (appointment)"
+        "title": "Date of appointment"
       },
       "specifications": {
-        "description": "Liste des caractéristiques enregistrées pour un transporteur sur une commande.",
+        "description": "List of characteristics recorded for a carrier on an order.",
         "type": "object",
         "x-examples": {
           "example": {
@@ -1226,23 +1276,23 @@
             }
           }
         },
-        "title": "Caractéristiques (specifications)",
+        "title": "Specifications",
         "properties": {
           "updateOrder": {
             "type": "boolean",
-            "description": "Indique si la modification de commande est autorisée"
+            "description": "Indicates whether the order change is authorized"
           },
           "cancelOrder": {
             "type": "boolean",
-            "description": "Indique si l'annulation de commande est autorisée"
+            "description": "Indicates whether order cancellation is allowed"
           },
           "carrierLabel": {
             "type": "boolean",
-            "description": "Indique si le transporteur possède une étiquette de transport"
+            "description": "Indicates if the carrier has a transport label."
           },
           "storageCapacity": {
             "type": "boolean",
-            "description": "Indique si le transporteur possède une capacité de stockage"
+            "description": "Indicates whether the carrier has storage capacity"
           },
           "weightMin": {
             "$ref": "#/components/schemas/weight"
@@ -1265,7 +1315,7 @@
         ]
       },
       "weight": {
-        "description": "Précise le poids autorisé",
+        "description": "Specifies the allowed weight",
         "type": "object",
         "properties": {
           "value": {
@@ -1285,10 +1335,10 @@
             "unit": "kg"
           }
         },
-        "title": "Poids (weight)"
+        "title": "Weight"
       },
       "distance": {
-        "description": "Précise la distance entre deux points.",
+        "description": "Specifies the distance between two points.",
         "type": "object",
         "x-examples": {
           "exemple": {
@@ -1296,7 +1346,7 @@
             "unit": "km"
           }
         },
-        "title": "Distance (distance)",
+        "title": "Distance",
         "properties": {
           "value": {
             "type": "number"
@@ -1312,11 +1362,11 @@
       },
       "distanceUnit": {
         "type": "string",
-        "title": "Unité de distance (distanceUnit)",
+        "title": "Distance unit",
         "x-examples": {
           "Exemple": "string"
         },
-        "description": "Précise l'unité de mesure pour le calcul de distance.",
+        "description": "Specifies the unit of measurement for distance calculation.",
         "enum": [
           "m",
           "km"
@@ -1326,7 +1376,7 @@
     "parameters": {
       "pathOrderId": {
         "in": "path",
-        "description": "Identifiant de la commande",
+        "description": "Order ID",
         "name": "orderId",
         "required": true,
         "schema": {
