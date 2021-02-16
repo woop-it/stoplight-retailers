@@ -1762,7 +1762,7 @@
         "tags": [
           "Pickup point"
         ],
-        "description": "This method returns a list of pickup points around a geolocation and optional parameters",
+        "description": "This method returns a list of pickup points around a geolocation and optional parameters. \n\n[Go to explication](https://woop.stoplight.io/docs/retailer/branches/english/docs/3.%20Models/PickupPoint-Management.md)",
         "operationId": "getPickupPoints",
         "parameters": [
           {
@@ -1835,6 +1835,11 @@
                           },
                           "carrier": {
                             "$ref": "#/components/schemas/pickupPointCarrier"
+                          },
+                          "externalCategory": {
+                            "type": "string",
+                            "example": "Cat1",
+                            "description": "Returns the category of the relay point as named at the carrier."
                           },
                           "openingHours": {
                             "type": "object",
@@ -1928,6 +1933,7 @@
                             "code": "transporteur1",
                             "name": "Transporteur A"
                           },
+                          "externalMinimalCategory": "24R",
                           "openingHours": {
                             "monday": [
                               {
@@ -2410,45 +2416,98 @@
         "summary": "Subscriptions initialization"
       }
     },
-    "/eligibilities/services": {
+    "/eligibilities": {
       "post": {
-        "summary": "Services eligibility",
+        "summary": "Carriers and services eligibility",
         "operationId": "postServices",
         "responses": {
           "200": {
-            "description": "List of eligible services",
+            "description": "List of eligible carriers and services",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "description": "Services list",
+                  "description": "Carriers and services list",
                   "properties": {
-                    "services": {
+                    "eligibilities": {
                       "type": "array",
                       "items": {
                         "type": "object",
+                        "required": [
+                          "carrier",
+                          "service",
+                          "price",
+                          "delay"
+                        ],
                         "properties": {
-                          "type": {
+                          "carrier": {
+                            "type": "object",
+                            "description": "Eligible carrier",
+                            "properties": {
+                              "name": {
+                                "type": "string",
+                                "description": "Carrier's name"
+                              },
+                              "code": {
+                                "type": "string",
+                                "description": "Internal code for carrier"
+                              }
+                            }
+                          },
+                          "service": {
                             "$ref": "#/components/schemas/deliveryService"
                           },
-                          "pickupPointTypes": {
+                          "types": {
                             "type": "array",
                             "description": "Types of eligible pickup points (for SERVICE_PICKUP_POINT service)",
                             "items": {
                               "$ref": "#/components/schemas/pickupPointType"
                             }
                           },
-                          "pickupPointCategories": {
+                          "categories": {
                             "type": "array",
                             "description": "Categories of eligible pickup points (for SERVICE_PICKUP_POINT service)",
                             "items": {
                               "$ref": "#/components/parameters/queryPickupPointCategory"
                             }
+                          },
+                          "price": {
+                            "type": "object",
+                            "description": "Service price",
+                            "required": [
+                              "price",
+                              "currency"
+                            ],
+                            "properties": {
+                              "price": {
+                                "type": "number"
+                              },
+                              "currency": {
+                                "$ref": "#/components/schemas/currency"
+                              }
+                            }
+                          },
+                          "delay": {
+                            "type": "object",
+                            "description": "Service execution time",
+                            "required": [
+                              "value",
+                              "unit"
+                            ],
+                            "properties": {
+                              "value": {
+                                "type": "number"
+                              },
+                              "unit": {
+                                "type": "enum",
+                                "enum": [
+                                  "day",
+                                  "hour"
+                                ]
+                              }
+                            }
                           }
-                        },
-                        "required": [
-                          "type"
-                        ]
+                        }
                       }
                     }
                   }
@@ -2456,28 +2515,49 @@
                 "examples": {
                   "Example": {
                     "value": {
-                      "services": [
+                      "eligibilities": [
                         {
-                          "type": "SERVICE_PICKUP_POINT",
-                          "pickupPointTypes": [
+                          "carrier": {
+                            "code": "bpost",
+                            "name": "Bpost"
+                          },
+                          "service": "SERVICE_PICKUP_POINT",
+                          "types": [
                             "PICKUP_POINT_AGENCY",
                             "PICKUP_POINT_POST_OFFICE",
                             "PICKUP_POINT_RELAY_WITH_LOCKER",
                             "PICKUP_POINT_RELAY_WITHOUT_LOCKER",
                             "PICKUP_POINT_ALL"
                           ],
-                          "pickupPointCategories": [
+                          "categories": [
                             "PICKUP_POINT_STANDARD",
                             "PICKUP_POINT_XL",
                             "PICKUP_POINT_XXL",
                             "PICKUP_POINT_DRIVE"
-                          ]
+                          ],
+                          "price": {
+                            "value": 2.99,
+                            "currency": "EUR"
+                          },
+                          "delay": {
+                            "value": 3,
+                            "unit": "day"
+                          }
                         },
                         {
-                          "type": "SERVICE_FRONT_HOME"
-                        },
-                        {
-                          "type": "SERVICE_INSTALL"
+                          "carrier": {
+                            "code": "chronopost",
+                            "name": "Chronopost"
+                          },
+                          "service": "SERVICE_FRONT_HOME",
+                          "price": {
+                            "value": 5.99,
+                            "currency": "EUR"
+                          },
+                          "delay": {
+                            "value": 1,
+                            "unit": "day"
+                          }
                         }
                       ]
                     }
@@ -2527,12 +2607,12 @@
             "$ref": "#/components/parameters/apiVersion"
           }
         ],
-        "description": "A method to retrieve the delivery services available for an order. The services returned depend on the picking location, delivery location (optional), the products/packages.",
+        "description": "A method to retrieve the delivery carriers and services available for an order. Carriers and services returned depend on the picking location, delivery location (optional), the products/packages.",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/postServices"
+                "$ref": "#/components/schemas/postEligibilities"
               },
               "examples": {
                 "Default example": {
@@ -2640,7 +2720,8 @@
         "tags": [
           "Eligibility"
         ]
-      }
+      },
+      "parameters": []
     },
     "/orders/download": {
       "get": {
@@ -2918,10 +2999,10 @@
         "description": "Specifies useful informations to create a collect request (click and collect).",
         "title": "Collect request (postCollects)"
       },
-      "postServices": {
+      "postEligibilities": {
         "type": "object",
-        "description": "Specifies the request for possible delivery services according to departure point, an arrival point (no mandatory) and the content of the client shopping cart.",
-        "title": "Service eligibility request (postServices)",
+        "description": "Eligibility request",
+        "title": "Request for Eligibility of Services (postEligibilities)",
         "x-examples": {
           "Default example": {
             "picking": {
@@ -3786,6 +3867,13 @@
       "pickupPointCarrier": {
         "description": "Specifies the selected carrier for a pickup point.",
         "type": "object",
+        "x-examples": {
+          "Exemple": {
+            "name": "Bpost",
+            "code": "bpost"
+          }
+        },
+        "title": "Pickup point carrier (pickupPointCarrier)",
         "properties": {
           "name": {
             "type": "string",
@@ -3799,14 +3887,7 @@
         "required": [
           "name",
           "code"
-        ],
-        "x-examples": {
-          "Example": {
-            "name": "Bpost",
-            "code": "bpost"
-          }
-        },
-        "title": "Pickup point carrier (pickupPointCarrier)"
+        ]
       },
       "cancelledReasons": {
         "type": "string",
