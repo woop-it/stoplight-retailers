@@ -4049,7 +4049,7 @@
         "items": {
           "type": "string"
         },
-        "description": "Précise le numéro de colis choisi pour le suivi par le transporteur.",
+        "description": "Précise le numéro de colis de l'enseigne.",
         "title": "Références des colis (packagesReferences)",
         "x-examples": {
           "example-1": [
