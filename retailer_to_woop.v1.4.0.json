@@ -3194,229 +3194,26 @@
         "properties": {
           "reference": {
             "type": "string",
-            "minLength": 1
+            "minLength": 1,
+            "description": "Identifiant de la demande de retrait"
           },
           "storeId": {
             "type": "string",
-            "minLength": 1
+            "minLength": 1,
+            "description": "Identifiant du magasin émettant la demande"
           },
           "customer": {
-            "type": "object",
-            "required": [
-              "firstName",
-              "lastName",
-              "phone",
-              "email",
-              "language",
-              "timezone"
-            ],
-            "properties": {
-              "firstName": {
-                "type": "string",
-                "minLength": 1
-              },
-              "lastName": {
-                "type": "string",
-                "minLength": 1
-              },
-              "phone": {
-                "type": "string",
-                "minLength": 1
-              },
-              "email": {
-                "type": "string",
-                "minLength": 1
-              },
-              "language": {
-                "type": "string",
-                "minLength": 1
-              },
-              "timezone": {
-                "type": "string",
-                "minLength": 1
-              }
-            }
+            "$ref": "#/components/schemas/contact"
           },
           "location": {
-            "type": "object",
-            "required": [
-              "type",
-              "addressLine1",
-              "addressLine2",
-              "elevator",
-              "floor",
-              "doorCode",
-              "postalCode",
-              "city",
-              "district",
-              "country",
-              "comment"
-            ],
-            "properties": {
-              "type": {
-                "type": "string",
-                "minLength": 1
-              },
-              "addressLine1": {
-                "type": "string",
-                "minLength": 1
-              },
-              "addressLine2": {
-                "type": "string",
-                "minLength": 1
-              },
-              "elevator": {
-                "type": "boolean"
-              },
-              "floor": {
-                "type": "number"
-              },
-              "doorCode": {
-                "type": "string",
-                "minLength": 1
-              },
-              "postalCode": {
-                "type": "string",
-                "minLength": 1
-              },
-              "city": {
-                "type": "string",
-                "minLength": 1
-              },
-              "district": {
-                "type": "string",
-                "minLength": 1
-              },
-              "country": {
-                "type": "string",
-                "minLength": 1
-              },
-              "comment": {
-                "type": "string",
-                "minLength": 1
-              }
-            }
+            "$ref": "#/components/schemas/location"
           },
           "packages": {
             "type": "array",
             "uniqueItems": true,
             "minItems": 1,
             "items": {
-              "type": "object",
-              "properties": {
-                "references": {
-                  "type": "array",
-                  "items": {
-                    "type": "object"
-                  }
-                },
-                "length": {
-                  "type": "object",
-                  "properties": {
-                    "value": {
-                      "type": "number"
-                    },
-                    "unit": {
-                      "type": "string",
-                      "minLength": 1
-                    }
-                  },
-                  "required": [
-                    "value",
-                    "unit"
-                  ]
-                },
-                "width": {
-                  "type": "object",
-                  "properties": {
-                    "value": {
-                      "type": "number"
-                    },
-                    "unit": {
-                      "type": "string",
-                      "minLength": 1
-                    }
-                  },
-                  "required": [
-                    "value",
-                    "unit"
-                  ]
-                },
-                "height": {
-                  "type": "object",
-                  "properties": {
-                    "value": {
-                      "type": "number"
-                    },
-                    "unit": {
-                      "type": "string",
-                      "minLength": 1
-                    }
-                  },
-                  "required": [
-                    "value",
-                    "unit"
-                  ]
-                },
-                "weight": {
-                  "type": "object",
-                  "properties": {
-                    "value": {
-                      "type": "number"
-                    },
-                    "unit": {
-                      "type": "string",
-                      "minLength": 1
-                    }
-                  },
-                  "required": [
-                    "value",
-                    "unit"
-                  ]
-                },
-                "products": {
-                  "type": "array",
-                  "uniqueItems": true,
-                  "minItems": 1,
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "type": {
-                        "type": "string",
-                        "minLength": 1
-                      },
-                      "ean": {
-                        "type": "string",
-                        "minLength": 1
-                      },
-                      "cug": {
-                        "type": "string",
-                        "minLength": 1
-                      },
-                      "label": {
-                        "type": "string",
-                        "minLength": 1
-                      },
-                      "quantity": {
-                        "type": "number"
-                      }
-                    },
-                    "required": [
-                      "type",
-                      "ean",
-                      "cug",
-                      "label",
-                      "quantity"
-                    ]
-                  }
-                },
-                "quantity": {
-                  "type": "number"
-                }
-              },
-              "required": [
-                "quantity"
-              ]
+              "$ref": "#/components/schemas/packages"
             }
           },
           "tags": {
@@ -3424,25 +3221,17 @@
             "uniqueItems": true,
             "minItems": 1,
             "items": {
-              "type": "object",
-              "properties": {
-                "key": {
-                  "type": "string",
-                  "minLength": 1
-                },
-                "value": {
-                  "type": "string",
-                  "minLength": 1
-                }
-              },
-              "required": [
-                "key",
-                "value"
-              ]
+              "$ref": "#/components/schemas/tags"
             }
           },
           "mode": {
-            "type": "string"
+            "type": "string",
+            "description": "Mode de click & collect choisi par le client ",
+            "enum": [
+              "standard",
+              "express",
+              "delay"
+            ]
           }
         },
         "required": [
