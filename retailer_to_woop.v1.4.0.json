@@ -70,7 +70,7 @@
         "tags": [
           "Retrait"
         ],
-        "description": "Cette méthode permet d’effectuer une demande de retrait dans un emplacement de prélèvement précis. Dès la demande validée, l’ordre de retrait sera alors créé instantanément.",
+        "description": "Cette méthode permet d’effectuer une demande de retrait Click&Collect dans un emplacement de prélèvement précis. Dès la demande validée et le créneau de réservation sélectionné, l’ordre de retrait sera créé instantanément.",
         "operationId": "postCollects",
         "parameters": [
           {
@@ -3188,39 +3188,271 @@
         }
       },
       "postCollects": {
+        "description": "Précise les informations utiles à la création d'une demande de retrait drive click & collect.",
         "type": "object",
+        "title": "Demande de retrait (postCollects)",
+        "properties": {
+          "reference": {
+            "type": "string",
+            "minLength": 1
+          },
+          "storeId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "customer": {
+            "type": "object",
+            "required": [
+              "firstName",
+              "lastName",
+              "phone",
+              "email",
+              "language",
+              "timezone"
+            ],
+            "properties": {
+              "firstName": {
+                "type": "string",
+                "minLength": 1
+              },
+              "lastName": {
+                "type": "string",
+                "minLength": 1
+              },
+              "phone": {
+                "type": "string",
+                "minLength": 1
+              },
+              "email": {
+                "type": "string",
+                "minLength": 1
+              },
+              "language": {
+                "type": "string",
+                "minLength": 1
+              },
+              "timezone": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          },
+          "location": {
+            "type": "object",
+            "required": [
+              "type",
+              "addressLine1",
+              "addressLine2",
+              "elevator",
+              "floor",
+              "doorCode",
+              "postalCode",
+              "city",
+              "district",
+              "country",
+              "comment"
+            ],
+            "properties": {
+              "type": {
+                "type": "string",
+                "minLength": 1
+              },
+              "addressLine1": {
+                "type": "string",
+                "minLength": 1
+              },
+              "addressLine2": {
+                "type": "string",
+                "minLength": 1
+              },
+              "elevator": {
+                "type": "boolean"
+              },
+              "floor": {
+                "type": "number"
+              },
+              "doorCode": {
+                "type": "string",
+                "minLength": 1
+              },
+              "postalCode": {
+                "type": "string",
+                "minLength": 1
+              },
+              "city": {
+                "type": "string",
+                "minLength": 1
+              },
+              "district": {
+                "type": "string",
+                "minLength": 1
+              },
+              "country": {
+                "type": "string",
+                "minLength": 1
+              },
+              "comment": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          },
+          "packages": {
+            "type": "array",
+            "uniqueItems": true,
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "properties": {
+                "references": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                },
+                "length": {
+                  "type": "object",
+                  "properties": {
+                    "value": {
+                      "type": "number"
+                    },
+                    "unit": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "required": [
+                    "value",
+                    "unit"
+                  ]
+                },
+                "width": {
+                  "type": "object",
+                  "properties": {
+                    "value": {
+                      "type": "number"
+                    },
+                    "unit": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "required": [
+                    "value",
+                    "unit"
+                  ]
+                },
+                "height": {
+                  "type": "object",
+                  "properties": {
+                    "value": {
+                      "type": "number"
+                    },
+                    "unit": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "required": [
+                    "value",
+                    "unit"
+                  ]
+                },
+                "weight": {
+                  "type": "object",
+                  "properties": {
+                    "value": {
+                      "type": "number"
+                    },
+                    "unit": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "required": [
+                    "value",
+                    "unit"
+                  ]
+                },
+                "products": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "minItems": 1,
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "ean": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "cug": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "label": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "quantity": {
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "ean",
+                      "cug",
+                      "label",
+                      "quantity"
+                    ]
+                  }
+                },
+                "quantity": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "quantity"
+              ]
+            }
+          },
+          "tags": {
+            "type": "array",
+            "uniqueItems": true,
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "value": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "required": [
+                "key",
+                "value"
+              ]
+            }
+          },
+          "mode": {
+            "type": "string"
+          }
+        },
         "required": [
           "reference",
           "storeId",
           "customer",
           "location",
-          "packages"
-        ],
-        "properties": {
-          "reference": {
-            "type": "string",
-            "description": "Identifiant de la demande de retrait"
-          },
-          "storeId": {
-            "type": "string",
-            "description": "Identifiant du magasin émettant la demande"
-          },
-          "customer": {
-            "$ref": "#/components/schemas/contact"
-          },
-          "location": {
-            "$ref": "#/components/schemas/location"
-          },
-          "packages": {
-            "description": "Ensemble des colis",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/packages"
-            }
-          }
-        },
-        "description": "Précise les informations utiles à la création d'une demande de retrait (click and collect).",
-        "title": "Demande de retrait (postCollects)"
+          "packages",
+          "tags"
+        ]
       },
       "postEligibilities": {
         "type": "object",
@@ -3464,7 +3696,121 @@
           "delivery",
           "packages",
           "services"
-        ]
+        ],
+        "x-examples": {
+          "example-1": {
+            "orderId": "string",
+            "referenceNumber": "string",
+            "storeId": "string",
+            "picking": {
+              "location": {
+                "type": "address",
+                "addressLine1": "string",
+                "addressLine2": "string",
+                "elevator": true,
+                "floor": 0,
+                "doorCode": "string",
+                "postalCode": "string",
+                "city": "string",
+                "district": "string",
+                "country": "FR",
+                "comment": "string"
+              },
+              "infos": "string",
+              "interval": [
+                {
+                  "start": "string",
+                  "end": "string"
+                }
+              ],
+              "contact": {
+                "firstName": "string",
+                "lastName": "string",
+                "phone": "string",
+                "email": "string",
+                "language": "fr",
+                "timezone": "Europe/Paris"
+              }
+            },
+            "delivery": {
+              "location": {
+                "type": "address",
+                "addressLine1": "string",
+                "addressLine2": "string",
+                "elevator": true,
+                "floor": 0,
+                "doorCode": "string",
+                "postalCode": "string",
+                "city": "string",
+                "district": "string",
+                "country": "FR",
+                "comment": "string"
+              },
+              "infos": "string",
+              "interval": [
+                {
+                  "start": "string",
+                  "end": "string"
+                }
+              ],
+              "contact": {
+                "firstName": "string",
+                "lastName": "string",
+                "phone": "string",
+                "email": "string",
+                "language": "fr",
+                "timezone": "Europe/Paris"
+              }
+            },
+            "numberOfPackages": 0,
+            "packages": [
+              {
+                "references": [
+                  "string"
+                ],
+                "length": {
+                  "value": 0,
+                  "unit": "mm"
+                },
+                "width": {
+                  "value": 0,
+                  "unit": "mm"
+                },
+                "height": {
+                  "value": 0,
+                  "unit": "mm"
+                },
+                "weight": {
+                  "value": 0,
+                  "unit": "kg"
+                },
+                "products": [
+                  {
+                    "type": "TYPOLOGY_GENERIC",
+                    "ean": "string",
+                    "cug": "string",
+                    "label": "string",
+                    "quantity": 1
+                  }
+                ],
+                "quantity": 1
+              }
+            ],
+            "services": [
+              "SERVICE_PICKUP_POINT"
+            ],
+            "productsPrice": {
+              "value": 0,
+              "currency": "EUR"
+            },
+            "tags": [
+              {
+                "key": "origin",
+                "value": "web"
+              }
+            ]
+          }
+        }
       },
       "postProductReturn": {
         "type": "object",
