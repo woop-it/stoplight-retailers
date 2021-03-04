@@ -40,6 +40,13 @@ Code | Intitulé
 
 Default value : `PICKUP_POINT_RELAY_ALL`
 
+Types disponibles par transporteur:
+
+Transporteur | Code | Catégories
+---------|---------|----------
+ Bpost| bpost|PICKUP_POINT_AGENCY, PICKUP_POINT_POST_OFFICE, PICKUP_POINT_RELAY_WITH_LOCKER, PICKUP_POINT_RELAY_WITHOUT_LOCKER
+ Dpd | dpd | PICKUP_POINT_AGENCY, PICKUP_POINT_POST_OFFICE, PICKUP_POINT_RELAY_WITH_LOCKER, PICKUP_POINT_RELAY_WITHOUT_LOCKER
+
 
 ## Catégorie de point-relais
 
