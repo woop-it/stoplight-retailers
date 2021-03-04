@@ -1883,46 +1883,55 @@
                 "$ref": "#/components/schemas/postPickupPoints"
               },
               "examples": {
-                "Recherche simple" : {
-                  "value" : {
+                "Recherche simple": {
+                  "value": {
                     "latitude": 50.6379636,
                     "longitude": 3.077384,
                     "number": 10,
                     "kilometricDistance": 20
                   }
                 },
-                 "Recherche par type" : {
-                  "value" : {
+                "Recherche par type": {
+                  "value": {
                     "latitude": 50.6379636,
                     "longitude": 3.077384,
                     "kilometricDistance": 20,
                     "type": "PICKUP_POINT_AGENCY"
                   }
                 },
-                "Recherche par catégories" : {
-                  "value" : {
+                "Recherche par catégories": {
+                  "value": {
                     "latitude": 50.6379636,
                     "longitude": 3.077384,
                     "kilometricDistance": 20,
                     "carrierCode": "mondial-relay",
-                    "category" : {
-                      "mondial-relay": ["24R", "24L"]
+                    "category": {
+                      "mondial-relay": [
+                        "24R",
+                        "24L"
+                      ]
                     }
                   }
                 },
-                "Recherche par transporteurs et catégories" : {
-                  "value" : {
+                "Recherche par transporteurs et catégories": {
+                  "value": {
                     "latitude": 50.6379636,
                     "longitude": 3.077384,
                     "kilometricDistance": 20,
-                    "carrierCode": ["dpd", "mondial-relay"],
-                    "category" : {
-                      "mondial-relay": ["24R", "24L"]
+                    "carrierCode": [
+                      "dpd",
+                      "mondial-relay"
+                    ],
+                    "category": {
+                      "mondial-relay": [
+                        "24R",
+                        "24L"
+                      ]
                     }
                   }
                 },
                 "Recherche par panier": {
-                  "value" : {
+                  "value": {
                     "latitude": 50.6379636,
                     "longitude": 3.077384,
                     "kilometricDistance": 20,
@@ -3624,7 +3633,7 @@
           "packages"
         ]
       },
-      "postPickupPoints" : {
+      "postPickupPoints": {
         "type": "object",
         "description": "Précise les informations pour la recherche de point relais",
         "title": "Recherche de points relais (postPickupPoints)",
@@ -3632,16 +3641,16 @@
           "latitude",
           "longitude"
         ],
-        "properties" : {
-          "latitude" : {
+        "properties": {
+          "latitude": {
             "type": "number",
             "description": "Latitude du point de recherche"
           },
-          "longitude" : {
+          "longitude": {
             "type": "number",
             "description": "Longitude du point de recherche"
           },
-          "number" : {
+          "number": {
             "type": "number",
             "description": "Longitude du point de recherche",
             "maximum": 25,
@@ -3662,8 +3671,14 @@
           },
           "carrierCode": {
             "oneOf": [
-              { "type": "string", "description": "Filtre par code du transporteur"},
-              { "type": "array", "description": "Filtre par multiple codes transporteur"}
+              {
+                "type": "string",
+                "description": "Filtre par code du transporteur"
+              },
+              {
+                "type": "array",
+                "description": "Filtre par multiple codes transporteur"
+              }
             ]
           },
           "packages": {
@@ -3676,7 +3691,7 @@
           "storeId": {
             "type": "string",
             "description": "Identifiant du magasin émettant la demande"
-          }      
+          }
         }
       },
       "tags": {
@@ -4504,7 +4519,7 @@
         "required": true,
         "schema": {
           "type": "string",
-          "example": "1.4.0"
+          "example": "1.5.0"
         }
       },
       "queryDeliveryStatus": {
