@@ -746,6 +746,102 @@
         },
         "summary": "Recevoir les événements pour une commande donnée"
       }
+    },
+    "/orders/{orderId}/quotes": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "orderId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "post": {
+        "summary": "Recevoir l'ensemble des devis d'une commande",
+        "operationId": "postOrderQuotes",
+        "responses": {
+          "200": {
+            "description": "Requête traitée avec succès"
+          },
+          "400": {
+            "description": "Elements manquants et/ou incorrect dans le body",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "reasons": {
+                      "type": "string",
+                      "example": "Missing argument 'xxxxx'"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./retailer_to_woop.v1.4.0.json#/components/schemas/errorCode"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./retailer_to_woop.v1.4.0.json#/components/schemas/errorCode"
+                }
+              }
+            }
+          }
+        },
+        "description": "Cette méthode permet de recevoir l'ensemble des devis émis aux transporteurs pour la création d'une expédition. Les devis seront retournés à l'enseigne à titre informatif. ",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "description": "",
+                "minItems": 1,
+                "uniqueItems": true,
+                "items": {
+                  "$ref": "#/components/schemas/getQuote"
+                }
+              },
+              "examples": {
+                "example": {
+                  "value": [
+                    {
+                      "quoteId": "string",
+                      "price": {
+                        "value": 0,
+                        "currency": "string"
+                      },
+                      "vehicleType": "string",
+                      "carrierName": "string",
+                      "reasons": [
+                        "REFUSED_TOO_HEAVY"
+                      ],
+                      "comment": "string"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "description": "Contient les informations des devis transporteurs."
+        },
+        "tags": [
+          "Commande"
+        ]
+      }
     }
   },
   "components": {
@@ -1320,6 +1416,103 @@
         "enum": [
           "m",
           "km"
+        ]
+      },
+      "priceQuote": {
+        "description": "Correspond au prix du devis",
+        "type": "object",
+        "title": "Prix du devis (priceQuote)",
+        "x-examples": {
+          "example": {
+            "value": 0,
+            "currency": "string"
+          }
+        },
+        "properties": {
+          "value": {
+            "type": "number",
+            "description": "Valeur indicative du prix"
+          },
+          "currency": {
+            "$ref": "#/components/schemas/currency"
+          }
+        },
+        "required": [
+          "value",
+          "currency"
+        ]
+      },
+      "getQuote": {
+        "description": "Ensemble des devis émis par les transporteurs lors de la demande de création de commande. ",
+        "type": "object",
+        "x-examples": {
+          "example": {
+            "quoteId": "string",
+            "price": {
+              "value": 0,
+              "currency": "string"
+            },
+            "vehicleType": "string",
+            "carrierName": "string",
+            "reasons": [
+              "REFUSED_TOO_HEAVY"
+            ],
+            "comment": "string"
+          }
+        },
+        "title": "Informations des devis transporteurs (getQuote)",
+        "properties": {
+          "quoteId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "price": {
+            "$ref": "#/components/schemas/priceQuote"
+          },
+          "vehicleType": {
+            "$ref": "#/components/schemas/vehicleType"
+          },
+          "carrierName": {
+            "type": "string",
+            "minLength": 1
+          },
+          "reasons": {
+            "type": "array",
+            "uniqueItems": true,
+            "minItems": 1,
+            "items": {
+              "$ref": "#/components/schemas/refusedReason"
+            }
+          },
+          "comment": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "quoteId",
+          "price",
+          "vehicleType",
+          "carrierName",
+          "reasons",
+          "comment"
+        ]
+      },
+      "refusedReason": {
+        "type": "string",
+        "title": "Motif de refus (refusedReason)",
+        "description": "Précise les raisons de refus possible d'un devis. ",
+        "x-examples": {
+          "example": "REFUSED_AREA"
+        },
+        "enum": [
+          "REFUSED_AREA",
+          "REFUSED_AVAILABILITY",
+          "REFUSED_DAY_OFF",
+          "REFUSED_EXCEPTION",
+          "REFUSED_TIME_NOT_WORKED",
+          "REFUSED_TOO_HEAVY",
+          "REFUSED_TOO_LARGE"
         ]
       }
     },
