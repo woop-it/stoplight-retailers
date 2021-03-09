@@ -871,7 +871,10 @@
             }
           },
           "description": "Contient les informations relatives aux deltaCosts. "
-        }
+        },
+        "tags": [
+          "Commande"
+        ]
       }
     }
   },
