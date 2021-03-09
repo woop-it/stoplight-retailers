@@ -233,6 +233,78 @@
         "summary": "Effectuer une demande de retrait de commande"
       }
     },
+    "/collects/slots": {
+      "get": {
+        "summary": "Récuperer les créneaux disponibles pour le retrait de commande",
+        "description": "Cette méthode permet de récupérer les créneaux disponibles pour une demande de retrait Click&Collect dans un emplacement de prélèvement précis.",
+        "tags": [
+          "Retrait"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/components/parameters/queryStoreIdRequired"
+          },
+          {
+            "$ref": "#/components/parameters/queryExchangePlaceIdRequired"
+          },
+          {
+            "$ref": "#/components/parameters/queryFromDateSlots"
+          },
+          {
+            "$ref": "#/components/parameters/queryToDateSlots"
+          }
+        ],
+        "responses": {
+          "200" : {
+            "description": "OK. Contient les créneaux disponibles",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": ["slots"],
+                  "properties": {
+                    "slots": {
+                      "type": "array",
+                      "items" : {
+                        "$ref": "#/components/schemas/interval"
+                      }                 
+                    }
+                  }
+                },
+                "examples": {
+                  "Exemple": {
+                    "value": {
+                      "slots": [
+                        {
+                          "start": "2021-04-20T08:00:00+0000",
+                          "end": "2021-04-20T08:30:00+0000"
+                        },
+                        {
+                          "start": "2021-04-20T08:30:00+0000",
+                          "end": "2021-04-20T09:00:00+0000"
+                        },
+                        {
+                          "start": "2021-04-20T09:00:00+0000",
+                          "end": "2021-04-20T09:30:00+0000"
+                        },
+                        {
+                          "start": "2021-04-20T09:30:00+0000",
+                          "end": "2021-04-20T10:00:00+0000"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getCollectsSlots"
+      }
+    },
     "/orders": {
       "post": {
         "tags": [
@@ -4674,6 +4746,35 @@
         "required": true,
         "description": "Identifiant de la demande de prix",
         "name": "priceId",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "queryExchangePlaceIdRequired": {
+        "in": "query",
+        "required": true,
+        "description": "Filtre par id du point de prélèvement",
+        "name": "exchangePlaceId",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "queryFromDateSlots": {
+        "in": "query",
+        "required": false,
+        "description": "Date de début des créneaux retournés (aujourd'hui si non renseigné)",
+        "name": "from",
+        "example": "2021-07-21",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "queryToDateSlots": {
+        "in": "query",
+        "required": true,
+        "description": "Date de fin des créneaux retournés",
+        "name": "to",
+        "example": "2021-07-25",
         "schema": {
           "type": "string"
         }
