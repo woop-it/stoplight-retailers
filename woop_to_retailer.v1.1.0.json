@@ -720,6 +720,18 @@
               "application/json": {
                 "schema": {
                   "$ref": "./retailer_to_woop.v1.4.0.json#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "statusCode": 0,
+                      "error": "string",
+                      "message": "string",
+                      "reasons": [
+                        "STORE_NOT_FOUND"
+                      ]
+                    }
+                  }
                 }
               }
             }
@@ -745,6 +757,121 @@
           }
         },
         "summary": "Recevoir les événements pour une commande donnée"
+      }
+    },
+    "/orders/{orderId}/deltaCosts": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "orderId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "post": {
+        "summary": "Recevoir les deltaCosts du transporteur",
+        "operationId": "postOrderDeltaCosts",
+        "responses": {
+          "204": {
+            "description": "Requête traitée avec succès"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "reasons": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "example": "Missing argument 'xxxxx'"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "reasons": [
+                        "Missing argument 'xxxxx'"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./retailer_to_woop.v1.4.0.json#/components/schemas/errorCode"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./retailer_to_woop.v1.4.0.json#/components/schemas/errorCode"
+                }
+              }
+            }
+          }
+        },
+        "description": "Cette méthode permet de recevoir les informations de deltaCost émis par le transporteur sur la commande lors de la livraison. Ces données peuvent être de type; Frais supplémentaire et/ou remise sur la livraison. ",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "",
+                "type": "object",
+                "properties": {
+                  "amount": {
+                    "type": "number",
+                    "description": "Montant des frais indiqués par le transporteur."
+                  },
+                  "currency": {
+                    "$ref": "#/components/schemas/currency"
+                  },
+                  "reason": {
+                    "$ref": "#/components/schemas/deltaCostReason"
+                  },
+                  "comment": {
+                    "type": "string",
+                    "minLength": 1,
+                    "description": "Commentaire libre laissé par le transporteur. "
+                  },
+                  "date": {
+                    "type": "string",
+                    "minLength": 1,
+                    "description": "Date de l'évènement enregistré. "
+                  }
+                },
+                "required": [
+                  "amount",
+                  "currency",
+                  "reason",
+                  "comment",
+                  "date"
+                ]
+              },
+              "examples": {
+                "example-1": {
+                  "value": {}
+                }
+              }
+            }
+          },
+          "description": "Contient les informations relatives aux deltaCosts. "
+        }
       }
     }
   },
@@ -1320,6 +1447,25 @@
         "enum": [
           "m",
           "km"
+        ]
+      },
+      "deltaCostReason": {
+        "type": "string",
+        "title": "Raison de deltaCost (deltaCostReason)",
+        "description": "Précise la raison remontée par le transporteur pour la création d'un deltaCost sur une commande.  ",
+        "x-examples": {
+          "example": "DELTACOST_EXTEND_WAITING_WAREHOUSE"
+        },
+        "enum": [
+          "DELTACOST_EXTEND_WAITING_WAREHOUSE",
+          "DELTACOST_EXTEND_WAITING_CUSTOMER",
+          "DELTACOST_WRONG_FLOOR",
+          "DELTACOST_WRONG_CONTENT",
+          "DELTACOST_WAREHOUSE_RETURN",
+          "DELTACOST_LATE_CANCELLATION",
+          "DELTACOST_PICKUP_FAILED",
+          "DELTACOST_PARTIALLY_DELIVERED",
+          "DELTACOST_UNKNOWN"
         ]
       }
     },
