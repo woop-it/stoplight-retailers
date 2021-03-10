@@ -425,7 +425,7 @@
         "operationId": "putCollectsSlotsBook"
       },
       "delete": {
-        "summary": "Annuler la réservation d'unun créneau de retrait",
+        "summary": "Annuler la réservation d'un créneau de retrait",
         "description": "Cette méthode permet d'annuler la réservation d'un créneau pour une demande de retrait Click&Collect dans un emplacement de prélèvement précis.",
         "tags": ["Retrait"],
         "requestBody": {
