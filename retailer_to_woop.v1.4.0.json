@@ -3513,6 +3513,11 @@
         "type": "object",
         "title": "Réservation de créneau de retrait (putCollectsSlots)",
         "properties": {
+           "reference": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Identifiant de la demande de retrait"
+          },
           "storeId": {
             "type": "string",
             "minLength": 1,
@@ -3528,6 +3533,7 @@
           }
         },
         "required": [
+          "reference",
           "storeId",
           "exchangePlaceId",
           "slot"
@@ -3538,6 +3544,11 @@
         "type": "object",
         "title": "Annulation de créneau de retrait (deletCollectsSlots)",
         "properties": {
+          "reference": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Identifiant de la demande de retrait"
+          },
           "storeId": {
             "type": "string",
             "minLength": 1,
@@ -3553,6 +3564,7 @@
           }
         },
         "required": [
+          "reference",
           "storeId",
           "exchangePlaceId",
           "slot"
