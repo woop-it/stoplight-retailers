@@ -271,7 +271,7 @@
                     "slots": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/slot"
+                        "$ref": "#/components/schemas/availableSlot"
                       }
                     }
                   }
@@ -282,19 +282,23 @@
                       "slots": [
                         {
                           "start": "2021-04-20T08:00:00+0000",
-                          "end": "2021-04-20T08:30:00+0000"
+                          "end": "2021-04-20T08:30:00+0000",
+                          "remainingCapacity": 4
                         },
                         {
                           "start": "2021-04-20T08:30:00+0000",
-                          "end": "2021-04-20T09:00:00+0000"
+                          "end": "2021-04-20T09:00:00+0000",
+                          "remainingCapacity": 5
                         },
                         {
                           "start": "2021-04-20T09:00:00+0000",
-                          "end": "2021-04-20T09:30:00+0000"
+                          "end": "2021-04-20T09:30:00+0000",
+                          "remainingCapacity": 1
                         },
                         {
                           "start": "2021-04-20T09:30:00+0000",
-                          "end": "2021-04-20T10:00:00+0000"
+                          "end": "2021-04-20T10:00:00+0000",
+                          "remainingCapacity": 2
                         }
                       ]
                     }
@@ -362,6 +366,7 @@
               "examples": {
                 "Exemple": {
                   "value": {
+                    "reference": "65q41zdq65z14",
                     "storeId": "MAG01",
                     "exchangePlaceId": "COLLECT01",
                     "slot": {
@@ -438,6 +443,7 @@
               "examples": {
                 "Exemple": {
                   "value": {
+                    "reference": "65q41zdq65z14",
                     "storeId": "MAG01",
                     "exchangePlaceId": "COLLECT01",
                     "slot": {
@@ -4703,6 +4709,39 @@
         "x-examples": {
           "Exemple": "Europe/Paris"
         }
+      },
+      "availableSlot": {
+        "description": "Créneau de retrait disponible.",
+        "type": "object",
+        "properties": {
+          "start": {
+            "type": "string",
+            "format": "datetime",
+            "description": "Début du créneau"
+          },
+          "end": {
+            "type": "string",
+            "format": "datetime",
+            "description": "Fin du créneau"
+          },
+          "remainingCapacity": {
+            "type": "number",
+            "description": "Capacité restante dans ce créneau"
+          }
+        },
+        "required": [
+          "start",
+          "end",
+          "availableSlot"
+        ],
+        "x-examples": {
+          "Exemple": {
+            "start": "2019-05-02T15:52:01+0000",
+            "end": "2019-05-02T17:52:01+0000",
+            "remainingCapacity": 5
+          }
+        },
+        "title": "Créneau de retrait disponible (availableSlot)"
       },
       "slot": {
         "description": "Créneau de retrait.",
