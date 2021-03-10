@@ -235,7 +235,7 @@
     },
     "/collects/slots": {
       "get": {
-        "summary": "Récuperer les créneaux disponibles pour le retrait de commande",
+        "summary": "Récuperer les créneaux de retrait disponibles",
         "description": "Cette méthode permet de récupérer les créneaux disponibles pour une demande de retrait Click&Collect dans un emplacement de prélèvement précis.",
         "tags": [
           "Retrait"
@@ -258,19 +258,21 @@
           }
         ],
         "responses": {
-          "200" : {
+          "200": {
             "description": "OK. Contient les créneaux disponibles",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": ["slots"],
+                  "required": [
+                    "slots"
+                  ],
                   "properties": {
                     "slots": {
                       "type": "array",
-                      "items" : {
-                        "$ref": "#/components/schemas/interval"
-                      }                 
+                      "items": {
+                        "$ref": "#/components/schemas/slot"
+                      }
                     }
                   }
                 },
@@ -300,9 +302,127 @@
                 }
               }
             }
+          },
+          "400": {
+            "description": "Elements manquants et/ou incorrect dans les query parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Vous n'êtes pas autorisé à accéder à cet élément",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                },
+                "examples": {}
+              }
+            }
+          },
+          "403": {
+            "description": "Demande impossible pour le 'storeId' ou 'exchangePlaceId'",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "Exemple": {
+                    "value": {
+                      "statusCode": 403,
+                      "error": "Forbidden",
+                      "message": "Store doesn't exist or is inactive"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "operationId": "getCollectsSlots"
+      }
+    },
+    "/collects/slots/book": {
+      "put": {
+        "summary": "Réserver un créneau de retrait",
+        "description": "Cette méthode permet de réserver un créneau disponible pour une demande de retrait Click&Collect dans un emplacement de prélèvement précis.",
+        "tags": ["Retrait"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/putCollectsSlots"
+              },
+              "examples": {
+                "Exemple": {
+                  "value": {
+                    "storeId": "MAG01",
+                    "exchangePlaceId": "COLLECT01",
+                    "slot": {
+                      "start": "2021-04-20T08:00:00+0000",
+                      "end": "2021-04-20T08:30:00+0000"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Requête traitée avec succès, créneau réservé"
+          },
+          "400": {
+            "description": "Elements manquants et/ou incorrect dans le body",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Le créneau est déjà réservé"
+          },
+          "401": {
+            "description": "Vous n'êtes pas autorisé à accéder à cet élément",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                },
+                "examples": {}
+              }
+            }
+          },
+          "403": {
+            "description": "Demande impossible pour le 'storeId' ou 'exchangePlaceId'",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "Exemple": {
+                    "value": {
+                      "statusCode": 403,
+                      "error": "Forbidden",
+                      "message": "Store doesn't exist or is inactive"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "putCollectsSlotsBook"
       }
     },
     "/orders": {
@@ -3315,6 +3435,31 @@
           "tags"
         ]
       },
+      "putCollectsSlots": {
+        "description": "Précise les informations nécessaires à la réservation d'un créneau de retrait.",
+        "type": "object",
+        "title": "Réservation de créneau de retrait (putCollectsSlots)",
+        "properties": {
+          "storeId": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Identifiant du magasin émettant la demande"
+          },
+          "exchangePlaceId": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Identifiant du point de prélèvement"
+          },
+          "slot" : {
+            "$ref": "#/components/schemas/slot"
+          }
+        },
+        "required": [
+          "storeId",
+          "exchangePlaceId",
+          "slot"
+        ]
+      },
       "postEligibilities": {
         "type": "object",
         "description": "Demande d'éligibilité ",
@@ -4449,6 +4594,33 @@
           "Exemple": "Europe/Paris"
         }
       },
+      "slot": {
+        "description": "Créneau de retrait.",
+        "type": "object",
+        "properties": {
+          "start": {
+            "type": "string",
+            "format": "datetime",
+            "description": "Début du créneau"
+          },
+          "end": {
+            "type": "string",
+            "format": "datetime",
+            "description": "Fin du créneau"
+          }
+        },
+        "required": [
+          "start",
+          "end"
+        ],
+        "x-examples": {
+          "Exemple": {
+            "start": "2019-05-02T15:52:01+0000",
+            "end": "2019-05-02T17:52:01+0000"
+          }
+        },
+        "title": "Créneau de retrait (slot)"
+      },
       "orderStatus": {
         "title": "Statut de la commande (orderStatus)",
         "type": "string",
@@ -4763,7 +4935,7 @@
         "in": "query",
         "required": false,
         "description": "Date de début des créneaux retournés (aujourd'hui si non renseigné)",
-        "name": "from",
+        "name": "fromDate",
         "example": "2021-07-21",
         "schema": {
           "type": "string"
@@ -4773,7 +4945,7 @@
         "in": "query",
         "required": true,
         "description": "Date de fin des créneaux retournés",
-        "name": "to",
+        "name": "toDate",
         "example": "2021-07-25",
         "schema": {
           "type": "string"
