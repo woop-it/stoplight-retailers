@@ -423,6 +423,79 @@
           }
         },
         "operationId": "putCollectsSlotsBook"
+      },
+      "delete": {
+        "summary": "Annuler la réservation d'unun créneau de retrait",
+        "description": "Cette méthode permet d'annuler la réservation d'un créneau pour une demande de retrait Click&Collect dans un emplacement de prélèvement précis.",
+        "tags": ["Retrait"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/deleteCollectsSlots"
+              },
+              "examples": {
+                "Exemple": {
+                  "value": {
+                    "storeId": "MAG01",
+                    "exchangePlaceId": "COLLECT01",
+                    "slot": {
+                      "start": "2021-04-20T08:00:00+0000",
+                      "end": "2021-04-20T08:30:00+0000"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Requête traitée avec succès, créneau annulé"
+          },
+          "400": {
+            "description": "Elements manquants et/ou incorrect dans le body",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Vous n'êtes pas autorisé à accéder à cet élément",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                },
+                "examples": {}
+              }
+            }
+          },
+          "403": {
+            "description": "Demande impossible pour le 'storeId' ou 'exchangePlaceId'",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "Exemple": {
+                    "value": {
+                      "statusCode": 403,
+                      "error": "Forbidden",
+                      "message": "Store doesn't exist or is inactive"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "deleteCollectsSlotsBook"
       }
     },
     "/orders": {
@@ -3439,6 +3512,31 @@
         "description": "Précise les informations nécessaires à la réservation d'un créneau de retrait.",
         "type": "object",
         "title": "Réservation de créneau de retrait (putCollectsSlots)",
+        "properties": {
+          "storeId": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Identifiant du magasin émettant la demande"
+          },
+          "exchangePlaceId": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Identifiant du point de prélèvement"
+          },
+          "slot" : {
+            "$ref": "#/components/schemas/slot"
+          }
+        },
+        "required": [
+          "storeId",
+          "exchangePlaceId",
+          "slot"
+        ]
+      },
+       "deleteCollectsSlots": {
+        "description": "Précise les informations nécessaires à l'annulation d'une réservation de retrait.",
+        "type": "object",
+        "title": "Annulation de créneau de retrait (deletCollectsSlots)",
         "properties": {
           "storeId": {
             "type": "string",
