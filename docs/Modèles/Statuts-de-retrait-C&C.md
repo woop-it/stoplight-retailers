@@ -2,7 +2,7 @@
 tags: [Retrait drive]
 ---
 
-# Statuts de retrait en click & collect
+# Statuts de retrait C&C
 
 Au cours de son cycle de vie la demande de retrait en click & collect passe tour à tour par plusieurs statuts. Ceux que nous identifions sont les différents stades de la demande. 
 
