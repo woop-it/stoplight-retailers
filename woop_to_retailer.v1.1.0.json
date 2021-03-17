@@ -791,13 +791,16 @@
         }
       ],
       "put": {
-        "summary": "",
+        "summary": "Recevoir les statuts de la demande de collecte",
         "operationId": "put-collects-collectId-status",
         "responses": {
           "200": {
             "description": "OK"
           }
-        }
+        },
+        "tags": [
+          "Retrait"
+        ]
       }
     }
   },
