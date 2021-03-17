@@ -3367,6 +3367,38 @@
           "Retrait"
         ]
       }
+    },
+    "/collects/{collectId}/packages/{packageId}/status": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "collectId",
+          "in": "path",
+          "required": true
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "packageId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "put": {
+        "summary": "",
+        "operationId": "put-collects-collectId-packages-packageId-status",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "Retrait"
+        ]
+      }
     }
   },
   "components": {
