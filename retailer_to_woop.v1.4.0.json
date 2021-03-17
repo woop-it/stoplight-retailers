@@ -355,7 +355,9 @@
       "put": {
         "summary": "Réserver un créneau de retrait",
         "description": "Cette méthode permet de réserver un créneau disponible pour une demande de retrait Click&Collect dans un emplacement de prélèvement précis.",
-        "tags": ["Retrait"],
+        "tags": [
+          "Retrait"
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -393,9 +395,6 @@
               }
             }
           },
-          "409": {
-            "description": "Le créneau est déjà réservé"
-          },
           "401": {
             "description": "Vous n'êtes pas autorisé à accéder à cet élément",
             "content": {
@@ -425,6 +424,9 @@
                 }
               }
             }
+          },
+          "409": {
+            "description": "Le créneau est déjà réservé"
           }
         },
         "operationId": "putCollectsSlotsBook"
@@ -432,7 +434,9 @@
       "delete": {
         "summary": "Annuler la réservation d'un créneau de retrait",
         "description": "Cette méthode permet d'annuler la réservation d'un créneau pour une demande de retrait Click&Collect dans un emplacement de prélèvement précis.",
-        "tags": ["Retrait"],
+        "tags": [
+          "Retrait"
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -3339,6 +3343,27 @@
           }
         ]
       }
+    },
+    "/collects/{collectId}/status": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "collectId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "put": {
+        "summary": "",
+        "operationId": "put-collects-collectId-status",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -3519,7 +3544,7 @@
         "type": "object",
         "title": "Réservation de créneau de retrait (putCollectsSlots)",
         "properties": {
-           "reference": {
+          "reference": {
             "type": "string",
             "minLength": 1,
             "description": "Identifiant de la demande de retrait"
@@ -3534,7 +3559,7 @@
             "minLength": 1,
             "description": "Identifiant du point de prélèvement"
           },
-          "slot" : {
+          "slot": {
             "$ref": "#/components/schemas/slot"
           }
         },
@@ -3545,7 +3570,7 @@
           "slot"
         ]
       },
-       "deleteCollectsSlots": {
+      "deleteCollectsSlots": {
         "description": "Précise les informations nécessaires à l'annulation d'une réservation de retrait.",
         "type": "object",
         "title": "Annulation de créneau de retrait (deletCollectsSlots)",
@@ -3565,7 +3590,7 @@
             "minLength": 1,
             "description": "Identifiant du point de prélèvement"
           },
-          "slot" : {
+          "slot": {
             "$ref": "#/components/schemas/slot"
           }
         },
