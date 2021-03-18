@@ -42,7 +42,7 @@ Default value : `PICKUP_POINT_RELAY_ALL`
 
 Types disponibles par transporteur:
 
-Transporteur | Code | Catégories
+Transporteur | Code | Types
 ---------|---------|----------
  Bpost| bpost|PICKUP_POINT_AGENCY, PICKUP_POINT_POST_OFFICE, PICKUP_POINT_RELAY_WITH_LOCKER, PICKUP_POINT_RELAY_WITHOUT_LOCKER
  Dpd | dpd | PICKUP_POINT_AGENCY, PICKUP_POINT_POST_OFFICE, PICKUP_POINT_RELAY_WITH_LOCKER, PICKUP_POINT_RELAY_WITHOUT_LOCKER
@@ -52,7 +52,7 @@ Transporteur | Code | Catégories
 
 La catégorie du point relais spécifique au transporteur, représente souvent une limite de poids / taille de stockage du point relais.
 
-Catégories disponibles :
+Catégories disponibles par transporteur:
 
 Transporteur | Code | Catégories
 ---------|---------|----------
