@@ -195,28 +195,8 @@
           }
         },
         "responses": {
-          "201": {
-            "description": "Création de la demande de retrait réussie",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "string",
-                      "example": "4f802782-bf37-4499-a50d-c7d0169c670d"
-                    }
-                  }
-                },
-                "examples": {
-                  "example": {
-                    "value": {
-                      "id": "4f802782-bf37-4499-a50d-c7d0169c670d"
-                    }
-                  }
-                }
-              }
-            }
+          "204": {
+            "description": "Création de la demande de retrait réussie"
           },
           "400": {
             "description": "Elements manquants et/ou incorrect dans le body",
@@ -568,7 +548,166 @@
             }
           }
         },
-        "operationId": "deleteCollectsBooksBook"
+        "operationId": "deleteCollectsBooks"
+      }
+    },
+    "/collects/{collectId}": {
+      "patch": {
+        "tags": [
+          "Retrait"
+        ],
+        "description": "Cette méthode permet de modifier une demande de retrait Click&Collect.",
+        "operationId": "patchCollects",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "name": "collectId",
+            "in": "path",
+            "required": true,
+            "description": "Identifiant de la réservation"
+          },
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "description": "Contient les informations de modification d'une demande de retrait.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/patchCollects"
+              },
+              "examples": {
+                "Exemple mode standard": {
+                  "value": {
+                    "bookId": "bfded21b-cbed-4256-b756-2febcea94df6"
+                  }
+                },
+                "Exemple mode express": {
+                  "value": {
+                    "slot": {
+                      "start": "2021-03-18T14:00:00.000Z",
+                      "end": "2021-03-18T14:30:00.000Z"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Modification de la demande de retrait réussie"
+          },
+          "400": {
+            "description": "Elements manquants et/ou incorrect dans le body",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "Exemple": {
+                    "value": {
+                      "statusCode": 400,
+                      "error": "Bad Request",
+                      "message": "child \"location\" fails because [child \"addressLine1\" fails because [\"addressLine1\" is required], child \"id\" fails because [\"id\" is required]]",
+                      "validation": {
+                        "source": "payload",
+                        "keys": [
+                          "location.addressLine1",
+                          "location.id"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Vous n'êtes pas autorisé à accéder à cet élément"
+          },
+          "404": {
+            "description": "Le 'collectId' n'existe pas",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "statusCode": 404,
+                      "error": "Not Found",
+                      "message": "Not Found"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Effectuer une modification d'une demande de retrait"
+      },
+      "delete": {
+         "tags": [
+          "Retrait"
+        ],
+        "description": "Cette méthode permet d'annuler une demande de retrait Click&Collect.",
+        "operationId": "deleteCollects",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "name": "collectId",
+            "in": "path",
+            "required": true,
+            "description": "Identifiant de la réservation"
+          },
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Requête traitée avec succès, demande de retrait annulé"
+          },
+          "401": {
+            "description": "Vous n'êtes pas autorisé à accéder à cet élément",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                },
+                "examples": {}
+              }
+            }
+          },
+          "404": {
+            "description": "Le 'collectId' n'existe pas",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "statusCode": 404,
+                      "error": "Not Found",
+                      "message": "Not Found"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/orders": {
@@ -3526,7 +3665,7 @@
         }
       },
       "postCollects": {
-        "description": "Précise les informations utiles à la création d'une demande de retrait drive click & collect.",
+        "description": "Précise les informations utiles à la modification d'une demande de retrait.",
         "type": "object",
         "title": "Demande de retrait (postCollects)",
         "properties": {
@@ -3586,6 +3725,32 @@
           "customer",
           "location",
           "packages"
+        ]
+      },
+      "patchCollects": {
+        "description": "Précise les informations utiles à la modification d'une demande de retrait.",
+        "type": "object",
+        "title": "Modification d'une demande de retrait (postCollects)",
+        "oneOf": [
+          {
+            "type" : "object",
+            "properties" : {
+              "bookId": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Identifiant de la réservation (nécessaire pour les modes standard et delay)"
+              }
+            },
+            "required": ["bookId"]        
+          }, {
+            "type" : "object",
+            "properties" : {
+              "slot": {
+                "$ref": "#/components/schemas/slot"
+              }
+            },
+            "required": ["slot"]
+          }
         ]
       },
       "postCollectsBooks": {
@@ -4769,7 +4934,7 @@
         "required": [
           "start",
           "end",
-          "availableSlot"
+          "remainingCapacity"
         ],
         "x-examples": {
           "Exemple": {
