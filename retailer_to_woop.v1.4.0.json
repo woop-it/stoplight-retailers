@@ -86,9 +86,65 @@
                 "$ref": "#/components/schemas/postCollects"
               },
               "examples": {
-                "Exemple": {
+                "Exemple mode standard": {
                   "value": {
-                    "reference": "CN123456789FR59",
+                    "mode": "standard",
+                    "collectId": "CN123456789FR59",
+                    "storeId": "MAG01",
+                    "location": {
+                      "type": "exchangePlace",
+                      "id": "DRIVE-59-001"
+                    },
+                    "bookId": "bfded21b-cbed-4256-b756-2febcea94df6",
+                    "customer": {
+                      "firstName": "Michel",
+                      "lastName": "Dupont",
+                      "phone": "+33600000000",
+                      "email": "michel.dupont@mail.fr",
+                      "language": "fr",
+                      "timezone": "Europe/Paris"
+                    },
+                  
+                    "packages": [
+                      {
+                        "length": {
+                          "value": 15,
+                          "unit": "cm"
+                        },
+                        "width": {
+                          "value": 15,
+                          "unit": "cm"
+                        },
+                        "height": {
+                          "value": 1.2,
+                          "unit": "m"
+                        },
+                        "weight": {
+                          "value": 560,
+                          "unit": "g"
+                        },
+                        "products": [
+                          {
+                            "type": "TYPOLOGY_GENERIC",
+                            "ean": "978020137962",
+                            "cug": "123456",
+                            "label": "T-Shirt XL Jaune",
+                            "quantity": 1
+                          }
+                        ],
+                        "quantity": 1
+                      }
+                    ]
+                  }
+                },
+                "Exemple mode express": {
+                  "value": {
+                    "mode": "express",
+                    "collectId": "CN123456789FR59",
+                    "slot": {
+                      "start": "2021-03-18T14:00:00.000Z",
+                      "end": "2021-03-18T14:30:00.000Z"
+                    },
                     "storeId": "MAG01",
                     "location": {
                       "type": "exchangePlace",
@@ -101,7 +157,7 @@
                       "email": "michel.dupont@mail.fr",
                       "language": "fr",
                       "timezone": "Europe/Paris"
-                    },
+                    },                 
                     "packages": [
                       {
                         "length": {
@@ -351,24 +407,28 @@
         "operationId": "getCollectsSlots"
       }
     },
-    "/collects/slots/book": {
-      "put": {
+    "/collects/books": {
+      "post": {
         "summary": "Réserver un créneau de retrait",
         "description": "Cette méthode permet de réserver un créneau disponible pour une demande de retrait Click&Collect dans un emplacement de prélèvement précis.",
         "tags": [
           "Retrait"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          }
         ],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/putCollectsSlots"
+                "$ref": "#/components/schemas/postCollectsBooks"
               },
               "examples": {
                 "Exemple": {
                   "value": {
-                    "reference": "65q41zdq65z14",
                     "storeId": "MAG01",
                     "exchangePlaceId": "COLLECT01",
                     "slot": {
@@ -382,8 +442,28 @@
           }
         },
         "responses": {
-          "204": {
-            "description": "Requête traitée avec succès, créneau réservé"
+          "201": {
+            "description": "Requête traitée avec succès, créneau réservé",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "bookId": {
+                      "type": "string",
+                      "description": "Identifiant de la réservation."
+                    }
+                  }
+                },
+                "examples": {
+                  "Exemple": {
+                    "value": {
+                      "bookId": "bfded21b-cbed-4256-b756-2febcea94df6"
+                    }
+                  }
+                }
+              }
+            }
           },
           "400": {
             "description": "Elements manquants et/ou incorrect dans le body",
@@ -429,50 +509,33 @@
             "description": "Le créneau est déjà réservé"
           }
         },
-        "operationId": "putCollectsSlotsBook"
-      },
+        "operationId": "postCollectsBooks"
+      }
+    },
+    "/collects/books/{bookId}": {
       "delete": {
         "summary": "Annuler la réservation d'un créneau de retrait",
         "description": "Cette méthode permet d'annuler la réservation d'un créneau pour une demande de retrait Click&Collect dans un emplacement de prélèvement précis.",
         "tags": [
           "Retrait"
         ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/deleteCollectsSlots"
-              },
-              "examples": {
-                "Exemple": {
-                  "value": {
-                    "reference": "65q41zdq65z14",
-                    "storeId": "MAG01",
-                    "exchangePlaceId": "COLLECT01",
-                    "slot": {
-                      "start": "2021-04-20T08:00:00+0000",
-                      "end": "2021-04-20T08:30:00+0000"
-                    }
-                  }
-                }
-              }
-            }
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "name": "bookId",
+            "in": "path",
+            "required": true,
+            "description": "Identifiant de la réservation"
+          },
+          {
+            "$ref": "#/components/parameters/apiVersion"
           }
-        },
+        ],
         "responses": {
           "204": {
             "description": "Requête traitée avec succès, créneau annulé"
-          },
-          "400": {
-            "description": "Elements manquants et/ou incorrect dans le body",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/errorCode"
-                }
-              }
-            }
           },
           "401": {
             "description": "Vous n'êtes pas autorisé à accéder à cet élément",
@@ -485,19 +548,19 @@
               }
             }
           },
-          "403": {
-            "description": "Demande impossible pour le 'storeId' ou 'exchangePlaceId'",
+          "404": {
+            "description": "Le 'bookId' n'existe pas",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/errorCode"
                 },
                 "examples": {
-                  "Exemple": {
+                  "example": {
                     "value": {
-                      "statusCode": 403,
-                      "error": "Forbidden",
-                      "message": "Store doesn't exist or is inactive"
+                      "statusCode": 404,
+                      "error": "Not Found",
+                      "message": "Not Found"
                     }
                   }
                 }
@@ -505,7 +568,7 @@
             }
           }
         },
-        "operationId": "deleteCollectsSlotsBook"
+        "operationId": "deleteCollectsBooksBook"
       }
     },
     "/orders": {
@@ -3343,62 +3406,6 @@
           }
         ]
       }
-    },
-    "/collects/{collectId}/status": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "collectId",
-          "in": "path",
-          "required": true
-        }
-      ],
-      "put": {
-        "summary": "",
-        "operationId": "put-collects-collectId-status",
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        },
-        "tags": [
-          "Retrait"
-        ]
-      }
-    },
-    "/collects/{collectId}/packages/{packageId}/status": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "collectId",
-          "in": "path",
-          "required": true
-        },
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "packageId",
-          "in": "path",
-          "required": true
-        }
-      ],
-      "put": {
-        "summary": "",
-        "operationId": "put-collects-collectId-packages-packageId-status",
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        },
-        "tags": [
-          "Retrait"
-        ]
-      }
     }
   },
   "components": {
@@ -3523,7 +3530,7 @@
         "type": "object",
         "title": "Demande de retrait (postCollects)",
         "properties": {
-          "reference": {
+          "collectId": {
             "type": "string",
             "minLength": 1,
             "description": "Identifiant de la demande de retrait"
@@ -3532,6 +3539,14 @@
             "type": "string",
             "minLength": 1,
             "description": "Identifiant du magasin émettant la demande"
+          },
+          "bookId": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Identifiant de la réservation (nécessaire pour les modes standard et delay)"
+          },
+          "slot": {
+            "$ref": "#/components/schemas/slot"
           },
           "customer": {
             "$ref": "#/components/schemas/contact"
@@ -3566,24 +3581,18 @@
           }
         },
         "required": [
-          "reference",
+          "collectId",
           "storeId",
           "customer",
           "location",
-          "packages",
-          "tags"
+          "packages"
         ]
       },
-      "putCollectsSlots": {
+      "postCollectsBooks": {
         "description": "Précise les informations nécessaires à la réservation d'un créneau de retrait.",
         "type": "object",
-        "title": "Réservation de créneau de retrait (putCollectsSlots)",
+        "title": "Réservation de créneau de retrait (postCollectsBooks)",
         "properties": {
-          "reference": {
-            "type": "string",
-            "minLength": 1,
-            "description": "Identifiant de la demande de retrait"
-          },
           "storeId": {
             "type": "string",
             "minLength": 1,
@@ -3599,38 +3608,6 @@
           }
         },
         "required": [
-          "reference",
-          "storeId",
-          "exchangePlaceId",
-          "slot"
-        ]
-      },
-      "deleteCollectsSlots": {
-        "description": "Précise les informations nécessaires à l'annulation d'une réservation de retrait.",
-        "type": "object",
-        "title": "Annulation de créneau de retrait (deletCollectsSlots)",
-        "properties": {
-          "reference": {
-            "type": "string",
-            "minLength": 1,
-            "description": "Identifiant de la demande de retrait"
-          },
-          "storeId": {
-            "type": "string",
-            "minLength": 1,
-            "description": "Identifiant du magasin émettant la demande"
-          },
-          "exchangePlaceId": {
-            "type": "string",
-            "minLength": 1,
-            "description": "Identifiant du point de prélèvement"
-          },
-          "slot": {
-            "$ref": "#/components/schemas/slot"
-          }
-        },
-        "required": [
-          "reference",
           "storeId",
           "exchangePlaceId",
           "slot"
