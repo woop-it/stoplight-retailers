@@ -104,7 +104,6 @@
                       "language": "fr",
                       "timezone": "Europe/Paris"
                     },
-                  
                     "packages": [
                       {
                         "length": {
@@ -157,7 +156,7 @@
                       "email": "michel.dupont@mail.fr",
                       "language": "fr",
                       "timezone": "Europe/Paris"
-                    },                 
+                    },
                     "packages": [
                       {
                         "length": {
@@ -654,7 +653,7 @@
         "summary": "Effectuer une modification d'une demande de retrait"
       },
       "delete": {
-         "tags": [
+        "tags": [
           "Retrait"
         ],
         "description": "Cette méthode permet d'annuler une demande de retrait Click&Collect.",
@@ -3545,6 +3544,59 @@
           }
         ]
       }
+    },
+    "/collects/{collectId}/packages/{packageId}/status": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "collectId",
+          "in": "path",
+          "required": true
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "packageId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "put": {
+        "summary": "Faire évoluer individuellement un colis de la commande client",
+        "operationId": "put-collects-collectId-packages-packageId-status",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "Retrait"
+        ]
+      }
+    },
+    "/collects/{collectId}/status": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "collectId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "put": {
+        "summary": "Faire évoluer la commande globale",
+        "operationId": "put-collects-collectId-status",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -3733,23 +3785,28 @@
         "title": "Modification d'une demande de retrait (postCollects)",
         "oneOf": [
           {
-            "type" : "object",
-            "properties" : {
+            "type": "object",
+            "properties": {
               "bookId": {
                 "type": "string",
                 "minLength": 1,
                 "description": "Identifiant de la réservation (nécessaire pour les modes standard et delay)"
               }
             },
-            "required": ["bookId"]        
-          }, {
-            "type" : "object",
-            "properties" : {
+            "required": [
+              "bookId"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
               "slot": {
                 "$ref": "#/components/schemas/slot"
               }
             },
-            "required": ["slot"]
+            "required": [
+              "slot"
+            ]
           }
         ]
       },

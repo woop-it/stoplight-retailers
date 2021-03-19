@@ -767,7 +767,7 @@
         }
       ],
       "put": {
-        "summary": "",
+        "summary": "Recevoir les informations d’un colis",
         "operationId": "put-collects-collectId-packages-packageId-status",
         "responses": {
           "200": {
@@ -791,7 +791,7 @@
         }
       ],
       "put": {
-        "summary": "Recevoir les statuts de la demande de collecte",
+        "summary": "Suivre l’évolution d’une commande globale",
         "operationId": "put-collects-collectId-status",
         "responses": {
           "200": {
