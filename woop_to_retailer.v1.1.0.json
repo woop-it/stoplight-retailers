@@ -853,6 +853,15 @@
                     "type": "string",
                     "minLength": 1,
                     "description": "Date de l'évènement enregistré. "
+                  },
+                  "deliveryId": {
+                    "type": "string"
+                  },
+                  "externalReference": {
+                    "type": "string"
+                  },
+                  "orderId": {
+                    "type": "string"
                   }
                 },
                 "required": [
@@ -866,6 +875,9 @@
               "examples": {
                 "Annulation tardive": {
                   "value": {
+                    "deliveryId": "056d12bb-7b53-46b8-980e-2c430fd9b4d3",
+                    "externalReference": "056d12bb-7b53-46b8-980e-2c430fd9b4d3",
+                    "orderId": "1d0297b0-be4e-409f-8179-b253",
                     "amount": 165.98,
                     "currency": "EUR",
                     "reason": "DELTACOST_LATE_CANCELLATION",
