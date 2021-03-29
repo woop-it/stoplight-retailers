@@ -834,7 +834,18 @@
                 "description": "",
                 "type": "object",
                 "properties": {
-                  "amount": {
+                  "deliveryId": {
+                    "type": "string",
+                    "description": "Identifiant de livraison"
+                  },
+                  "externalReference": {
+                    "type": "string",
+                    "description": "Référence de commmande"
+                  },
+                  "orderId": {
+                    "type": "string",
+                    "description": "Identifiant de commande"
+                  },"amount": {
                     "type": "number",
                     "description": "Montant des frais indiqués par le transporteur."
                   },
@@ -853,15 +864,6 @@
                     "type": "string",
                     "minLength": 1,
                     "description": "Date de l'évènement enregistré. "
-                  },
-                  "deliveryId": {
-                    "type": "string"
-                  },
-                  "externalReference": {
-                    "type": "string"
-                  },
-                  "orderId": {
-                    "type": "string"
                   }
                 },
                 "required": [
