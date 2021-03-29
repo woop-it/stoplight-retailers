@@ -2017,7 +2017,12 @@
                           "category": {
                             "type": "string",
                             "example": "Cat1",
-                            "description": "Retourne la catégorie du point relais."
+                            "description": "Catégorie du point relais."
+                          },
+                          "type": {
+                            "type": "string",
+                            "example": "Cat1",
+                            "description": "Type du point relais."
                           },
                           "openingHours": {
                             "type": "object",
@@ -2112,6 +2117,7 @@
                             "name": "Transporteur A"
                           },
                           "category": "XL",
+                          "type": "PICKUP_POINT_AGENCY",
                           "openingHours": {
                             "monday": [
                               {
@@ -3659,7 +3665,7 @@
           "kilometricDistance": {
             "type": "number",
             "description": "Distance en kilomètres du rayon de recherche",
-            "maximum": 40,
+            "maximum": 50,
             "default": 5
           },
           "type": {
