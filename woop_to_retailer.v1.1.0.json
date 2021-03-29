@@ -845,7 +845,8 @@
                   "orderId": {
                     "type": "string",
                     "description": "Identifiant de commande"
-                  },"amount": {
+                  },
+                  "amount": {
                     "type": "number",
                     "description": "Montant des frais indiqués par le transporteur."
                   },
@@ -867,6 +868,8 @@
                   }
                 },
                 "required": [
+                  "deliveryId",
+                  "orderId",
                   "amount",
                   "currency",
                   "reason",
