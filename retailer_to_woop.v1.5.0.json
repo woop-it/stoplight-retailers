@@ -1899,6 +1899,18 @@
                     "type": "PICKUP_POINT_AGENCY"
                   }
                 },
+                "Recherche par transporteurs et type": {
+                  "value": {
+                    "latitude": 50.6379636,
+                    "longitude": 3.077384,
+                    "kilometricDistance": 20,
+                    "carrierCode": ["bpost", "chronopost"],
+                    "type": {
+                      "bpost": "PICKUP_POINT_AGENCY",
+                      "chronopost": "PICKUP_POINT_RELAY_WITH_LOCKER"
+                    }
+                  }
+                },
                 "Recherche par catégories": {
                   "value": {
                     "latitude": 50.6379636,
@@ -3669,7 +3681,15 @@
             "default": 5
           },
           "type": {
-            "$ref": "#/components/schemas/pickupPointType"
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/pickupPointType"
+              },
+              {
+                "type": "object",
+                "description": "Type de point relais par transporteur (voir documentation point relais)"
+              }
+            ]   
           },
           "category": {
             "type": "object",

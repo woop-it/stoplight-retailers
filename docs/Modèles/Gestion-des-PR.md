@@ -16,13 +16,13 @@ Le code du transporteur permet de filtrer la recherche en fonction du ou des tra
 - Filtre sur un transporteur: 
 ```json
 {
-  carrierCode: "bpost"
+  "carrierCode": "bpost"
 }
 ```
 - Filtre sur plusieurs transporteurs: 
 ```json
 {
-  carrierCode: ["bpost", "mondial-relay"]
+  "carrierCode": ["bpost", "mondial-relay"]
 }
 ```
 
@@ -45,8 +45,25 @@ Types disponibles par transporteur:
 Transporteur | Code | Types
 ---------|---------|----------
  Bpost| bpost|PICKUP_POINT_AGENCY, PICKUP_POINT_POST_OFFICE, PICKUP_POINT_RELAY_WITH_LOCKER, PICKUP_POINT_RELAY_WITHOUT_LOCKER
- Dpd | dpd | PICKUP_POINT_AGENCY, PICKUP_POINT_POST_OFFICE, PICKUP_POINT_RELAY_WITH_LOCKER, PICKUP_POINT_RELAY_WITHOUT_LOCKER
+ Chronopost | chronopost | PICKUP_POINT_AGENCY, PICKUP_POINT_POST_OFFICE, PICKUP_POINT_RELAY_WITH_LOCKER, PICKUP_POINT_RELAY_WITHOUT_LOCKER
 
+*Ex:*
+- Filtre par type:
+```json
+{
+  "type": "PICKUP_POINT_AGENCY"
+}
+```
+- Filtre par multiples transporteurs et type:
+```json
+{
+  "carrierCode": ["bpost", "chronopost"],
+  "type": {
+    "bpost": "PICKUP_POINT_AGENCY",
+    "chronopost": "PICKUP_POINT_RELAY_WITH_LOCKER"
+  } 
+}
+```
 
 ## Catégorie de point-relais
 
@@ -58,14 +75,15 @@ Transporteur | Code | Catégories
 ---------|---------|----------
  Mondial relay | mondial-relay|24R, 24L, Drive
  Relais colis | relais-colis | RCStandard, RCMax
+ Agrikolis | agrikolis | A1, A2, A3, A4
 
 
 *Ex:*
 - Filtre par catégories:
 ```json
 {
-  carrierCode: ["mondial-relay"],
-  category: {
+  "carrierCode": ["mondial-relay"],
+  "category": {
     "mondial-relay": ["24R", "24L"]
   } 
 }
@@ -73,8 +91,8 @@ Transporteur | Code | Catégories
 - Filtre par multiples transporteurs et catégories:
 ```json
 {
-  carrierCode: ["mondial-relay", "relais-colis"],
-  category: {
+  "carrierCode": ["mondial-relay", "relais-colis"],
+  "category": {
     "mondial-relay": ["24R", "24L"],
     "relais-colis": ["RCMax"]
   } 
