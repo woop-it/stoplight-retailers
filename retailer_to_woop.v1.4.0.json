@@ -95,7 +95,7 @@
                       "type": "exchangePlace",
                       "id": "DRIVE-59-001"
                     },
-                    "bookId": "bfded21b-cbed-4256-b756-2febcea94df6",
+                    "bookingId": "bfded21b-cbed-4256-b756-2febcea94df6",
                     "customer": {
                       "firstName": "Michel",
                       "lastName": "Dupont",
@@ -386,7 +386,7 @@
         "operationId": "getCollectsSlots"
       }
     },
-    "/collects/books": {
+    "/collects/bookings": {
       "post": {
         "summary": "Réserver un créneau de retrait",
         "description": "Cette méthode permet de réserver un créneau disponible pour une demande de retrait Click&Collect dans un emplacement de prélèvement précis.",
@@ -403,7 +403,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/postCollectsBooks"
+                "$ref": "#/components/schemas/postCollectsBookings"
               },
               "examples": {
                 "Exemple": {
@@ -428,7 +428,7 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "bookId": {
+                    "bookingId": {
                       "type": "string",
                       "description": "Identifiant de la réservation."
                     }
@@ -437,7 +437,7 @@
                 "examples": {
                   "Exemple": {
                     "value": {
-                      "bookId": "bfded21b-cbed-4256-b756-2febcea94df6"
+                      "bookingId": "bfded21b-cbed-4256-b756-2febcea94df6"
                     }
                   }
                 }
@@ -488,10 +488,10 @@
             "description": "Le créneau est déjà réservé"
           }
         },
-        "operationId": "postCollectsBooks"
+        "operationId": "postCollectsBookings"
       }
     },
-    "/collects/books/{bookId}": {
+    "/collects/bookings/{bookingId}": {
       "delete": {
         "summary": "Annuler la réservation d'un créneau de retrait",
         "description": "Cette méthode permet d'annuler la réservation d'un créneau pour une demande de retrait Click&Collect dans un emplacement de prélèvement précis.",
@@ -503,7 +503,7 @@
             "schema": {
               "type": "string"
             },
-            "name": "bookId",
+            "name": "bookingId",
             "in": "path",
             "required": true,
             "description": "Identifiant de la réservation"
@@ -528,7 +528,7 @@
             }
           },
           "404": {
-            "description": "Le 'bookId' n'existe pas",
+            "description": "Le 'bookingId' n'existe pas",
             "content": {
               "application/json": {
                 "schema": {
@@ -547,7 +547,7 @@
             }
           }
         },
-        "operationId": "deleteCollectsBooks"
+        "operationId": "deleteCollectsBookings"
       }
     },
     "/collects/{collectId}": {
@@ -582,7 +582,7 @@
               "examples": {
                 "Exemple mode standard": {
                   "value": {
-                    "bookId": "bfded21b-cbed-4256-b756-2febcea94df6"
+                    "bookingId": "bfded21b-cbed-4256-b756-2febcea94df6"
                   }
                 },
                 "Exemple mode express": {
@@ -3734,7 +3734,7 @@
             "minLength": 1,
             "description": "Identifiant du magasin émettant la demande"
           },
-          "bookId": {
+          "bookingId": {
             "type": "string",
             "minLength": 1,
             "description": "Identifiant de la réservation (nécessaire pour les modes standard et delay)"
@@ -3790,14 +3790,14 @@
           {
             "type": "object",
             "properties": {
-              "bookId": {
+              "bookingId": {
                 "type": "string",
                 "minLength": 1,
                 "description": "Identifiant de la réservation (nécessaire pour les modes standard et delay)"
               }
             },
             "required": [
-              "bookId"
+              "bookingId"
             ]
           },
           {
@@ -3813,10 +3813,10 @@
           }
         ]
       },
-      "postCollectsBooks": {
+      "postCollectsBookings": {
         "description": "Précise les informations nécessaires à la réservation d'un créneau de retrait.",
         "type": "object",
-        "title": "Réservation de créneau de retrait (postCollectsBooks)",
+        "title": "Réservation de créneau de retrait (postCollectsBookings)",
         "properties": {
           "storeId": {
             "type": "string",
