@@ -4,6 +4,7 @@ Au cours de son cycle de vie la commande passe tour à tour par plusieurs statut
 
 ### Parcours d'une commande
 
+![get-started-icon](../../assets/images/Workflow_status_commande.png)
 
 ### Liste des statuts de livraison possible
 
@@ -27,3 +28,5 @@ Statut | Intitulé | Description
  `ORDER_REFUSED_DELIVERY`|Commande refusée|La commande a été refusée par les transporteurs. 
  
 ### Gestion des retours et des erreurs
+
+![get-started-icon](../../assets/images/Workflow_retours_commande.png)

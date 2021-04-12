@@ -32,4 +32,4 @@ Statut | Intitulé
  
 ### Gestion des retours et des erreurs
 
-![get-started-icon](../../assets/images/Workflow_retours.png)
+![get-started-icon](../../assets/images/Workflow_retours_livraison.png)
