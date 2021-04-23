@@ -67,9 +67,6 @@
     },
     "/collects": {
       "post": {
-        "tags": [
-          "Retrait"
-        ],
         "description": "Cette méthode permet d’effectuer une demande de retrait Click&Collect dans un emplacement de prélèvement précis. Dès la demande validée et le créneau de réservation sélectionné, l’ordre de retrait sera créé instantanément.",
         "operationId": "postCollects",
         "parameters": [
@@ -265,16 +262,16 @@
             }
           }
         },
-        "summary": "Créer une collecte"
+        "summary": "Créer une collecte",
+        "tags": [
+          "Collecte"
+        ]
       }
     },
     "/collects/slots": {
       "get": {
         "summary": "Récupérer les créneaux de retrait",
         "description": "Cette méthode permet de récupérer les créneaux disponibles pour une demande de retrait Click&Collect dans un emplacement de prélèvement précis.",
-        "tags": [
-          "Retrait"
-        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/apiVersion"
@@ -399,16 +396,16 @@
             }
           }
         },
-        "operationId": "getCollectsSlots"
+        "operationId": "getCollectsSlots",
+        "tags": [
+          "Collecte"
+        ]
       }
     },
     "/collects/bookings": {
       "post": {
         "summary": "Réserver un créneau de retrait",
         "description": "Cette méthode permet de réserver un créneau disponible pour une demande de retrait Click&Collect dans un emplacement de prélèvement précis.",
-        "tags": [
-          "Retrait"
-        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/apiVersion"
@@ -504,16 +501,16 @@
             "description": "Le créneau est déjà réservé"
           }
         },
-        "operationId": "postCollectsBookings"
+        "operationId": "postCollectsBookings",
+        "tags": [
+          "Collecte"
+        ]
       }
     },
     "/collects/bookings/{bookingId}": {
       "delete": {
         "summary": "Annuler la réservation d'un créneau de retrait",
         "description": "Cette méthode permet d'annuler la réservation d'un créneau pour une demande de retrait Click&Collect dans un emplacement de prélèvement précis.",
-        "tags": [
-          "Retrait"
-        ],
         "parameters": [
           {
             "schema": {
@@ -563,14 +560,14 @@
             }
           }
         },
-        "operationId": "deleteCollectsBookings"
+        "operationId": "deleteCollectsBookings",
+        "tags": [
+          "Collecte"
+        ]
       }
     },
     "/collects/{collectId}": {
       "patch": {
-        "tags": [
-          "Retrait"
-        ],
         "description": "Cette méthode permet de modifier une demande de retrait Click&Collect.",
         "operationId": "patchCollects",
         "parameters": [
@@ -666,7 +663,10 @@
             }
           }
         },
-        "summary": "Modifier une collecte"
+        "summary": "Modifier une collecte",
+        "tags": [
+          "Collecte"
+        ]
       },
       "delete": {
         "tags": [
@@ -3601,9 +3601,6 @@
             "description": "OK"
           }
         },
-        "tags": [
-          "Retrait"
-        ],
         "parameters": [
           {
             "schema": {
@@ -3651,7 +3648,10 @@
               }
             }
           }
-        }
+        },
+        "tags": [
+          "Collecte"
+        ]
       }
     }
   },
