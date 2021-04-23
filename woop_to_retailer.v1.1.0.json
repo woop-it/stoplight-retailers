@@ -765,19 +765,7 @@
           "in": "path",
           "required": true
         }
-      ],
-      "put": {
-        "summary": "Recevoir les informations d’un colis",
-        "operationId": "put-collects-collectId-packages-packageId-status",
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        },
-        "tags": [
-          "Retrait"
-        ]
-      }
+      ]
     },
     "/collects/{collectId}/status": {
       "parameters": [
@@ -791,7 +779,7 @@
         }
       ],
       "put": {
-        "summary": "Suivre l’évolution d’une commande globale",
+        "summary": "Recevoir les mises à jour de statut de collecte",
         "operationId": "put-collects-collectId-status",
         "responses": {
           "200": {
@@ -800,6 +788,15 @@
         },
         "tags": [
           "Retrait"
+        ],
+        "description": "Cette méthode permet à l’enseigne de recevoir les informations de statut sur la commande de Click & Collect. L’enseigne pourra alors suivre en temps réel l’évolution de la collecte du client dans le temps. ",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header"
+          }
         ]
       }
     }
