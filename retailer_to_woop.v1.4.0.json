@@ -265,12 +265,12 @@
             }
           }
         },
-        "summary": "Effectuer une demande de retrait de commande"
+        "summary": "Créer une collecte"
       }
     },
     "/collects/slots": {
       "get": {
-        "summary": "Récuperer les créneaux de retrait disponibles",
+        "summary": "Récupérer les créneaux de retrait",
         "description": "Cette méthode permet de récupérer les créneaux disponibles pour une demande de retrait Click&Collect dans un emplacement de prélèvement précis.",
         "tags": [
           "Retrait"
@@ -290,6 +290,22 @@
           },
           {
             "$ref": "#/components/parameters/queryToDateSlots"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "number",
+            "description": "Nombre de créneaux disponibles"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": " minRemainingCapacity",
+            "description": "Capacité minimale autorisée "
           }
         ],
         "responses": {
@@ -650,7 +666,7 @@
             }
           }
         },
-        "summary": "Effectuer une modification d'une demande de retrait"
+        "summary": "Modifier une collecte"
       },
       "delete": {
         "tags": [
@@ -706,7 +722,8 @@
               }
             }
           }
-        }
+        },
+        "summary": "Annuler une collecte"
       }
     },
     "/orders": {
@@ -3563,19 +3580,7 @@
           "in": "path",
           "required": true
         }
-      ],
-      "put": {
-        "summary": "Faire évoluer individuellement un colis de la commande client",
-        "operationId": "put-collects-collectId-packages-packageId-status",
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        },
-        "tags": [
-          "Retrait"
-        ]
-      }
+      ]
     },
     "/collects/{collectId}/status": {
       "parameters": [
@@ -3589,7 +3594,7 @@
         }
       ],
       "put": {
-        "summary": "Faire évoluer la commande globale",
+        "summary": "Mise à jour des statuts de la collecte",
         "operationId": "put-collects-collectId-status",
         "responses": {
           "200": {
@@ -3598,7 +3603,55 @@
         },
         "tags": [
           "Retrait"
-        ]
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "example": "1.4.0"
+            },
+            "in": "header",
+            "name": "x-api-version"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "",
+                "type": "object",
+                "properties": {
+                  "status": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "date": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "comment": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "required": [
+                  "status",
+                  "date",
+                  "comment"
+                ]
+              },
+              "examples": {
+                "example": {
+                  "value": {
+                    "status": "string",
+                    "date": "string",
+                    "comment": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
   },
@@ -3754,14 +3807,6 @@
             "minItems": 1,
             "items": {
               "$ref": "#/components/schemas/packages"
-            }
-          },
-          "tags": {
-            "type": "array",
-            "uniqueItems": true,
-            "minItems": 1,
-            "items": {
-              "$ref": "#/components/schemas/tags"
             }
           },
           "mode": {
