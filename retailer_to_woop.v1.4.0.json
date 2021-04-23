@@ -669,9 +669,6 @@
         ]
       },
       "delete": {
-        "tags": [
-          "Retrait"
-        ],
         "description": "Cette méthode permet d'annuler une demande de retrait Click&Collect.",
         "operationId": "deleteCollects",
         "parameters": [
@@ -723,7 +720,10 @@
             }
           }
         },
-        "summary": "Annuler une collecte"
+        "summary": "Annuler une collecte",
+        "tags": [
+          "Collecte"
+        ]
       }
     },
     "/orders": {
