@@ -3701,7 +3701,7 @@
         "tags": [
           "Collecte"
         ],
-        "description": "Cette méthode permet à l’enseigne d’envoyer une mise à jour des statuts de la collecte. \n\nL’enseigne doit renseigner le prochain statut de suivi de la collecte pour faire évoluer la demande de retrait. Ce statut de suivi de livraison doit être en cohérence avec le workflow défini."
+        "description": "Cette méthode permet à l’enseigne d’envoyer une mise à jour des statuts de la collecte. \n\nL’enseigne doit renseigner le prochain statut de suivi de la collecte pour faire évoluer la demande de retrait. Ce statut de suivi de livraison doit être en cohérence avec le workflow défini. <a href=\"/docs/Modèles/Statuts-de-retrait-C&C.md\">Workflow et liste des status</a>"
       }
     }
   },
