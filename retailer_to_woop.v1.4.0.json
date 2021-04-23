@@ -617,7 +617,7 @@
     },
     "/collects/{collectId}": {
       "patch": {
-        "description": "Cette méthode permet de modifier une demande de retrait Click&Collect.",
+        "description": "Cette méthode permet de modifier une demande de collecte initialement créée par l’enseigne.",
         "operationId": "patchCollects",
         "parameters": [
           {
@@ -718,7 +718,7 @@
         ]
       },
       "delete": {
-        "description": "Cette méthode permet d'annuler une demande de retrait Click&Collect.",
+        "description": "Cette méthode permet d’annuler une demande de collecte initialement créée par l’enseigne.\n\nLa méthode permet de supprimer la réservation du créneau ainsi que la demande d'enlèvement auprès du magasin. \n",
         "operationId": "deleteCollects",
         "parameters": [
           {
@@ -3700,7 +3700,8 @@
         },
         "tags": [
           "Collecte"
-        ]
+        ],
+        "description": "Cette méthode permet à l’enseigne d’envoyer une mise à jour des statuts de la collecte. \n\nL’enseigne doit renseigner le prochain statut de suivi de la collecte pour faire évoluer la demande de retrait. Ce statut de suivi de livraison doit être en cohérence avec le workflow défini."
       }
     }
   },
