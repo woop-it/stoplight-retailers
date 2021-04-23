@@ -782,22 +782,93 @@
         "summary": "Recevoir les mises à jour de statut de collecte",
         "operationId": "put-collects-collectId-status",
         "responses": {
-          "200": {
-            "description": "OK"
+          "204": {
+            "description": "Requête traitée avec succès"
+          },
+          "400": {
+            "description": "Elements manquants et/ou incorrect dans le body",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "reasons": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "L'information ne peut plus être envoyée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./retailer_to_woop.v1.4.0.json#/components/schemas/errorCode"
+                },
+                "examples": {}
+              }
+            }
+          },
+          "404": {
+            "description": "Le 'collectId' n'a pas été trouvé",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./retailer_to_woop.v1.4.0.json#/components/schemas/errorCode"
+                }
+              }
+            }
           }
         },
         "description": "Cette méthode permet à l’enseigne de recevoir les informations de statut sur la commande de Click & Collect. L’enseigne pourra alors suivre en temps réel l’évolution de la collecte du client dans le temps. ",
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header"
-          }
-        ],
+        "parameters": [],
         "tags": [
           "Collecte"
-        ]
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "",
+                "type": "object",
+                "properties": {
+                  "collectId": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "date": {
+                    "type": "string",
+                    "minLength": 1,
+                    "format": "date-time"
+                  },
+                  "status": {
+                    "$ref": "./retailer_to_woop.v1.4.0.json#/components/schemas/collectStatus"
+                  }
+                },
+                "required": [
+                  "collectId",
+                  "date",
+                  "status"
+                ]
+              },
+              "examples": {
+                "Créneau validé": {
+                  "value": {
+                    "collectId": "CN123456789FR59",
+                    "date": "2021-04-27T10:30:00+0000",
+                    "status": "COLLECT_STARTED"
+                  }
+                }
+              }
+            }
+          },
+          "description": "Contient les informations du changement de statut."
+        }
       }
     }
   },
@@ -1202,7 +1273,14 @@
           "date",
           "status"
         ],
-        "description": "Mise à jour du statut de la commande."
+        "description": "Mise à jour du statut de la commande.",
+        "x-examples": {
+          "example": {
+            "orderId": "string",
+            "date": "string",
+            "status": "ORDER_CREATED"
+          }
+        }
       },
       "additionalData": {
         "title": "Données additionnelles (additionalData)",

@@ -3646,8 +3646,17 @@
         "summary": "Mise à jour des statuts de la collecte",
         "operationId": "put-collects-collectId-status",
         "responses": {
-          "200": {
-            "description": "OK"
+          "204": {
+            "description": "Requête traitée avec succès"
+          },
+          "401": {
+            "description": "Vous n'êtes pas autorisé à accéder à cet élément."
+          },
+          "403": {
+            "description": "Le 'collectId' n'a pas été trouvé"
+          },
+          "404": {
+            "description": "Not Found"
           }
         },
         "parameters": [
@@ -3668,12 +3677,12 @@
                 "type": "object",
                 "properties": {
                   "status": {
-                    "type": "string",
-                    "minLength": 1
+                    "$ref": "#/components/schemas/collectStatus"
                   },
                   "date": {
                     "type": "string",
-                    "minLength": 1
+                    "minLength": 1,
+                    "format": "date-time"
                   },
                   "comment": {
                     "type": "string",
@@ -3687,21 +3696,22 @@
                 ]
               },
               "examples": {
-                "example": {
+                "Commande prête": {
                   "value": {
-                    "status": "string",
-                    "date": "string",
-                    "comment": "string"
+                    "status": "COLLECT_READY",
+                    "date": "2021-04-27T10:30:00+0000",
+                    "comment": "La commande est prête à être réceptionnée."
                   }
                 }
               }
             }
-          }
+          },
+          "description": "Contient les informations du nouveau statut"
         },
         "tags": [
           "Collecte"
         ],
-        "description": "Cette méthode permet à l’enseigne d’envoyer une mise à jour des statuts de la collecte. \n\nL’enseigne doit renseigner le prochain statut de suivi de la collecte pour faire évoluer la demande de retrait. Ce statut de suivi de livraison doit être en cohérence avec le workflow défini. <a href=\"/docs/Modèles/Statuts-de-retrait-C&C.md\">Workflow et liste des status</a>"
+        "description": "Cette méthode permet à l’enseigne d’envoyer une mise à jour des statuts de la collecte. \n\nL’enseigne doit renseigner le prochain statut de suivi de la collecte pour faire évoluer la demande de retrait. Ce statut de suivi de livraison doit être en cohérence avec le workflow défini. <a href=\"/docs/retailer/docs/Modèles/Statuts-de-retrait-C&C.md\">Workflow et liste des status</a>"
       }
     }
   },
@@ -4489,7 +4499,7 @@
           "DELIVERY_DELIVERED_OK",
           "DELIVERY_DELIVERED_PARTIALLY"
         ],
-        "description": "Précise le statut de livraison pouvant être utilisé.",
+        "description": "Précise les statuts de livraison pouvant être utilisé.",
         "x-examples": {
           "Exemple": "DELIVERY_STARTED"
         },
@@ -5270,6 +5280,23 @@
             "$ref": "#/components/schemas/currency"
           }
         }
+      },
+      "collectStatus": {
+        "type": "string",
+        "title": "Statut de collecte - Retrait drive (collectStatus)",
+        "description": "Précise les statuts de collecte pouvant être utilisé.",
+        "enum": [
+          "COLLECT_INIT",
+          "COLLECT_STARTED",
+          "COLLECT_READY",
+          "COLLECT_AWAITING",
+          "COLLECT_IN_PROGRESS",
+          "COLLECT_PICK_UP_OK",
+          "COLLECT_PICK_UP_FAILED",
+          "COLLECT_PICK_UP_PARTIALLY",
+          "COLLECT_BLOCKED",
+          "COLLECT_DELAYED"
+        ]
       }
     },
     "parameters": {
