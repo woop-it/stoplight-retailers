@@ -185,6 +185,55 @@
                       }
                     ]
                   }
+                },
+                "Exemple mode delay": {
+                  "value": {
+                    "mode": "express",
+                    "collectId": "CN123456789FR59",
+                    "storeId": "MAG01",
+                    "location": {
+                      "type": "exchangePlace",
+                      "id": "DRIVE-59-001"
+                    },
+                    "customer": {
+                      "firstName": "Michel",
+                      "lastName": "Dupont",
+                      "phone": "+33600000000",
+                      "email": "michel.dupont@mail.fr",
+                      "language": "fr",
+                      "timezone": "Europe/Paris"
+                    },
+                    "packages": [
+                      {
+                        "length": {
+                          "value": 15,
+                          "unit": "cm"
+                        },
+                        "width": {
+                          "value": 15,
+                          "unit": "cm"
+                        },
+                        "height": {
+                          "value": 1.2,
+                          "unit": "m"
+                        },
+                        "weight": {
+                          "value": 560,
+                          "unit": "g"
+                        },
+                        "products": [
+                          {
+                            "type": "TYPOLOGY_GENERIC",
+                            "ean": "978020137962",
+                            "cug": "123456",
+                            "label": "T-Shirt XL Jaune",
+                            "quantity": 1
+                          }
+                        ],
+                        "quantity": 1
+                      }
+                    ]
+                  }
                 }
               }
             }
