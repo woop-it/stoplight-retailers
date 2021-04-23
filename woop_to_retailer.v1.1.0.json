@@ -786,9 +786,6 @@
             "description": "OK"
           }
         },
-        "tags": [
-          "Retrait"
-        ],
         "description": "Cette méthode permet à l’enseigne de recevoir les informations de statut sur la commande de Click & Collect. L’enseigne pourra alors suivre en temps réel l’évolution de la collecte du client dans le temps. ",
         "parameters": [
           {
@@ -797,6 +794,9 @@
             },
             "in": "header"
           }
+        ],
+        "tags": [
+          "Collecte"
         ]
       }
     }
