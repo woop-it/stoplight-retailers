@@ -319,7 +319,7 @@
     },
     "/collects/slots": {
       "get": {
-        "summary": "Récupérer les créneaux de retrait",
+        "summary": "Récupérer les créneaux disponibles",
         "description": "Cette méthode permet de récupérer les créneaux disponibles pour une demande de retrait Click&Collect dans un emplacement de prélèvement précis.",
         "parameters": [
           {

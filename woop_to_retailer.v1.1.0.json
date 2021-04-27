@@ -848,6 +848,9 @@
                   },
                   "status": {
                     "$ref": "./retailer_to_woop.v1.4.0.json#/components/schemas/collectStatus"
+                  },
+                  "slot": {
+                    "$ref": "./retailer_to_woop.v1.4.0.json#/components/schemas/slot"
                   }
                 },
                 "required": [
