@@ -720,6 +720,18 @@
               "application/json": {
                 "schema": {
                   "$ref": "./retailer_to_woop.v1.4.0.json#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "statusCode": 0,
+                      "error": "string",
+                      "message": "string",
+                      "reasons": [
+                        "STORE_NOT_FOUND"
+                      ]
+                    }
+                  }
                 }
               }
             }
@@ -745,6 +757,243 @@
           }
         },
         "summary": "Recevoir les événements pour une commande donnée"
+      }
+    },
+    "/orders/{orderId}/deltaCosts": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "orderId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "post": {
+        "summary": "Recevoir les deltaCosts du transporteur",
+        "operationId": "postOrderDeltaCosts",
+        "responses": {
+          "204": {
+            "description": "Requête traitée avec succès"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "reasons": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "example": "Missing argument 'xxxxx'"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "reasons": [
+                        "Missing argument 'xxxxx'"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./retailer_to_woop.v1.4.0.json#/components/schemas/errorCode"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./retailer_to_woop.v1.4.0.json#/components/schemas/errorCode"
+                }
+              }
+            }
+          }
+        },
+        "description": "Cette méthode permet de recevoir les informations de deltaCost émis par le transporteur sur la commande lors de la livraison. Ces données peuvent être de type; Frais supplémentaire et/ou remise sur la livraison. ",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "",
+                "type": "object",
+                "properties": {
+                  "deliveryId": {
+                    "type": "string",
+                    "description": "Identifiant de livraison"
+                  },
+                  "externalReference": {
+                    "type": "string",
+                    "description": "Référence de commmande"
+                  },
+                  "orderId": {
+                    "type": "string",
+                    "description": "Identifiant de commande"
+                  },
+                  "amount": {
+                    "type": "number",
+                    "description": "Montant des frais indiqués par le transporteur."
+                  },
+                  "currency": {
+                    "$ref": "#/components/schemas/currency"
+                  },
+                  "reason": {
+                    "$ref": "#/components/schemas/deltaCostReason"
+                  },
+                  "comment": {
+                    "type": "string",
+                    "minLength": 1,
+                    "description": "Commentaire libre laissé par le transporteur. "
+                  },
+                  "date": {
+                    "type": "string",
+                    "minLength": 1,
+                    "description": "Date de l'évènement enregistré. "
+                  }
+                },
+                "required": [
+                  "deliveryId",
+                  "orderId",
+                  "amount",
+                  "currency",
+                  "reason",
+                  "comment",
+                  "date"
+                ]
+              },
+              "examples": {
+                "Annulation tardive": {
+                  "value": {
+                    "deliveryId": "056d12bb-7b53-46b8-980e-2c430fd9b4d3",
+                    "externalReference": "056d12bb-7b53-46b8-980e-2c430fd9b4d3",
+                    "orderId": "1d0297b0-be4e-409f-8179-b253",
+                    "amount": 165.98,
+                    "currency": "EUR",
+                    "reason": "DELTACOST_LATE_CANCELLATION",
+                    "comment": "Commande annulée 5min avant livraison.",
+                    "date": "2019-11-27T10:30:00+0000"
+                  }
+                }
+              }
+            }
+          },
+          "description": "Contient les informations relatives aux deltaCosts. "
+        },
+        "tags": [
+          "Commande"
+        ]
+      }
+    },
+    "/orders/{orderId}/quotes": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "orderId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "post": {
+        "summary": "Recevoir l'ensemble des devis d'une commande",
+        "operationId": "postOrderQuotes",
+        "responses": {
+          "200": {
+            "description": "Requête traitée avec succès"
+          },
+          "400": {
+            "description": "Elements manquants et/ou incorrect dans le body",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "reasons": {
+                      "type": "string",
+                      "example": "Missing argument 'xxxxx'"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./retailer_to_woop.v1.4.0.json#/components/schemas/errorCode"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./retailer_to_woop.v1.4.0.json#/components/schemas/errorCode"
+                }
+              }
+            }
+          }
+        },
+        "description": "Cette méthode permet de recevoir l'ensemble des devis émis aux transporteurs pour la création d'une expédition. Les devis seront retournés à l'enseigne à titre informatif. ",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "description": "",
+                "minItems": 1,
+                "uniqueItems": true,
+                "items": {
+                  "$ref": "#/components/schemas/getQuote"
+                }
+              },
+              "examples": {
+                "example": {
+                  "value": [
+                    {
+                      "quoteId": "string",
+                      "price": {
+                        "value": 0,
+                        "currency": "string"
+                      },
+                      "vehicleType": "string",
+                      "carrierName": "string",
+                      "reasons": [
+                        "REFUSED_TOO_HEAVY"
+                      ],
+                      "comment": "string"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "description": "Contient les informations des devis transporteurs."
+        },
+        "tags": [
+          "Commande"
+        ]
       }
     }
   },
@@ -1320,6 +1569,122 @@
         "enum": [
           "m",
           "km"
+        ]
+      },
+      "deltaCostReason": {
+        "type": "string",
+        "title": "Raison de deltaCost (deltaCostReason)",
+        "description": "Précise la raison remontée par le transporteur pour la création d'un deltaCost sur une commande.  ",
+        "x-examples": {
+          "example": "DELTACOST_EXTEND_WAITING_WAREHOUSE"
+        },
+        "enum": [
+          "DELTACOST_EXTEND_WAITING_WAREHOUSE",
+          "DELTACOST_EXTEND_WAITING_CUSTOMER",
+          "DELTACOST_WRONG_FLOOR",
+          "DELTACOST_WRONG_CONTENT",
+          "DELTACOST_WAREHOUSE_RETURN",
+          "DELTACOST_LATE_CANCELLATION",
+          "DELTACOST_PICKUP_FAILED",
+          "DELTACOST_PARTIALLY_DELIVERED",
+          "DELTACOST_UNKNOWN"
+        ]
+      },
+      "priceQuote": {
+        "description": "Correspond au prix du devis",
+        "type": "object",
+        "title": "Prix du devis (priceQuote)",
+        "x-examples": {
+          "example": {
+            "value": 0,
+            "currency": "string"
+          }
+        },
+        "properties": {
+          "value": {
+            "type": "number",
+            "description": "Valeur indicative du prix"
+          },
+          "currency": {
+            "$ref": "#/components/schemas/currency"
+          }
+        },
+        "required": [
+          "value",
+          "currency"
+        ]
+      },
+      "getQuote": {
+        "description": "Ensemble des devis émis par les transporteurs lors de la demande de création de commande. ",
+        "type": "object",
+        "x-examples": {
+          "example": {
+            "quoteId": "string",
+            "price": {
+              "value": 0,
+              "currency": "string"
+            },
+            "vehicleType": "string",
+            "carrierName": "string",
+            "reasons": [
+              "REFUSED_TOO_HEAVY"
+            ],
+            "comment": "string"
+          }
+        },
+        "title": "Informations des devis transporteurs (getQuote)",
+        "properties": {
+          "quoteId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "price": {
+            "$ref": "#/components/schemas/priceQuote"
+          },
+          "vehicleType": {
+            "$ref": "#/components/schemas/vehicleType"
+          },
+          "carrierName": {
+            "type": "string",
+            "minLength": 1
+          },
+          "reasons": {
+            "type": "array",
+            "uniqueItems": true,
+            "minItems": 1,
+            "items": {
+              "$ref": "#/components/schemas/refusedReason"
+            }
+          },
+          "comment": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "quoteId",
+          "price",
+          "vehicleType",
+          "carrierName",
+          "reasons",
+          "comment"
+        ]
+      },
+      "refusedReason": {
+        "type": "string",
+        "title": "Motif de refus (refusedReason)",
+        "description": "Précise les raisons de refus possible d'un devis. ",
+        "x-examples": {
+          "example": "REFUSED_AREA"
+        },
+        "enum": [
+          "REFUSED_AREA",
+          "REFUSED_AVAILABILITY",
+          "REFUSED_DAY_OFF",
+          "REFUSED_EXCEPTION",
+          "REFUSED_TIME_NOT_WORKED",
+          "REFUSED_TOO_HEAVY",
+          "REFUSED_TOO_LARGE"
         ]
       }
     },
