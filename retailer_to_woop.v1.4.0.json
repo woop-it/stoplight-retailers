@@ -2292,6 +2292,23 @@
                         "required": [
                           "url"
                         ]
+                      },
+                      "quote": {
+                        "type": "object",
+                        "description": "Callback permettant de recevoir les devis des transporteurs",
+                        "properties": {
+                          "url": {
+                            "type": "string",
+                            "description": "Url de la route d'API"
+                          },
+                          "version": {
+                            "type": "string",
+                            "description": "Version d'API pour ce callback"
+                          }
+                        },
+                        "required": [
+                          "url"
+                        ]
                       }
                     }
                   },
