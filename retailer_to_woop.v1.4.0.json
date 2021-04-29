@@ -326,9 +326,6 @@
             "$ref": "#/components/parameters/apiVersion"
           },
           {
-            "$ref": "#/components/parameters/queryStoreIdRequired"
-          },
-          {
             "$ref": "#/components/parameters/queryExchangePlaceIdRequired"
           },
           {
