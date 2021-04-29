@@ -467,7 +467,6 @@
               "examples": {
                 "Exemple": {
                   "value": {
-                    "storeId": "MAG01",
                     "exchangePlaceId": "COLLECT01",
                     "slot": {
                       "start": "2021-04-20T08:00:00+0000",
@@ -3920,11 +3919,6 @@
         "type": "object",
         "title": "Réservation de créneau de retrait (postCollectsBookings)",
         "properties": {
-          "storeId": {
-            "type": "string",
-            "minLength": 1,
-            "description": "Identifiant du magasin émettant la demande"
-          },
           "exchangePlaceId": {
             "type": "string",
             "minLength": 1,
@@ -3935,7 +3929,6 @@
           }
         },
         "required": [
-          "storeId",
           "exchangePlaceId",
           "slot"
         ]
