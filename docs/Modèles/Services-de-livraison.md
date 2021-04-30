@@ -12,6 +12,7 @@ Code| Intitulé
 `SERVICE_REGULAR_FRONT_HOME`| Livraison express à domicile
 `SERVICE_PICKUP_POINT`| Livraison point relais
 `SERVICE_SELECTED_ROOM`| Livraison pièce du choix
+`SERVICE_RETURN`| Retour produit 
 `SERVICE_SIMPLE_INSTALL`| Mise en service simple
 `SERVICE_COMPLEX_INSTALL`| Mise en service complexe
 `SERVICE_STANDARD_TAXI`| Livraison simple en taxi (type berline)
