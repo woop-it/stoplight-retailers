@@ -11,6 +11,7 @@ Code| Intitulé
 `SERVICE_FRONT_HOME`| Livraison devant habitation
 `SERVICE_REGULAR_FRONT_HOME`| Livraison express à domicile
 `SERVICE_PICKUP_POINT`| Livraison point relais
+`SERVICE_RETURN`| Retour produit 
 `SERVICE_SELECTED_ROOM`| Livraison pièce du choix
 `SERVICE_SIMPLE_INSTALL`| Mise en service simple
 `SERVICE_COMPLEX_INSTALL`| Mise en service complexe
