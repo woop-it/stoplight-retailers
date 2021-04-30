@@ -191,7 +191,7 @@
           "Commande"
         ],
         "operationId": "putOrderStatus",
-        "description": "Cette méthode permet de recevoir les mises à jour des statuts de livraison de la part du transporteur.",
+        "description": "Cette méthode permet de recevoir les statuts de livraison provenant du transporteur.",
         "parameters": [
           {
             "$ref": "#/components/parameters/pathOrderId"
@@ -590,7 +590,7 @@
           "Commande"
         ],
         "operationId": "postOrderEvents",
-        "description": "Cette méthode permet de recevoir la notification d'un évènement d'une commande.",
+        "description": "Cette méthode permet de recevoir les évènements liés à une commande.",
         "parameters": [
           {
             "$ref": "#/components/parameters/pathOrderId"
