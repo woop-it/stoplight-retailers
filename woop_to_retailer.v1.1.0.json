@@ -17,7 +17,7 @@
           "Commande"
         ],
         "operationId": "putOrderCarrier",
-        "description": "Cette méthode permet de recevoir la notification du transporteur sélectionné pour une commande donnée. Lorsque le choix du transporteur assurant la livraison de la commande est établi, l'information est envoyée. ",
+        "description": "Cette méthode permet de recevoir le nom du transporteur sélectionné pour une commande donnée. \n\nLorsque le choix du transporteur assurant la livraison de la commande est établi, l'information est envoyée. ",
         "parameters": [
           {
             "$ref": "#/components/parameters/pathOrderId"
@@ -182,7 +182,7 @@
             }
           }
         },
-        "summary": "Recevoir la notification du transporteur sélectionné pour une commande"
+        "summary": "Recevoir le nom du transporteur sélectionné pour une commande"
       }
     },
     "/orders/{orderId}/status": {
@@ -590,7 +590,7 @@
           "Commande"
         ],
         "operationId": "postOrderEvents",
-        "description": "Cette méthode permet de recevoir les évènements liés à une commande.",
+        "description": "Cette méthode permet de recevoir les évènements liés à une commande. Toutes les notifications envoyées au client seront transmises à l'enseigne: Raisons d'échec, date d'envoi et contenu de la notification. \n\n",
         "parameters": [
           {
             "$ref": "#/components/parameters/pathOrderId"
