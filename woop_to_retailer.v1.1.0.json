@@ -182,7 +182,7 @@
             }
           }
         },
-        "summary": "Recevoir la notification du transporteur sélectionné pour une commande"
+        "summary": "Recevoir le nom du transporteur sélectionné pour la livraison"
       }
     },
     "/orders/{orderId}/status": {
@@ -191,7 +191,7 @@
           "Commande"
         ],
         "operationId": "putOrderStatus",
-        "description": "Cette méthode permet de recevoir les mises à jour des statuts de livraison de la part du transporteur.",
+        "description": "Cette méthode permet à l’enseigne de recevoir les mises à jour des statuts de livraison de la part du transporteur pour une commande donnée.\n\nL’enseigne pourra alors suivre en temps réel l’évolution de la livraison dans le temps. ",
         "parameters": [
           {
             "$ref": "#/components/parameters/pathOrderId"
@@ -311,7 +311,7 @@
             }
           }
         },
-        "summary": "Recevoir les notifications de mise à jour des statuts de livraison"
+        "summary": "Recevoir les mises à jour de statut de livraison"
       }
     },
     "/orders/{orderId}/score": {
@@ -444,7 +444,7 @@
             }
           }
         },
-        "summary": "Recevoir les notes transporteur pour une livraison"
+        "summary": "Recevoir les notes du transporteur pour une livraison"
       }
     },
     "/orders/{orderId}/deliveryClosure": {
