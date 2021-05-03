@@ -191,7 +191,7 @@
           "Commande"
         ],
         "operationId": "putOrderStatus",
-        "description": "Cette méthode permet de recevoir les statuts de livraison provenant du transporteur.",
+        "description": "Cette méthode permet à l’enseigne de recevoir les mises à jour des statuts de livraison de la part du transporteur pour une commande donnée.  \n\nL’enseigne pourra alors suivre en temps réel l’évolution de la livraison dans le temps. ",
         "parameters": [
           {
             "$ref": "#/components/parameters/pathOrderId"
@@ -311,7 +311,7 @@
             }
           }
         },
-        "summary": "Recevoir les notifications de mise à jour des statuts de livraison"
+        "summary": "Recevoir les mises à jour de statut de livraison"
       }
     },
     "/orders/{orderId}/score": {
