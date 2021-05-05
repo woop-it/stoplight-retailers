@@ -8,6 +8,9 @@
   "tags": [
     {
       "name": "Commande"
+    },
+    {
+      "name": "Collecte"
     }
   ],
   "paths": {
@@ -747,26 +750,6 @@
         "summary": "Recevoir les événements pour une commande donnée"
       }
     },
-    "/collects/{collectId}/packages/{packageId}/status": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "collectId",
-          "in": "path",
-          "required": true
-        },
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "packageId",
-          "in": "path",
-          "required": true
-        }
-      ]
-    },
     "/collects/{collectId}/status": {
       "parameters": [
         {
@@ -863,8 +846,12 @@
                 "Créneau validé": {
                   "value": {
                     "collectId": "CN123456789FR59",
-                    "date": "2021-04-27T10:30:00+0000",
-                    "status": "COLLECT_INIT"
+                    "date": "2019-08-24T14:15:22Z",
+                    "status": "COLLECT_STARTED",
+                    "slot": {
+                      "start": "2019-05-02T15:00:00+0000",
+                      "end": "2019-05-02T15:30:00+0000"
+                    }
                   }
                 },
                 "Créneau modifié par le client": {
@@ -878,11 +865,11 @@
                     }
                   }
                 },
-                "Créneau défini pour une collecte différée": {
+                "Collecte prête": {
                   "value": {
                     "collectId": "CN123456789FR59",
                     "date": "2019-08-24T14:15:22Z",
-                    "status": "COLLECT_STARTED",
+                    "status": "COLLECT_READY",
                     "slot": {
                       "start": "2019-05-02T15:00:00+0000",
                       "end": "2019-05-02T15:30:00+0000"

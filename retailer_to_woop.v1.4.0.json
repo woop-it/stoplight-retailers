@@ -11,7 +11,7 @@
       "name": "Document"
     },
     {
-      "name": "Retrait"
+      "name": "Collecte"
     },
     {
       "name": "Health"
@@ -67,6 +67,9 @@
     },
     "/collects": {
       "post": {
+        "tags": [
+          "Collecte"
+        ],
         "description": "Cette méthode permet d’effectuer une demande de retrait Click&Collect dans un emplacement de prélèvement précis. Dès la demande validée et le créneau de réservation sélectionné, l’ordre de retrait sera créé instantanément.",
         "operationId": "postCollects",
         "parameters": [
@@ -83,15 +86,11 @@
                 "$ref": "#/components/schemas/postCollects"
               },
               "examples": {
-                "Exemple mode standard": {
+                "Exemple mode standard (avec réservation du créneau au préalable)": {
                   "value": {
                     "mode": "standard",
                     "collectId": "CN123456789FR59",
-                    "storeId": "MAG01",
-                    "location": {
-                      "type": "exchangePlace",
-                      "id": "DRIVE-59-001"
-                    },
+                    "exchangePlaceId": "DRIVE-59-001",
                     "bookingId": "bfded21b-cbed-4256-b756-2febcea94df6",
                     "customer": {
                       "firstName": "Michel",
@@ -133,18 +132,14 @@
                     ]
                   }
                 },
-                "Exemple mode express": {
+                "Exemple mode standard (sans réservation au préalable)": {
                   "value": {
-                    "mode": "express",
+                    "mode": "standard",
                     "collectId": "CN123456789FR59",
+                    "exchangePlaceId": "DRIVE-59-001",
                     "slot": {
                       "start": "2021-03-18T14:00:00.000Z",
                       "end": "2021-03-18T14:30:00.000Z"
-                    },
-                    "storeId": "MAG01",
-                    "location": {
-                      "type": "exchangePlace",
-                      "id": "DRIVE-59-001"
                     },
                     "customer": {
                       "firstName": "Michel",
@@ -188,13 +183,9 @@
                 },
                 "Exemple mode delay": {
                   "value": {
-                    "mode": "express",
+                    "mode": "delay",
                     "collectId": "CN123456789FR59",
-                    "storeId": "MAG01",
-                    "location": {
-                      "type": "exchangePlace",
-                      "id": "DRIVE-59-001"
-                    },
+                    "exchangePlaceId": "DRIVE-59-001",
                     "customer": {
                       "firstName": "Michel",
                       "lastName": "Dupont",
@@ -311,10 +302,7 @@
             }
           }
         },
-        "summary": "Créer une collecte",
-        "tags": [
-          "Collecte"
-        ]
+        "summary": "Créer une collecte"
       }
     },
     "/collects/slots": {
@@ -623,7 +611,7 @@
             "name": "collectId",
             "in": "path",
             "required": true,
-            "description": "Identifiant de la réservation"
+            "description": "Identifiant de la collecte"
           },
           {
             "$ref": "#/components/parameters/apiVersion"
@@ -638,12 +626,12 @@
                 "$ref": "#/components/schemas/patchCollects"
               },
               "examples": {
-                "Exemple mode standard": {
+                "Exemple modification du créneau avec réservation": {
                   "value": {
                     "bookingId": "bfded21b-cbed-4256-b756-2febcea94df6"
                   }
                 },
-                "Exemple mode express": {
+                "Exemple modification du créneau sans réservation": {
                   "value": {
                     "slot": {
                       "start": "2021-03-18T14:00:00.000Z",
@@ -724,7 +712,7 @@
             "name": "collectId",
             "in": "path",
             "required": true,
-            "description": "Identifiant de la réservation"
+            "description": "Identifiant de la collecte"
           },
           {
             "$ref": "#/components/parameters/apiVersion"
@@ -2816,6 +2804,24 @@
                             "example": "1.1.0"
                           }
                         }
+                      },
+                      "collectStatus": {
+                        "type": "object",
+                        "description": "Callback permettant de recevoir les changements de statut d'une collecte",
+                        "required": [
+                          "url"
+                        ],
+                        "properties": {
+                          "url": {
+                            "type": "string",
+                            "description": "Url de la route d'API"
+                          },
+                          "version": {
+                            "type": "string",
+                            "description": "Version d'API pour ce callback",
+                            "example": "1.1.0"
+                          }
+                        }
                       }
                     }
                   },
@@ -2935,6 +2941,10 @@
                       "event": {
                         "url": "https://my_url/orders/{orderId}/event",
                         "version": "1.1.0"
+                      },
+                      "collectStatus": {
+                        "url": "https://my_url/collects/{collectId}/status",
+                        "version": "1.1.0"
                       }
                     },
                     "headers": [
@@ -2973,6 +2983,10 @@
                       "event": {
                         "url": "https://my_url/orders/{orderId}/event",
                         "version": "1.1.0"
+                      },
+                       "collectStatus": {
+                        "url": "https://my_url/collects/{collectId}/status",
+                        "version": "1.1.0"
                       }
                     },
                     "auth": {
@@ -3007,6 +3021,10 @@
                       },
                       "event": {
                         "url": "https://my_url/orders/{orderId}/event",
+                        "version": "1.1.0"
+                      },
+                       "collectStatus": {
+                        "url": "https://my_url/collects/{collectId}/status",
                         "version": "1.1.0"
                       }
                     },
@@ -3607,26 +3625,6 @@
         ]
       }
     },
-    "/collects/{collectId}/packages/{packageId}/status": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "collectId",
-          "in": "path",
-          "required": true
-        },
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "packageId",
-          "in": "path",
-          "required": true
-        }
-      ]
-    },
     "/collects/{collectId}/status": {
       "parameters": [
         {
@@ -3833,29 +3831,34 @@
         "type": "object",
         "title": "Demande de retrait (postCollects)",
         "properties": {
+           "mode": {
+            "type": "string",
+            "description": "Mode de click & collect choisi par le client ",
+            "enum": [
+              "standard",
+              "delay"
+            ]
+          },
           "collectId": {
             "type": "string",
             "minLength": 1,
             "description": "Identifiant de la demande de retrait"
           },
-          "storeId": {
+          "exchangePlaceId": {
             "type": "string",
             "minLength": 1,
-            "description": "Identifiant du magasin émettant la demande"
+            "description": "Identifiant du point de prélèvement"
           },
           "bookingId": {
             "type": "string",
             "minLength": 1,
-            "description": "Identifiant de la réservation (nécessaire pour les modes standard et delay)"
+            "description": "Identifiant de la réservation du créneau"
           },
           "slot": {
             "$ref": "#/components/schemas/slot"
           },
           "customer": {
             "$ref": "#/components/schemas/contact"
-          },
-          "location": {
-            "$ref": "#/components/schemas/location"
           },
           "packages": {
             "type": "array",
@@ -3864,29 +3867,19 @@
             "items": {
               "$ref": "#/components/schemas/packages"
             }
-          },
-          "mode": {
-            "type": "string",
-            "description": "Mode de click & collect choisi par le client ",
-            "enum": [
-              "standard",
-              "express",
-              "delay"
-            ]
           }
         },
         "required": [
           "collectId",
-          "storeId",
+          "exchangePlaceId",
           "customer",
-          "location",
           "packages"
         ]
       },
       "patchCollects": {
         "description": "Précise les informations utiles à la modification d'une demande de retrait.",
         "type": "object",
-        "title": "Modification d'une demande de retrait (postCollects)",
+        "title": "Modification du créneau d'une demande de retrait (postCollects)",
         "oneOf": [
           {
             "type": "object",
@@ -3894,7 +3887,7 @@
               "bookingId": {
                 "type": "string",
                 "minLength": 1,
-                "description": "Identifiant de la réservation (nécessaire pour les modes standard et delay)"
+                "description": "Identifiant de la réservation du créneau"
               }
             },
             "required": [
@@ -5101,7 +5094,7 @@
         "title": "Créneau de retrait disponible (availableSlot)"
       },
       "slot": {
-        "description": "Créneau de retrait.",
+        "description": "Créneau de retrait (sans réservation ni vérification de capacité).",
         "type": "object",
         "properties": {
           "start": {
@@ -5285,7 +5278,8 @@
           "COLLECT_PICK_UP_FAILED",
           "COLLECT_PICK_UP_PARTIALLY",
           "COLLECT_BLOCKED",
-          "COLLECT_DELAYED"
+          "COLLECT_DELAYED",
+          "COLLECT_REPLANNED"
         ]
       }
     },
