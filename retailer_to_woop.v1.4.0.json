@@ -1021,9 +1021,6 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": [
-                  "reasons"
-                ],
                 "properties": {
                   "reasons": {
                     "description": "Motifs d’annulation",
@@ -1036,7 +1033,10 @@
                     "type": "string",
                     "description": "Commentaire optionnel à ajouté si besoin lors de l’annulation"
                   }
-                }
+                },
+                "required": [
+                  "reasons"
+                ]
               }
             }
           }
