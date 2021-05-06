@@ -1089,7 +1089,7 @@
             }
           },
           "409": {
-            "description": "La commande est déjà annulée"
+            "description": "La commande est déjà annulée ou une action est déjà en cours sur cette commande"
           }
         },
         "summary": "Annuler une commande"
@@ -1316,6 +1316,9 @@
                 }
               }
             }
+          },
+          "409": {
+            "description": "Une action est déjà en cours sur cette commande"
           }
         },
         "summary": "Modifier une commande"
