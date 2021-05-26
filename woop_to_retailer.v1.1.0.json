@@ -834,6 +834,9 @@
                   },
                   "slot": {
                     "$ref": "./retailer_to_woop.v1.4.0.json#/components/schemas/slot"
+                  },
+                  "additionalData": {
+                    "$ref": "#/components/schemas/additionalData"
                   }
                 },
                 "required": [
