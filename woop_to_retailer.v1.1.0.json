@@ -834,6 +834,9 @@
                   },
                   "slot": {
                     "$ref": "./retailer_to_woop.v1.4.0.json#/components/schemas/slot"
+                  },
+                  "additionalData": {
+                    "$ref": "#/components/schemas/additionalData"
                   }
                 },
                 "required": [
@@ -873,6 +876,21 @@
                     "slot": {
                       "start": "2019-05-02T15:00:00+0000",
                       "end": "2019-05-02T15:30:00+0000"
+                    }
+                  }
+                },
+                "Client arrivé en magasin": {
+                  "value": {
+                    "collectId": "CN123456789FR59",
+                    "date": "2019-08-24T14:15:22Z",
+                    "status": "COLLECT_AWAITING",
+                    "slot": {
+                      "start": "2019-05-02T15:00:00+0000",
+                      "end": "2019-05-02T15:30:00+0000"
+                    },
+                    "additionalData": {
+                      "key": "space",
+                      "value": "A32"
                     }
                   }
                 }

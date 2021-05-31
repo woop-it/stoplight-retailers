@@ -132,9 +132,9 @@
                     ]
                   }
                 },
-                "Exemple mode standard (sans réservation au préalable)": {
+                "Exemple mode express (sans réservation au préalable)": {
                   "value": {
-                    "mode": "standard",
+                    "mode": "express",
                     "collectId": "CN123456789FR59",
                     "exchangePlaceId": "DRIVE-59-001",
                     "slot": {
@@ -2984,7 +2984,7 @@
                         "url": "https://my_url/orders/{orderId}/event",
                         "version": "1.1.0"
                       },
-                       "collectStatus": {
+                      "collectStatus": {
                         "url": "https://my_url/collects/{collectId}/status",
                         "version": "1.1.0"
                       }
@@ -3023,7 +3023,7 @@
                         "url": "https://my_url/orders/{orderId}/event",
                         "version": "1.1.0"
                       },
-                       "collectStatus": {
+                      "collectStatus": {
                         "url": "https://my_url/collects/{collectId}/status",
                         "version": "1.1.0"
                       }
@@ -3831,7 +3831,7 @@
         "type": "object",
         "title": "Demande de retrait (postCollects)",
         "properties": {
-           "mode": {
+          "mode": {
             "type": "string",
             "description": "Mode de click & collect choisi par le client ",
             "enum": [
