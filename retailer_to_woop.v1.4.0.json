@@ -305,7 +305,7 @@
         "summary": "Créer une collecte"
       }
     },
-    "/collects/slots": {
+    "/slots": {
       "get": {
         "summary": "Récupérer les créneaux disponibles",
         "description": "Cette méthode permet de récupérer les créneaux disponibles pour une demande de retrait Click&Collect dans un emplacement de prélèvement précis.",
@@ -430,13 +430,13 @@
             }
           }
         },
-        "operationId": "getCollectsSlots",
+        "operationId": "getSlots",
         "tags": [
           "Collecte"
         ]
       }
     },
-    "/collects/bookings": {
+    "/bookings": {
       "post": {
         "summary": "Réserver un créneau de retrait",
         "description": "Cette méthode permet de réserver un créneau disponible pour une demande de retrait Click&Collect dans un emplacement de prélèvement précis.",
@@ -534,13 +534,13 @@
             "description": "Le créneau est déjà réservé"
           }
         },
-        "operationId": "postCollectsBookings",
+        "operationId": "postBookings",
         "tags": [
           "Collecte"
         ]
       }
     },
-    "/collects/bookings/{bookingId}": {
+    "/bookings/{bookingId}": {
       "delete": {
         "summary": "Annuler la réservation d'un créneau de retrait",
         "description": "Cette méthode permet d'annuler la réservation d'un créneau pour une demande de retrait Click&Collect dans un emplacement de prélèvement précis.",
@@ -593,7 +593,7 @@
             }
           }
         },
-        "operationId": "deleteCollectsBookings",
+        "operationId": "deleteBookings",
         "tags": [
           "Collecte"
         ]
