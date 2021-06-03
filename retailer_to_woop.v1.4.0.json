@@ -3698,9 +3698,26 @@
               "examples": {
                 "Commande prête": {
                   "value": {
+                    "collectId": "CN123456789FR59",
+                    "date": "2019-08-24T14:15:22Z",
+                    "comment": "La commande est prête à être réceptionnée.",
                     "status": "COLLECT_READY",
-                    "date": "2021-04-27T10:30:00+0000",
-                    "comment": "La commande est prête à être réceptionnée."
+                    "slot": {
+                      "start": "2019-05-02T15:00:00+0000",
+                      "end": "2019-05-02T15:30:00+0000"
+                    }
+                  }
+                },
+                "Créneau modifié par le client": {
+                  "value": {
+                    "collectId": "CN123456789FR59",
+                    "date": "2019-08-24T14:15:22Z",
+                    "comment": "Commande modifiée",
+                    "status": "COLLECT_REPLANNED",
+                    "slot": {
+                      "start": "2019-05-02T15:00:00+0000",
+                      "end": "2019-05-02T15:30:00+0000"
+                    }
                   }
                 }
               }
