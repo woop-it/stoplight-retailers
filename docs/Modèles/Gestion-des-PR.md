@@ -46,6 +46,7 @@ Transporteur | Code | Types
 ---------|---------|----------
  Bpost| bpost|PICKUP_POINT_AGENCY, PICKUP_POINT_POST_OFFICE, PICKUP_POINT_RELAY_WITH_LOCKER, PICKUP_POINT_RELAY_WITHOUT_LOCKER
  Chronopost | chronopost | PICKUP_POINT_AGENCY, PICKUP_POINT_POST_OFFICE, PICKUP_POINT_RELAY_WITH_LOCKER, PICKUP_POINT_RELAY_WITHOUT_LOCKER
+  Colissimo | colissimo | PICKUP_POINT_AGENCY, PICKUP_POINT_POST_OFFICE, PICKUP_POINT_RELAY_WITHOUT_LOCKER
 
 *Ex:*
 - Filtre par type:
@@ -76,6 +77,7 @@ Transporteur | Code | Catégories
  Mondial relay | mondial-relay|24R, 24L, Drive
  Relais colis | relais-colis | RCStandard, RCMax
  Agrikolis | agrikolis | A1, A2, A3, A4
+ Colissimo | colissimo | A2P, BPR, CDI, ACP, CMT, BDP
 
 
 *Ex:*
