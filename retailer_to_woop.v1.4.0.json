@@ -3681,6 +3681,12 @@
                   "comment": {
                     "type": "string",
                     "minLength": 1
+                  },
+                  "slot": {
+                    "$ref": "#/components/schemas/slot"
+                  },
+                  "additionalData": {
+                    "$ref": "./woop_to_retailer.v1.1.0.json#/components/schemas/additionalData"
                   }
                 },
                 "required": [
