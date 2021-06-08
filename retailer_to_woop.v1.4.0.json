@@ -512,7 +512,7 @@
             }
           },
           "403": {
-            "description": "Demande impossible pour le 'storeId' ou 'exchangePlaceId'",
+            "description": "Demande impossible pour cet 'exchangePlaceId'",
             "content": {
               "application/json": {
                 "schema": {
