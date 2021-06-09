@@ -573,6 +573,17 @@
               }
             }
           },
+          "403": {
+            "description": "La réservation du créaneau ne peut être annulée.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                },
+                "examples": {}
+              }
+            }
+          },
           "404": {
             "description": "Le 'bookingId' n'existe pas",
             "content": {
@@ -638,6 +649,18 @@
                       "end": "2021-03-18T14:30:00.000Z"
                     }
                   }
+                },
+                "Exemple modification des infos utilisateur": {
+                  "value": {
+                    "customer": {
+                      "firstName": "Michel",
+                      "lastName": "Dupont",
+                      "phone": "+33600000000",
+                      "email": "michel.dupont@mail.fr",
+                      "language": "fr",
+                      "timezone": "Europe/Paris"
+                    }
+                  }
                 }
               }
             }
@@ -675,6 +698,9 @@
           },
           "401": {
             "description": "Vous n'êtes pas autorisé à accéder à cet élément"
+          },
+          "403": {
+            "description": "La demande de retrait ne peut être modifiée"
           },
           "404": {
             "description": "Le 'collectId' n'existe pas",
@@ -724,6 +750,17 @@
           },
           "401": {
             "description": "Vous n'êtes pas autorisé à accéder à cet élément",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                },
+                "examples": {}
+              }
+            }
+          },
+          "403": {
+            "description": "La demande de retrait ne peut être annulée",
             "content": {
               "application/json": {
                 "schema": {
@@ -3647,10 +3684,10 @@
             "description": "Vous n'êtes pas autorisé à accéder à cet élément."
           },
           "403": {
-            "description": "Le 'collectId' n'a pas été trouvé"
+            "description": "Le statut de la collecte ne peut-être modifié"
           },
           "404": {
-            "description": "Not Found"
+            "description": "Le 'collectId' n'a pas été trouvé"
           }
         },
         "parameters": [
@@ -3681,12 +3718,6 @@
                   "comment": {
                     "type": "string",
                     "minLength": 1
-                  },
-                  "slot": {
-                    "$ref": "#/components/schemas/slot"
-                  },
-                  "additionalData": {
-                    "$ref": "./woop_to_retailer.v1.1.0.json#/components/schemas/additionalData"
                   }
                 },
                 "required": [
@@ -3698,26 +3729,9 @@
               "examples": {
                 "Commande prête": {
                   "value": {
-                    "collectId": "CN123456789FR59",
                     "date": "2019-08-24T14:15:22Z",
                     "comment": "La commande est prête à être réceptionnée.",
-                    "status": "COLLECT_READY",
-                    "slot": {
-                      "start": "2019-05-02T15:00:00+0000",
-                      "end": "2019-05-02T15:30:00+0000"
-                    }
-                  }
-                },
-                "Créneau modifié par le client": {
-                  "value": {
-                    "collectId": "CN123456789FR59",
-                    "date": "2019-08-24T14:15:22Z",
-                    "comment": "Commande modifiée",
-                    "status": "COLLECT_REPLANNED",
-                    "slot": {
-                      "start": "2019-05-02T15:00:00+0000",
-                      "end": "2019-05-02T15:30:00+0000"
-                    }
+                    "status": "COLLECT_READY"
                   }
                 }
               }
@@ -3902,33 +3916,33 @@
       "patchCollects": {
         "description": "Précise les informations utiles à la modification d'une demande de retrait.",
         "type": "object",
-        "title": "Modification du créneau d'une demande de retrait (postCollects)",
-        "oneOf": [
-          {
-            "type": "object",
-            "properties": {
-              "bookingId": {
-                "type": "string",
-                "minLength": 1,
-                "description": "Identifiant de la réservation du créneau"
-              }
-            },
-            "required": [
-              "bookingId"
-            ]
+        "title": "Modification d'une demande de retrait (postCollects)",
+        "properties": {
+           "exchangePlaceId": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Identifiant du point de prélèvement"
           },
-          {
-            "type": "object",
-            "properties": {
-              "slot": {
-                "$ref": "#/components/schemas/slot"
-              }
-            },
-            "required": [
-              "slot"
-            ]
+          "bookingId": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Identifiant de la réservation du créneau"
+          },
+          "slot": {
+            "$ref": "#/components/schemas/slot"
+          },
+          "customer": {
+            "$ref": "#/components/schemas/contact"
+          },
+          "packages": {
+            "type": "array",
+            "uniqueItems": true,
+            "minItems": 1,
+            "items": {
+              "$ref": "#/components/schemas/packages"
+            }
           }
-        ]
+        }
       },
       "postCollectsBookings": {
         "description": "Précise les informations nécessaires à la réservation d'un créneau de retrait.",
