@@ -3244,11 +3244,6 @@
                         "items": {
                           "$ref": "#/components/schemas/product"
                         }
-                      },
-                      "quantity": {
-                        "type": "integer",
-                        "default": 1,
-                        "description": "Quantité de colis"
                       }
                     }
                   }
