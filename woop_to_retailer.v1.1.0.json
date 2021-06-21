@@ -320,7 +320,7 @@
           "Commande"
         ],
         "operationId": "putOrderScore",
-        "description": "Cette méthode permet de recevoir la note finale de la livraison effectuée.",
+        "description": "Cette méthode permet de recevoir les retours client suite à la livraison.",
         "parameters": [
           {
             "$ref": "#/components/parameters/pathOrderId"
@@ -346,8 +346,11 @@
                     }
                   },
                   "comment": {
-                    "type": "string",
-                    "description": "Commentaire libre"
+                    "type": "array",
+                    "description": "Commentaires clients",
+                    "items": {
+                      "$ref": "#/components/schemas/scoreComment"
+                    }
                   }
                 },
                 "required": [
@@ -363,10 +366,16 @@
                     "score": [
                       {
                         "note": 9,
-                        "type": "SCORE_TYPE_SATISFACTION"
+                        "type": "SCORE_TYPE_SATISFACTION",
+                        "includedInCarrierScore": true
                       }
                     ],
-                    "comment": "J'ai été très satisfaite de ma livraison !"
+                    "comment": [
+                      {
+                        "answer": "Non, livraison correcte.",
+                        "question": "Avez-vous des suggestions à nous partager afin de nous aider à améliorer notre service de livraison ?"
+                      }
+                    ]
                   }
                 }
               }
@@ -1005,10 +1014,11 @@
         "x-examples": {
           "Exemple": {
             "note": 5,
-            "type": "SCORE_TYPE_RECOMMENDATION"
+            "type": "SCORE_TYPE_RECOMMENDATION",
+            "includedInCarrierScore": true
           }
         },
-        "description": "Précise la note obtenu de la part du client final pour la livraison effectuée. ",
+        "description": "Précise la note obtenue de la part du client final pour la livraison effectuée et si elle est inclue dans le calcul de la note transporteur. ",
         "properties": {
           "note": {
             "type": "number",
@@ -1021,11 +1031,16 @@
               "SCORE_TYPE_SATISFACTION"
             ],
             "description": "Type de note"
+          },
+          "includedInCarrierScore": {
+            "type": "boolean",
+            "description": "Inclus dans la note transporteur"
           }
         },
         "required": [
           "note",
-          "type"
+          "type",
+          "includedInCarrierScore"
         ]
       },
       "contact": {
@@ -1685,6 +1700,31 @@
           "REFUSED_TIME_NOT_WORKED",
           "REFUSED_TOO_HEAVY",
           "REFUSED_TOO_LARGE"
+        ]
+      },
+      "scoreComment": {
+        "title": "Commentaires sur la livraison (scoreComment)",
+        "type": "object",
+        "x-examples": {
+          "Exemple": {
+            "answer": "Pas de commentaires !",
+            "question": "Avez-vous des suggestions à nous partager afin de nous aider à améliorer notre service de livraison ?"
+          }
+        },
+        "description": "Champ libre pour les commentaires clients",
+        "properties": {
+          "answer": {
+            "type": "string",
+            "description": "Réponse apportée par le client final"
+          },
+          "question": {
+            "type": "string",
+            "description": "Question posée au client final"
+          }
+        },
+        "required": [
+          "answer",
+          "question"
         ]
       }
     },
