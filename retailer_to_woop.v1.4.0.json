@@ -3226,13 +3226,8 @@
       },
       "postCollects": {
         "type": "object",
-        "required": [
-          "reference",
-          "storeId",
-          "customer",
-          "location",
-          "packages"
-        ],
+        "description": "Précise les informations utiles à la création d'une demande de retrait (click and collect).",
+        "title": "Demande de retrait (postCollects)",
         "properties": {
           "reference": {
             "type": "string",
@@ -3254,10 +3249,22 @@
             "items": {
               "$ref": "#/components/schemas/packages"
             }
+          },
+          "additionalData": {
+            "type": "array",
+            "description": "Permet d'envoyer des données supplémentaires",
+            "items": {
+              "$ref": "./woop_to_retailer.v1.1.0.json#/components/schemas/additionalData"
+            }
           }
         },
-        "description": "Précise les informations utiles à la création d'une demande de retrait (click and collect).",
-        "title": "Demande de retrait (postCollects)"
+        "required": [
+          "reference",
+          "storeId",
+          "customer",
+          "location",
+          "packages"
+        ]
       },
       "postEligibilities": {
         "type": "object",
