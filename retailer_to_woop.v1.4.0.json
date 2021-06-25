@@ -3249,13 +3249,6 @@
             "items": {
               "$ref": "#/components/schemas/packages"
             }
-          },
-          "additionalData": {
-            "type": "array",
-            "description": "Permet d'envoyer des données supplémentaires",
-            "items": {
-              "$ref": "./woop_to_retailer.v1.1.0.json#/components/schemas/additionalData"
-            }
           }
         },
         "required": [
