@@ -836,7 +836,10 @@
                     "$ref": "./retailer_to_woop.v1.4.0.json#/components/schemas/slot"
                   },
                   "additionalData": {
-                    "$ref": "#/components/schemas/additionalData"
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/additionalData"
+                    }
                   }
                 },
                 "required": [
@@ -1256,7 +1259,10 @@
             "$ref": "#/components/schemas/team"
           },
           "additionalData": {
-            "$ref": "#/components/schemas/additionalData"
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/additionalData"
+            }
           },
           "appointment": {
             "$ref": "#/components/schemas/appointment"

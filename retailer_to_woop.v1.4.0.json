@@ -3718,6 +3718,13 @@
                   "comment": {
                     "type": "string",
                     "minLength": 1
+                  },
+                  "additionalData": {
+                    "type": "array",
+                    "description": "Permet de transmettre des données supplémentaires",
+                    "items": {
+                      "$ref": "./woop_to_retailer.v1.1.0.json#/components/schemas/additionalData"
+                    }
                   }
                 },
                 "required": [
@@ -3918,7 +3925,7 @@
         "type": "object",
         "title": "Modification d'une demande de retrait (postCollects)",
         "properties": {
-           "exchangePlaceId": {
+          "exchangePlaceId": {
             "type": "string",
             "minLength": 1,
             "description": "Identifiant du point de prélèvement"
