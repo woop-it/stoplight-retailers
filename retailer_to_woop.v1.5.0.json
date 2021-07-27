@@ -31,8 +31,8 @@
   ],
   "info": {
     "title": "Enseigne vers Woop",
-    "description": "Pour commencer, toutes les informations technique concernant les API Woop à destination des enseignes sont centralisées dans cette documentation. Pour toute question ou précision, merci de contacter l'équipe technique interne. \n\nPour utiliser les API \"Enseigne vers Woop\", vous devez vous munir des vos accès identifiants secret fournis lors de la création de votre compte enseigne au sein de la palteforme. [Voir la documentation](https://woop.stoplight.io/docs/retailer/docs/Bases/Authentification.md)\n\nLa version actuellement proposée dans la documentation est la <b>Version 1.4.0</b>",
-    "version": "1.4.0"
+    "description": "Pour commencer, toutes les informations technique concernant les API Woop à destination des enseignes sont centralisées dans cette documentation. Pour toute question ou précision, merci de contacter l'équipe technique interne. \n\nPour utiliser les API \"Enseigne vers Woop\", vous devez vous munir des vos accès identifiants secret fournis lors de la création de votre compte enseigne au sein de la palteforme. [Voir la documentation](https://woop.stoplight.io/docs/retailer/docs/Bases/Authentification.md)\n\nLa version actuellement proposée dans la documentation est la <b>Version 1.5.0</b>",
+    "version": "1.5.0"
   },
   "servers": [
     {
@@ -1866,41 +1866,126 @@
       }
     },
     "/pickupPoints": {
-      "get": {
+      "post": {
         "tags": [
           "Point relais"
         ],
         "description": "Cette méthode permet de récupérer la liste des point relais des transporteurs situés autour d’une géolocalisation donnée.\n\n[Voir l'explication](https://woop.stoplight.io/docs/retailer/docs/Mod%C3%A8les/Gestion-des-PR.md)",
-        "operationId": "getPickupPoints",
+        "operationId": "postPickupPoints",
         "parameters": [
           {
             "$ref": "#/components/parameters/apiVersion"
-          },
-          {
-            "$ref": "#/components/parameters/queryLatitude"
-          },
-          {
-            "$ref": "#/components/parameters/queryLongitude"
-          },
-          {
-            "$ref": "#/components/parameters/queryNumber"
-          },
-          {
-            "$ref": "#/components/parameters/queryKilometricDistance"
-          },
-          {
-            "$ref": "#/components/parameters/queryPickupPointType"
-          },
-          {
-            "$ref": "#/components/parameters/queryPickupPointCategory"
-          },
-          {
-            "$ref": "#/components/parameters/queryStoreId"
-          },
-          {
-            "$ref": "#/components/parameters/queryPickupPointCarrierCode"
           }
         ],
+        "requestBody": {
+          "required": true,
+          "description": "Contient les informations pour la recherche de poit relais.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/postPickupPoints"
+              },
+              "examples": {
+                "Recherche simple": {
+                  "value": {
+                    "latitude": 50.6379636,
+                    "longitude": 3.077384,
+                    "number": 10,
+                    "kilometricDistance": 20
+                  }
+                },
+                "Recherche par type": {
+                  "value": {
+                    "latitude": 50.6379636,
+                    "longitude": 3.077384,
+                    "kilometricDistance": 20,
+                    "type": "PICKUP_POINT_AGENCY"
+                  }
+                },
+                "Recherche par transporteurs et type": {
+                  "value": {
+                    "latitude": 50.6379636,
+                    "longitude": 3.077384,
+                    "kilometricDistance": 20,
+                    "carrierCode": ["bpost", "chronopost"],
+                    "type": {
+                      "bpost": "PICKUP_POINT_AGENCY",
+                      "chronopost": "PICKUP_POINT_RELAY_WITH_LOCKER"
+                    }
+                  }
+                },
+                "Recherche par catégories": {
+                  "value": {
+                    "latitude": 50.6379636,
+                    "longitude": 3.077384,
+                    "kilometricDistance": 20,
+                    "carrierCode": "mondial-relay",
+                    "category": {
+                      "mondial-relay": [
+                        "24R",
+                        "24L"
+                      ]
+                    }
+                  }
+                },
+                "Recherche par transporteurs et catégories": {
+                  "value": {
+                    "latitude": 50.6379636,
+                    "longitude": 3.077384,
+                    "kilometricDistance": 20,
+                    "carrierCode": [
+                      "dpd",
+                      "mondial-relay"
+                    ],
+                    "category": {
+                      "mondial-relay": [
+                        "24R",
+                        "24L"
+                      ]
+                    }
+                  }
+                },
+                "Recherche par panier": {
+                  "value": {
+                    "latitude": 50.6379636,
+                    "longitude": 3.077384,
+                    "kilometricDistance": 20,
+                    "packages": [
+                      {
+                        "length": {
+                          "value": 15,
+                          "unit": "cm"
+                        },
+                        "width": {
+                          "value": 15,
+                          "unit": "cm"
+                        },
+                        "height": {
+                          "value": 1.2,
+                          "unit": "m"
+                        },
+                        "weight": {
+                          "value": 1,
+                          "unit": "kg"
+                        },
+                        "products": [
+                          {
+                            "type": "TYPOLOGY_GENERIC",
+                            "ean": "4dq86zd4q6zd4q64",
+                            "cug": "q56zd4q65d4q",
+                            "label": "Lampe",
+                            "quantity": 1
+                          }
+                        ],
+                        "quantity": 1
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "OK. Contient les point relais récupérés.",
@@ -1913,109 +1998,7 @@
                       "type": "array",
                       "description": "Informations sur les point relais",
                       "items": {
-                        "type": "object",
-                        "properties": {
-                          "address": {
-                            "allOf": [
-                              {
-                                "$ref": "#/components/schemas/address"
-                              },
-                              {
-                                "type": "object",
-                                "properties": {
-                                  "title": {
-                                    "type": "string"
-                                  }
-                                },
-                                "required": [
-                                  "title"
-                                ]
-                              }
-                            ],
-                            "description": "Adresse du point relais"
-                          },
-                          "coordinates": {
-                            "$ref": "#/components/schemas/coordinates"
-                          },
-                          "id": {
-                            "type": "string",
-                            "description": "Id du point relais"
-                          },
-                          "carrier": {
-                            "$ref": "#/components/schemas/pickupPointCarrier"
-                          },
-                          "externalCategory": {
-                            "type": "string",
-                            "example": "Cat1",
-                            "description": "Retourne la catégorie du point relais comme nommée chez le transporteur."
-                          },
-                          "openingHours": {
-                            "type": "object",
-                            "description": "Horaires d'ouverture du point relais",
-                            "properties": {
-                              "monday": {
-                                "type": "array",
-                                "description": "Horaires du lundi",
-                                "items": {
-                                  "$ref": "#/components/schemas/interval_hour"
-                                }
-                              },
-                              "tuesday": {
-                                "type": "array",
-                                "description": "Horaires du mardi",
-                                "items": {
-                                  "$ref": "#/components/schemas/interval_hour"
-                                }
-                              },
-                              "wednesday": {
-                                "type": "array",
-                                "description": "Horaires du mercredi",
-                                "items": {
-                                  "$ref": "#/components/schemas/interval_hour"
-                                }
-                              },
-                              "thursday": {
-                                "type": "array",
-                                "description": "Horaires du jeudi",
-                                "items": {
-                                  "$ref": "#/components/schemas/interval_hour"
-                                }
-                              },
-                              "friday": {
-                                "type": "array",
-                                "description": "Horaires du vendredi",
-                                "items": {
-                                  "$ref": "#/components/schemas/interval_hour"
-                                }
-                              },
-                              "saturday": {
-                                "type": "array",
-                                "description": "Horaires du samedi",
-                                "items": {
-                                  "$ref": "#/components/schemas/interval_hour"
-                                }
-                              },
-                              "sunday": {
-                                "type": "array",
-                                "description": "Horaires du dimanche",
-                                "items": {
-                                  "$ref": "#/components/schemas/interval_hour"
-                                }
-                              }
-                            }
-                          },
-                          "maxWeight": {
-                            "$ref": "#/components/schemas/mass"
-                          }
-                        },
-                        "required": [
-                          "address",
-                          "coordinates",
-                          "id",
-                          "carrier",
-                          "openingHours",
-                          "maxWeight"
-                        ]
+                        "$ref": "#/components/schemas/pickupPoint"
                       }
                     }
                   }
@@ -2041,7 +2024,8 @@
                             "code": "transporteur1",
                             "name": "Transporteur A"
                           },
-                          "externalMinimalCategory": "24R",
+                          "category": "XL",
+                          "type": "PICKUP_POINT_AGENCY",
                           "openingHours": {
                             "monday": [
                               {
@@ -2156,7 +2140,203 @@
             }
           }
         },
-        "summary": "Rechercher un ensemble de point-relais"
+        "summary": "Rechercher un ensemble de point relais"
+      }
+    },
+    "/pickupPoints/{pickupPointId}": {
+      "get" : {
+        "tags": [
+          "Point relais"
+        ],
+        "description": "Cette méthode permet de récupérer le détail d'un point relais par son id et le code transporteur associé",
+        "operationId": "getPickupPoint",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/components/parameters/pathPickupPointId"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "carrierCode",
+            "required": true,
+            "description": "Code du transporteur"
+          }    
+        ],
+
+         "responses": {
+          "200": {
+            "description": "OK. Contient les point relais récupérés.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Détail du points relais",
+                  "properties": {
+                    "pickupPoint": {
+                        "$ref": "#/components/schemas/pickupPoint"
+                    }
+                  }
+                },
+                "examples": {
+                  "Exemple": {
+                    "value": {
+                      "pickupPoint": {
+                          "address": {
+                            "addressLine1": "168 RUE DES POSTES",
+                            "postalCode": "59000",
+                            "city": "Lille",
+                            "country": "FR",
+                            "title": "Point relais"
+                          },
+                          "coordinates": {
+                            "latitude": 50.638386,
+                            "longitude": 3.077183
+                          },
+                          "id": "q251zd564qz",
+                          "carrier": {
+                            "code": "transporteur1",
+                            "name": "Transporteur A"
+                          },
+                          "category": "XL",
+                          "type": "PICKUP_POINT_AGENCY",
+                          "openingHours": {
+                            "monday": [
+                              {
+                                "start": "08:00",
+                                "end": "19:30"
+                              }
+                            ],
+                            "tuesday": [
+                              {
+                                "start": "08:00",
+                                "end": "19:30"
+                              }
+                            ],
+                            "wednesday": [
+                              {
+                                "start": "08:00",
+                                "end": "19:30"
+                              }
+                            ],
+                            "thursday": [
+                              {
+                                "start": "08:00",
+                                "end": "19:30"
+                              }
+                            ],
+                            "friday": [
+                              {
+                                "start": "08:00",
+                                "end": "19:30"
+                              }
+                            ],
+                            "saturday": [
+                              {
+                                "start": "08:00",
+                                "end": "16:00"
+                              }
+                            ],
+                            "sunday": [
+                              {
+                                "start": "08:00",
+                                "end": "12:00"
+                              }
+                            ]
+                          },
+                          "maxWeight": {
+                            "value": 250,
+                            "unit": "kg"
+                          }
+                        }  
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Elements manquants et/ou incorrect dans le body",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "reasons": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "example": "Missing argument 'xxxxx'"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Exemple": {
+                    "value": {
+                      "reasons": [
+                        "Missing argument 'xxxxx'"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Vous n'êtes pas autorisé à accéder à cet élément.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Vous n'êtes pas autorisé à accéder à cet élément.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "statusCode": 403,
+                      "error": "Forbidden",
+                      "message": "Store doesn't exist or is inactive"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Le 'pickupPointId' pour le code transporteur donné n'existe pas",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "statusCode": 404,
+                      "error": "Not Found",
+                      "message": "Not Found"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Détail d'un point relais"
       }
     },
     "/subscriptions": {
@@ -2610,7 +2790,7 @@
                             "type": "array",
                             "description": "Liste des catégories des point relais éligibles (pour le service SERVICE_PICKUP_POINT)",
                             "items": {
-                              "$ref": "#/components/parameters/queryPickupPointCategory"
+                              "type": "string"
                             }
                           },
                           "price": {
@@ -2660,8 +2840,8 @@
                       "eligibilities": [
                         {
                           "carrier": {
-                            "code": "bpost",
-                            "name": "Bpost"
+                            "code": "mondial-relay",
+                            "name": "Mondial Relay"
                           },
                           "service": "SERVICE_PICKUP_POINT",
                           "types": [
@@ -2672,10 +2852,9 @@
                             "PICKUP_POINT_ALL"
                           ],
                           "categories": [
-                            "PICKUP_POINT_STANDARD",
-                            "PICKUP_POINT_XL",
-                            "PICKUP_POINT_XXL",
-                            "PICKUP_POINT_DRIVE"
+                            "24R",
+                            "24L",
+                            "Drive"
                           ],
                           "price": {
                             "value": 2.99,
@@ -3598,6 +3777,75 @@
           "packages"
         ]
       },
+      "postPickupPoints": {
+        "type": "object",
+        "description": "Précise les informations pour la recherche de point relais",
+        "title": "Recherche de points relais (postPickupPoints)",
+        "required": [
+          "latitude",
+          "longitude"
+        ],
+        "properties": {
+          "latitude": {
+            "type": "number",
+            "description": "Latitude du point de recherche"
+          },
+          "longitude": {
+            "type": "number",
+            "description": "Longitude du point de recherche"
+          },
+          "number": {
+            "type": "number",
+            "description": "Longitude du point de recherche",
+            "maximum": 25,
+            "default": 10
+          },
+          "kilometricDistance": {
+            "type": "number",
+            "description": "Distance en kilomètres du rayon de recherche",
+            "maximum": 50,
+            "default": 5
+          },
+          "type": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/pickupPointType"
+              },
+              {
+                "type": "object",
+                "description": "Type de point relais par transporteur (voir documentation point relais)"
+              }
+            ]   
+          },
+          "category": {
+            "type": "object",
+            "description": "Catégorie du point relais (voir documentation point relais)"
+          },
+          "carrierCode": {
+            "oneOf": [
+              {
+                "type": "string",
+                "description": "Filtre par code du transporteur"
+              },
+              {
+                "type": "array",
+                "description": "Filtre par multiple codes transporteur"
+              }
+            ]
+          },
+          "packages": {
+            "description": "Ensemble des colis",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/packages"
+            }
+          },
+          "storeId": {
+            "type": "string",
+            "description": "Identifiant du magasin émettant la demande"
+          }
+        }
+      },
       "tags": {
         "type": "array",
         "description": "Permet de définir des \"marqueurs\" sur cette commande.",
@@ -4311,8 +4559,119 @@
         ],
         "description": "Précise le statut d'une commande."
       },
+      "pickupPoint" : {
+        "type": "object",
+          "properties": {
+            "address": {
+              "allOf": [
+                {
+                  "$ref": "#/components/schemas/address"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "title": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "title"
+                  ]
+                }
+              ],
+              "description": "Adresse du point relais"
+            },
+            "coordinates": {
+              "$ref": "#/components/schemas/coordinates"
+            },
+            "id": {
+              "type": "string",
+              "description": "Id du point relais"
+            },
+            "carrier": {
+              "$ref": "#/components/schemas/pickupPointCarrier"
+            },
+            "category": {
+              "type": "string",
+              "example": "Cat1",
+              "description": "Catégorie du point relais."
+            },
+            "type": {
+              "type": "string",
+              "example": "Cat1",
+              "description": "Type du point relais."
+            },
+            "openingHours": {
+              "type": "object",
+              "description": "Horaires d'ouverture du point relais",
+              "properties": {
+                "monday": {
+                  "type": "array",
+                  "description": "Horaires du lundi",
+                  "items": {
+                    "$ref": "#/components/schemas/interval_hour"
+                  }
+                },
+                "tuesday": {
+                  "type": "array",
+                  "description": "Horaires du mardi",
+                  "items": {
+                    "$ref": "#/components/schemas/interval_hour"
+                  }
+                },
+                "wednesday": {
+                  "type": "array",
+                  "description": "Horaires du mercredi",
+                  "items": {
+                    "$ref": "#/components/schemas/interval_hour"
+                  }
+                },
+                "thursday": {
+                  "type": "array",
+                  "description": "Horaires du jeudi",
+                  "items": {
+                    "$ref": "#/components/schemas/interval_hour"
+                  }
+                },
+                "friday": {
+                  "type": "array",
+                  "description": "Horaires du vendredi",
+                  "items": {
+                    "$ref": "#/components/schemas/interval_hour"
+                  }
+                },
+                "saturday": {
+                  "type": "array",
+                  "description": "Horaires du samedi",
+                  "items": {
+                    "$ref": "#/components/schemas/interval_hour"
+                  }
+                },
+                "sunday": {
+                  "type": "array",
+                  "description": "Horaires du dimanche",
+                  "items": {
+                    "$ref": "#/components/schemas/interval_hour"
+                  }
+                }
+              }
+            },
+            "maxWeight": {
+              "$ref": "#/components/schemas/mass"
+            }
+          },
+          "required": [
+            "address",
+            "coordinates",
+            "id",
+            "carrier",
+            "openingHours",
+            "maxWeight"
+          ]  
+      },
       "pickupPointType": {
         "title": "Type de point relais",
+        "description": "Type de point relais",
         "type": "string",
         "enum": [
           "PICKUP_POINT_AGENCY",
@@ -4321,17 +4680,7 @@
           "PICKUP_POINT_RELAY_WITHOUT_LOCKER",
           "PICKUP_POINT_ALL"
         ],
-        "default": "PICKUP_POINT_RELAY_WITH_LOCKER"
-      },
-      "pickupPointCategory": {
-        "title": "Catégorie de point relais",
-        "type": "string",
-        "enum": [
-          "PICKUP_POINT_STANDARD",
-          "PICKUP_POINT_XL",
-          "PICKUP_POINT_XXL",
-          "PICKUP_POINT_DRIVE"
-        ]
+        "default": "PICKUP_POINT_ALL"
       },
       "errorCode": {
         "title": "Code erreur (errorCode)",
@@ -4441,7 +4790,7 @@
         "required": true,
         "schema": {
           "type": "string",
-          "example": "1.4.0"
+          "example": "1.5.0"
         }
       },
       "queryDeliveryStatus": {
@@ -4504,64 +4853,6 @@
           ]
         }
       },
-      "queryLatitude": {
-        "in": "query",
-        "required": true,
-        "description": "Latitude du point de recherche",
-        "name": "latitude",
-        "schema": {
-          "type": "number"
-        }
-      },
-      "queryLongitude": {
-        "in": "query",
-        "description": "Longitude du point de recherche",
-        "required": true,
-        "name": "longitude",
-        "schema": {
-          "type": "number"
-        }
-      },
-      "queryNumber": {
-        "in": "query",
-        "required": false,
-        "description": "Nombre de points relais retournés",
-        "name": "number",
-        "schema": {
-          "type": "integer",
-          "maximum": 25,
-          "default": 10
-        }
-      },
-      "queryKilometricDistance": {
-        "in": "query",
-        "required": false,
-        "description": "Distance en kilomètres du rayon de recherche",
-        "name": "kilometricDistance",
-        "schema": {
-          "type": "integer",
-          "maximum": 40,
-          "default": 5
-        }
-      },
-      "queryPickupPointType": {
-        "in": "query",
-        "required": false,
-        "name": "type",
-        "description": "Type de point relais",
-        "schema": {
-          "$ref": "#/components/schemas/pickupPointType"
-        }
-      },
-      "queryPickupPointCategory": {
-        "in": "query",
-        "required": false,
-        "name": "category",
-        "description": "Catégorie de point relais",
-        "schema": {
-          "$ref": "#/components/schemas/pickupPointCategory"
-        }
-      },
       "pathOrderId": {
         "in": "path",
         "required": true,
@@ -4585,6 +4876,15 @@
         "required": true,
         "description": "Identifiant de la demande de prix",
         "name": "priceId",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "pathPickupPointId": {
+        "in": "path",
+        "required": true,
+        "description": "Identifiant du point relais",
+        "name": "pickupPointId",
         "schema": {
           "type": "string"
         }
