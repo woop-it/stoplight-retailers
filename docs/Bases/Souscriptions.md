@@ -125,6 +125,24 @@ Les données à envoyer sont :
               "example": "1.1.0"
             }
           }
+        },
+        "collectStatus": {
+          "type": "object",
+          "description": "Callback permettant de recevoir les changements de statut d'une collecte",
+          "required": [
+            "url"
+          ],
+          "properties": {
+            "url": {
+              "type": "string",
+              "description": "Url de la route d'API"
+            },
+            "version": {
+              "type": "string",
+              "description": "Version d'API pour ce callback",
+              "example": "1.1.0"
+            }
+          }
         }
       }
     },
@@ -235,6 +253,7 @@ status | Callback permettant de recevoir les changements de statut | [/orders/{o
 score | Callback permettant de recevoir les notes client | [/orders/{orderId}/score](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1score/put) | **OUI**
 deliveryClosure | Callback permettant de recevoir les informations de facturation | [/orders/{orderId}/deliveryClosure](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1deliveryClosure/post) | NON
 event | Callback permettant de recevoir les notifications envoyées au client | [/orders/{orderId}/events](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1events/post) | NON
+collectStatus | Callback permettant de recevoir de recevoir les changements de statut d'une collect | [/collects/{collectId}/status](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1collects~1{collectId}~1status) | NON
 
 **Description d'un callback**
 
@@ -267,7 +286,7 @@ Url de la route d'API vers laquelle la plateforme Woop enverra l’événement l
 
 > **Variable d'url**
 >
-> Pour récupérer l'orderId dans vos APIs, il est fortement conseillé d’incorporer la variable `{orderId}` dans vos urls de callbacks.
+> Pour récupérer l'orderId  ou la collectId dans vos APIs, il est fortement conseillé d’incorporer la variable `{orderId}` dans vos urls de callbacks.
 > Cette variable sera remplacée par la valeur de l'orderId lors des appels.
 >
 > Exemple: **https://my_url/orders/{orderId}/status** 
@@ -446,6 +465,10 @@ Je m'abonne à toutes les souscriptions, mon API est protégée par une authenti
       "url": "https://my_url/orders/{orderId}/events",
       "version": "1.1.0"
     },
+    "collectStatus": {
+      "url": "https://my_url/collects/{collectId}/status",
+      "version": "1.1.0"
+    },
   },
   "auth": {
     "oauth2": {
@@ -474,6 +497,7 @@ status | [/orders/{orderId}/status](https://woop.stoplight.io/docs/retailer/woop
 score |  [/orders/{orderId}/score](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1score/put) | **OUI**
 deliveryClosure | [/orders/{orderId}/deliveryClosure](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1deliveryClosure/post) | NON
 event | [/orders/{orderId}/events](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1events/post) | NON
+collectStatus | [/collects/{collectId}/status](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1collects~1{collectId}~1status) | NON
 
 
 <!-- theme: warning -->

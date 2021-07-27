@@ -8,6 +8,9 @@
   "tags": [
     {
       "name": "Commande"
+    },
+    {
+      "name": "Collecte"
     }
   ],
   "paths": {
@@ -182,7 +185,7 @@
             }
           }
         },
-        "summary": "Recevoir la notification du transporteur sélectionné pour une commande"
+        "summary": "Recevoir le nom du transporteur sélectionné pour la livraison"
       }
     },
     "/orders/{orderId}/status": {
@@ -191,7 +194,7 @@
           "Commande"
         ],
         "operationId": "putOrderStatus",
-        "description": "Cette méthode permet de recevoir les mises à jour des statuts de livraison de la part du transporteur.",
+        "description": "Cette méthode permet à l’enseigne de recevoir les mises à jour des statuts de livraison de la part du transporteur pour une commande donnée.\n\nL’enseigne pourra alors suivre en temps réel l’évolution de la livraison dans le temps. ",
         "parameters": [
           {
             "$ref": "#/components/parameters/pathOrderId"
@@ -311,7 +314,7 @@
             }
           }
         },
-        "summary": "Recevoir les notifications de mise à jour des statuts de livraison"
+        "summary": "Recevoir les mises à jour de statut de livraison"
       }
     },
     "/orders/{orderId}/score": {
@@ -444,7 +447,7 @@
             }
           }
         },
-        "summary": "Recevoir les notes transporteur pour une livraison"
+        "summary": "Recevoir les notes du transporteur pour une livraison"
       }
     },
     "/orders/{orderId}/deliveryClosure": {
@@ -745,6 +748,149 @@
           }
         },
         "summary": "Recevoir les événements pour une commande donnée"
+      }
+    },
+    "/collects/{collectId}/status": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "collectId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "put": {
+        "summary": "Recevoir les mises à jour de statut de collecte",
+        "operationId": "put-collects-collectId-status",
+        "responses": {
+          "204": {
+            "description": "Requête traitée avec succès"
+          },
+          "400": {
+            "description": "Elements manquants et/ou incorrect dans le body",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "reasons": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "L'information ne peut plus être envoyée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./retailer_to_woop.v1.4.0.json#/components/schemas/errorCode"
+                },
+                "examples": {}
+              }
+            }
+          },
+          "404": {
+            "description": "Le 'collectId' n'a pas été trouvé",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./retailer_to_woop.v1.4.0.json#/components/schemas/errorCode"
+                }
+              }
+            }
+          }
+        },
+        "description": "Cette méthode permet à l’enseigne de recevoir les informations de statut sur la commande de Click & Collect. L’enseigne pourra alors suivre en temps réel l’évolution de la collecte du client dans le temps. ",
+        "parameters": [],
+        "tags": [
+          "Collecte"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "",
+                "type": "object",
+                "properties": {
+                  "collectId": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "date": {
+                    "type": "string",
+                    "minLength": 1,
+                    "format": "date-time"
+                  },
+                  "status": {
+                    "$ref": "./retailer_to_woop.v1.4.0.json#/components/schemas/collectStatus"
+                  },
+                  "slot": {
+                    "$ref": "./retailer_to_woop.v1.4.0.json#/components/schemas/slot"
+                  },
+                  "additionalData": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/additionalData"
+                    }
+                  }
+                },
+                "required": [
+                  "collectId",
+                  "date",
+                  "status"
+                ]
+              },
+              "examples": {
+                "Créneau validé": {
+                  "value": {
+                    "collectId": "CN123456789FR59",
+                    "date": "2019-08-24T14:15:22Z",
+                    "status": "COLLECT_STARTED",
+                    "slot": {
+                      "start": "2019-05-02T15:00:00+0000",
+                      "end": "2019-05-02T15:30:00+0000"
+                    }
+                  }
+                },
+                "Créneau modifié par le client": {
+                  "value": {
+                    "collectId": "CN123456789FR59",
+                    "date": "2019-08-24T14:15:22Z",
+                    "status": "COLLECT_REPLANNED",
+                    "slot": {
+                      "start": "2019-05-02T15:00:00+0000",
+                      "end": "2019-05-02T15:30:00+0000"
+                    }
+                  }
+                },
+                "Client arrivé en magasin": {
+                  "value": {
+                    "collectId": "CN123456789FR59",
+                    "date": "2019-08-24T14:15:22Z",
+                    "status": "COLLECT_AWAITING",
+                    "slot": {
+                      "start": "2019-05-02T15:00:00+0000",
+                      "end": "2019-05-02T15:30:00+0000"
+                    },
+                    "additionalData": {
+                      "key": "space",
+                      "value": "A32"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "description": "Contient les informations du changement de statut."
+        }
       }
     }
   },
@@ -1113,7 +1259,10 @@
             "$ref": "#/components/schemas/team"
           },
           "additionalData": {
-            "$ref": "#/components/schemas/additionalData"
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/additionalData"
+            }
           },
           "appointment": {
             "$ref": "#/components/schemas/appointment"
@@ -1149,7 +1298,14 @@
           "date",
           "status"
         ],
-        "description": "Mise à jour du statut de la commande."
+        "description": "Mise à jour du statut de la commande.",
+        "x-examples": {
+          "example": {
+            "orderId": "string",
+            "date": "string",
+            "status": "ORDER_CREATED"
+          }
+        }
       },
       "additionalData": {
         "title": "Données additionnelles (additionalData)",
