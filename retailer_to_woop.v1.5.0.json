@@ -1457,7 +1457,18 @@
                           "packages": [
                             {
                               "id": "1324",
-                              "reference": "B8413DD"
+                              "reference": "B8413DD",
+                              "currentStatus": "DELIVERY_DELIVERED_OK",
+                              "products": [
+                                {
+                                  "type": "TYPOLOGY_GENERIC",
+                                  "ean": "4dq86zd4q6zd4q64",
+                                  "cug": "q56zd4q65d4q",
+                                  "label": "Lampe",
+                                  "quantity": 1
+                                }
+                              ],
+                              "quantity": 1
                             }
                           ]
                         },
@@ -1717,8 +1728,19 @@
                           },
                           "packages": [
                             {
-                              "id": "999",
-                              "reference": "A123"
+                              "id": "1324",
+                              "reference": "B8413DD",
+                              "currentStatus": "DELIVERY_DELIVERED_OK",
+                              "products": [
+                                {
+                                  "type": "TYPOLOGY_GENERIC",
+                                  "ean": "4dq86zd4q6zd4q64",
+                                  "cug": "q56zd4q65d4q",
+                                  "label": "Lampe",
+                                  "quantity": 1
+                                }
+                              ],
+                              "quantity": 1
                             }
                           ]
                         }
@@ -4074,6 +4096,16 @@
                       "reference": {
                         "type": "string",
                         "description": "Référence du colis"
+                      },
+                      "currentStatus": {
+                        "$ref": "#/components/schemas/deliveryStatus"
+                      },
+                      "products": {
+                        "type": "array",
+                        "description": "List des produits dans le colis",
+                        "items": {
+                          "$ref": "#/components/schemas/product"
+                        }
                       }
                     }
                   }
@@ -5035,6 +5067,34 @@
         },
         "title": "Services de livraison (services)"
       },
+      "product": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/productType"
+          },
+          "ean": {
+            "type": "string",
+            "description": "Ean du produit"
+          },
+          "cug": {
+            "type": "string",
+            "description": "Cug du produit"
+          },
+          "label": {
+            "type": "string",
+            "description": "Description du produit"
+          },
+          "quantity": {
+            "type": "integer",
+            "default": 1,
+            "description": "Quantité du produit"
+          }
+        },
+        "required": [
+          "type"
+        ]
+      },
       "packages": {
         "description": "Précise les informations utiles à l'édition d'un colis. L'unité de manutention est à définir avec la structure colis/produit. ",
         "type": "object",
@@ -5092,32 +5152,7 @@
             "type": "array",
             "description": "List des produits dans le colis",
             "items": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "$ref": "#/components/schemas/productType"
-                },
-                "ean": {
-                  "type": "string",
-                  "description": "Ean du produit"
-                },
-                "cug": {
-                  "type": "string",
-                  "description": "Cug du produit"
-                },
-                "label": {
-                  "type": "string",
-                  "description": "Description du produit"
-                },
-                "quantity": {
-                  "type": "integer",
-                  "default": 1,
-                  "description": "Quantité du produit"
-                }
-              },
-              "required": [
-                "type"
-              ]
+              "$ref": "#/components/schemas/product"
             }
           },
           "quantity": {
