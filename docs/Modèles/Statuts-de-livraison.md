@@ -29,9 +29,10 @@ Statut | Intitulé
  `DELIVERY_DELAYED`|Livraison retardée 
  `DELIVERY_AVAILABLE`|Livraison disponible en point de retrait
  `DELIVERY_REPLANNED`|Date de livraison replannifiée par une prise de RDV avec le client
+ `DELIVERY_CLOSED`|Livraison clôturée à la demande de l'enseigne 
 
 Les statuts `DELIVERY_PICK_UP_PARTIALLY` et `DELIVERY_DELIVERED_PARTIALLY` sont réservés à la livraison et ne sont pas autorisés pour le suivi de colis.
- 
+
 ### Gestion des retours et des erreurs
 
 ![get-started-icon](../../assets/images/Workflow_retours_livraison.png)
