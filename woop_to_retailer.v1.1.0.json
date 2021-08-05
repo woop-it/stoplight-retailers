@@ -83,6 +83,7 @@
                     },
                     "carrier": {
                       "name": "Transporteur A",
+                      "code": "transporteur-a",
                       "contact": {
                         "firstName": "Michel",
                         "lastName": "Dupont",
@@ -1448,6 +1449,7 @@
         "x-examples": {
           "Exemple": {
             "name": "Bpost",
+            "code": "bpost",
             "contact": {
               "firstName": "John",
               "lastName": "Doe",
@@ -1481,6 +1483,10 @@
             "type": "string",
             "description": "Nom du transporteur"
           },
+          "code": {
+            "type": "string",
+            "description": "Code du transporteur"
+          },
           "contact": {
             "$ref": "#/components/schemas/contact"
           },
@@ -1490,6 +1496,7 @@
         },
         "required": [
           "name",
+          "code",
           "contact",
           "specifications"
         ]
