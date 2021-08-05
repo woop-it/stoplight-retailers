@@ -9,6 +9,7 @@ tags: ['Bases']
 Toutes les dates utilisées dans l'API sont au format **ISO 8601**.
 
 **En entrée de l'API** il faut utiliser les dates avec l'information de timezone ou en UTC.
+Si la timezone n'est pas envoyée, la date sera considérée comme étant en UTC.
 
 *Exemple : `2020-09-20T09:00:00+02:00` ou `2020-09-20T07:00:00Z`*
 
