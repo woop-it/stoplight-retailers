@@ -36,16 +36,16 @@
   },
   "servers": [
     {
-      "url": "https://ret-api.recette.gcp.last-mile.fr",
-      "description": "URL de recette"
+      "url": "https://retailer.last-mile.fr",
+      "description": "URL de prod"
     },
     {
       "url": "https://ret-api.preprod.gcp.last-mile.fr",
       "description": "URL de preprod"
     },
     {
-      "url": "https://retailer.last-mile.fr",
-      "description": "URL de prod"
+      "description": "URL de recette",
+      "url": "https://ret-api.recette.gcp.last-mile.fr"
     }
   ],
   "paths": {
@@ -2492,7 +2492,10 @@
                     "latitude": 50.6379636,
                     "longitude": 3.077384,
                     "kilometricDistance": 20,
-                    "carrierCode": ["bpost", "chronopost"],
+                    "carrierCode": [
+                      "bpost",
+                      "chronopost"
+                    ],
                     "type": {
                       "bpost": "PICKUP_POINT_AGENCY",
                       "chronopost": "PICKUP_POINT_RELAY_WITH_LOCKER"
@@ -2729,7 +2732,7 @@
       }
     },
     "/pickupPoints/{pickupPointId}": {
-      "get" : {
+      "get": {
         "tags": [
           "Point relais"
         ],
@@ -2750,10 +2753,9 @@
             "name": "carrierCode",
             "required": true,
             "description": "Code du transporteur"
-          }    
+          }
         ],
-
-         "responses": {
+        "responses": {
           "200": {
             "description": "OK. Contient les point relais récupérés.",
             "content": {
@@ -2763,7 +2765,7 @@
                   "description": "Détail du points relais",
                   "properties": {
                     "pickupPoint": {
-                        "$ref": "#/components/schemas/pickupPoint"
+                      "$ref": "#/components/schemas/pickupPoint"
                     }
                   }
                 },
@@ -2771,73 +2773,73 @@
                   "Exemple": {
                     "value": {
                       "pickupPoint": {
-                          "address": {
-                            "addressLine1": "168 RUE DES POSTES",
-                            "postalCode": "59000",
-                            "city": "Lille",
-                            "country": "FR",
-                            "title": "Point relais"
-                          },
-                          "coordinates": {
-                            "latitude": 50.638386,
-                            "longitude": 3.077183
-                          },
-                          "id": "q251zd564qz",
-                          "carrier": {
-                            "code": "transporteur1",
-                            "name": "Transporteur A"
-                          },
-                          "category": "XL",
-                          "type": "PICKUP_POINT_AGENCY",
-                          "openingHours": {
-                            "monday": [
-                              {
-                                "start": "08:00",
-                                "end": "19:30"
-                              }
-                            ],
-                            "tuesday": [
-                              {
-                                "start": "08:00",
-                                "end": "19:30"
-                              }
-                            ],
-                            "wednesday": [
-                              {
-                                "start": "08:00",
-                                "end": "19:30"
-                              }
-                            ],
-                            "thursday": [
-                              {
-                                "start": "08:00",
-                                "end": "19:30"
-                              }
-                            ],
-                            "friday": [
-                              {
-                                "start": "08:00",
-                                "end": "19:30"
-                              }
-                            ],
-                            "saturday": [
-                              {
-                                "start": "08:00",
-                                "end": "16:00"
-                              }
-                            ],
-                            "sunday": [
-                              {
-                                "start": "08:00",
-                                "end": "12:00"
-                              }
-                            ]
-                          },
-                          "maxWeight": {
-                            "value": 250,
-                            "unit": "kg"
-                          }
-                        }  
+                        "address": {
+                          "addressLine1": "168 RUE DES POSTES",
+                          "postalCode": "59000",
+                          "city": "Lille",
+                          "country": "FR",
+                          "title": "Point relais"
+                        },
+                        "coordinates": {
+                          "latitude": 50.638386,
+                          "longitude": 3.077183
+                        },
+                        "id": "q251zd564qz",
+                        "carrier": {
+                          "code": "transporteur1",
+                          "name": "Transporteur A"
+                        },
+                        "category": "XL",
+                        "type": "PICKUP_POINT_AGENCY",
+                        "openingHours": {
+                          "monday": [
+                            {
+                              "start": "08:00",
+                              "end": "19:30"
+                            }
+                          ],
+                          "tuesday": [
+                            {
+                              "start": "08:00",
+                              "end": "19:30"
+                            }
+                          ],
+                          "wednesday": [
+                            {
+                              "start": "08:00",
+                              "end": "19:30"
+                            }
+                          ],
+                          "thursday": [
+                            {
+                              "start": "08:00",
+                              "end": "19:30"
+                            }
+                          ],
+                          "friday": [
+                            {
+                              "start": "08:00",
+                              "end": "19:30"
+                            }
+                          ],
+                          "saturday": [
+                            {
+                              "start": "08:00",
+                              "end": "16:00"
+                            }
+                          ],
+                          "sunday": [
+                            {
+                              "start": "08:00",
+                              "end": "12:00"
+                            }
+                          ]
+                        },
+                        "maxWeight": {
+                          "value": 250,
+                          "unit": "kg"
+                        }
+                      }
                     }
                   }
                 }
@@ -4364,106 +4366,6 @@
         "type": "object",
         "description": "Précise les informations utiles pour la création de la commande.",
         "title": "Création de la commande (postOrders)",
-        "properties": {
-          "orderId": {
-            "type": "string",
-            "description": "Identifiant unique de la commande (maximum 36 charactères)",
-            "maxLength": 36
-          },
-          "referenceNumber": {
-            "type": "string",
-            "description": "Référence de la commande, numéro associé à un magasin. Pouvant être égal à l’orderId."
-          },
-          "storeId": {
-            "type": "string",
-            "description": "Identifiant du magasin émettant la demande"
-          },
-          "picking": {
-            "description": "Informations de l'emplacement de prélèvement",
-            "type": "object",
-            "required": [
-              "location",
-              "interval",
-              "contact"
-            ],
-            "properties": {
-              "location": {
-                "$ref": "#/components/schemas/location"
-              },
-              "infos": {
-                "type": "string",
-                "description": "Commentaire libre"
-              },
-              "interval": {
-                "type": "array",
-                "description": "Créneaux de prélèvement",
-                "items": {
-                  "$ref": "#/components/schemas/interval"
-                }
-              },
-              "contact": {
-                "$ref": "#/components/schemas/contact"
-              }
-            }
-          },
-          "delivery": {
-            "description": "Informations de l'emplacement de livraison",
-            "type": "object",
-            "required": [
-              "location",
-              "interval",
-              "contact"
-            ],
-            "properties": {
-              "location": {
-                "$ref": "#/components/schemas/location"
-              },
-              "infos": {
-                "type": "string",
-                "description": "Commentaire libre"
-              },
-              "interval": {
-                "type": "array",
-                "description": "Créneaux de livraison",
-                "items": {
-                  "$ref": "#/components/schemas/interval"
-                }
-              },
-              "contact": {
-                "$ref": "#/components/schemas/contactDelivery"
-              }
-            }
-          },
-          "numberOfPackages": {
-            "description": "Ce champ est à utiliser si vous souhaitez n'envoyer qu'un colis mais diviser son poids par X NumberOfPackage. La plateforme LMMP va regarder l'info NumberOfPackage puis calculer le nombre de package non générique. Puis va soustraire ce nombre au NumberOfPackage pour diviser le package contenant la marchandse générique par le résultat. ATTENTION : ce champ est spécifique à un besoin Décathlon, merci de ne pas en tenir compte pour le MVP si vous n'êtes pas ce retailer ",
-            "type": "integer",
-            "deprecated": true
-          },
-          "packages": {
-            "description": "Ensemble des colis",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/packages"
-            }
-          },
-          "services": {
-            "$ref": "#/components/schemas/services"
-          },
-          "productsPrice": {
-            "$ref": "#/components/schemas/productsPrice"
-          },
-          "tags": {
-            "$ref": "#/components/schemas/tags"
-          }
-        },
-        "required": [
-          "orderId",
-          "storeId",
-          "picking",
-          "delivery",
-          "packages",
-          "services"
-        ],
         "x-examples": {
           "example-1": {
             "orderId": "string",
@@ -4577,7 +4479,109 @@
               }
             ]
           }
-        }
+        },
+        "properties": {
+          "orderId": {
+            "type": "string",
+            "description": "Identifiant unique de la commande (maximum 36 charactères)",
+            "maxLength": 36
+          },
+          "referenceNumber": {
+            "type": "string",
+            "description": "Référence de la commande, numéro associé à un magasin. Pouvant être égal à l’orderId."
+          },
+          "storeId": {
+            "type": "string",
+            "description": "Identifiant du magasin émettant la demande"
+          },
+          "picking": {
+            "description": "Informations de l'emplacement de prélèvement",
+            "type": "object",
+            "required": [
+              "location",
+              "interval",
+              "contact"
+            ],
+            "properties": {
+              "location": {
+                "$ref": "#/components/schemas/location"
+              },
+              "infos": {
+                "type": "string",
+                "description": "Déprécié - Utiliser \"picking.location.comment\"",
+                "deprecated": true
+              },
+              "interval": {
+                "type": "array",
+                "description": "Créneaux de prélèvement",
+                "items": {
+                  "$ref": "#/components/schemas/interval"
+                }
+              },
+              "contact": {
+                "$ref": "#/components/schemas/contact"
+              }
+            }
+          },
+          "delivery": {
+            "description": "Informations de l'emplacement de livraison",
+            "type": "object",
+            "required": [
+              "location",
+              "interval",
+              "contact"
+            ],
+            "properties": {
+              "location": {
+                "$ref": "#/components/schemas/location"
+              },
+              "infos": {
+                "type": "string",
+                "description": "Déprécié - Utiliser \"delivery.location.comment\"",
+                "deprecated": true
+              },
+              "interval": {
+                "type": "array",
+                "description": "Créneaux de livraison",
+                "items": {
+                  "$ref": "#/components/schemas/interval"
+                }
+              },
+              "contact": {
+                "$ref": "#/components/schemas/contactDelivery"
+              }
+            }
+          },
+          "numberOfPackages": {
+            "description": "Ce champ est à utiliser si vous souhaitez n'envoyer qu'un colis mais diviser son poids par X NumberOfPackage. La plateforme LMMP va regarder l'info NumberOfPackage puis calculer le nombre de package non générique. Puis va soustraire ce nombre au NumberOfPackage pour diviser le package contenant la marchandse générique par le résultat. ATTENTION : ce champ est spécifique à un besoin Décathlon, merci de ne pas en tenir compte pour le MVP si vous n'êtes pas ce retailer ",
+            "type": "integer",
+            "deprecated": true
+          },
+          "packages": {
+            "description": "Ensemble des colis",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/packages"
+            }
+          },
+          "services": {
+            "$ref": "#/components/schemas/services"
+          },
+          "productsPrice": {
+            "$ref": "#/components/schemas/productsPrice"
+          },
+          "tags": {
+            "$ref": "#/components/schemas/tags"
+          }
+        },
+        "required": [
+          "orderId",
+          "storeId",
+          "picking",
+          "delivery",
+          "packages",
+          "services"
+        ]
       },
       "postProductReturn": {
         "type": "object",
@@ -4712,7 +4716,7 @@
                 "type": "object",
                 "description": "Type de point relais par transporteur (voir documentation point relais)"
               }
-            ]   
+            ]
           },
           "category": {
             "type": "object",
@@ -5519,115 +5523,115 @@
         ],
         "description": "Précise le statut d'une commande."
       },
-      "pickupPoint" : {
+      "pickupPoint": {
         "type": "object",
-          "properties": {
-            "address": {
-              "allOf": [
-                {
-                  "$ref": "#/components/schemas/address"
+        "properties": {
+          "address": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/address"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string"
+                  }
                 },
-                {
-                  "type": "object",
-                  "properties": {
-                    "title": {
-                      "type": "string"
-                    }
-                  },
-                  "required": [
-                    "title"
-                  ]
+                "required": [
+                  "title"
+                ]
+              }
+            ],
+            "description": "Adresse du point relais"
+          },
+          "coordinates": {
+            "$ref": "#/components/schemas/coordinates"
+          },
+          "id": {
+            "type": "string",
+            "description": "Id du point relais"
+          },
+          "carrier": {
+            "$ref": "#/components/schemas/pickupPointCarrier"
+          },
+          "category": {
+            "type": "string",
+            "example": "Cat1",
+            "description": "Catégorie du point relais."
+          },
+          "type": {
+            "type": "string",
+            "example": "Cat1",
+            "description": "Type du point relais."
+          },
+          "openingHours": {
+            "type": "object",
+            "description": "Horaires d'ouverture du point relais",
+            "properties": {
+              "monday": {
+                "type": "array",
+                "description": "Horaires du lundi",
+                "items": {
+                  "$ref": "#/components/schemas/interval_hour"
                 }
-              ],
-              "description": "Adresse du point relais"
-            },
-            "coordinates": {
-              "$ref": "#/components/schemas/coordinates"
-            },
-            "id": {
-              "type": "string",
-              "description": "Id du point relais"
-            },
-            "carrier": {
-              "$ref": "#/components/schemas/pickupPointCarrier"
-            },
-            "category": {
-              "type": "string",
-              "example": "Cat1",
-              "description": "Catégorie du point relais."
-            },
-            "type": {
-              "type": "string",
-              "example": "Cat1",
-              "description": "Type du point relais."
-            },
-            "openingHours": {
-              "type": "object",
-              "description": "Horaires d'ouverture du point relais",
-              "properties": {
-                "monday": {
-                  "type": "array",
-                  "description": "Horaires du lundi",
-                  "items": {
-                    "$ref": "#/components/schemas/interval_hour"
-                  }
-                },
-                "tuesday": {
-                  "type": "array",
-                  "description": "Horaires du mardi",
-                  "items": {
-                    "$ref": "#/components/schemas/interval_hour"
-                  }
-                },
-                "wednesday": {
-                  "type": "array",
-                  "description": "Horaires du mercredi",
-                  "items": {
-                    "$ref": "#/components/schemas/interval_hour"
-                  }
-                },
-                "thursday": {
-                  "type": "array",
-                  "description": "Horaires du jeudi",
-                  "items": {
-                    "$ref": "#/components/schemas/interval_hour"
-                  }
-                },
-                "friday": {
-                  "type": "array",
-                  "description": "Horaires du vendredi",
-                  "items": {
-                    "$ref": "#/components/schemas/interval_hour"
-                  }
-                },
-                "saturday": {
-                  "type": "array",
-                  "description": "Horaires du samedi",
-                  "items": {
-                    "$ref": "#/components/schemas/interval_hour"
-                  }
-                },
-                "sunday": {
-                  "type": "array",
-                  "description": "Horaires du dimanche",
-                  "items": {
-                    "$ref": "#/components/schemas/interval_hour"
-                  }
+              },
+              "tuesday": {
+                "type": "array",
+                "description": "Horaires du mardi",
+                "items": {
+                  "$ref": "#/components/schemas/interval_hour"
+                }
+              },
+              "wednesday": {
+                "type": "array",
+                "description": "Horaires du mercredi",
+                "items": {
+                  "$ref": "#/components/schemas/interval_hour"
+                }
+              },
+              "thursday": {
+                "type": "array",
+                "description": "Horaires du jeudi",
+                "items": {
+                  "$ref": "#/components/schemas/interval_hour"
+                }
+              },
+              "friday": {
+                "type": "array",
+                "description": "Horaires du vendredi",
+                "items": {
+                  "$ref": "#/components/schemas/interval_hour"
+                }
+              },
+              "saturday": {
+                "type": "array",
+                "description": "Horaires du samedi",
+                "items": {
+                  "$ref": "#/components/schemas/interval_hour"
+                }
+              },
+              "sunday": {
+                "type": "array",
+                "description": "Horaires du dimanche",
+                "items": {
+                  "$ref": "#/components/schemas/interval_hour"
                 }
               }
-            },
-            "maxWeight": {
-              "$ref": "#/components/schemas/mass"
             }
           },
-          "required": [
-            "address",
-            "coordinates",
-            "id",
-            "carrier",
-            "openingHours",
-            "maxWeight"
-          ]  
+          "maxWeight": {
+            "$ref": "#/components/schemas/mass"
+          }
+        },
+        "required": [
+          "address",
+          "coordinates",
+          "id",
+          "carrier",
+          "openingHours",
+          "maxWeight"
+        ]
       },
       "pickupPointType": {
         "title": "Type de point relais",
