@@ -2548,6 +2548,14 @@
                     }
                   }
                 },
+                "Recherche avec date de dépot du colis": {
+                  "value": {
+                    "latitude": 50.6379636,
+                    "longitude": 3.077384,
+                    "kilometricDistance": 50,
+                    "depositDate": "2021-09-30"
+                  }
+                },
                 "Recherche par panier": {
                   "value": {
                     "latitude": 50.6379636,
@@ -2673,6 +2681,7 @@
                               }
                             ]
                           },
+                          "closingDates": ["2022-12-26", "2022-12-27", "2022-12-27"],
                           "maxWeight": {
                             "value": 250,
                             "unit": "kg"
@@ -4882,6 +4891,11 @@
               }
             ]
           },
+          "depositDate": {
+            "type": "string",
+            "format": "date",
+            "description": "Date estimée du dépot du colis dans le point relais (voir documentation point relais)"
+          },
           "packages": {
             "description": "Ensemble des colis",
             "type": "array",
@@ -5767,6 +5781,14 @@
                 }
               }
             }
+          },
+          "closingDates": {
+             "type": "array",
+             "description": "Liste de dates de fermeture temporaire du point relais",
+             "items": {
+               "type": "string",
+               "format": "date"
+             }
           },
           "maxWeight": {
             "$ref": "#/components/schemas/mass"
