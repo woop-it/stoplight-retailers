@@ -2,12 +2,15 @@
   "openapi": "3.0.2",
   "info": {
     "title": "Woop vers Enseigne",
-    "description": "Pour commencer, toutes les informations technique concernant les API Woop à destination des enseignes sont centralisées dans cette documentation. Pour toute question ou précision, merci de contacter l'équipe technique interne. \n\nPour utiliser les API \"Woop vers Enseigne\", vous devez vous munir des vos accès identifiants secret fournis lors de la création de votre compte enseigne au sein de la palteforme. \n\nLa version actuellement proposée dans la documentation est la <b>Version 1.1.0</b>",
+    "description": "Pour commencer, toutes les informations technique concernant les API Woop à destination des enseignes sont centralisées dans cette documentation. Pour toute question ou précision, merci de contacter l'équipe technique interne. \n\nPour utiliser les API \"Woop vers Enseigne\", vous devez vous munir des vos accès identifiants secret fournis lors de la création de votre compte enseigne au sein de la palteforme. \n\nLa version actuellement proposée dans la documentation est la <b>Version 1.4.0</b>",
     "version": "1.1.1"
   },
   "tags": [
     {
       "name": "Commande"
+    },
+    {
+      "name": "Collecte"
     }
   ],
   "paths": {
@@ -17,7 +20,7 @@
           "Commande"
         ],
         "operationId": "putOrderCarrier",
-        "description": "Cette méthode permet de recevoir la notification du transporteur sélectionné pour une commande donnée. Lorsque le choix du transporteur assurant la livraison de la commande est établi, l'information est envoyée. ",
+        "description": "Cette méthode permet de recevoir le nom du transporteur sélectionné pour une commande donnée. \n\nLorsque le choix du transporteur assurant la livraison de la commande est établi, l'information est envoyée. ",
         "parameters": [
           {
             "$ref": "#/components/parameters/pathOrderId"
@@ -80,6 +83,7 @@
                     },
                     "carrier": {
                       "name": "Transporteur A",
+                      "code": "transporteur-a",
                       "contact": {
                         "firstName": "Michel",
                         "lastName": "Dupont",
@@ -182,7 +186,7 @@
             }
           }
         },
-        "summary": "Recevoir la notification du transporteur sélectionné pour une commande"
+        "summary": "Recevoir le nom du transporteur sélectionné pour une commande"
       }
     },
     "/orders/{orderId}/status": {
@@ -191,7 +195,7 @@
           "Commande"
         ],
         "operationId": "putOrderStatus",
-        "description": "Cette méthode permet de recevoir les statuts de livraison provenant du transporteur.",
+        "description": "Cette méthode permet à l’enseigne de recevoir les mises à jour des statuts de livraison de la part du transporteur pour une commande donnée.  \n\nL’enseigne pourra alors suivre en temps réel l’évolution de la livraison dans le temps. ",
         "parameters": [
           {
             "$ref": "#/components/parameters/pathOrderId"
@@ -311,7 +315,7 @@
             }
           }
         },
-        "summary": "Recevoir les notifications de mise à jour des statuts de livraison"
+        "summary": "Recevoir les mises à jour de statut de livraison"
       }
     },
     "/orders/{orderId}/score": {
@@ -320,7 +324,7 @@
           "Commande"
         ],
         "operationId": "putOrderScore",
-        "description": "Cette méthode permet de recevoir la note finale de la livraison effectuée.",
+        "description": "Cette méthode permet de recevoir les retours client suite à la livraison.",
         "parameters": [
           {
             "$ref": "#/components/parameters/pathOrderId"
@@ -346,8 +350,11 @@
                     }
                   },
                   "comment": {
-                    "type": "string",
-                    "description": "Commentaire libre"
+                    "type": "array",
+                    "description": "Commentaires clients",
+                    "items": {
+                      "$ref": "#/components/schemas/scoreComment"
+                    }
                   }
                 },
                 "required": [
@@ -363,10 +370,16 @@
                     "score": [
                       {
                         "note": 9,
-                        "type": "SCORE_TYPE_SATISFACTION"
+                        "type": "SCORE_TYPE_SATISFACTION",
+                        "includedInCarrierScore": true
                       }
                     ],
-                    "comment": "J'ai été très satisfaite de ma livraison !"
+                    "comment": [
+                      {
+                        "answer": "Non, livraison correcte.",
+                        "question": "Avez-vous des suggestions à nous partager afin de nous aider à améliorer notre service de livraison ?"
+                      }
+                    ]
                   }
                 }
               }
@@ -444,7 +457,7 @@
             }
           }
         },
-        "summary": "Recevoir les notes transporteur pour une livraison"
+        "summary": "Recevoir les notes du transporteur pour une livraison"
       }
     },
     "/orders/{orderId}/deliveryClosure": {
@@ -590,7 +603,7 @@
           "Commande"
         ],
         "operationId": "postOrderEvents",
-        "description": "Cette méthode permet de recevoir les évènements liés à une commande.",
+        "description": "Cette méthode permet de recevoir les évènements liés à une commande. Toutes les notifications envoyées au client seront transmises à l'enseigne: Raisons d'échec, date d'envoi et contenu de la notification. \n\n",
         "parameters": [
           {
             "$ref": "#/components/parameters/pathOrderId"
@@ -995,6 +1008,149 @@
           "Commande"
         ]
       }
+    },
+    "/collects/{collectId}/status": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "collectId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "put": {
+        "summary": "Recevoir les mises à jour de statut de collecte",
+        "operationId": "put-collects-collectId-status",
+        "responses": {
+          "204": {
+            "description": "Requête traitée avec succès"
+          },
+          "400": {
+            "description": "Elements manquants et/ou incorrect dans le body",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "reasons": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "L'information ne peut plus être envoyée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./retailer_to_woop.v1.4.0.json#/components/schemas/errorCode"
+                },
+                "examples": {}
+              }
+            }
+          },
+          "404": {
+            "description": "Le 'collectId' n'a pas été trouvé",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./retailer_to_woop.v1.4.0.json#/components/schemas/errorCode"
+                }
+              }
+            }
+          }
+        },
+        "description": "Cette méthode permet à l’enseigne de recevoir les informations de statut sur la commande de Click & Collect. L’enseigne pourra alors suivre en temps réel l’évolution de la collecte du client dans le temps. ",
+        "parameters": [],
+        "tags": [
+          "Collecte"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "",
+                "type": "object",
+                "properties": {
+                  "collectId": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "date": {
+                    "type": "string",
+                    "minLength": 1,
+                    "format": "date-time"
+                  },
+                  "status": {
+                    "$ref": "./retailer_to_woop.v1.4.0.json#/components/schemas/collectStatus"
+                  },
+                  "slot": {
+                    "$ref": "./retailer_to_woop.v1.4.0.json#/components/schemas/slot"
+                  },
+                  "additionalData": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/additionalData"
+                    }
+                  }
+                },
+                "required": [
+                  "collectId",
+                  "date",
+                  "status"
+                ]
+              },
+              "examples": {
+                "Créneau validé": {
+                  "value": {
+                    "collectId": "CN123456789FR59",
+                    "date": "2019-08-24T14:15:22Z",
+                    "status": "COLLECT_STARTED",
+                    "slot": {
+                      "start": "2019-05-02T15:00:00+0000",
+                      "end": "2019-05-02T15:30:00+0000"
+                    }
+                  }
+                },
+                "Créneau modifié par le client": {
+                  "value": {
+                    "collectId": "CN123456789FR59",
+                    "date": "2019-08-24T14:15:22Z",
+                    "status": "COLLECT_REPLANNED",
+                    "slot": {
+                      "start": "2019-05-02T15:00:00+0000",
+                      "end": "2019-05-02T15:30:00+0000"
+                    }
+                  }
+                },
+                "Client arrivé en magasin": {
+                  "value": {
+                    "collectId": "CN123456789FR59",
+                    "date": "2019-08-24T14:15:22Z",
+                    "status": "COLLECT_AWAITING",
+                    "slot": {
+                      "start": "2019-05-02T15:00:00+0000",
+                      "end": "2019-05-02T15:30:00+0000"
+                    },
+                    "additionalData": {
+                      "key": "space",
+                      "value": "A32"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "description": "Contient les informations du changement de statut."
+        }
+      }
     }
   },
   "components": {
@@ -1005,10 +1161,11 @@
         "x-examples": {
           "Exemple": {
             "note": 5,
-            "type": "SCORE_TYPE_RECOMMENDATION"
+            "type": "SCORE_TYPE_RECOMMENDATION",
+            "includedInCarrierScore": true
           }
         },
-        "description": "Précise la note obtenu de la part du client final pour la livraison effectuée. ",
+        "description": "Précise la note obtenue de la part du client final pour la livraison effectuée et si elle est inclue dans le calcul de la note transporteur. ",
         "properties": {
           "note": {
             "type": "number",
@@ -1021,11 +1178,16 @@
               "SCORE_TYPE_SATISFACTION"
             ],
             "description": "Type de note"
+          },
+          "includedInCarrierScore": {
+            "type": "boolean",
+            "description": "Inclus dans la note transporteur"
           }
         },
         "required": [
           "note",
-          "type"
+          "type",
+          "includedInCarrierScore"
         ]
       },
       "contact": {
@@ -1211,7 +1373,9 @@
           "VEHICLE_TYPE_BIKE_CARGO",
           "VEHICLE_TYPE_CAR",
           "VEHICLE_TYPE_E_CAR",
-          "VEHICLE_TYPE_UNKNOWN"
+          "VEHICLE_TYPE_UNKNOWN",
+          "VEHICLE_TYPE_GAZ_VAN_BIG",
+          "VEHICLE_TYPE_GAZ_VAN_MEDIUM"
         ],
         "title": "Type de véhicule de transport (vehicleType)",
         "x-examples": {
@@ -1287,6 +1451,7 @@
         "x-examples": {
           "Exemple": {
             "name": "Bpost",
+            "code": "bpost",
             "contact": {
               "firstName": "John",
               "lastName": "Doe",
@@ -1320,6 +1485,10 @@
             "type": "string",
             "description": "Nom du transporteur"
           },
+          "code": {
+            "type": "string",
+            "description": "Code du transporteur"
+          },
           "contact": {
             "$ref": "#/components/schemas/contact"
           },
@@ -1329,6 +1498,7 @@
         },
         "required": [
           "name",
+          "code",
           "contact",
           "specifications"
         ]
@@ -1362,7 +1532,10 @@
             "$ref": "#/components/schemas/team"
           },
           "additionalData": {
-            "$ref": "#/components/schemas/additionalData"
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/additionalData"
+            }
           },
           "appointment": {
             "$ref": "#/components/schemas/appointment"
@@ -1398,7 +1571,14 @@
           "date",
           "status"
         ],
-        "description": "Mise à jour du statut de la commande."
+        "description": "Mise à jour du statut de la commande.",
+        "x-examples": {
+          "example": {
+            "orderId": "string",
+            "date": "string",
+            "status": "ORDER_CREATED"
+          }
+        }
       },
       "additionalData": {
         "title": "Données additionnelles (additionalData)",
@@ -1685,6 +1865,31 @@
           "REFUSED_TIME_NOT_WORKED",
           "REFUSED_TOO_HEAVY",
           "REFUSED_TOO_LARGE"
+        ]
+      },
+      "scoreComment": {
+        "title": "Commentaires sur la livraison (scoreComment)",
+        "type": "object",
+        "x-examples": {
+          "Exemple": {
+            "answer": "Pas de commentaires !",
+            "question": "Avez-vous des suggestions à nous partager afin de nous aider à améliorer notre service de livraison ?"
+          }
+        },
+        "description": "Champ libre pour les commentaires clients",
+        "properties": {
+          "answer": {
+            "type": "string",
+            "description": "Réponse apportée par le client final"
+          },
+          "question": {
+            "type": "string",
+            "description": "Question posée au client final"
+          }
+        },
+        "required": [
+          "answer",
+          "question"
         ]
       }
     },

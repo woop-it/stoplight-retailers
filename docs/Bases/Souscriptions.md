@@ -15,7 +15,7 @@ Ces évènements sont décrits dans la partie **Woop vers Enseigne** de notre do
 ## Initialisation des souscriptions
 
 
-Pour vous abonner aux évènements un premier appel à **l'API [/souscriptions](https://woop.stoplight.io/docs/retailer/retailer_to_woop.v1.4.0.json/paths/paths/~1subscriptions/post)** est nécessaire.
+Pour vous abonner aux évènements un premier appel à **l'API [/souscriptions](https://woop.stoplight.io/docs/retailer/retailer_to_woop.v1.4.0.json/paths/~1subscriptions/post)** est nécessaire.
 
 Les données à envoyer sont :
 
@@ -111,42 +111,6 @@ Les données à envoyer sont :
         "event": {
           "type": "object",
           "description": "Callback permettant de recevoir les notifications envoyées au client",
-          "required": [
-            "url"
-          ],
-          "properties": {
-            "url": {
-              "type": "string",
-              "description": "Url de la route d'API"
-            },
-            "version": {
-              "type": "string",
-              "description": "Version d'API pour ce callback",
-              "example": "1.1.0"
-            }
-          }
-        },
-        "deltaCosts": {
-          "type": "object",
-          "description": "Callback permettant de recevoir les informations de deltaCost émis par le transporteur sur la commande.",
-          "required": [
-            "url"
-          ],
-          "properties": {
-            "url": {
-              "type": "string",
-              "description": "Url de la route d'API"
-            },
-            "version": {
-              "type": "string",
-              "description": "Version d'API pour ce callback",
-              "example": "1.1.0"
-            }
-          }
-        },
-        "quote": {
-          "type": "object",
-          "description": "Callback permettant de recevoir les devis des transporteurs",
           "required": [
             "url"
           ],
@@ -281,17 +245,15 @@ Les données à envoyer sont :
 
 Les `callbacks` ou autrement dit `webhooks` permettent de définir l'URL appelée pour chaque événement, différents callbacks sont disponibles **dont certains sont obligatoires** :
 
-Callback  | Contrat d'interface | Requis
----------|----------|---------
-carrier  | [/orders/{orderId}/carrier](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1carrier/put) | NON
-status | [/orders/{orderId}/status](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1status/put) | NON
-score |  [/orders/{orderId}/score](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1score/put) | NON
-deliveryClosure | [/orders/{orderId}/deliveryClosure](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1deliveryClosure/post) | NON
-event | [/orders/{orderId}/events](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1events/post) | NON
-deltaCost |  [/orders/{orderId}/deltaCost](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1deltaCosts/post) | NON
-quote | [/orders/{orderId}/quote](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1quotes/post) | NON
-collectStatus | [/orders/{orderId}/status](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1collects~1%7BcollectId%7D~1status/put) | NON
 
+Callback  | Description | Contrat d'interface | Requis
+---------|----------|---------
+carrier | Callback permettant de recevoir le choix du transporteur | [/orders/{orderId}/carrier](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1carrier/put) | **OUI**
+status | Callback permettant de recevoir les changements de statut | [/orders/{orderId}/status](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1status/put) | **OUI**
+score | Callback permettant de recevoir les notes client | [/orders/{orderId}/score](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1score/put) | **OUI**
+deliveryClosure | Callback permettant de recevoir les informations de facturation | [/orders/{orderId}/deliveryClosure](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1deliveryClosure/post) | NON
+event | Callback permettant de recevoir les notifications envoyées au client | [/orders/{orderId}/events](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1events/post) | NON
+collectStatus | Callback permettant de recevoir de recevoir les changements de statut d'une collect | [/collects/{collectId}/status](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1collects~1{collectId}~1status) | NON
 
 **Description d'un callback**
 
@@ -324,7 +286,7 @@ Url de la route d'API vers laquelle la plateforme Woop enverra l’événement l
 
 > **Variable d'url**
 >
-> Pour récupérer l'orderId dans vos APIs, il est fortement conseillé d’incorporer la variable `{orderId}` dans vos urls de callbacks.
+> Pour récupérer l'orderId  ou la collectId dans vos APIs, il est fortement conseillé d’incorporer la variable `{orderId}` dans vos urls de callbacks.
 > Cette variable sera remplacée par la valeur de l'orderId lors des appels.
 >
 > Exemple: **https://my_url/orders/{orderId}/status** 
@@ -503,6 +465,10 @@ Je m'abonne à toutes les souscriptions, mon API est protégée par une authenti
       "url": "https://my_url/orders/{orderId}/events",
       "version": "1.1.0"
     },
+    "collectStatus": {
+      "url": "https://my_url/collects/{collectId}/status",
+      "version": "1.1.0"
+    },
   },
   "auth": {
     "oauth2": {
@@ -526,14 +492,12 @@ Pour rappel :
 
 Callback  | Contrat d'interface | Requis
 ---------|----------|---------
-carrier  | [/orders/{orderId}/carrier](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1carrier/put) | NON
-status | [/orders/{orderId}/status](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1status/put) | NON
-score |  [/orders/{orderId}/score](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1score/put) | NON
+carrier  | [/orders/{orderId}/carrier](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1carrier/put) | **OUI**
+status | [/orders/{orderId}/status](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1status/put) | **OUI**
+score |  [/orders/{orderId}/score](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1score/put) | **OUI**
 deliveryClosure | [/orders/{orderId}/deliveryClosure](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1deliveryClosure/post) | NON
 event | [/orders/{orderId}/events](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1events/post) | NON
-deltaCost |  [/orders/{orderId}/deltaCost](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1deltaCosts/post) | NON
-quote | [/orders/{orderId}/quote](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1quotes/post) | NON
-collectStatus | [/orders/{orderId}/status](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1collects~1%7BcollectId%7D~1status/put) | NON
+collectStatus | [/collects/{collectId}/status](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1collects~1{collectId}~1status) | NON
 
 
 <!-- theme: warning -->
