@@ -11,7 +11,7 @@
       "name": "Document"
     },
     {
-      "name": "Collecte"
+      "name": "Retrait"
     },
     {
       "name": "Health"
@@ -31,21 +31,21 @@
   ],
   "info": {
     "title": "Enseigne vers Woop",
-    "description": "Pour commencer, toutes les informations technique concernant les API Woop à destination des enseignes sont centralisées dans cette documentation. Pour toute question ou précision, merci de contacter l'équipe technique interne. \n\nPour utiliser les API \"Enseigne vers Woop\", vous devez vous munir des vos accès identifiants secret fournis lors de la création de votre compte enseigne au sein de la palteforme. [Voir la documentation](https://woop.stoplight.io/docs/retailer/docs/Bases/Authentification.md)\n\nLa version actuellement proposée dans la documentation est la <b>Version 1.5.0</b>",
-    "version": "1.5.0"
+    "description": "Pour commencer, toutes les informations technique concernant les API Woop à destination des enseignes sont centralisées dans cette documentation. Pour toute question ou précision, merci de contacter l'équipe technique interne. \n\nPour utiliser les API \"Enseigne vers Woop\", vous devez vous munir des vos accès identifiants secret fournis lors de la création de votre compte enseigne au sein de la palteforme. \n\nLa version actuellement proposée dans la documentation est la <b>Version 1.4.0</b>",
+    "version": "1.4.0"
   },
   "servers": [
     {
-      "url": "https://retailer.last-mile.fr",
-      "description": "URL de prod"
+      "url": "https://ret-api.recette.gcp.last-mile.fr",
+      "description": "URL de recette"
     },
     {
       "url": "https://ret-api.preprod.gcp.last-mile.fr",
       "description": "URL de preprod"
     },
     {
-      "description": "URL de recette",
-      "url": "https://ret-api.recette.gcp.last-mile.fr"
+      "url": "https://retailer.last-mile.fr",
+      "description": "URL de prod"
     }
   ],
   "paths": {
@@ -68,9 +68,9 @@
     "/collects": {
       "post": {
         "tags": [
-          "Collecte"
+          "Retrait"
         ],
-        "description": "Cette méthode permet d’effectuer une demande de retrait Click&Collect dans un emplacement de prélèvement précis. Dès la demande validée et le créneau de réservation sélectionné, l’ordre de retrait sera créé instantanément.",
+        "description": "Cette méthode permet d’effectuer une demande de retrait dans un emplacement de prélèvement précis. Dès la demande validée, l’ordre de retrait sera alors créé instantanément.",
         "operationId": "postCollects",
         "parameters": [
           {
@@ -86,106 +86,14 @@
                 "$ref": "#/components/schemas/postCollects"
               },
               "examples": {
-                "Exemple mode standard (avec réservation du créneau au préalable)": {
+                "Exemple": {
                   "value": {
-                    "mode": "standard",
-                    "collectId": "CN123456789FR59",
-                    "exchangePlaceId": "DRIVE-59-001",
-                    "bookingId": "bfded21b-cbed-4256-b756-2febcea94df6",
-                    "customer": {
-                      "firstName": "Michel",
-                      "lastName": "Dupont",
-                      "phone": "+33600000000",
-                      "email": "michel.dupont@mail.fr",
-                      "language": "fr",
-                      "timezone": "Europe/Paris"
+                    "reference": "CN123456789FR59",
+                    "storeId": "MAG01",
+                    "location": {
+                      "type": "exchangePlace",
+                      "id": "DRIVE-59-001"
                     },
-                    "packages": [
-                      {
-                        "length": {
-                          "value": 15,
-                          "unit": "cm"
-                        },
-                        "width": {
-                          "value": 15,
-                          "unit": "cm"
-                        },
-                        "height": {
-                          "value": 1.2,
-                          "unit": "m"
-                        },
-                        "weight": {
-                          "value": 560,
-                          "unit": "g"
-                        },
-                        "products": [
-                          {
-                            "type": "TYPOLOGY_GENERIC",
-                            "ean": "978020137962",
-                            "cug": "123456",
-                            "label": "T-Shirt XL Jaune",
-                            "quantity": 1
-                          }
-                        ],
-                        "quantity": 1
-                      }
-                    ]
-                  }
-                },
-                "Exemple mode express (sans réservation au préalable)": {
-                  "value": {
-                    "mode": "express",
-                    "collectId": "CN123456789FR59",
-                    "exchangePlaceId": "DRIVE-59-001",
-                    "slot": {
-                      "start": "2021-03-18T14:00:00.000Z",
-                      "end": "2021-03-18T14:30:00.000Z"
-                    },
-                    "customer": {
-                      "firstName": "Michel",
-                      "lastName": "Dupont",
-                      "phone": "+33600000000",
-                      "email": "michel.dupont@mail.fr",
-                      "language": "fr",
-                      "timezone": "Europe/Paris"
-                    },
-                    "packages": [
-                      {
-                        "length": {
-                          "value": 15,
-                          "unit": "cm"
-                        },
-                        "width": {
-                          "value": 15,
-                          "unit": "cm"
-                        },
-                        "height": {
-                          "value": 1.2,
-                          "unit": "m"
-                        },
-                        "weight": {
-                          "value": 560,
-                          "unit": "g"
-                        },
-                        "products": [
-                          {
-                            "type": "TYPOLOGY_GENERIC",
-                            "ean": "978020137962",
-                            "cug": "123456",
-                            "label": "T-Shirt XL Jaune",
-                            "quantity": 1
-                          }
-                        ],
-                        "quantity": 1
-                      }
-                    ]
-                  }
-                },
-                "Exemple mode delay": {
-                  "value": {
-                    "mode": "delay",
-                    "collectId": "CN123456789FR59",
-                    "exchangePlaceId": "DRIVE-59-001",
                     "customer": {
                       "firstName": "Michel",
                       "lastName": "Dupont",
@@ -231,8 +139,28 @@
           }
         },
         "responses": {
-          "204": {
-            "description": "Création de la demande de retrait réussie"
+          "201": {
+            "description": "Création de la demande de retrait réussie",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "4f802782-bf37-4499-a50d-c7d0169c670d"
+                    }
+                  }
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "id": "4f802782-bf37-4499-a50d-c7d0169c670d"
+                    }
+                  }
+                }
+              }
+            }
           },
           "400": {
             "description": "Elements manquants et/ou incorrect dans le body",
@@ -302,498 +230,7 @@
             }
           }
         },
-        "summary": "Créer une collecte"
-      }
-    },
-    "/slots": {
-      "get": {
-        "summary": "Récupérer les créneaux disponibles",
-        "description": "Cette méthode permet de récupérer les créneaux disponibles pour une demande de retrait Click&Collect dans un emplacement de prélèvement précis.",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/apiVersion"
-          },
-          {
-            "$ref": "#/components/parameters/queryExchangePlaceIdRequired"
-          },
-          {
-            "$ref": "#/components/parameters/queryFromDateSlots"
-          },
-          {
-            "$ref": "#/components/parameters/queryToDateSlots"
-          },
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "query",
-            "name": "number",
-            "description": "Nombre de créneaux disponibles"
-          },
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "query",
-            "name": " minRemainingCapacity",
-            "description": "Capacité minimale autorisée "
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. Contient les créneaux disponibles",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "required": [
-                    "slots"
-                  ],
-                  "properties": {
-                    "slots": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/availableSlot"
-                      }
-                    }
-                  }
-                },
-                "examples": {
-                  "Exemple": {
-                    "value": {
-                      "slots": [
-                        {
-                          "start": "2021-04-20T08:00:00+0000",
-                          "end": "2021-04-20T08:30:00+0000",
-                          "remainingCapacity": 4
-                        },
-                        {
-                          "start": "2021-04-20T08:30:00+0000",
-                          "end": "2021-04-20T09:00:00+0000",
-                          "remainingCapacity": 5
-                        },
-                        {
-                          "start": "2021-04-20T09:00:00+0000",
-                          "end": "2021-04-20T09:30:00+0000",
-                          "remainingCapacity": 1
-                        },
-                        {
-                          "start": "2021-04-20T09:30:00+0000",
-                          "end": "2021-04-20T10:00:00+0000",
-                          "remainingCapacity": 2
-                        }
-                      ]
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Elements manquants et/ou incorrect dans les query parameters",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/errorCode"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Vous n'êtes pas autorisé à accéder à cet élément",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/errorCode"
-                },
-                "examples": {}
-              }
-            }
-          },
-          "403": {
-            "description": "Demande impossible pour le 'storeId' ou 'exchangePlaceId'",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/errorCode"
-                },
-                "examples": {
-                  "Exemple": {
-                    "value": {
-                      "statusCode": 403,
-                      "error": "Forbidden",
-                      "message": "Store doesn't exist or is inactive"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "operationId": "getSlots",
-        "tags": [
-          "Collecte"
-        ]
-      }
-    },
-    "/bookings": {
-      "post": {
-        "summary": "Réserver un créneau de retrait",
-        "description": "Cette méthode permet de réserver un créneau disponible pour une demande de retrait Click&Collect dans un emplacement de prélèvement précis.",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/apiVersion"
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/postCollectsBookings"
-              },
-              "examples": {
-                "Exemple": {
-                  "value": {
-                    "exchangePlaceId": "COLLECT01",
-                    "slot": {
-                      "start": "2021-04-20T08:00:00+0000",
-                      "end": "2021-04-20T08:30:00+0000"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "Requête traitée avec succès, créneau réservé",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "bookingId": {
-                      "type": "string",
-                      "description": "Identifiant de la réservation."
-                    }
-                  }
-                },
-                "examples": {
-                  "Exemple": {
-                    "value": {
-                      "bookingId": "bfded21b-cbed-4256-b756-2febcea94df6"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Elements manquants et/ou incorrect dans le body",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/errorCode"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Vous n'êtes pas autorisé à accéder à cet élément",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/errorCode"
-                },
-                "examples": {}
-              }
-            }
-          },
-          "403": {
-            "description": "Demande impossible pour cet 'exchangePlaceId'",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/errorCode"
-                },
-                "examples": {
-                  "Exemple": {
-                    "value": {
-                      "statusCode": 403,
-                      "error": "Forbidden",
-                      "message": "Store doesn't exist or is inactive"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "Le créneau est déjà réservé"
-          }
-        },
-        "operationId": "postBookings",
-        "tags": [
-          "Collecte"
-        ]
-      }
-    },
-    "/bookings/{bookingId}": {
-      "delete": {
-        "summary": "Annuler la réservation d'un créneau de retrait",
-        "description": "Cette méthode permet d'annuler la réservation d'un créneau pour une demande de retrait Click&Collect dans un emplacement de prélèvement précis.",
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "name": "bookingId",
-            "in": "path",
-            "required": true,
-            "description": "Identifiant de la réservation"
-          },
-          {
-            "$ref": "#/components/parameters/apiVersion"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Requête traitée avec succès, créneau annulé"
-          },
-          "401": {
-            "description": "Vous n'êtes pas autorisé à accéder à cet élément",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/errorCode"
-                },
-                "examples": {}
-              }
-            }
-          },
-          "403": {
-            "description": "La réservation du créaneau ne peut être annulée.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/errorCode"
-                },
-                "examples": {}
-              }
-            }
-          },
-          "404": {
-            "description": "Le 'bookingId' n'existe pas",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/errorCode"
-                },
-                "examples": {
-                  "example": {
-                    "value": {
-                      "statusCode": 404,
-                      "error": "Not Found",
-                      "message": "Not Found"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "operationId": "deleteBookings",
-        "tags": [
-          "Collecte"
-        ]
-      }
-    },
-    "/collects/{collectId}": {
-      "patch": {
-        "description": "Cette méthode permet de modifier une demande de collecte initialement créée par l’enseigne.",
-        "operationId": "patchCollects",
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "name": "collectId",
-            "in": "path",
-            "required": true,
-            "description": "Identifiant de la collecte"
-          },
-          {
-            "$ref": "#/components/parameters/apiVersion"
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "description": "Contient les informations de modification d'une demande de retrait.",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/patchCollects"
-              },
-              "examples": {
-                "Exemple modification du créneau avec réservation": {
-                  "value": {
-                    "bookingId": "bfded21b-cbed-4256-b756-2febcea94df6"
-                  }
-                },
-                "Exemple modification du créneau sans réservation": {
-                  "value": {
-                    "slot": {
-                      "start": "2021-03-18T14:00:00.000Z",
-                      "end": "2021-03-18T14:30:00.000Z"
-                    }
-                  }
-                },
-                "Exemple modification des infos utilisateur": {
-                  "value": {
-                    "customer": {
-                      "firstName": "Michel",
-                      "lastName": "Dupont",
-                      "phone": "+33600000000",
-                      "email": "michel.dupont@mail.fr",
-                      "language": "fr",
-                      "timezone": "Europe/Paris"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "204": {
-            "description": "Modification de la demande de retrait réussie"
-          },
-          "400": {
-            "description": "Elements manquants et/ou incorrect dans le body",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/errorCode"
-                },
-                "examples": {
-                  "Exemple": {
-                    "value": {
-                      "statusCode": 400,
-                      "error": "Bad Request",
-                      "message": "child \"location\" fails because [child \"addressLine1\" fails because [\"addressLine1\" is required], child \"id\" fails because [\"id\" is required]]",
-                      "validation": {
-                        "source": "payload",
-                        "keys": [
-                          "location.addressLine1",
-                          "location.id"
-                        ]
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Vous n'êtes pas autorisé à accéder à cet élément"
-          },
-          "403": {
-            "description": "La demande de retrait ne peut être modifiée"
-          },
-          "404": {
-            "description": "Le 'collectId' n'existe pas",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/errorCode"
-                },
-                "examples": {
-                  "example": {
-                    "value": {
-                      "statusCode": 404,
-                      "error": "Not Found",
-                      "message": "Not Found"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "summary": "Modifier une collecte",
-        "tags": [
-          "Collecte"
-        ]
-      },
-      "delete": {
-        "description": "Cette méthode permet d’annuler une demande de collecte initialement créée par l’enseigne.\n\nLa méthode permet de supprimer la réservation du créneau ainsi que la demande d'enlèvement auprès du magasin. \n",
-        "operationId": "deleteCollects",
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "name": "collectId",
-            "in": "path",
-            "required": true,
-            "description": "Identifiant de la collecte"
-          },
-          {
-            "$ref": "#/components/parameters/apiVersion"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Requête traitée avec succès, demande de retrait annulé"
-          },
-          "401": {
-            "description": "Vous n'êtes pas autorisé à accéder à cet élément",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/errorCode"
-                },
-                "examples": {}
-              }
-            }
-          },
-          "403": {
-            "description": "La demande de retrait ne peut être annulée",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/errorCode"
-                },
-                "examples": {}
-              }
-            }
-          },
-          "404": {
-            "description": "Le 'collectId' n'existe pas",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/errorCode"
-                },
-                "examples": {
-                  "example": {
-                    "value": {
-                      "statusCode": 404,
-                      "error": "Not Found",
-                      "message": "Not Found"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "summary": "Annuler une collecte",
-        "tags": [
-          "Collecte"
-        ]
+        "summary": "Effectuer une demande de retrait de commande"
       }
     },
     "/orders": {
@@ -1457,18 +894,7 @@
                           "packages": [
                             {
                               "id": "1324",
-                              "reference": "B8413DD",
-                              "currentStatus": "DELIVERY_DELIVERED_OK",
-                              "products": [
-                                {
-                                  "type": "TYPOLOGY_GENERIC",
-                                  "ean": "4dq86zd4q6zd4q64",
-                                  "cug": "q56zd4q65d4q",
-                                  "label": "Lampe",
-                                  "quantity": 1
-                                }
-                              ],
-                              "quantity": 1
+                              "reference": "B8413DD"
                             }
                           ]
                         },
@@ -1663,7 +1089,7 @@
             }
           },
           "409": {
-            "description": "La commande est déjà annulée ou une action est déjà en cours sur cette commande"
+            "description": "La commande est déjà annulée"
           }
         },
         "summary": "Annuler une commande"
@@ -1728,19 +1154,8 @@
                           },
                           "packages": [
                             {
-                              "id": "1324",
-                              "reference": "B8413DD",
-                              "currentStatus": "DELIVERY_DELIVERED_OK",
-                              "products": [
-                                {
-                                  "type": "TYPOLOGY_GENERIC",
-                                  "ean": "4dq86zd4q6zd4q64",
-                                  "cug": "q56zd4q65d4q",
-                                  "label": "Lampe",
-                                  "quantity": 1
-                                }
-                              ],
-                              "quantity": 1
+                              "id": "999",
+                              "reference": "A123"
                             }
                           ]
                         }
@@ -1901,9 +1316,6 @@
                 }
               }
             }
-          },
-          "409": {
-            "description": "Une action est déjà en cours sur cette commande"
           }
         },
         "summary": "Modifier une commande"
@@ -2451,129 +1863,41 @@
       }
     },
     "/pickupPoints": {
-      "post": {
+      "get": {
         "tags": [
           "Point relais"
         ],
         "description": "Cette méthode permet de récupérer la liste des point relais des transporteurs situés autour d’une géolocalisation donnée.\n\n[Voir l'explication](https://woop.stoplight.io/docs/retailer/docs/Mod%C3%A8les/Gestion-des-PR.md)",
-        "operationId": "postPickupPoints",
+        "operationId": "getPickupPoints",
         "parameters": [
           {
             "$ref": "#/components/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/components/parameters/queryLatitude"
+          },
+          {
+            "$ref": "#/components/parameters/queryLongitude"
+          },
+          {
+            "$ref": "#/components/parameters/queryNumber"
+          },
+          {
+            "$ref": "#/components/parameters/queryKilometricDistance"
+          },
+          {
+            "$ref": "#/components/parameters/queryPickupPointType"
+          },
+          {
+            "$ref": "#/components/parameters/queryPickupPointCategory"
+          },
+          {
+            "$ref": "#/components/parameters/queryStoreId"
+          },
+          {
+            "$ref": "#/components/parameters/queryPickupPointCarrierCode"
           }
         ],
-        "requestBody": {
-          "required": true,
-          "description": "Contient les informations pour la recherche de poit relais.",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/postPickupPoints"
-              },
-              "examples": {
-                "Recherche simple": {
-                  "value": {
-                    "latitude": 50.6379636,
-                    "longitude": 3.077384,
-                    "number": 10,
-                    "kilometricDistance": 20
-                  }
-                },
-                "Recherche par type": {
-                  "value": {
-                    "latitude": 50.6379636,
-                    "longitude": 3.077384,
-                    "kilometricDistance": 20,
-                    "type": "PICKUP_POINT_AGENCY"
-                  }
-                },
-                "Recherche par transporteurs et type": {
-                  "value": {
-                    "latitude": 50.6379636,
-                    "longitude": 3.077384,
-                    "kilometricDistance": 20,
-                    "carrierCode": [
-                      "bpost",
-                      "chronopost"
-                    ],
-                    "type": {
-                      "bpost": "PICKUP_POINT_AGENCY",
-                      "chronopost": "PICKUP_POINT_RELAY_WITH_LOCKER"
-                    }
-                  }
-                },
-                "Recherche par catégories": {
-                  "value": {
-                    "latitude": 50.6379636,
-                    "longitude": 3.077384,
-                    "kilometricDistance": 20,
-                    "carrierCode": "mondial-relay",
-                    "category": {
-                      "mondial-relay": [
-                        "24R",
-                        "24L"
-                      ]
-                    }
-                  }
-                },
-                "Recherche par transporteurs et catégories": {
-                  "value": {
-                    "latitude": 50.6379636,
-                    "longitude": 3.077384,
-                    "kilometricDistance": 20,
-                    "carrierCode": [
-                      "dpd",
-                      "mondial-relay"
-                    ],
-                    "category": {
-                      "mondial-relay": [
-                        "24R",
-                        "24L"
-                      ]
-                    }
-                  }
-                },
-                "Recherche par panier": {
-                  "value": {
-                    "latitude": 50.6379636,
-                    "longitude": 3.077384,
-                    "kilometricDistance": 20,
-                    "packages": [
-                      {
-                        "length": {
-                          "value": 15,
-                          "unit": "cm"
-                        },
-                        "width": {
-                          "value": 15,
-                          "unit": "cm"
-                        },
-                        "height": {
-                          "value": 1.2,
-                          "unit": "m"
-                        },
-                        "weight": {
-                          "value": 1,
-                          "unit": "kg"
-                        },
-                        "products": [
-                          {
-                            "type": "TYPOLOGY_GENERIC",
-                            "ean": "4dq86zd4q6zd4q64",
-                            "cug": "q56zd4q65d4q",
-                            "label": "Lampe",
-                            "quantity": 1
-                          }
-                        ],
-                        "quantity": 1
-                      }
-                    ]
-                  }
-                }
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "OK. Contient les point relais récupérés.",
@@ -2586,7 +1910,109 @@
                       "type": "array",
                       "description": "Informations sur les point relais",
                       "items": {
-                        "$ref": "#/components/schemas/pickupPoint"
+                        "type": "object",
+                        "properties": {
+                          "address": {
+                            "allOf": [
+                              {
+                                "$ref": "#/components/schemas/address"
+                              },
+                              {
+                                "type": "object",
+                                "properties": {
+                                  "title": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "title"
+                                ]
+                              }
+                            ],
+                            "description": "Adresse du point relais"
+                          },
+                          "coordinates": {
+                            "$ref": "#/components/schemas/coordinates"
+                          },
+                          "id": {
+                            "type": "string",
+                            "description": "Id du point relais"
+                          },
+                          "carrier": {
+                            "$ref": "#/components/schemas/pickupPointCarrier"
+                          },
+                          "externalCategory": {
+                            "type": "string",
+                            "example": "Cat1",
+                            "description": "Retourne la catégorie du point relais comme nommée chez le transporteur."
+                          },
+                          "openingHours": {
+                            "type": "object",
+                            "description": "Horaires d'ouverture du point relais",
+                            "properties": {
+                              "monday": {
+                                "type": "array",
+                                "description": "Horaires du lundi",
+                                "items": {
+                                  "$ref": "#/components/schemas/interval_hour"
+                                }
+                              },
+                              "tuesday": {
+                                "type": "array",
+                                "description": "Horaires du mardi",
+                                "items": {
+                                  "$ref": "#/components/schemas/interval_hour"
+                                }
+                              },
+                              "wednesday": {
+                                "type": "array",
+                                "description": "Horaires du mercredi",
+                                "items": {
+                                  "$ref": "#/components/schemas/interval_hour"
+                                }
+                              },
+                              "thursday": {
+                                "type": "array",
+                                "description": "Horaires du jeudi",
+                                "items": {
+                                  "$ref": "#/components/schemas/interval_hour"
+                                }
+                              },
+                              "friday": {
+                                "type": "array",
+                                "description": "Horaires du vendredi",
+                                "items": {
+                                  "$ref": "#/components/schemas/interval_hour"
+                                }
+                              },
+                              "saturday": {
+                                "type": "array",
+                                "description": "Horaires du samedi",
+                                "items": {
+                                  "$ref": "#/components/schemas/interval_hour"
+                                }
+                              },
+                              "sunday": {
+                                "type": "array",
+                                "description": "Horaires du dimanche",
+                                "items": {
+                                  "$ref": "#/components/schemas/interval_hour"
+                                }
+                              }
+                            }
+                          },
+                          "maxWeight": {
+                            "$ref": "#/components/schemas/mass"
+                          }
+                        },
+                        "required": [
+                          "address",
+                          "coordinates",
+                          "id",
+                          "carrier",
+                          "openingHours",
+                          "maxWeight"
+                        ]
                       }
                     }
                   }
@@ -2612,8 +2038,7 @@
                             "code": "transporteur1",
                             "name": "Transporteur A"
                           },
-                          "category": "XL",
-                          "type": "PICKUP_POINT_AGENCY",
+                          "externalMinimalCategory": "24R",
                           "openingHours": {
                             "monday": [
                               {
@@ -2728,202 +2153,7 @@
             }
           }
         },
-        "summary": "Rechercher un ensemble de point relais"
-      }
-    },
-    "/pickupPoints/{pickupPointId}": {
-      "get": {
-        "tags": [
-          "Point relais"
-        ],
-        "description": "Cette méthode permet de récupérer le détail d'un point relais par son id et le code transporteur associé",
-        "operationId": "getPickupPoint",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/apiVersion"
-          },
-          {
-            "$ref": "#/components/parameters/pathPickupPointId"
-          },
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "query",
-            "name": "carrierCode",
-            "required": true,
-            "description": "Code du transporteur"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. Contient les point relais récupérés.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Détail du points relais",
-                  "properties": {
-                    "pickupPoint": {
-                      "$ref": "#/components/schemas/pickupPoint"
-                    }
-                  }
-                },
-                "examples": {
-                  "Exemple": {
-                    "value": {
-                      "pickupPoint": {
-                        "address": {
-                          "addressLine1": "168 RUE DES POSTES",
-                          "postalCode": "59000",
-                          "city": "Lille",
-                          "country": "FR",
-                          "title": "Point relais"
-                        },
-                        "coordinates": {
-                          "latitude": 50.638386,
-                          "longitude": 3.077183
-                        },
-                        "id": "q251zd564qz",
-                        "carrier": {
-                          "code": "transporteur1",
-                          "name": "Transporteur A"
-                        },
-                        "category": "XL",
-                        "type": "PICKUP_POINT_AGENCY",
-                        "openingHours": {
-                          "monday": [
-                            {
-                              "start": "08:00",
-                              "end": "19:30"
-                            }
-                          ],
-                          "tuesday": [
-                            {
-                              "start": "08:00",
-                              "end": "19:30"
-                            }
-                          ],
-                          "wednesday": [
-                            {
-                              "start": "08:00",
-                              "end": "19:30"
-                            }
-                          ],
-                          "thursday": [
-                            {
-                              "start": "08:00",
-                              "end": "19:30"
-                            }
-                          ],
-                          "friday": [
-                            {
-                              "start": "08:00",
-                              "end": "19:30"
-                            }
-                          ],
-                          "saturday": [
-                            {
-                              "start": "08:00",
-                              "end": "16:00"
-                            }
-                          ],
-                          "sunday": [
-                            {
-                              "start": "08:00",
-                              "end": "12:00"
-                            }
-                          ]
-                        },
-                        "maxWeight": {
-                          "value": 250,
-                          "unit": "kg"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Elements manquants et/ou incorrect dans le body",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "reasons": {
-                      "type": "array",
-                      "items": {
-                        "type": "string",
-                        "example": "Missing argument 'xxxxx'"
-                      }
-                    }
-                  }
-                },
-                "examples": {
-                  "Exemple": {
-                    "value": {
-                      "reasons": [
-                        "Missing argument 'xxxxx'"
-                      ]
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Vous n'êtes pas autorisé à accéder à cet élément.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/errorCode"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Vous n'êtes pas autorisé à accéder à cet élément.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/errorCode"
-                },
-                "examples": {
-                  "example": {
-                    "value": {
-                      "statusCode": 403,
-                      "error": "Forbidden",
-                      "message": "Store doesn't exist or is inactive"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Le 'pickupPointId' pour le code transporteur donné n'existe pas",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/errorCode"
-                },
-                "examples": {
-                  "example": {
-                    "value": {
-                      "statusCode": 404,
-                      "error": "Not Found",
-                      "message": "Not Found"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "summary": "Détail d'un point relais"
+        "summary": "Rechercher un ensemble de point-relais"
       }
     },
     "/subscriptions": {
@@ -3079,24 +2309,6 @@
                         "required": [
                           "url"
                         ]
-                      },
-                      "collectStatus": {
-                        "type": "object",
-                        "description": "Callback permettant de recevoir les changements de statut d'une collecte",
-                        "required": [
-                          "url"
-                        ],
-                        "properties": {
-                          "url": {
-                            "type": "string",
-                            "description": "Url de la route d'API"
-                          },
-                          "version": {
-                            "type": "string",
-                            "description": "Version d'API pour ce callback",
-                            "example": "1.1.0"
-                          }
-                        }
                       }
                     }
                   },
@@ -3219,10 +2431,6 @@
                       "event": {
                         "url": "https://my_url/orders/{orderId}/event",
                         "version": "1.1.0"
-                      },
-                      "collectStatus": {
-                        "url": "https://my_url/collects/{collectId}/status",
-                        "version": "1.1.0"
                       }
                     },
                     "headers": [
@@ -3261,10 +2469,6 @@
                       "event": {
                         "url": "https://my_url/orders/{orderId}/event",
                         "version": "1.1.0"
-                      },
-                      "collectStatus": {
-                        "url": "https://my_url/collects/{collectId}/status",
-                        "version": "1.1.0"
                       }
                     },
                     "auth": {
@@ -3299,10 +2503,6 @@
                       },
                       "event": {
                         "url": "https://my_url/orders/{orderId}/event",
-                        "version": "1.1.0"
-                      },
-                      "collectStatus": {
-                        "url": "https://my_url/collects/{collectId}/status",
                         "version": "1.1.0"
                       }
                     },
@@ -3407,7 +2607,7 @@
                             "type": "array",
                             "description": "Liste des catégories des point relais éligibles (pour le service SERVICE_PICKUP_POINT)",
                             "items": {
-                              "type": "string"
+                              "$ref": "#/components/parameters/queryPickupPointCategory"
                             }
                           },
                           "price": {
@@ -3457,8 +2657,8 @@
                       "eligibilities": [
                         {
                           "carrier": {
-                            "code": "mondial-relay",
-                            "name": "Mondial Relay"
+                            "code": "bpost",
+                            "name": "Bpost"
                           },
                           "service": "SERVICE_PICKUP_POINT",
                           "types": [
@@ -3469,9 +2669,10 @@
                             "PICKUP_POINT_ALL"
                           ],
                           "categories": [
-                            "24R",
-                            "24L",
-                            "Drive"
+                            "PICKUP_POINT_STANDARD",
+                            "PICKUP_POINT_XL",
+                            "PICKUP_POINT_XXL",
+                            "PICKUP_POINT_DRIVE"
                           ],
                           "price": {
                             "value": 2.99,
@@ -3901,96 +3102,6 @@
           }
         ]
       }
-    },
-    "/collects/{collectId}/status": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "collectId",
-          "in": "path",
-          "required": true
-        }
-      ],
-      "put": {
-        "summary": "Mise à jour des statuts de la collecte",
-        "operationId": "put-collects-collectId-status",
-        "responses": {
-          "204": {
-            "description": "Requête traitée avec succès"
-          },
-          "401": {
-            "description": "Vous n'êtes pas autorisé à accéder à cet élément."
-          },
-          "403": {
-            "description": "Le statut de la collecte ne peut-être modifié"
-          },
-          "404": {
-            "description": "Le 'collectId' n'a pas été trouvé"
-          }
-        },
-        "parameters": [
-          {
-            "schema": {
-              "type": "string",
-              "example": "1.4.0"
-            },
-            "in": "header",
-            "name": "x-api-version"
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "description": "",
-                "type": "object",
-                "properties": {
-                  "status": {
-                    "$ref": "#/components/schemas/collectStatus"
-                  },
-                  "date": {
-                    "type": "string",
-                    "minLength": 1,
-                    "format": "date-time"
-                  },
-                  "comment": {
-                    "type": "string",
-                    "minLength": 1
-                  },
-                  "additionalData": {
-                    "type": "array",
-                    "description": "Permet de transmettre des données supplémentaires",
-                    "items": {
-                      "$ref": "./woop_to_retailer.v1.1.0.json#/components/schemas/additionalData"
-                    }
-                  }
-                },
-                "required": [
-                  "status",
-                  "date",
-                  "comment"
-                ]
-              },
-              "examples": {
-                "Commande prête": {
-                  "value": {
-                    "date": "2019-08-24T14:15:22Z",
-                    "comment": "La commande est prête à être réceptionnée.",
-                    "status": "COLLECT_READY"
-                  }
-                }
-              }
-            }
-          },
-          "description": "Contient les informations du nouveau statut"
-        },
-        "tags": [
-          "Collecte"
-        ],
-        "description": "Cette méthode permet à l’enseigne d’envoyer une mise à jour des statuts de la collecte. \n\nL’enseigne doit renseigner le prochain statut de suivi de la collecte pour faire évoluer la demande de retrait. Ce statut de suivi de livraison doit être en cohérence avec le workflow défini. <a href=\"/docs/retailer/docs/Modèles/Statuts-de-retrait-C&C.md\">Workflow et liste des status</a>"
-      }
     }
   },
   "components": {
@@ -4098,16 +3209,6 @@
                       "reference": {
                         "type": "string",
                         "description": "Référence du colis"
-                      },
-                      "currentStatus": {
-                        "$ref": "#/components/schemas/deliveryStatus"
-                      },
-                      "products": {
-                        "type": "array",
-                        "description": "List des produits dans le colis",
-                        "items": {
-                          "$ref": "#/components/schemas/product"
-                        }
                       }
                     }
                   }
@@ -4121,107 +3222,39 @@
         }
       },
       "postCollects": {
-        "description": "Précise les informations utiles à la modification d'une demande de retrait.",
         "type": "object",
-        "title": "Demande de retrait (postCollects)",
-        "properties": {
-          "mode": {
-            "type": "string",
-            "description": "Mode de click & collect choisi par le client ",
-            "enum": [
-              "standard",
-              "delay"
-            ]
-          },
-          "collectId": {
-            "type": "string",
-            "minLength": 1,
-            "description": "Identifiant de la demande de retrait"
-          },
-          "exchangePlaceId": {
-            "type": "string",
-            "minLength": 1,
-            "description": "Identifiant du point de prélèvement"
-          },
-          "bookingId": {
-            "type": "string",
-            "minLength": 1,
-            "description": "Identifiant de la réservation du créneau"
-          },
-          "slot": {
-            "$ref": "#/components/schemas/slot"
-          },
-          "customer": {
-            "$ref": "#/components/schemas/contact"
-          },
-          "packages": {
-            "type": "array",
-            "uniqueItems": true,
-            "minItems": 1,
-            "items": {
-              "$ref": "#/components/schemas/packages"
-            }
-          }
-        },
-        "required": [
-          "collectId",
-          "exchangePlaceId",
-          "customer",
-          "packages"
-        ]
-      },
-      "patchCollects": {
-        "description": "Précise les informations utiles à la modification d'une demande de retrait.",
-        "type": "object",
-        "title": "Modification d'une demande de retrait (postCollects)",
-        "properties": {
-          "exchangePlaceId": {
-            "type": "string",
-            "minLength": 1,
-            "description": "Identifiant du point de prélèvement"
-          },
-          "bookingId": {
-            "type": "string",
-            "minLength": 1,
-            "description": "Identifiant de la réservation du créneau"
-          },
-          "slot": {
-            "$ref": "#/components/schemas/slot"
-          },
-          "customer": {
-            "$ref": "#/components/schemas/contact"
-          },
-          "packages": {
-            "type": "array",
-            "uniqueItems": true,
-            "minItems": 1,
-            "items": {
-              "$ref": "#/components/schemas/packages"
-            }
-          }
-        }
-      },
-      "postCollectsBookings": {
-        "description": "Précise les informations nécessaires à la réservation d'un créneau de retrait.",
-        "type": "object",
-        "title": "Réservation de créneau de retrait (postCollectsBookings)",
-        "properties": {
-          "exchangePlaceId": {
-            "type": "string",
-            "minLength": 1,
-            "description": "Identifiant du point de prélèvement"
-          },
-          "slot": {
-            "$ref": "#/components/schemas/slot"
-          }
-        },
         "required": [
           "reference",
           "storeId",
           "customer",
           "location",
           "packages"
-        ]
+        ],
+        "properties": {
+          "reference": {
+            "type": "string",
+            "description": "Identifiant de la demande de retrait"
+          },
+          "storeId": {
+            "type": "string",
+            "description": "Identifiant du magasin émettant la demande"
+          },
+          "customer": {
+            "$ref": "#/components/schemas/contact"
+          },
+          "location": {
+            "$ref": "#/components/schemas/location"
+          },
+          "packages": {
+            "description": "Ensemble des colis",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/packages"
+            }
+          }
+        },
+        "description": "Précise les informations utiles à la création d'une demande de retrait (click and collect).",
+        "title": "Demande de retrait (postCollects)"
       },
       "postEligibilities": {
         "type": "object",
@@ -4366,120 +3399,6 @@
         "type": "object",
         "description": "Précise les informations utiles pour la création de la commande.",
         "title": "Création de la commande (postOrders)",
-        "x-examples": {
-          "example-1": {
-            "orderId": "string",
-            "referenceNumber": "string",
-            "storeId": "string",
-            "picking": {
-              "location": {
-                "type": "address",
-                "addressLine1": "string",
-                "addressLine2": "string",
-                "elevator": true,
-                "floor": 0,
-                "doorCode": "string",
-                "postalCode": "string",
-                "city": "string",
-                "district": "string",
-                "country": "FR",
-                "comment": "string"
-              },
-              "infos": "string",
-              "interval": [
-                {
-                  "start": "string",
-                  "end": "string"
-                }
-              ],
-              "contact": {
-                "firstName": "string",
-                "lastName": "string",
-                "phone": "string",
-                "email": "string",
-                "language": "fr",
-                "timezone": "Europe/Paris"
-              }
-            },
-            "delivery": {
-              "location": {
-                "type": "address",
-                "addressLine1": "string",
-                "addressLine2": "string",
-                "elevator": true,
-                "floor": 0,
-                "doorCode": "string",
-                "postalCode": "string",
-                "city": "string",
-                "district": "string",
-                "country": "FR",
-                "comment": "string"
-              },
-              "infos": "string",
-              "interval": [
-                {
-                  "start": "string",
-                  "end": "string"
-                }
-              ],
-              "contact": {
-                "firstName": "string",
-                "lastName": "string",
-                "phone": "string",
-                "email": "string",
-                "language": "fr",
-                "timezone": "Europe/Paris"
-              }
-            },
-            "numberOfPackages": 0,
-            "packages": [
-              {
-                "references": [
-                  "string"
-                ],
-                "length": {
-                  "value": 0,
-                  "unit": "mm"
-                },
-                "width": {
-                  "value": 0,
-                  "unit": "mm"
-                },
-                "height": {
-                  "value": 0,
-                  "unit": "mm"
-                },
-                "weight": {
-                  "value": 0,
-                  "unit": "kg"
-                },
-                "products": [
-                  {
-                    "type": "TYPOLOGY_GENERIC",
-                    "ean": "string",
-                    "cug": "string",
-                    "label": "string",
-                    "quantity": 1
-                  }
-                ],
-                "quantity": 1
-              }
-            ],
-            "services": [
-              "SERVICE_PICKUP_POINT"
-            ],
-            "productsPrice": {
-              "value": 0,
-              "currency": "EUR"
-            },
-            "tags": [
-              {
-                "key": "origin",
-                "value": "web"
-              }
-            ]
-          }
-        },
         "properties": {
           "orderId": {
             "type": "string",
@@ -4508,8 +3427,7 @@
               },
               "infos": {
                 "type": "string",
-                "description": "Déprécié - Utiliser \"picking.location.comment\"",
-                "deprecated": true
+                "description": "Commentaire libre"
               },
               "interval": {
                 "type": "array",
@@ -4537,8 +3455,7 @@
               },
               "infos": {
                 "type": "string",
-                "description": "Déprécié - Utiliser \"delivery.location.comment\"",
-                "deprecated": true
+                "description": "Commentaire libre"
               },
               "interval": {
                 "type": "array",
@@ -4678,75 +3595,6 @@
           "packages"
         ]
       },
-      "postPickupPoints": {
-        "type": "object",
-        "description": "Précise les informations pour la recherche de point relais",
-        "title": "Recherche de points relais (postPickupPoints)",
-        "required": [
-          "latitude",
-          "longitude"
-        ],
-        "properties": {
-          "latitude": {
-            "type": "number",
-            "description": "Latitude du point de recherche"
-          },
-          "longitude": {
-            "type": "number",
-            "description": "Longitude du point de recherche"
-          },
-          "number": {
-            "type": "number",
-            "description": "Longitude du point de recherche",
-            "maximum": 25,
-            "default": 10
-          },
-          "kilometricDistance": {
-            "type": "number",
-            "description": "Distance en kilomètres du rayon de recherche",
-            "maximum": 50,
-            "default": 5
-          },
-          "type": {
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/pickupPointType"
-              },
-              {
-                "type": "object",
-                "description": "Type de point relais par transporteur (voir documentation point relais)"
-              }
-            ]
-          },
-          "category": {
-            "type": "object",
-            "description": "Catégorie du point relais (voir documentation point relais)"
-          },
-          "carrierCode": {
-            "oneOf": [
-              {
-                "type": "string",
-                "description": "Filtre par code du transporteur"
-              },
-              {
-                "type": "array",
-                "description": "Filtre par multiple codes transporteur"
-              }
-            ]
-          },
-          "packages": {
-            "description": "Ensemble des colis",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/packages"
-            }
-          },
-          "storeId": {
-            "type": "string",
-            "description": "Identifiant du magasin émettant la demande"
-          }
-        }
-      },
       "tags": {
         "type": "array",
         "description": "Permet de définir des \"marqueurs\" sur cette commande.",
@@ -4859,7 +3707,7 @@
           "DELIVERY_DELIVERED_OK",
           "DELIVERY_DELIVERED_PARTIALLY"
         ],
-        "description": "Précise les statuts de livraison pouvant être utilisé.",
+        "description": "Précise le statut de livraison pouvant être utilisé.",
         "x-examples": {
           "Exemple": "DELIVERY_STARTED"
         },
@@ -5071,34 +3919,6 @@
         },
         "title": "Services de livraison (services)"
       },
-      "product": {
-        "type": "object",
-        "properties": {
-          "type": {
-            "$ref": "#/components/schemas/productType"
-          },
-          "ean": {
-            "type": "string",
-            "description": "Ean du produit"
-          },
-          "cug": {
-            "type": "string",
-            "description": "Cug du produit"
-          },
-          "label": {
-            "type": "string",
-            "description": "Description du produit"
-          },
-          "quantity": {
-            "type": "integer",
-            "default": 1,
-            "description": "Quantité du produit"
-          }
-        },
-        "required": [
-          "type"
-        ]
-      },
       "packages": {
         "description": "Précise les informations utiles à l'édition d'un colis. L'unité de manutention est à définir avec la structure colis/produit. ",
         "type": "object",
@@ -5156,7 +3976,32 @@
             "type": "array",
             "description": "List des produits dans le colis",
             "items": {
-              "$ref": "#/components/schemas/product"
+              "type": "object",
+              "properties": {
+                "type": {
+                  "$ref": "#/components/schemas/productType"
+                },
+                "ean": {
+                  "type": "string",
+                  "description": "Ean du produit"
+                },
+                "cug": {
+                  "type": "string",
+                  "description": "Cug du produit"
+                },
+                "label": {
+                  "type": "string",
+                  "description": "Description du produit"
+                },
+                "quantity": {
+                  "type": "integer",
+                  "default": 1,
+                  "description": "Quantité du produit"
+                }
+              },
+              "required": [
+                "type"
+              ]
             }
           },
           "quantity": {
@@ -5440,66 +4285,6 @@
           "Exemple": "Europe/Paris"
         }
       },
-      "availableSlot": {
-        "description": "Créneau de retrait disponible.",
-        "type": "object",
-        "properties": {
-          "start": {
-            "type": "string",
-            "format": "datetime",
-            "description": "Début du créneau"
-          },
-          "end": {
-            "type": "string",
-            "format": "datetime",
-            "description": "Fin du créneau"
-          },
-          "remainingCapacity": {
-            "type": "number",
-            "description": "Capacité restante dans ce créneau"
-          }
-        },
-        "required": [
-          "start",
-          "end",
-          "remainingCapacity"
-        ],
-        "x-examples": {
-          "Exemple": {
-            "start": "2019-05-02T15:52:01+0000",
-            "end": "2019-05-02T17:52:01+0000",
-            "remainingCapacity": 5
-          }
-        },
-        "title": "Créneau de retrait disponible (availableSlot)"
-      },
-      "slot": {
-        "description": "Créneau de retrait (sans réservation ni vérification de capacité).",
-        "type": "object",
-        "properties": {
-          "start": {
-            "type": "string",
-            "format": "datetime",
-            "description": "Début du créneau"
-          },
-          "end": {
-            "type": "string",
-            "format": "datetime",
-            "description": "Fin du créneau"
-          }
-        },
-        "required": [
-          "start",
-          "end"
-        ],
-        "x-examples": {
-          "Exemple": {
-            "start": "2019-05-02T15:52:01+0000",
-            "end": "2019-05-02T17:52:01+0000"
-          }
-        },
-        "title": "Créneau de retrait (slot)"
-      },
       "orderStatus": {
         "title": "Statut de la commande (orderStatus)",
         "type": "string",
@@ -5523,119 +4308,8 @@
         ],
         "description": "Précise le statut d'une commande."
       },
-      "pickupPoint": {
-        "type": "object",
-        "properties": {
-          "address": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/address"
-              },
-              {
-                "type": "object",
-                "properties": {
-                  "title": {
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "title"
-                ]
-              }
-            ],
-            "description": "Adresse du point relais"
-          },
-          "coordinates": {
-            "$ref": "#/components/schemas/coordinates"
-          },
-          "id": {
-            "type": "string",
-            "description": "Id du point relais"
-          },
-          "carrier": {
-            "$ref": "#/components/schemas/pickupPointCarrier"
-          },
-          "category": {
-            "type": "string",
-            "example": "Cat1",
-            "description": "Catégorie du point relais."
-          },
-          "type": {
-            "type": "string",
-            "example": "Cat1",
-            "description": "Type du point relais."
-          },
-          "openingHours": {
-            "type": "object",
-            "description": "Horaires d'ouverture du point relais",
-            "properties": {
-              "monday": {
-                "type": "array",
-                "description": "Horaires du lundi",
-                "items": {
-                  "$ref": "#/components/schemas/interval_hour"
-                }
-              },
-              "tuesday": {
-                "type": "array",
-                "description": "Horaires du mardi",
-                "items": {
-                  "$ref": "#/components/schemas/interval_hour"
-                }
-              },
-              "wednesday": {
-                "type": "array",
-                "description": "Horaires du mercredi",
-                "items": {
-                  "$ref": "#/components/schemas/interval_hour"
-                }
-              },
-              "thursday": {
-                "type": "array",
-                "description": "Horaires du jeudi",
-                "items": {
-                  "$ref": "#/components/schemas/interval_hour"
-                }
-              },
-              "friday": {
-                "type": "array",
-                "description": "Horaires du vendredi",
-                "items": {
-                  "$ref": "#/components/schemas/interval_hour"
-                }
-              },
-              "saturday": {
-                "type": "array",
-                "description": "Horaires du samedi",
-                "items": {
-                  "$ref": "#/components/schemas/interval_hour"
-                }
-              },
-              "sunday": {
-                "type": "array",
-                "description": "Horaires du dimanche",
-                "items": {
-                  "$ref": "#/components/schemas/interval_hour"
-                }
-              }
-            }
-          },
-          "maxWeight": {
-            "$ref": "#/components/schemas/mass"
-          }
-        },
-        "required": [
-          "address",
-          "coordinates",
-          "id",
-          "carrier",
-          "openingHours",
-          "maxWeight"
-        ]
-      },
       "pickupPointType": {
         "title": "Type de point relais",
-        "description": "Type de point relais",
         "type": "string",
         "enum": [
           "PICKUP_POINT_AGENCY",
@@ -5644,7 +4318,17 @@
           "PICKUP_POINT_RELAY_WITHOUT_LOCKER",
           "PICKUP_POINT_ALL"
         ],
-        "default": "PICKUP_POINT_ALL"
+        "default": "PICKUP_POINT_RELAY_WITH_LOCKER"
+      },
+      "pickupPointCategory": {
+        "title": "Catégorie de point relais",
+        "type": "string",
+        "enum": [
+          "PICKUP_POINT_STANDARD",
+          "PICKUP_POINT_XL",
+          "PICKUP_POINT_XXL",
+          "PICKUP_POINT_DRIVE"
+        ]
       },
       "errorCode": {
         "title": "Code erreur (errorCode)",
@@ -5744,24 +4428,6 @@
             "$ref": "#/components/schemas/currency"
           }
         }
-      },
-      "collectStatus": {
-        "type": "string",
-        "title": "Statut de collecte - Retrait drive (collectStatus)",
-        "description": "Précise les statuts de collecte pouvant être utilisé.",
-        "enum": [
-          "COLLECT_INIT",
-          "COLLECT_STARTED",
-          "COLLECT_READY",
-          "COLLECT_AWAITING",
-          "COLLECT_IN_PROGRESS",
-          "COLLECT_PICK_UP_OK",
-          "COLLECT_PICK_UP_FAILED",
-          "COLLECT_PICK_UP_PARTIALLY",
-          "COLLECT_BLOCKED",
-          "COLLECT_DELAYED",
-          "COLLECT_REPLANNED"
-        ]
       }
     },
     "parameters": {
@@ -5772,7 +4438,7 @@
         "required": true,
         "schema": {
           "type": "string",
-          "example": "1.5.0"
+          "example": "1.4.0"
         }
       },
       "queryDeliveryStatus": {
@@ -5835,6 +4501,64 @@
           ]
         }
       },
+      "queryLatitude": {
+        "in": "query",
+        "required": true,
+        "description": "Latitude du point de recherche",
+        "name": "latitude",
+        "schema": {
+          "type": "number"
+        }
+      },
+      "queryLongitude": {
+        "in": "query",
+        "description": "Longitude du point de recherche",
+        "required": true,
+        "name": "longitude",
+        "schema": {
+          "type": "number"
+        }
+      },
+      "queryNumber": {
+        "in": "query",
+        "required": false,
+        "description": "Nombre de points relais retournés",
+        "name": "number",
+        "schema": {
+          "type": "integer",
+          "maximum": 25,
+          "default": 10
+        }
+      },
+      "queryKilometricDistance": {
+        "in": "query",
+        "required": false,
+        "description": "Distance en kilomètres du rayon de recherche",
+        "name": "kilometricDistance",
+        "schema": {
+          "type": "integer",
+          "maximum": 40,
+          "default": 5
+        }
+      },
+      "queryPickupPointType": {
+        "in": "query",
+        "required": false,
+        "name": "type",
+        "description": "Type de point relais",
+        "schema": {
+          "$ref": "#/components/schemas/pickupPointType"
+        }
+      },
+      "queryPickupPointCategory": {
+        "in": "query",
+        "required": false,
+        "name": "category",
+        "description": "Catégorie de point relais",
+        "schema": {
+          "$ref": "#/components/schemas/pickupPointCategory"
+        }
+      },
       "pathOrderId": {
         "in": "path",
         "required": true,
@@ -5858,41 +4582,6 @@
         "required": true,
         "description": "Identifiant de la demande de prix",
         "name": "priceId",
-        "schema": {
-          "type": "string"
-        }
-      },
-      "queryExchangePlaceIdRequired": {
-        "in": "query",
-        "required": true,
-        "description": "Filtre par id du point de prélèvement",
-        "name": "exchangePlaceId",
-        "schema": {
-          "type": "string"
-        }
-      },
-      "queryFromDateSlots": {
-        "in": "query",
-        "required": false,
-        "description": "Date de début des créneaux retournés (aujourd'hui si non renseigné)",
-        "name": "fromDate",
-        "example": "2021-07-21",
-        "schema": {
-          "type": "string"
-        }
-      },
-      "queryToDateSlots": {
-        "in": "query",
-        "required": true,
-        "description": "Date de fin des créneaux retournés",
-        "name": "toDate",
-        "example": "2021-07-25"
-      },
-      "pathPickupPointId": {
-        "in": "path",
-        "required": true,
-        "description": "Identifiant du point relais",
-        "name": "pickupPointId",
         "schema": {
           "type": "string"
         }
