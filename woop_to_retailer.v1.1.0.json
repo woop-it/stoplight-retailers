@@ -58,6 +58,10 @@
                   },
                   "carrier": {
                     "$ref": "#/components/schemas/carrier"
+                  },
+                  "referenceNumber": {
+                    "type": "string",
+                    "description": "Reference de la commande"
                   }
                 },
                 "required": [
@@ -66,7 +70,8 @@
                   "trackingPageUrl",
                   "vehicleType",
                   "price",
-                  "carrier"
+                  "carrier",
+                  "referenceNumber"
                 ]
               },
               "examples": {
