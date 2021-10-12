@@ -59,6 +59,11 @@
                   "carrier": {
                     "$ref": "#/components/schemas/carrier"
                   },
+                  "parcels": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "./models/parcel.yaml"
+                    }
                   "referenceNumber": {
                     "type": "string",
                     "description": "Reference de la commande"
