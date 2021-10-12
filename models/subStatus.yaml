@@ -1,0 +1,10 @@
+type: string
+title: subStatus
+enum:
+  - FAILED
+  - FAILED_WITH_RETRY
+  - FAILED_WITH_RETURN
+  - WITH_CLAIM
+  - REFUSED
+  - NOT_COLLECTED
+x-internal: true

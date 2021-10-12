@@ -1,0 +1,50 @@
+title: parcel
+type: object
+description: Informations sur les colis
+examples:
+  - id: 56f74d65s4f564ds6
+    trackingId: 77899656544BY
+    status: DELIVERY_KO
+    subStatus: FAILED_WITH_RETURN
+    barcode:
+      value: '7841122236655'
+      type: barcode
+      format: '128'
+    package:
+      reference: EARB1225
+      products:
+        - type: TYPOLOGY_GENERIC
+          ean: '1259456954845'
+          cug: LAMPE785AD
+          label: Lampe de chevet
+          quantity: 1
+properties:
+  id:
+    type: string
+    description: Identifiant du colis
+  status:
+    $ref: ./status.yaml
+  subStatus:
+    $ref: ./subStatus.yaml
+  trackingId:
+    type: string
+    description: Identifiant du suivi du colis
+  barcode:
+    $ref: ./barcode.yaml
+  package:
+    type: object
+    description: Paquet contenu dans le colis
+    required:
+      - products
+    properties:
+      reference:
+        type: string
+        description: Identifiant du paquet dans le colis
+      products:
+        type: array
+        items:
+          $ref: ../retailer_to_woop.v1.5.0.json#/components/schemas/product
+required:
+  - id
+  - status
+  - package
