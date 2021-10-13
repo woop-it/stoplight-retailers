@@ -1688,61 +1688,65 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/responseOrder"
+                  "$ref": "#/components/schemas/responseOrder-getById"
                 },
                 "examples": {
-                  "Exemple": {
+                  "example-1": {
                     "value": {
                       "orders": [
                         {
                           "delivery": {
-                            "externalDeliveryId": "123456",
+                            "externalDeliveryId": "string",
                             "currentStatus": "DELIVERY_INIT",
-                            "updatedAt": "2019-12-03T12:00:00+0000",
+                            "updatedAt": "string",
                             "interval": {
-                              "start": "2019-12-07T12:00:00+0000",
-                              "end": "2019-12-07T14:00:00+0000"
+                              "start": "string",
+                              "end": "string"
                             },
-                            "trackingPageUrl:": "https://url_suivi_livraison"
+                            "trackingPageUrl:": "string"
                           },
                           "carrier": {
-                            "name": "Transporteur A",
-                            "contact": "Michel",
-                            "claimUrl": "https://url_reclamation"
-                          },
-                          "price": {
-                            "price": 15.12,
-                            "currency": "EUR"
+                            "name": "string",
+                            "contact": "string",
+                            "claimUrl": "string"
                           },
                           "order": {
-                            "id": "65z4eq1d6q54zd1",
+                            "id": "string",
                             "currentStatus": "ORDER_CREATED",
-                            "updatedAt": "2019-12-03T12:00:00+0000",
-                            "referenceNumber": "65q41zdq65z14"
+                            "updatedAt": "string",
+                            "referenceNumber": "string"
                           },
                           "picking": {
                             "interval": {
-                              "start": "2019-12-06T13:30:00+0000",
-                              "end": "2019-12-06T15:30:00+0000"
+                              "start": "string",
+                              "end": "string"
                             }
                           },
                           "packages": [
                             {
-                              "id": "1324",
-                              "reference": "B8413DD",
-                              "currentStatus": "DELIVERY_DELIVERED_OK",
+                              "id": "string",
+                              "reference": "string",
+                              "currentStatus": "DELIVERY_INIT",
                               "products": [
                                 {
                                   "type": "TYPOLOGY_GENERIC",
-                                  "ean": "4dq86zd4q6zd4q64",
-                                  "cug": "q56zd4q65d4q",
-                                  "label": "Lampe",
+                                  "ean": "string",
+                                  "cug": "string",
+                                  "label": "string",
                                   "quantity": 1
                                 }
                               ],
-                              "quantity": 1
+                              "barcode": {
+                                "value": "54fd56g4f5gfd456sd",
+                                "type": "barcode",
+                                "format": "128"
+                              }
                             }
-                          ]
+                          ],
+                          "price": {
+                            "price": 0,
+                            "currency": "EUR"
+                          }
                         }
                       ]
                     }
@@ -1751,7 +1755,7 @@
               }
             }
           },
-          "401": {
+          "400": {
             "description": "Vous n'êtes pas autorisé à accéder à cet élément",
             "content": {
               "application/json": {
@@ -4108,6 +4112,128 @@
                         "items": {
                           "$ref": "#/components/schemas/product"
                         }
+                      }
+                    }
+                  }
+                },
+                "price": {
+                  "$ref": "#/components/schemas/price"
+                }
+              }
+            }
+          }
+        }
+      },
+      "responseOrder-getById": {
+        "title": "Réponse récupération commande (responseOrder)",
+        "type": "object",
+        "description": "Précise la réponse lors de la récupération d'une commande.",
+        "x-internal": true,
+        "properties": {
+          "orders": {
+            "type": "array",
+            "description": "Liste des commandes",
+            "items": {
+              "type": "object",
+              "properties": {
+                "delivery": {
+                  "description": "Informations sur la livraison",
+                  "type": "object",
+                  "properties": {
+                    "externalDeliveryId": {
+                      "type": "string",
+                      "description": "Identifiant de la livraison"
+                    },
+                    "currentStatus": {
+                      "$ref": "#/components/schemas/deliveryStatus"
+                    },
+                    "updatedAt": {
+                      "type": "string",
+                      "description": "Date de dernière mise à jour"
+                    },
+                    "interval": {
+                      "$ref": "#/components/schemas/interval"
+                    },
+                    "trackingPageUrl:": {
+                      "type": "string",
+                      "description": "Url de la page de suivi de livraison"
+                    }
+                  }
+                },
+                "carrier": {
+                  "type": "object",
+                  "description": "Informations du transporteur sélectionné",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "description": "Nom du transporteur"
+                    },
+                    "contact": {
+                      "type": "string",
+                      "description": "Information de contact du transporteur"
+                    },
+                    "claimUrl": {
+                      "type": "string",
+                      "description": "Url de réclamation du transporteur"
+                    }
+                  }
+                },
+                "order": {
+                  "type": "object",
+                  "description": "Informations de la commande",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "Identifiant de la commande"
+                    },
+                    "currentStatus": {
+                      "$ref": "#/components/schemas/orderStatus"
+                    },
+                    "updatedAt": {
+                      "type": "string",
+                      "description": "Date de dernière mise à jour"
+                    },
+                    "referenceNumber": {
+                      "type": "string",
+                      "description": "Référence de la commande"
+                    }
+                  }
+                },
+                "picking": {
+                  "type": "object",
+                  "description": "Informations sur le prélèvement",
+                  "properties": {
+                    "interval": {
+                      "$ref": "#/components/schemas/interval"
+                    }
+                  }
+                },
+                "packages": {
+                  "type": "array",
+                  "description": "Informations des colis",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "description": "Identifiant du colis"
+                      },
+                      "reference": {
+                        "type": "string",
+                        "description": "Référence du colis"
+                      },
+                      "currentStatus": {
+                        "$ref": "#/components/schemas/deliveryStatus"
+                      },
+                      "products": {
+                        "type": "array",
+                        "description": "List des produits dans le colis",
+                        "items": {
+                          "$ref": "#/components/schemas/product"
+                        }
+                      },
+                      "barcode": {
+                        "$ref": "./models/barcode.yaml"
                       }
                     }
                   }

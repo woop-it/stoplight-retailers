@@ -1,0 +1,25 @@
+title: barcode
+type: object
+description: Code barre / QRCode du colis
+properties:
+  value:
+    type: string
+    description: Valeur du code barre
+  type:
+    type: string
+    description: Type d'affichage du code barre
+    enum:
+      - barcode
+  format:
+    type: string
+    description: Format du code barre
+    enum:
+      - '128'
+required:
+  - value
+  - type
+  - format
+examples:
+  - value: 54fd56g4f5gfd456sd
+    type: barcode
+    format: '128'
