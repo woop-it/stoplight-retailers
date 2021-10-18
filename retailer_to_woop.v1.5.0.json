@@ -3902,6 +3902,17 @@
           },
           {
             "$ref": "#/components/parameters/queryMode"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "A6"
+              ]
+            },
+            "in": "query",
+            "name": "size",
+            "description": "Dimension de l'étiquette"
           }
         ]
       }
