@@ -1929,6 +1929,17 @@
           },
           {
             "$ref": "#/components/parameters/queryMode"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "A6"
+              ]
+            },
+            "in": "query",
+            "name": "size",
+            "description": "Dimension de l'étiquette ***[Uniquement en cas de colis unique]***"
           }
         ],
         "responses": {
@@ -1976,7 +1987,7 @@
             }
           },
           "403": {
-            "description": "Demande impossible pour ce 'orderId'",
+            "description": "Demande impossible pour ce 'orderId' / Précence de l'argument `size` non authorisée (multiple colis) ",
             "content": {
               "application/json": {
                 "schema": {
