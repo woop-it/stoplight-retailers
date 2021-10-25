@@ -992,8 +992,8 @@
                     {
                       "quoteId": "string",
                       "price": {
-                        "value": 0,
-                        "currency": "string"
+                        "taxExcludedAmount": 10,
+                        "currency": "EUR"
                       },
                       "vehicleType": "string",
                       "carrierName": "string",
@@ -1786,16 +1786,24 @@
           }
         },
         "properties": {
-          "value": {
+          "taxExcludedAmount": {
             "type": "number",
-            "description": "Valeur indicative du prix"
+            "description": "Valeur indicative du prix sans taxe"
+          },
+          "taxIncludedAmount": {
+            "type": "number",
+            "description": "Valeur indicative du prix avec taxe"
+          },
+          "taxAmount": {
+            "type": "number",
+            "description": "Valeur indicative du montant des taxes"
           },
           "currency": {
             "$ref": "#/components/schemas/currency"
           }
         },
         "required": [
-          "value",
+          "taxExcludedAmount",
           "currency"
         ]
       },
@@ -1806,8 +1814,8 @@
           "example": {
             "quoteId": "string",
             "price": {
-              "value": 0,
-              "currency": "string"
+              "taxExcludedAmount": 10,
+              "currency": "EUR"
             },
             "vehicleType": "string",
             "carrierName": "string",
@@ -1821,7 +1829,8 @@
         "properties": {
           "quoteId": {
             "type": "string",
-            "minLength": 1
+            "minLength": 1,
+            "description": "Dans le cas d'un devis refusé la valeur est égale a \"-1\""
           },
           "price": {
             "$ref": "#/components/schemas/priceQuote"
@@ -1849,10 +1858,7 @@
         "required": [
           "quoteId",
           "price",
-          "vehicleType",
-          "carrierName",
-          "reasons",
-          "comment"
+          "carrierName"
         ]
       },
       "refusedReason": {
