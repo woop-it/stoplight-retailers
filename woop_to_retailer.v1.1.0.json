@@ -54,7 +54,7 @@
                     "$ref": "#/components/schemas/vehicleType"
                   },
                   "price": {
-                    "$ref": "#/components/schemas/price"
+                    "$ref": "#/components/schemas/priceQuote"
                   },
                   "carrier": {
                     "$ref": "#/components/schemas/carrier"
@@ -1781,8 +1781,8 @@
         "title": "Prix du devis (priceQuote)",
         "x-examples": {
           "example": {
-            "value": 0,
-            "currency": "string"
+            "taxExcludedAmount": 17.3,
+            "currency": "EUR"
           }
         },
         "properties": {
