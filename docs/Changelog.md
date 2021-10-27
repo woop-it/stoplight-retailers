@@ -300,3 +300,33 @@ title: 1.6
 [Lien vers la documentation](https://api.woopit.fr/docs/retailer/b3A6MTAwODE5NQ-recevoir-le-nom-du-transporteur-selectionne-pour-une-commande)
 
 - **Mineur**: Ajout des informations des `parcels`
+
+```json
+{
+  ...,
+  "parcels": [{
+    "id": "56f74d65s4f564ds6",
+    "trackingId": "77899656544BY",
+    "status": "DELIVERY_KO",
+    "subStatus": "FAILED_WITH_RETURN",
+    "barcode": {
+      "value": "7841122236655",
+      "type": "barcode",
+      "format": "128"
+    },
+    "package": {
+      "id": "1324",
+      "reference": "B8413DD",
+      "products": [
+        {
+          "type": "TYPOLOGY_GENERIC",
+          "ean": "4dq86zd4q6zd4q64",
+          "cug": "q56zd4q65d4q",
+          "label": "Lampe",
+          "quantity": 1
+        }
+      ]
+    }
+  }]
+}
+```
