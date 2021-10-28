@@ -1,0 +1,6 @@
+type: string
+title: Currency
+description: 'Devise, précise la monnaie utilisée.'
+x-internal: true
+enum:
+  - EUR

@@ -134,7 +134,7 @@
                 },
                 "Exemple mode express (sans réservation au préalable)": {
                   "value": {
-                    "mode": "express",
+                    "mode": "standard",
                     "collectId": "CN123456789FR59",
                     "exchangePlaceId": "DRIVE-59-001",
                     "slot": {
@@ -1570,67 +1570,79 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/responseOrder-getById"
+                  "$ref": "#/components/schemas/responseOrder-(getById)"
                 },
                 "examples": {
-                  "example-1": {
+                  "Example": {
                     "value": {
-                      "orders": [
-                        {
-                          "delivery": {
-                            "externalDeliveryId": "string",
-                            "currentStatus": "DELIVERY_INIT",
-                            "updatedAt": "string",
-                            "interval": {
-                              "start": "string",
-                              "end": "string"
+                      "order": {
+                        "id": "string",
+                        "status": "ORDER_CREATED",
+                        "updatedAt": "string",
+                        "referenceNumber": "string",
+                        "picking": {
+                          "interval": {
+                            "start": "string",
+                            "end": "string"
+                          }
+                        },
+                        "delivery": {
+                          "externalDeliveryId": "string",
+                          "updatedAt": "string",
+                          "interval": {
+                            "start": "string",
+                            "end": "string"
+                          },
+                          "trackingPageUrl:": "string",
+                          "status": "DELIVERY_INIT",
+                          "subStatus": "FAILED"
+                        },
+                        "carrier": {
+                          "name": "string",
+                          "claimUrl": "string",
+                          "contact": {
+                            "firstName": "string",
+                            "lastName": "string",
+                            "phone": "string",
+                            "email": "string",
+                            "language": "fr",
+                            "timezone": "Europe/Paris",
+                            "main": true,
+                            "title": "string"
+                          }
+                        },
+                        "parcels": [
+                          {
+                            "id": "56f74d65s4f564ds6",
+                            "trackingId": "77899656544BY",
+                            "status": "DELIVERY_KO",
+                            "subStatus": "FAILED_WITH_RETURN",
+                            "barcode": {
+                              "value": "7841122236655",
+                              "type": "barcode",
+                              "format": "128"
                             },
-                            "trackingPageUrl:": "string"
-                          },
-                          "carrier": {
-                            "name": "string",
-                            "contact": "string",
-                            "claimUrl": "string"
-                          },
-                          "order": {
-                            "id": "string",
-                            "currentStatus": "ORDER_CREATED",
-                            "updatedAt": "string",
-                            "referenceNumber": "string"
-                          },
-                          "picking": {
-                            "interval": {
-                              "start": "string",
-                              "end": "string"
-                            }
-                          },
-                          "packages": [
-                            {
-                              "id": "string",
-                              "reference": "string",
-                              "currentStatus": "DELIVERY_INIT",
+                            "package": {
+                              "reference": "EARB1225",
                               "products": [
                                 {
                                   "type": "TYPOLOGY_GENERIC",
-                                  "ean": "string",
-                                  "cug": "string",
-                                  "label": "string",
+                                  "ean": "1259456954845",
+                                  "cug": "LAMPE785AD",
+                                  "label": "Lampe de chevet",
                                   "quantity": 1
                                 }
-                              ],
-                              "barcode": {
-                                "value": "54fd56g4f5gfd456sd",
-                                "type": "barcode",
-                                "format": "128"
-                              }
+                              ]
                             }
-                          ],
-                          "price": {
-                            "price": 0,
-                            "currency": "EUR"
                           }
+                        ],
+                        "price": {
+                          "taxExcludedAmount": 17.2,
+                          "taxIncludedAmount": 20.64,
+                          "taxAmount": 3.44,
+                          "currency": "EUR"
                         }
-                      ]
+                      }
                     }
                   }
                 }
@@ -1861,7 +1873,7 @@
                   "Exemple": {
                     "value": {
                       "base64": "AxfzFZEGEg ...",
-                      "trackingPageUrl:": "https://url_suivi_livraison"
+                      "trackingPageUrl": "https://url_suivi_livraison"
                     }
                   }
                 }
@@ -3279,12 +3291,6 @@
                       "type": "array",
                       "items": {
                         "type": "object",
-                        "required": [
-                          "carrier",
-                          "service",
-                          "price",
-                          "delay"
-                        ],
                         "properties": {
                           "carrier": {
                             "type": "object",
@@ -3317,22 +3323,6 @@
                               "type": "string"
                             }
                           },
-                          "price": {
-                            "type": "object",
-                            "description": "Prix du service",
-                            "required": [
-                              "price",
-                              "currency"
-                            ],
-                            "properties": {
-                              "price": {
-                                "type": "number"
-                              },
-                              "currency": {
-                                "$ref": "#/components/schemas/currency"
-                              }
-                            }
-                          },
                           "delay": {
                             "type": "object",
                             "description": "Délai d'execution du service",
@@ -3345,7 +3335,7 @@
                                 "type": "number"
                               },
                               "unit": {
-                                "type": "enum",
+                                "type": "string",
                                 "enum": [
                                   "day",
                                   "hour"
@@ -3353,7 +3343,12 @@
                               }
                             }
                           }
-                        }
+                        },
+                        "required": [
+                          "carrier",
+                          "service",
+                          "delay"
+                        ]
                       }
                     }
                   }
@@ -3381,7 +3376,7 @@
                             "Drive"
                           ],
                           "price": {
-                            "value": 2.99,
+                            "taxExcludedAmount": 2.99,
                             "currency": "EUR"
                           },
                           "delay": {
@@ -3395,10 +3390,6 @@
                             "name": "Chronopost"
                           },
                           "service": "SERVICE_FRONT_HOME",
-                          "price": {
-                            "value": 5.99,
-                            "currency": "EUR"
-                          },
                           "delay": {
                             "value": 1,
                             "unit": "day"
@@ -3989,11 +3980,7 @@
                       ]
                     }
                   }
-                ],
-                "price": {
-                  "price": 13,
-                  "currency": "EUR"
-                }
+                ]
               }
             ]
           }
@@ -4093,7 +4080,7 @@
         "type": "object",
         "description": "Précise la réponse lors de la récupération d'une commande précise.",
         "x-examples": {
-          "example-1": {
+          "Example": {
             "order": {
               "id": "787566AZEE",
               "status": "ORDER_CREATED",
@@ -4156,7 +4143,9 @@
                 }
               ],
               "price": {
-                "price": 13,
+                "taxExcludedAmount": 17.2,
+                "taxIncludedAmount": 20.64,
+                "taxAmount": 3.44,
                 "currency": "EUR"
               }
             }
@@ -4246,129 +4235,7 @@
                 }
               },
               "price": {
-                "$ref": "#/components/schemas/price"
-              }
-            }
-          }
-        }
-      },
-      "responseOrder-getById": {
-        "title": "Réponse récupération commande (responseOrder)",
-        "type": "object",
-        "description": "Précise la réponse lors de la récupération d'une commande.",
-        "x-internal": true,
-        "properties": {
-          "orders": {
-            "type": "array",
-            "description": "Liste des commandes",
-            "items": {
-              "type": "object",
-              "properties": {
-                "delivery": {
-                  "description": "Informations sur la livraison",
-                  "type": "object",
-                  "properties": {
-                    "externalDeliveryId": {
-                      "type": "string",
-                      "description": "Identifiant de la livraison"
-                    },
-                    "currentStatus": {
-                      "$ref": "#/components/schemas/deliveryStatus"
-                    },
-                    "updatedAt": {
-                      "type": "string",
-                      "description": "Date de dernière mise à jour"
-                    },
-                    "interval": {
-                      "$ref": "#/components/schemas/interval"
-                    },
-                    "trackingPageUrl:": {
-                      "type": "string",
-                      "description": "Url de la page de suivi de livraison"
-                    }
-                  }
-                },
-                "carrier": {
-                  "type": "object",
-                  "description": "Informations du transporteur sélectionné",
-                  "properties": {
-                    "name": {
-                      "type": "string",
-                      "description": "Nom du transporteur"
-                    },
-                    "contact": {
-                      "type": "string",
-                      "description": "Information de contact du transporteur"
-                    },
-                    "claimUrl": {
-                      "type": "string",
-                      "description": "Url de réclamation du transporteur"
-                    }
-                  }
-                },
-                "order": {
-                  "type": "object",
-                  "description": "Informations de la commande",
-                  "properties": {
-                    "id": {
-                      "type": "string",
-                      "description": "Identifiant de la commande"
-                    },
-                    "currentStatus": {
-                      "$ref": "#/components/schemas/orderStatus"
-                    },
-                    "updatedAt": {
-                      "type": "string",
-                      "description": "Date de dernière mise à jour"
-                    },
-                    "referenceNumber": {
-                      "type": "string",
-                      "description": "Référence de la commande"
-                    }
-                  }
-                },
-                "picking": {
-                  "type": "object",
-                  "description": "Informations sur le prélèvement",
-                  "properties": {
-                    "interval": {
-                      "$ref": "#/components/schemas/interval"
-                    }
-                  }
-                },
-                "packages": {
-                  "type": "array",
-                  "description": "Informations des colis",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "string",
-                        "description": "Identifiant du colis"
-                      },
-                      "reference": {
-                        "type": "string",
-                        "description": "Référence du colis"
-                      },
-                      "currentStatus": {
-                        "$ref": "#/components/schemas/deliveryStatus"
-                      },
-                      "products": {
-                        "type": "array",
-                        "description": "List des produits dans le colis",
-                        "items": {
-                          "$ref": "#/components/schemas/product"
-                        }
-                      },
-                      "barcode": {
-                        "$ref": "./models/barcode.yaml"
-                      }
-                    }
-                  }
-                },
-                "price": {
-                  "$ref": "#/components/schemas/price"
-                }
+                "$ref": "./models/price.yaml"
               }
             }
           }
@@ -5535,7 +5402,7 @@
             "description": "valeur"
           },
           "currency": {
-            "$ref": "#/components/schemas/currency"
+            "$ref": "./models/currency.yaml"
           }
         }
       },
@@ -5620,17 +5487,6 @@
           "Exemple": "TYPOLOGY_GENERIC"
         },
         "title": "Typologie du produit (productType)"
-      },
-      "currency": {
-        "type": "string",
-        "description": "Devise, précise la monnaie utilisée.",
-        "enum": [
-          "EUR"
-        ],
-        "x-examples": {
-          "Exemple": "EUR"
-        },
-        "title": "Devise (currency)"
       },
       "lengthUnits": {
         "type": "string",
@@ -5992,22 +5848,6 @@
           "language",
           "timezone"
         ]
-      },
-      "price": {
-        "title": "Prix (price)",
-        "type": "object",
-        "description": "Le prix",
-        "properties": {
-          "price": {
-            "type": "number",
-            "format": "float",
-            "exclusiveMinimum": true,
-            "minimum": 0
-          },
-          "currency": {
-            "$ref": "#/components/schemas/currency"
-          }
-        }
       },
       "collectStatus": {
         "type": "string",

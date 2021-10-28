@@ -44,7 +44,7 @@ title: 1.6
       ...,
       "delivery": {
         "status": "DELIVERY_KO",
-        "substatus": "FAILED_WITH_RETURN"
+        "subStatus": "FAILED_WITH_RETURN"
       }
     }
   ]
@@ -172,7 +172,7 @@ title: 1.6
     ...,
     "delivery": {
       "status": "DELIVERY_KO",
-      "substatus": "FAILED_WITH_RETURN"
+      "subStatus": "FAILED_WITH_RETURN"
     }
   }
 }

@@ -54,19 +54,17 @@
                     "$ref": "#/components/schemas/vehicleType"
                   },
                   "price": {
-                    "$ref": "#/components/schemas/priceQuote"
+                    "$ref": "./models/price.yaml"
                   },
                   "carrier": {
                     "$ref": "#/components/schemas/carrier"
                   },
-                  "parcels": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "./models/parcel.yaml"
-                    }
                   "referenceNumber": {
                     "type": "string",
                     "description": "Reference de la commande"
+                  },
+                  "parcels": {
+                    "$ref": "./models/parcel.yaml"
                   }
                 },
                 "required": [
@@ -80,43 +78,69 @@
                 ]
               },
               "examples": {
-                "Exemple": {
+                "Example": {
                   "value": {
-                    "deliveryId": "4qz64zd5qdq",
-                    "externalReference": "6546465-FH",
-                    "orderId": "zd8qz4dq4dz6q",
-                    "trackingPageUrl": "https://url_suivi_livraison",
+                    "deliveryId": "string",
+                    "externalReference": "string",
+                    "orderId": "string",
+                    "trackingPageUrl": "string",
                     "vehicleType": "VEHICLE_TYPE_BIKE",
                     "price": {
-                      "value": 36.5,
+                      "taxExcludedAmount": 17.2,
+                      "taxIncludedAmount": 20.64,
+                      "taxAmount": 3.44,
                       "currency": "EUR"
                     },
                     "carrier": {
-                      "name": "Transporteur A",
-                      "code": "transporteur-a",
+                      "name": "string",
+                      "code": "string",
                       "contact": {
-                        "firstName": "Michel",
-                        "lastName": "Dupont",
-                        "phone": "+33600000000",
-                        "email": "michel.dupont@mail.fr"
+                        "firstName": "string",
+                        "lastName": "string",
+                        "phone": "string",
+                        "email": "string"
                       },
                       "specifications": {
                         "updateOrder": true,
-                        "cancelOrder": false,
+                        "cancelOrder": true,
                         "carrierLabel": true,
                         "storageCapacity": true,
                         "weightMin": {
-                          "value": 5,
-                          "unit": "kg"
+                          "value": 0,
+                          "unit": "mcg"
                         },
                         "weightMax": {
-                          "value": 50,
-                          "unit": "kg"
+                          "value": 0,
+                          "unit": "mcg"
                         },
-                        "ditanceMax": {
-                          "value": 5,
+                        "distanceMax": {
+                          "value": 0,
                           "unit": "m"
                         }
+                      }
+                    },
+                    "referenceNumber": "string",
+                    "parcels": {
+                      "id": "56f74d65s4f564ds6",
+                      "trackingId": "77899656544BY",
+                      "status": "DELIVERY_KO",
+                      "subStatus": "FAILED_WITH_RETURN",
+                      "barcode": {
+                        "value": "7841122236655",
+                        "type": "barcode",
+                        "format": "128"
+                      },
+                      "package": {
+                        "reference": "EARB1225",
+                        "products": [
+                          {
+                            "type": "TYPOLOGY_GENERIC",
+                            "ean": "1259456954845",
+                            "cug": "LAMPE785AD",
+                            "label": "Lampe de chevet",
+                            "quantity": 1
+                          }
+                        ]
                       }
                     }
                   }
@@ -162,7 +186,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "./retailer_to_woop.v1.4.0.json#/components/schemas/errorCode"
+                  "$ref": "./retailer_to_woop.v1.5.0.json#/components/schemas/errorCode"
                 },
                 "examples": {
                   "example": {
@@ -181,7 +205,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "./retailer_to_woop.v1.4.0.json#/components/schemas/errorCode"
+                  "$ref": "./retailer_to_woop.v1.5.0.json#/components/schemas/errorCode"
                 },
                 "examples": {
                   "example": {
@@ -291,7 +315,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "./retailer_to_woop.v1.4.0.json#/components/schemas/errorCode"
+                  "$ref": "./retailer_to_woop.v1.5.0.json#/components/schemas/errorCode"
                 },
                 "examples": {
                   "example": {
@@ -310,7 +334,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "./retailer_to_woop.v1.4.0.json#/components/schemas/errorCode"
+                  "$ref": "./retailer_to_woop.v1.5.0.json#/components/schemas/errorCode"
                 },
                 "examples": {
                   "example": {
@@ -433,7 +457,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "./retailer_to_woop.v1.4.0.json#/components/schemas/errorCode"
+                  "$ref": "./retailer_to_woop.v1.5.0.json#/components/schemas/errorCode"
                 },
                 "examples": {
                   "example": {
@@ -452,7 +476,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "./retailer_to_woop.v1.4.0.json#/components/schemas/errorCode"
+                  "$ref": "./retailer_to_woop.v1.5.0.json#/components/schemas/errorCode"
                 },
                 "examples": {
                   "example": {
@@ -578,7 +602,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "./retailer_to_woop.v1.4.0.json#/components/schemas/errorCode"
+                  "$ref": "./retailer_to_woop.v1.5.0.json#/components/schemas/errorCode"
                 },
                 "examples": {}
               }
@@ -589,7 +613,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "./retailer_to_woop.v1.4.0.json#/components/schemas/errorCode"
+                  "$ref": "./retailer_to_woop.v1.5.0.json#/components/schemas/errorCode"
                 },
                 "examples": {
                   "example": {
@@ -742,7 +766,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "./retailer_to_woop.v1.4.0.json#/components/schemas/errorCode"
+                  "$ref": "./retailer_to_woop.v1.5.0.json#/components/schemas/errorCode"
                 },
                 "examples": {
                   "example-1": {
@@ -764,7 +788,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "./retailer_to_woop.v1.4.0.json#/components/schemas/errorCode"
+                  "$ref": "./retailer_to_woop.v1.5.0.json#/components/schemas/errorCode"
                 },
                 "examples": {
                   "example": {
@@ -833,7 +857,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "./retailer_to_woop.v1.4.0.json#/components/schemas/errorCode"
+                  "$ref": "./retailer_to_woop.v1.5.0.json#/components/schemas/errorCode"
                 }
               }
             }
@@ -843,7 +867,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "./retailer_to_woop.v1.4.0.json#/components/schemas/errorCode"
+                  "$ref": "./retailer_to_woop.v1.5.0.json#/components/schemas/errorCode"
                 }
               }
             }
@@ -869,13 +893,6 @@
                     "type": "string",
                     "description": "Identifiant de commande"
                   },
-                  "amount": {
-                    "type": "number",
-                    "description": "Montant des frais indiqués par le transporteur."
-                  },
-                  "currency": {
-                    "$ref": "#/components/schemas/currency"
-                  },
                   "reason": {
                     "$ref": "#/components/schemas/deltaCostReason"
                   },
@@ -888,16 +905,18 @@
                     "type": "string",
                     "minLength": 1,
                     "description": "Date de l'évènement enregistré. "
+                  },
+                  "": {
+                    "$ref": "./models/price.yaml"
                   }
                 },
                 "required": [
                   "deliveryId",
                   "orderId",
-                  "amount",
-                  "currency",
                   "reason",
                   "comment",
-                  "date"
+                  "date",
+                  ""
                 ]
               },
               "examples": {
@@ -906,7 +925,7 @@
                     "deliveryId": "056d12bb-7b53-46b8-980e-2c430fd9b4d3",
                     "externalReference": "056d12bb-7b53-46b8-980e-2c430fd9b4d3",
                     "orderId": "1d0297b0-be4e-409f-8179-b253",
-                    "amount": 165.98,
+                    "taxExcludedAmount": 165.98,
                     "currency": "EUR",
                     "reason": "DELTACOST_LATE_CANCELLATION",
                     "comment": "Commande annulée 5min avant livraison.",
@@ -962,7 +981,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "./retailer_to_woop.v1.4.0.json#/components/schemas/errorCode"
+                  "$ref": "./retailer_to_woop.v1.5.0.json#/components/schemas/errorCode"
                 }
               }
             }
@@ -972,7 +991,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "./retailer_to_woop.v1.4.0.json#/components/schemas/errorCode"
+                  "$ref": "./retailer_to_woop.v1.5.0.json#/components/schemas/errorCode"
                 }
               }
             }
@@ -1000,7 +1019,7 @@
                         "taxExcludedAmount": 10,
                         "currency": "EUR"
                       },
-                      "vehicleType": "string",
+                      "vehicleType": "VEHICLE_TYPE_BIKE",
                       "carrierName": "string",
                       "reasons": [
                         "REFUSED_TOO_HEAVY"
@@ -1060,7 +1079,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "./retailer_to_woop.v1.4.0.json#/components/schemas/errorCode"
+                  "$ref": "./retailer_to_woop.v1.5.0.json#/components/schemas/errorCode"
                 },
                 "examples": {}
               }
@@ -1071,7 +1090,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "./retailer_to_woop.v1.4.0.json#/components/schemas/errorCode"
+                  "$ref": "./retailer_to_woop.v1.5.0.json#/components/schemas/errorCode"
                 }
               }
             }
@@ -1099,10 +1118,10 @@
                     "format": "date-time"
                   },
                   "status": {
-                    "$ref": "./retailer_to_woop.v1.4.0.json#/components/schemas/collectStatus"
+                    "$ref": "./retailer_to_woop.v1.5.0.json#/components/schemas/collectStatus"
                   },
                   "slot": {
-                    "$ref": "./retailer_to_woop.v1.4.0.json#/components/schemas/slot"
+                    "$ref": "./retailer_to_woop.v1.5.0.json#/components/schemas/slot"
                   },
                   "additionalData": {
                     "type": "array",
@@ -1149,10 +1168,12 @@
                       "start": "2019-05-02T15:00:00+0000",
                       "end": "2019-05-02T15:30:00+0000"
                     },
-                    "additionalData": {
-                      "key": "space",
-                      "value": "A32"
-                    }
+                    "additionalData": [
+                      {
+                        "key": "space",
+                        "value": "A32"
+                      }
+                    ]
                   }
                 }
               }
@@ -1393,17 +1414,6 @@
         },
         "description": "Précise le type de véhicule utilisé pour le transport. "
       },
-      "currency": {
-        "type": "string",
-        "description": "Devise, précise la monnaie utilisée.",
-        "enum": [
-          "EUR"
-        ],
-        "title": "Devise (currency)",
-        "x-examples": {
-          "Exemple": "EUR"
-        }
-      },
       "team": {
         "type": "object",
         "properties": {
@@ -1430,31 +1440,6 @@
           }
         },
         "description": "Informations de l'équipe ayant contribué à la livraison."
-      },
-      "price": {
-        "title": "Prix (price)",
-        "x-examples": {
-          "Exemple": {
-            "value": 20,
-            "currency": "EUR"
-          }
-        },
-        "type": "object",
-        "description": "Précise le prix d'achât du produit. ",
-        "properties": {
-          "value": {
-            "type": "number",
-            "format": "float",
-            "description": "valeur"
-          },
-          "currency": {
-            "$ref": "#/components/schemas/currency"
-          }
-        },
-        "required": [
-          "value",
-          "currency"
-        ]
       },
       "carrier": {
         "title": "Transporteur (carrier)",
@@ -1780,38 +1765,6 @@
           "DELTACOST_UNKNOWN"
         ]
       },
-      "priceQuote": {
-        "description": "Correspond au prix du devis",
-        "type": "object",
-        "title": "Prix du devis (priceQuote)",
-        "x-examples": {
-          "example": {
-            "taxExcludedAmount": 17.3,
-            "currency": "EUR"
-          }
-        },
-        "properties": {
-          "taxExcludedAmount": {
-            "type": "number",
-            "description": "Valeur indicative du prix sans taxe"
-          },
-          "taxIncludedAmount": {
-            "type": "number",
-            "description": "Valeur indicative du prix avec taxe"
-          },
-          "taxAmount": {
-            "type": "number",
-            "description": "Valeur indicative du montant des taxes"
-          },
-          "currency": {
-            "$ref": "#/components/schemas/currency"
-          }
-        },
-        "required": [
-          "taxExcludedAmount",
-          "currency"
-        ]
-      },
       "getQuote": {
         "description": "Ensemble des devis émis par les transporteurs lors de la demande de création de commande. ",
         "type": "object",
@@ -1838,7 +1791,7 @@
             "description": "Dans le cas d'un devis refusé la valeur est égale a \"-1\""
           },
           "price": {
-            "$ref": "#/components/schemas/priceQuote"
+            "$ref": "./models/price.yaml"
           },
           "vehicleType": {
             "$ref": "#/components/schemas/vehicleType"
