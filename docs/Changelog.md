@@ -3,6 +3,24 @@
 
 Toutes les modifications notables apportées aux apis seront documentées ici.
 
+## Général
+
+### 1.5 -> 1.6
+
+#### Workflow statut de livraison
+<!--
+type: tab
+title: 1.5
+-->
+![Workflow_status_livraison_1.5.png](https://stoplight.io/api/v1/projects/cHJqOjkyOTQ/images/S9Jyxo1wPbQ)
+
+
+<!--
+type: tab
+title: 1.6
+-->
+![Workflow_status_livraison.png](https://stoplight.io/api/v1/projects/cHJqOjkyOTQ/images/uvZojBVFgns)
+<!-- type: tab-end -->
 
 ## Enseigne vers Woop
 

@@ -4,7 +4,8 @@ Au cours de son cycle de vie la commande passe tour à tour par plusieurs statut
 
 ### Parcours d'une commande
 
-![Workflow_status_livraison.png](https://stoplight.io/api/v1/projects/cHJqOjkyOTQ/images/xCGIDq45shc)
+![Workflow_status_livraison.png](https://stoplight.io/api/v1/projects/cHJqOjkyOTQ/images/zxbZCpmzQ7w)
+
 
 
 ### Liste des statuts de livraison possible
