@@ -1,10 +1,10 @@
 # Statuts de livraison
 
-Au cours de son cycle de vie la livraison passe tour à tour par plusieurs statuts. Ceux que nous identifions sont les différents stades de la livraison. 
+Au cours de son cycle de vie la commande passe tour à tour par plusieurs statuts. Ceux que nous identifions sont les différents stades de la livraison. 
 
 ### Parcours d'une commande
 
-![get-started-icon](../../assets/images/Workflow_status_livraison.png)
+![Workflow_status_livraison.png](https://stoplight.io/api/v1/projects/cHJqOjkyOTQ/images/xCGIDq45shc)
 
 
 ### Liste des statuts de livraison possible
@@ -35,6 +35,8 @@ Statut | Sous-statut | Intitulé | Exemples de commentaire
   `DELIVERY_REPLANNED` || Date de livraison replanifiée par le transporteur | "N/A"
 
 
-### Gestion des retours et des erreurs
 
-![get-started-icon](../../assets/images/Workflow_retours_livraison.png)
+### Sous-statuts et cas d'usage 
+
+![Workflow_annexe_livraison.png](https://stoplight.io/api/v1/projects/cHJqOjkyOTQ/images/KQg1fKPVsaU)
+
