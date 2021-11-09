@@ -29,7 +29,8 @@ title: 1.6
 #### GET /orders 
 [Lien vers la documentation](https://api.woopit.fr/docs/retailer/b3A6Njg0NzIwOA-recuperer-des-commandes)
 
-- **Majeur**: Suppression des informations `packages` et `price`. Ces informations ne sont retournés que dans le détail d'une commande (get /orders/{id}). **/!\ Pas de rétro-compatibilité, suppression de ces informations sur toutes les versions !**
+- **Majeur**: Suppression des informations `packages` et `price`. Ces informations ne sont retournés que dans le détail d'une commande (get /orders/{id}). 
+**/!\ Pas de rétro-compatibilité, suppression de ces informations sur toutes les versions !**
 
 
 - **Majeur**: Remplacement du champs `currentStatus` par deux champs `status` et `subStatus` dans `delivery`: [Explication des nouveaux status de livraisons](https://api.woopit.fr/docs/retailer/ZG9jOjEwMDkzODc-statuts-de-livraison)
@@ -71,6 +72,55 @@ title: 1.6
 <!-- type: tab-end -->
 
 
+- **Majeur**: Déplacement du contenu du noeud `order` à la racine de la de l'objet. 
+
+<!--
+type: tab
+title: 1.5
+-->
+```json
+{
+  "orders": [
+    {
+      "picking": {
+        ...
+      },
+      "delivery": {
+        ...
+      },
+      "order": {
+        "id": "A1234",
+        "referenceNumber": "A6172",
+        ....
+      }
+    }
+  ]
+}
+```
+
+<!--
+type: tab
+title: 1.6
+-->
+```json
+{
+  "order":
+  {
+    "id": "A1234",
+    "referenceNumber": "A6172",
+    "picking": {
+      ...
+    },
+    "delivery": {
+      ...
+    },
+    ....
+  }
+}
+```
+<!-- type: tab-end -->
+
+
 - **Majeur**: Remplacement du champs `currentStatus` par un champs `status` dans `order`:
 
 <!--
@@ -82,8 +132,14 @@ title: 1.5
   "orders": [
     {
       ...,
+      "picking": {
+        ...
+      },
       "order": {
-        "currentStatus": "ORDER_DELIVERED"
+        "id": "12343",
+        "referenceNumber": "A6172",
+        "currentStatus": "ORDER_DELIVERED",
+        ....
       }
     }
   ]
@@ -98,10 +154,13 @@ title: 1.6
 {
   "orders": [
     {
-      ...,
-      "order": {
-        "status": "ORDER_DELIVERED"
-      }
+      "id": "12343",
+      "referenceNumber": "A6172",
+      "status": "ORDER_DELIVERED",
+      "picking": {
+        ...
+      },
+      ...
     }
   ]
 }

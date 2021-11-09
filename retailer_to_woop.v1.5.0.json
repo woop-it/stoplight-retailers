@@ -3919,6 +3919,10 @@
           "example-1": {
             "orders": [
               {
+                "id": "787566AZEE",
+                "status": "ORDER_CREATED",
+                "updatedAt": "2021-02-10T09:33:41.422Z",
+                "referenceNumber": "1234",
                 "picking": {
                   "interval": {
                     "start": "2021-02-08T05:33:41.422Z",
@@ -3949,12 +3953,6 @@
                     "title": "Responsable opérationnel"
                   },
                   "claimUrl": "https://woopit.fr"
-                },
-                "order": {
-                  "id": "787566AZEE",
-                  "status": "ORDER_CREATED",
-                  "updatedAt": "2021-02-10T09:33:41.422Z",
-                  "referenceNumber": "1234"
                 },
                 "parcels": [
                   {
@@ -3992,9 +3990,28 @@
             "items": {
               "type": "object",
               "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "Identifiant de la commande"
+                },
+                "status": {
+                  "$ref": "#/components/schemas/orderStatus"
+                },
+                "updatedAt": {
+                  "type": "string",
+                  "description": "Date de dernière mise à jour",
+                  "format": "date"
+                },
+                "referenceNumber": {
+                  "type": "string",
+                  "description": "Référence de la commande"
+                },
                 "picking": {
                   "type": "object",
                   "description": "Informations sur le prélèvement",
+                  "required": [
+                    "interval"
+                  ],
                   "properties": {
                     "interval": {
                       "$ref": "#/components/schemas/interval"
@@ -4004,6 +4021,9 @@
                 "delivery": {
                   "description": "Informations sur la livraison",
                   "type": "object",
+                  "required": [
+                    "interval"
+                  ],
                   "properties": {
                     "externalDeliveryId": {
                       "type": "string",
@@ -4026,11 +4046,7 @@
                     "subStatus": {
                       "$ref": "./models/subStatus.yaml"
                     }
-                  },
-                  "required": [
-                    "externalDeliveryId",
-                    "status"
-                  ]
+                  }
                 },
                 "carrier": {
                   "type": "object",
@@ -4048,29 +4064,15 @@
                       "$ref": "#/components/schemas/contact"
                     }
                   }
-                },
-                "order": {
-                  "type": "object",
-                  "description": "Informations de la commande",
-                  "properties": {
-                    "id": {
-                      "type": "string",
-                      "description": "Identifiant de la commande"
-                    },
-                    "status": {
-                      "$ref": "#/components/schemas/orderStatus"
-                    },
-                    "updatedAt": {
-                      "type": "string",
-                      "description": "Date de dernière mise à jour"
-                    },
-                    "referenceNumber": {
-                      "type": "string",
-                      "description": "Référence de la commande"
-                    }
-                  }
                 }
-              }
+              },
+              "required": [
+                "id",
+                "status",
+                "updatedAt",
+                "picking",
+                "delivery"
+              ]
             }
           }
         }
@@ -4174,6 +4176,9 @@
               "picking": {
                 "type": "object",
                 "description": "Informations sur le prélèvement",
+                "required": [
+                  "interval"
+                ],
                 "properties": {
                   "interval": {
                     "$ref": "#/components/schemas/interval"
@@ -4183,6 +4188,9 @@
               "delivery": {
                 "description": "Informations sur la livraison",
                 "type": "object",
+                "required": [
+                  "interval"
+                ],
                 "properties": {
                   "externalDeliveryId": {
                     "type": "string",
@@ -4205,11 +4213,7 @@
                   "subStatus": {
                     "$ref": "./models/subStatus.yaml"
                   }
-                },
-                "required": [
-                  "externalDeliveryId",
-                  "status"
-                ]
+                }
               },
               "carrier": {
                 "type": "object",
@@ -4237,7 +4241,14 @@
               "price": {
                 "$ref": "./models/price.yaml"
               }
-            }
+            },
+            "required": [
+              "id",
+              "status",
+              "updatedAt",
+              "picking",
+              "delivery"
+            ]
           }
         }
       },
