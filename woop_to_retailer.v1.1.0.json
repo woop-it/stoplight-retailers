@@ -1279,30 +1279,6 @@
           "Exemple": "ORDER_CREATED"
         }
       },
-      "deliveryStatus": {
-        "type": "string",
-        "enum": [
-          "DELIVERY_STARTED",
-          "DELIVERY_PICK_UP_REACHED",
-          "DELIVERY_PICK_UP_OK",
-          "DELIVERY_PICK_UP_PARTIALLY",
-          "DELIVERY_IN_PROGRESS",
-          "DELIVERY_AT_DROP_OF_LOCATION",
-          "DELIVERY_PICK_UP_FAILED",
-          "DELIVERY_DELIVERED_WITH_CLAIM",
-          "DELIVERY_CANCELLED_WITH_RETURN",
-          "DELIVERY_FAILED_WITH_RETURN",
-          "DELIVERY_RETURNED_TO_PICK_UP",
-          "DELIVERY_DELIVERED_OK",
-          "DELIVERY_DELIVERED_PARTIALLY",
-          "DELIVERY_REPLANNED"
-        ],
-        "title": "Statut de livraison (deliveryStatus)",
-        "x-examples": {
-          "Exemple": "DELIVERY_STARTED"
-        },
-        "description": "Précise le statut de livraison pouvant être utilisé."
-      },
       "length": {
         "title": "Dimension (length)",
         "x-examples": {
@@ -1509,7 +1485,10 @@
             "description": "Identifiant de commande"
           },
           "status": {
-            "$ref": "#/components/schemas/deliveryStatus"
+            "$ref": "./models/status.yaml"
+          },
+          "subStatus": {
+            "$ref": "./models/subStatus.yaml"
           },
           "date": {
             "type": "string",

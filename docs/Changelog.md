@@ -372,3 +372,39 @@ title: 1.6
 ```
 <!-- type: tab-end -->
 
+## Woop vers Enseigne
+
+### PUT /status
+[Lien vers la documentation](https://api.woopit.fr/docs/retailer/b3A6MTAwODE5Ng-recevoir-les-mises-a-jour-de-statut-de-livraison)
+
+#### 1.5 -> 1.6
+
+- **Majeur**: Remplacement du champs `status` par deux champs `status` et `subStatus` dans le cas d'une mise à jour de la livraison: [Explication des nouveaux status de livraisons](https://api.woopit.fr/docs/retailer/ZG9jOjEwMDkzODc-statuts-de-livraison)
+
+<!--
+type: tab
+title: 1.5
+-->
+```json
+{
+  "deliveryId": "kzqfq41q561gq5ge1q5",
+  "orderId": "5z8d4q465zdq65d",
+  "status": "DELIVERY_PICK_UP_FAILED",
+  ...
+}
+```
+
+<!--
+type: tab
+title: 1.6
+-->
+```json
+{
+  "deliveryId": "kzqfq41q561gq5ge1q5",
+  "orderId": "5z8d4q465zdq65d",
+  "status": "DELIVERY_PICK_UP_KO",
+  "subStatus": "FAILED"
+  ...
+}
+```
+<!-- type: tab-end -->
