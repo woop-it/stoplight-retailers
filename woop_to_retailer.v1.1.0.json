@@ -62,9 +62,6 @@
                   "referenceNumber": {
                     "type": "string",
                     "description": "Reference de la commande"
-                  },
-                  "parcels": {
-                    "$ref": "./models/parcel.yaml"
                   }
                 },
                 "required": [
