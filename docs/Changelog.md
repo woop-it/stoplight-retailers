@@ -5,9 +5,10 @@ Toutes les modifications notables apportées aux apis seront documentées ici.
 
 ## Général
 
-### 1.5 -> 1.6
+### Workflow statut de livraison
 
-#### Workflow statut de livraison
+#### 1.5 -> 1.6
+
 <!--
 type: tab
 title: 1.5
@@ -24,10 +25,10 @@ title: 1.6
 
 ## Enseigne vers Woop
 
-### 1.5 -> 1.6
-
-#### GET /orders 
+### GET /orders
 [Lien vers la documentation](https://api.woopit.fr/docs/retailer/b3A6Njg0NzIwOA-recuperer-des-commandes)
+
+#### 1.5 -> 1.6
 
 - **Majeur**: Suppression des informations `packages` et `price`. Ces informations ne sont retournés que dans le détail d'une commande (get /orders/{id}). 
 **/!\ Pas de rétro-compatibilité, suppression de ces informations sur toutes les versions !**
@@ -168,8 +169,10 @@ title: 1.6
 <!-- type: tab-end -->
 
 
-#### GET /orders/{id}
+### GET /orders/{id}
 [Lien vers la documentation](https://api.woopit.fr/docs/retailer/b3A6Njg0NzIxMA-recuperer-une-commande-specifique)
+
+#### 1.5 -> 1.6
 
 - **Majeur**: Remplacement de la liste `orders` à la racine de la réponse par un objet `order` et réorganisation de celui-ci. 
 A noter que c'est la dernière commande connue avec cet identifiant qui est retournée.
@@ -371,10 +374,10 @@ title: 1.6
 
 ## Woop vers Enseignes
 
-### 1.5 -> 1.6
-
-#### PUT /carrier
+### PUT /carrier
 [Lien vers la documentation](https://api.woopit.fr/docs/retailer/b3A6MTAwODE5NQ-recevoir-le-nom-du-transporteur-selectionne-pour-une-commande)
+
+#### 1.5 -> 1.6
 
 - **Mineur**: Ajout des informations des `parcels`
 
