@@ -168,6 +168,8 @@ title: 1.6
 ```
 <!-- type: tab-end -->
 
+- **Mineur**: Ajout d'un queryParams `deliverySubStatus` pour filtrer les livraisons avec un sous-status
+
 
 ### GET /orders/{id}
 [Lien vers la documentation](https://api.woopit.fr/docs/retailer/b3A6Njg0NzIxMA-recuperer-une-commande-specifique)
@@ -371,6 +373,13 @@ title: 1.6
 }
 ```
 <!-- type: tab-end -->
+
+### GET /orders/download
+[Lien vers la documentation](https://api.woopit.fr/docs/retailer/b3A6Njg0NzIyMA-telecharger-le-bordereau-de-remise-par-transporteur)
+
+#### 1.5 -> 1.6
+
+- **Mineur**: Ajout d'un queryParams `deliverySubStatus` pour filtrer les livraisons avec un sous-status
 
 ## Woop vers Enseigne
 

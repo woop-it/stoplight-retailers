@@ -1408,6 +1408,15 @@
           },
           {
             "$ref": "#/components/parameters/queryStoreIdRequired"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "FAILED"
+            },
+            "in": "query",
+            "name": "deliverySubStatus",
+            "description": "Filtre la liste des commandes en fonction du subStatus"
           }
         ],
         "responses": {
@@ -3606,7 +3615,8 @@
         "parameters": [
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "example": "DELIVERY_PICK_UP_KO"
             },
             "in": "query",
             "name": "deliveryStatus",
@@ -3655,6 +3665,15 @@
             "in": "header",
             "name": "Accept",
             "description": "Pour avoir un retour en json qui contient une base64, mettre en valeur \"application/json\""
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "FAILED"
+            },
+            "in": "query",
+            "name": "deliverySubStatus",
+            "description": "SubStatus de la livraison"
           }
         ]
       }
@@ -5892,13 +5911,13 @@
       },
       "queryDeliveryStatus": {
         "in": "query",
-        "required": true,
         "name": "deliveryStatus",
         "description": "Filtre la liste des commandes en fonction du statut de livraison",
         "schema": {
           "type": "string",
-          "example": "DELIVERY_INIT"
-        }
+          "example": "DELIVERY_PICK_UP_KO"
+        },
+        "required": true
       },
       "queryPickingDate": {
         "in": "query",
