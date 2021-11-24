@@ -1404,9 +1404,6 @@
             "$ref": "#/components/parameters/queryDeliveryStatus"
           },
           {
-            "$ref": "#/components/parameters/queryPickingDate"
-          },
-          {
             "$ref": "#/components/parameters/queryStoreIdRequired"
           },
           {
@@ -1417,6 +1414,22 @@
             "in": "query",
             "name": "deliverySubStatus",
             "description": "Filtre la liste des commandes en fonction du subStatus"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "fromPickingDate",
+            "description": "Filtre par date de prélèvement. Permet de récupérer les commandes à partir de cette date."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "toPickingDate",
+            "description": "Filtre par date de prélèvement. Permet de récupérer les commandes antérieures à cette date."
           }
         ],
         "responses": {
