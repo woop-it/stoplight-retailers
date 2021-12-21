@@ -1702,17 +1702,10 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": [
-                  "orderId",
-                  "storeId",
-                  "picking",
-                  "delivery",
-                  "services",
-                  "packages"
-                ],
                 "properties": {
                   "picking": {
                     "description": "Informations de l'emplacement de prélèvement",
+                    "type": "object",
                     "required": [
                       "location",
                       "interval",
@@ -1738,6 +1731,7 @@
                   },
                   "delivery": {
                     "description": "Informations de l'emplacement de livraison",
+                    "type": "object",
                     "required": [
                       "location",
                       "interval",
@@ -1770,8 +1764,17 @@
                   },
                   "services": {
                     "$ref": "#/components/schemas/services"
+                  },
+                  "tags": {
+                    "$ref": "#/components/schemas/tags"
                   }
-                }
+                },
+                "required": [
+                  "picking",
+                  "delivery",
+                  "packages",
+                  "services"
+                ]
               },
               "examples": {
                 "Exemple": {
