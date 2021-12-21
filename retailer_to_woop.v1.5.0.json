@@ -1789,17 +1789,10 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": [
-                  "orderId",
-                  "storeId",
-                  "picking",
-                  "delivery",
-                  "services",
-                  "packages"
-                ],
                 "properties": {
                   "picking": {
                     "description": "Informations de l'emplacement de prélèvement",
+                    "type": "object",
                     "required": [
                       "location",
                       "interval",
@@ -1825,6 +1818,7 @@
                   },
                   "delivery": {
                     "description": "Informations de l'emplacement de livraison",
+                    "type": "object",
                     "required": [
                       "location",
                       "interval",
@@ -1857,8 +1851,17 @@
                   },
                   "services": {
                     "$ref": "#/components/schemas/services"
+                  },
+                  "tags": {
+                    "$ref": "#/components/schemas/tags"
                   }
-                }
+                },
+                "required": [
+                  "picking",
+                  "delivery",
+                  "packages",
+                  "services"
+                ]
               },
               "examples": {
                 "Exemple": {
@@ -2681,7 +2684,11 @@
                               }
                             ]
                           },
-                          "closingDates": ["2022-12-26", "2022-12-27", "2022-12-27"],
+                          "closingDates": [
+                            "2022-12-26",
+                            "2022-12-27",
+                            "2022-12-27"
+                          ],
                           "maxWeight": {
                             "value": 250,
                             "unit": "kg"
@@ -5783,12 +5790,12 @@
             }
           },
           "closingDates": {
-             "type": "array",
-             "description": "Liste de dates de fermeture temporaire du point relais",
-             "items": {
-               "type": "string",
-               "format": "date"
-             }
+            "type": "array",
+            "description": "Liste de dates de fermeture temporaire du point relais",
+            "items": {
+              "type": "string",
+              "format": "date"
+            }
           },
           "maxWeight": {
             "$ref": "#/components/schemas/mass"
