@@ -1,0 +1,25 @@
+title: trackingUrls
+type: object
+description: Liste les différents liens de tracking de la commande
+properties:
+  carrier:
+    type: string
+    description: (Facultatif) Le lien spécifique du transporteur
+    example: 'https://tracking.best-carrier.com/XJHSDL541'
+  woop:
+    type: object
+    required:
+      - simple
+      - multiple
+    description: Lien de suivi "made in" Woop
+    properties:
+      simple:
+        type: string
+        description: Lien vers de suivi d'expedition simple
+        example: 'https://trace.woopit.fr/t/48aed-b5552d-4da5-813c-00c06e1ff327'
+      multiple:
+        type: string
+        description: Lien de suivi dans le cadre du regroupement de commande
+        example: 'https://trace.woopit.fr/m/48aed-b5552d-4da5-813c-00c06e1ff327'
+required:
+  - woop

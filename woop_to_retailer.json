@@ -46,9 +46,8 @@
                     "type": "string",
                     "description": "Identifiant de commande"
                   },
-                  "trackingPageUrl": {
-                    "type": "string",
-                    "description": "Lien de la page de suivi de la livraison"
+                  "trackingUrls": {
+                    "$ref": "./models/trackingUrls.yaml"
                   },
                   "vehicleType": {
                     "$ref": "#/components/schemas/vehicleType"
@@ -67,7 +66,7 @@
                 "required": [
                   "deliveryId",
                   "orderId",
-                  "trackingPageUrl",
+                  "trackingUrls",
                   "vehicleType",
                   "price",
                   "carrier",
@@ -80,7 +79,13 @@
                     "deliveryId": "string",
                     "externalReference": "string",
                     "orderId": "string",
-                    "trackingPageUrl": "string",
+                    "trackingUrls": {
+                      "carrier": "https://tracking.best-carrier.com/XJHSDL541",
+                      "woop": {
+                        "simple": "https://trace.woopit.fr/t/48aed-b5552d-4da5-813c-00c06e1ff327",
+                        "multiple": "https://trace.woopit.fr/m/48aed-b5552d-4da5-813c-00c06e1ff327"
+                      }
+                    },
                     "vehicleType": "VEHICLE_TYPE_BIKE",
                     "price": {
                       "taxExcludedAmount": 17.2,

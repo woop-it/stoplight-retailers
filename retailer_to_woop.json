@@ -1602,7 +1602,13 @@
                             "start": "string",
                             "end": "string"
                           },
-                          "trackingPageUrl:": "string",
+                          "trackingUrls:": {
+                            "carrier": "https://tracking.best-carrier.com/XJHSDL541",
+                            "woop": {
+                              "simple": "https://trace.woopit.fr/t/48aed-b5552d-4da5-813c-00c06e1ff327",
+                              "multiple": "https://trace.woopit.fr/m/48aed-b5552d-4da5-813c-00c06e1ff327"
+                            }
+                          },
                           "status": "DELIVERY_INIT",
                           "subStatus": "FAILED"
                         },
@@ -1871,21 +1877,26 @@
                       "type": "string",
                       "description": "L’étiquette est retournée en base64 au format indiqué lors de l’appel"
                     },
-                    "trackingPageUrl": {
-                      "type": "string",
-                      "description": "Lien de la page de suivi de livraison"
+                    "trackingUrls": {
+                      "$ref": "./models/trackingUrls.yaml"
                     }
                   },
                   "required": [
                     "base64",
-                    "trackingPageUrl"
+                    "trackingUrls"
                   ]
                 },
                 "examples": {
                   "Exemple": {
                     "value": {
                       "base64": "AxfzFZEGEg ...",
-                      "trackingPageUrl": "https://url_suivi_livraison"
+                      "trackingUrls": {
+                        "carrier": "https://tracking.best-carrier.com/XJHSDL541",
+                        "woop": {
+                          "simple": "https://trace.woopit.fr/t/48aed-b5552d-4da5-813c-00c06e1ff327",
+                          "multiple": "https://trace.woopit.fr/m/48aed-b5552d-4da5-813c-00c06e1ff327"
+                        }
+                      }
                     }
                   }
                 }
@@ -3721,22 +3732,26 @@
                       "minLength": 1,
                       "description": "L’étiquette est retournée en base64 au format indiqué lors de l’appel"
                     },
-                    "trackingPageUrl:": {
-                      "type": "string",
-                      "minLength": 1,
-                      "description": "Lien de la page de suivi de livraison"
+                    "trackingUrls:": {
+                      "$ref": "./models/trackingUrls.yaml"
                     }
                   },
                   "required": [
                     "base64",
-                    "trackingPageUrl:"
+                    "trackingUrls:"
                   ]
                 },
                 "examples": {
                   "example": {
                     "value": {
                       "base64": "AxfzFZEGEg ...",
-                      "trackingPageUrl:": "https://url_suivi_livraison"
+                      "trackingUrls:": {
+                        "carrier": "https://tracking.best-carrier.com/XJHSDL541",
+                        "woop": {
+                          "simple": "https://trace.woopit.fr/t/48aed-b5552d-4da5-813c-00c06e1ff327",
+                          "multiple": "https://trace.woopit.fr/m/48aed-b5552d-4da5-813c-00c06e1ff327"
+                        }
+                      }
                     }
                   }
                 }
@@ -3958,7 +3973,13 @@
                     "start": "2021-02-11T06:33:41.422Z",
                     "end": "2021-02-11T09:33:41.422Z"
                   },
-                  "trackingPageUrl:": "https://trace.woopit.fr/d/64q55s8szg236dq",
+                  "trackingUrls:": {
+                    "carrier": "https://tracking.best-carrier.com/XJHSDL541",
+                    "woop": {
+                      "simple": "https://trace.woopit.fr/t/48aed-b5552d-4da5-813c-00c06e1ff327",
+                      "multiple": "https://trace.woopit.fr/m/48aed-b5552d-4da5-813c-00c06e1ff327"
+                    }
+                  },
                   "status": "DELIVERY_INIT",
                   "subStatus": "FAILED"
                 },
@@ -4044,7 +4065,8 @@
                   "description": "Informations sur la livraison",
                   "type": "object",
                   "required": [
-                    "interval"
+                    "interval",
+                    "trackingUrls:"
                   ],
                   "properties": {
                     "externalDeliveryId": {
@@ -4058,9 +4080,8 @@
                     "interval": {
                       "$ref": "#/components/schemas/interval"
                     },
-                    "trackingPageUrl:": {
-                      "type": "string",
-                      "description": "Url de la page de suivi de livraison"
+                    "trackingUrls:": {
+                      "$ref": "./models/trackingUrls.yaml"
                     },
                     "status": {
                       "$ref": "./models/status.yaml"
@@ -4123,7 +4144,13 @@
                   "start": "2021-02-11T06:33:41.422Z",
                   "end": "2021-02-11T09:33:41.422Z"
                 },
-                "trackingPageUrl:": "https://trace.woopit.fr/d/64q55s8szg236dq",
+                "trackingUrls:": {
+                  "carrier": "https://tracking.best-carrier.com/XJHSDL541",
+                  "woop": {
+                    "simple": "https://trace.woopit.fr/t/48aed-b5552d-4da5-813c-00c06e1ff327",
+                    "multiple": "https://trace.woopit.fr/m/48aed-b5552d-4da5-813c-00c06e1ff327"
+                  }
+                },
                 "status": "DELIVERY_INIT",
                 "subStatus": "FAILED"
               },
@@ -4211,7 +4238,8 @@
                 "description": "Informations sur la livraison",
                 "type": "object",
                 "required": [
-                  "interval"
+                  "interval",
+                  "trackingUrls:"
                 ],
                 "properties": {
                   "externalDeliveryId": {
@@ -4225,9 +4253,8 @@
                   "interval": {
                     "$ref": "#/components/schemas/interval"
                   },
-                  "trackingPageUrl:": {
-                    "type": "string",
-                    "description": "Url de la page de suivi de livraison"
+                  "trackingUrls:": {
+                    "$ref": "./models/trackingUrls.yaml"
                   },
                   "status": {
                     "$ref": "./models/status.yaml"
