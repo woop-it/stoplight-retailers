@@ -4724,6 +4724,33 @@
           "productsPrice": {
             "$ref": "#/components/schemas/productsPrice"
           },
+          "oustandingBalance": {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "number"
+              },
+              "currency": {
+                "$ref": "./models/currency.yaml"
+              },
+              "paymentMethod": {
+                "type": "string",
+                "enum": [
+                  "CASH",
+                  "CREDIT_CART",
+                  "DEBIT_CARD",
+                  "DIRECT_DEBIT",
+                  "BANK_TRANSFER",
+                  "CHECK"
+                ]
+              }
+            },
+            "required": [
+              "value",
+              "currency",
+              "paymentMethod"
+            ]
+          },
           "tags": {
             "$ref": "#/components/schemas/tags"
           }
@@ -5482,6 +5509,7 @@
         "title": "Motif d'annulation (cancelledReasons)"
       },
       "deliveryService": {
+        "type": "string",
         "description": "Précise le service de livraison pouvant être utilisé.",
         "enum": [
           "SERVICE_PICKUP_POINT",
@@ -5493,13 +5521,13 @@
           "SERVICE_RECOVERY",
           "SERVICE_SIMPLE_INSTALL",
           "SERVICE_COMPLEX_INSTALL",
-          "SERVICE_ASSEMBLY"
+          "SERVICE_ASSEMBLY",
+          "SERVICE_PAY_ON_DELIVERY"
         ],
         "x-examples": {
           "Exemple": "SERVICE_PICKUP_POINT"
         },
-        "title": "Service de livraison (deliveryService)",
-        "type": "string"
+        "title": "Service de livraison (deliveryService)"
       },
       "productType": {
         "type": "string",
