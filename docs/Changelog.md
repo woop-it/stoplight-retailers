@@ -381,6 +381,24 @@ title: 1.6
 
 - **Mineur**: Ajout d'un queryParams `deliverySubStatus` pour filtrer les livraisons avec un sous-status
 
+### POST /orders
+
+#### 1.6
+
+- **Mineur**: Ajout du service "contre remboursement".
+
+Informations à ajouter uniquement dans le cadre du service `PAY_ON_DELIVERY` :
+
+```json
+  "oustandingBalance": {
+    "value": 174,
+    "currency": "EUR",
+    "paymentMethod": "CASH"
+  }
+```
+
+
+
 ## Woop vers Enseigne
 
 ### PUT /status
