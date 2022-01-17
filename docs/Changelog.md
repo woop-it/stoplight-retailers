@@ -385,7 +385,7 @@ title: 1.6
 
 - **Mineur**: Ajout du service "contre remboursement". (Ajouter à partir de la version 1.2.0)
 
-Informations à ajouter uniquement dans le cadre du service `PAY_ON_DELIVERY` :
+Informations à ajouter uniquement dans le cadre du service `SERVICE_PAY_ON_DELIVERY` :
 
 ```json
   "oustandingBalance": {

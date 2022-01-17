@@ -4726,6 +4726,7 @@
           },
           "oustandingBalance": {
             "type": "object",
+            "description": "Reste à payer, à utiliser dans le cadre du service `SERVICE_PAY_ON_DELIVERY`",
             "properties": {
               "value": {
                 "type": "number"
