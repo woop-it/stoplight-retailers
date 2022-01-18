@@ -4706,11 +4706,6 @@
               }
             }
           },
-          "numberOfPackages": {
-            "description": "Ce champ est à utiliser si vous souhaitez n'envoyer qu'un colis mais diviser son poids par X NumberOfPackage. La plateforme LMMP va regarder l'info NumberOfPackage puis calculer le nombre de package non générique. Puis va soustraire ce nombre au NumberOfPackage pour diviser le package contenant la marchandse générique par le résultat. ATTENTION : ce champ est spécifique à un besoin Décathlon, merci de ne pas en tenir compte pour le MVP si vous n'êtes pas ce retailer ",
-            "type": "integer",
-            "deprecated": true
-          },
           "packages": {
             "description": "Ensemble des colis",
             "type": "array",
@@ -4724,7 +4719,7 @@
           "productsPrice": {
             "$ref": "#/components/schemas/productsPrice"
           },
-          "oustandingBalance": {
+          "expectedPayment": {
             "type": "object",
             "description": "Reste à payer, à utiliser dans le cadre du service `SERVICE_PAY_ON_DELIVERY`",
             "properties": {

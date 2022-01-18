@@ -388,7 +388,7 @@ title: 1.6
 Informations à ajouter uniquement dans le cadre du service `SERVICE_PAY_ON_DELIVERY` :
 
 ```json
-  "oustandingBalance": {
+  "expectedPayment": {
     "value": 174,
     "currency": "EUR",
     "paymentMethod": "CASH"
