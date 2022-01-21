@@ -4932,12 +4932,9 @@
       "tags": {
         "type": "array",
         "description": "Permet de définir des \"marqueurs\" sur cette commande.",
+        "title": "Tags",
         "items": {
           "type": "object",
-          "required": [
-            "key",
-            "value"
-          ],
           "properties": {
             "key": {
               "type": "string",
@@ -4946,10 +4943,18 @@
             "value": {
               "type": "string",
               "example": "web"
+            },
+            "applyToOrchestration": {
+              "type": "boolean",
+              "description": "- Si `true`, le tag est utilisé dans les conditions d'orchestration\n- Si `false`, le tag n'est pas pris en compte dans les conditions d'orchestration.\nDans tous les cas, le tag est transmis au transporteur."
             }
-          }
-        },
-        "title": "Tags"
+          },
+          "required": [
+            "key",
+            "value",
+            "applyToOrchestration"
+          ]
+        }
       },
       "address": {
         "description": "Ensemble des informations utiles pour une adresse livraison/prélèvement.",
