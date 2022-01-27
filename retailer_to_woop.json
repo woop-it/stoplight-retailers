@@ -6089,7 +6089,10 @@
         "required": true,
         "description": "Date de fin des créneaux retournés",
         "name": "toDate",
-        "example": "2021-07-25"
+        "example": "2021-07-25",
+        "schema": {
+          "type": "string"
+        }
       },
       "pathPickupPointId": {
         "in": "path",
