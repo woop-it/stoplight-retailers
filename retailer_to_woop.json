@@ -337,6 +337,15 @@
             "in": "query",
             "name": " minRemainingCapacity",
             "description": "Capacité minimale autorisée "
+          },
+          {
+            "schema": {
+              "type": "boolean",
+              "default": "false"
+            },
+            "in": "query",
+            "description": "Renvoyer également les créneaux en cours",
+            "name": "withOnGoingSlots"
           }
         ],
         "responses": {
