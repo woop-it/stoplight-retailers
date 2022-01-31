@@ -4,7 +4,9 @@ tags: ['Bases']
 
 # Authentification
 
-Un token est nécessaire pour échanger avec nos APIs, une fois récupéré il est valide pendant 24h et doit être fourni à chaque appel dans un header HTTP : `Authorization: Bearer {token}`
+Un token est nécessaire pour échanger avec nos APIs, une fois récupéré il est valide pendant 24h.
+
+## Récupérer un token
 
 ### Urls
 
@@ -14,7 +16,6 @@ Un token est nécessaire pour échanger avec nos APIs, une fois récupéré il e
 | Preproduction | <https://connect.preprod.gcp.last-mile.fr/api/oauth/token> |
 | Recette       | <https://connect.recette.gcp.last-mile.fr/api/oauth/token> |
 
-### Récupérer un token
 
 <!-- theme: info -->
 
@@ -40,7 +41,7 @@ Un token est nécessaire pour échanger avec nos APIs, une fois récupéré il e
   }
 }
 ```
-#### Réponse
+### Réponse
 ```json json_schema
 {
   "type": "object",
@@ -71,3 +72,17 @@ Un token est nécessaire pour échanger avec nos APIs, une fois récupéré il e
   ]
 }
 ```
+
+## Utiliser du token
+
+L'`acces_token` obtenu doit être fourni à chaque appel dans un header HTTP : `Authorization: Bearer {token}`
+
+### Urls de nos API
+
+| Environnement |                             Url                            |
+| ------------- | :--------------------------------------------------------: |
+| Production    | <https://retailer.last-mile.fr>          |
+| Preproduction | <https://ret-api.preprod.gcp.last-mile.fr> |
+| Recette       | <https://ret-api.recette.gcp.last-mile.fr> |
+
+
