@@ -805,7 +805,7 @@
         ]
       },
       "get": {
-        "summary": "",
+        "summary": "Récupérer une collecte",
         "operationId": "get-collects-collectId",
         "responses": {
           "200": {
@@ -840,7 +840,10 @@
             "description": "Not Found"
           }
         },
-        "description": "Retourne les informations de la collecte."
+        "description": "Retourne les informations de la collecte.",
+        "tags": [
+          "Collecte"
+        ]
       }
     },
     "/orders": {
