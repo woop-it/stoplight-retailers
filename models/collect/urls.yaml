@@ -1,0 +1,14 @@
+title: urls
+type: object
+description: Liens à destination du client final.
+properties:
+  reschedule:
+    type: string
+    description: Url permettant de modifier un créneau (présent si la collecte n'est pas terminée)
+    example: 'https://trace.woopit.fr/p/5451fds5fsdfsd56fds6'
+  track:
+    type: string
+    description: Url de suivi de la collecte
+    example: 'https://trace.woopit.fr/dt/dqs54fd4s5fq4sd'
+required:
+  - track

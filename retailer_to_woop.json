@@ -803,6 +803,44 @@
         "tags": [
           "Collecte"
         ]
+      },
+      "get": {
+        "summary": "",
+        "operationId": "get-collects-collectId",
+        "responses": {
+          "200": {
+            "description": "Retourne les informations de la collect",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/collectStatus"
+                    },
+                    "slot": {
+                      "$ref": "#/components/schemas/slot"
+                    },
+                    "mode": {
+                      "$ref": "./models/collect/mode.yaml"
+                    },
+                    "urls": {
+                      "$ref": "./models/collect/urls.yaml"
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "mode"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "description": "Retourne les informations de la collecte."
       }
     },
     "/orders": {
@@ -3931,7 +3969,7 @@
                     "type": "array",
                     "description": "Permet de transmettre des données supplémentaires",
                     "items": {
-                      "$ref": "./woop_to_retailer.v1.1.0.json#/components/schemas/additionalData"
+                      "$ref": "./woop_to_retailer.json#/components/schemas/additionalData"
                     }
                   }
                 },
@@ -4329,12 +4367,7 @@
         "title": "Demande de retrait (postCollects)",
         "properties": {
           "mode": {
-            "type": "string",
-            "description": "Mode de click & collect choisi par le client ",
-            "enum": [
-              "standard",
-              "delay"
-            ]
+            "$ref": "./models/collect/mode.yaml"
           },
           "collectId": {
             "type": "string",

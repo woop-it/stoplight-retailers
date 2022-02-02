@@ -188,7 +188,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "./retailer_to_woop.v1.5.0.json#/components/schemas/errorCode"
+                  "$ref": "./retailer_to_woop.json#/components/schemas/errorCode"
                 },
                 "examples": {
                   "example": {
@@ -207,7 +207,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "./retailer_to_woop.v1.5.0.json#/components/schemas/errorCode"
+                  "$ref": "./retailer_to_woop.json#/components/schemas/errorCode"
                 },
                 "examples": {
                   "example": {
@@ -317,7 +317,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "./retailer_to_woop.v1.5.0.json#/components/schemas/errorCode"
+                  "$ref": "./retailer_to_woop.json#/components/schemas/errorCode"
                 },
                 "examples": {
                   "example": {
@@ -336,7 +336,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "./retailer_to_woop.v1.5.0.json#/components/schemas/errorCode"
+                  "$ref": "./retailer_to_woop.json#/components/schemas/errorCode"
                 },
                 "examples": {
                   "example": {
@@ -459,7 +459,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "./retailer_to_woop.v1.5.0.json#/components/schemas/errorCode"
+                  "$ref": "./retailer_to_woop.json#/components/schemas/errorCode"
                 },
                 "examples": {
                   "example": {
@@ -478,7 +478,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "./retailer_to_woop.v1.5.0.json#/components/schemas/errorCode"
+                  "$ref": "./retailer_to_woop.json#/components/schemas/errorCode"
                 },
                 "examples": {
                   "example": {
@@ -604,7 +604,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "./retailer_to_woop.v1.5.0.json#/components/schemas/errorCode"
+                  "$ref": "./retailer_to_woop.json#/components/schemas/errorCode"
                 },
                 "examples": {}
               }
@@ -615,7 +615,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "./retailer_to_woop.v1.5.0.json#/components/schemas/errorCode"
+                  "$ref": "./retailer_to_woop.json#/components/schemas/errorCode"
                 },
                 "examples": {
                   "example": {
@@ -768,7 +768,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "./retailer_to_woop.v1.5.0.json#/components/schemas/errorCode"
+                  "$ref": "./retailer_to_woop.json#/components/schemas/errorCode"
                 },
                 "examples": {
                   "example-1": {
@@ -790,7 +790,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "./retailer_to_woop.v1.5.0.json#/components/schemas/errorCode"
+                  "$ref": "./retailer_to_woop.json#/components/schemas/errorCode"
                 },
                 "examples": {
                   "example": {
@@ -859,7 +859,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "./retailer_to_woop.v1.5.0.json#/components/schemas/errorCode"
+                  "$ref": "./retailer_to_woop.json#/components/schemas/errorCode"
                 }
               }
             }
@@ -869,7 +869,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "./retailer_to_woop.v1.5.0.json#/components/schemas/errorCode"
+                  "$ref": "./retailer_to_woop.json#/components/schemas/errorCode"
                 }
               }
             }
@@ -983,7 +983,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "./retailer_to_woop.v1.5.0.json#/components/schemas/errorCode"
+                  "$ref": "./retailer_to_woop.json#/components/schemas/errorCode"
                 }
               }
             }
@@ -993,7 +993,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "./retailer_to_woop.v1.5.0.json#/components/schemas/errorCode"
+                  "$ref": "./retailer_to_woop.json#/components/schemas/errorCode"
                 }
               }
             }
@@ -1081,7 +1081,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "./retailer_to_woop.v1.5.0.json#/components/schemas/errorCode"
+                  "$ref": "./retailer_to_woop.json#/components/schemas/errorCode"
                 },
                 "examples": {}
               }
@@ -1092,7 +1092,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "./retailer_to_woop.v1.5.0.json#/components/schemas/errorCode"
+                  "$ref": "./retailer_to_woop.json#/components/schemas/errorCode"
                 }
               }
             }
@@ -1120,10 +1120,13 @@
                     "format": "date-time"
                   },
                   "status": {
-                    "$ref": "./retailer_to_woop.v1.5.0.json#/components/schemas/collectStatus"
+                    "$ref": "./retailer_to_woop.json#/components/schemas/collectStatus"
                   },
                   "slot": {
-                    "$ref": "./retailer_to_woop.v1.5.0.json#/components/schemas/slot"
+                    "$ref": "./retailer_to_woop.json#/components/schemas/slot"
+                  },
+                  "urls": {
+                    "$ref": "./models/collect/urls.yaml"
                   },
                   "additionalData": {
                     "type": "array",
