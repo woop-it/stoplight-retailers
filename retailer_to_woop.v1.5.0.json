@@ -5063,9 +5063,6 @@
               {
                 "type": "object",
                 "description": "Emplacement de type adresse",
-                "required": [
-                  "type"
-                ],
                 "properties": {
                   "type": {
                     "type": "string",
@@ -5073,7 +5070,10 @@
                       "address"
                     ]
                   }
-                }
+                },
+                "required": [
+                  "type"
+                ]
               },
               {
                 "$ref": "#/components/schemas/address"
@@ -5083,11 +5083,6 @@
           {
             "type": "object",
             "description": "Emplacement de type point relais",
-            "required": [
-              "type",
-              "id",
-              "carrierCode"
-            ],
             "properties": {
               "type": {
                 "type": "string",
@@ -5104,15 +5099,16 @@
                 "description": "Code du transporteur",
                 "example": "bpost"
               }
-            }
+            },
+            "required": [
+              "type",
+              "id",
+              "carrierCode"
+            ]
           },
           {
             "type": "object",
             "description": "Emplacement de type point de prélèvement",
-            "required": [
-              "type",
-              "id"
-            ],
             "properties": {
               "type": {
                 "type": "string",
@@ -5123,8 +5119,16 @@
               "id": {
                 "type": "string",
                 "description": "Id du point de prélèvement"
+              },
+              "comment": {
+                "type": "string",
+                "description": "Commentaire sur le point de prélévement (surcharge du commentaire enregistré dans le back-office)"
               }
-            }
+            },
+            "required": [
+              "type",
+              "id"
+            ]
           }
         ]
       },
