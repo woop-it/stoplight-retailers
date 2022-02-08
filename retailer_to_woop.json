@@ -4168,6 +4168,10 @@
                     },
                     "contact": {
                       "$ref": "#/components/schemas/contact"
+                    },
+                    "code": {
+                      "type": "string",
+                      "description": "Code du transporteur"
                     }
                   }
                 }
@@ -4341,6 +4345,10 @@
                   },
                   "contact": {
                     "$ref": "#/components/schemas/contact"
+                  },
+                  "code": {
+                    "type": "string",
+                    "description": "Code du transporteur"
                   }
                 }
               },
