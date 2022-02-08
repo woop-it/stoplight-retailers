@@ -1059,7 +1059,7 @@
                     ],
                     "productsPrice": {
                       "value": 30,
-                      "currrency": "EUR"
+                      "currency": "EUR"
                     }
                   }
                 },
@@ -1247,7 +1247,7 @@
                     ],
                     "productsPrice": {
                       "value": 30,
-                      "currrency": "EUR"
+                      "currency": "EUR"
                     }
                   }
                 },
