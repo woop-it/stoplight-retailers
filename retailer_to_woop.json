@@ -2538,6 +2538,14 @@
                     }
                   }
                 },
+                "Recherche avec date de dépot du colis": {
+                  "value": {
+                    "latitude": 50.6379636,
+                    "longitude": 3.077384,
+                    "kilometricDistance": 50,
+                    "depositDate": "2021-09-30"
+                  }
+                },
                 "Recherche par panier": {
                   "value": {
                     "latitude": 50.6379636,
@@ -2663,6 +2671,11 @@
                               }
                             ]
                           },
+                          "closingDates": [
+                            "2022-12-26",
+                            "2022-12-27",
+                            "2022-12-27"
+                          ],
                           "maxWeight": {
                             "value": 250,
                             "unit": "kg"
@@ -5001,6 +5014,11 @@
               }
             ]
           },
+          "depositDate": {
+            "type": "string",
+            "format": "date",
+            "description": "Date estimée du dépot du colis dans le point relais (voir documentation point relais)"
+          },
           "packages": {
             "description": "Ensemble des colis",
             "type": "array",
@@ -5170,9 +5188,6 @@
               {
                 "type": "object",
                 "description": "Emplacement de type adresse",
-                "required": [
-                  "type"
-                ],
                 "properties": {
                   "type": {
                     "type": "string",
@@ -5180,7 +5195,10 @@
                       "address"
                     ]
                   }
-                }
+                },
+                "required": [
+                  "type"
+                ]
               },
               {
                 "$ref": "#/components/schemas/address"
@@ -5190,11 +5208,6 @@
           {
             "type": "object",
             "description": "Emplacement de type point relais",
-            "required": [
-              "type",
-              "id",
-              "carrierCode"
-            ],
             "properties": {
               "type": {
                 "type": "string",
@@ -5211,15 +5224,16 @@
                 "description": "Code du transporteur",
                 "example": "bpost"
               }
-            }
+            },
+            "required": [
+              "type",
+              "id",
+              "carrierCode"
+            ]
           },
           {
             "type": "object",
             "description": "Emplacement de type point de prélèvement",
-            "required": [
-              "type",
-              "id"
-            ],
             "properties": {
               "type": {
                 "type": "string",
@@ -5230,8 +5244,16 @@
               "id": {
                 "type": "string",
                 "description": "Id du point de prélèvement"
+              },
+              "comment": {
+                "type": "string",
+                "description": "Commentaire sur le point de prélévement (surcharge du commentaire enregistré dans le back-office)"
               }
-            }
+            },
+            "required": [
+              "type",
+              "id"
+            ]
           }
         ]
       },
@@ -5894,6 +5916,14 @@
                   "$ref": "#/components/schemas/interval_hour"
                 }
               }
+            }
+          },
+          "closingDates": {
+            "type": "array",
+            "description": "Liste de dates de fermeture temporaire du point relais",
+            "items": {
+              "type": "string",
+              "format": "date"
             }
           },
           "maxWeight": {
