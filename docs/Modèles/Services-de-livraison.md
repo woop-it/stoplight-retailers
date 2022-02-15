@@ -18,3 +18,4 @@ Code| Intitulé
 `SERVICE_STANDARD_TAXI`| Livraison simple en taxi (type berline)
 `SERVICE_XL_TAXI`| Livraison simple en taxi (type Van)
 `SERVICE_WITH_SIGNATURE`| Livraison avec service de signature à la réception
+`SERVICE_GREEN`| Livraison écologique
