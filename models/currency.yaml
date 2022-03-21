@@ -4,3 +4,4 @@ description: 'Devise, précise la monnaie utilisée.'
 x-internal: true
 enum:
   - EUR
+  - GBP
