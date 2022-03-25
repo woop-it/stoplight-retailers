@@ -1,33 +1,33 @@
 ---
-tags: [Retrait drive]
+tags: [Drive collection]
 ---
 
-# Statuts de retrait C&C
+# Status of C&C collection
 
-Au cours de son cycle de vie la demande de retrait en click & collect passe tour à tour par plusieurs statuts. Ceux que nous identifions sont les différents stades de la demande. 
+The click & collect collection request goes through several statuses in succession. We identify the different stages of the order. 
 
-### Parcours d'une demande de retrait
+### Process for a collection request
 
 ![get-started-icon](../../assets/images/Workflow_status_retrait_c&c.png)
 
-### Liste des statuts de livraison possible
+### List of possible delivery statuses
 
-| Statut                      | Intitulé                                     | Description                                                                                |
+| Status                      | Title                                     | Description                                                                                |
 | --------------------------- | -------------------------------------------- | ------------------------------------------------------------------------------------------ |
-| `COLLECT_INIT`              | Initialisation de la commande                | Demande de retrait récupérée par Woop.                                                     |
-| `COLLECT_STOCK_OK`          | Stock vérifié                                | Le produit demandé est disponible pour un retrait C&C                                      |
-| `COLLECT_STARTED`           | Créneau validé                               | Le créneau de retrait C&C a été validé par le client                                       |
-| `COLLECT_READY`             | Commande prête                               | Prépration C&C terminée en magasin, la commande client est prête                           |
-| `COLLECT_AWAITING`          | Client arrivé en magasin                     | Le client est arrivé en magasin et attent d'être pris en charge par un vendeur             |
-| `COLLECT_IN_PROGRESS`       | Retrait en cours                             | Prise en charge du client par le magasin                                                   |
-| `COLLECT_PICK_UP_OK`        | Retrait effectué                             | La commande C&C a bien été récupérée par le client                                         |
-| `COLLECT_PICK_UP_FAILED`    | Retrait en echec                             | La commande C&C n'a pas été récupérée par le client                                        |
-| `COLLECT_PICK_UP_PARTIALLY` | Retrait partiel                              | La commande C&C n'a pas été récupérée entièrement par le client et devra être replanifiée. |
-| `COLLECT_CANCELLED`         | Retrait C&C annulée                          | La commande C&C a été annulée                                                              |
-| `COLLECT_BLOCKED`           | Retrait C&C bloqué                           | La commande C&C est bloquée est ne peut pas suivre son parcours correctement               |
-| `COLLECT_DELAYED`           | Retrait C&C retardé                          | La commande C&C est retardée pour diverses raison propre au magasin                        |
-| `COLLECT_REPLANNED`         | Créneau de retrait replannifié par le client | La commande C&C a été replainifée sur un autre créneau                                     |
+| `COLLECT_INIT`              | Initialization of the order                | Collection request retrieved by Woop.                                                     |
+| `COLLECT_STOCK_OK`          | Stock verified                                | The requested product is available for C&C collection                                      |
+| `COLLECT_STARTED`           | Time slot validated                               | The C&C collection time slot has been validated by the customer                                       |
+| `COLLECT_READY`             | Order ready                               | C&C preparation completed in store, customer order ready                           |
+| `COLLECT_AWAITING`          | Customer has arrived at the store                     | The customer has arrived at the store and is waiting to be assisted by a salesperson             |
+| `COLLECT_IN_PROGRESS`       | Collection in progress                             | The store assists the customer                                                   |
+| `COLLECT_PICK_UP_OK`        | Collection completed                             | The C&C order was successfully picked-up by the customer                                         |
+| `COLLECT_PICK_UP_FAILED`    | Collection failed                             | The C&C order has not been picked-up by the customer                                        |
+| `COLLECT_PICK_UP_PARTIALLY` | Partial collection                              | Not all of the C&C order has been picked-up by the customer and will need to be rescheduled. |
+| `COLLECT_CANCELLED`         | C&C collection cancelled                          | The C&C order has been cancelled                                                              |
+| `COLLECT_BLOCKED`           | C&C collection blocked                           | The C&C order is blocked and cannot be completed               |
+| `COLLECT_DELAYED`           | C&C collection delayed                          | The C&C order is delayed for various reasons related to the store                        |
+| `COLLECT_REPLANNED`         | Collection time slot rescheduled by the customer | The C&C order has been rescheduled to another time slot                                     |
 
-### Gestion des erreurs
+### Error handling
 
 ![get-started-icon](../../assets/images/Workflow_retours_c&c.png)

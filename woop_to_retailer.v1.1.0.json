@@ -1,8 +1,8 @@
 {
   "openapi": "3.0.2",
   "info": {
-    "title": "Woop vers Enseigne",
-    "description": "Pour commencer, toutes les informations technique concernant les API Woop à destination des enseignes sont centralisées dans cette documentation. Pour toute question ou précision, merci de contacter l'équipe technique interne. \n\nPour utiliser les API \"Woop vers Enseigne\", vous devez vous munir des vos accès identifiants secret fournis lors de la création de votre compte enseigne au sein de la palteforme. \n\nLa version actuellement proposée dans la documentation est la <b>Version 1.4.0</b>",
+    "title": "Woop to Brand",
+    "description": "This document contains the technical information about Woop APIs for carriers. For any questions or clarification, please contact the internal technical team.To use \"Woop to Brand\" APIs, you must use the confidential access codes provided when you created your brand account on the platform.The version currently available in the documentation is <b>Version 1.4.0</b>",
     "version": "1.1.1"
   },
   "tags": [
@@ -20,7 +20,7 @@
           "Commande"
         ],
         "operationId": "putOrderCarrier",
-        "description": "Cette méthode permet de recevoir le nom du transporteur sélectionné pour une commande donnée. \n\nLorsque le choix du transporteur assurant la livraison de la commande est établi, l'information est envoyée. ",
+        "description": "This method allows you to receive the name of the selected carrier for a given order.The information is sent when the carrier to deliver the order is chosen. ",
         "parameters": [
           {
             "$ref": "#/components/parameters/pathOrderId"
@@ -28,7 +28,7 @@
         ],
         "requestBody": {
           "required": true,
-          "description": "Contient les informations du transporteur sélectionné.",
+          "description": "Contains the information of the selected carrier.",
           "content": {
             "application/json": {
               "schema": {
@@ -36,19 +36,19 @@
                 "properties": {
                   "deliveryId": {
                     "type": "string",
-                    "description": "Identifiant de livraison"
+                    "description": "Delivery identifier"
                   },
                   "externalReference": {
                     "type": "string",
-                    "description": "Référence de commmande"
+                    "description": "Order reference"
                   },
                   "orderId": {
                     "type": "string",
-                    "description": "Identifiant de commande"
+                    "description": "Order identifier"
                   },
                   "trackingPageUrl": {
                     "type": "string",
-                    "description": "Lien de la page de suivi de la livraison"
+                    "description": "Link to delivery tracking page"
                   },
                   "vehicleType": {
                     "$ref": "#/components/schemas/vehicleType"
@@ -61,7 +61,7 @@
                   },
                   "referenceNumber": {
                     "type": "string",
-                    "description": "Reference de la commande"
+                    "description": "Order reference"
                   }
                 },
                 "required": [
@@ -122,10 +122,10 @@
         },
         "responses": {
           "204": {
-            "description": "Requête traitée avec succès"
+            "description": "Request processed successfully"
           },
           "400": {
-            "description": "Elements manquants et/ou incorrect dans le body",
+            "description": "Missing and/or incorrect items in the body",
             "content": {
               "application/json": {
                 "schema": {
@@ -153,7 +153,7 @@
             }
           },
           "403": {
-            "description": "L'information ne peut plus être envoyée",
+            "description": "Information can no longer be sent",
             "content": {
               "application/json": {
                 "schema": {
@@ -172,7 +172,7 @@
             }
           },
           "404": {
-            "description": "Le 'orderId' n'a pas été trouvé",
+            "description": "The 'orderId' was not found",
             "content": {
               "application/json": {
                 "schema": {
@@ -200,7 +200,7 @@
           "Commande"
         ],
         "operationId": "putOrderStatus",
-        "description": "Cette méthode permet à l’enseigne de recevoir les mises à jour des statuts de livraison de la part du transporteur pour une commande donnée.  \n\nL’enseigne pourra alors suivre en temps réel l’évolution de la livraison dans le temps. ",
+        "description": "This method allows the brand to receive delivery status updates from the carrier for a given order.The brand can then follow the progress of the delivery in real time. ",
         "parameters": [
           {
             "$ref": "#/components/parameters/pathOrderId"
@@ -208,7 +208,7 @@
         ],
         "requestBody": {
           "required": true,
-          "description": "Contient les informations du changement de statut.",
+          "description": "Contains the updated status information.",
           "content": {
             "application/json": {
               "schema": {
@@ -235,7 +235,7 @@
                     "orderId": "5z8d4q465zdq65d",
                     "status": "DELIVERY_STARTED",
                     "date": "2019-11-27T12:00:00+0000",
-                    "comment": "Ceci est un commentaire utile.",
+                    "comment": "This is a useful comment.",
                     "team": {
                       "members": [
                         {
@@ -251,10 +251,10 @@
         },
         "responses": {
           "204": {
-            "description": "Requête traitée avec succès"
+            "description": "Request processed successfully"
           },
           "400": {
-            "description": "Elements manquants et/ou incorrect dans le body",
+            "description": "Missing and/or incorrect items in the body",
             "content": {
               "application/json": {
                 "schema": {
@@ -282,7 +282,7 @@
             }
           },
           "403": {
-            "description": "L'information ne peut plus être envoyée",
+            "description": "Information can no longer be sent",
             "content": {
               "application/json": {
                 "schema": {
@@ -301,7 +301,7 @@
             }
           },
           "404": {
-            "description": "Le 'orderId' n'a pas été trouvé",
+            "description": "The 'orderId' was not found",
             "content": {
               "application/json": {
                 "schema": {
@@ -329,7 +329,7 @@
           "Commande"
         ],
         "operationId": "putOrderScore",
-        "description": "Cette méthode permet de recevoir les retours client suite à la livraison.",
+        "description": "This method allows you to receive customer comments following delivery.",
         "parameters": [
           {
             "$ref": "#/components/parameters/pathOrderId"
@@ -337,7 +337,7 @@
         ],
         "requestBody": {
           "required": true,
-          "description": "Contient les informations de la note.",
+          "description": "Contains the rating information.",
           "content": {
             "application/json": {
               "schema": {
@@ -345,18 +345,18 @@
                 "properties": {
                   "orderId": {
                     "type": "string",
-                    "description": "Identifiant de commande"
+                    "description": "Order identifier"
                   },
                   "score": {
                     "type": "array",
-                    "description": "Note de la livraison",
+                    "description": "Delivery rating",
                     "items": {
                       "$ref": "#/components/schemas/score"
                     }
                   },
                   "comment": {
                     "type": "array",
-                    "description": "Commentaires clients",
+                    "description": "Customer comments",
                     "items": {
                       "$ref": "#/components/schemas/scoreComment"
                     }
@@ -393,10 +393,10 @@
         },
         "responses": {
           "204": {
-            "description": "Requête traitée avec succès"
+            "description": "Request processed successfully"
           },
           "400": {
-            "description": "Elements manquants et/ou incorrect dans le body",
+            "description": "Missing and/or incorrect items in the body",
             "content": {
               "application/json": {
                 "schema": {
@@ -424,7 +424,7 @@
             }
           },
           "403": {
-            "description": "L'information ne peut plus être envoyée",
+            "description": "Information can no longer be sent",
             "content": {
               "application/json": {
                 "schema": {
@@ -443,7 +443,7 @@
             }
           },
           "404": {
-            "description": "Le 'orderId' n'a pas été trouvé",
+            "description": "The 'orderId' was not found",
             "content": {
               "application/json": {
                 "schema": {
@@ -471,7 +471,7 @@
           "Commande"
         ],
         "operationId": "postOrderDeliveryClosure",
-        "description": "Cette méthode permet de recevoir les informations de facturation pour une livraison donnée.",
+        "description": "This method is used to receive billing information for a given delivery.",
         "parameters": [
           {
             "$ref": "#/components/parameters/pathOrderId"
@@ -479,7 +479,7 @@
         ],
         "requestBody": {
           "required": true,
-          "description": "Contient les informations de facturation.",
+          "description": "Contains billing information.",
           "content": {
             "application/json": {
               "schema": {
@@ -487,15 +487,15 @@
                 "properties": {
                   "deliveryId": {
                     "type": "string",
-                    "description": "Identifiant de la livraison"
+                    "description": "Delivery identifier"
                   },
                   "externalReference": {
                     "type": "string",
-                    "description": "Référence de commande"
+                    "description": "Order reference"
                   },
                   "orderId": {
                     "type": "string",
-                    "description": "Identifiant de commmande"
+                    "description": "Order identifier"
                   },
                   "billedDistance": {
                     "$ref": "#/components/schemas/length"
@@ -538,10 +538,10 @@
         },
         "responses": {
           "204": {
-            "description": "Requête traitée avec succès"
+            "description": "Request processed successfully"
           },
           "400": {
-            "description": "Elements manquants et/ou incorrect dans le body",
+            "description": "Missing and/or incorrect items in the body",
             "content": {
               "application/json": {
                 "schema": {
@@ -569,7 +569,7 @@
             }
           },
           "403": {
-            "description": "L'information ne peut plus être envoyée",
+            "description": "Information can no longer be sent",
             "content": {
               "application/json": {
                 "schema": {
@@ -580,7 +580,7 @@
             }
           },
           "404": {
-            "description": "Le 'orderId' n'a pas été trouvé",
+            "description": "The 'orderId' was not found",
             "content": {
               "application/json": {
                 "schema": {
@@ -608,7 +608,7 @@
           "Commande"
         ],
         "operationId": "postOrderEvents",
-        "description": "Cette méthode permet de recevoir les évènements liés à une commande. Toutes les notifications envoyées au client seront transmises à l'enseigne: Raisons d'échec, date d'envoi et contenu de la notification. \n\n",
+        "description": "This method is used to receive events related to an order. All notifications sent to the customer will be forwarded to the brand: Failure reasons, sent date and content of the notification.",
         "parameters": [
           {
             "$ref": "#/components/parameters/pathOrderId"
@@ -616,7 +616,7 @@
         ],
         "requestBody": {
           "required": true,
-          "description": "Contient les informations de l'évenement.",
+          "description": "Contains the event information.",
           "content": {
             "application/json": {
               "schema": {
@@ -624,7 +624,7 @@
                 "properties": {
                   "status": {
                     "type": "boolean",
-                    "description": "Indique si l'événement à été envoyé correctement au client"
+                    "description": "Indicates whether the event was correctly sent to the customer"
                   },
                   "type": {
                     "type": "string",
@@ -633,12 +633,12 @@
                       "EVENT_TYPE_MAIL",
                       "EVENT_TYPE_CALL"
                     ],
-                    "description": "Type de l'évènement"
+                    "description": "Event type"
                   },
                   "date": {
                     "type": "string",
                     "format": "datetime",
-                    "description": "Date de l’événement"
+                    "description": "Event date"
                   },
                   "subject": {
                     "type": "string",
@@ -661,19 +661,19 @@
                       "DELIVERY_DELAYED",
                       "DELIVERY_AVAILABLE"
                     ],
-                    "description": "Sujet de l'évènement"
+                    "description": "Event subject"
                   },
                   "message": {
                     "type": "string",
-                    "description": "Message envoyé au client"
+                    "description": "Message sent to the customer"
                   },
                   "failReason": {
                     "type": "string",
-                    "description": "Motif de l'échec si status est false"
+                    "description": "Reason for failure if status is false"
                   },
                   "sender": {
                     "type": "string",
-                    "description": "Expéditeur"
+                    "description": "Sender"
                   }
                 },
                 "required": [
@@ -702,10 +702,10 @@
         },
         "responses": {
           "204": {
-            "description": "Requête traitée avec succès"
+            "description": "Request processed successfully"
           },
           "400": {
-            "description": "Elements manquants et/ou incorrect dans le body",
+            "description": "Missing and/or incorrect items in the body",
             "content": {
               "application/json": {
                 "schema": {
@@ -733,7 +733,7 @@
             }
           },
           "403": {
-            "description": "L'information ne peut plus être envoyée",
+            "description": "Information can no longer be sent",
             "content": {
               "application/json": {
                 "schema": {
@@ -755,7 +755,7 @@
             }
           },
           "404": {
-            "description": "Le 'orderId' n'a pas été trouvé",
+            "description": "The 'orderId' was not found",
             "content": {
               "application/json": {
                 "schema": {
@@ -793,7 +793,7 @@
         "operationId": "postOrderDeltaCosts",
         "responses": {
           "204": {
-            "description": "Requête traitée avec succès"
+            "description": "Request processed successfully"
           },
           "400": {
             "description": "Bad Request",
@@ -844,7 +844,7 @@
             }
           }
         },
-        "description": "Cette méthode permet de recevoir les informations de deltaCost émis par le transporteur sur la commande lors de la livraison. Ces données peuvent être de type; Frais supplémentaire et/ou remise sur la livraison. ",
+        "description": "This method allows you to receive the deltaCost information issued by the carrier for the order during delivery. This data can be of type; Additional costs and/or discount for the delivery. ",
         "requestBody": {
           "content": {
             "application/json": {
@@ -854,19 +854,19 @@
                 "properties": {
                   "deliveryId": {
                     "type": "string",
-                    "description": "Identifiant de livraison"
+                    "description": "Delivery identifier"
                   },
                   "externalReference": {
                     "type": "string",
-                    "description": "Référence de commmande"
+                    "description": "Order reference"
                   },
                   "orderId": {
                     "type": "string",
-                    "description": "Identifiant de commande"
+                    "description": "Order identifier"
                   },
                   "amount": {
                     "type": "number",
-                    "description": "Montant des frais indiqués par le transporteur."
+                    "description": "Costs indicated by the carrier."
                   },
                   "currency": {
                     "$ref": "#/components/schemas/currency"
@@ -877,12 +877,12 @@
                   "comment": {
                     "type": "string",
                     "minLength": 1,
-                    "description": "Commentaire libre laissé par le transporteur. "
+                    "description": "Additional comment left by the carrier. "
                   },
                   "date": {
                     "type": "string",
                     "minLength": 1,
-                    "description": "Date de l'évènement enregistré. "
+                    "description": "Date of the recorded event. "
                   }
                 },
                 "required": [
@@ -904,14 +904,14 @@
                     "amount": 165.98,
                     "currency": "EUR",
                     "reason": "DELTACOST_LATE_CANCELLATION",
-                    "comment": "Commande annulée 5min avant livraison.",
+                    "comment": "Order cancelled 5 mins before delivery.",
                     "date": "2019-11-27T10:30:00+0000"
                   }
                 }
               }
             }
           },
-          "description": "Contient les informations relatives aux deltaCosts. "
+          "description": "Contains deltaCosts information. "
         },
         "tags": [
           "Commande"
@@ -934,10 +934,10 @@
         "operationId": "postOrderQuotes",
         "responses": {
           "200": {
-            "description": "Requête traitée avec succès"
+            "description": "Request processed successfully"
           },
           "400": {
-            "description": "Elements manquants et/ou incorrect dans le body",
+            "description": "Missing and/or incorrect items in the body",
             "content": {
               "application/json": {
                 "schema": {
@@ -973,7 +973,7 @@
             }
           }
         },
-        "description": "Cette méthode permet de recevoir l'ensemble des devis émis aux transporteurs pour la création d'une expédition. Les devis seront retournés à l'enseigne à titre informatif. ",
+        "description": "This method allows you to receive all quotes issued to carriers for the creation of a delivery. Quotes will be returned to the brand for information purposes. ",
         "requestBody": {
           "content": {
             "application/json": {
@@ -1007,7 +1007,7 @@
               }
             }
           },
-          "description": "Contient les informations des devis transporteurs."
+          "description": "Contains the carrier quote information."
         },
         "tags": [
           "Commande"
@@ -1030,10 +1030,10 @@
         "operationId": "put-collects-collectId-status",
         "responses": {
           "204": {
-            "description": "Requête traitée avec succès"
+            "description": "Request processed successfully"
           },
           "400": {
-            "description": "Elements manquants et/ou incorrect dans le body",
+            "description": "Missing and/or incorrect items in the body",
             "content": {
               "application/json": {
                 "schema": {
@@ -1051,7 +1051,7 @@
             }
           },
           "403": {
-            "description": "L'information ne peut plus être envoyée",
+            "description": "Information can no longer be sent",
             "content": {
               "application/json": {
                 "schema": {
@@ -1062,7 +1062,7 @@
             }
           },
           "404": {
-            "description": "Le 'collectId' n'a pas été trouvé",
+            "description": "The 'collectId' was not found",
             "content": {
               "application/json": {
                 "schema": {
@@ -1072,7 +1072,7 @@
             }
           }
         },
-        "description": "Cette méthode permet à l’enseigne de recevoir les informations de statut sur la commande de Click & Collect. L’enseigne pourra alors suivre en temps réel l’évolution de la collecte du client dans le temps. ",
+        "description": "This method allows the brand to receive status information on the Click & Collect order. The brand can then monitor progress of the customer collection in real time . ",
         "parameters": [],
         "tags": [
           "Collecte"
@@ -1153,7 +1153,7 @@
               }
             }
           },
-          "description": "Contient les informations du changement de statut."
+          "description": "Contains the updated status information."
         }
       }
     }
@@ -1161,7 +1161,7 @@
   "components": {
     "schemas": {
       "score": {
-        "title": "Note de livraison (score)",
+        "title": "Delivery rating (score)",
         "type": "object",
         "x-examples": {
           "Exemple": {
@@ -1170,11 +1170,11 @@
             "includedInCarrierScore": true
           }
         },
-        "description": "Précise la note obtenue de la part du client final pour la livraison effectuée et si elle est inclue dans le calcul de la note transporteur. ",
+        "description": "Specifies the rating for the delivery given by the end customer and if it is included in the calculation of the carrier rating. ",
         "properties": {
           "note": {
             "type": "number",
-            "description": "Note"
+            "description": "Rating"
           },
           "type": {
             "type": "string",
@@ -1182,11 +1182,11 @@
               "SCORE_TYPE_RECOMMENDATION",
               "SCORE_TYPE_SATISFACTION"
             ],
-            "description": "Type de note"
+            "description": "Rating type"
           },
           "includedInCarrierScore": {
             "type": "boolean",
-            "description": "Inclus dans la note transporteur"
+            "description": "Included in the carrier rating"
           }
         },
         "required": [
@@ -1206,19 +1206,19 @@
             "email": "johndoe@mail.com"
           }
         },
-        "description": "Informations de contact de livraison/prélèvement.",
+        "description": "Delivery/collection contact information.",
         "properties": {
           "firstName": {
             "type": "string",
-            "description": "Prénom"
+            "description": "First name"
           },
           "lastName": {
             "type": "string",
-            "description": "Nom"
+            "description": "Last name"
           },
           "phone": {
             "type": "string",
-            "description": "Téléphone"
+            "description": "Telephone"
           },
           "email": {
             "type": "string",
@@ -1250,8 +1250,8 @@
           "ORDER_DELIVERED",
           "ORDER_CANCELLED"
         ],
-        "title": "Statut de commande (orderStatus)",
-        "description": "Précise le statut d'une commande.",
+        "title": "Order status (orderStatus)",
+        "description": "Specifies the order status.",
         "x-examples": {
           "Exemple": "ORDER_CREATED"
         }
@@ -1274,11 +1274,11 @@
           "DELIVERY_DELIVERED_PARTIALLY",
           "DELIVERY_REPLANNED"
         ],
-        "title": "Statut de livraison (deliveryStatus)",
+        "title": "Delivery status (deliveryStatus)",
         "x-examples": {
           "Exemple": "DELIVERY_STARTED"
         },
-        "description": "Précise le statut de livraison pouvant être utilisé."
+        "description": "Specifies the delivery status that can be used."
       },
       "length": {
         "title": "Dimension (length)",
@@ -1289,7 +1289,7 @@
           }
         },
         "type": "object",
-        "description": "Précise la dimension d'un colis.",
+        "description": "Specifies the size of a package.",
         "properties": {
           "value": {
             "type": "number",
@@ -1318,18 +1318,18 @@
             "$ref": "#/components/schemas/massUnit"
           }
         },
-        "title": "Poids (mass)",
+        "title": "Weight (mass)",
         "x-examples": {
           "Exemple": {
             "value": 1,
             "unit": "kg"
           }
         },
-        "description": "Précise le poids d'un colis/produit."
+        "description": "Specifies the weight of a package/product."
       },
       "lengthUnit": {
         "type": "string",
-        "description": "Précise l'unité de mesure pour les dimensions.",
+        "description": "Specifies the unit of measurement for the dimensions.",
         "enum": [
           "mm",
           "cm",
@@ -1339,13 +1339,13 @@
           "ft",
           "mi"
         ],
-        "title": "Unité de mesure (lengthUnit)",
+        "title": "Unit of measurement (lengthUnit)",
         "x-examples": {
           "Exemple": "mm"
         }
       },
       "massUnit": {
-        "description": "Précise l'unité de poids.",
+        "description": "Specifies the unit of weight.",
         "enum": [
           "mcg",
           "mg",
@@ -1356,7 +1356,7 @@
           "mt",
           "t"
         ],
-        "title": "Unité de poids (massUnit)",
+        "title": "Unit of weight (massUnits)",
         "x-examples": {
           "Exemple": "mcg"
         },
@@ -1382,19 +1382,19 @@
           "VEHICLE_TYPE_GAZ_VAN_BIG",
           "VEHICLE_TYPE_GAZ_VAN_MEDIUM"
         ],
-        "title": "Type de véhicule de transport (vehicleType)",
+        "title": "Type of carrier vehicle (vehicleType)",
         "x-examples": {
           "Exemple": "VEHICLE_TYPE_BIKE"
         },
-        "description": "Précise le type de véhicule utilisé pour le transport. "
+        "description": "Specifies the type of vehicle used for the delivery. "
       },
       "currency": {
         "type": "string",
-        "description": "Devise, précise la monnaie utilisée.",
+        "description": "Currency, specifies the currency used.",
         "enum": [
           "EUR"
         ],
-        "title": "Devise (currency)",
+        "title": "Currency (currency)",
         "x-examples": {
           "Exemple": "EUR"
         }
@@ -1414,7 +1414,7 @@
             }
           }
         },
-        "title": "Équipe (team)",
+        "title": "Team (team)",
         "x-examples": {
           "Exemple": {
             "members": [
@@ -1424,10 +1424,10 @@
             ]
           }
         },
-        "description": "Informations de l'équipe ayant contribué à la livraison."
+        "description": "Information from the delivery team."
       },
       "price": {
-        "title": "Prix (price)",
+        "title": "Price (price)",
         "x-examples": {
           "Exemple": {
             "value": 20,
@@ -1435,12 +1435,12 @@
           }
         },
         "type": "object",
-        "description": "Précise le prix d'achât du produit. ",
+        "description": "Specifies the product purchase price. ",
         "properties": {
           "value": {
             "type": "number",
             "format": "float",
-            "description": "valeur"
+            "description": "value"
           },
           "currency": {
             "$ref": "#/components/schemas/currency"
@@ -1452,7 +1452,7 @@
         ]
       },
       "carrier": {
-        "title": "Transporteur (carrier)",
+        "title": "Carrier (carrier)",
         "x-examples": {
           "Exemple": {
             "name": "Bpost",
@@ -1484,15 +1484,15 @@
           }
         },
         "type": "object",
-        "description": "Précise les informations du transporteur.",
+        "description": "Specifies the carrier information.",
         "properties": {
           "name": {
             "type": "string",
-            "description": "Nom du transporteur"
+            "description": "Carrier name"
           },
           "code": {
             "type": "string",
-            "description": "Code du transporteur"
+            "description": "Carrier code"
           },
           "contact": {
             "$ref": "#/components/schemas/contact"
@@ -1509,17 +1509,17 @@
         ]
       },
       "putDeliveryStatus": {
-        "title": "Mise à jour de statut de livraison (putDeliveryStatus)",
+        "title": "Update of the delivery status (putDeliveryStatus)",
         "type": "object",
-        "description": "Mise à jour de statut de livraison.",
+        "description": "Update of the delivery status.",
         "properties": {
           "deliveryId": {
             "type": "string",
-            "description": "Identifiant de la livraison"
+            "description": "Delivery identifier"
           },
           "orderId": {
             "type": "string",
-            "description": "Identifiant de commande"
+            "description": "Order identifier"
           },
           "status": {
             "$ref": "#/components/schemas/deliveryStatus"
@@ -1527,11 +1527,11 @@
           "date": {
             "type": "string",
             "format": "datetime",
-            "description": "Date de la modification"
+            "description": "Modification date"
           },
           "comment": {
             "type": "string",
-            "description": "Commentaire libre"
+            "description": "Additional comment"
           },
           "team": {
             "$ref": "#/components/schemas/team"
@@ -1555,17 +1555,17 @@
         ]
       },
       "putOrderStatus": {
-        "title": "Mise à jour du statut de la commande (putOrderStatus)",
+        "title": "Update of the order status (putOrderStatus)",
         "type": "object",
         "properties": {
           "orderId": {
             "type": "string",
-            "description": "Identifiant de la commande"
+            "description": "Order identifier"
           },
           "date": {
             "type": "string",
             "format": "datetime",
-            "description": "Date de mise à jour"
+            "description": "Date of the update"
           },
           "status": {
             "$ref": "#/components/schemas/orderStatus"
@@ -1576,7 +1576,7 @@
           "date",
           "status"
         ],
-        "description": "Mise à jour du statut de la commande.",
+        "description": "Update of the order status.",
         "x-examples": {
           "example": {
             "orderId": "string",
@@ -1586,17 +1586,17 @@
         }
       },
       "additionalData": {
-        "title": "Données additionnelles (additionalData)",
+        "title": "Additional data (additionalData)",
         "type": "object",
-        "description": "Permet de recevoir des informations/données personnalisées de la part du transporteur.",
+        "description": "Allows you to receive personalised information/data from the carrier.",
         "properties": {
           "key": {
             "type": "string",
-            "description": "Intitulé de l'information reçue"
+            "description": "Title of the information received"
           },
           "value": {
             "type": "string",
-            "description": "Valeur de l'information"
+            "description": "Value of the information transmitted"
           }
         },
         "required": [
@@ -1611,7 +1611,7 @@
         }
       },
       "appointment": {
-        "description": "Précise un interval de dates avec heures pour la prise de RDV client.",
+        "description": "Specifies a range of dates and times for customer appointments.",
         "type": "object",
         "x-examples": {
           "example": {
@@ -1623,22 +1623,22 @@
           "start": {
             "type": "string",
             "minLength": 1,
-            "description": "Début du créneau"
+            "description": "Start of the time slot"
           },
           "end": {
             "type": "string",
             "minLength": 1,
-            "description": "Fin du créneau"
+            "description": "End of the time slot"
           }
         },
         "required": [
           "start",
           "end"
         ],
-        "title": "Date de prise RDV (appointment)"
+        "title": "Appointment date (appointment)"
       },
       "specifications": {
-        "description": "Liste des caractéristiques enregistrées pour un transporteur sur une commande.",
+        "description": "List of specifications recorded for a carrier on an order.",
         "type": "object",
         "x-examples": {
           "example": {
@@ -1660,23 +1660,23 @@
             }
           }
         },
-        "title": "Caractéristiques (specifications)",
+        "title": "Specifications (specifications)",
         "properties": {
           "updateOrder": {
             "type": "boolean",
-            "description": "Indique si la modification de commande est autorisée"
+            "description": "Indicates whether the order update is allowed"
           },
           "cancelOrder": {
             "type": "boolean",
-            "description": "Indique si l'annulation de commande est autorisée"
+            "description": "Indicates whether the order cancellation is allowed"
           },
           "carrierLabel": {
             "type": "boolean",
-            "description": "Indique si le transporteur possède une étiquette de transport"
+            "description": "Indicates whether the carrier has a carrier label"
           },
           "storageCapacity": {
             "type": "boolean",
-            "description": "Indique si le transporteur possède une capacité de stockage"
+            "description": "Indicates whether the carrier has storage capacity"
           },
           "weightMin": {
             "$ref": "#/components/schemas/weight"
@@ -1699,7 +1699,7 @@
         ]
       },
       "weight": {
-        "description": "Précise le poids autorisé",
+        "description": "Specifies the weight allowance",
         "type": "object",
         "properties": {
           "value": {
@@ -1719,10 +1719,10 @@
             "unit": "kg"
           }
         },
-        "title": "Poids (weight)"
+        "title": "Weight (weight)"
       },
       "distance": {
-        "description": "Précise la distance entre deux points.",
+        "description": "Specifies the distance between two points.",
         "type": "object",
         "x-examples": {
           "exemple": {
@@ -1746,11 +1746,11 @@
       },
       "distanceUnit": {
         "type": "string",
-        "title": "Unité de distance (distanceUnit)",
+        "title": "Unit of distance (distanceUnit)",
         "x-examples": {
           "Exemple": "string"
         },
-        "description": "Précise l'unité de mesure pour le calcul de distance.",
+        "description": "Specifies the unit of measurement for the distance calculation.",
         "enum": [
           "m",
           "km"
@@ -1758,8 +1758,8 @@
       },
       "deltaCostReason": {
         "type": "string",
-        "title": "Raison de deltaCost (deltaCostReason)",
-        "description": "Précise la raison remontée par le transporteur pour la création d'un deltaCost sur une commande.  ",
+        "title": "Reason for deltaCost (deltaCostReason)",
+        "description": "Specifies the reason reported by the carrier for creating a deltaCost on an order.  ",
         "x-examples": {
           "example": "DELTACOST_EXTEND_WAITING_WAREHOUSE"
         },
@@ -1776,9 +1776,9 @@
         ]
       },
       "priceQuote": {
-        "description": "Correspond au prix du devis",
+        "description": "Corresponds to the quote price",
         "type": "object",
-        "title": "Prix du devis (priceQuote)",
+        "title": "Price of the quote (priceQuote)",
         "x-examples": {
           "example": {
             "taxExcludedAmount": 17.3,
@@ -1788,15 +1788,15 @@
         "properties": {
           "taxExcludedAmount": {
             "type": "number",
-            "description": "Valeur indicative du prix sans taxe"
+            "description": "Indicative value of the price without tax"
           },
           "taxIncludedAmount": {
             "type": "number",
-            "description": "Valeur indicative du prix avec taxe"
+            "description": "Indicative value of the price with tax"
           },
           "taxAmount": {
             "type": "number",
-            "description": "Valeur indicative du montant des taxes"
+            "description": "Indicative value of the amount of tax"
           },
           "currency": {
             "$ref": "#/components/schemas/currency"
@@ -1808,7 +1808,7 @@
         ]
       },
       "getQuote": {
-        "description": "Ensemble des devis émis par les transporteurs lors de la demande de création de commande. ",
+        "description": "All quotes issued by the carriers when requesting the creation of an order. ",
         "type": "object",
         "x-examples": {
           "example": {
@@ -1825,12 +1825,12 @@
             "comment": "string"
           }
         },
-        "title": "Informations des devis transporteurs (getQuote)",
+        "title": "Information on the carrier quotes (getQuote)",
         "properties": {
           "quoteId": {
             "type": "string",
             "minLength": 1,
-            "description": "Dans le cas d'un devis refusé la valeur est égale a \"-1\""
+            "description": "For a refused quote the value is equal to \"-1\""
           },
           "price": {
             "$ref": "#/components/schemas/priceQuote"
@@ -1863,8 +1863,8 @@
       },
       "refusedReason": {
         "type": "string",
-        "title": "Motif de refus (refusedReason)",
-        "description": "Précise les raisons de refus possible d'un devis. ",
+        "title": "Reason for refusal (refusedReason)",
+        "description": "Specifies the possible reasons for refusal of a quote. ",
         "x-examples": {
           "example": "REFUSED_AREA"
         },
@@ -1879,7 +1879,7 @@
         ]
       },
       "scoreComment": {
-        "title": "Commentaires sur la livraison (scoreComment)",
+        "title": "Comments on the delivery (scoreComment)",
         "type": "object",
         "x-examples": {
           "Exemple": {
@@ -1887,15 +1887,15 @@
             "question": "Avez-vous des suggestions à nous partager afin de nous aider à améliorer notre service de livraison ?"
           }
         },
-        "description": "Champ libre pour les commentaires clients",
+        "description": "Additional field for customer comments",
         "properties": {
           "answer": {
             "type": "string",
-            "description": "Réponse apportée par le client final"
+            "description": "Response by the end customer"
           },
           "question": {
             "type": "string",
-            "description": "Question posée au client final"
+            "description": "Question for the end customer"
           }
         },
         "required": [
@@ -1907,7 +1907,7 @@
     "parameters": {
       "pathOrderId": {
         "in": "path",
-        "description": "Identifiant de la commande",
+        "description": "Order identifier",
         "name": "orderId",
         "required": true,
         "schema": {

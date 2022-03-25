@@ -2,34 +2,34 @@
 tags: ['Bases']
 ---
 
-# Souscriptions
+# Subscriptions
 
 
-Le système de souscriptions permet de **s'abonner à des événements** liés à vos commandes qui se passent sur la plateforme Woop.
+The subscription system allows you to **subscribe to events** related to your orders on the Woop platform.
 
-Par exemple : Mise à jour du statut ou choix du transporteur de votre commande.
-
-
-Ces évènements sont décrits dans la partie **Woop vers Enseigne** de notre documentation.
-
-## Initialisation des souscriptions
+For example: Update the status or choose the carrier for your order.
 
 
-Pour vous abonner aux évènements un premier appel à **l'API [/souscriptions](https://woop.stoplight.io/docs/retailer/retailer_to_woop.v1.4.0.json/paths/paths/~1subscriptions/post)** est nécessaire.
+These events are described in the section **Woop to Brand** in our documentation.
 
-Les données à envoyer sont :
+## Initiating subscriptions
+
+
+To subscribe to events, a first call to **the API [/subscriptions](https://woop.stoplight.io/docs/retailer/retailer_to_woop.v1.4.0.json/paths/paths/~1subscriptions/post)** is required.
+
+The data to be sent is:
 
 ```json json_schema
 {
   "type": "object",
-  "description": "Informations de souscriptions",
+  "description": "Subscription information",
   "required": [
     "callbacks"
   ],
   "properties": {
     "callbacks": {
       "type": "object",
-      "description" : "Callbacks des événements",
+      "description" : "Event callbacks",
       "required": [
         "carrier",
         "status",
@@ -38,18 +38,18 @@ Les données à envoyer sont :
       "properties": {
         "carrier": {
           "type": "object",
-          "description": "Callback permettant de recevoir le choix du transporteur.",
+          "description": "Callback to receive the choice of carrier.",
           "required": [
             "url"
           ],
           "properties": {
             "url": {
               "type": "string",
-              "description": "Url de la route d'API"
+              "description": "URL of the API route"
             },
             "version": {
               "type": "string",
-              "description": "Version d'API pour ce callback",
+              "description": "API version for this callback",
               "example": "1.1.0"
             }
           }
@@ -59,123 +59,123 @@ Les données à envoyer sont :
           "required": [
             "url"
           ],
-          "description": "Callback permettant de recevoir les changements de statut",
+          "description": "Callback to receive status changes",
           "properties": {
             "url": {
                 "type": "string",
-                "description": "Url de la route d'API"
+                "description": "URL of the API route"
             },
             "version": {
               "type": "string",
-              "description": "Version d'API pour ce callback",
+              "description": "API version for this callback",
               "example": "1.1.0"
             }
           }
         },
         "score": {
           "type": "object",
-          "description": "Callback permettant de recevoir les notes client",
+          "description": "Callback to receive customer ratings",
           "required": [
             "url"
           ],
           "properties": {
             "url": {
               "type": "string",
-              "description": "Url de la route d'API."
+              "description": "URL of the API route."
             },
             "version": {
               "type": "string",
-              "description": "Version d'API pour ce callback.",
+              "description": "API version for this callback.",
               "example": "1.1.0"
             }
           }
         },
         "deliveryClosure": {
           "type": "object",
-          "description": "Callback permettant de recevoir les informations de facturation",
+          "description": "Callback to receive billing information",
           "required": [
             "url"
           ],
           "properties": {
             "url": {
               "type": "string",
-              "description": "Url de la route d'API."
+              "description": "URL of the API route."
             },
             "version": {
               "type": "string",
-              "description": "Version d'API pour ce callback",
+              "description": "API version for this callback",
               "example": "1.1.0"
             }
           }
         },
         "event": {
           "type": "object",
-          "description": "Callback permettant de recevoir les notifications envoyées au client",
+          "description": "Callback to receive notifications sent to the customer",
           "required": [
             "url"
           ],
           "properties": {
             "url": {
               "type": "string",
-              "description": "Url de la route d'API"
+              "description": "URL of the API route"
             },
             "version": {
               "type": "string",
-              "description": "Version d'API pour ce callback",
+              "description": "API version for this callback",
               "example": "1.1.0"
             }
           }
         },
         "deltaCosts": {
           "type": "object",
-          "description": "Callback permettant de recevoir les informations de deltaCost émis par le transporteur sur la commande.",
+          "description": "Callback to receive deltaCost information on the order issued by the carrier.",
           "required": [
             "url"
           ],
           "properties": {
             "url": {
               "type": "string",
-              "description": "Url de la route d'API"
+              "description": "URL of the API route"
             },
             "version": {
               "type": "string",
-              "description": "Version d'API pour ce callback",
+              "description": "API version for this callback",
               "example": "1.1.0"
             }
           }
         },
         "quote": {
           "type": "object",
-          "description": "Callback permettant de recevoir les devis des transporteurs",
+          "description": "Callback to receive quotes from carriers",
           "required": [
             "url"
           ],
           "properties": {
             "url": {
               "type": "string",
-              "description": "Url de la route d'API"
+              "description": "URL of the API route"
             },
             "version": {
               "type": "string",
-              "description": "Version d'API pour ce callback",
+              "description": "API version for this callback",
               "example": "1.1.0"
             }
           }
         },
         "collectStatus": {
           "type": "object",
-          "description": "Callback permettant de recevoir les changements de statut d'une collecte",
+          "description": "Callback to receive changes in the status of a collection",
           "required": [
             "url"
           ],
           "properties": {
             "url": {
               "type": "string",
-              "description": "Url de la route d'API"
+              "description": "URL of the API route"
             },
             "version": {
               "type": "string",
-              "description": "Version d'API pour ce callback",
+              "description": "API version for this callback",
               "example": "1.1.0"
             }
           }
@@ -184,7 +184,7 @@ Les données à envoyer sont :
     },
     "headers": {
       "type": "array",
-      "description": "Headers HTTP supplémentaires à envoyer lors des callbacks",
+      "description": "Additional HTTP headers to be sent in callbacks",
       "items": {
         "type": "object",
         "required": [
@@ -194,22 +194,22 @@ Les données à envoyer sont :
         "properties": {
           "key": {
             "type": "string",
-            "description": "Clé/nom du header"
+            "description": "Key/name of the header"
           },
           "value": {
             "type": "string",
-            "description": "Valeur du header"
+            "description": "Value of the header"
           }
         }
       }
     },
     "auth": {
       "type": "object",
-      "description": "Configuration de l'authentification à votre API",
+      "description": "Configuring the authentication of your API",
       "properties": {
         "basic": {
           "type": "object",
-          "description": "A definir si la méthode d'authentification à l'API voulue est basic",
+          "description": "To be defined if the required API authentication method is basic",
           "required": [
             "username",
             "password"
@@ -225,7 +225,7 @@ Les données à envoyer sont :
         },
         "oauth2": {
           "type": "object",
-          "description": "A definir si la méthode d'authentification à l'API voulue est oauth2",
+          "description": "To be defined if the required API authentication method is oauth2",
           "required": [
             "client_id",
             "client_secret",
@@ -246,13 +246,13 @@ Les données à envoyer sont :
             },
             "tokenEndPoint": {
               "type": "string",
-              "description": "Url permettant de recupérer le token d'accès en fonction du clientId et du clientSecret"
+              "description": "URL to retrieve the access token according to the clientId and the clientSecret"
             }
           }
         },
         "token": {
           "type": "object",
-          "description": "A définir si la méthode d'authentification donne un bearer token à partir d'un username/password",
+          "description": "To be defined if the authentication method gives a bearer token from a username/password",
           "required": [
             "username",
             "password",
@@ -267,7 +267,7 @@ Les données à envoyer sont :
             },
             "endpoint": {
               "type": "string",
-              "description": "Url permettant de recupérer le token d'accès"
+              "description": "URL to retrieve the access token"
             }
           }
         }
@@ -279,21 +279,21 @@ Les données à envoyer sont :
 
 ### Callbacks
 
-Les `callbacks` ou autrement dit `webhooks` permettent de définir l'URL appelée pour chaque événement, différents callbacks sont disponibles **dont certains sont obligatoires** :
+`Callbacks` also known as `webhooks` allow you to define the URL called for each event, different callbacks are available **some of which are mandatory**:
 
-Callback  | Contrat d'interface | Requis
+Callback  | Interface contract | Required
 ---------|----------|---------
-carrier  | [/orders/{orderId}/carrier](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1carrier/put) | NON
-status | [/orders/{orderId}/status](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1status/put) | NON
-score |  [/orders/{orderId}/score](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1score/put) | NON
-deliveryClosure | [/orders/{orderId}/deliveryClosure](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1deliveryClosure/post) | NON
-event | [/orders/{orderId}/events](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1events/post) | NON
-deltaCost |  [/orders/{orderId}/deltaCost](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1deltaCosts/post) | NON
-quote | [/orders/{orderId}/quote](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1quotes/post) | NON
-collectStatus | [/orders/{orderId}/status](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1collects~1%7BcollectId%7D~1status/put) | NON
+carrier  | [/orders/{orderId}/carrier](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1carrier/put) | NO
+status | [/orders/{orderId}/status](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1status/put) | NO
+score |  [/orders/{orderId}/score](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1score/put) | NO
+deliveryClosure | [/orders/{orderId}/deliveryClosure](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1deliveryClosure/post) | NO
+event | [/orders/{orderId}/events](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1events/post) | NO
+deltaCost |  [/orders/{orderId}/deltaCost](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1deltaCosts/post) | NO
+quote | [/orders/{orderId}/quote](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1quotes/post) | NO
+collectStatus | [/orders/{orderId}/status](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1collects~1%7BcollectId%7D~1status/put) | NO
 
 
-**Description d'un callback**
+**Description of a callback**
 
 ```json json_schema
 {
@@ -305,39 +305,39 @@ collectStatus | [/orders/{orderId}/status](https://woop.stoplight.io/docs/retail
   "properties": {
     "url": {
       "type": "string",
-      "description": "Url de la route d'API"
+      "description": "URL of the API route"
     }, 
     "version": {
       "type": "string",
-      "description": "Version d'API pour ce callback",
+      "description": "API version for this callback",
       "example": "1.1.0"
     }
   }
 }
 ```
 
-**Url**
+**URL**
 
-Url de la route d'API vers laquelle la plateforme Woop enverra l’événement lié au callback.
+URL of the API route where the Woop platform sends the callback event.
 
 <!-- theme: info -->
 
-> **Variable d'url**
+> **URL variable**
 >
-> Pour récupérer l'orderId dans vos APIs, il est fortement conseillé d’incorporer la variable `{orderId}` dans vos urls de callbacks.
-> Cette variable sera remplacée par la valeur de l'orderId lors des appels.
+> To retrieve the orderId in your APIs, it is highly recommended to include the variable `{orderId}` in your callback URLs.
+> This variable will be replaced by the value of the orderId in calls.
 >
 > Exemple: **https://my_url/orders/{orderId}/status** 
 
 **Version**
 
-Version d'API ciblée du callback.
+Targeted API version of the callback.
 
-Comme toutes nos APIs, les callbacks sont versionnées, **lorsque vous souscrivez à un callback il faut préciser à quelle version**.
+Like all our APIs, callbacks are versioned, **when you subscribe to a callback you must specify which version**.
 
-La version est disponible dans la documentation [Woop vers Enseigne](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json).
+The version is found in the documentation [Woop to Brand](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json).
 
-Exemple :
+Example:
 ```json
 {
   "callbacks": {
@@ -352,9 +352,9 @@ Exemple :
 
 ### Headers
 
-Si votre API a besoin de headers HTTP supplémentaires, il est possible de configurer plusieurs couples de clé-valeur qui seront envoyés à chaque appel.
+If your API needs additional HTTP headers, you can add multiple key-value pairs to be sent on each call.
 
-Exemple :
+Example:
 ```json
 {
   "headers" : [
@@ -367,14 +367,14 @@ Exemple :
 
 ### Auth
 
-Si votre API nécessite une authentification, il est possible de la configurer.
+Your API can be configured if it requires authentication.
 
-Trois méthodes d’authentification sont disponibles :
+Three authentication methods are available:
 
 
 <!--
 type: tab
-title: Méthode Basic
+title: Basic method
 -->
 Configuration:
 ```json
@@ -387,12 +387,12 @@ Configuration:
   }
 }
 ```
-Un header HTTP `Authorization : Basic YWRtaW46MTIzNA==` sera envoyé à votre API.
+An HTTP header `Authorisation: Basic YWRtaW46MTIzNA==` will be sent to your API.
 
-`YWRtaW46MTIzNA==` étant la représentation en Base64 du texte admin:1234
+`YWRtaW46MTIzNA==` Which is the Base64 representation of the text admin:1234
 <!--
 type: tab
-title: Méthode OAuth2
+title: OAuth2 method
 -->
 Configuration:
 ```json
@@ -408,11 +408,11 @@ Configuration:
   }
 }
 ```
-Un échange de token respectant la spécification [OAuth2 client_credentials](https://tools.ietf.org/html/rfc6749#section-4.4) sera effectué à chaque appel.
+A token exchange that complies with the [OAuth2 client_credentials](https://tools.ietf.org/html/rfc6749#section-4.4) will be made for each call.
 
 <!--
 type: tab
-title: Méthode Token
+title: Token method
 -->
 Configuration:
 ```json
@@ -427,30 +427,30 @@ Configuration:
   }
 }
 ```
-Cette méthode effectuera un appel **HTTP POST** vers l'endpoint configuré avec les paramètres suivants :
+This method will make a call **HTTP POST** to the endpoint configured with the following parameters:
 ```json
 {
   "username": "{username}",
   "password": "{password}"
 }
 ```
-Le endpoint appelé devra retourner un token : 
+The called endpoint should return a token: 
 ```json
 {
   "token": "87YB1K2B312K3",
 }
 ```
-Ce token sera envoyé dans le header HTTP `Authorization: Bearer {token}`
+This token will be sent in the HTTP header `Authorisation: Bearer {token}`
 <!-- type: tab-end -->
 
 
-### Exemples de souscriptions
+### Example subscriptions
 
 <!--
 type: tab
-title: Exemple 1
+title: Example 1
 -->
-Je m'abonne aux souscriptions obligatoires, mon API est protégée par une simple API Key.
+I subscribe to the required subscriptions, my API is protected by a simple API Key.
 ```json
 {
   "callbacks": {
@@ -477,9 +477,9 @@ Je m'abonne aux souscriptions obligatoires, mon API est protégée par une simpl
 
 <!--
 type: tab
-title: Exemple 2
+title: Example 2
 -->
-Je m'abonne à toutes les souscriptions, mon API est protégée par une authentification OAuth2.
+I subscribe to the required subscriptions, my API is protected by authentication, it is possible to configure it OAuth2.
 ```json
 {
   "callbacks": {
@@ -518,26 +518,26 @@ Je m'abonne à toutes les souscriptions, mon API est protégée par une authenti
 
 <!-- type: tab-end -->
 
-## Implémentation des souscriptions
+## Subscription implementation
 
-Pour chaque *callback* configuré il est nécessaire d'implémenter le contrat d'interface lié à celui-ci.
+For each *callback* configured you must implement the interface contract linked to it.
 
-Pour rappel :
+As a reminder:
 
-Callback  | Contrat d'interface | Requis
+Callback  | Interface contract | Required
 ---------|----------|---------
-carrier  | [/orders/{orderId}/carrier](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1carrier/put) | NON
-status | [/orders/{orderId}/status](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1status/put) | NON
-score |  [/orders/{orderId}/score](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1score/put) | NON
-deliveryClosure | [/orders/{orderId}/deliveryClosure](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1deliveryClosure/post) | NON
-event | [/orders/{orderId}/events](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1events/post) | NON
-deltaCost |  [/orders/{orderId}/deltaCost](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1deltaCosts/post) | NON
-quote | [/orders/{orderId}/quote](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1quotes/post) | NON
-collectStatus | [/orders/{orderId}/status](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1collects~1%7BcollectId%7D~1status/put) | NON
+carrier  | [/orders/{orderId}/carrier](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1carrier/put) | NO
+status | [/orders/{orderId}/status](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1status/put) | NO
+score |  [/orders/{orderId}/score](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1score/put) | NO
+deliveryClosureosure | [/orders/{orderId}/deliveryClosure](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1deliveryClosure/post) | NO
+event | [/orders/{orderId}/events](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1events/post) | NO
+deltaCost |  [/orders/{orderId}/deltaCost](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1deltaCosts/post) | NO
+quote | [/orders/{orderId}/quote](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1orders~1%7BorderId%7D~1quotes/post) | NO
+collectStatus | [/orders/{orderId}/status](https://woop.stoplight.io/docs/retailer/woop_to_retailer.v1.1.0.json/paths/~1collects~1%7BcollectId%7D~1status/put) | NO
 
 
 <!-- theme: warning -->
 
-> **Méthodes et codes HTTP**
+> **HTTP methods and codes**
 >
-> Lors de l'implémentation des contrats d'interfaces, il est **important** de bien respecter les **méthodes HTTP** (POST. PATCH etc...) ainsi que les **codes HTTP retours** (201, 400 etc..) spécifiés dans le contrat d'interface.
+> When implementing interface contracts, it is **important** to use **HTTP methods** (POST. PATCH etc.) and the **HTTP return codes** (201, 400 etc.) specified in the interface contract.

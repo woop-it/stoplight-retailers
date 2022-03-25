@@ -1,38 +1,38 @@
-# Statuts de livraison
+# Delivery status
 
-Au cours de son cycle de vie la livraison passe tour à tour par plusieurs statuts. Ceux que nous identifions sont les différents stades de la livraison. 
+The delivery goes through several statuses in succession. We identify the different stages of the delivery. 
 
-### Parcours d'une commande
+### Route of an order
 
 ![get-started-icon](../../assets/images/Workflow_status_livraison.png)
 
-### Liste des statuts de livraison possible
+### List of possible delivery statuses
 
-Statut | Intitulé
+Status | Title
 ---------|----------
- `DELIVERY_INIT`|Validée transporteur
- `DELIVERY_STARTED`|Coursier en approche magasin
- `DELIVERY_PICK_UP_REACHED`|Coursier arrivé en magasin
- `DELIVERY_PICK_UP_OK`|Commande prise en charge
- `DELIVERY_PICK_UP_FAILED`|Commande en échec au retrait
- `DELIVERY_PICK_UP_PARTIALLY`|Commande prise en charge partiellement
- `DELIVERY_IN_PROGRESS`|Commande en cours de livraison
- `DELIVERY_AT_DROP_OF_LOCATION`|Coursier arrivé client
- `DELIVERY_DELIVERED_OK`|Commande livrée conforme
- `DELIVERY_DELIVERED_WITH_CLAIM`|Commande livrée avec réserves
- `DELIVERY_DELIVERED_PARTIALLY`|Commande prise en charge partiellement
- `DELIVERY_FAILED_WITH_RETURN`|Livraison en échec avec retour magasin
- `DELIVERY_RETURNED_TO_PICK_UP`|Commande retournée en magasin
- `DELIVERY_CANCELLED`|Livraison annulée
- `DELIVERY_CANCELLED_WITH_RETURN`|Livraison annulée avec retour magasin
- `DELIVERY_BLOCKED`|Livraison bloquée
- `DELIVERY_DELAYED`|Livraison retardée 
- `DELIVERY_AVAILABLE`|Livraison disponible en point de retrait
- `DELIVERY_REPLANNED`|Date de livraison replannifiée par une prise de RDV avec le client
- `DELIVERY_CLOSED`|Livraison clôturée à la demande de l'enseigne 
+ `DELIVERY_INIT`|Validated carrier
+ `DELIVERY_STARTED`|Courier near to the store
+ `DELIVERY_PICK_UP_REACHED`|Courier arrived at the store
+ `DELIVERY_PICK_UP_OK`|Order collected
+ `DELIVERY_PICK_UP_FAILED`|Order failed at collection
+ `DELIVERY_PICK_UP_PARTIALLY`|Partial orders managed
+ `DELIVERY_IN_PROGRESS`|Order in process of delivery
+ `DELIVERY_AT_DROP_OF_LOCATION`|Courier arriving at the customer location
+ `DELIVERY_DELIVERED_OK`|Order delivered correctly
+ `DELIVERY_DELIVERED_WITH_CLAIM`|Order delivered with reserves
+ `DELIVERY_DELIVERED_PARTIALLY`|Partial orders managed
+ `DELIVERY_FAILED_WITH_RETURN`|Failed delivery with return to store
+ `DELIVERY_RETURNED_TO_PICK_UP`|Order returned to store
+ `DELIVERY_CANCELLED`|Delivery cancelled
+ `DELIVERY_CANCELLED_WITH_RETURN`|Delivery cancelled with return to store
+ `DELIVERY_BLOCKED`|Delivery blocked
+ `DELIVERY_DELAYED`|Delivery delayed 
+ `DELIVERY_AVAILABLE`|Delivery available at collection points
+ `DELIVERY_REPLANNED`|Delivery date rescheduled by making an appointment with the customer
+ `DELIVERY_CLOSED`|Delivery closed at the brand's request 
 
-Les statuts `DELIVERY_PICK_UP_PARTIALLY` et `DELIVERY_DELIVERED_PARTIALLY` sont réservés à la livraison et ne sont pas autorisés pour le suivi de colis.
+Statuses `DELIVERY_PICK_UP_PARTIALLY` and `DELIVERY_DELIVERED_PARTIALLY` are reserved for delivery only and are not allowed for tracking packages.
 
-### Gestion des retours et des erreurs
+### Returns and error management
 
 ![get-started-icon](../../assets/images/Workflow_retours_livraison.png)
