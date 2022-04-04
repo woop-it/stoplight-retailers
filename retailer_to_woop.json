@@ -5545,14 +5545,33 @@
       },
       "packagesReferences": {
         "type": "array",
-        "items": {
-          "type": "string"
-        },
-        "description": "Specifies package reference. Note that count of reference must be equal to package quantity",
+        "description": "Specifies package references. Note that count of reference must be equal to package quantity",
         "title": "Package references (packagesReferences)",
         "x-examples": {
           "example-1": [
-            "string"
+            {
+              "reference": "1232435",
+              "barcode": {
+                "value": "54fd56g4f5gfd456sd",
+                "type": "barcode",
+                "format": "128"
+              }
+            }
+          ]
+        },
+        "items": {
+          "type": "object",
+          "properties": {
+            "reference": {
+              "type": "string",
+              "description": "Specifies package references."
+            },
+            "barcode": {
+              "$ref": "./models/barcode.yaml"
+            }
+          },
+          "required": [
+            "reference"
           ]
         }
       },
