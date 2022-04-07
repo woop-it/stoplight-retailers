@@ -2,7 +2,7 @@
   "openapi": "3.0.2",
   "info": {
     "title": "Woop to retailer",
-    "description": "This document contains the technical information about Woop APIs for carriers. For any questions or clarification, please contact the internal technical team.To use \"Woop to Brand\" APIs, you must use the confidential access codes provided when you created your brand account on the platform.The version currently available in the documentation is <b>Version 1.7.0</b>",
+    "description": "This document contains the technical information about Woop APIs for carriers. For any questions or clarification, please contact the internal technical team.To use \"Woop to Retailer\" APIs, you must use the confidential access codes provided when you created your retailer account on the platform.The version currently available in the documentation is <b>Version 1.7.0</b>",
     "version": "1.7.0"
   },
   "tags": [
@@ -208,7 +208,7 @@
           "Order"
         ],
         "operationId": "putOrderStatus",
-        "description": "This method allows the brand to receive delivery status updates from the carrier for a given order.The brand can then follow the progress of the delivery in real time. ",
+        "description": "This method allows the retailer to receive delivery status updates from the carrier for a given order.The retailer can then follow the progress of the delivery in real time. ",
         "parameters": [
           {
             "$ref": "#/components/parameters/pathOrderId"
@@ -616,7 +616,7 @@
           "Order"
         ],
         "operationId": "postOrderEvents",
-        "description": "This method is used to receive events related to an order. All notifications sent to the customer will be forwarded to the brand: Failure reasons, sent date and content of the notification.",
+        "description": "This method is used to receive events related to an order. All notifications sent to the customer will be forwarded to the retailer: Failure reasons, sent date and content of the notification.",
         "parameters": [
           {
             "$ref": "#/components/parameters/pathOrderId"
@@ -976,7 +976,7 @@
             }
           }
         },
-        "description": "This method allows you to receive all quotes issued to carriers for the creation of a delivery. Quotes will be returned to the brand for information purposes. ",
+        "description": "This method allows you to receive all quotes issued to carriers for the creation of a delivery. Quotes will be returned to the retailer for information purposes. ",
         "requestBody": {
           "content": {
             "application/json": {
@@ -1075,7 +1075,7 @@
             }
           }
         },
-        "description": "This method allows the brand to receive status information on the Click & Collect order. The brand can then monitor progress of the customer collection in real time . ",
+        "description": "This method allows the retailer to receive status information on the Click & Collect order. The retailer can then monitor progress of the customer collection in real time . ",
         "parameters": [],
         "tags": [
           "Collect"

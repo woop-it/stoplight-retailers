@@ -31,7 +31,7 @@
   ],
   "info": {
     "title": "Retailer to Woop",
-    "description": "This document contains the technical information about Woop APIs for carriers. For any questions or clarification, please contact the internal technical team.\n\nTo use \"Brand to Woop\" APIs, you must use the confidential access codes provided when you created your brand account on the platform. [See documentation](https://woop.stoplight.io/docs/retailer/docs/Basis/2.Authentication.md)\n\nThe version currently available in the documentation is <b>Version 1.7.0</b>",
+    "description": "This document contains the technical information about Woop APIs for carriers. For any questions or clarification, please contact the internal technical team.\n\nTo use \"Retailer to Woop\" APIs, you must use the confidential access codes provided when you created your retailer account on the platform. [See documentation](https://woop.stoplight.io/docs/retailer/docs/Basis/2.Authentication.md)\n\nThe version currently available in the documentation is <b>Version 1.7.0</b>",
     "version": "1.7.0"
   },
   "servers": [
@@ -621,7 +621,7 @@
     },
     "/collects/{collectId}": {
       "patch": {
-        "description": "This method allows you to modify a collection request initially created by the brand.",
+        "description": "This method allows you to modify a collection request initially created by the retailer.",
         "operationId": "patchCollects",
         "parameters": [
           {
@@ -737,7 +737,7 @@
         ]
       },
       "delete": {
-        "description": "This method allows you to cancel a collection request initially created by the brand.\n\nThe method removes the time slot reservation as well as the collection request from the store. \n",
+        "description": "This method allows you to cancel a collection request initially created by the retailer.\n\nThe method removes the time slot reservation as well as the collection request from the store. \n",
         "operationId": "deleteCollects",
         "parameters": [
           {
@@ -4000,7 +4000,7 @@
         "tags": [
           "Collect"
         ],
-        "description": "This method allows the brand to send an update on the collection status.\n\nThe brand must enter the next collection tracking status to progress the collection request. This delivery tracking status must be consistent with the defined workflow. <a href=\"/docs/retailer/docs/Modèles/Statuts-de-retrait-C&C.md\">Workflow and status list</a>"
+        "description": "This method allows the retailer to send an update on the collection status.\n\nThe retailer must enter the next collection tracking status to progress the collection request. This delivery tracking status must be consistent with the defined workflow. <a href=\"/docs/retailer/docs/Modèles/Statuts-de-retrait-C&C.md\">Workflow and status list</a>"
       }
     }
   },
@@ -5548,7 +5548,7 @@
         "items": {
           "type": "string"
         },
-        "description": "Specifies the package number of the brand.",
+        "description": "Specifies the package number of the retailer.",
         "title": "Package references (packagesReferences)",
         "x-examples": {
           "example-1": [

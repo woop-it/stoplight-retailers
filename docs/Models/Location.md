@@ -43,7 +43,7 @@ type: tab
 title: Collection point
 -->
 
-The type "**exchangePlace**" represents a specific collection point in one of the brand's stores. This information is specific to the store and is configured in the Woop back office. When creating the collection point, you can define the identifier of your choice for each.
+The type "**exchangePlace**" represents a specific collection point in one of the retailer's stores. This information is specific to the store and is configured in the Woop back office. When creating the collection point, you can define the identifier of your choice for each.
 
 View page [Collection point (ExchangePlace)](docs/Modèles/ExchangePlace.md)for more details.
 
