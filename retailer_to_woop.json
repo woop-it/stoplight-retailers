@@ -1439,7 +1439,7 @@
         "tags": [
           "Order"
         ],
-        "description": "This method returns the details of one or more orders according to the selected filters.",
+        "description": "This method returns the details of one or more orders according to the selected filters.\n\nThe method used is governed by the following constraints:\n\n- Result limited to 100 orders\n- Sorting orders from oldest to most recent\n\nNote: It is recommended to regularly clean old test orders on staging environment.",
         "operationId": "getOrders",
         "parameters": [
           {
