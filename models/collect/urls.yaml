@@ -1,0 +1,14 @@
+title: urls
+type: object
+description: Links to the end customer.
+properties:
+  reschedule:
+    type: string
+    description: Url allowing to modify a slot (present when collect is not finished)
+    example: 'https://trace.woopit.fr/p/5451fds5fsdfsd56fds6'
+  track:
+    type: string
+    description: Tracking url for collect
+    example: 'https://trace.woopit.fr/dt/dqs54fd4s5fq4sd'
+required:
+  - track

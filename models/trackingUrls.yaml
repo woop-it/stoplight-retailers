@@ -1,0 +1,25 @@
+title: trackingUrls
+type: object
+description: Lists the different order tracking links
+properties:
+  carrier:
+    type: string
+    description: (Optional) The specific carrier tracking link
+    example: 'https://tracking.best-carrier.com/XJHSDL541'
+  woop:
+    type: object
+    required:
+      - simple
+      - multiple
+    description: Woop tracking link
+    properties:
+      simple:
+        type: string
+        description: Link to simple shipment tracking
+        example: 'https://trace.woopit.fr/t/48aed-b5552d-4da5-813c-00c06e1ff327'
+      multiple:
+        type: string
+        description: Tracking link as part of order grouping
+        example: 'https://trace.woopit.fr/m/48aed-b5552d-4da5-813c-00c06e1ff327'
+required:
+  - woop

@@ -1,0 +1,7 @@
+type: string
+title: Currency
+description: 'Currency, specifies the currency used.'
+x-internal: true
+enum:
+  - EUR
+  - GBP

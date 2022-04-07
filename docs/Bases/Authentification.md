@@ -1,14 +1,16 @@
 ---
-tags: ['Bases']
+tags: ["Basis"]
 ---
 
 # Authentication
 
-A token is required to interact with our APIs. Once retrieved, it is valid for 24 hours and must be provided in an HTTP header for each call: `Authorisation: Bearer {token}`
+A token is required to interact with our APIs. Once retrieved, it is valid for 24 hours.
+
+The token is mandatory and is required to identify yourself during a call. It must be generated at the beginning via the route indicated.
 
 ### URLs
 
-| Environment |                             URL                            |
+| Environment   |                            URL                             |
 | ------------- | :--------------------------------------------------------: |
 | Production    |          <https://token.last-mile.fr/oauth/token>          |
 | Preproduction | <https://connect.preprod.gcp.last-mile.fr/api/oauth/token> |
@@ -18,12 +20,11 @@ A token is required to interact with our APIs. Once retrieved, it is valid for 2
 
 <!-- theme: info -->
 
-> 💡     The client_id and client_secret parameters will be provided later. 
+> 💡 &nbsp; The client_id and client_secret parameters will be provided later by the Woop IT team.
 
 <!-- theme: danger -->
 
->   For this call only, the Content-Type specified in the header must be **application/x-www-form-urlencoded**.
-
+> For this call only, the Content-Type specified in the header must be **application/x-www-form-urlencoded**.
 
 ```json http
 {
@@ -40,7 +41,9 @@ A token is required to interact with our APIs. Once retrieved, it is valid for 2
   }
 }
 ```
+
 #### Response
+
 ```json json_schema
 {
   "type": "object",
@@ -52,9 +55,7 @@ A token is required to interact with our APIs. Once retrieved, it is valid for 2
     },
     "token_type": {
       "type": "string",
-      "enum": [
-        "bearer"
-      ]
+      "enum": ["bearer"]
     },
     "expires_in": {
       "type": "number",
@@ -64,10 +65,18 @@ A token is required to interact with our APIs. Once retrieved, it is valid for 2
       "type": "string"
     }
   },
-  "required": [
-    "access_token",
-    "token_type",
-    "expires_in"
-  ]
+  "required": ["access_token", "token_type", "expires_in"]
 }
 ```
+
+## Token usage
+
+The `acces_token` must be provided in an HTTP header for each call : `Authorization: Bearer {token}`
+
+### API Urls
+
+| Environment   |                    Url                     |
+| ------------- | :----------------------------------------: |
+| Production    |      <https://retailer.last-mile.fr>       |
+| Preproduction | <https://ret-api.preprod.gcp.last-mile.fr> |
+| Staging       | <https://ret-api.recette.gcp.last-mile.fr> |

@@ -1,0 +1,50 @@
+title: Parcel
+type: object
+description: Parcel information
+examples:
+  - id: 56f74d65s4f564ds6
+    trackingId: 77899656544BY
+    status: DELIVERY_KO
+    subStatus: FAILED_WITH_RETURN
+    barcode:
+      value: '7841122236655'
+      type: barcode
+      format: '128'
+    package:
+      reference: EARB1225
+      products:
+        - type: TYPOLOGY_GENERIC
+          ean: '1259456954845'
+          cug: LAMPE785AD
+          label: Bedside lamp
+          quantity: 1
+properties:
+  id:
+    type: string
+    description: Parcel identifier
+  status:
+    $ref: ./status.yaml
+  subStatus:
+    $ref: ./subStatus.yaml
+  trackingId:
+    type: string
+    description: Tracking identifier
+  barcode:
+    $ref: ./barcode.yaml
+  package:
+    type: object
+    description: Package contained in the parcel
+    required:
+      - products
+    properties:
+      reference:
+        type: string
+        description: Package identifier
+      products:
+        type: array
+        items:
+          $ref: ../retailer_to_woop.json#/components/schemas/product
+required:
+  - id
+  - status
+  - package

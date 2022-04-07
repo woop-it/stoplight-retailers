@@ -1,0 +1,23 @@
+title: Price
+type: object
+description: Corresponds to the price
+examples:
+  - taxExcludedAmount: 17.2
+    taxIncludedAmount: 20.64
+    taxAmount: 3.44
+    currency: EUR
+properties:
+  taxExcludedAmount:
+    type: number
+    description: Indicative value of the price without taxes
+  taxIncludedAmount:
+    type: number
+    description: Indicative value of the price with taxes
+  taxAmount:
+    type: number
+    description: Indicative value of the taxes amount
+  currency:
+    $ref: ./currency.yaml
+required:
+  - taxExcludedAmount
+  - currency

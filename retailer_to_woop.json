@@ -30,21 +30,21 @@
     }
   ],
   "info": {
-    "title": "Brand to Woop",
-    "description": "This document contains the technical information about Woop APIs for carriers. For any questions or clarification, please contact the internal technical team.\n\nTo use \"Brand to Woop\" APIs, you must use the confidential access codes provided when you created your brand account on the platform. [See documentation](https://woop.stoplight.io/docs/retailer/docs/Bases/Authentification.md)\n\nThe version currently available in the documentation is <b>Version 1.5.0</b>",
-    "version": "1.5.0"
+    "title": "Retailer to Woop",
+    "description": "This document contains the technical information about Woop APIs for carriers. For any questions or clarification, please contact the internal technical team.\n\nTo use \"Brand to Woop\" APIs, you must use the confidential access codes provided when you created your brand account on the platform. [See documentation](https://woop.stoplight.io/docs/retailer/docs/Bases/Authentification.md)\n\nThe version currently available in the documentation is <b>Version 1.7.0</b>",
+    "version": "1.7.0"
   },
   "servers": [
     {
       "url": "https://retailer.last-mile.fr",
-      "description": "Prod URL"
+      "description": "Production URL"
     },
     {
       "url": "https://ret-api.preprod.gcp.last-mile.fr",
-      "description": "Preprod URL"
+      "description": "Pre-production URL"
     },
     {
-      "description": "Receipt URL",
+      "description": "Staging URL",
       "url": "https://ret-api.recette.gcp.last-mile.fr"
     }
   ],
@@ -134,7 +134,7 @@
                 },
                 "Exemple mode express (sans réservation au préalable)": {
                   "value": {
-                    "mode": "express",
+                    "mode": "standard",
                     "collectId": "CN123456789FR59",
                     "exchangePlaceId": "DRIVE-59-001",
                     "slot": {
@@ -336,7 +336,16 @@
             },
             "in": "query",
             "name": " minRemainingCapacity",
-            "description": "Minimum authorised capacity "
+            "description": "Minimum authorised capacity"
+          },
+          {
+            "schema": {
+              "type": "boolean",
+              "default": "false"
+            },
+            "in": "query",
+            "description": "Also return on going slots",
+            "name": "withOnGoingSlots"
           }
         ],
         "responses": {
@@ -794,6 +803,47 @@
         "tags": [
           "Collecte"
         ]
+      },
+      "get": {
+        "summary": "Récupérer une collecte",
+        "operationId": "get-collects-collectId",
+        "responses": {
+          "200": {
+            "description": "Retourne les informations de la collect",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/collectStatus"
+                    },
+                    "slot": {
+                      "$ref": "#/components/schemas/slot"
+                    },
+                    "mode": {
+                      "$ref": "./models/collect/mode.yaml"
+                    },
+                    "urls": {
+                      "$ref": "./models/collect/urls.yaml"
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "mode"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "description": "Retourne les informations de la collecte.",
+        "tags": [
+          "Collecte"
+        ]
       }
     },
     "/orders": {
@@ -1009,7 +1059,7 @@
                     ],
                     "productsPrice": {
                       "value": 30,
-                      "currrency": "EUR"
+                      "currency": "EUR"
                     }
                   }
                 },
@@ -1197,7 +1247,7 @@
                     ],
                     "productsPrice": {
                       "value": 30,
-                      "currrency": "EUR"
+                      "currency": "EUR"
                     }
                   }
                 },
@@ -1404,10 +1454,32 @@
             "$ref": "#/components/parameters/queryDeliveryStatus"
           },
           {
-            "$ref": "#/components/parameters/queryPickingDate"
+            "$ref": "#/components/parameters/queryStoreIdRequired"
           },
           {
-            "$ref": "#/components/parameters/queryStoreIdRequired"
+            "schema": {
+              "type": "string",
+              "example": "FAILED"
+            },
+            "in": "query",
+            "name": "deliverySubStatus",
+            "description": "Filtre la liste des commandes en fonction du subStatus"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "fromPickingDate",
+            "description": "Filtre par date de prélèvement. Permet de récupérer les commandes à partir de cette date."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "toPickingDate",
+            "description": "Filtre par date de prélèvement. Permet de récupérer les commandes antérieures à cette date."
           }
         ],
         "responses": {
@@ -1416,125 +1488,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/responseOrder"
-                },
-                "examples": {
-                  "Exemple par défaut": {
-                    "value": {
-                      "orders": [
-                        {
-                          "delivery": {
-                            "externalDeliveryId": "123457",
-                            "currentStatus": "DELIVERY_DELIVERED_OK",
-                            "updatedAt": "2019-12-03T15:25:00+0000",
-                            "interval": {
-                              "start": "2019-12-03T15:00:00+0000",
-                              "end": "2019-12-03T16:00:00+0000"
-                            },
-                            "trackingPageUrl:": "https://url_suivi_livraison"
-                          },
-                          "carrier": {
-                            "name": "Transporteur A",
-                            "contact": "Michel",
-                            "claimUrl": "https://url_reclamation"
-                          },
-                          "price": {
-                            "price": 15.12,
-                            "currency": "EUR"
-                          },
-                          "order": {
-                            "id": "q54zd65qzd465qz4d",
-                            "currentStatus": "ORDER_DELIVERED",
-                            "updatedAt": "2019-12-03T15:25:00+0000",
-                            "referenceNumber": "q54zd65qzd465qz4d"
-                          },
-                          "picking": {
-                            "interval": {
-                              "start": "2019-12-02T13:00:00+0000",
-                              "end": "2019-12-02T15:00:00+0000"
-                            }
-                          },
-                          "packages": [
-                            {
-                              "id": "1324",
-                              "reference": "B8413DD",
-                              "currentStatus": "DELIVERY_DELIVERED_OK",
-                              "products": [
-                                {
-                                  "type": "TYPOLOGY_GENERIC",
-                                  "ean": "4dq86zd4q6zd4q64",
-                                  "cug": "q56zd4q65d4q",
-                                  "label": "Lampe",
-                                  "quantity": 1
-                                }
-                              ],
-                              "quantity": 1
-                            }
-                          ]
-                        },
-                        {
-                          "delivery": {
-                            "externalDeliveryId": "123456",
-                            "currentStatus": "DELIVERY_INIT",
-                            "updatedAt": "2019-12-03T12:00:00+0000",
-                            "interval": {
-                              "start": "2019-12-07T12:00:00+0000",
-                              "end": "2019-12-07T14:00:00+0000"
-                            },
-                            "trackingPageUrl:": "https://url_suivi_livraison"
-                          },
-                          "carrier": {
-                            "name": "Transporteur A",
-                            "contact": "Michel",
-                            "claimUrl": "https://url_reclamation"
-                          },
-                          "order": {
-                            "id": "65z4eq1d6q54zd1",
-                            "currentStatus": "ORDER_CREATED",
-                            "updatedAt": "2019-12-03T12:00:00+0000",
-                            "referenceNumber": "65q41zdq65z14"
-                          },
-                          "picking": {
-                            "interval": {
-                              "start": "2019-12-06T13:30:00+0000",
-                              "end": "2019-12-06T15:30:00+0000"
-                            }
-                          },
-                          "packages": [
-                            {
-                              "id": "999",
-                              "reference": "1323A"
-                            }
-                          ]
-                        }
-                      ]
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Missing and/or incorrect elements",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/errorCode"
-                },
-                "examples": {
-                  "Exemple": {
-                    "value": {
-                      "statusCode": 400,
-                      "error": "Bad Request",
-                      "message": "child \"deliveryStatus\" fails because [\"deliveryStatus\" must be one of [DELIVERY_INIT]]",
-                      "validation": {
-                        "source": "query",
-                        "keys": [
-                          "deliveryStatus"
-                        ]
-                      }
-                    }
-                  }
+                  "$ref": "#/components/schemas/responseOrder-(getAll)"
                 }
               }
             }
@@ -1684,71 +1638,89 @@
         ],
         "responses": {
           "200": {
-            "description": "OK. Contains the retrieved order",
+            "description": "OK. Contains order detail",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/responseOrder-getById"
+                  "$ref": "#/components/schemas/responseOrder-(getById)"
                 },
                 "examples": {
-                  "example-1": {
+                  "Example": {
                     "value": {
-                      "orders": [
-                        {
-                          "delivery": {
-                            "externalDeliveryId": "string",
-                            "currentStatus": "DELIVERY_INIT",
-                            "updatedAt": "string",
-                            "interval": {
-                              "start": "string",
-                              "end": "string"
-                            },
-                            "trackingPageUrl:": "string"
+                      "order": {
+                        "id": "string",
+                        "status": "ORDER_CREATED",
+                        "updatedAt": "string",
+                        "referenceNumber": "string",
+                        "picking": {
+                          "interval": {
+                            "start": "string",
+                            "end": "string"
+                          }
+                        },
+                        "delivery": {
+                          "externalDeliveryId": "string",
+                          "updatedAt": "string",
+                          "interval": {
+                            "start": "string",
+                            "end": "string"
                           },
-                          "carrier": {
-                            "name": "string",
-                            "contact": "string",
-                            "claimUrl": "string"
-                          },
-                          "order": {
-                            "id": "string",
-                            "currentStatus": "ORDER_CREATED",
-                            "updatedAt": "string",
-                            "referenceNumber": "string"
-                          },
-                          "picking": {
-                            "interval": {
-                              "start": "string",
-                              "end": "string"
+                          "trackingUrls:": {
+                            "carrier": "https://tracking.best-carrier.com/XJHSDL541",
+                            "woop": {
+                              "simple": "https://trace.woopit.fr/t/48aed-b5552d-4da5-813c-00c06e1ff327",
+                              "multiple": "https://trace.woopit.fr/m/48aed-b5552d-4da5-813c-00c06e1ff327"
                             }
                           },
-                          "packages": [
-                            {
-                              "id": "string",
-                              "reference": "string",
-                              "currentStatus": "DELIVERY_INIT",
+                          "status": "DELIVERY_INIT",
+                          "subStatus": "FAILED"
+                        },
+                        "carrier": {
+                          "name": "string",
+                          "claimUrl": "string",
+                          "contact": {
+                            "firstName": "string",
+                            "lastName": "string",
+                            "phone": "string",
+                            "email": "string",
+                            "language": "fr",
+                            "timezone": "Europe/Paris",
+                            "main": true,
+                            "title": "string"
+                          }
+                        },
+                        "parcels": [
+                          {
+                            "id": "56f74d65s4f564ds6",
+                            "trackingId": "77899656544BY",
+                            "status": "DELIVERY_KO",
+                            "subStatus": "FAILED_WITH_RETURN",
+                            "barcode": {
+                              "value": "7841122236655",
+                              "type": "barcode",
+                              "format": "128"
+                            },
+                            "package": {
+                              "reference": "EARB1225",
                               "products": [
                                 {
                                   "type": "TYPOLOGY_GENERIC",
-                                  "ean": "string",
-                                  "cug": "string",
-                                  "label": "string",
+                                  "ean": "1259456954845",
+                                  "cug": "LAMPE785AD",
+                                  "label": "Lampe de chevet",
                                   "quantity": 1
                                 }
-                              ],
-                              "barcode": {
-                                "value": "54fd56g4f5gfd456sd",
-                                "type": "barcode",
-                                "format": "128"
-                              }
+                              ]
                             }
-                          ],
-                          "price": {
-                            "price": 0,
-                            "currency": "EUR"
                           }
+                        ],
+                        "price": {
+                          "taxExcludedAmount": 17.2,
+                          "taxIncludedAmount": 20.64,
+                          "taxAmount": 3.44,
+                          "currency": "EUR"
                         }
-                      ]
+                      }
                     }
                   }
                 }
@@ -1757,6 +1729,16 @@
           },
           "400": {
             "description": "You are not authorised to access this item",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Commande non trouvée",
             "content": {
               "application/json": {
                 "schema": {
@@ -1958,21 +1940,26 @@
                       "type": "string",
                       "description": "The label is returned in base64 in the format indicated at the time of the call"
                     },
-                    "trackingPageUrl": {
-                      "type": "string",
-                      "description": "Link to delivery tracking page"
+                    "trackingUrls": {
+                      "$ref": "./models/trackingUrls.yaml"
                     }
                   },
                   "required": [
                     "base64",
-                    "trackingPageUrl"
+                    "trackingUrls"
                   ]
                 },
                 "examples": {
                   "Exemple": {
                     "value": {
                       "base64": "AxfzFZEGEg ...",
-                      "trackingPageUrl:": "https://url_suivi_livraison"
+                      "trackingUrls": {
+                        "carrier": "https://tracking.best-carrier.com/XJHSDL541",
+                        "woop": {
+                          "simple": "https://trace.woopit.fr/t/48aed-b5552d-4da5-813c-00c06e1ff327",
+                          "multiple": "https://trace.woopit.fr/m/48aed-b5552d-4da5-813c-00c06e1ff327"
+                        }
+                      }
                     }
                   }
                 }
@@ -3403,12 +3390,6 @@
                       "type": "array",
                       "items": {
                         "type": "object",
-                        "required": [
-                          "carrier",
-                          "service",
-                          "price",
-                          "delay"
-                        ],
                         "properties": {
                           "carrier": {
                             "type": "object",
@@ -3441,22 +3422,6 @@
                               "type": "string"
                             }
                           },
-                          "price": {
-                            "type": "object",
-                            "description": "Service price",
-                            "required": [
-                              "price",
-                              "currency"
-                            ],
-                            "properties": {
-                              "price": {
-                                "type": "number"
-                              },
-                              "currency": {
-                                "$ref": "#/components/schemas/currency"
-                              }
-                            }
-                          },
                           "delay": {
                             "type": "object",
                             "description": "Turnaround time for the service",
@@ -3469,7 +3434,7 @@
                                 "type": "number"
                               },
                               "unit": {
-                                "type": "enum",
+                                "type": "string",
                                 "enum": [
                                   "day",
                                   "hour"
@@ -3477,7 +3442,12 @@
                               }
                             }
                           }
-                        }
+                        },
+                        "required": [
+                          "carrier",
+                          "service",
+                          "delay"
+                        ]
                       }
                     }
                   }
@@ -3505,7 +3475,7 @@
                             "Drive"
                           ],
                           "price": {
-                            "value": 2.99,
+                            "taxExcludedAmount": 2.99,
                             "currency": "EUR"
                           },
                           "delay": {
@@ -3519,10 +3489,6 @@
                             "name": "Chronopost"
                           },
                           "service": "SERVICE_FRONT_HOME",
-                          "price": {
-                            "value": 5.99,
-                            "currency": "EUR"
-                          },
                           "delay": {
                             "value": 1,
                             "unit": "day"
@@ -3739,7 +3705,8 @@
         "parameters": [
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "example": "DELIVERY_PICK_UP_KO"
             },
             "in": "query",
             "name": "deliveryStatus",
@@ -3788,6 +3755,15 @@
             "in": "header",
             "name": "Accept",
             "description": "To return a json containing base64, set the value to \"application/json\""
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "FAILED"
+            },
+            "in": "query",
+            "name": "deliverySubStatus",
+            "description": "SubStatus de la livraison"
           }
         ]
       }
@@ -3832,22 +3808,26 @@
                       "minLength": 1,
                       "description": "The label is returned in base64 in the format indicated at the time of the call"
                     },
-                    "trackingPageUrl:": {
-                      "type": "string",
-                      "minLength": 1,
-                      "description": "Link to delivery tracking page"
+                    "trackingUrls:": {
+                      "$ref": "./models/trackingUrls.yaml"
                     }
                   },
                   "required": [
                     "base64",
-                    "trackingPageUrl:"
+                    "trackingUrls:"
                   ]
                 },
                 "examples": {
                   "example": {
                     "value": {
                       "base64": "AxfzFZEGEg ...",
-                      "trackingPageUrl:": "https://url_suivi_livraison"
+                      "trackingUrls:": {
+                        "carrier": "https://tracking.best-carrier.com/XJHSDL541",
+                        "woop": {
+                          "simple": "https://trace.woopit.fr/t/48aed-b5552d-4da5-813c-00c06e1ff327",
+                          "multiple": "https://trace.woopit.fr/m/48aed-b5552d-4da5-813c-00c06e1ff327"
+                        }
+                      }
                     }
                   }
                 }
@@ -4005,7 +3985,7 @@
                     "type": "array",
                     "description": "Allows additional data to be sent",
                     "items": {
-                      "$ref": "./woop_to_retailer.v1.1.0.json#/components/schemas/additionalData"
+                      "$ref": "./woop_to_retailer.json#/components/schemas/additionalData"
                     }
                   }
                 },
@@ -4044,10 +4024,84 @@
       }
     },
     "schemas": {
-      "responseOrder": {
-        "title": "Order retrieval response (responseOrder)",
+      "responseOrder-(getAll)": {
+        "title": "Order retrieval response (getAll)",
         "type": "object",
         "description": "Specifies the response when retrieving an order.",
+        "x-examples": {
+          "example-1": {
+            "orders": [
+              {
+                "id": "787566AZEE",
+                "status": "ORDER_CREATED",
+                "updatedAt": "2021-02-10T09:33:41.422Z",
+                "referenceNumber": "1234",
+                "picking": {
+                  "interval": {
+                    "start": "2021-02-08T05:33:41.422Z",
+                    "end": "2021-02-08T09:33:41.422Z"
+                  }
+                },
+                "delivery": {
+                  "externalDeliveryId": "45DDEZ6Z",
+                  "updatedAt": "2021-02-10T09:33:41.422Z",
+                  "interval": {
+                    "start": "2021-02-11T06:33:41.422Z",
+                    "end": "2021-02-11T09:33:41.422Z"
+                  },
+                  "trackingUrls:": {
+                    "carrier": "https://tracking.best-carrier.com/XJHSDL541",
+                    "woop": {
+                      "simple": "https://trace.woopit.fr/t/48aed-b5552d-4da5-813c-00c06e1ff327",
+                      "multiple": "https://trace.woopit.fr/m/48aed-b5552d-4da5-813c-00c06e1ff327"
+                    }
+                  },
+                  "status": "DELIVERY_INIT",
+                  "subStatus": "FAILED"
+                },
+                "carrier": {
+                  "name": "Woop Carrier",
+                  "contact": {
+                    "firstName": "Jogn",
+                    "lastName": "Doe",
+                    "phone": "+33610101010",
+                    "email": "johndoe@mail.com",
+                    "language": "fr",
+                    "timezone": "Europe/Paris",
+                    "main": true,
+                    "title": "Operational manager"
+                  },
+                  "claimUrl": "https://woopit.fr"
+                },
+                "parcels": [
+                  {
+                    "id": "56f74d65s4f564ds6",
+                    "trackingId": "77899656544BY",
+                    "status": "DELIVERY_KO",
+                    "subStatus": "FAILED_WITH_RETURN",
+                    "barcode": {
+                      "value": "7841122236655",
+                      "type": "barcode",
+                      "format": "128"
+                    },
+                    "package": {
+                      "reference": "EARB1225",
+                      "products": [
+                        {
+                          "type": "TYPOLOGY_GENERIC",
+                          "ean": "1259456954845",
+                          "cug": "LAMPE785AD",
+                          "label": "Bedside lamp",
+                          "quantity": 1
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        },
         "properties": {
           "orders": {
             "type": "array",
@@ -4055,16 +4109,45 @@
             "items": {
               "type": "object",
               "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "Order identifier"
+                },
+                "status": {
+                  "$ref": "#/components/schemas/orderStatus"
+                },
+                "updatedAt": {
+                  "type": "string",
+                  "description": "Last update datetime",
+                  "format": "date"
+                },
+                "referenceNumber": {
+                  "type": "string",
+                  "description": "Order reference"
+                },
+                "picking": {
+                  "type": "object",
+                  "description": "Picking informations",
+                  "required": [
+                    "interval"
+                  ],
+                  "properties": {
+                    "interval": {
+                      "$ref": "#/components/schemas/interval"
+                    }
+                  }
+                },
                 "delivery": {
                   "description": "Information on the delivery",
                   "type": "object",
+                  "required": [
+                    "interval",
+                    "trackingUrls:"
+                  ],
                   "properties": {
                     "externalDeliveryId": {
                       "type": "string",
                       "description": "Delivery identifier"
-                    },
-                    "currentStatus": {
-                      "$ref": "#/components/schemas/deliveryStatus"
                     },
                     "updatedAt": {
                       "type": "string",
@@ -4073,9 +4156,14 @@
                     "interval": {
                       "$ref": "#/components/schemas/interval"
                     },
-                    "trackingPageUrl:": {
-                      "type": "string",
-                      "description": "URL of the delivery tracking page"
+                    "trackingUrls:": {
+                      "$ref": "./models/trackingUrls.yaml"
+                    },
+                    "status": {
+                      "$ref": "./models/status.yaml"
+                    },
+                    "subStatus": {
+                      "$ref": "./models/subStatus.yaml"
                     }
                   }
                 },
@@ -4087,200 +4175,213 @@
                       "type": "string",
                       "description": "Carrier name"
                     },
-                    "contact": {
-                      "type": "string",
-                      "description": "Information of the carrier contact"
-                    },
                     "claimUrl": {
                       "type": "string",
-                      "description": "URL for the carrier's claim"
-                    }
-                  }
-                },
-                "order": {
-                  "type": "object",
-                  "description": "Order information",
-                  "properties": {
-                    "id": {
-                      "type": "string",
-                      "description": "Order identifier"
+                      "description": "Carrier claim Url"
                     },
-                    "currentStatus": {
-                      "$ref": "#/components/schemas/orderStatus"
+                    "contact": {
+                      "$ref": "#/components/schemas/contact"
                     },
-                    "updatedAt": {
+                    "code": {
                       "type": "string",
-                      "description": "Date of the last update"
-                    },
-                    "referenceNumber": {
-                      "type": "string",
-                      "description": "Order reference"
+                      "description": "Carrier identifier"
                     }
                   }
-                },
-                "picking": {
-                  "type": "object",
-                  "description": "Collection information",
-                  "properties": {
-                    "interval": {
-                      "$ref": "#/components/schemas/interval"
-                    }
-                  }
-                },
-                "packages": {
-                  "type": "array",
-                  "description": "Package information",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "string",
-                        "description": "Package identifier"
-                      },
-                      "reference": {
-                        "type": "string",
-                        "description": "Package number"
-                      },
-                      "currentStatus": {
-                        "$ref": "#/components/schemas/deliveryStatus"
-                      },
-                      "products": {
-                        "type": "array",
-                        "description": "List of products in the package",
-                        "items": {
-                          "$ref": "#/components/schemas/product"
-                        }
-                      }
-                    }
-                  }
-                },
-                "price": {
-                  "$ref": "#/components/schemas/price"
                 }
-              }
+              },
+              "required": [
+                "id",
+                "status",
+                "updatedAt",
+                "picking",
+                "delivery"
+              ]
             }
           }
         }
       },
-      "responseOrder-getById": {
-        "title": "Order retrieval response (responseOrder)",
+      "responseOrder-(getById)": {
+        "title": "Réponse récupération commande (getById)",
         "type": "object",
-        "description": "Specifies the response when retrieving an order.",
-        "x-internal": true,
-        "properties": {
-          "orders": {
-            "type": "array",
-            "description": "List of orders",
-            "items": {
-              "type": "object",
-              "properties": {
-                "delivery": {
-                  "description": "Information on the delivery",
-                  "type": "object",
-                  "properties": {
-                    "externalDeliveryId": {
-                      "type": "string",
-                      "description": "Delivery identifier"
-                    },
-                    "currentStatus": {
-                      "$ref": "#/components/schemas/deliveryStatus"
-                    },
-                    "updatedAt": {
-                      "type": "string",
-                      "description": "Date of the last update"
-                    },
-                    "interval": {
-                      "$ref": "#/components/schemas/interval"
-                    },
-                    "trackingPageUrl:": {
-                      "type": "string",
-                      "description": "URL of the delivery tracking page"
-                    }
-                  }
-                },
-                "carrier": {
-                  "type": "object",
-                  "description": "Information from the selected carrier",
-                  "properties": {
-                    "name": {
-                      "type": "string",
-                      "description": "Carrier name"
-                    },
-                    "contact": {
-                      "type": "string",
-                      "description": "Information of the carrier contact"
-                    },
-                    "claimUrl": {
-                      "type": "string",
-                      "description": "URL for the carrier's claim"
-                    }
-                  }
-                },
-                "order": {
-                  "type": "object",
-                  "description": "Order information",
-                  "properties": {
-                    "id": {
-                      "type": "string",
-                      "description": "Order identifier"
-                    },
-                    "currentStatus": {
-                      "$ref": "#/components/schemas/orderStatus"
-                    },
-                    "updatedAt": {
-                      "type": "string",
-                      "description": "Date of the last update"
-                    },
-                    "referenceNumber": {
-                      "type": "string",
-                      "description": "Order reference"
-                    }
-                  }
-                },
-                "picking": {
-                  "type": "object",
-                  "description": "Collection information",
-                  "properties": {
-                    "interval": {
-                      "$ref": "#/components/schemas/interval"
-                    }
-                  }
-                },
-                "packages": {
-                  "type": "array",
-                  "description": "Package information",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "string",
-                        "description": "Package identifier"
-                      },
-                      "reference": {
-                        "type": "string",
-                        "description": "Package number"
-                      },
-                      "currentStatus": {
-                        "$ref": "#/components/schemas/deliveryStatus"
-                      },
-                      "products": {
-                        "type": "array",
-                        "description": "List of products in the package",
-                        "items": {
-                          "$ref": "#/components/schemas/product"
-                        }
-                      },
-                      "barcode": {
-                        "$ref": "./models/barcode.yaml"
-                      }
-                    }
-                  }
-                },
-                "price": {
-                  "$ref": "#/components/schemas/price"
+        "description": "Précise la réponse lors de la récupération d'une commande précise.",
+        "x-examples": {
+          "Example": {
+            "order": {
+              "id": "787566AZEE",
+              "status": "ORDER_CREATED",
+              "updatedAt": "2021-02-10T09:33:41.422Z",
+              "referenceNumber": "1234",
+              "picking": {
+                "interval": {
+                  "start": "2021-02-08T05:33:41.422Z",
+                  "end": "2021-02-08T09:33:41.422Z"
                 }
+              },
+              "delivery": {
+                "externalDeliveryId": "45DDEZ6Z",
+                "updatedAt": "2021-02-10T09:33:41.422Z",
+                "interval": {
+                  "start": "2021-02-11T06:33:41.422Z",
+                  "end": "2021-02-11T09:33:41.422Z"
+                },
+                "trackingUrls:": {
+                  "carrier": "https://tracking.best-carrier.com/XJHSDL541",
+                  "woop": {
+                    "simple": "https://trace.woopit.fr/t/48aed-b5552d-4da5-813c-00c06e1ff327",
+                    "multiple": "https://trace.woopit.fr/m/48aed-b5552d-4da5-813c-00c06e1ff327"
+                  }
+                },
+                "status": "DELIVERY_INIT",
+                "subStatus": "FAILED"
+              },
+              "carrier": {
+                "name": "Woop Carrier",
+                "contact": {
+                  "firstName": "Jogn",
+                  "lastName": "Doe",
+                  "phone": "+33610101010",
+                  "email": "johndoe@mail.com",
+                  "language": "fr",
+                  "timezone": "Europe/Paris",
+                  "main": true,
+                  "title": "Operational manager"
+                },
+                "claimUrl": "https://woopit.fr"
+              },
+              "parcels": [
+                {
+                  "id": "56f74d65s4f564ds6",
+                  "trackingId": "77899656544BY",
+                  "status": "DELIVERY_KO",
+                  "subStatus": "FAILED_WITH_RETURN",
+                  "barcode": {
+                    "value": "7841122236655",
+                    "type": "barcode",
+                    "format": "128"
+                  },
+                  "package": {
+                    "reference": "EARB1225",
+                    "products": [
+                      {
+                        "type": "TYPOLOGY_GENERIC",
+                        "ean": "1259456954845",
+                        "cug": "LAMPE785AD",
+                        "label": "Bedside lamp",
+                        "quantity": 1
+                      }
+                    ]
+                  }
+                }
+              ],
+              "price": {
+                "taxExcludedAmount": 17.2,
+                "taxIncludedAmount": 20.64,
+                "taxAmount": 3.44,
+                "currency": "EUR"
               }
             }
+          }
+        },
+        "properties": {
+          "order": {
+            "type": "object",
+            "description": "Order informations",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Order identifier"
+              },
+              "status": {
+                "$ref": "#/components/schemas/orderStatus"
+              },
+              "updatedAt": {
+                "type": "string",
+                "description": "Last update datetime"
+              },
+              "referenceNumber": {
+                "type": "string",
+                "description": "Order reference"
+              },
+              "picking": {
+                "type": "object",
+                "description": "Picking informations",
+                "required": [
+                  "interval"
+                ],
+                "properties": {
+                  "interval": {
+                    "$ref": "#/components/schemas/interval"
+                  }
+                }
+              },
+              "delivery": {
+                "description": "Delivery informations",
+                "type": "object",
+                "required": [
+                  "interval",
+                  "trackingUrls:"
+                ],
+                "properties": {
+                  "externalDeliveryId": {
+                    "type": "string",
+                    "description": "Delivery identifier"
+                  },
+                  "updatedAt": {
+                    "type": "string",
+                    "description": "Last update datetime"
+                  },
+                  "interval": {
+                    "$ref": "#/components/schemas/interval"
+                  },
+                  "trackingUrls:": {
+                    "$ref": "./models/trackingUrls.yaml"
+                  },
+                  "status": {
+                    "$ref": "./models/status.yaml"
+                  },
+                  "subStatus": {
+                    "$ref": "./models/subStatus.yaml"
+                  }
+                }
+              },
+              "carrier": {
+                "type": "object",
+                "description": "Information from the selected carrier",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "Carrier name"
+                  },
+                  "claimUrl": {
+                    "type": "string",
+                    "description": "Carrier claim URL"
+                  },
+                  "contact": {
+                    "$ref": "#/components/schemas/contact"
+                  },
+                  "code": {
+                    "type": "string",
+                    "description": "Carrier identifier"
+                  }
+                }
+              },
+              "parcels": {
+                "type": "array",
+                "items": {
+                  "$ref": "./models/parcel.yaml"
+                }
+              },
+              "price": {
+                "$ref": "./models/price.yaml"
+              }
+            },
+            "required": [
+              "id",
+              "status",
+              "updatedAt",
+              "picking",
+              "delivery"
+            ]
           }
         }
       },
@@ -4290,12 +4391,7 @@
         "title": "Collection request (postCollects)",
         "properties": {
           "mode": {
-            "type": "string",
-            "description": "Click & collect mode chosen by the customer ",
-            "enum": [
-              "standard",
-              "delay"
-            ]
+            "$ref": "./models/collect/mode.yaml"
           },
           "collectId": {
             "type": "string",
@@ -4716,11 +4812,6 @@
               }
             }
           },
-          "numberOfPackages": {
-            "description": "This field should be used to send only one package but divide its weight by X NumberOfPackage. The LMMP platform will look at the NumberOfPackage info then calculate the number of non-generic packages. Then subtract this number from the NumberOfPackage to divide the package containing the general merchandise by the result. CAUTION: this field is specific to a Decathlon requirement, please ignore it for the MVP if you are not this retailer ",
-            "type": "integer",
-            "deprecated": true
-          },
           "packages": {
             "description": "All packages",
             "type": "array",
@@ -4733,6 +4824,34 @@
           },
           "productsPrice": {
             "$ref": "#/components/schemas/productsPrice"
+          },
+          "expectedPayment": {
+            "type": "object",
+            "description": "Reste à payer, à utiliser dans le cadre du service `SERVICE_PAY_ON_DELIVERY`",
+            "properties": {
+              "value": {
+                "type": "number"
+              },
+              "currency": {
+                "$ref": "./models/currency.yaml"
+              },
+              "paymentMethod": {
+                "type": "string",
+                "enum": [
+                  "CASH",
+                  "CREDIT_CART",
+                  "DEBIT_CARD",
+                  "DIRECT_DEBIT",
+                  "BANK_TRANSFER",
+                  "CHECK"
+                ]
+              }
+            },
+            "required": [
+              "value",
+              "currency",
+              "paymentMethod"
+            ]
           },
           "tags": {
             "$ref": "#/components/schemas/tags"
@@ -4844,12 +4963,8 @@
       },
       "postPickupPoints": {
         "type": "object",
-        "description": "Specifies the information for a relay point search",
-        "title": "Search for relay points (postPickupPoints)",
-        "required": [
-          "latitude",
-          "longitude"
-        ],
+        "description": "Specifies the information for a pickup point search",
+        "title": "Search for pickup points (postPickupPoints)",
         "properties": {
           "latitude": {
             "type": "number",
@@ -4861,7 +4976,7 @@
           },
           "number": {
             "type": "number",
-            "description": "Longitude of the search point",
+            "description": "Number of pickup points",
             "maximum": 25,
             "default": 10
           },
@@ -4894,7 +5009,8 @@
               },
               {
                 "type": "array",
-                "description": "Filter by multiple carrier codes"
+                "description": "Filter by multiple carrier codes",
+                "items": {}
               }
             ]
           },
@@ -4914,17 +5030,18 @@
             "type": "string",
             "description": "Identifier of the store issuing the request"
           }
-        }
+        },
+        "required": [
+          "latitude",
+          "longitude"
+        ]
       },
       "tags": {
         "type": "array",
         "description": "Allows you to set \"markers\" on this order.",
+        "title": "Tags",
         "items": {
           "type": "object",
-          "required": [
-            "key",
-            "value"
-          ],
           "properties": {
             "key": {
               "type": "string",
@@ -4933,10 +5050,18 @@
             "value": {
               "type": "string",
               "example": "web"
+            },
+            "applyToOrchestration": {
+              "type": "boolean",
+              "description": "- Si `true`, le tag est utilisé dans les conditions d'orchestration\n- Si `false`, le tag n'est pas pris en compte dans les conditions d'orchestration.\nDans tous les cas, le tag est transmis au transporteur."
             }
-          }
-        },
-        "title": "Tags"
+          },
+          "required": [
+            "key",
+            "value",
+            "applyToOrchestration"
+          ]
+        }
       },
       "address": {
         "description": "All relevant information for a delivery/collection address.",
@@ -5185,8 +5310,8 @@
         "title": "Time slot (interval_hour)"
       },
       "contact": {
-        "title": "Contact (contact)",
-        "description": "Information on the collection contact.",
+        "title": "Contact",
+        "description": "Contact informations",
         "type": "object",
         "x-examples": {
           "Exemple": {
@@ -5195,7 +5320,9 @@
             "phone": "+33610101010",
             "email": "johndoe@mail.com",
             "language": "fr",
-            "timezone": "Europe/Paris"
+            "timezone": "Europe/Paris",
+            "main": true,
+            "title": "Responsable opérationnel"
           }
         },
         "properties": {
@@ -5220,6 +5347,14 @@
           },
           "timezone": {
             "$ref": "#/components/schemas/timezone"
+          },
+          "main": {
+            "type": "boolean",
+            "description": "Contact principal"
+          },
+          "title": {
+            "type": "string",
+            "description": "Titre du contact"
           }
         },
         "required": [
@@ -5444,7 +5579,7 @@
             "description": "value"
           },
           "currency": {
-            "$ref": "#/components/schemas/currency"
+            "$ref": "./models/currency.yaml"
           }
         }
       },
@@ -5490,6 +5625,7 @@
         "title": "Cancellation reason (cancelledReasons)"
       },
       "deliveryService": {
+        "type": "string",
         "description": "Specifies the delivery service that can be used.",
         "enum": [
           "SERVICE_PICKUP_POINT",
@@ -5501,13 +5637,13 @@
           "SERVICE_RECOVERY",
           "SERVICE_SIMPLE_INSTALL",
           "SERVICE_COMPLEX_INSTALL",
-          "SERVICE_ASSEMBLY"
+          "SERVICE_ASSEMBLY",
+          "SERVICE_PAY_ON_DELIVERY"
         ],
         "x-examples": {
           "Exemple": "SERVICE_PICKUP_POINT"
         },
-        "title": "Delivery service (deliveryService)",
-        "type": "string"
+        "title": "Delivery service (deliveryService)"
       },
       "productType": {
         "type": "string",
@@ -5529,17 +5665,6 @@
           "Exemple": "TYPOLOGY_GENERIC"
         },
         "title": "Product type (productType)"
-      },
-      "currency": {
-        "type": "string",
-        "description": "Currency, specifies the currency used.",
-        "enum": [
-          "EUR"
-        ],
-        "x-examples": {
-          "Exemple": "EUR"
-        },
-        "title": "Currency (currency)"
       },
       "lengthUnits": {
         "type": "string",
@@ -5910,22 +6035,6 @@
           "timezone"
         ]
       },
-      "price": {
-        "title": "Price (price)",
-        "type": "object",
-        "description": "The price",
-        "properties": {
-          "price": {
-            "type": "number",
-            "format": "float",
-            "exclusiveMinimum": true,
-            "minimum": 0
-          },
-          "currency": {
-            "$ref": "#/components/schemas/currency"
-          }
-        }
-      },
       "collectStatus": {
         "type": "string",
         "title": "Collection status - Drive collection (collectStatus)",
@@ -5953,18 +6062,18 @@
         "required": true,
         "schema": {
           "type": "string",
-          "example": "1.5.0"
+          "example": "1.6.0"
         }
       },
       "queryDeliveryStatus": {
         "in": "query",
-        "required": true,
         "name": "deliveryStatus",
         "description": "Filters the order list by delivery status",
         "schema": {
           "type": "string",
-          "example": "DELIVERY_INIT"
-        }
+          "example": "DELIVERY_PICK_UP_KO"
+        },
+        "required": true
       },
       "queryPickingDate": {
         "in": "query",
@@ -6067,7 +6176,10 @@
         "required": true,
         "description": "End date of returned time slots",
         "name": "toDate",
-        "example": "2021-07-25"
+        "example": "2021-07-25",
+        "schema": {
+          "type": "string"
+        }
       },
       "pathPickupPointId": {
         "in": "path",

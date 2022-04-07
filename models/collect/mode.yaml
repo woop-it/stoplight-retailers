@@ -1,0 +1,7 @@
+type: string
+title: collectMode
+description: 'Click & collect mode chosen by the customer'
+enum:
+  - standard
+  - delay
+  - express
