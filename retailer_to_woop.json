@@ -5548,7 +5548,7 @@
         "items": {
           "type": "string"
         },
-        "description": "Specifies the package number of the retailer.",
+        "description": "Specifies package reference. Note that count of reference must be equal to package quantity",
         "title": "Package references (packagesReferences)",
         "x-examples": {
           "example-1": [
