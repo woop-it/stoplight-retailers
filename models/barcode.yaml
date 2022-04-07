@@ -1,18 +1,18 @@
 title: barcode
 type: object
-description: Code barre / QRCode du colis
+description: Bar code / QRCode of the parcel
 properties:
   value:
     type: string
-    description: Valeur du code barre
+    description: Barcode value
   type:
     type: string
-    description: Type d'affichage du code barre
+    description: Barcode display type
     enum:
       - barcode
   format:
     type: string
-    description: Format du code barre
+    description: Bar code format
     enum:
       - '128'
 required:

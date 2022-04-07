@@ -2,9 +2,9 @@
 tags: ['Bases']
 ---
 
-# Gestion des erreurs
+# Error handling
 
-Les réponses erreur des API comprennent le détail de ce qui s'est mal passé. Le format de la réponse est décrit comme suit :
+The API error responses include details of what went wrong. The format of the response is described as follows:
 
 ```json
 {
@@ -14,20 +14,20 @@ Les réponses erreur des API comprennent le détail de ce qui s'est mal passé. 
 }
 ```
 
-Voici la liste des erreurs API possibles : 
+The following is a list of possible API errors:
 
-Code HTTP| Statut| Description
+HTTP code| Status| Description
 ---------|-------|------------
-`400`| Bad Request| Éléments manquants et/ou incorrects dans le body de la requête
-`401`| Unauthorized| Vous n'êtes pas autorisé à accéder à cet élément
-`404`| not found| L'élément demandé n'existe pas ou n'est pas reconnu
+`400`| Bad Request| Missing and/or incorrect elements in the body of the request
+`401`| Unauthorised| You are not authorised to access this item
+`404`| not found| The requested item does not exist or is not recognised
 `403`| Forbidden| Action impossible (1)
-`409`| Conflict| l'identifiant indiqué existe déjà. L'identifiant est unique et ne peut être généré une deuxième fois
-`504`| xxx| Temps de réponse dépasse le temps de réponse maximal configuré par l’appelant (2)
+`409`| Conflict| the indicated identifier already exists. The identifier is unique and cannot be generated a second time
+`504`| xxx| Response time exceeds the maximum response time configured by the caller (2)
 
 
 
-(1) La plateforme Woop agit comme passerelle pour diffuser le(s) code(s) erreur retourné(s) par le(s) transporteur(s). Les contraintes techniques et métier sont à revoir (poids, tailles et distances). 
+(1) The Woop platform acts as a gateway to distribute error codes returned by carriers.()()()()() The technical and business constraints are to be reviewed (weights, sizes and distances).
 
-(2) La plateforme Woop agit comme passerelle pour diffuser le temps de réponse de la plateforme des transporteurs. Le temps de traitement de la plateforme Woop s'additionne au temps de réponse des transporteurs.
+(2) The Woop platform acts as a gateway to distribute the response time of the carrier platform. The processing time of the Woop platform is added to the carrier response time.
 

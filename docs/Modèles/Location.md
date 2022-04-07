@@ -1,12 +1,12 @@
-# Emplacement 
+# Location 
 
-Un emplacement dit `location` représente un lieu de prélèvement ou de livraison physique. Au travers des API, trois types d'emplacement sont disponibles :
+A location called `location` represents a physical collection or delivery location. Through the APIs, three types of location are available:
 
 <!--
 type: tab
-title: Adresse
+title: Address
 -->
-Le type "**address**" représente une addresse postale classique à saisir entièrement lors de la création de commande. Il correspond à l'appel standard le plus classique lors de la création d'une commande. Si l'adresse de prélèvement et/ou de livraison ne sont pas connues, vous avez alors la possibilité d'indiquer l'emplacement complet. 
+The type "**address**" is a standard postal address to be entered in full when creating an order. This is the most common standard call when creating an order. If the collection and/or delivery address is not known, you can indicate the details of the location. 
 ```json
 {
   "type": "address",
@@ -20,11 +20,11 @@ Le type "**address**" représente une addresse postale classique à saisir enti�
 ```
 <!--
 type: tab
-title: Point relais
+title: Relay point
 -->
-Le type "**pickupPoint**" représente l'emplacement d'un point-relais ou centre de distribution précis d'un transporteur. Il correspond à l'adresse enregistrée pour un transporteur donné associé à ce lieu. Pour utiliser ce type d'emplacement, il est nécessaire de connaitre l'identifiant du point-relais par transporteur.
+The type "**pickupPoint**represents the location of a specific relay point or a carrier's distribution centre. It corresponds to the address registered for a given carrier at that location. To use this type of location, the identifier of the relay point by carrier is required.
 
-L'identifiant du point-relais doit être récupéré par [la recherche de point relais](https://woop.stoplight.io/docs/retailer/retailer_to_woop.v1.4.0.json/paths/~1pickupPoints/get)
+The relay point identifier must be retrieved by [searching for a relay point](https://woop.stoplight.io/docs/retailer/retailer_to_woop.v1.4.0.json/paths/~1pickupPoints/get)
 ```json
 {
   "type": "pickupPoint",
@@ -35,11 +35,11 @@ L'identifiant du point-relais doit être récupéré par [la recherche de point 
 
 <!--
 type: tab
-title: Point de prélèvement
+title: Collection point
 -->
-Le type "**exchangePlace**" représente un point de prélèvement précis d'un des magasins de l'enseigne. Configuré dans le back-office de Woop, ces informations sont propres au magasin. A la création, vous pouvez définir l'identifiant de votre choix pour chaque point de prélèvement. 
+The type "**exchangePlace**" represents a specific collection point in one of the brand's stores. This information is specific to the store and is configured in the Woop back office. When creating the collection point, you can define the identifier of your choice for each. 
 
-Consulter la page [Point de prélevement (ExchangePlace)](docs/Modèles/ExchangePlace.md)pour plus de détails.
+View page [Collection point (ExchangePlace)](docs/Modèles/ExchangePlace.md)for more details.
 ```json
 {
   "type": "exchangePlace",

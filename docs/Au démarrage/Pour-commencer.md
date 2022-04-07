@@ -1,11 +1,11 @@
-# Pour commencer
+# To begin
 
-Pour commencer, toutes les informations technique concernant les API Woop à destination des enseignes sont centralisées dans cette documentation. Pour toute question ou précision, merci de contacter l'équipe technique interne.
+To begin, all technical information about Woop APIs for carriers is contained in this documentation. For any questions or clarification, please contact the internal technical team.
 
-Pour utiliser les API, vous devez vous munir des vos accès récupérés lors de la création de votre compte au sein de la plateforme.
+To use the APIs, you will need the login information you received when you created your account on the platform.
 
 
-Ce document se décompose en 2 sections illustrant les échanges possible Woop <> Enseigne :
-- `Enseigne vers Woop` (retailer_to_woop.v1.4.0.json): Qui décrit globalement le fonctionnement des API avec les informations issues de la part de l'enseigne à destination de Woop. Des fonctions comme la création d'un ordre de transport et la recherche de point-relais seront décrites dans cette partie.
+This document is divided into 2 sections illustrating the exchanges possible between Woop and the brand:
+- `Brand to Woop` (retailer_to_woop.v1.4.0.json): Which describes the overall operation of the API response from the brand to Woop. This section describes functions such as creating a delivery order and retrieving a list of relay points.
 
-- `Woop vers Enseigne` (woop_to_retailer.v1.1.0.json): Qui décrit globalement le fonctionnement des API (réponse) de la part de Woop à destination de l'enseigne. Ces API permettent à Woop de remonter les informations néccesaire à l'enseigne. Des fonctions comme la mise à jour des statuts de livraison et le choix du transporteur seront décrites dans cette partie.
+- `Woop to Brand` (woop_to_retailer.v1.1.0.json): Which describes the overall operation of the API (response) from Woop to the Brand. These APIs allow Woop to provide the necessary information to the brand. Functions such as updating delivery status and choosing a carrier are described in this section.

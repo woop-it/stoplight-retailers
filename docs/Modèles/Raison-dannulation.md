@@ -1,12 +1,12 @@
-# Raison d'annulation
+# Reason for cancellation
 
-Liste des différents motifs d'annulation. 
+List of possible reasons for cancellation. 
 
-Code | Intitulé
+Code | Title
 ---------|----------
- `CANCELLED_CANNOT_SERVICE`|Annulation par manque de service
- `CANCELLED_UNKNOWN`|Aucune raison d’annulation 
- `CANCELLED_PREPARATION_DELAYED`|Annulation car la préparation est retardée 
- `CANCELLED_BY_CLIENT`|Annulation effectuée par le client
- `CANCELLED_NEW_ADDRESS`|Annulation pour changement d’adresse
- `CANCELLED_INCOMPLETE `|Annulation car commande incomplète 
+ `CANCELLED_CANNOT_SERVICE`|Cancellation due to lack of service
+ `CANCELLED_UNKNOWN`|No reason for cancellation 
+ `CANCELLED_PREPARATION_DELAYED`|Cancellation because preparation was delayed 
+ `CANCELLED_BY_CLIENT`|Cancellation by the customer
+ `CANCELLED_NEW_ADDRESS`|Cancellation due to change of address
+ `CANCELLED_INCOMPLETE `|Cancellation due to incomplete order 

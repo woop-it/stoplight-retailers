@@ -1,9 +1,9 @@
-# Liste des raisons
+# List of reasons
 
-Liste des différentes raisons d'erreur. 
+List of reasons for error . 
 
-Code | Intitulé
+Code | Title
 ---------|----------
- `EXCHANGE_PLACE_NOT_FOUND`| Point de prélevement inexistant ou inactif
- `STORE_NOT_FOUND`| Magasin inexistant ou inactif
- `PICKUP_POINT_NOT_FOUND`| Point-relais non trouvé
+ `EXCHANGE_PLACE_NOT_FOUND`| Collection point non-existent or inactive
+ `STORE_NOT_FOUND`| Store non-existent or inactive
+ `PICKUP_POINT_NOT_FOUND`| Relay point not found

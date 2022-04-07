@@ -6,20 +6,20 @@ tags: ['Bases']
 
 ## Date
 
-Toutes les dates utilisées dans l'API sont au format **ISO 8601**.
+All dates used in the API are in the format **ISO 8601**.
 
-**En entrée de l'API** il faut utiliser les dates avec l'information de timezone ou en UTC.
-Si la timezone n'est pas envoyée, la date sera considérée comme étant en UTC.
+**For API input** dates with time zone or UTC information should be used.
+If the time zone is not sent, the date will be treated as UTC.
 
-*Exemple : `2020-09-20T09:00:00+02:00` ou `2020-09-20T07:00:00Z`*
+*Example: `2020-09-20T09:00:00+02:00` or `2020-09-20T07:00:00Z`*
 
 
-**En retour de l'API** toutes les dates seront obligatoirement au format UTC.
+**For API input** all dates must be in UTC format.
 
-*Exemple: `2020-09-20T07:00:00Z`*
+*Example: `2020-09-20T07:00:00Z`*
 
-## Numéro de téléphone
+## Telephone numbers
 
-Tous les numéros de téléphone doivent être dans un format international : `Indicatif pays + numéro`
+All telephone numbers must be in international format: `Country code + number`
 
-*Exemple: `+33610101010` ou `0033610101010`*
+*Example: `+33610101010` or `0033610101010`*
