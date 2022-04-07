@@ -2386,7 +2386,7 @@
             }
           }
         },
-        "summary": "Download documents"
+        "summary": "Download all documents"
       }
     },
     "/orders/{orderId}/documents/{documentId}/download": {
@@ -2962,11 +2962,6 @@
                   "callbacks": {
                     "type": "object",
                     "description": "Event callbacks",
-                    "required": [
-                      "carrier",
-                      "status",
-                      "score"
-                    ],
                     "properties": {
                       "carrier": {
                         "type": "object",
@@ -3784,7 +3779,7 @@
         }
       ],
       "get": {
-        "summary": "Package label",
+        "summary": "Retrieve a package label",
         "tags": [
           "Label"
         ],
