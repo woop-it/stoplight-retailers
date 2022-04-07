@@ -5217,6 +5217,10 @@
                 "type": "string",
                 "description": "Carrier code",
                 "example": "bpost"
+              },
+              "comment": {
+                "type": "string",
+                "description": "Additional comments"
               }
             },
             "required": [
@@ -5241,7 +5245,7 @@
               },
               "comment": {
                 "type": "string",
-                "description": "Comment on the collection point (overwriting the comment recorded in the back-office)"
+                "description": "A comment (overwriting comment recorded in the back-office for exchange place)"
               }
             },
             "required": [
