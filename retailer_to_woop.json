@@ -939,11 +939,22 @@
                           "unit": "g"
                         },
                         "references": [
-                          "123456789A",
-                          "123456789B",
-                          "123456789C",
-                          "123456789D",
-                          "123456789E"
+                          {
+                            "reference": "123456789A",
+                            "barcode": {
+                              "value": "54fd56g4f5gfd456sd",
+                              "type": "barcode",
+                              "format": "128"
+                            }
+                          },
+                          {
+                            "reference": "123456789B",
+                            "barcode": {
+                              "value": "54fd56g4f5gfd456sdsdsd",
+                              "type": "barcode",
+                              "format": "128"
+                            }
+                          }
                         ],
                         "products": [
                           {
@@ -954,7 +965,7 @@
                             "quantity": 1
                           }
                         ],
-                        "quantity": 5
+                        "quantity": 2
                       }
                     ],
                     "services": [
@@ -1034,11 +1045,22 @@
                           "unit": "g"
                         },
                         "references": [
-                          "123456789A",
-                          "123456789B",
-                          "123456789C",
-                          "123456789D",
-                          "123456789E"
+                          {
+                            "reference": "123456789A",
+                            "barcode": {
+                              "value": "54fd56g4f5gfd456sd",
+                              "type": "barcode",
+                              "format": "128"
+                            }
+                          },
+                          {
+                            "reference": "123456789B",
+                            "barcode": {
+                              "value": "54fd56g4f5gfd456sdsdsd",
+                              "type": "barcode",
+                              "format": "128"
+                            }
+                          }
                         ],
                         "products": [
                           {
@@ -1049,7 +1071,7 @@
                             "quantity": 1
                           }
                         ],
-                        "quantity": 5
+                        "quantity": 2
                       }
                     ],
                     "services": [
@@ -1127,11 +1149,22 @@
                           "unit": "g"
                         },
                         "references": [
-                          "123456789A",
-                          "123456789B",
-                          "123456789C",
-                          "123456789D",
-                          "123456789E"
+                          {
+                            "reference": "123456789A",
+                            "barcode": {
+                              "value": "54fd56g4f5gfd456sd",
+                              "type": "barcode",
+                              "format": "128"
+                            }
+                          },
+                          {
+                            "reference": "123456789B",
+                            "barcode": {
+                              "value": "54fd56g4f5gfd456sdsdsd",
+                              "type": "barcode",
+                              "format": "128"
+                            }
+                          }
                         ],
                         "products": [
                           {
@@ -1142,7 +1175,7 @@
                             "quantity": 1
                           }
                         ],
-                        "quantity": 5
+                        "quantity": 2
                       }
                     ],
                     "services": [
@@ -1214,11 +1247,22 @@
                           "unit": "g"
                         },
                         "references": [
-                          "123456789A",
-                          "123456789B",
-                          "123456789C",
-                          "123456789D",
-                          "123456789E"
+                          {
+                            "reference": "123456789A",
+                            "barcode": {
+                              "value": "54fd56g4f5gfd456sd",
+                              "type": "barcode",
+                              "format": "128"
+                            }
+                          },
+                          {
+                            "reference": "123456789B",
+                            "barcode": {
+                              "value": "54fd56g4f5gfd456sdsdsd",
+                              "type": "barcode",
+                              "format": "128"
+                            }
+                          }
                         ],
                         "products": [
                           {
@@ -1229,7 +1273,7 @@
                             "quantity": 1
                           }
                         ],
-                        "quantity": 5
+                        "quantity": 2
                       }
                     ],
                     "services": [
@@ -1316,11 +1360,22 @@
                           "unit": "g"
                         },
                         "references": [
-                          "123456789A",
-                          "123456789B",
-                          "123456789C",
-                          "123456789D",
-                          "123456789E"
+                          {
+                            "reference": "123456789A",
+                            "barcode": {
+                              "value": "54fd56g4f5gfd456sd",
+                              "type": "barcode",
+                              "format": "128"
+                            }
+                          },
+                          {
+                            "reference": "123456789B",
+                            "barcode": {
+                              "value": "54fd56g4f5gfd456sdsdsd",
+                              "type": "barcode",
+                              "format": "128"
+                            }
+                          }
                         ],
                         "products": [
                           {
@@ -1331,7 +1386,7 @@
                             "quantity": 1
                           }
                         ],
-                        "quantity": 5
+                        "quantity": 2
                       }
                     ],
                     "tags": [
