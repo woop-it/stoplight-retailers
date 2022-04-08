@@ -4259,6 +4259,11 @@
                 "interval": {
                   "start": "2021-02-08T05:33:41.422Z",
                   "end": "2021-02-08T09:33:41.422Z"
+                },
+                "route": {
+                  "id": "12345dsffsr",
+                  "sequenceNumber": 3,
+                  "deliverySequenceNumber": 1
                 }
               },
               "delivery": {
@@ -4273,6 +4278,11 @@
                   "woop": {
                     "simple": "https://trace.woopit.fr/t/48aed-b5552d-4da5-813c-00c06e1ff327",
                     "multiple": "https://trace.woopit.fr/m/48aed-b5552d-4da5-813c-00c06e1ff327"
+                  },
+                  "route": {
+                    "id": "12345dsffsr",
+                    "sequenceNumber": 3,
+                    "deliverySequenceNumber": 7
                   }
                 },
                 "status": "DELIVERY_INIT",
@@ -4355,6 +4365,9 @@
                 "properties": {
                   "interval": {
                     "$ref": "#/components/schemas/interval"
+                  },
+                  "route": {
+                    "$ref": "./models/route.yaml"
                   }
                 }
               },
@@ -4385,6 +4398,9 @@
                   },
                   "subStatus": {
                     "$ref": "./models/subStatus.yaml"
+                  },
+                  "route": {
+                    "$ref": "./models/route.yaml"
                   }
                 }
               },

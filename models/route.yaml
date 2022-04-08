@@ -1,0 +1,24 @@
+title: route
+type: object
+description: delivery route information
+properties:
+  id:
+    type: string
+    description: technical id from route system
+    example: 12345dsffsr
+  sequenceNumber:
+    type: integer
+    description: Route sequence between all routes from one planning (starting from 1)
+    example: 3
+  deliverySequenceNumber:
+    type: integer
+    description: Delivery sequence between all deliveries from one route (starting from 1)
+    example: 7
+required:
+  - id
+  - sequenceNumber
+  - deliverySequenceNumber
+examples:
+  - id: 12345dsffsr
+    sequenceNumber: 3
+    deliverySequenceNumber: 7
