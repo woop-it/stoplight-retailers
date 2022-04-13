@@ -473,7 +473,8 @@
                 }
               }
             }
-          }
+          },
+          "description": "Contains the creation information of the request."
         },
         "responses": {
           "201": {
@@ -548,6 +549,112 @@
           "Collect"
         ]
       }
+    },
+    "/deliveriesBookings": {
+      "post": {
+        "summary": "Book a delivery slot",
+        "description": "This method allows you to reserve an available time slot for a delivery request from the schedule of one or more given carriers.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/postCollectsBookings"
+              },
+              "examples": {
+                "Example": {
+                  "value": {
+                    "exchangePlaceId": "COLLECT01",
+                    "slot": {
+                      "start": "2021-04-20T08:00:00+0000",
+                      "end": "2021-04-20T08:30:00+0000"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "description": "Contains the creation information of the request."
+        },
+        "responses": {
+          "201": {
+            "description": "Request processed successfully, time slot reserved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "bookingId": {
+                      "type": "string",
+                      "description": "Reservation identifier."
+                    }
+                  }
+                },
+                "examples": {
+                  "Example": {
+                    "value": {
+                      "bookingId": "bfded21b-cbed-4256-b756-2febcea94df6"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Missing and/or incorrect items in the body",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "You are not authorised to access this item",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                },
+                "examples": {}
+              }
+            }
+          },
+          "403": {
+            "description": "Request not possible for this 'exchangePlaceId'",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "Example": {
+                    "value": {
+                      "statusCode": 403,
+                      "error": "Forbidden",
+                      "message": "Store doesn't exist or is inactive"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "The time slot is already booked"
+          }
+        },
+        "operationId": "postDeliveriesBookings",
+        "tags": [
+          "Order"
+        ]
+      },
+      "parameters": []
     },
     "/bookings/{bookingId}": {
       "delete": {
@@ -3559,37 +3666,45 @@
                             "code": "mondial-relay",
                             "name": "Mondial Relay"
                           },
-                          "service": "SERVICE_PICKUP_POINT",
-                          "types": [
-                            "PICKUP_POINT_AGENCY",
-                            "PICKUP_POINT_POST_OFFICE",
-                            "PICKUP_POINT_RELAY_WITH_LOCKER",
-                            "PICKUP_POINT_RELAY_WITHOUT_LOCKER",
-                            "PICKUP_POINT_ALL"
-                          ],
-                          "categories": [
-                            "24R",
-                            "24L",
-                            "Drive"
-                          ],
-                          "price": {
-                            "taxExcludedAmount": 2.99,
-                            "currency": "EUR"
-                          },
-                          "delay": {
-                            "value": 3,
+                          "deliveryPromise": {
+                            "value": 2,
                             "unit": "day"
-                          }
-                        },
-                        {
-                          "carrier": {
-                            "code": "chronopost",
-                            "name": "Chronopost"
                           },
-                          "service": "SERVICE_FRONT_HOME",
-                          "delay": {
-                            "value": 1,
-                            "unit": "day"
+                          "durationSlot": {
+                            "value": 2,
+                            "unit": "hour"
+                          },
+                          "deliveryNotice": {
+                            "value": 2,
+                            "unit": "hour"
+                          },
+                          "firstDeliveryHour": {
+                            "interval": {
+                              "start": "2019-05-02T15:52:01+0000",
+                              "end": "2019-05-02T17:52:01+0000"
+                            }
+                          },
+                          "service": [
+                            {
+                              "name": "SERVICE_PICKUP_POINT",
+                              "types": [
+                                "PICKUP_POINT_AGENCY",
+                                "PICKUP_POINT_POST_OFFICE",
+                                "PICKUP_POINT_RELAY_WITH_LOCKER",
+                                "PICKUP_POINT_RELAY_WITHOUT_LOCKER",
+                                "PICKUP_POINT_ALL"
+                              ],
+                              "categories": [
+                                "24R",
+                                "24L",
+                                "Drive"
+                              ]
+                            }
+                          ],
+                          "slot": {
+                            "start": "2019-05-02T15:52:01+0000",
+                            "end": "2019-05-02T17:52:01+0000",
+                            "remainingCapacity": 5
                           }
                         }
                       ]
@@ -4629,6 +4744,35 @@
         }
       },
       "postCollectsBookings": {
+        "description": "Specifies the information needed to book a delivery slot for a given carrier.",
+        "type": "object",
+        "title": "Reservation of a delivery time slot (postDeliveriesBookings)",
+        "properties": {
+          "exchangePlaceId": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Picking point identifier"
+          },
+          "slot": {
+            "$ref": "#/components/schemas/slot"
+          },
+          "carrierCodes": {
+            "type": "array",
+            "description": "Carrier(s) code(s)",
+            "items": {
+              "type": "string"
+            }
+          },
+          "storeId": {
+            "type": "string",
+            "description": "Identifier of the ordering shop"
+          }
+        },
+        "required": [
+          "storeId"
+        ]
+      },
+      "postDeliveriesBookings": {
         "description": "Specifies the information needed to reserve a collection time slot.",
         "type": "object",
         "title": "Reservation of a collection time slot (postCollectsBookings)",
