@@ -3449,30 +3449,9 @@
                               }
                             }
                           },
-                          "service": {
-                            "$ref": "#/components/schemas/deliveryService"
-                          },
-                          "types": {
-                            "type": "array",
-                            "description": "List of eligible relay point types (for the service SERVICE_PICKUP_POINT)",
-                            "items": {
-                              "$ref": "#/components/schemas/pickupPointType"
-                            }
-                          },
-                          "categories": {
-                            "type": "array",
-                            "description": "List of eligible relay point categories (for the service SERVICE_PICKUP_POINT)",
-                            "items": {
-                              "type": "string"
-                            }
-                          },
-                          "delay": {
+                          "deliveryPromise": {
                             "type": "object",
-                            "description": "Turnaround time for the service",
-                            "required": [
-                              "value",
-                              "unit"
-                            ],
+                            "description": "Promise of delivery ",
                             "properties": {
                               "value": {
                                 "type": "number"
@@ -3484,20 +3463,95 @@
                                   "hour"
                                 ]
                               }
+                            },
+                            "required": [
+                              "value",
+                              "unit"
+                            ]
+                          },
+                          "durationSlot": {
+                            "type": "object",
+                            "description": "Duration of the delivery slot",
+                            "properties": {
+                              "value": {
+                                "type": "number"
+                              },
+                              "unit": {
+                                "type": "string",
+                                "enum": [
+                                  "day",
+                                  "hour"
+                                ]
+                              }
+                            },
+                            "required": [
+                              "value",
+                              "unit"
+                            ]
+                          },
+                          "deliveryNotice": {
+                            "type": "object",
+                            "description": "Minimum notice for delivery",
+                            "properties": {
+                              "value": {
+                                "type": "number"
+                              },
+                              "unit": {
+                                "type": "string",
+                                "enum": [
+                                  "day",
+                                  "hour"
+                                ]
+                              }
+                            },
+                            "required": [
+                              "value",
+                              "unit"
+                            ]
+                          },
+                          "firstDeliveryHour": {
+                            "type": "object",
+                            "description": "First available delivery slot",
+                            "properties": {
+                              "interval": {
+                                "$ref": "#/components/schemas/interval"
+                              }
                             }
+                          },
+                          "services": {
+                            "type": "array",
+                            "description": "List of delivery services",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "name": {
+                                  "type": "string"
+                                },
+                                "types": {
+                                  "$ref": "#/components/schemas/pickupPointType"
+                                },
+                                "categories": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "string"
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "slot": {
+                            "$ref": "#/components/schemas/availableSlot"
                           }
                         },
                         "required": [
-                          "carrier",
-                          "service",
-                          "delay"
+                          "carrier"
                         ]
                       }
                     }
                   }
                 },
                 "examples": {
-                  "Example": {
+                  "Default Example": {
                     "value": {
                       "eligibilities": [
                         {
