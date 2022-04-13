@@ -589,7 +589,7 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "bookingId": {
+                    "deliveriesBookingId": {
                       "type": "string",
                       "description": "Reservation identifier."
                     }
@@ -651,7 +651,7 @@
         },
         "operationId": "postDeliveriesBookings",
         "tags": [
-          "Order"
+          "Delivery Booking"
         ]
       },
       "parameters": []
@@ -725,6 +725,87 @@
           "Collect"
         ]
       }
+    },
+    "/orders/{deliveriesBookingId}": {
+      "delete": {
+        "summary": "Cancel a delivery booking slot",
+        "description": "This method allows you to cancel the reservation of a time slot for a delivery request at a specific carrier and location.",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "name": "bookingId",
+            "in": "path",
+            "required": true,
+            "description": "Reservation identifier"
+          },
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Request successfully processed, time slot cancelled"
+          },
+          "401": {
+            "description": "You are not authorised to access this item",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                },
+                "examples": {}
+              }
+            }
+          },
+          "403": {
+            "description": "The time slot reservation cannot be cancelled.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                },
+                "examples": {}
+              }
+            }
+          },
+          "404": {
+            "description": "The 'bookingId' does not exist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "statusCode": 404,
+                      "error": "Not Found",
+                      "message": "Not Found"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "deleteDeliveriesBookings",
+        "tags": [
+          "Delivery booking"
+        ]
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "deliveriesBookingId",
+          "in": "path",
+          "required": true,
+          "description": "Reservation Identifier"
+        }
+      ]
     },
     "/collects/{collectId}": {
       "patch": {
@@ -4279,6 +4360,9 @@
         ],
         "description": "This method allows the retailer to send an update on the collection status.\n\nThe retailer must enter the next collection tracking status to progress the collection request. This delivery tracking status must be consistent with the defined workflow. <a href=\"/docs/retailer/docs/Modèles/Statuts-de-retrait-C&C.md\">Workflow and status list</a>"
       }
+    },
+    "": {
+      "parameters": []
     }
   },
   "components": {
