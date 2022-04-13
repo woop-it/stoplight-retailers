@@ -3684,6 +3684,59 @@
                     ],
                     "storeId": "MAG01"
                   }
+                },
+                "Example with slot": {
+                  "value": {
+                    "picking": {
+                      "location": {
+                        "type": "address",
+                        "addressLine1": "237 rue du ballon",
+                        "postalCode": "59110",
+                        "city": "La Madeleine",
+                        "country": "FR"
+                      }
+                    },
+                    "packages": [
+                      {
+                        "length": {
+                          "value": 15,
+                          "unit": "cm"
+                        },
+                        "width": {
+                          "value": 15,
+                          "unit": "cm"
+                        },
+                        "height": {
+                          "value": 1.2,
+                          "unit": "m"
+                        },
+                        "weight": {
+                          "value": 560,
+                          "unit": "g"
+                        },
+                        "products": [
+                          {
+                            "type": "TYPOLOGY_GENERIC",
+                            "ean": "4dq86zd4q6zd4q64",
+                            "cug": "q56zd4q65d4q",
+                            "label": "Lamp",
+                            "quantity": 1
+                          }
+                        ],
+                        "quantity": 1
+                      }
+                    ],
+                    "storeId": "MAG01",
+                    "slot": {
+                      "location": {
+                        "type": "address",
+                        "addressLine1": "237 rue du ballon",
+                        "postalCode": "59110",
+                        "city": "La Madeleine",
+                        "country": "FR"
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -4640,6 +4693,57 @@
               }
             ],
             "storeId": "MAG01"
+          },
+          "Example with slot ": {
+            "picking": {
+              "location": {
+                "type": "address",
+                "addressLine1": "237 rue du ballon",
+                "postalCode": "59110",
+                "city": "La Madeleine",
+                "country": "FR"
+              }
+            },
+            "packages": [
+              {
+                "length": {
+                  "value": 15,
+                  "unit": "cm"
+                },
+                "width": {
+                  "value": 15,
+                  "unit": "cm"
+                },
+                "height": {
+                  "value": 1.2,
+                  "unit": "m"
+                },
+                "weight": {
+                  "value": 560,
+                  "unit": "g"
+                },
+                "products": [
+                  {
+                    "type": "TYPOLOGY_GENERIC",
+                    "ean": "4dq86zd4q6zd4q64",
+                    "cug": "q56zd4q65d4q",
+                    "label": "Lamp",
+                    "quantity": 1
+                  }
+                ],
+                "quantity": 1
+              }
+            ],
+            "storeId": "MAG01",
+            "slot": {
+              "location": {
+                "type": "address",
+                "addressLine1": "237 rue du ballon",
+                "postalCode": "59110",
+                "city": "La Madeleine",
+                "country": "FR"
+              }
+            }
           }
         },
         "properties": {
@@ -4652,6 +4756,9 @@
             "properties": {
               "location": {
                 "$ref": "#/components/schemas/location"
+              },
+              "interval": {
+                "$ref": "#/components/schemas/interval"
               }
             }
           },
@@ -4674,6 +4781,30 @@
           "storeId": {
             "type": "string",
             "description": "Identifier of the store issuing the request"
+          },
+          "slot": {
+            "type": "object",
+            "properties": {
+              "fromtDate": {
+                "type": "string",
+                "description": "Start Date"
+              },
+              "toDate": {
+                "type": "string",
+                "description": "End Date"
+              },
+              "minRemainingCapacity": {
+                "type": "number",
+                "description": "Minimum remaining capacity for this slot"
+              },
+              "limit": {
+                "type": "number",
+                "description": "Max number of slot "
+              }
+            },
+            "required": [
+              "fromtDate"
+            ]
           }
         },
         "required": [
