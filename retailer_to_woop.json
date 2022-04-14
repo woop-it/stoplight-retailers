@@ -5085,7 +5085,7 @@
               }
             },
             "required": [
-              "fromtDate"
+              "toDate"
             ]
           }
         },
