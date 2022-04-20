@@ -473,7 +473,7 @@
         "summary": "Receive notes for a delivery"
       }
     },
-    "/oders/{orderId}/routes": {
+    "/orders/{orderId}/routes": {
       "parameters": [
         {
           "schema": {
