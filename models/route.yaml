@@ -12,11 +12,11 @@ properties:
     example: 12345dsffsr
   sequenceNumber:
     type: integer
-    description: Route sequence between all routes from one planning (starting from 1)
+    description: Route sequence number between all routes from one planning (starting from 1)
     example: 3
   stopSequenceNumber:
     type: integer
-    description: Delivery sequence between all deliveries from one route (starting from 1)
+    description: Stop sequence number between all stops from one route (starting from 1)
     example: 7
   team:
     $ref: ../woop_to_retailer.json#/components/schemas/team
