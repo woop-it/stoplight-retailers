@@ -608,7 +608,10 @@
             }
           },
           "description": "Contains the information of the routes linked to an order."
-        }
+        },
+        "tags": [
+          "Order"
+        ]
       }
     },
     "/orders/{orderId}/deliveryClosure": {
