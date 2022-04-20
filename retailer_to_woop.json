@@ -4569,7 +4569,14 @@
                 "route": {
                   "id": "12345dsffsr",
                   "sequenceNumber": 3,
-                  "deliverySequenceNumber": 1
+                  "deliverySequenceNumber": 1,
+                  "team": {
+                    "members": [
+                      {
+                        "id": "176867"
+                      }
+                    ]
+                  }
                 }
               },
               "delivery": {
@@ -4588,7 +4595,14 @@
                   "route": {
                     "id": "12345dsffsr",
                     "sequenceNumber": 3,
-                    "deliverySequenceNumber": 7
+                    "deliverySequenceNumber": 7,
+                    "team": {
+                      "members": [
+                        {
+                          "id": "234567"
+                        }
+                      ]
+                    }
                   }
                 },
                 "status": "DELIVERY_INIT",
