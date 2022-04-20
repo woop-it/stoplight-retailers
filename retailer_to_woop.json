@@ -589,7 +589,7 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "deliveriesBookingId": {
+                    "deliveryBookingId": {
                       "type": "string",
                       "description": "Reservation identifier."
                     }
