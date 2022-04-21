@@ -199,7 +199,7 @@
             }
           }
         },
-        "summary": "Recevoir le nom du transporteur sélectionné pour une commande"
+        "summary": "Receive the selected carrier name for an order"
       }
     },
     "/orders/{orderId}/status": {
@@ -471,6 +471,147 @@
           }
         },
         "summary": "Receive notes for a delivery"
+      }
+    },
+    "/orders/{orderId}/routes": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "orderId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "put": {
+        "summary": "Receive routes for an order",
+        "operationId": "putOrderRoutes",
+        "responses": {
+          "204": {
+            "description": "Request processed successfully"
+          },
+          "400": {
+            "description": "Missing and/or incorrect items in the body",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "reasons": {
+                      "type": "array",
+                      "description": "List of reasons of issue",
+                      "items": {
+                        "type": "string",
+                        "example": "Missing argument 'xxxxx'"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Information can no longer be sent",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./retailer_to_woop.json#/components/schemas/errorCode"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The 'orderId' was not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./retailer_to_woop.json#/components/schemas/errorCode"
+                }
+              }
+            }
+          }
+        },
+        "description": "This method allows you to receive the routes set to a given order.The information is sent when the planning of the order is done.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "orderId": {
+                    "type": "string",
+                    "description": "Order identifier"
+                  },
+                  "picking": {
+                    "type": "object",
+                    "required": [
+                      "route"
+                    ],
+                    "description": "Picking information",
+                    "properties": {
+                      "route": {
+                        "$ref": "./models/route.yaml"
+                      }
+                    }
+                  },
+                  "delivery": {
+                    "type": "object",
+                    "description": "Delivery information",
+                    "properties": {
+                      "route": {
+                        "$ref": "./models/route.yaml"
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "orderId",
+                  "picking"
+                ]
+              },
+              "examples": {
+                "example-1": {
+                  "value": {
+                    "orderId": "string",
+                    "picking": {
+                      "route": {
+                        "id": "12345dsffsr",
+                        "sequenceNumber": 3,
+                        "deliverySequenceNumber": 1,
+                        "team": {
+                          "members": [
+                            {
+                              "id": "ZE46567"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "delivery": {
+                      "route": {
+                        "id": "12345dsffsr",
+                        "sequenceNumber": 3,
+                        "deliverySequenceNumber": 7,
+                        "team": {
+                          "members": [
+                            {
+                              "id": "1234567"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "description": "Contains the information of the routes linked to an order."
+        },
+        "tags": [
+          "Order"
+        ]
       }
     },
     "/orders/{orderId}/deliveryClosure": {
