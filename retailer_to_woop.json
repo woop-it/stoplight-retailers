@@ -1894,18 +1894,6 @@
                           "interval": {
                             "start": "string",
                             "end": "string"
-                          },
-                          "route": {
-                            "id": "12345dsffsr",
-                            "sequenceNumber": 3,
-                            "deliverySequenceNumber": 1,
-                            "team": {
-                              "members": [
-                                {
-                                  "id": "123456"
-                                }
-                              ]
-                            }
                           }
                         },
                         "delivery": {
@@ -1923,19 +1911,7 @@
                             }
                           },
                           "status": "DELIVERY_INIT",
-                          "subStatus": "FAILED",
-                          "route": {
-                            "id": "12345dsffsr",
-                            "sequenceNumber": 3,
-                            "deliverySequenceNumber": 7,
-                            "team": {
-                              "members": [
-                                {
-                                  "id": "ZE46567"
-                                }
-                              ]
-                            }
-                          }
+                          "subStatus": "FAILED"
                         },
                         "carrier": {
                           "name": "string",
@@ -4593,14 +4569,7 @@
                 "route": {
                   "id": "12345dsffsr",
                   "sequenceNumber": 3,
-                  "deliverySequenceNumber": 1,
-                  "team": {
-                    "members": [
-                      {
-                        "id": "176867"
-                      }
-                    ]
-                  }
+                  "deliverySequenceNumber": 1
                 }
               },
               "delivery": {
@@ -4619,14 +4588,7 @@
                   "route": {
                     "id": "12345dsffsr",
                     "sequenceNumber": 3,
-                    "deliverySequenceNumber": 7,
-                    "team": {
-                      "members": [
-                        {
-                          "id": "234567"
-                        }
-                      ]
-                    }
+                    "deliverySequenceNumber": 7
                   }
                 },
                 "status": "DELIVERY_INIT",

@@ -1,10 +1,6 @@
 title: route
 type: object
 description: delivery route information
-examples:
-  - id: 12345dsffsr
-    sequenceNumber: 3
-    deliverySequenceNumber: 7
 properties:
   id:
     type: string
@@ -12,13 +8,17 @@ properties:
     example: 12345dsffsr
   sequenceNumber:
     type: integer
-    description: Route sequence number between all routes from one planning (starting from 1)
+    description: Route sequence between all routes from one planning (starting from 1)
     example: 3
-  stopSequenceNumber:
+  deliverySequenceNumber:
     type: integer
-    description: Stop sequence number between all stops from one route (starting from 1)
+    description: Delivery sequence between all deliveries from one route (starting from 1)
     example: 7
-  team:
-    $ref: ../woop_to_retailer.json#/components/schemas/team
 required:
   - id
+  - sequenceNumber
+  - deliverySequenceNumber
+examples:
+  - id: 12345dsffsr
+    sequenceNumber: 3
+    deliverySequenceNumber: 7
