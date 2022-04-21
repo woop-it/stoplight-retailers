@@ -5130,7 +5130,6 @@
         },
         "required": [
           "picking",
-          "packages",
           "storeId"
         ]
       },
