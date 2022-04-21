@@ -656,76 +656,6 @@
       },
       "parameters": []
     },
-    "/bookings/{bookingId}": {
-      "delete": {
-        "summary": "Cancel a booking slot",
-        "description": "This method allows you to cancel the reservation of a time slot for a Click&Collect collection request at a specific collection location.",
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "name": "bookingId",
-            "in": "path",
-            "required": true,
-            "description": "Reservation identifier"
-          },
-          {
-            "$ref": "#/components/parameters/apiVersion"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Request successfully processed, time slot cancelled"
-          },
-          "401": {
-            "description": "You are not authorised to access this item",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/errorCode"
-                },
-                "examples": {}
-              }
-            }
-          },
-          "403": {
-            "description": "The time slot reservation cannot be cancelled.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/errorCode"
-                },
-                "examples": {}
-              }
-            }
-          },
-          "404": {
-            "description": "The 'bookingId' does not exist",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/errorCode"
-                },
-                "examples": {
-                  "example": {
-                    "value": {
-                      "statusCode": 404,
-                      "error": "Not Found",
-                      "message": "Not Found"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "operationId": "deleteBookings",
-        "tags": [
-          "Collect"
-        ]
-      }
-    },
     "/orders/{deliveriesBookingId}": {
       "delete": {
         "summary": "Cancel a delivery booking slot",
@@ -806,6 +736,76 @@
           "description": "Reservation Identifier"
         }
       ]
+    },
+    "/bookings/{bookingId}": {
+      "delete": {
+        "summary": "Cancel a booking slot",
+        "description": "This method allows you to cancel the reservation of a time slot for a Click&Collect collection request at a specific collection location.",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "name": "bookingId",
+            "in": "path",
+            "required": true,
+            "description": "Reservation identifier"
+          },
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Request successfully processed, time slot cancelled"
+          },
+          "401": {
+            "description": "You are not authorised to access this item",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                },
+                "examples": {}
+              }
+            }
+          },
+          "403": {
+            "description": "The time slot reservation cannot be cancelled.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                },
+                "examples": {}
+              }
+            }
+          },
+          "404": {
+            "description": "The 'bookingId' does not exist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "statusCode": 404,
+                      "error": "Not Found",
+                      "message": "Not Found"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "deleteBookings",
+        "tags": [
+          "Collect"
+        ]
+      }
     },
     "/collects/{collectId}": {
       "patch": {
