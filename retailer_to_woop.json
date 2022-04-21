@@ -3730,7 +3730,7 @@
                               }
                             }
                           },
-                          "slot": {
+                          "slots": {
                             "$ref": "#/components/schemas/availableSlot"
                           }
                         },
@@ -3785,11 +3785,13 @@
                               ]
                             }
                           ],
-                          "slot": {
-                            "start": "2019-05-02T15:52:01+0000",
-                            "end": "2019-05-02T17:52:01+0000",
-                            "remainingCapacity": 5
-                          }
+                          "slots": [
+                            {
+                              "start": "2019-05-02T15:52:01+0000",
+                              "end": "2019-05-02T17:52:01+0000",
+                              "remainingCapacity": 5
+                            }
+                          ]
                         }
                       ]
                     }
