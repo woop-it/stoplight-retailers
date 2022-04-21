@@ -726,24 +726,20 @@
         ]
       }
     },
-    "/orders/{deliveryBookingId} ": {
-      "delete": {
-        "summary": "Cancel a booking slot",
-        "description": "This method allows you to cancel the reservation of a time slot for a Click&Collect collection request at a specific collection location.",
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "name": "bookingId",
-            "in": "path",
-            "required": true,
-            "description": "Reservation identifier"
+    "/orders/{deliveryBookingId}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
           },
-          {
-            "$ref": "#/components/parameters/apiVersion"
-          }
-        ],
+          "name": "deliveryBookingId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "delete": {
+        "summary": "Cancel a delivery booking slot",
+        "operationId": "delete-orders-deliveryBookingId",
         "responses": {
           "204": {
             "description": "Request successfully processed, time slot cancelled"
@@ -754,8 +750,7 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/errorCode"
-                },
-                "examples": {}
+                }
               }
             }
           },
@@ -765,8 +760,7 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/errorCode"
-                },
-                "examples": {}
+                }
               }
             }
           },
@@ -776,35 +770,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/errorCode"
-                },
-                "examples": {
-                  "example": {
-                    "value": {
-                      "statusCode": 404,
-                      "error": "Not Found",
-                      "message": "Not Found"
-                    }
-                  }
                 }
               }
             }
           }
         },
-        "operationId": "deleteBookings",
         "tags": [
-          "Collect"
+          "Delivery Booking"
+        ],
+        "description": "This method allows you to cancel the reservation of a time slot for a delivery request at a specific carrier and location.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          }
         ]
-      },
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "deliveryBookingId",
-          "in": "path",
-          "required": true
-        }
-      ]
+      }
     },
     "/collects/{collectId}": {
       "patch": {
@@ -4383,9 +4363,6 @@
         ],
         "description": "This method allows the retailer to send an update on the collection status.\n\nThe retailer must enter the next collection tracking status to progress the collection request. This delivery tracking status must be consistent with the defined workflow. <a href=\"/docs/retailer/docs/Modèles/Statuts-de-retrait-C&C.md\">Workflow and status list</a>"
       }
-    },
-    "": {
-      "parameters": []
     }
   },
   "components": {
