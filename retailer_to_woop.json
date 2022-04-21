@@ -742,7 +742,7 @@
         "operationId": "delete-orders-deliveryBookingId",
         "responses": {
           "204": {
-            "description": "Request successfully processed, time slot cancelled"
+            "description": "Request successfully processed time slot cancelled"
           },
           "401": {
             "description": "You are not authorised to access this item",
