@@ -5092,7 +5092,6 @@
         },
         "required": [
           "picking",
-          "packages",
           "storeId"
         ]
       },
