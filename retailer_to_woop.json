@@ -3214,9 +3214,6 @@
                       "carrier": {
                         "type": "object",
                         "description": "Callback to receive the choice of carrier.",
-                        "required": [
-                          "url"
-                        ],
                         "properties": {
                           "url": {
                             "type": "string",
@@ -3227,14 +3224,14 @@
                             "description": "API version for this callback",
                             "example": "1.1.0"
                           }
-                        }
+                        },
+                        "required": [
+                          "url"
+                        ]
                       },
                       "status": {
                         "type": "object",
                         "description": "Callback to receive status changes",
-                        "required": [
-                          "url"
-                        ],
                         "properties": {
                           "url": {
                             "type": "string",
@@ -3245,14 +3242,14 @@
                             "description": "API version for this callback",
                             "example": "1.1.0"
                           }
-                        }
+                        },
+                        "required": [
+                          "url"
+                        ]
                       },
                       "score": {
                         "type": "object",
                         "description": "Callback to receive customer ratings",
-                        "required": [
-                          "url"
-                        ],
                         "properties": {
                           "url": {
                             "type": "string",
@@ -3263,7 +3260,10 @@
                             "description": "API version for this callback.",
                             "example": "1.1.0"
                           }
-                        }
+                        },
+                        "required": [
+                          "url"
+                        ]
                       },
                       "deliveryClosure": {
                         "type": "object",
@@ -3335,12 +3335,27 @@
                           "url"
                         ]
                       },
+                      "deliveryStop": {
+                        "type": "object",
+                        "description": "Callback to receive changes in the delivery stops of an order",
+                        "properties": {
+                          "url": {
+                            "type": "string",
+                            "description": "URL of the API route"
+                          },
+                          "version": {
+                            "type": "string",
+                            "example": "1.8.0",
+                            "description": "API version for this callback"
+                          }
+                        },
+                        "required": [
+                          "url"
+                        ]
+                      },
                       "collectStatus": {
                         "type": "object",
                         "description": "Callback to receive changes in the status of a collection",
-                        "required": [
-                          "url"
-                        ],
                         "properties": {
                           "url": {
                             "type": "string",
@@ -3351,7 +3366,10 @@
                             "description": "API version for this callback",
                             "example": "1.1.0"
                           }
-                        }
+                        },
+                        "required": [
+                          "url"
+                        ]
                       }
                     }
                   },
@@ -3475,6 +3493,10 @@
                         "url": "https://my_url/orders/{orderId}/event",
                         "version": "1.1.0"
                       },
+                      "deliveryStop": {
+                        "url": "https://my_url/orders/{orderId}/stops",
+                        "version": "1.8.0"
+                      },
                       "collectStatus": {
                         "url": "https://my_url/collects/{collectId}/status",
                         "version": "1.1.0"
@@ -3517,6 +3539,10 @@
                         "url": "https://my_url/orders/{orderId}/event",
                         "version": "1.1.0"
                       },
+                      "deliveryStop": {
+                        "url": "https://my_url/orders/{orderId}/stops",
+                        "version": "1.8.0"
+                      },
                       "collectStatus": {
                         "url": "https://my_url/collects/{collectId}/status",
                         "version": "1.1.0"
@@ -3555,6 +3581,10 @@
                       "event": {
                         "url": "https://my_url/orders/{orderId}/event",
                         "version": "1.1.0"
+                      },
+                      "deliveryStop": {
+                        "url": "https://my_url/orders/{orderId}/stops",
+                        "version": "1.8.0"
                       },
                       "collectStatus": {
                         "url": "https://my_url/collects/{collectId}/status",
