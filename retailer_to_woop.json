@@ -4571,8 +4571,9 @@
                   "start": "2021-02-08T05:33:41.422Z",
                   "end": "2021-02-08T09:33:41.422Z"
                 },
-                "route": {
+                "stop": {
                   "id": "12345dsffsr",
+                  "routeId": "EZRZEG4353",
                   "sequenceNumber": 3,
                   "deliverySequenceNumber": 1,
                   "team": {
@@ -4597,8 +4598,9 @@
                     "simple": "https://trace.woopit.fr/t/48aed-b5552d-4da5-813c-00c06e1ff327",
                     "multiple": "https://trace.woopit.fr/m/48aed-b5552d-4da5-813c-00c06e1ff327"
                   },
-                  "route": {
+                  "stop": {
                     "id": "12345dsffsr",
+                    "routeId": "FERGER45345T3F",
                     "sequenceNumber": 3,
                     "deliverySequenceNumber": 7,
                     "team": {
@@ -4691,8 +4693,8 @@
                   "interval": {
                     "$ref": "#/components/schemas/interval"
                   },
-                  "route": {
-                    "$ref": "./models/route.yaml"
+                  "stop": {
+                    "$ref": "./models/stop.yaml"
                   }
                 }
               },
@@ -4724,8 +4726,8 @@
                   "subStatus": {
                     "$ref": "./models/subStatus.yaml"
                   },
-                  "route": {
-                    "$ref": "./models/route.yaml"
+                  "stop": {
+                    "$ref": "./models/stop.yaml"
                   }
                 }
               },

@@ -1,23 +1,23 @@
-title: route
+title: stop
 type: object
-description: delivery route information
+description: delivery stop information
 examples:
-  - routeId: 12345dsffsr
-    stopId: 123890654FRTTY
+  - id: 123890654FRTTY
+    routeId: 12345dsffsr
     routeSequenceNumber: 3
     stopSequenceNumber: 7
     team:
       members:
         - id: string
 properties:
+  id:
+    type: string
+    description: technical id for a stop in the route
+    example: 123890654FRTTY
   routeId:
     type: string
     description: technical id from route system
     example: 12345dsffsr
-  stopId:
-    type: string
-    description: technical id for a stop in the route
-    example: 123890654FRTTY
   routeSequenceNumber:
     type: integer
     description: Route sequence number between all routes from one planning (starting from 1)
@@ -29,5 +29,5 @@ properties:
   team:
     $ref: ../woop_to_retailer.json#/components/schemas/team
 required:
+  - id
   - routeId
-  - stopId
