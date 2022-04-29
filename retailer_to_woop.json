@@ -306,7 +306,7 @@
       },
       "get": {
         "summary": "",
-        "operationId": "getCollects",
+        "operationId": "Get Collects",
         "responses": {
           "200": {
             "description": "OK",
@@ -337,6 +337,12 @@
                 }
               }
             }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
           }
         },
         "parameters": [
@@ -428,6 +434,9 @@
             "in": "query",
             "name": "offset"
           }
+        ],
+        "tags": [
+          "Collect"
         ]
       }
     },
