@@ -306,10 +306,37 @@
       },
       "get": {
         "summary": "",
-        "operationId": "get-collects",
+        "operationId": "getCollects",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "status": {
+                        "$ref": "#/components/schemas/collectStatus"
+                      },
+                      "slot": {
+                        "$ref": "#/components/schemas/slot"
+                      },
+                      "urls": {
+                        "$ref": "./models/collect/urls.yaml"
+                      },
+                      "mode": {
+                        "$ref": "./models/collect/mode.yaml"
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "parameters": [
@@ -332,7 +359,20 @@
           },
           {
             "schema": {
-              "type": "array"
+              "type": "array",
+              "enum": [
+                "COLLECT_INIT",
+                "COLLECT_STARTED",
+                "COLLECT_READY",
+                "COLLECT_AWAITING",
+                "COLLECT_IN_PROGRESS",
+                "COLLECT_PICK_UP_OK",
+                "COLLECT_PICK_UP_FAILED",
+                "COLLECT_PICK_UP_PARTIALLY",
+                "COLLECT_BLOCKED",
+                "COLLECT_DELAYED",
+                "COLLECT_REPLANNED"
+              ]
             },
             "in": "query",
             "name": "status"
