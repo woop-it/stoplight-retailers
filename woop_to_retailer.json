@@ -546,14 +546,14 @@
                   "picking": {
                     "type": "object",
                     "description": "Picking information",
-                    "required": [
-                      "stop"
-                    ],
                     "properties": {
                       "stop": {
                         "$ref": "./models/stop.yaml"
                       }
-                    }
+                    },
+                    "required": [
+                      "stop"
+                    ]
                   },
                   "delivery": {
                     "type": "object",
@@ -562,7 +562,10 @@
                       "stop": {
                         "$ref": "./models/stop.yaml"
                       }
-                    }
+                    },
+                    "required": [
+                      "stop"
+                    ]
                   }
                 },
                 "required": [
