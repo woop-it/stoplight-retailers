@@ -950,7 +950,7 @@
         ]
       },
       "get": {
-        "summary": "Get collect",
+        "summary": "Get a collect",
         "operationId": "get-collects-collectId",
         "responses": {
           "200": {
