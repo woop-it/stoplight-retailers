@@ -19,3 +19,4 @@ List of the delivery services available when creating an order.
 | `SERVICE_XL_TAXI`            | Simple delivery in a (Van taxi)      |
 | `SERVICE_WITH_SIGNATURE`     | Delivery with signature on receipt   |
 | `SERVICE_GREEN`              | Eco-friendly delivery                |
+| `SERVICE_PAY_ON_DELIVERY`    | Pay on delivery service              |
