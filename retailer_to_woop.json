@@ -550,7 +550,7 @@
         ]
       }
     },
-    "/deliveriesBookings": {
+    "/deliveries/bookings": {
       "post": {
         "summary": "Book a delivery slot",
         "description": "This method allows you to reserve an available time slot for a delivery request from the schedule of one or more given carriers.",
@@ -589,7 +589,7 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "deliveryBookingId": {
+                    "bookingId": {
                       "type": "string",
                       "description": "Reservation identifier."
                     }
@@ -726,13 +726,13 @@
         ]
       }
     },
-    "/orders/{deliveryBookingId}": {
+    "/deliveries/bookings/{bookingId}": {
       "parameters": [
         {
           "schema": {
             "type": "string"
           },
-          "name": "deliveryBookingId",
+          "name": "bookingId",
           "in": "path",
           "required": true
         }
@@ -4897,15 +4897,11 @@
             "items": {
               "type": "string"
             }
-          },
-          "storeId": {
-            "type": "string",
-            "description": "Identifier of the ordering shop"
           }
         },
         "required": [
-          "carrierCodes",
-          "storeId"
+          "exchangePlaceId",
+          "carrierCodes"
         ]
       },
       "postDeliveriesBookings": {
