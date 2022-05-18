@@ -4755,11 +4755,6 @@
               "location": {
                 "$ref": "#/components/schemas/location"
               },
-              "infos": {
-                "type": "string",
-                "description": "Depreciated - Use \"picking.location.comment\"",
-                "deprecated": true
-              },
               "interval": {
                 "type": "array",
                 "description": "Collection time slots",
@@ -4783,11 +4778,6 @@
             "properties": {
               "location": {
                 "$ref": "#/components/schemas/location"
-              },
-              "infos": {
-                "type": "string",
-                "description": "Depreciated - Use \"delivery.location.comment\"",
-                "deprecated": true
               },
               "interval": {
                 "type": "array",
@@ -4878,19 +4868,15 @@
           },
           "picking": {
             "type": "object",
+            "description": "Collection information",
             "required": [
               "location",
               "interval",
               "contact"
             ],
-            "description": "Collection information",
             "properties": {
               "location": {
                 "$ref": "#/components/schemas/location"
-              },
-              "infos": {
-                "type": "string",
-                "description": "Additional comment"
               },
               "interval": {
                 "type": "array",
@@ -4906,19 +4892,15 @@
           },
           "delivery": {
             "type": "object",
+            "description": "Delivery information",
             "required": [
               "location",
               "interval",
               "contact"
             ],
-            "description": "Delivery information",
             "properties": {
               "location": {
                 "$ref": "#/components/schemas/location"
-              },
-              "infos": {
-                "type": "string",
-                "description": "Additional comment"
               },
               "interval": {
                 "type": "array",
