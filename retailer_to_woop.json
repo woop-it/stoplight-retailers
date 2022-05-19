@@ -5168,6 +5168,10 @@
           "storeId": {
             "type": "string",
             "description": "Identifier of the store issuing the request"
+          },
+          "countryCode": {
+            "type": "string",
+            "description": "Country code (ISO 3166 alpha-2)."
           }
         },
         "required": [
