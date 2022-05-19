@@ -332,7 +332,12 @@
                       "mode": {
                         "$ref": "./models/collect/mode.yaml"
                       }
-                    }
+                    },
+                    "required": [
+                      "id",
+                      "status",
+                      "mode"
+                    ]
                   }
                 }
               }
