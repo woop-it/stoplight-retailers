@@ -303,6 +303,146 @@
           }
         },
         "summary": "Create collect"
+      },
+      "get": {
+        "summary": "",
+        "operationId": "Get Collects",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "status": {
+                        "$ref": "#/components/schemas/collectStatus"
+                      },
+                      "slot": {
+                        "$ref": "#/components/schemas/slot"
+                      },
+                      "urls": {
+                        "$ref": "./models/collect/urls.yaml"
+                      },
+                      "mode": {
+                        "$ref": "./models/collect/mode.yaml"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "status",
+                      "mode"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "example": "1.6.0"
+            },
+            "in": "header",
+            "name": "x-api-version",
+            "required": true,
+            "description": "Target API version"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "exchangePlaceId"
+          },
+          {
+            "schema": {
+              "type": "array",
+              "enum": [
+                "COLLECT_INIT",
+                "COLLECT_STARTED",
+                "COLLECT_READY",
+                "COLLECT_AWAITING",
+                "COLLECT_IN_PROGRESS",
+                "COLLECT_PICK_UP_OK",
+                "COLLECT_PICK_UP_FAILED",
+                "COLLECT_PICK_UP_PARTIALLY",
+                "COLLECT_BLOCKED",
+                "COLLECT_DELAYED",
+                "COLLECT_REPLANNED"
+              ]
+            },
+            "in": "query",
+            "name": "status"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "in": "query",
+            "name": "start",
+            "description": "Date ISO8601"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "in": "query",
+            "name": "end",
+            "description": "Date ISO8601"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "in": "query",
+            "name": "createdAtStart",
+            "description": "Date ISO8601"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "in": "query",
+            "name": "createdAtEnd",
+            "description": "Date ISO8601"
+          },
+          {
+            "schema": {
+              "type": "number",
+              "default": 100
+            },
+            "in": "query",
+            "name": "limit"
+          },
+          {
+            "schema": {
+              "type": "number"
+            },
+            "in": "query",
+            "name": "offset"
+          }
+        ],
+        "tags": [
+          "Collect"
+        ]
       }
     },
     "/slots": {
@@ -469,6 +609,16 @@
                       "start": "2021-04-20T08:00:00+0000",
                       "end": "2021-04-20T08:30:00+0000"
                     }
+                  }
+                },
+                "Example with multi slot": {
+                  "value": {
+                    "exchangePlaceId": "COLLECT01",
+                    "slot": {
+                      "start": "2021-04-20T08:00:00+0000",
+                      "end": "2021-04-20T12:30:00+0000"
+                    },
+                    "isMultiSlot": true
                   }
                 }
               }
@@ -805,7 +955,7 @@
         ]
       },
       "get": {
-        "summary": "Get collect",
+        "summary": "Get a collect",
         "operationId": "get-collects-collectId",
         "responses": {
           "200": {
@@ -4462,14 +4612,14 @@
           },
           "slot": {
             "$ref": "#/components/schemas/slot"
+          },
+          "isMultiSlot": {
+            "type": "boolean"
           }
         },
         "required": [
-          "reference",
-          "storeId",
-          "customer",
-          "location",
-          "packages"
+          "exchangePlaceId",
+          "slot"
         ]
       },
       "postEligibilities": {
