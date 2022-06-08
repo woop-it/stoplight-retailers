@@ -739,7 +739,7 @@
       ],
       "delete": {
         "summary": "Cancel a delivery booking slot",
-        "operationId": "delete-orders-deliveryBookingId",
+        "operationId": "deleteDeliveryBookingId",
         "responses": {
           "204": {
             "description": "Request successfully processed time slot cancelled"
