@@ -2188,7 +2188,7 @@
         }
       ],
       "post": {
-        "summary": "Retry order creation",
+        "summary": "Retry an order",
         "operationId": "retryOrder",
         "responses": {
           "200": {
@@ -2261,7 +2261,7 @@
             }
           }
         },
-        "description": "The aim of this method is to perform a retry after a POST /orders failure.\nThis API will use exactly the same data sent for the POST /orders initial call (if part of the order data has change, then the PATCH /orders/{orderId} API has to be called instead)",
+        "description": "The aim of this method is to perform a retry if an order is an functional error status (no carrier found for example).\nThis API will use exactly the same data sent for the POST /orders initial call (if part of the order data has change, then the PATCH /orders/{orderId} API has to be called instead)",
         "tags": [
           "Order"
         ]
