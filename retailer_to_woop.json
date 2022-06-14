@@ -1566,6 +1566,118 @@
                       "SERVICE_FRONT_HOME"
                     ]
                   }
+                },
+                "Example with bookingId": {
+                  "value": {
+                    "orderId": "65z4eq1d6q54zd1",
+                    "referenceNumber": "65q41zdq65z14",
+                    "storeId": "AX645",
+                    "picking": {
+                      "location": {
+                        "type": "exchangePlace",
+                        "id": "EXCHANGE PLACE 1"
+                      },
+                      "interval": [
+                        {
+                          "start": "2019-11-27T12:00:00+0000",
+                          "end": "2019-11-27T14:00:00+0000"
+                        }
+                      ],
+                      "contact": {
+                        "firstName": "Michel",
+                        "lastName": "Dupont",
+                        "phone": "+33600000000",
+                        "email": "michel.dupont@mail.fr",
+                        "language": "fr",
+                        "timezone": "Europe/Paris"
+                      }
+                    },
+                    "delivery": {
+                      "location": {
+                        "type": "address",
+                        "addressLine1": "165 avenue de Bretagne",
+                        "elevator": true,
+                        "floor": 3,
+                        "postalCode": "59000",
+                        "city": "Lille",
+                        "country": "FR"
+                      },
+                      "interval": [
+                        {
+                          "bookingId": "34452233"
+                        }
+                      ],
+                      "contact": {
+                        "firstName": "Pierre",
+                        "lastName": "Dupond",
+                        "phone": "+33600000000",
+                        "email": "pierre.dupond@mail.fr",
+                        "language": "fr",
+                        "timezone": "Europe/Paris"
+                      }
+                    },
+                    "packages": [
+                      {
+                        "length": {
+                          "value": 15,
+                          "unit": "cm"
+                        },
+                        "width": {
+                          "value": 15,
+                          "unit": "cm"
+                        },
+                        "height": {
+                          "value": 1.2,
+                          "unit": "m"
+                        },
+                        "weight": {
+                          "value": 560,
+                          "unit": "g"
+                        },
+                        "references": [
+                          {
+                            "reference": "123456789A",
+                            "barcode": {
+                              "value": "54fd56g4f5gfd456sd",
+                              "type": "barcode",
+                              "format": "128"
+                            }
+                          },
+                          {
+                            "reference": "123456789B",
+                            "barcode": {
+                              "value": "54fd56g4f5gfd456sdsdsd",
+                              "type": "barcode",
+                              "format": "128"
+                            }
+                          }
+                        ],
+                        "products": [
+                          {
+                            "type": "TYPOLOGY_GENERIC",
+                            "ean": "4dq86zd4q6zd4q64",
+                            "cug": "q56zd4q65d4q",
+                            "label": "Lamp",
+                            "quantity": 1
+                          }
+                        ],
+                        "quantity": 2
+                      }
+                    ],
+                    "services": [
+                      "SERVICE_ASSEMBLY"
+                    ],
+                    "tags": [
+                      {
+                        "key": "origin",
+                        "value": "web"
+                      }
+                    ],
+                    "productsPrice": {
+                      "value": 30,
+                      "currency": "EUR"
+                    }
+                  }
                 }
               }
             }
@@ -3707,25 +3819,50 @@
                               }
                             }
                           },
-                          "deliveryPromise": {
+                          "delivery": {
                             "type": "object",
-                            "description": "Promise of delivery ",
                             "properties": {
-                              "value": {
-                                "type": "number"
-                              },
-                              "unit": {
-                                "type": "string",
-                                "enum": [
-                                  "day",
-                                  "hour"
+                              "noticePeriod": {
+                                "type": "object",
+                                "description": "Minimum notice for delivery",
+                                "properties": {
+                                  "value": {
+                                    "type": "number"
+                                  },
+                                  "unit": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "value",
+                                  "unit"
                                 ]
+                              },
+                              "promise": {
+                                "type": "object",
+                                "description": "Promise of delivery ",
+                                "properties": {
+                                  "value": {
+                                    "type": "number"
+                                  },
+                                  "unit": {
+                                    "type": "string"
+                                  }
+                                }
+                              },
+                              "minDeliveryTime": {
+                                "type": "object",
+                                "description": "Min delivery time",
+                                "properties": {
+                                  "value": {
+                                    "type": "number"
+                                  },
+                                  "unit": {
+                                    "type": "string"
+                                  }
+                                }
                               }
-                            },
-                            "required": [
-                              "value",
-                              "unit"
-                            ]
+                            }
                           },
                           "durationSlot": {
                             "type": "object",
@@ -3746,35 +3883,6 @@
                               "value",
                               "unit"
                             ]
-                          },
-                          "deliveryNotice": {
-                            "type": "object",
-                            "description": "Minimum notice for delivery",
-                            "properties": {
-                              "value": {
-                                "type": "number"
-                              },
-                              "unit": {
-                                "type": "string",
-                                "enum": [
-                                  "day",
-                                  "hour"
-                                ]
-                              }
-                            },
-                            "required": [
-                              "value",
-                              "unit"
-                            ]
-                          },
-                          "firstDeliveryHour": {
-                            "type": "object",
-                            "description": "First available delivery slot",
-                            "properties": {
-                              "interval": {
-                                "$ref": "#/components/schemas/interval"
-                              }
-                            }
                           },
                           "services": {
                             "type": "array",
@@ -3802,7 +3910,8 @@
                           }
                         },
                         "required": [
-                          "carrier"
+                          "carrier",
+                          "services"
                         ]
                       }
                     }
@@ -3817,23 +3926,23 @@
                             "code": "mondial-relay",
                             "name": "Mondial Relay"
                           },
-                          "deliveryPromise": {
-                            "value": 2,
-                            "unit": "day"
+                          "delivery": {
+                            "noticePeriod": {
+                              "value": 2,
+                              "unit": "day"
+                            },
+                            "promise": {
+                              "value": 2,
+                              "unit": "hour"
+                            },
+                            "minDeliveryTime": {
+                              "value": 2,
+                              "unit": "hour"
+                            }
                           },
                           "durationSlot": {
                             "value": 2,
                             "unit": "hour"
-                          },
-                          "deliveryNotice": {
-                            "value": 2,
-                            "unit": "hour"
-                          },
-                          "firstDeliveryHour": {
-                            "interval": {
-                              "start": "2019-05-02T15:52:01+0000",
-                              "end": "2019-05-02T17:52:01+0000"
-                            }
                           },
                           "service": [
                             {
@@ -4936,6 +5045,7 @@
         },
         "required": [
           "exchangePlaceId",
+          "slot",
           "carrierCodes"
         ]
       },
@@ -5181,120 +5291,7 @@
         "type": "object",
         "description": "Specifies the information required for creating the order.",
         "title": "Creation of the order (postOrders)",
-        "x-examples": {
-          "example-1": {
-            "orderId": "string",
-            "referenceNumber": "string",
-            "storeId": "string",
-            "picking": {
-              "location": {
-                "type": "address",
-                "addressLine1": "string",
-                "addressLine2": "string",
-                "elevator": true,
-                "floor": 0,
-                "doorCode": "string",
-                "postalCode": "string",
-                "city": "string",
-                "district": "string",
-                "country": "FR",
-                "comment": "string"
-              },
-              "infos": "string",
-              "interval": [
-                {
-                  "start": "string",
-                  "end": "string"
-                }
-              ],
-              "contact": {
-                "firstName": "string",
-                "lastName": "string",
-                "phone": "string",
-                "email": "string",
-                "language": "fr",
-                "timezone": "Europe/Paris"
-              }
-            },
-            "delivery": {
-              "location": {
-                "type": "address",
-                "addressLine1": "string",
-                "addressLine2": "string",
-                "elevator": true,
-                "floor": 0,
-                "doorCode": "string",
-                "postalCode": "string",
-                "city": "string",
-                "district": "string",
-                "country": "FR",
-                "comment": "string"
-              },
-              "infos": "string",
-              "interval": [
-                {
-                  "start": "string",
-                  "end": "string"
-                }
-              ],
-              "contact": {
-                "firstName": "string",
-                "lastName": "string",
-                "phone": "string",
-                "email": "string",
-                "language": "fr",
-                "timezone": "Europe/Paris"
-              }
-            },
-            "numberOfPackages": 0,
-            "packages": [
-              {
-                "references": [
-                  "string"
-                ],
-                "length": {
-                  "value": 0,
-                  "unit": "mm"
-                },
-                "width": {
-                  "value": 0,
-                  "unit": "mm"
-                },
-                "height": {
-                  "value": 0,
-                  "unit": "mm"
-                },
-                "weight": {
-                  "value": 0,
-                  "unit": "kg"
-                },
-                "products": [
-                  {
-                    "type": "TYPOLOGY_GENERIC",
-                    "ean": "string",
-                    "cug": "string",
-                    "label": "string",
-                    "quantity": 1
-                  }
-                ],
-                "quantity": 1
-              }
-            ],
-            "services": [
-              "SERVICE_PICKUP_POINT"
-            ],
-            "productsPrice": {
-              "value": 0,
-              "currency": "EUR"
-            },
-            "tags": [
-              {
-                "key": "origin",
-                "value": "web"
-              }
-            ]
-          }
-        },
+        "x-examples": {},
         "properties": {
           "orderId": {
             "type": "string",
@@ -5818,7 +5815,6 @@
       },
       "interval": {
         "description": "Specifies the date range for a collection/delivery.",
-        "type": "object",
         "x-examples": {
           "Example": {
             "start": "2019-05-02T15:52:01+0000",
@@ -5826,24 +5822,40 @@
           }
         },
         "title": "Date slot (interval)",
-        "properties": {
-          "start": {
-            "type": "string",
-            "format": "datetime",
-            "description": "Start of the time slot",
-            "example": "2019-12-04T12:30:00+0000"
+        "oneOf": [
+          {
+            "properties": {
+              "start": {
+                "type": "string",
+                "format": "datetime",
+                "description": "Start of the time slot",
+                "example": "2019-12-04T12:30:00+0000"
+              },
+              "end": {
+                "type": "string",
+                "format": "datetime",
+                "description": "End of the time slot",
+                "example": "2019-12-04T14:30:00+0000"
+              }
+            },
+            "required": [
+              "start",
+              "end"
+            ]
           },
-          "end": {
-            "type": "string",
-            "format": "datetime",
-            "description": "End of the time slot",
-            "example": "2019-12-04T14:30:00+0000"
+          {
+            "properties": {
+              "bookingId": {
+                "type": "string",
+                "description": "Booking slot"
+              }
+            },
+            "required": [
+              "bookingId"
+            ]
           }
-        },
-        "required": [
-          "start",
-          "end"
-        ]
+        ],
+        "type": "object"
       },
       "interval_hour": {
         "type": "object",
