@@ -2624,7 +2624,7 @@
                   "value": {
                     "latitude": 50.6379636,
                     "longitude": 3.077384,
-                    "number": 10,
+                    "limit": 10,
                     "kilometricDistance": 20
                   }
                 },
@@ -5182,7 +5182,8 @@
         "required": [
           "latitude",
           "longitude"
-        ]
+        ],
+        "x-examples": {}
       },
       "tags": {
         "type": "array",
