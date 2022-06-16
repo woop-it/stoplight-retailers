@@ -2261,7 +2261,7 @@
             }
           }
         },
-        "description": "The aim of this method is to perform a retry if an order has a functional error status (no carrier found for example).\nThis API will use exactly the same data sent for the POST /orders initial call (if part of the order data has change, then the PATCH /orders/{orderId} API has to be called instead).",
+        "description": "The aim of this method is to perform a retry if an order has a functional error status (ORDER_WITH_NO_CARRIER_ELIGIBLE, ORDER_WITH_NO_QUOTE, ORDER_WITH_NO_CARRIER_AVAILABLE, ORDER_REFUSED_DELIVERY).\nThis API will use exactly the same data sent for the POST /orders initial call (if part of the order data has change, then the PATCH /orders/{orderId} API has to be called instead).",
         "tags": [
           "Order"
         ]
