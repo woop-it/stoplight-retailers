@@ -2191,7 +2191,7 @@
         "summary": "Retry an order",
         "operationId": "retryOrder",
         "responses": {
-          "200": {
+          "202": {
             "description": "the order retry has been registered"
           },
           "401": {
