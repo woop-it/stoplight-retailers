@@ -1,5 +1,7 @@
 {
+  "name": "Retailer API",
   "description": "",
+  "spectralExtends": [],
   "formats": [
     "oas2",
     "oas3",
@@ -9,7 +11,7 @@
   "aliases": {},
   "rules": {},
   "extends": [
-    "cHJqOjEyMzU4Ng@29"
+    "cHJqOjEyMzU4Ng@31"
   ],
   "extendedStyleguides": [
     {
