@@ -15,6 +15,9 @@ examples:
     team:
       members:
         - id: AAA
+    planning:
+      references:
+        id: P000001
 properties:
   references:
     type: object
@@ -34,5 +37,7 @@ properties:
     $ref: ./vehicle.yaml
   team:
     $ref: ../woop_to_retailer.json#/components/schemas/team
+  planning:
+    $ref: ./planning.yaml
 required:
   - references

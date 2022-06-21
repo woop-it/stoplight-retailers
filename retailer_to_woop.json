@@ -2009,6 +2009,11 @@
                                     "id": "AAA"
                                   }
                                 ]
+                              },
+                              "planning": {
+                                "references": {
+                                  "id": "P000001"
+                                }
                               }
                             },
                             "plannedInterval": {
@@ -2056,6 +2061,11 @@
                                     "id": "AAA"
                                   }
                                 ]
+                              },
+                              "planning": {
+                                "references": {
+                                  "id": "P000001"
+                                }
                               }
                             },
                             "plannedInterval": {

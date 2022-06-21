@@ -600,6 +600,11 @@
                                 "id": "AAA"
                               }
                             ]
+                          },
+                          "planning": {
+                            "references": {
+                              "id": "POOOOO1"
+                            }
                           }
                         },
                         "plannedInterval": {
@@ -632,6 +637,11 @@
                                 "id": "AAA"
                               }
                             ]
+                          },
+                          "planning": {
+                            "references": {
+                              "id": "POOOOO1"
+                            }
                           }
                         },
                         "plannedInterval": {
