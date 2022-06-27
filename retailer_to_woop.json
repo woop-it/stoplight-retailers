@@ -5243,7 +5243,7 @@
                 "$ref": "#/components/schemas/location"
               },
               "interval": {
-                "$ref": "#/components/schemas/interval"
+                "$ref": "#/components/schemas/pickingInterval"
               }
             }
           },
