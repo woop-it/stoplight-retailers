@@ -4021,7 +4021,7 @@
             "$ref": "#/components/parameters/apiVersion"
           }
         ],
-        "description": "This method returns the available carriers and delivery services for an order. The method returns all available services and carriers according to the starting point of the order, (optional) destination and content of the shopping cart. ",
+        "description": "This method returns the available carriers and delivery services for an order. The method returns all available services and carriers according to the starting point of the order, (optional) destination and content of the shopping cart. \n\nEligibility is calculated according to certain delivery constraints defined by the carrier. [See explanation](https://woop.stoplight.io/docs/Models/Carrier_eligibility_constraint.md)",
         "requestBody": {
           "content": {
             "application/json": {
