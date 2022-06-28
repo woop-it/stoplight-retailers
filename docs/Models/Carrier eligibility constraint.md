@@ -6,8 +6,8 @@ Let's note here some of these constraints:
 
 Code | Title
 ---------|----------
- delivery.promise`| Promise of delivery for the carrier
- DurationSlot`| Delivery duration defined by slot
+ `delivery.promise`| Promise of delivery for the carrier
+ `DurationSlot`| Delivery duration defined by slot
  `delivery.noticePeriod`| Notice period required to take delivery
  `delivery.minDeliveryTime`| Minimum duration expressed by the carrier
 
