@@ -3829,6 +3829,23 @@
                               }
                             }
                           },
+                          "route": {
+                            "type": "object",
+                            "properties": {
+                              "distance": {
+                                "type": "object",
+                                "description": "distance between picking address and delivery ",
+                                "properties": {
+                                  "value": {
+                                    "type": "number"
+                                  },
+                                  "unit": {
+                                    "type": "string"
+                                  }
+                                }
+                              }
+                            }
+                          },
                           "delivery": {
                             "type": "object",
                             "properties": {
@@ -3863,18 +3880,6 @@
                               "minDeliveryTime": {
                                 "type": "object",
                                 "description": "Min delivery time",
-                                "properties": {
-                                  "value": {
-                                    "type": "number"
-                                  },
-                                  "unit": {
-                                    "type": "string"
-                                  }
-                                }
-                              },
-                              "distance": {
-                                "type": "object",
-                                "description": "distance between picking address and delivery ",
                                 "properties": {
                                   "value": {
                                     "type": "number"
@@ -4098,7 +4103,7 @@
                             "code": "mondial-relay",
                             "name": "Mondial Relay"
                           },
-                          "delivery": {
+                          "route": {
                             "distance": {
                               "value": 23.5,
                               "unit": "km"
