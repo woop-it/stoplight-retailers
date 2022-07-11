@@ -5406,6 +5406,21 @@
                 "country": "FR"
               }
             }
+          },
+          "Example with distance option": {
+            "picking": {
+              "location": {
+                "type": "address",
+                "addressLine1": "237 rue du ballon",
+                "postalCode": "59110",
+                "city": "La Madeleine",
+                "country": "FR"
+              }
+            },
+            "storeId": "MAG01",
+            "options": {
+              "withDistance": true
+            }
           }
         },
         "properties": {
@@ -5446,6 +5461,7 @@
           },
           "slot": {
             "type": "object",
+            "description": "Allows you to define slot reservation criteria ",
             "properties": {
               "fromDate": {
                 "type": "string",
@@ -5467,6 +5483,16 @@
             "required": [
               "toDate"
             ]
+          },
+          "options": {
+            "type": "object",
+            "description": "List of options",
+            "properties": {
+              "withDistance": {
+                "type": "boolean",
+                "description": "Used to calculate the distance between the pick and the delivery."
+              }
+            }
           }
         },
         "required": [
