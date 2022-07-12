@@ -4370,7 +4370,9 @@
                     },
                     "storeId": "MAG01",
                     "options": {
-                      "withDistance": true
+                      "distance": {
+                        "active": true
+                      }
                     }
                   }
                 }
@@ -5490,9 +5492,15 @@
             "type": "object",
             "description": "List of options",
             "properties": {
-              "withDistance": {
-                "type": "boolean",
-                "description": "Used to calculate the distance between the pick and the delivery."
+              "distance": {
+                "type": "object",
+                "description": "Distance options",
+                "properties": {
+                  "active": {
+                    "type": "boolean",
+                    "description": "Used to calculate the distance between the pick and the delivery."
+                  }
+                }
               }
             }
           }
