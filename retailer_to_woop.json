@@ -6056,6 +6056,35 @@
           "end"
         ]
       },
+      "interval": {
+        "description": "Specifies the date range for an object.",
+        "x-examples": {
+          "Example": {
+            "start": "2019-05-02T15:52:01+0000",
+            "end": "2019-05-02T17:52:01+0000"
+          }
+        },
+        "title": "Interval of time",
+        "type": "object",
+        "properties": {
+          "start": {
+            "type": "string",
+            "format": "datetime",
+            "description": "Start of the time slot",
+            "example": "2019-12-04T12:30:00+0000"
+          },
+          "end": {
+            "type": "string",
+            "format": "datetime",
+            "description": "End of the time slot",
+            "example": "2019-12-04T14:30:00+0000"
+          }
+        },
+        "required": [
+          "start",
+          "end"
+        ]
+      },
       "interval_hour": {
         "type": "object",
         "properties": {
