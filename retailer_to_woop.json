@@ -2448,6 +2448,97 @@
         "summary": "Patch order"
       }
     },
+    "/orders/{orderId}/retry": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "orderId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "post": {
+        "summary": "Retry an order",
+        "operationId": "retryOrder",
+        "responses": {
+          "202": {
+            "description": "the order retry has been registered"
+          },
+          "401": {
+            "description": "You are not authorised to access this item",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "Example": {
+                    "value": {
+                      "statusCode": 0,
+                      "error": "string",
+                      "message": "string",
+                      "reasons": [
+                        "UNAUTHORISED"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The order can't be retried",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "Example": {
+                    "value": {
+                      "statusCode": 0,
+                      "error": "string",
+                      "message": "string",
+                      "reasons": [
+                        "RETRY_FORBIDDEN"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "OrderId not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "Example": {
+                    "value": {
+                      "statusCode": 0,
+                      "error": "string",
+                      "message": "string",
+                      "reasons": [
+                        "ORDER_NOT_FOUND"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "The aim of this method is to perform a retry if an order has a functional error status (ORDER_WITH_NO_CARRIER_ELIGIBLE, ORDER_WITH_NO_QUOTE, ORDER_WITH_NO_CARRIER_AVAILABLE, ORDER_REFUSED_DELIVERY).\nThis API will use exactly the same data sent for the POST /orders initial call (if part of the order data has change, then the PATCH /orders/{orderId} API has to be called instead).",
+        "tags": [
+          "Order"
+        ]
+      }
+    },
     "/orders/{orderId}/label": {
       "get": {
         "tags": [
