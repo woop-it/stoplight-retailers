@@ -6476,7 +6476,6 @@
                     "type": "string",
                     "description": "footprint unit",
                     "example": "m²",
-                    "default": "m²",
                     "enum": [
                       "m²",
                       "cm²",
