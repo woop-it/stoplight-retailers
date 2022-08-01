@@ -225,6 +225,74 @@
                       }
                     ]
                   }
+                },
+                "example-1": {
+                  "value": {
+                    "mode": "standard",
+                    "collectId": "string",
+                    "exchangePlaceId": "string",
+                    "bookingId": "string",
+                    "slot": {
+                      "start": "string",
+                      "end": "string"
+                    },
+                    "customer": {
+                      "firstName": "string",
+                      "lastName": "string",
+                      "phone": "string",
+                      "email": "string",
+                      "language": "fr",
+                      "timezone": "Europe/Paris",
+                      "main": true,
+                      "title": "string"
+                    },
+                    "packages": [
+                      {
+                        "references": [
+                          {
+                            "reference": "12345B",
+                            "barcode": {
+                              "value": "54fd56g4f5gfd456sd",
+                              "type": "barcode",
+                              "format": "128"
+                            }
+                          }
+                        ],
+                        "length": {
+                          "value": 0,
+                          "unit": "mm"
+                        },
+                        "width": {
+                          "value": 0,
+                          "unit": "mm"
+                        },
+                        "height": {
+                          "value": 0,
+                          "unit": "mm"
+                        },
+                        "weight": {
+                          "value": 0,
+                          "unit": "kg"
+                        },
+                        "products": [
+                          {
+                            "type": "TYPOLOGY_GENERIC",
+                            "ean": "string",
+                            "cug": "string",
+                            "label": "string",
+                            "quantity": 1
+                          }
+                        ],
+                        "quantity": 1,
+                        "attributes": {
+                          "footprint": {
+                            "value": 13,
+                            "unit": "m²"
+                          }
+                        }
+                      }
+                    ]
+                  }
                 }
               }
             }
@@ -1282,7 +1350,13 @@
                             "quantity": 1
                           }
                         ],
-                        "quantity": 2
+                        "quantity": 2,
+                        "attributes": {
+                          "footprint": {
+                            "value": 13,
+                            "unit": "m²"
+                          }
+                        }
                       }
                     ],
                     "services": [
@@ -4308,7 +4382,13 @@
                             "quantity": 1
                           }
                         ],
-                        "quantity": 1
+                        "quantity": 1,
+                        "attributes": {
+                          "footprint": {
+                            "value": 13,
+                            "unit": "m²"
+                          }
+                        }
                       }
                     ],
                     "storeId": "MAG01"
@@ -6304,8 +6384,15 @@
         "type": "object",
         "x-examples": {
           "Example": {
-            "reference": [
-              "12345B"
+            "references": [
+              {
+                "reference": "12345B",
+                "barcode": {
+                  "value": "54fd56g4f5gfd456sd",
+                  "type": "barcode",
+                  "format": "128"
+                }
+              }
             ],
             "length": {
               "value": 200,
@@ -6332,7 +6419,13 @@
                 "quantity": 1
               }
             ],
-            "quantity": 1
+            "quantity": 1,
+            "attributes": {
+              "footprint": {
+                "value": 13,
+                "unit": "m²"
+              }
+            }
           }
         },
         "title": "Package (package)",
@@ -6363,6 +6456,29 @@
             "type": "integer",
             "default": 1,
             "description": "Quantity of packages"
+          },
+          "attributes": {
+            "type": "object",
+            "description": "package attributes",
+            "properties": {
+              "footprint": {
+                "type": "object",
+                "description": "package footprint on the ground",
+                "properties": {
+                  "value": {
+                    "type": "number",
+                    "description": "footprint value",
+                    "example": 13
+                  },
+                  "unit": {
+                    "type": "string",
+                    "description": "footprint unit",
+                    "example": "m²",
+                    "default": "m²"
+                  }
+                }
+              }
+            }
           }
         },
         "required": [
@@ -6447,9 +6563,9 @@
         "description": "Specifies package references. Note that count of reference must be equal to package quantity",
         "title": "Package references (packagesReferences)",
         "x-examples": {
-          "example-1": [
+          "Example": [
             {
-              "reference": "1232435",
+              "reference": "12345B",
               "barcode": {
                 "value": "54fd56g4f5gfd456sd",
                 "type": "barcode",
@@ -6463,7 +6579,8 @@
           "properties": {
             "reference": {
               "type": "string",
-              "description": "Specifies package references."
+              "description": "Specifies package references.",
+              "example": "12345B"
             },
             "barcode": {
               "$ref": "./models/barcode.yaml"
