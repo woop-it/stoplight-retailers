@@ -1356,7 +1356,8 @@
                             "value": 13,
                             "unit": "m²"
                           }
-                        }
+                        },
+                        "type": "PACKAGE"
                       }
                     ],
                     "services": [
@@ -6425,7 +6426,8 @@
                 "value": 13,
                 "unit": "m²"
               }
-            }
+            },
+            "type": "PACKAGE"
           }
         },
         "title": "Package (package)",
@@ -6484,6 +6486,17 @@
                 }
               }
             }
+          },
+          "type": {
+            "type": "string",
+            "description": "package type",
+            "enum": [
+              "PACKAGE",
+              "TRAY",
+              "PALLET"
+            ],
+            "example": "PACKAGE",
+            "default": "PACKAGE"
           }
         },
         "required": [
