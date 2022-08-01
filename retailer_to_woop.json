@@ -6483,7 +6483,11 @@
                       "pallet"
                     ]
                   }
-                }
+                },
+                "required": [
+                  "value",
+                  "unit"
+                ]
               }
             }
           },
