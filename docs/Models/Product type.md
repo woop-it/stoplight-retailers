@@ -1,3 +1,7 @@
+---
+stoplight-id: d6f97240b3560
+---
+
 # Product types
 
 For the best delivery service, each product must be attributed a type. This allows the product to be correctly identified and categorised.
