@@ -5373,6 +5373,22 @@
             "items": {
               "type": "string"
             }
+          },
+          "capacity": {
+            "type": "integer",
+            "description": "Capacity for a delivery slot"
+          },
+          "type": {
+            "type": "string",
+            "description": "Type of delivery week",
+            "enum": [
+              "ordersQuantity",
+              "packagesQuantity",
+              "palletsQuantity",
+              "traysQuantity",
+              "footprintQuantity"
+            ],
+            "example": "ordersQuantity"
           }
         },
         "required": [
@@ -5607,6 +5623,18 @@
               "limit": {
                 "type": "number",
                 "description": "Max number of slot "
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "ordersQuantity",
+                  "packagesQuantity",
+                  "palletsQuantity",
+                  "traysQuantity",
+                  "footprintQuantity"
+                ],
+                "example": "ordersQuantity",
+                "description": "Type of delivery week"
               }
             },
             "required": [
@@ -6824,6 +6852,13 @@
       "slot": {
         "description": "Collection time slot (without reservation or availability check).",
         "type": "object",
+        "x-examples": {
+          "Example": {
+            "start": "2019-05-02T15:52:01+0000",
+            "end": "2019-05-02T17:52:01+0000"
+          }
+        },
+        "title": "Collection time slot (slot)",
         "properties": {
           "start": {
             "type": "string",
@@ -6839,14 +6874,7 @@
         "required": [
           "start",
           "end"
-        ],
-        "x-examples": {
-          "Example": {
-            "start": "2019-05-02T15:52:01+0000",
-            "end": "2019-05-02T17:52:01+0000"
-          }
-        },
-        "title": "Collection time slot (slot)"
+        ]
       },
       "orderStatus": {
         "title": "Order status (orderStatus)",
