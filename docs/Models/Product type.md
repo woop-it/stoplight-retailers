@@ -19,5 +19,4 @@ For the best delivery service, each product must be attributed a type. This allo
 | `TYPOLOGY_LARGE_HOUSEHOLD`    | Large household appliances (American fridge-freezer, cooking range, etc.) |
 | `TYPOLOGY_VOLUMINOUS`         | Bulky product                                                             |
 | `TYPOLOGY_VOLUMINOUS_FRAGILE` | Bulky and fragile product                                                 |
-| `TYPOLOGY_PALLET_GENERIC`     | General goods pallet                                                      |
 | `TYPOLOGY_NON_STANDARD`       | Non-standard product                                                      |

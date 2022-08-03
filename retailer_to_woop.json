@@ -6708,8 +6708,7 @@
           "TYPOLOGY_FRAGILE",
           "TYPOLOGY_VOLUMINOUS_FRAGILE",
           "TYPOLOGY_LARGE_HOUSEHOLD",
-          "TYPOLOGY_SMALL_HOUSEHOLD",
-          "TYPOLOGY_PALLET_GENERIC"
+          "TYPOLOGY_SMALL_HOUSEHOLD"
         ],
         "x-examples": {
           "Example": "TYPOLOGY_GENERIC"
