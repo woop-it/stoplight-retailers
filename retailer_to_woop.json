@@ -1781,15 +1781,15 @@
                         "quantity": 2
                       }
                     ],
-                    "tags": [
-                      {
-                        "key": "selected_carrier",
-                        "value": "carrier_code"
-                      }
-                    ],
                     "services": [
                       "SERVICE_FRONT_HOME"
-                    ]
+                    ],
+                    "carrierSelection": {
+                      "mode": "INCLUSION",
+                      "carrierCodes": [
+                        "chronopost"
+                      ]
+                    }
                   }
                 },
                 "Example with bookingId": {
@@ -2465,6 +2465,9 @@
                   },
                   "tags": {
                     "$ref": "#/components/schemas/tags"
+                  },
+                  "carrierSelection": {
+                    "$ref": "#/components/schemas/carrierSelection"
                   }
                 },
                 "required": [
@@ -5992,6 +5995,9 @@
           },
           "tags": {
             "$ref": "#/components/schemas/tags"
+          },
+          "carrierSelection": {
+            "$ref": "#/components/schemas/carrierSelection"
           }
         },
         "required": [
@@ -7353,6 +7359,37 @@
           "COLLECT_BLOCKED",
           "COLLECT_DELAYED",
           "COLLECT_REPLANNED"
+        ]
+      },
+      "carrierSelection": {
+        "title": "carrierSelection",
+        "x-stoplight": {
+          "id": "xe3fbbamllx4n"
+        },
+        "type": "object",
+        "description": "contains all the data regarding the selection or exclusion of some carriers from the process involved",
+        "properties": {
+          "mode": {
+            "type": "string",
+            "description": "mode of the selection",
+            "enum": [
+              "INCLUSION",
+              "EXCLUSION"
+            ],
+            "example": "INCLUSION"
+          },
+          "carrierCodes": {
+            "type": "array",
+            "description": "list of carrierCodes concerned by the selection",
+            "items": {
+              "type": "string",
+              "example": "chronopost"
+            }
+          }
+        },
+        "required": [
+          "mode",
+          "carrierCodes"
         ]
       }
     },
