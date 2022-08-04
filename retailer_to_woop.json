@@ -5381,14 +5381,13 @@
           "type": {
             "type": "string",
             "description": "Type of delivery week",
+            "example": "ORDERS_QUANTITY",
             "enum": [
-              "ordersQuantity",
-              "packagesQuantity",
-              "palletsQuantity",
-              "traysQuantity",
-              "footprintQuantity"
-            ],
-            "example": "ordersQuantity"
+              "ORDERS_QUANTITY",
+              "PACKAGES_QUANTITY",
+              "PALLETS_QUANTITY",
+              "TRAYS_QUANTITY"
+            ]
           }
         },
         "required": [
@@ -5626,15 +5625,14 @@
               },
               "type": {
                 "type": "string",
+                "example": "ORDERS_QUANTITY",
+                "description": "Type of delivery week",
                 "enum": [
-                  "ordersQuantity",
-                  "packagesQuantity",
-                  "palletsQuantity",
-                  "traysQuantity",
-                  "footprintQuantity"
-                ],
-                "example": "ordersQuantity",
-                "description": "Type of delivery week"
+                  "ORDERS_QUANTITY",
+                  "PACKAGES_QUANTITY",
+                  "PALLETS_QUANTITY",
+                  "TRAYS_QUANTITY"
+                ]
               }
             },
             "required": [
