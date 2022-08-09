@@ -4145,6 +4145,23 @@
                               }
                             }
                           },
+                          "route": {
+                            "type": "object",
+                            "properties": {
+                              "distance": {
+                                "type": "object",
+                                "description": "distance between picking address and delivery ",
+                                "properties": {
+                                  "value": {
+                                    "type": "number"
+                                  },
+                                  "unit": {
+                                    "type": "string"
+                                  }
+                                }
+                              }
+                            }
+                          },
                           "delivery": {
                             "type": "object",
                             "properties": {
@@ -4249,6 +4266,102 @@
                       "eligibilities": [
                         {
                           "carrier": {
+                            "code": "chronopost",
+                            "name": "Chronopost"
+                          },
+                          "service": [
+                            {
+                              "name": "SERVICE_FRONT_HOME"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "Example with slots": {
+                    "value": {
+                      "eligibilities": [
+                        {
+                          "carrier": {
+                            "code": "mondial-relay",
+                            "name": "Mondial Relay"
+                          },
+                          "durationSlot": {
+                            "value": 2,
+                            "unit": "hour"
+                          },
+                          "service": [
+                            {
+                              "name": "SERVICE_PICKUP_POINT",
+                              "types": [
+                                "PICKUP_POINT_AGENCY",
+                                "PICKUP_POINT_POST_OFFICE",
+                                "PICKUP_POINT_RELAY_WITH_LOCKER",
+                                "PICKUP_POINT_RELAY_WITHOUT_LOCKER",
+                                "PICKUP_POINT_ALL"
+                              ],
+                              "categories": [
+                                "24R",
+                                "24L",
+                                "Drive"
+                              ]
+                            }
+                          ],
+                          "slots": [
+                            {
+                              "start": "2019-05-02T15:52:01+0000",
+                              "end": "2019-05-02T17:52:01+0000",
+                              "remainingCapacity": 5
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "Example with carrier constraints": {
+                    "value": {
+                      "eligibilities": [
+                        {
+                          "carrier": {
+                            "name": "string",
+                            "code": "string"
+                          },
+                          "delivery": {
+                            "noticePeriod": {
+                              "value": 0,
+                              "unit": "string"
+                            },
+                            "promise": {
+                              "value": 0,
+                              "unit": "string"
+                            },
+                            "minDeliveryTime": {
+                              "value": 0,
+                              "unit": "string"
+                            }
+                          },
+                          "durationSlot": {
+                            "value": 0,
+                            "unit": "day"
+                          },
+                          "services": [
+                            {
+                              "name": "string",
+                              "types": "PICKUP_POINT_ALL",
+                              "categories": [
+                                "string"
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "Example with slots and constraints": {
+                    "value": {
+                      "eligibilities": [
+                        {
+                          "carrier": {
                             "code": "mondial-relay",
                             "name": "Mondial Relay"
                           },
@@ -4292,6 +4405,70 @@
                               "start": "2019-05-02T15:52:01+0000",
                               "end": "2019-05-02T17:52:01+0000",
                               "remainingCapacity": 5
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "Example with distance": {
+                    "value": {
+                      "eligibilities": [
+                        {
+                          "carrier": {
+                            "code": "mondial-relay",
+                            "name": "Mondial Relay"
+                          },
+                          "route": {
+                            "distance": {
+                              "value": 23.5,
+                              "unit": "km"
+                            }
+                          },
+                          "service": [
+                            {
+                              "name": "SERVICE_PICKUP_POINT",
+                              "types": [
+                                "PICKUP_POINT_AGENCY",
+                                "PICKUP_POINT_POST_OFFICE",
+                                "PICKUP_POINT_RELAY_WITH_LOCKER",
+                                "PICKUP_POINT_RELAY_WITHOUT_LOCKER",
+                                "PICKUP_POINT_ALL"
+                              ],
+                              "categories": [
+                                "24R",
+                                "24L",
+                                "Drive"
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "Example with pickup-point ": {
+                    "value": {
+                      "eligibilities": [
+                        {
+                          "carrier": {
+                            "code": "mondial-relay",
+                            "name": "Mondial Relay"
+                          },
+                          "service": [
+                            {
+                              "name": "SERVICE_PICKUP_POINT",
+                              "types": [
+                                "PICKUP_POINT_AGENCY",
+                                "PICKUP_POINT_POST_OFFICE",
+                                "PICKUP_POINT_RELAY_WITH_LOCKER",
+                                "PICKUP_POINT_RELAY_WITHOUT_LOCKER",
+                                "PICKUP_POINT_ALL"
+                              ],
+                              "categories": [
+                                "24R",
+                                "24L",
+                                "Drive"
+                              ]
                             }
                           ]
                         }
@@ -4499,6 +4676,25 @@
                       "toDate": "2022-05-07T17:52:01+0000",
                       "minRemainingCapacity": 3,
                       "limit": 80
+                    }
+                  }
+                },
+                "Example with distance option": {
+                  "value": {
+                    "picking": {
+                      "location": {
+                        "type": "address",
+                        "addressLine1": "237 rue du ballon",
+                        "postalCode": "59110",
+                        "city": "La Madeleine",
+                        "country": "FR"
+                      }
+                    },
+                    "storeId": "MAG01",
+                    "options": {
+                      "distance": {
+                        "active": true
+                      }
                     }
                   }
                 }
@@ -5606,6 +5802,7 @@
           },
           "slot": {
             "type": "object",
+            "description": "Allows you to define slot reservation criteria ",
             "properties": {
               "fromDate": {
                 "type": "string",
@@ -5638,6 +5835,22 @@
             "required": [
               "toDate"
             ]
+          },
+          "options": {
+            "type": "object",
+            "description": "List of options",
+            "properties": {
+              "distance": {
+                "type": "object",
+                "description": "Distance options",
+                "properties": {
+                  "active": {
+                    "type": "boolean",
+                    "description": "Used to calculate the distance between the pick and the delivery."
+                  }
+                }
+              }
+            }
           }
         },
         "required": [
