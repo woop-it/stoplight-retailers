@@ -2207,10 +2207,12 @@
                         "updatedAt": "string",
                         "referenceNumber": "string",
                         "picking": {
-                          "interval": {
-                            "start": "2019-12-04T12:30:00+0000",
-                            "end": "2019-12-04T14:30:00+0000"
-                          },
+                          "interval": [
+                            {
+                              "start": "2019-12-04T12:30:00+0000",
+                              "end": "2019-12-04T14:30:00+0000"
+                            }
+                          ],
                           "stop": {
                             "references": {
                               "id": "123890654FRTTY"
@@ -2250,10 +2252,12 @@
                         "delivery": {
                           "externalDeliveryId": "string",
                           "updatedAt": "string",
-                          "interval": {
-                            "start": "2019-12-04T12:30:00+0000",
-                            "end": "2019-12-04T14:30:00+0000"
-                          },
+                          "interval": [
+                            {
+                              "start": "2019-12-04T12:30:00+0000",
+                              "end": "2019-12-04T14:30:00+0000"
+                            }
+                          ],
                           "trackingUrls:": {
                             "carrier": "https://tracking.best-carrier.com/XJHSDL541",
                             "woop": {
@@ -5076,10 +5080,12 @@
               "updatedAt": "2021-02-10T09:33:41.422Z",
               "referenceNumber": "1234",
               "picking": {
-                "interval": {
-                  "start": "2021-02-08T05:33:41.422Z",
-                  "end": "2021-02-08T09:33:41.422Z"
-                },
+                "interval": [
+                  {
+                    "start": "2021-02-08T05:33:41.422Z",
+                    "end": "2021-02-08T09:33:41.422Z"
+                  }
+                ],
                 "stop": {
                   "id": "12345dsffsr",
                   "routeId": "EZRZEG4353",
@@ -5097,10 +5103,12 @@
               "delivery": {
                 "externalDeliveryId": "45DDEZ6Z",
                 "updatedAt": "2021-02-10T09:33:41.422Z",
-                "interval": {
-                  "start": "2021-02-11T06:33:41.422Z",
-                  "end": "2021-02-11T09:33:41.422Z"
-                },
+                "interval": [
+                  {
+                    "start": "2021-02-11T06:33:41.422Z",
+                    "end": "2021-02-11T09:33:41.422Z"
+                  }
+                ],
                 "trackingUrls:": {
                   "carrier": "https://tracking.best-carrier.com/XJHSDL541",
                   "woop": {
@@ -5200,7 +5208,10 @@
                 ],
                 "properties": {
                   "interval": {
-                    "$ref": "#/components/schemas/interval"
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/interval"
+                    }
                   },
                   "stop": {
                     "$ref": "./models/stop.yaml"
@@ -5224,7 +5235,10 @@
                     "description": "Last update datetime"
                   },
                   "interval": {
-                    "$ref": "#/components/schemas/interval"
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/interval"
+                    }
                   },
                   "trackingUrls:": {
                     "$ref": "./models/trackingUrls.yaml"
