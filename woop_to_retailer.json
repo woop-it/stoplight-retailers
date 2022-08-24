@@ -1354,13 +1354,13 @@
         }
       }
     },
-    "/bookings/{bookingid}": {
+    "/bookings/{bookingId}": {
       "parameters": [
         {
           "schema": {
             "type": "string"
           },
-          "name": "bookingid",
+          "name": "bookingId",
           "in": "path",
           "required": true
         }
