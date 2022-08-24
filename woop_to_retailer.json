@@ -1353,6 +1353,30 @@
           "description": "Contains the updated status information."
         }
       }
+    },
+    "/bookings/{bookingId}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "bookingId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "delete": {
+        "summary": "Receive delete booking",
+        "operationId": "delete-collect",
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "tags": [
+          "Collect"
+        ]
+      }
     }
   },
   "components": {
