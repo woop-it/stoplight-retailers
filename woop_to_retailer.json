@@ -1353,6 +1353,30 @@
           "description": "Contains the updated status information."
         }
       }
+    },
+    "/collects/{collectId}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "collectId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "delete": {
+        "summary": "Receive cancel collect",
+        "operationId": "delete-collect",
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "tags": [
+          "Collect"
+        ]
+      }
     }
   },
   "components": {
