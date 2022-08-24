@@ -1354,19 +1354,19 @@
         }
       }
     },
-    "/collects/{collectId}": {
+    "/bookings/{bookingid}": {
       "parameters": [
         {
           "schema": {
             "type": "string"
           },
-          "name": "collectId",
+          "name": "bookingid",
           "in": "path",
           "required": true
         }
       ],
       "delete": {
-        "summary": "Receive cancel collect",
+        "summary": "Receive delete booking",
         "operationId": "delete-collect",
         "responses": {
           "204": {
