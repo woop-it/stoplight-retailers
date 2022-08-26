@@ -127,7 +127,13 @@
                             "quantity": 1
                           }
                         ],
-                        "quantity": 1
+                        "quantity": 1,
+                        "attributes": {
+                          "footprint": {
+                            "value": 13,
+                            "unit": "m2"
+                          }
+                        }
                       }
                     ]
                   }
@@ -222,74 +228,6 @@
                           }
                         ],
                         "quantity": 1
-                      }
-                    ]
-                  }
-                },
-                "example-1": {
-                  "value": {
-                    "mode": "standard",
-                    "collectId": "string",
-                    "exchangePlaceId": "string",
-                    "bookingId": "string",
-                    "slot": {
-                      "start": "string",
-                      "end": "string"
-                    },
-                    "customer": {
-                      "firstName": "string",
-                      "lastName": "string",
-                      "phone": "string",
-                      "email": "string",
-                      "language": "fr",
-                      "timezone": "Europe/Paris",
-                      "main": true,
-                      "title": "string"
-                    },
-                    "packages": [
-                      {
-                        "references": [
-                          {
-                            "reference": "12345B",
-                            "barcode": {
-                              "value": "54fd56g4f5gfd456sd",
-                              "type": "barcode",
-                              "format": "128"
-                            }
-                          }
-                        ],
-                        "length": {
-                          "value": 0,
-                          "unit": "mm"
-                        },
-                        "width": {
-                          "value": 0,
-                          "unit": "mm"
-                        },
-                        "height": {
-                          "value": 0,
-                          "unit": "mm"
-                        },
-                        "weight": {
-                          "value": 0,
-                          "unit": "kg"
-                        },
-                        "products": [
-                          {
-                            "type": "TYPOLOGY_GENERIC",
-                            "ean": "string",
-                            "cug": "string",
-                            "label": "string",
-                            "quantity": 1
-                          }
-                        ],
-                        "quantity": 1,
-                        "attributes": {
-                          "footprint": {
-                            "value": 13,
-                            "unit": "m²"
-                          }
-                        }
                       }
                     ]
                   }
@@ -1354,7 +1292,7 @@
                         "attributes": {
                           "footprint": {
                             "value": 13,
-                            "unit": "m²"
+                            "unit": "m2"
                           }
                         },
                         "type": "PACKAGE"
@@ -6444,7 +6382,7 @@
             "attributes": {
               "footprint": {
                 "value": 13,
-                "unit": "m²"
+                "unit": "m2"
               }
             },
             "type": "PACKAGE"
@@ -6495,10 +6433,10 @@
                   "unit": {
                     "type": "string",
                     "description": "footprint unit",
-                    "example": "m²",
+                    "example": "m2",
                     "enum": [
-                      "m²",
-                      "cm²",
+                      "m2",
+                      "cm2",
                       "pallet"
                     ]
                   }
