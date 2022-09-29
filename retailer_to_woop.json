@@ -782,7 +782,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/postCollectsBookings"
+                "$ref": "#/components/schemas/postDeliveriesBookings"
               },
               "examples": {
                 "Example": {
@@ -5567,7 +5567,7 @@
           }
         }
       },
-      "postCollectsBookings": {
+      "postDeliveriesBookings": {
         "description": "Specifies the information needed to book a delivery slot for a given carrier.",
         "type": "object",
         "title": "Reservation of a delivery time slot (postDeliveriesBookings)",
@@ -5609,7 +5609,7 @@
           "carrierCodes"
         ]
       },
-      "postDeliveriesBookings": {
+      "postCollectsBookings": {
         "description": "Specifies the information needed to reserve a collection time slot.",
         "type": "object",
         "title": "Reservation of a collection time slot (postCollectsBookings)",
