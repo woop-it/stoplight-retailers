@@ -1914,7 +1914,57 @@
             "description": "the order has been registered"
           },
           "202": {
-            "description": "the order must be completed"
+            "description": "Date in some fields are incorrect",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "message": {
+                            "type": "string",
+                            "description": "error message",
+                            "example": "Picking start MUST be before delivery start"
+                          },
+                          "translationKey": {
+                            "type": "string",
+                            "description": "technical error message for Woop Team",
+                            "example": "technical.incidents.date.pickingStartBeforeDeliveryStart"
+                          },
+                          "key": {
+                            "type": "string",
+                            "description": "technical key for Woop team",
+                            "example": "order"
+                          }
+                        },
+                        "required": [
+                          "message",
+                          "translationKey",
+                          "key"
+                        ]
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Example": {
+                    "value": {
+                      "errors": [
+                        {
+                          "message": "Picking start MUST be before delivery start",
+                          "translationKey": "technical.incidents.date.pickingStartBeforeDeliveryStart",
+                          "key": "order"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
           },
           "400": {
             "description": "Missing and/or incorrect items in the body",
