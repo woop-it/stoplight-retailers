@@ -287,7 +287,7 @@
                         "attributes": {
                           "footprint": {
                             "value": 13,
-                            "unit": "m²"
+                            "unit": "m2"
                           }
                         }
                       }
@@ -549,7 +549,7 @@
           {
             "schema": {
               "type": "boolean",
-              "default": "false"
+              "default": false
             },
             "in": "query",
             "description": "Also return on going slots",
@@ -791,7 +791,8 @@
                     "slot": {
                       "start": "2021-04-20T08:00:00+0000",
                       "end": "2021-04-20T08:30:00+0000"
-                    }
+                    },
+                    "carrierCodes": ["carrier1"]
                   }
                 }
               }
