@@ -792,7 +792,9 @@
                       "start": "2021-04-20T08:00:00+0000",
                       "end": "2021-04-20T08:30:00+0000"
                     },
-                    "carrierCodes": ["carrier1"]
+                    "carrierCodes": [
+                      "carrier1"
+                    ]
                   }
                 }
               }
@@ -4265,6 +4267,9 @@
                           "services"
                         ]
                       }
+                    },
+                    "price": {
+                      "$ref": "./models/price.yaml"
                     }
                   }
                 },
@@ -5865,6 +5870,14 @@
                   "active": {
                     "type": "boolean",
                     "description": "Used to calculate the distance between the pick and the delivery."
+                  }
+                }
+              },
+              "price": {
+                "type": "object",
+                "properties": {
+                  "active": {
+                    "type": "boolean"
                   }
                 }
               }
