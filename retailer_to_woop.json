@@ -4260,9 +4260,6 @@
                           },
                           "slots": {
                             "$ref": "#/components/schemas/availableSlot"
-                          },
-                          "price": {
-                            "$ref": "./models/price.yaml"
                           }
                         },
                         "required": [
@@ -5882,6 +5879,9 @@
                 }
               }
             }
+          },
+          "services": {
+            "$ref": "#/components/schemas/deliveryService"
           }
         },
         "required": [
