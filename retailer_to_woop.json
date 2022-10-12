@@ -5881,7 +5881,10 @@
             }
           },
           "services": {
-            "$ref": "#/components/schemas/deliveryService"
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/deliveryService"
+            }
           }
         },
         "required": [
