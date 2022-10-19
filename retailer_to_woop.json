@@ -792,7 +792,9 @@
                       "start": "2021-04-20T08:00:00+0000",
                       "end": "2021-04-20T08:30:00+0000"
                     },
-                    "carrierCodes": ["carrier1"]
+                    "carrierCodes": [
+                      "carrier1"
+                    ]
                   }
                 }
               }
@@ -7100,6 +7102,14 @@
             "type": "string",
             "format": "datetime",
             "description": "End of the time slot"
+          },
+          "expiredAt": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 168,
+            "default": 1,
+            "example": 24,
+            "description": "Validity of the slot expressed in hours"
           }
         },
         "required": [
