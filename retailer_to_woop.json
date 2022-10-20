@@ -7104,12 +7104,10 @@
             "description": "End of the time slot"
           },
           "expiredAt": {
-            "type": "integer",
-            "minimum": 1,
-            "maximum": 168,
-            "default": 1,
-            "example": 24,
-            "description": "Validity of the slot expressed in hours"
+            "type": "string",
+            "format": "datetime",
+            "description": "Validity limit of slots (max 1 week)",
+            "example": "2022-11-22T09:00:007Z"
           }
         },
         "required": [
