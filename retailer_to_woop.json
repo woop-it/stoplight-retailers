@@ -7088,7 +7088,8 @@
         "x-examples": {
           "Example": {
             "start": "2019-05-02T15:52:01+0000",
-            "end": "2019-05-02T17:52:01+0000"
+            "end": "2019-05-02T17:52:01+0000",
+            "expiredAt": "2019-05-04T12:00:01+0000"
           }
         },
         "title": "Collection time slot (slot)",
