@@ -5999,6 +5999,12 @@
           },
           "carrierSelection": {
             "$ref": "#/components/schemas/carrierSelection"
+          },
+          "state": {
+            "type": "string",
+            "enum": [
+              "TO_BE_COMPLETED"
+            ]
           }
         },
         "required": [
