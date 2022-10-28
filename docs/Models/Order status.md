@@ -1,12 +1,16 @@
-# Order status
+# Order status & states 
 
-The order goes through several statuses in succession.
+During its life cycle, an order goes through several : 
+- order status 
+- order states
+
+## Order status
 
 ### Route of an order
 
 ![get-started-icon](../../assets/images/Workflow_status_commande.png)
 
-### List of possible delivery statuses
+### List of possible order statuses
 
 | Status                            | Title                    | Description                                                                |
 | --------------------------------- | ------------------------ | -------------------------------------------------------------------------- |
@@ -30,3 +34,11 @@ The order goes through several statuses in succession.
 ### Returns and error management
 
 ![get-started-icon](../../assets/images/Workflow_retours_commande.png)
+
+## Order states
+
+### List of possible order states
+
+| States                         | Title                                |
+| ---------------------------- | ------------------------------------ |
+| `ORDER_TO_BE_COMPLETED`      | Order awaiting further information. Request to be completed.                              |
