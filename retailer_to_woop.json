@@ -4310,6 +4310,9 @@
                           },
                           "slots": {
                             "$ref": "#/components/schemas/availableSlot"
+                          },
+                          "price": {
+                            "$ref": "./models/price.yaml"
                           }
                         },
                         "required": [
@@ -5919,7 +5922,21 @@
                     "description": "Used to calculate the distance between the pick and the delivery."
                   }
                 }
+              },
+              "price": {
+                "type": "object",
+                "properties": {
+                  "active": {
+                    "type": "boolean"
+                  }
+                }
               }
+            }
+          },
+          "services": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/deliveryService"
             }
           }
         },
