@@ -792,7 +792,9 @@
                       "start": "2021-04-20T08:00:00+0000",
                       "end": "2021-04-20T08:30:00+0000"
                     },
-                    "carrierCodes": ["carrier1"]
+                    "carrierCodes": [
+                      "carrier1"
+                    ]
                   }
                 }
               }
@@ -7142,7 +7144,8 @@
         "x-examples": {
           "Example": {
             "start": "2019-05-02T15:52:01+0000",
-            "end": "2019-05-02T17:52:01+0000"
+            "end": "2019-05-02T17:52:01+0000",
+            "expiredAt": "2019-05-04T12:00:01+0000"
           }
         },
         "title": "Collection time slot (slot)",
@@ -7156,6 +7159,12 @@
             "type": "string",
             "format": "datetime",
             "description": "End of the time slot"
+          },
+          "expiredAt": {
+            "type": "string",
+            "format": "datetime",
+            "description": "Validity limit of slots (max 1 week)",
+            "example": "2022-11-22T09:00:007Z"
           }
         },
         "required": [
