@@ -3886,6 +3886,24 @@
                           "url"
                         ]
                       },
+                      "trackingPageUrl": {
+                        "type": "object",
+                        "description": "Callback to receive changes in the tracking page url of an order",
+                        "properties": {
+                          "url": {
+                            "type": "string",
+                            "description": "URL of the API route"
+                          },
+                          "version": {
+                            "type": "string",
+                            "description": "API version for this callback",
+                            "example": "1.9.0"
+                          }
+                        },
+                        "required": [
+                          "url"
+                        ]
+                      },
                       "collectStatus": {
                         "type": "object",
                         "description": "Callback to receive changes in the status of a collection",
@@ -4029,6 +4047,10 @@
                       "deliveryStop": {
                         "url": "https://my_url/orders/{orderId}/stops",
                         "version": "1.8.0"
+                      },
+                      "trackingPageUrl": {
+                        "url": "https://my_url/orders/{orderId}/trackingPageUrl",
+                        "version": "1.9.0"
                       },
                       "collectStatus": {
                         "url": "https://my_url/collects/{collectId}/status",
