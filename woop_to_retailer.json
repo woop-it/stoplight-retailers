@@ -662,6 +662,98 @@
         ]
       }
     },
+    "/orders/{orderId}/trackingPageUrl": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "orderId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "put": {
+        "summary": "Receive tracking Page Url for an order",
+        "operationId": "putOrderTrackingPageUrl",
+        "responses": {
+          "204": {
+            "description": "Request processed successfully"
+          },
+          "400": {
+            "description": "Missing and/or incorrect items in the body",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "reasons": {
+                      "type": "array",
+                      "description": "List of reasons of issue",
+                      "items": {
+                        "type": "string",
+                        "example": "Missing argument 'xxxxx'"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Information can no longer be sent",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./retailer_to_woop.json#/components/schemas/errorCode"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The 'orderId' was not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./retailer_to_woop.json#/components/schemas/errorCode"
+                }
+              }
+            }
+          }
+        },
+        "description": "This method allows you to receive the tracking page url set to a given order.The information is sent when the carrier is sending it to Woop.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "trackingPageUrl": {
+                    "type": "string",
+                    "description": "Tracking Page Url",
+                    "example": "https://myTrackingPageUrl.com"
+                  }
+                },
+                "required": [
+                  "trackingPageUrl"
+                ]
+              },
+              "examples": {
+                "Example 1": {
+                  "value": {
+                    "trackingPageUrl": "https://myTrackingPageUrl.com"
+                  }
+                }
+              }
+            }
+          },
+          "description": "Contains the the tracking page url."
+        },
+        "tags": [
+          "Order"
+        ]
+      }
+    },
     "/orders/{orderId}/deliveryClosure": {
       "post": {
         "tags": [
