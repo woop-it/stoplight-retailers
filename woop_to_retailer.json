@@ -61,6 +61,36 @@
                   "referenceNumber": {
                     "type": "string",
                     "description": "Order reference"
+                  },
+                  "parcels": {
+                    "type": "array",
+                    "description": "Information on the package",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "description": "Parcel identifier",
+                          "example": "Parcel_001"
+                        },
+                        "packageReference": {
+                          "type": "string",
+                          "description": "Package reference in parcel",
+                          "example": "PackageReference_001"
+                        },
+                        "trackingId": {
+                          "type": "string",
+                          "description": "Tracking parcel identifier",
+                          "example": "TrackingId_001"
+                        },
+                        "barcode": {
+                          "$ref": "./models/barcode.yaml"
+                        }
+                      },
+                      "required": [
+                        "id"
+                      ]
+                    }
                   }
                 },
                 "required": [
@@ -121,7 +151,19 @@
                         }
                       }
                     },
-                    "referenceNumber": "string"
+                    "referenceNumber": "string",
+                    "parcels": [
+                      {
+                        "id": "Parcel_001",
+                        "packageReference": "PackageReference_001",
+                        "trackingId": "TrackingId_001",
+                        "barcode": {
+                          "value": "54fd56g4f5gfd456sd",
+                          "type": "barcode",
+                          "format": "128"
+                        }
+                      }
+                    ]
                   }
                 }
               }
@@ -1914,7 +1956,8 @@
             "ditanceMax": {
               "value": 0,
               "unit": "string"
-            }
+            },
+            "claimFormUrl": "https://myClaimFormUrl.com"
           }
         },
         "title": "Specifications (specifications)",
@@ -1943,6 +1986,11 @@
           },
           "distanceMax": {
             "$ref": "#/components/schemas/distance"
+          },
+          "claimUrl": {
+            "type": "string",
+            "description": "Claim for url",
+            "example": "https://myClaimFormUrl.com"
           }
         },
         "required": [
