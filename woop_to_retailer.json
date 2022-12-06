@@ -704,7 +704,7 @@
         ]
       }
     },
-    "/orders/{orderId}/trackingPageUrl": {
+    "/orders/{orderId}/trackings": {
       "parameters": [
         {
           "schema": {
@@ -717,7 +717,7 @@
       ],
       "put": {
         "summary": "Receive tracking Page Url for an order",
-        "operationId": "putOrderTrackingPageUrl",
+        "operationId": "putOrderTrackings",
         "responses": {
           "204": {
             "description": "Request processed successfully"
@@ -763,7 +763,7 @@
             }
           }
         },
-        "description": "This method allows you to receive the tracking page url set to a given order.The information is sent when the carrier is sending it to Woop.",
+        "description": "This method allows you to receive the tracking set to a given order.The information is sent when the carrier is sending it to Woop.",
         "requestBody": {
           "content": {
             "application/json": {

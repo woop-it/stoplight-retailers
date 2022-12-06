@@ -3886,7 +3886,7 @@
                           "url"
                         ]
                       },
-                      "trackingPageUrl": {
+                      "tracking": {
                         "type": "object",
                         "description": "Callback to receive changes in the tracking page url of an order",
                         "properties": {
@@ -4048,7 +4048,7 @@
                         "url": "https://my_url/orders/{orderId}/stops",
                         "version": "1.8.0"
                       },
-                      "trackingPageUrl": {
+                      "tracking": {
                         "url": "https://my_url/orders/{orderId}/trackingPageUrl",
                         "version": "1.9.0"
                       },
@@ -4098,6 +4098,10 @@
                         "url": "https://my_url/orders/{orderId}/stops",
                         "version": "1.8.0"
                       },
+                      "tracking": {
+                        "url": "https://my_url/orders/{orderId}/trackingPageUrl",
+                        "version": "1.9.0"
+                      },
                       "collectStatus": {
                         "url": "https://my_url/collects/{collectId}/status",
                         "version": "1.1.0"
@@ -4140,6 +4144,10 @@
                       "deliveryStop": {
                         "url": "https://my_url/orders/{orderId}/stops",
                         "version": "1.8.0"
+                      },
+                      "tracking": {
+                        "url": "https://my_url/orders/{orderId}/trackingPageUrl",
+                        "version": "1.9.0"
                       },
                       "collectStatus": {
                         "url": "https://my_url/collects/{collectId}/status",
