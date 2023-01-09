@@ -366,7 +366,7 @@
         "summary": "Receive order status updates"
       }
     },
-    "/orders/{orderId}/delivery/{deliveryId}/status": {
+    "/orders/{orderId}/deliveries/{deliveryId}/status": {
       "put": {
         "tags": [
           "Order"
@@ -506,7 +506,7 @@
         }
       ]
     },
-    "/orders/{orderId}/delivery/{deliveryId}/parcel/{parcelId}/status ": {
+    "/orders/{orderId}/deliveries/{deliveryId}/parcels/{parcelId}/status": {
       "put": {
         "tags": [
           "Order"
@@ -2130,8 +2130,7 @@
           "deliveryId",
           "orderId",
           "status",
-          "date",
-          "comment"
+          "date"
         ]
       },
       "putParcelStatus": {
@@ -2178,8 +2177,7 @@
           "deliveryId",
           "parcelId",
           "status",
-          "date",
-          "comment"
+          "date"
         ]
       },
       "putOrderStatus": {
