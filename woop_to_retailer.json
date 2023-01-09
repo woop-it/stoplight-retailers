@@ -363,7 +363,7 @@
             }
           }
         },
-        "summary": "Receive delivery status updates"
+        "summary": "Receive order status updates"
       }
     },
     "/orders/{orderId}/delivery/{deliveryId}/status": {
@@ -625,7 +625,7 @@
             }
           }
         },
-        "summary": "Receive delivery status updates"
+        "summary": "Receive parcel status updates"
       },
       "parameters": [
         {
