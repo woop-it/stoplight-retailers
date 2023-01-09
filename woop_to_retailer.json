@@ -2153,6 +2153,10 @@
             "type": "string",
             "description": "parcel identifier"
           },
+          "carrierEvent": {
+            "type": "string",
+            "description": "Event from the carrier "
+          },
           "status": {
             "$ref": "./models/status.yaml"
           },
@@ -2176,6 +2180,7 @@
           "orderId",
           "deliveryId",
           "parcelId",
+          "carrierEvent",
           "status",
           "date"
         ]
