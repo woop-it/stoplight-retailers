@@ -2521,6 +2521,9 @@
                   },
                   "carrierSelection": {
                     "$ref": "#/components/schemas/carrierSelection"
+                  },
+                  "additionalData": {
+                    "$ref": "./models/additionalData.yaml"
                   }
                 },
                 "required": [
@@ -6104,6 +6107,9 @@
             "enum": [
               "TO_BE_COMPLETED"
             ]
+          },
+          "additionalData": {
+            "$ref": "./models/additionalData.yaml"
           }
         },
         "required": [
