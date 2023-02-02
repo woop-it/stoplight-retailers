@@ -6699,7 +6699,8 @@
             "language": "fr",
             "timezone": "Europe/Paris",
             "main": true,
-            "title": "Manager"
+            "title": "Manager",
+            "isProfessional": true
           }
         },
         "properties": {
@@ -6732,6 +6733,11 @@
           "title": {
             "type": "string",
             "description": "Contact title"
+          },
+          "isProfessional": {
+            "type": "boolean",
+            "description": "Indicates if the contact is a professional",
+            "default": false
           }
         },
         "required": [
@@ -7460,7 +7466,8 @@
             "lastName": "Doe",
             "email": "johndoe@mail.com",
             "language": "fr",
-            "timezone": "Europe/Paris"
+            "timezone": "Europe/Paris",
+            "isProfessional": true
           }
         },
         "properties": {
@@ -7485,6 +7492,11 @@
           },
           "timezone": {
             "$ref": "#/components/schemas/timezone"
+          },
+          "isProfessional": {
+            "type": "boolean",
+            "default": false,
+            "description": "Indicates if the contact is a professional"
           }
         },
         "required": [
