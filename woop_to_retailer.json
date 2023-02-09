@@ -271,22 +271,6 @@
                     "status": "ORDER_CREATED",
                     "date": "2019-11-27T12:00:00+0000"
                   }
-                },
-                "Statut de livraison": {
-                  "value": {
-                    "deliveryId": "kzqfq41q561gq5ge1q5",
-                    "orderId": "5z8d4q465zdq65d",
-                    "status": "DELIVERY_STARTED",
-                    "date": "2019-11-27T12:00:00+0000",
-                    "comment": "This is a useful comment.",
-                    "team": {
-                      "members": [
-                        {
-                          "id": "q6z4qz4dq"
-                        }
-                      ]
-                    }
-                  }
                 }
               }
             }
@@ -387,17 +371,11 @@
                 "$ref": "#/components/schemas/putDeliveryStatus"
               },
               "examples": {
-                "Statut de commande": {
-                  "value": {
-                    "orderId": "5z8d4q465zdq65d",
-                    "status": "ORDER_CREATED",
-                    "date": "2019-11-27T12:00:00+0000"
-                  }
-                },
                 "Statut de livraison": {
                   "value": {
                     "deliveryId": "kzqfq41q561gq5ge1q5",
                     "orderId": "5z8d4q465zdq65d",
+                    "carrierCode": "DPD",
                     "status": "DELIVERY_STARTED",
                     "date": "2019-11-27T12:00:00+0000",
                     "comment": "This is a useful comment.",
@@ -527,20 +505,16 @@
                 "$ref": "#/components/schemas/putParcelStatus"
               },
               "examples": {
-                "Statut de commande": {
-                  "value": {
-                    "orderId": "5z8d4q465zdq65d",
-                    "status": "ORDER_CREATED",
-                    "date": "2019-11-27T12:00:00+0000"
-                  }
-                },
-                "Statut de livraison": {
+                "Parcel status": {
                   "value": {
                     "deliveryId": "kzqfq41q561gq5ge1q5",
                     "orderId": "5z8d4q465zdq65d",
                     "status": "DELIVERY_STARTED",
                     "date": "2019-11-27T12:00:00+0000",
                     "comment": "This is a useful comment.",
+                    "parcelId": "42239FRZ",
+                    "carrierEvent": "AA3",
+                    "carrierCode": "DPD",
                     "team": {
                       "members": [
                         {
@@ -2124,6 +2098,10 @@
           },
           "appointment": {
             "$ref": "#/components/schemas/appointment"
+          },
+          "carrierCode": {
+            "type": "string",
+            "description": "Carrier code"
           }
         },
         "required": [
@@ -2174,6 +2152,10 @@
           },
           "team": {
             "$ref": "#/components/schemas/team"
+          },
+          "carrierCode": {
+            "type": "string",
+            "description": "Carrier code"
           }
         },
         "required": [
