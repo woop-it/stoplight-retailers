@@ -2108,7 +2108,8 @@
           "deliveryId",
           "orderId",
           "status",
-          "date"
+          "date",
+          "carrierCode"
         ]
       },
       "putParcelStatus": {
@@ -2164,7 +2165,8 @@
           "parcelId",
           "carrierEvent",
           "status",
-          "date"
+          "date",
+          "carrierCode"
         ]
       },
       "putOrderStatus": {
