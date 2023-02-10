@@ -3264,7 +3264,9 @@
                     "latitude": 50.6379636,
                     "longitude": 3.077384,
                     "kilometricDistance": 20,
-                    "type": "PICKUP_POINT_AGENCY"
+                    "type": [
+                      "PICKUP_POINT_AGENCY"
+                    ]
                   }
                 },
                 "Search by type and carrier": {
@@ -3277,8 +3279,12 @@
                       "chronopost"
                     ],
                     "type": {
-                      "bpost": "PICKUP_POINT_AGENCY",
-                      "chronopost": "PICKUP_POINT_RELAY_WITH_LOCKER"
+                      "bpost": [
+                        "PICKUP_POINT_AGENCY"
+                      ],
+                      "chronopost": [
+                        "PICKUP_POINT_RELAY_WITH_LOCKER"
+                      ]
                     }
                   }
                 },
@@ -6253,6 +6259,39 @@
         "type": "object",
         "description": "Specifies the information for a pickup point search",
         "title": "Search for pickup points (postPickupPoints)",
+        "x-examples": {
+          "Post Pickup point by type": {
+            "storeId": "string",
+            "latitude": 0,
+            "longitude": 0,
+            "limit": 25,
+            "offset": 0,
+            "kilometricDistance": 5,
+            "type": [
+              "PICKUP_POINT_RELAY_WITHOUT_LOCKER"
+            ]
+          },
+          "Post Pickup point by type and carrierCode": {
+            "storeId": "string",
+            "latitude": 0,
+            "longitude": 0,
+            "limit": 25,
+            "offset": 0,
+            "kilometricDistance": 5,
+            "carrierCode": [
+              "mondial-relay",
+              "bpost"
+            ],
+            "type": {
+              "mondial-relay": [
+                "PICKUP_POINT_RELAY_WITHOUT_LOCKER"
+              ],
+              "bpost": [
+                "PICKUP_POINT_RELAY_WITHOUT_LOCKER"
+              ]
+            }
+          }
+        },
         "properties": {
           "storeId": {
             "type": "string",
@@ -6286,10 +6325,15 @@
           "type": {
             "oneOf": [
               {
-                "$ref": "#/components/schemas/pickupPointType"
+                "type": "array",
+                "description": "Type of relay point (see relay point documentation)",
+                "items": {
+                  "$ref": "#/components/schemas/pickupPointType"
+                }
               },
               {
                 "type": "object",
+                "example": "\"mondial-relay\": [\"PICKUP_POINT_RELAY_WITH_LOCKER\"],",
                 "description": "Type of relay point by carrier (see relay point documentation)"
               }
             ]
@@ -6331,8 +6375,7 @@
         "required": [
           "latitude",
           "longitude"
-        ],
-        "x-examples": {}
+        ]
       },
       "tags": {
         "type": "array",
@@ -7416,7 +7459,8 @@
           "PICKUP_POINT_RELAY_WITHOUT_LOCKER",
           "PICKUP_POINT_ALL"
         ],
-        "default": "PICKUP_POINT_ALL"
+        "default": "PICKUP_POINT_ALL",
+        "example": "PICKUP_POINT_RELAY_WITHOUT_LOCKER"
       },
       "errorCode": {
         "title": "Error code (errorCode)",
