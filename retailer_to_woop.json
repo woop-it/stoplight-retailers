@@ -6259,39 +6259,7 @@
         "type": "object",
         "description": "Specifies the information for a pickup point search",
         "title": "Search for pickup points (postPickupPoints)",
-        "x-examples": {
-          "Post Pickup point by type": {
-            "storeId": "string",
-            "latitude": 0,
-            "longitude": 0,
-            "limit": 25,
-            "offset": 0,
-            "kilometricDistance": 5,
-            "type": [
-              "PICKUP_POINT_RELAY_WITHOUT_LOCKER"
-            ]
-          },
-          "Post Pickup point by type and carrierCode": {
-            "storeId": "string",
-            "latitude": 0,
-            "longitude": 0,
-            "limit": 25,
-            "offset": 0,
-            "kilometricDistance": 5,
-            "carrierCode": [
-              "mondial-relay",
-              "bpost"
-            ],
-            "type": {
-              "mondial-relay": [
-                "PICKUP_POINT_RELAY_WITHOUT_LOCKER"
-              ],
-              "bpost": [
-                "PICKUP_POINT_RELAY_WITHOUT_LOCKER"
-              ]
-            }
-          }
-        },
+        "x-examples": {},
         "properties": {
           "storeId": {
             "type": "string",
