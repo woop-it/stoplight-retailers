@@ -60,7 +60,7 @@ _Eg:_
 
 ```json
 {
-  "type": "PICKUP_POINT_AGENCY"
+  "type": ["PICKUP_POINT_AGENCY","PICKUP_POINT_RELAY_WITH_LOCKER"]
 }
 ```
 
@@ -70,8 +70,8 @@ _Eg:_
 {
   "carrierCode": ["bpost", "chronopost"],
   "type": {
-    "bpost": "PICKUP_POINT_AGENCY",
-    "chronopost": "PICKUP_POINT_RELAY_WITH_LOCKER"
+    "bpost": ["PICKUP_POINT_AGENCY","PICKUP_POINT_RELAY_WITH_LOCKER"],
+    "chronopost": ["PICKUP_POINT_RELAY_WITH_LOCKER"]
   }
 }
 ```
