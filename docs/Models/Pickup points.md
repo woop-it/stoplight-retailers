@@ -42,9 +42,9 @@ The type of relay point allows the search to be filtered according to the drop-o
 | `PICKUP_POINT_POST_OFFICE`          | Relay point located in a post office |
 | `PICKUP_POINT_RELAY_WITH_LOCKER`    | Relay point with Locker              |
 | `PICKUP_POINT_RELAY_WITHOUT_LOCKER` | Relay point without Locker           |
-| `PICKUP_POINT_ALL`                  | All available relay points           |
+| `PICKUP_POINT_DRIVE`                | Drive                                |
 
-Default value: `PICKUP_POINT_ALL`
+Default value: `PICKUP_POINT_RELAY_WITHOUT_LOCKER`
 
 Types available by carrier:
 
