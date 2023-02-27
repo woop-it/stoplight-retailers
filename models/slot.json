@@ -1,0 +1,39 @@
+{
+  "type": "object",
+  "x-stoplight": {
+    "id": "m8ilmah932y2d"
+  },
+  "x-examples": {
+    "Example": {
+      "start": "14:00",
+      "end": "18:00"
+    }
+  },
+  "description": "Specifies an interval of hours.",
+  "title": "Time slot",
+  "properties": {
+    "start": {
+      "type": "string",
+      "format": "time",
+      "example": "14:00"
+    },
+    "end": {
+      "type": "string",
+      "format": "time",
+      "example": "18:00"
+    }
+  },
+  "required": [
+    "start",
+    "end"
+  ],
+  "examples": [
+    {
+      "start": "14:00",
+      "end": "18:00"
+    }
+  ],
+  "x-tags": [
+    "Common"
+  ]
+}

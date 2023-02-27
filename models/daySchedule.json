@@ -1,0 +1,63 @@
+{
+  "title": "Schedule of a day",
+  "x-stoplight": {
+    "id": "5namnxusqru29"
+  },
+  "type": "array",
+  "description": "Schedule of a day made of an array of slots",
+  "items": {
+    "$ref": "#/definitions/Slot"
+  },
+  "examples": [
+    [
+      {
+        "start": "14:00",
+        "end": "18:00"
+      }
+    ]
+  ],
+  "x-tags": [
+    "Common"
+  ],
+  "definitions": {
+    "Slot": {
+      "type": "object",
+      "x-stoplight": {
+        "id": "ts8v22plvhvu8"
+      },
+      "x-examples": {
+        "Example": {
+          "start": "14:00",
+          "end": "18:00"
+        }
+      },
+      "description": "Specifies an interval of hours.",
+      "title": "Time slot",
+      "properties": {
+        "start": {
+          "type": "string",
+          "format": "time",
+          "example": "14:00"
+        },
+        "end": {
+          "type": "string",
+          "format": "time",
+          "example": "18:00"
+        }
+      },
+      "required": [
+        "start",
+        "end"
+      ],
+      "examples": [
+        {
+          "start": "14:00",
+          "end": "18:00"
+        }
+      ],
+      "x-tags": [
+        "Common"
+      ]
+    }
+  }
+}

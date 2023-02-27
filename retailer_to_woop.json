@@ -4388,6 +4388,9 @@
                           },
                           "price": {
                             "$ref": "./models/price.yaml"
+                          },
+                          "workSchedule": {
+                            "$ref": "./models/workSchedule.json"
                           }
                         },
                         "required": [

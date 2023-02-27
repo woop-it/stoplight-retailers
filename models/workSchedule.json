@@ -1,0 +1,210 @@
+{
+  "$ref": "#/definitions/WeekSchedule",
+  "x-stoplight": {
+    "id": "eaixrphsle9kb"
+  },
+  "description": "Carrier weekly work schedule",
+  "examples": [
+    {
+      "monday": [
+        {
+          "start": "14:00",
+          "end": "18:00"
+        }
+      ],
+      "tuesday": [
+        {
+          "start": "14:00",
+          "end": "18:00"
+        }
+      ],
+      "wednesday": [
+        {
+          "start": "14:00",
+          "end": "18:00"
+        }
+      ],
+      "thursday": [
+        {
+          "start": "14:00",
+          "end": "18:00"
+        }
+      ],
+      "friday": [
+        {
+          "start": "14:00",
+          "end": "18:00"
+        }
+      ],
+      "saturday": [
+        {
+          "start": "14:00",
+          "end": "18:00"
+        }
+      ],
+      "sunday": [
+        {
+          "start": "14:00",
+          "end": "18:00"
+        }
+      ]
+    }
+  ],
+  "x-tags": [
+    "Carrier"
+  ],
+  "title": "Carrier Work Schedule",
+  "definitions": {
+    "DaySchedule": {
+      "description": "Monday slots",
+      "title": "Schedule of a day",
+      "x-stoplight": {
+        "id": "zgpymncklu3es"
+      },
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Slot"
+      },
+      "examples": [
+        [
+          {
+            "start": "14:00",
+            "end": "18:00"
+          }
+        ]
+      ],
+      "x-tags": [
+        "Common"
+      ]
+    },
+    "Slot": {
+      "type": "object",
+      "x-stoplight": {
+        "id": "ts8v22plvhvu8"
+      },
+      "x-examples": {
+        "Example": {
+          "start": "14:00",
+          "end": "18:00"
+        }
+      },
+      "description": "Specifies an interval of hours.",
+      "title": "Time slot",
+      "properties": {
+        "start": {
+          "type": "string",
+          "format": "time",
+          "example": "14:00"
+        },
+        "end": {
+          "type": "string",
+          "format": "time",
+          "example": "18:00"
+        }
+      },
+      "required": [
+        "start",
+        "end"
+      ],
+      "examples": [
+        {
+          "start": "14:00",
+          "end": "18:00"
+        }
+      ],
+      "x-tags": [
+        "Common"
+      ]
+    },
+    "WeekSchedule": {
+      "x-stoplight": {
+        "id": "hah4lhtuh6rnf"
+      },
+      "description": "Carrier weekly work schedule",
+      "examples": [
+        {
+          "monday": [
+            {
+              "start": "14:00",
+              "end": "18:00"
+            }
+          ],
+          "tuesday": [
+            {
+              "start": "14:00",
+              "end": "18:00"
+            }
+          ],
+          "wednesday": [
+            {
+              "start": "14:00",
+              "end": "18:00"
+            }
+          ],
+          "thursday": [
+            {
+              "start": "14:00",
+              "end": "18:00"
+            }
+          ],
+          "friday": [
+            {
+              "start": "14:00",
+              "end": "18:00"
+            }
+          ],
+          "saturday": [
+            {
+              "start": "14:00",
+              "end": "18:00"
+            }
+          ],
+          "sunday": [
+            {
+              "start": "14:00",
+              "end": "18:00"
+            }
+          ]
+        }
+      ],
+      "x-tags": [
+        "Carrier"
+      ],
+      "title": "Carrier Work Schedule",
+      "definitions": {
+        "$ref": "#/definitions"
+      },
+      "type": "object",
+      "properties": {
+        "monday": {
+          "$ref": "#/definitions/DaySchedule",
+          "description": "Monday slots"
+        },
+        "tuesday": {
+          "$ref": "#/definitions/DaySchedule",
+          "description": "Tuesday slots"
+        },
+        "wednesday": {
+          "$ref": "#/definitions/DaySchedule",
+          "description": "Wednesday slots"
+        },
+        "thursday": {
+          "$ref": "#/definitions/DaySchedule",
+          "description": "Thursday slots"
+        },
+        "friday": {
+          "$ref": "#/definitions/DaySchedule",
+          "description": "Friday slots"
+        },
+        "saturday": {
+          "$ref": "#/definitions/DaySchedule",
+          "description": "Saturday slots"
+        },
+        "sunday": {
+          "$ref": "#/definitions/DaySchedule",
+          "description": "Sunday slots"
+        }
+      }
+    }
+  }
+}
