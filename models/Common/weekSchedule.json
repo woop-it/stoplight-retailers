@@ -1,0 +1,87 @@
+{
+  "title": "Week Schedule",
+  "x-stoplight": {
+    "id": "y2f3a0z2w443l"
+  },
+  "type": "object",
+  "description": "Week schedule",
+  "examples": [
+    {
+      "monday": [
+        {
+          "start": "14:00",
+          "end": "18:00"
+        }
+      ],
+      "tuesday": [
+        {
+          "start": "14:00",
+          "end": "18:00"
+        }
+      ],
+      "wednesday": [
+        {
+          "start": "14:00",
+          "end": "18:00"
+        }
+      ],
+      "thursday": [
+        {
+          "start": "14:00",
+          "end": "18:00"
+        }
+      ],
+      "friday": [
+        {
+          "start": "14:00",
+          "end": "18:00"
+        }
+      ],
+      "saturday": [
+        {
+          "start": "14:00",
+          "end": "18:00"
+        }
+      ],
+      "sunday": [
+        {
+          "start": "14:00",
+          "end": "18:00"
+        }
+      ]
+    }
+  ],
+  "properties": {
+    "monday": {
+      "$ref": "../Common/daySchedule.json",
+      "description": "Monday slots"
+    },
+    "tuesday": {
+      "$ref": "../Common/daySchedule.json",
+      "description": "Tuesday slots"
+    },
+    "wednesday": {
+      "$ref": "../Common/daySchedule.json",
+      "description": "Wednesday slots"
+    },
+    "thursday": {
+      "$ref": "../Common/daySchedule.json",
+      "description": "Thursday slots"
+    },
+    "friday": {
+      "$ref": "../Common/daySchedule.json",
+      "description": "Friday slots"
+    },
+    "saturday": {
+      "$ref": "../Common/daySchedule.json",
+      "description": "Saturday slots"
+    },
+    "sunday": {
+      "$ref": "../Common/daySchedule.json",
+      "description": "Sunday slots"
+    }
+  },
+  "x-tags": [
+    "Common"
+  ]
+}

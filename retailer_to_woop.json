@@ -4390,7 +4390,7 @@
                             "$ref": "./models/price.yaml"
                           },
                           "workSchedule": {
-                            "$ref": "./models/workSchedule.json"
+                            "$ref": "./models/Carrier/workSchedule.json"
                           }
                         },
                         "required": [
