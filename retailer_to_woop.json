@@ -4615,6 +4615,30 @@
                         }
                       ]
                     }
+                  },
+                  "Example with workSchedule": {
+                    "value": {
+                      "eligibilities": [
+                        {
+                          "carrier": {
+                            "code": "mondial-relay",
+                            "name": "Mondial Relay"
+                          },
+                          "workSchedule": {
+                            "monday": [
+                              {
+                                "start": "07:00",
+                                "end": "11:00"
+                              },
+                              {
+                                "start": "13:00",
+                                "end": "17:00"
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
                   }
                 }
               }
