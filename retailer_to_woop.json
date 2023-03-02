@@ -5977,6 +5977,9 @@
             "properties": {
               "location": {
                 "$ref": "#/components/schemas/location"
+              },
+              "interval": {
+                "$ref": "#/components/schemas/interval"
               }
             }
           },
