@@ -1,11 +1,11 @@
 {
-  "$ref": "../Common/weekSchedule.json",
-  "x-stoplight": {
-    "id": "mtfgyl8xky9b1"
-  },
   "description": "Carrier weekly work schedule",
+  "x-stoplight": {
+    "id": "69vv3fpugcg7w"
+  },
   "examples": [
     {
+      "timezone": "Europe/Paris",
       "monday": [
         {
           "start": "14:00",
@@ -53,5 +53,178 @@
   "x-tags": [
     "Carrier"
   ],
-  "title": "Carrier Work Schedule"
+  "title": "Carrier Work Schedule",
+  "allOf": [
+    {
+      "$ref": "#/definitions/Timezone"
+    },
+    {
+      "$ref": "#/definitions/WeekSchedule"
+    }
+  ],
+  "definitions": {
+    "DaySchedule": {
+      "description": "Monday slots",
+      "title": "Schedule of a day",
+      "x-stoplight": {
+        "id": "zgpymncklu3es"
+      },
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Slot"
+      },
+      "examples": [
+        [
+          {
+            "start": "14:00",
+            "end": "18:00"
+          }
+        ]
+      ],
+      "x-tags": [
+        "Common"
+      ]
+    },
+    "Slot": {
+      "type": "object",
+      "x-stoplight": {
+        "id": "ts8v22plvhvu8"
+      },
+      "x-examples": {
+        "Example": {
+          "start": "14:00",
+          "end": "18:00"
+        }
+      },
+      "description": "Specifies an interval of hours.",
+      "title": "Time slot",
+      "properties": {
+        "start": {
+          "type": "string",
+          "format": "time",
+          "example": "14:00"
+        },
+        "end": {
+          "type": "string",
+          "format": "time",
+          "example": "18:00"
+        }
+      },
+      "required": [
+        "start",
+        "end"
+      ],
+      "examples": [
+        {
+          "start": "14:00",
+          "end": "18:00"
+        }
+      ],
+      "x-tags": [
+        "Common"
+      ]
+    },
+    "Timezone": {
+      "title": "Timezone",
+      "x-stoplight": {
+        "id": "vmh6cvhrrapar"
+      },
+      "type": "string",
+      "example": "Europe/Paris",
+      "description": "Timezone",
+      "x-tags": [
+        "Common"
+      ],
+      "examples": [
+        "Europe/Paris"
+      ]
+    },
+    "WeekSchedule": {
+      "title": "Week Schedule",
+      "x-stoplight": {
+        "id": "u1tnu9dyodd8p"
+      },
+      "type": "object",
+      "description": "Week schedule, if a day has no schedule it will be then sent as null",
+      "examples": [
+        {
+          "monday": [
+            {
+              "start": "14:00",
+              "end": "18:00"
+            }
+          ],
+          "tuesday": [
+            {
+              "start": "14:00",
+              "end": "18:00"
+            }
+          ],
+          "wednesday": [
+            {
+              "start": "14:00",
+              "end": "18:00"
+            }
+          ],
+          "thursday": [
+            {
+              "start": "14:00",
+              "end": "18:00"
+            }
+          ],
+          "friday": [
+            {
+              "start": "14:00",
+              "end": "18:00"
+            }
+          ],
+          "saturday": [
+            {
+              "start": "14:00",
+              "end": "18:00"
+            }
+          ],
+          "sunday": [
+            {
+              "start": "14:00",
+              "end": "18:00"
+            }
+          ]
+        }
+      ],
+      "properties": {
+        "monday": {
+          "$ref": "#/definitions/DaySchedule",
+          "description": "Monday slots"
+        },
+        "tuesday": {
+          "$ref": "#/definitions/DaySchedule",
+          "description": "Tuesday slots"
+        },
+        "wednesday": {
+          "$ref": "#/definitions/DaySchedule",
+          "description": "Wednesday slots"
+        },
+        "thursday": {
+          "$ref": "#/definitions/DaySchedule",
+          "description": "Thursday slots"
+        },
+        "friday": {
+          "$ref": "#/definitions/DaySchedule",
+          "description": "Friday slots"
+        },
+        "saturday": {
+          "$ref": "#/definitions/DaySchedule",
+          "description": "Saturday slots"
+        },
+        "sunday": {
+          "$ref": "#/definitions/DaySchedule",
+          "description": "Sunday slots"
+        }
+      },
+      "x-tags": [
+        "Common"
+      ]
+    }
+  }
 }

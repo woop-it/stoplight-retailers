@@ -1,10 +1,10 @@
 {
   "title": "Week Schedule",
   "x-stoplight": {
-    "id": "y2f3a0z2w443l"
+    "id": "l4rjxzoz3co92"
   },
   "type": "object",
-  "description": "Week schedule",
+  "description": "Week schedule, if a day has no schedule it will be then sent as null",
   "examples": [
     {
       "monday": [
@@ -53,35 +53,98 @@
   ],
   "properties": {
     "monday": {
-      "$ref": "../Common/daySchedule.json",
+      "$ref": "#/definitions/DaySchedule",
       "description": "Monday slots"
     },
     "tuesday": {
-      "$ref": "../Common/daySchedule.json",
+      "$ref": "#/definitions/DaySchedule",
       "description": "Tuesday slots"
     },
     "wednesday": {
-      "$ref": "../Common/daySchedule.json",
+      "$ref": "#/definitions/DaySchedule",
       "description": "Wednesday slots"
     },
     "thursday": {
-      "$ref": "../Common/daySchedule.json",
+      "$ref": "#/definitions/DaySchedule",
       "description": "Thursday slots"
     },
     "friday": {
-      "$ref": "../Common/daySchedule.json",
+      "$ref": "#/definitions/DaySchedule",
       "description": "Friday slots"
     },
     "saturday": {
-      "$ref": "../Common/daySchedule.json",
+      "$ref": "#/definitions/DaySchedule",
       "description": "Saturday slots"
     },
     "sunday": {
-      "$ref": "../Common/daySchedule.json",
+      "$ref": "#/definitions/DaySchedule",
       "description": "Sunday slots"
     }
   },
   "x-tags": [
     "Common"
-  ]
+  ],
+  "definitions": {
+    "DaySchedule": {
+      "description": "Monday slots",
+      "title": "Schedule of a day",
+      "x-stoplight": {
+        "id": "zgpymncklu3es"
+      },
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Slot"
+      },
+      "examples": [
+        [
+          {
+            "start": "14:00",
+            "end": "18:00"
+          }
+        ]
+      ],
+      "x-tags": [
+        "Common"
+      ]
+    },
+    "Slot": {
+      "type": "object",
+      "x-stoplight": {
+        "id": "ts8v22plvhvu8"
+      },
+      "x-examples": {
+        "Example": {
+          "start": "14:00",
+          "end": "18:00"
+        }
+      },
+      "description": "Specifies an interval of hours.",
+      "title": "Time slot",
+      "properties": {
+        "start": {
+          "type": "string",
+          "format": "time",
+          "example": "14:00"
+        },
+        "end": {
+          "type": "string",
+          "format": "time",
+          "example": "18:00"
+        }
+      },
+      "required": [
+        "start",
+        "end"
+      ],
+      "examples": [
+        {
+          "start": "14:00",
+          "end": "18:00"
+        }
+      ],
+      "x-tags": [
+        "Common"
+      ]
+    }
+  }
 }
