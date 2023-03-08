@@ -6536,6 +6536,20 @@
               "comment": {
                 "type": "string",
                 "description": "Additional comments"
+              },
+              "boxCategoryId": {
+                "type": "string",
+                "x-stoplight": {
+                  "id": "qlhhaffxm0rkj"
+                },
+                "description": "box category id"
+              },
+              "accessibility": {
+                "type": "string",
+                "x-stoplight": {
+                  "id": "bqrpe0eig2z2f"
+                },
+                "description": "value = UPPER / LOWER / empty \nbox accessibility in the locker"
               }
             },
             "required": [
