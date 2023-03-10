@@ -6628,7 +6628,9 @@
           "Pickup points": {
             "type": "pickupPoint",
             "id": "76761",
-            "carrierCode": "bpost"
+            "carrierCode": "bpost",
+            "boxCategoryId": "XXX",
+            "accessibility": "UPPER"
           },
           "Exchange place": {
             "type": "exchangePlace",
