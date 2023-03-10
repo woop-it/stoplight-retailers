@@ -177,8 +177,9 @@ _Eg:_
 
 ## Pickup point type LOCKER with reservation 
 
-to have relay points with reservation, you must pass the "packages" in the request POST/pickupPoint.
-it is possible to specify the accessibility of the desired relay point with this parameters:
+To have relay points with reservation, you must pass the "packages" in the request POST/pickupPoint.
+
+It is possible to specify the accessibility of the desired relay point with this parameters:
 - pickUpPointAccessibility : accessibility of the pickup point
 - boxCategoryAccessibility : accessibility of the box in the pickup point
 
