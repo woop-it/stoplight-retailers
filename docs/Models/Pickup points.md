@@ -173,3 +173,54 @@ _Eg:_
 > ### Note
 >
 > The parameter _category_ cannot be used when _packages_ is provided.
+
+
+## Pickup point type LOCKER with reservation 
+
+to have relay points with reservation, you must pass the "packages" in the request POST/pickupPoint.
+it is possible to specify the accessibility of the desired relay point with this parameters:
+- pickUpPointAccessibility : accessibility of the pickup point
+- boxCategoryAccessibility : accessibility of the box in the pickup point
+
+
+_Eg:_
+
+```json
+ {
+   ...
+  "packages": [
+    {
+      "length": {
+        "value": 15,
+        "unit": "cm"
+      },
+      "width": {
+        "value": 15,
+        "unit": "cm"
+      },
+      "height": {
+        "value": 1.2,
+        "unit": "m"
+      },
+      "weight": {
+        "value": 1,
+        "unit": "kg"
+      },
+      "products": [
+        {
+          "type": "TYPOLOGY_GENERIC",
+          "ean": "4dq86zd4q6zd4q64",
+          "cug": "q56zd4q65d4q",
+          "label": "Lampe",
+          "quantity": 1
+        }
+      ],
+      "quantity": 1
+    }
+  ],
+ "pickUpPointAccessibility": "ACCESSIBLE",
+ "boxCategoryAccessibility": "UPPER"
+ ...
+ }
+```
+
