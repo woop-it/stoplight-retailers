@@ -1,0 +1,12 @@
+{
+  "title": "Order Id",
+  "x-stoplight": {
+    "id": "5abwr43kpw0x4"
+  },
+  "type": "string",
+  "description": "Unique id for an order per requester",
+  "example": "Order_001",
+  "x-tags": [
+    "Order"
+  ]
+}

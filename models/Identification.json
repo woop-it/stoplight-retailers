@@ -1,0 +1,32 @@
+{
+  "title": "Identification",
+  "x-stoplight": {
+    "id": "fag3gwx4p2ob1"
+  },
+  "type": "object",
+  "properties": {
+    "pinCode": {
+      "$ref": "../models/Common/pinCode.json",
+      "x-stoplight": {
+        "id": "pibd91hjxn8vf"
+      }
+    },
+    "barCode": {
+      "$ref": "../models/Common/barcode.json",
+      "x-stoplight": {
+        "id": "830hutwgoz4x4"
+      }
+    }
+  },
+  "description": "loading or unloading identification",
+  "examples": [
+    {
+      "pinCode": "123456",
+      "barCode": {
+        "value": "54fd56g4f5gfd456sd",
+        "type": "barcode",
+        "format": "128"
+      }
+    }
+  ]
+}
