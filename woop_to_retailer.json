@@ -372,7 +372,7 @@
           "pickupPoint"
         ],
         "operationId": "putOrderBookingStatus",
-        "description": "This method allows the retailer to receive orders status. The retailer can then follow the progress of his order in real time. ",
+        "description": "This method allows the retailer to receive booking status.",
         "parameters": [
           {
             "$ref": "#/components/parameters/pathOrderId"
@@ -385,6 +385,124 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/putBookingStatus"
+              },
+              "examples": {}
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Request processed successfully"
+          },
+          "400": {
+            "description": "Missing and/or incorrect items in the body",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "reasons": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "example": "Missing argument 'xxxxx'"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Example": {
+                    "value": {
+                      "reasons": [
+                        "Missing argument 'xxxxx'"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Information can no longer be sent",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./retailer_to_woop.json#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "statusCode": 403,
+                      "error": "Forbidden",
+                      "message": "Store doesn't exist or is inactive"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The 'orderId' or \"bookingId\" was not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./retailer_to_woop.json#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "statusCode": 404,
+                      "error": "Not Found",
+                      "message": "Not Found"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Receive booking pickupPoint status updates"
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "orderId",
+          "in": "path",
+          "required": true,
+          "description": "Order Id"
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "bookingId",
+          "in": "path",
+          "required": true,
+          "description": "Booking Id"
+        }
+      ]
+    },
+    "/orders/{orderId}/bookings/{bookingId}/pinCode": {
+      "put": {
+        "tags": [
+          "pickupPoint"
+        ],
+        "operationId": "putOrderBookingPinCode",
+        "description": "This method allows the retailer to receive booking pinCode ",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/pathOrderId"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "description": "Contains the booking pinCode",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/putBookingPinCode"
               },
               "examples": {
                 "Statut de commande": {
@@ -485,7 +603,7 @@
             }
           }
         },
-        "summary": "Receive booking pickupPoint status updates"
+        "summary": "Receive booking pickupPoint pinCode"
       },
       "parameters": [
         {
@@ -494,7 +612,8 @@
           },
           "name": "orderId",
           "in": "path",
-          "required": true
+          "required": true,
+          "description": "Order Id"
         },
         {
           "schema": {
@@ -502,147 +621,8 @@
           },
           "name": "bookingId",
           "in": "path",
-          "required": true
-        }
-      ]
-    },
-    "/orders/{orderId}/deliveries/{deliveryId}/status": {
-      "put": {
-        "tags": [
-          "Order"
-        ],
-        "operationId": "putDeliveryStatus",
-        "description": "This method allows the retailer to receive delivery status updates from the carrier for a given order.The retailer can then follow the progress of the delivery in real time. ",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/pathOrderId"
-          }
-        ],
-        "requestBody": {
           "required": true,
-          "description": "Contains the updated status information.",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/putDeliveryStatus"
-              },
-              "examples": {
-                "Statut de commande": {
-                  "value": {
-                    "orderId": "5z8d4q465zdq65d",
-                    "status": "ORDER_CREATED",
-                    "date": "2019-11-27T12:00:00+0000"
-                  }
-                },
-                "Statut de livraison": {
-                  "value": {
-                    "deliveryId": "kzqfq41q561gq5ge1q5",
-                    "orderId": "5z8d4q465zdq65d",
-                    "status": "DELIVERY_STARTED",
-                    "date": "2019-11-27T12:00:00+0000",
-                    "comment": "This is a useful comment.",
-                    "team": {
-                      "members": [
-                        {
-                          "id": "q6z4qz4dq"
-                        }
-                      ]
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "204": {
-            "description": "Request processed successfully"
-          },
-          "400": {
-            "description": "Missing and/or incorrect items in the body",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "reasons": {
-                      "type": "array",
-                      "items": {
-                        "type": "string",
-                        "example": "Missing argument 'xxxxx'"
-                      }
-                    }
-                  }
-                },
-                "examples": {
-                  "Example": {
-                    "value": {
-                      "reasons": [
-                        "Missing argument 'xxxxx'"
-                      ]
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Information can no longer be sent",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "./retailer_to_woop.json#/components/schemas/errorCode"
-                },
-                "examples": {
-                  "example": {
-                    "value": {
-                      "statusCode": 403,
-                      "error": "Forbidden",
-                      "message": "Store doesn't exist or is inactive"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "The 'orderId' was not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "./retailer_to_woop.json#/components/schemas/errorCode"
-                },
-                "examples": {
-                  "example": {
-                    "value": {
-                      "statusCode": 404,
-                      "error": "Not Found",
-                      "message": "Not Found"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "summary": "Receive delivery status updates"
-      },
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "orderId",
-          "in": "path",
-          "required": true
-        },
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "deliveryId",
-          "in": "path",
-          "required": true
+          "description": "Booking Id"
         }
       ]
     },
@@ -2648,8 +2628,8 @@
           "question"
         ]
       },
-      "putBookingStatus": {
-        "title": "putBookingStatus",
+      "putBookingPinCode": {
+        "title": "putBookingPinCode",
         "x-stoplight": {
           "id": "avkg3cqo2gxu7"
         },
@@ -2740,7 +2720,51 @@
         "required": [
           "orderId",
           "bookingId"
+        ],
+        "description": "send the booking pinCode to the retailer"
+      },
+      "putBookingStatus": {
+        "title": "putBookingStatus",
+        "x-stoplight": {
+          "id": "m5jlj9hlpmhdv"
+        },
+        "type": "object",
+        "x-examples": {},
+        "description": "send the booking status to the retailer",
+        "properties": {
+          "orderId": {
+            "$ref": "./models/order/orderId.json",
+            "x-stoplight": {
+              "id": "eeq9aux7zwlbf"
+            }
+          },
+          "bookingId": {
+            "$ref": "./models/PickUpPoint/bookingId.json",
+            "x-stoplight": {
+              "id": "gjz4fiuw4n4uh"
+            }
+          },
+          "status": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "f8m0y912b9ffa"
+            }
+          },
+          "date": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "pnfaqgbdzogmr"
+            },
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "orderId",
+          "bookingId"
         ]
+      },
+      "putBookingPinCode - copy": {
+        "type": "object"
       }
     },
     "parameters": {
