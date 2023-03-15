@@ -386,7 +386,16 @@
               "schema": {
                 "$ref": "#/components/schemas/putBookingStatus"
               },
-              "examples": {}
+              "examples": {
+                "Example 1": {
+                  "value": {
+                    "orderId": "Order_001",
+                    "bookingId": "Booking_001",
+                    "status": "PICK_UP_POINT_BOOKING_INIT",
+                    "date": "2019-08-24T14:15:22Z"
+                  }
+                }
+              }
             }
           }
         },
@@ -461,7 +470,7 @@
             }
           }
         },
-        "summary": "Receive booking pickupPoint status updates"
+        "summary": "PUT booking status"
       },
       "parameters": [
         {
@@ -484,7 +493,7 @@
         }
       ]
     },
-    "/orders/{orderId}/bookings/{bookingId}/pinCode": {
+    "/orders/{orderId}/bookings/{bookingId}/pinCodes": {
       "put": {
         "tags": [
           "pickupPoint"
@@ -505,26 +514,31 @@
                 "$ref": "#/components/schemas/putBookingPinCode"
               },
               "examples": {
-                "Statut de commande": {
+                "Example 1 - classic order": {
                   "value": {
-                    "orderId": "5z8d4q465zdq65d",
-                    "status": "ORDER_CREATED",
-                    "date": "2019-11-27T12:00:00+0000"
+                    "orderId": "Order_001",
+                    "bookingId": "Booking_001",
+                    "loadingIdentification": {
+                      "pinCode": "123456",
+                      "barCode": {
+                        "value": "54fd56g4f5gfd456sd",
+                        "type": "barcode",
+                        "format": "128"
+                      }
+                    }
                   }
                 },
-                "Statut de livraison": {
+                "Example 2 - return order": {
                   "value": {
-                    "deliveryId": "kzqfq41q561gq5ge1q5",
-                    "orderId": "5z8d4q465zdq65d",
-                    "status": "DELIVERY_STARTED",
-                    "date": "2019-11-27T12:00:00+0000",
-                    "comment": "This is a useful comment.",
-                    "team": {
-                      "members": [
-                        {
-                          "id": "q6z4qz4dq"
-                        }
-                      ]
+                    "orderId": "Order_001",
+                    "bookingId": "Booking_001",
+                    "unloadingIdentification": {
+                      "pinCode": "123456",
+                      "barCode": {
+                        "value": "54fd56g4f5gfd456sd",
+                        "type": "barcode",
+                        "format": "128"
+                      }
                     }
                   }
                 }
@@ -603,7 +617,7 @@
             }
           }
         },
-        "summary": "Receive booking pickupPoint pinCode"
+        "summary": "PUT booking pinCode"
       },
       "parameters": [
         {
@@ -2729,7 +2743,14 @@
           "id": "m5jlj9hlpmhdv"
         },
         "type": "object",
-        "x-examples": {},
+        "x-examples": {
+          "Example 1": {
+            "orderId": "Order_001",
+            "bookingId": "Booking_001",
+            "status": "PICK_UP_POINT_BOOKING_INIT",
+            "date": "2019-08-24T14:15:22Z"
+          }
+        },
         "description": "send the booking status to the retailer",
         "properties": {
           "orderId": {
@@ -2745,7 +2766,7 @@
             }
           },
           "status": {
-            "type": "string",
+            "$ref": "./models/bookingStatus.yaml",
             "x-stoplight": {
               "id": "f8m0y912b9ffa"
             }
