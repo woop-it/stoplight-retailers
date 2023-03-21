@@ -287,6 +287,27 @@
                       ]
                     }
                   }
+                },
+                "Statut ORDER_WITH_NO_CARRIER_AVAILABLE": {
+                  "value": {
+                    "orderId": "5z8d4q465zdq65d",
+                    "status": "ORDER_WITH_NO_CARRIER_AVAILABLE",
+                    "date": "2019-11-27T12:00:00+0000",
+                    "requestedCarriers": [
+                      {
+                        "code": "chronopost",
+                        "name": "Chronopost"
+                      },
+                      {
+                        "code": "mondial-relay",
+                        "name": "Mondial-Relay"
+                      },
+                      {
+                        "code": "dpd",
+                        "name": "DPD"
+                      }
+                    ]
+                  }
                 }
               }
             }
@@ -2085,8 +2106,8 @@
           "specifications"
         ]
       },
-      "carriers": {
-        "title": "Carrier (carrier)",
+      "requestedCarriers": {
+        "title": "requestedCarriers (carrier)",
         "x-stoplight": {
           "id": "hv40jz5sfshyh"
         },
@@ -2267,7 +2288,7 @@
               "id": "0equ3qyxs2uct"
             },
             "items": {
-              "$ref": "#/components/schemas/carriers",
+              "$ref": "#/components/schemas/requestedCarriers",
               "x-stoplight": {
                 "id": "yu6cw7wp6btrc"
               }
