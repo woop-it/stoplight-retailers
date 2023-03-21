@@ -2282,7 +2282,7 @@
           "status": {
             "$ref": "#/components/schemas/orderStatus"
           },
-          "carriers": {
+          "requestedCarriers": {
             "type": "array",
             "x-stoplight": {
               "id": "0equ3qyxs2uct"
