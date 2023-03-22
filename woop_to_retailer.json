@@ -271,22 +271,6 @@
                     "status": "ORDER_CREATED",
                     "date": "2019-11-27T12:00:00+0000"
                   }
-                },
-                "Statut de livraison": {
-                  "value": {
-                    "deliveryId": "kzqfq41q561gq5ge1q5",
-                    "orderId": "5z8d4q465zdq65d",
-                    "status": "DELIVERY_STARTED",
-                    "date": "2019-11-27T12:00:00+0000",
-                    "comment": "This is a useful comment.",
-                    "team": {
-                      "members": [
-                        {
-                          "id": "q6z4qz4dq"
-                        }
-                      ]
-                    }
-                  }
                 }
               }
             }
@@ -387,17 +371,11 @@
                 "$ref": "#/components/schemas/putDeliveryStatus"
               },
               "examples": {
-                "Statut de commande": {
-                  "value": {
-                    "orderId": "5z8d4q465zdq65d",
-                    "status": "ORDER_CREATED",
-                    "date": "2019-11-27T12:00:00+0000"
-                  }
-                },
                 "Statut de livraison": {
                   "value": {
                     "deliveryId": "kzqfq41q561gq5ge1q5",
                     "orderId": "5z8d4q465zdq65d",
+                    "carrierCode": "DPD",
                     "status": "DELIVERY_STARTED",
                     "date": "2019-11-27T12:00:00+0000",
                     "comment": "This is a useful comment.",
@@ -527,20 +505,16 @@
                 "$ref": "#/components/schemas/putParcelStatus"
               },
               "examples": {
-                "Statut de commande": {
-                  "value": {
-                    "orderId": "5z8d4q465zdq65d",
-                    "status": "ORDER_CREATED",
-                    "date": "2019-11-27T12:00:00+0000"
-                  }
-                },
-                "Statut de livraison": {
+                "Parcel status": {
                   "value": {
                     "deliveryId": "kzqfq41q561gq5ge1q5",
                     "orderId": "5z8d4q465zdq65d",
                     "status": "DELIVERY_STARTED",
                     "date": "2019-11-27T12:00:00+0000",
                     "comment": "This is a useful comment.",
+                    "parcelId": "42239FRZ",
+                    "carrierEvent": "AA3",
+                    "carrierCode": "DPD",
                     "team": {
                       "members": [
                         {
@@ -1982,17 +1956,29 @@
           "VEHICLE_TYPE_E_SCOOTER",
           "VEHICLE_TYPE_VAN_SMALL",
           "VEHICLE_TYPE_E_VAN_SMALL",
+          "VEHICLE_TYPE_GAZ_VAN_SMALL",
           "VEHICLE_TYPE_VAN_MEDIUM",
+          "VEHICLE_TYPE_E_VAN_MEDIUM",
           "VEHICLE_TYPE_PEDESTRIAN",
           "VEHICLE_TYPE_TRUCK",
+          "VEHICLE_TYPE_E_TRUCK",
           "VEHICLE_TYPE_VAN_BIG",
           "VEHICLE_TYPE_E_VAN_BIG",
+          "VEHICLE_TYPE_GAZ_TRUCK",
+          "VEHICLE_TYPE_MAXI_TRUCK",
+          "VEHICLE_TYPE_MAXI_E_TRUCK",
+          "VEHICLE_TYPE_MAXI_GAZ_TRUCK",
           "VEHICLE_TYPE_BIKE_CARGO",
           "VEHICLE_TYPE_CAR",
           "VEHICLE_TYPE_E_CAR",
-          "VEHICLE_TYPE_UNKNOWN",
           "VEHICLE_TYPE_GAZ_VAN_BIG",
-          "VEHICLE_TYPE_GAZ_VAN_MEDIUM"
+          "VEHICLE_TYPE_GAZ_VAN_MEDIUM",
+          "VEHICLE_TYPE_TRAILER_BIKE",
+          "VEHICLE_TYPE_E_TRAILER_BIKE",
+          "VEHICLE_TYPE_HYBRID_CAR",
+          "VEHICLE_TYPE_E_BIKE",
+          "VEHICLE_TYPE_E_BIKE_CARGO",
+          "VEHICLE_TYPE_UNKNOWN"
         ],
         "title": "Type of carrier vehicle (vehicleType)",
         "x-examples": {
@@ -2124,13 +2110,18 @@
           },
           "appointment": {
             "$ref": "#/components/schemas/appointment"
+          },
+          "carrierCode": {
+            "type": "string",
+            "description": "Carrier code"
           }
         },
         "required": [
           "deliveryId",
           "orderId",
           "status",
-          "date"
+          "date",
+          "carrierCode"
         ]
       },
       "putParcelStatus": {
@@ -2174,6 +2165,10 @@
           },
           "team": {
             "$ref": "#/components/schemas/team"
+          },
+          "carrierCode": {
+            "type": "string",
+            "description": "Carrier code"
           }
         },
         "required": [
@@ -2182,7 +2177,8 @@
           "parcelId",
           "carrierEvent",
           "status",
-          "date"
+          "date",
+          "carrierCode"
         ]
       },
       "putOrderStatus": {

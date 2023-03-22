@@ -2045,7 +2045,8 @@
             }
           }
         },
-        "summary": "Create order"
+        "summary": "Create order",
+        "x-internal": false
       },
       "get": {
         "tags": [
@@ -7098,17 +7099,30 @@
         "type": "string",
         "description": "Specifies the delivery service that can be used. Note that some services cannot be cumulated such as 'STANDARD_TAXI' and 'XL_TAXI' or 'FRONT_HOME' and 'SELECTED_ROOM'",
         "enum": [
-          "SERVICE_PICKUP_POINT",
-          "SERVICE_REGULAR_FRONT_HOME",
-          "SERVICE_SELECTED_ROOM",
-          "SERVICE_FRONT_HOME",
-          "SERVICE_UNPACKING",
+          "SERVICE_ASSEMBLY",
           "SERVICE_INSTALL",
           "SERVICE_RECOVERY",
+          "SERVICE_UNPACKING",
+          "SERVICE_FRONT_HOME",
+          "SERVICE_REGULAR_FRONT_HOME",
+          "SERVICE_PICKUP_POINT",
+          "SERVICE_RETURN",
+          "SERVICE_SELECTED_ROOM",
           "SERVICE_SIMPLE_INSTALL",
           "SERVICE_COMPLEX_INSTALL",
-          "SERVICE_ASSEMBLY",
-          "SERVICE_PAY_ON_DELIVERY"
+          "SERVICE_PAY_ON_DELIVERY",
+          "SERVICE_STANDARD_TAXI",
+          "SERVICE_XL_TAXI",
+          "SERVICE_WITH_SIGNATURE",
+          "SERVICE_GREEN",
+          "SERVICE_SHUTTLE",
+          "SERVICE_TWO_DRIVERS",
+          "SERVICE_EXHIBITION_MODEL",
+          "SERVICE_WHITE_GLOVE",
+          "SERVICE_EXCHANGE",
+          "SERVICE_DELIVERY_TO_LOCKER",
+          "SERVICE_DELIVERY_TO_PICKUP_POINT",
+          "SERVICE_DELIVERY_TO_MAILBOX"
         ],
         "x-examples": {
           "Example": "SERVICE_PICKUP_POINT"
