@@ -4389,6 +4389,9 @@
                           },
                           "price": {
                             "$ref": "./models/price.yaml"
+                          },
+                          "workSchedule": {
+                            "$ref": "./models/Carrier/workSchedule.json"
                           }
                         },
                         "required": [
@@ -4610,6 +4613,46 @@
                               ]
                             }
                           ]
+                        }
+                      ]
+                    }
+                  },
+                  "Example with workSchedule": {
+                    "value": {
+                      "eligibilities": [
+                        {
+                          "carrier": {
+                            "code": "mondial-relay",
+                            "name": "Mondial Relay"
+                          },
+                          "workSchedule": {
+                            "timezone": "Europe/Paris",
+                            "monday": [
+                              {
+                                "end": "11:00",
+                                "start": "07:00"
+                              },
+                              {
+                                "end": "17:00",
+                                "start": "13:00"
+                              }
+                            ],
+                            "tuesday": [
+                              {
+                                "end": "11:00",
+                                "start": "07:00"
+                              },
+                              {
+                                "end": "17:00",
+                                "start": "13:00"
+                              }
+                            ],
+                            "wednesday": null,
+                            "thursday": null,
+                            "friday": null,
+                            "saturday": null,
+                            "sunday": null
+                          }
                         }
                       ]
                     }
@@ -5935,6 +5978,9 @@
             "properties": {
               "location": {
                 "$ref": "#/components/schemas/location"
+              },
+              "interval": {
+                "$ref": "#/components/schemas/interval"
               }
             }
           },
