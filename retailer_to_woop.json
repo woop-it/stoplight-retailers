@@ -2522,6 +2522,9 @@
                   },
                   "carrierSelection": {
                     "$ref": "#/components/schemas/carrierSelection"
+                  },
+                  "additionalData": {
+                    "$ref": "./models/additionalData.yaml"
                   }
                 },
                 "required": [
@@ -6171,11 +6174,11 @@
                 "type": "string",
                 "enum": [
                   "CASH",
-                  "CREDIT_CART",
                   "DEBIT_CARD",
                   "DIRECT_DEBIT",
                   "BANK_TRANSFER",
-                  "CHECK"
+                  "CHECK",
+                  "CREDIT_CARD"
                 ]
               }
             },
@@ -6196,6 +6199,9 @@
             "enum": [
               "TO_BE_COMPLETED"
             ]
+          },
+          "additionalData": {
+            "$ref": "./models/additionalData.yaml"
           }
         },
         "required": [

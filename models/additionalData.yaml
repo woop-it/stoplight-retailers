@@ -1,0 +1,16 @@
+title: additionalData
+x-stoplight:
+  id: 3yev5xggj6r3k
+type: array
+minItems: 1
+items:
+  type: object
+  properties:
+    key:
+      type: string
+    value:
+      type: string
+  required:
+    - key
+    - value
+description: ''
