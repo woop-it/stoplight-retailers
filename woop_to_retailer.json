@@ -493,12 +493,12 @@
         }
       ]
     },
-    "/orders/{orderId}/bookings/{bookingId}/pinCodes": {
+    "/orders/{orderId}/bookings/{bookingId}/loadingIdentifications": {
       "put": {
         "tags": [
           "pickupPoint"
         ],
-        "operationId": "putOrderBookingPinCode",
+        "operationId": "putOrderBookingLoadingIdentifications",
         "description": "This method allows the retailer to receive booking pinCode ",
         "parameters": [
           {
@@ -511,7 +511,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/putBookingPinCode"
+                "$ref": "#/components/schemas/putBookingLoadingIdentifications"
               },
               "examples": {
                 "Example 1 - classic order": {
@@ -617,7 +617,7 @@
             }
           }
         },
-        "summary": "PUT booking pinCode"
+        "summary": "PUT booking LoadingIdentifications"
       },
       "parameters": [
         {
@@ -2642,8 +2642,8 @@
           "question"
         ]
       },
-      "putBookingPinCode": {
-        "title": "putBookingPinCode",
+      "putBookingLoadingIdentifications": {
+        "title": "putBookingLoadingIdentifications",
         "x-stoplight": {
           "id": "avkg3cqo2gxu7"
         },
