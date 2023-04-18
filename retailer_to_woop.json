@@ -4096,8 +4096,58 @@
                           "url"
                         ]
                       },
-                      "deliveryStau": {
-                        "type": "string"
+                      "loadingIdentifications": {
+                        "type": "object",
+                        "x-stoplight": {
+                          "id": "kdokrmjx1yxep"
+                        },
+                        "description": "Callback to receive the loading identifications",
+                        "properties": {
+                          "url": {
+                            "type": "string",
+                            "x-stoplight": {
+                              "id": "jzdej03iojerw"
+                            },
+                            "description": "URL of the API route"
+                          },
+                          "version": {
+                            "type": "string",
+                            "x-stoplight": {
+                              "id": "2auqf2olq42oe"
+                            },
+                            "description": "API version for this callback",
+                            "example": "1.12.0"
+                          }
+                        },
+                        "required": [
+                          "url"
+                        ]
+                      },
+                      "bookingStatus": {
+                        "type": "object",
+                        "x-stoplight": {
+                          "id": "slif0ildf7rne"
+                        },
+                        "description": "Callback to receive the booking status",
+                        "properties": {
+                          "url": {
+                            "type": "string",
+                            "x-stoplight": {
+                              "id": "n588mb7ju542x"
+                            },
+                            "description": "url of the API"
+                          },
+                          "version": {
+                            "type": "string",
+                            "x-stoplight": {
+                              "id": "ols7d22qix5jo"
+                            },
+                            "description": "u"
+                          }
+                        },
+                        "required": [
+                          "url"
+                        ]
                       }
                     }
                   },
@@ -4232,6 +4282,14 @@
                       "collectStatus": {
                         "url": "https://my_url/collects/{collectId}/status",
                         "version": "1.1.0"
+                      },
+                      "loadingIdentifications": {
+                        "url": "https://my_url/orders/{orderId}/bookings/{bookingId}/loadingIdentifications",
+                        "version": "1.1.0"
+                      },
+                      "bookingStatus": {
+                        "url": "https://my_url/orders/{orderId}/bookings/{bookingId}/status",
+                        "version": "1.1.0"
                       }
                     },
                     "headers": [
@@ -4282,6 +4340,14 @@
                       "collectStatus": {
                         "url": "https://my_url/collects/{collectId}/status",
                         "version": "1.1.0"
+                      },
+                      "loadingIdentifications": {
+                        "url": "https://my_url/orders/{orderId}/bookings/{bookingId}/loadingIdentifications",
+                        "version": "1.1.0"
+                      },
+                      "bookingStatus": {
+                        "url": "https://my_url/orders/{orderId}/bookings/{bookingId}/status",
+                        "version": "1.1.0"
                       }
                     },
                     "auth": {
@@ -4328,6 +4394,14 @@
                       },
                       "collectStatus": {
                         "url": "https://my_url/collects/{collectId}/status",
+                        "version": "1.1.0"
+                      },
+                      "loadingIdentifications": {
+                        "url": "https://my_url/orders/{orderId}/bookings/{bookingId}/loadingIdentifications",
+                        "version": "1.1.0"
+                      },
+                      "bookingStatus": {
+                        "url": "https://my_url/orders/{orderId}/bookings/{bookingId}/status",
                         "version": "1.1.0"
                       }
                     },
