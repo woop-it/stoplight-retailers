@@ -1,3 +1,7 @@
+---
+stoplight-id: 29a6c7af2fbda
+---
+
 # Delivery status
 
 The delivery goes through several statuses in succession. We identify the different stages of the delivery.
