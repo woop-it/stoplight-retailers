@@ -2018,13 +2018,16 @@
           "ORDER_BEING_DELIVERED",
           "ORDER_DELIVERY_UNCOMPLETED",
           "ORDER_DELIVERED",
-          "ORDER_CANCELLED"
+          "ORDER_CANCELLED",
+          "ORDER_ERROR",
+          "ORDER_DONE"
         ],
         "title": "Order status (orderStatus)",
         "description": "Specifies the order status.",
         "x-examples": {
           "Example": "ORDER_CREATED"
-        }
+        },
+        "format": "date-time"
       },
       "length": {
         "title": "Dimension (length)",
