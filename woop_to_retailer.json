@@ -2678,6 +2678,7 @@
             }
           }
         },
+        "description": "send the booking pinCode to the retailer",
         "properties": {
           "orderId": {
             "$ref": "./models/order/orderId.json",
@@ -2704,7 +2705,7 @@
                 "description": "if is a classic order",
                 "properties": {
                   "loadingIdentification": {
-                    "$ref": "./models/Identification.json",
+                    "$ref": "./models/PickUpPoint/identification.json",
                     "x-stoplight": {
                       "id": "h9vujbbpinjw5"
                     }
@@ -2721,7 +2722,7 @@
                 "description": "if is a return order",
                 "properties": {
                   "unloadingIdentification": {
-                    "$ref": "./models/Identification.json",
+                    "$ref": "./models/PickUpPoint/identification.json",
                     "x-stoplight": {
                       "id": "bdioy59ajq0sy"
                     }
@@ -2738,8 +2739,7 @@
         "required": [
           "orderId",
           "bookingId"
-        ],
-        "description": "send the booking pinCode to the retailer"
+        ]
       },
       "putBookingStatus": {
         "title": "putBookingStatus",
