@@ -1,7 +1,12 @@
-# Order status & states 
+---
+tags: [Status]
+---
 
-During its life cycle, an order goes through several : 
-- order status 
+# Order status & states
+
+During its life cycle, an order goes through several :
+
+- order status
 - order states
 
 ## Order status
@@ -39,6 +44,6 @@ During its life cycle, an order goes through several :
 
 ### List of possible order states
 
-| States                         | Title                                |
-| ---------------------------- | ------------------------------------ |
-| `ORDER_TO_BE_COMPLETED`      | Order awaiting further information. Request to be completed.                              |
+| States                  | Title                                                        |
+| ----------------------- | ------------------------------------------------------------ |
+| `ORDER_TO_BE_COMPLETED` | Order awaiting further information. Request to be completed. |
