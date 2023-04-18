@@ -387,12 +387,13 @@
                 "$ref": "#/components/schemas/putBookingStatus"
               },
               "examples": {
-                "Example 1": {
+                "Example booking status OK": {
                   "value": {
                     "orderId": "Order_001",
                     "bookingId": "Booking_001",
-                    "status": "PICK_UP_POINT_BOOKING_INIT",
-                    "date": "2019-08-24T14:15:22Z"
+                    "status": "PICK_UP_POINT_BOOKING_OK",
+                    "subStatus": "MANUAL",
+                    "date": "2023-03-24T14:15:22Z"
                   }
                 }
               }
@@ -2747,10 +2748,11 @@
         },
         "type": "object",
         "x-examples": {
-          "Example 1": {
+          "Example": {
             "orderId": "Order_001",
             "bookingId": "Booking_001",
-            "status": "PICK_UP_POINT_BOOKING_INIT",
+            "status": "PICK_UP_POINT_BOOKING_OK",
+            "subStatus": "MANUAL",
             "date": "2019-08-24T14:15:22Z"
           }
         },
@@ -2769,9 +2771,15 @@
             }
           },
           "status": {
-            "$ref": "./models/bookingStatus.yaml",
+            "$ref": "./models/PickUpPoint/bookingStatus.json",
             "x-stoplight": {
               "id": "f8m0y912b9ffa"
+            }
+          },
+          "subStatus": {
+            "$ref": "./models/PickUpPoint/bookingSubStatus.json",
+            "x-stoplight": {
+              "id": "f7l8mwzjm0fi0"
             }
           },
           "date": {
