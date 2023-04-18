@@ -6686,7 +6686,7 @@
                 "description": "Additional comments"
               },
               "boxCategory": {
-                "$ref": "./models/PickUpPoint/boxCategory (location).json",
+                "$ref": "./models/PickUpPoint/boxCategory(location).json",
                 "x-stoplight": {
                   "id": "fl9ffhdzp04eq"
                 }

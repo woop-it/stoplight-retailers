@@ -18,11 +18,17 @@
   "properties": {
     "id": {
       "$ref": "./boxCategoryId.json",
-      "description": "box category Id"
+      "description": "box category Id",
+      "x-stoplight": {
+        "id": "hu4rbjbk319oy"
+      }
     },
     "accessibility": {
       "$ref": "./boxCategoryAccessibility.json",
-      "description": "box category accessibility"
+      "description": "box category accessibility",
+      "x-stoplight": {
+        "id": "8csdi9dv8an9e"
+      }
     }
   }
 }
