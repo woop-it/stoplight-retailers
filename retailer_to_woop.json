@@ -6688,7 +6688,7 @@
               "boxCategory": {
                 "$ref": "./models/PickUpPoint/boxCategory (location).json",
                 "x-stoplight": {
-                  "id": "qlhhaffxm0rkj"
+                  "id": "fl9ffhdzp04eq"
                 }
               }
             },
