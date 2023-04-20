@@ -6545,7 +6545,7 @@
             "type": "string",
             "description": "Country code (ISO 3166 alpha-2)."
           },
-          "pickUpPointAccessibility": {
+          "accessibility": {
             "$ref": "./models/PickUpPoint/pickUpPointAccessibility.json",
             "x-stoplight": {
               "id": "5rbs8nfhv50e6"
