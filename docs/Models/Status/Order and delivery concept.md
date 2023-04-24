@@ -16,7 +16,8 @@ The customer order is present during the time of the eligibility and the orchest
 
 Default workflow delivery and order statuses
 
-![01d3285e-3452-4a86-bf52-1d7aa340e7ae.png](../../../assets/images/01d3285e-3452-4a86-bf52-1d7aa340e7ae.png)
+![Default_status_workflow.png](../../../assets/images/Default_status_workflow.png)
+
 
 
 List of the delivery statuses and order linked.
@@ -30,7 +31,7 @@ List of the delivery statuses and order linked.
 
 ### SubStatuts, returns and error management
 
-![498fe486-ec7b-486e-9d5b-7ca5dc26478e.png](../../../assets/images/498fe486-ec7b-486e-9d5b-7ca5dc26478e.png)
+![Failure_and_errors_status_workflow.png](../../../assets/images/Failure_and_errors_status_workflow.png)
 
 
 List of the delivery statuses and order linked.

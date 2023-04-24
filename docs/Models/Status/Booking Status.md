@@ -24,5 +24,5 @@ During its life cycle, a booking goes through several :
 
 
 ### Link between order, delivery and booking status
+![Workflow_statuts-Commande_retrait_ok.jpg](../../../assets/images/Workflow_statuts-Commande_retrait_ok.jpg)
 
-![SPIDER - Workflow statuts-Commande +retrait ok.jpg](<../../../assets/images/SPIDER - Workflow statuts-Commande +retrait ok.jpg>)
