@@ -13,7 +13,9 @@ During its life cycle, an order goes through several :
 
 ### Route of an order
 
-![get-started-icon](../../assets/images/Workflow_status_commande.png)
+
+![Workflow_status_commande.png](../../../assets/images/Workflow_status_commande.png)
+
 
 ### List of possible order statuses
 
@@ -38,7 +40,8 @@ During its life cycle, an order goes through several :
 
 ### Returns and error management
 
-![get-started-icon](../../assets/images/Workflow_retours_commande.png)
+![Workflow_retours_commande.png](../../../assets/images/Workflow_retours_commande.png)
+
 
 ## Order states
 

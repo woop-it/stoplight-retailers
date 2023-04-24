@@ -9,7 +9,7 @@ The click & collect collection request goes through several statuses in successi
 
 ### Process for a collection request
 
-![get-started-icon](../../assets/images/Workflow_status_retrait_c&c.png)
+![Workflow_status_retrait_c&c.png](../../../assets/images/Workflow_status_retrait_c&c.png)
 
 ### List of possible delivery statuses
 
@@ -31,4 +31,5 @@ The click & collect collection request goes through several statuses in successi
 
 ### Error handling
 
-![get-started-icon](../../assets/images/Workflow_retours_c&c.png)
+![Workflow_retours_c&c.png](../../../assets/images/Workflow_retours_c&c.png)
+
