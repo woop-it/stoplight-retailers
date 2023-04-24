@@ -1,5 +1,5 @@
 ---
-stoplight-id: r8hww92lyrhv6
+stoplight-id: 681xe6e7luc1g
 ---
 
 # Order and delivery concept
@@ -16,7 +16,8 @@ The customer order is present during the time of the eligibility and the orchest
 
 Default workflow delivery and order statuses
 
-![get-started-icon](../../assets/images/Default_status_workflow.png)
+![01d3285e-3452-4a86-bf52-1d7aa340e7ae.png](../../../assets/images/01d3285e-3452-4a86-bf52-1d7aa340e7ae.png)
+
 
 List of the delivery statuses and order linked.
 
@@ -29,7 +30,8 @@ List of the delivery statuses and order linked.
 
 ### SubStatuts, returns and error management
 
-![get-started-icon](../../assets/images/Failure_and_errors_status_workflow.png)
+![498fe486-ec7b-486e-9d5b-7ca5dc26478e.png](../../../assets/images/498fe486-ec7b-486e-9d5b-7ca5dc26478e.png)
+
 
 List of the delivery statuses and order linked.
 

@@ -23,3 +23,6 @@ During its life cycle, a booking goes through several :
 | `PICK_UP_POINT_COLLECTION_KO`                |`NOT_COLLECTED` | Error collection         | The parcel has not been collected on time by the final customer.                        |
 
 
+### Link between order, delivery and booking status
+
+![SPIDER - Workflow statuts-Commande +retrait ok.jpg](<../../../assets/images/SPIDER - Workflow statuts-Commande +retrait ok.jpg>)
