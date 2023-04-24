@@ -1,5 +1,6 @@
 ---
 tags: [changelog]
+stoplight-id: 9s87idhfe8ah3
 ---
 
 # Changelog 1.8 -> 1.9
@@ -13,11 +14,3 @@ All changes between version 1.8 and version 1.9 are listed here.
 ## PUT /orders/{orderId}/trackings
 
 - This new callback allows the Retailer to receive the tracking page url when the carrier send it to Woop
-
-## Woop to retailer
-
-- The vehicleType model has been modified within the `/orders/{orderId}/carrier`, `/orders/{orderId}/stops` and `/orders/{orderId}/quotes` methods.
-
-## Retailer to Woop
-
-- The vehicleType model has been modified within the `/orders/{orderId}` method.
