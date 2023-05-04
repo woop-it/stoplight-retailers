@@ -2,7 +2,11 @@
 
 During its life cycle, a booking goes through several :
 
-- order booking
+- booking status
+- order status
+
+An order doesn't always have a booking status.
+An order with locker reservation may sometimes not have delivery.
 
 ### List of possible booking statuses
 
