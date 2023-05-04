@@ -27,7 +27,6 @@ During its life cycle, a booking goes through several :
 ![SPIDER - Workflow statuts-workflow booking.jpg](<../../../assets/images/SPIDER - Workflow statuts-workflow booking.jpg>)
 
 ### Link between order, delivery and booking status
-
 ![SPIDER - Workflow statuts-__ status  (2).jpg](<../../../assets/images/SPIDER - Workflow statuts-__ status  (2).jpg>)
 
 
