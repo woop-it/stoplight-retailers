@@ -22,7 +22,9 @@ During its life cycle, a booking goes through several :
 | `PICK_UP_POINT_COLLECTION_KO`                |`BLOCKED` | Error collection         | The collection has been blocked by the retailer.                        |
 | `PICK_UP_POINT_COLLECTION_KO`                |`NOT_COLLECTED` | Error collection         | The parcel has not been collected on time by the final customer.                        |
 
-
 ### Link between order, delivery and booking status
-![Workflow_statuts-Commande_retrait_ok.jpg](../../../assets/images/Workflow_statuts-Commande_retrait_ok.jpg)
+
+![SPIDER - Workflow statuts-__ status  (1).jpg](<../../../assets/images/SPIDER - Workflow statuts-__ status  (1).jpg>)
+
+
 
