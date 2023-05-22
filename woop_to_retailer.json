@@ -352,9 +352,6 @@
     },
     "/orders/{orderId}/bookings/{bookingId}/status": {
       "put": {
-        "tags": [
-          "pickupPoint"
-        ],
         "operationId": "putOrderBookingStatus",
         "description": "This method allows the retailer to receive booking status.",
         "parameters": [
@@ -455,7 +452,10 @@
             }
           }
         },
-        "summary": "PUT booking status"
+        "summary": "Receive booking status updates",
+        "tags": [
+          "Relais point"
+        ]
       },
       "parameters": [
         {
@@ -480,9 +480,6 @@
     },
     "/orders/{orderId}/bookings/{bookingId}/loadingIdentifications": {
       "put": {
-        "tags": [
-          "pickupPoint"
-        ],
         "operationId": "putOrderBookingLoadingIdentifications",
         "description": "This method allows the retailer to receive booking pinCode ",
         "parameters": [
@@ -602,7 +599,10 @@
             }
           }
         },
-        "summary": "PUT booking LoadingIdentifications"
+        "summary": "Receive booking pinCode",
+        "tags": [
+          "Relais point"
+        ]
       },
       "parameters": [
         {
