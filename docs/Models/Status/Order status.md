@@ -14,7 +14,7 @@ During its life cycle, an order goes through several :
 ### Route of an order
 
 
-![Workflow_status_commande.png](../../../assets/images/Workflow_status_commande.png)
+![Workflow_status_commande.png](../../../assets/images/Order_status_workflow.png)
 
 
 ### List of possible order statuses
@@ -37,10 +37,12 @@ During its life cycle, an order goes through several :
 | `ORDER_TO_BE_COMPLETED`           | Order to be completed    | Order to be completed with missing information.                            |
 | `ORDER_CANCELLED`                 | Order cancelled          | The order has been cancelled.                                              |
 | `ORDER_REFUSED_DELIVERY`          | Order refused            | The order has been refused by the carriers.                                |
+| `ORDER_ERROR`         | Order error           | Order error related to a locker reservation.                                |
+| `ORDER_DONE`          | Order received             | The order is received in a locker relay point.                  |
 
 ### Returns and error management
 
-![Workflow_retours_commande.png](../../../assets/images/Workflow_retours_commande.png)
+![Order_status_workflow_annexes.png](../../../assets/images/Order_status_workflow_annexes.png)
 
 
 ## Order states
