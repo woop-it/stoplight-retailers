@@ -38,7 +38,7 @@ The delivery goes through several statuses in succession. We identify the differ
 | `DELIVERY_AVAILABLE`            | --                   | Delivery available at collection points                              | "N/A"                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 | `DELIVERY_REPLANNED`            | --                   | Delivery date rescheduled by making an appointment with the customer | "N/A"                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 
-### SubStatuts & use case
+### SubStatus & use case
 
 ![Stoplight PNG-Page-10.jpg](https://stoplight.io/api/v1/projects/cHJqOjkyOTQ/images/x91RqQHJML4)
 
