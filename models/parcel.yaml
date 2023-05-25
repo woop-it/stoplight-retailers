@@ -40,6 +40,11 @@ properties:
       reference:
         type: string
         description: Package identifier
+      state:
+        type: string
+        description: 'State identifier:ON_DOCK or PREPARED'
+        x-stoplight:
+          id: 5go84yioi29vc
       products:
         type: array
         items:
