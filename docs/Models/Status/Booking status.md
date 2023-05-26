@@ -1,3 +1,7 @@
+---
+stoplight-id: kl5w69vftgaw6
+---
+
 # Booking status 
 
 During its life cycle, a booking goes through several :
