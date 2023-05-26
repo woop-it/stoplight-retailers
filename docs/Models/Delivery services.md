@@ -25,6 +25,4 @@ List of the delivery services available when creating an order.
 | `SERVICE_EXHIBITION_MODEL`         | Delivery of an exhibition model      |
 | `SERVICE_WHITE_GLOVE`              | Delivery with white gloves           |
 | `SERVICE_EXCHANGE`                 | Products exchange                    |
-| `SERVICE_DELIVERY_TO_LOCKER`       | Delivery to a locker                 |
-| `SERVICE_DELIVERY_TO_PICKUP_POINT` | Delivery to a pick-up point          |
 | `SERVICE_DELIVERY_TO_MAILBOX`      | Delivery to a mailbox                |

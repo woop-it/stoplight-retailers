@@ -7400,8 +7400,6 @@
           "SERVICE_EXHIBITION_MODEL",
           "SERVICE_WHITE_GLOVE",
           "SERVICE_EXCHANGE",
-          "SERVICE_DELIVERY_TO_LOCKER",
-          "SERVICE_DELIVERY_TO_PICKUP_POINT",
           "SERVICE_DELIVERY_TO_MAILBOX"
         ],
         "x-examples": {
