@@ -110,6 +110,12 @@
                       },
                       "type": "object",
                       "properties": {
+                        "reference": {
+                          "type": "string",
+                          "x-stoplight": {
+                            "id": "3ppkxetxuy0yd"
+                          }
+                        },
                         "state": {
                           "type": "string",
                           "x-stoplight": {
