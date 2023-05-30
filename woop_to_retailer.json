@@ -271,6 +271,27 @@
                     "status": "ORDER_CREATED",
                     "date": "2019-11-27T12:00:00+0000"
                   }
+                },
+                "Statut ORDER_WITH_NO_CARRIER_AVAILABLE": {
+                  "value": {
+                    "orderId": "5z8d4q465zdq65d",
+                    "status": "ORDER_WITH_NO_CARRIER_AVAILABLE",
+                    "date": "2019-11-27T12:00:00+0000",
+                    "requestedCarriers": [
+                      {
+                        "code": "chronopost",
+                        "name": "Chronopost"
+                      },
+                      {
+                        "code": "mondial-relay",
+                        "name": "Mondial-Relay"
+                      },
+                      {
+                        "code": "dpd",
+                        "name": "DPD"
+                      }
+                    ]
+                  }
                 }
               }
             }
@@ -2304,6 +2325,58 @@
           "specifications"
         ]
       },
+      "requestedCarriers": {
+        "title": "requestedCarriers (carrier)",
+        "x-stoplight": {
+          "id": "hv40jz5sfshyh"
+        },
+        "x-examples": {
+          "Example": {
+            "name": "Bpost",
+            "code": "bpost",
+            "contact": {
+              "firstName": "John",
+              "lastName": "Doe",
+              "phone": "+33610101010",
+              "email": "johndoe@mail.com"
+            },
+            "specifications": {
+              "updateOrder": true,
+              "cancelOrder": false,
+              "carrierLabel": true,
+              "storageCapacity": true,
+              "weightMin": {
+                "value": 5,
+                "unit": "kg"
+              },
+              "weightMax": {
+                "value": 50,
+                "unit": "kg"
+              },
+              "ditanceMax": {
+                "value": 5,
+                "unit": "km"
+              }
+            }
+          }
+        },
+        "type": "object",
+        "description": "Specifies the requested carriers.",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Carrier name"
+          },
+          "code": {
+            "type": "string",
+            "description": "Carrier code"
+          }
+        },
+        "required": [
+          "name",
+          "code"
+        ]
+      },
       "putDeliveryStatus": {
         "title": "Update of the delivery status (putDeliveryStatus)",
         "type": "object",
@@ -2417,6 +2490,14 @@
       "putOrderStatus": {
         "title": "Update of the order status (putOrderStatus)",
         "type": "object",
+        "description": "Update of the order status.",
+        "x-examples": {
+          "example": {
+            "orderId": "string",
+            "date": "string",
+            "status": "ORDER_CREATED"
+          }
+        },
         "properties": {
           "orderId": {
             "type": "string",
@@ -2429,21 +2510,25 @@
           },
           "status": {
             "$ref": "#/components/schemas/orderStatus"
+          },
+          "requestedCarriers": {
+            "type": "array",
+            "x-stoplight": {
+              "id": "0equ3qyxs2uct"
+            },
+            "items": {
+              "$ref": "#/components/schemas/requestedCarriers",
+              "x-stoplight": {
+                "id": "yu6cw7wp6btrc"
+              }
+            }
           }
         },
         "required": [
           "orderId",
           "date",
           "status"
-        ],
-        "description": "Update of the order status.",
-        "x-examples": {
-          "example": {
-            "orderId": "string",
-            "date": "string",
-            "status": "ORDER_CREATED"
-          }
-        }
+        ]
       },
       "additionalData": {
         "title": "Additional data (additionalData)",
