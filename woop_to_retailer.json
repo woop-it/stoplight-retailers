@@ -371,6 +371,95 @@
         "summary": "Receive order status updates"
       }
     },
+    "/orders/{orderId}/deliveries/{deliveryId}/status": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "orderId",
+          "in": "path",
+          "required": true
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "deliveryId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "put": {
+        "summary": "Receive delivery status updates",
+        "operationId": "putDeliveryStatus",
+        "responses": {
+          "204": {
+            "description": "Request processed successfully",
+            "content": {}
+          },
+          "400": {
+            "description": "Missing and/or incorrect items in the body",
+            "headers": {},
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "reasons": {
+                      "type": "array",
+                      "x-stoplight": {
+                        "id": "ufyurw0naf53z"
+                      },
+                      "items": {
+                        "x-stoplight": {
+                          "id": "rpgead4kamwl9"
+                        },
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Information can no longer be sent",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The 'orderId' was not found"
+          }
+        },
+        "tags": [
+          "Order"
+        ],
+        "description": "This method allows the retailer to receive delivery status updates from the carrier for a given order.The retailer can then follow the progress of the delivery in real time. ",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/putDeliveryStatus"
+              }
+            }
+          },
+          "description": "Contains the updated status information."
+        }
+      }
+    },
     "/orders/{orderId}/bookings/{bookingId}/status": {
       "put": {
         "operationId": "putOrderBookingStatus",
@@ -1927,95 +2016,6 @@
         "tags": [
           "Collect"
         ]
-      }
-    },
-    "/orders/{orderId}/deliveries/{deliveryId}/status": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "orderId",
-          "in": "path",
-          "required": true
-        },
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "deliveryId",
-          "in": "path",
-          "required": true
-        }
-      ],
-      "put": {
-        "summary": "Receive delivery status updates",
-        "operationId": "putDeliveryStatus",
-        "responses": {
-          "204": {
-            "description": "Request processed successfully",
-            "content": {}
-          },
-          "400": {
-            "description": "Missing and/or incorrect items in the body",
-            "headers": {},
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "reasons": {
-                      "type": "array",
-                      "x-stoplight": {
-                        "id": "ufyurw0naf53z"
-                      },
-                      "items": {
-                        "x-stoplight": {
-                          "id": "rpgead4kamwl9"
-                        },
-                        "type": "string"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Information can no longer be sent",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {}
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "type": "object",
-                  "properties": {}
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "The 'orderId' was not found"
-          }
-        },
-        "tags": [
-          "Order"
-        ],
-        "description": "This method allows the retailer to receive delivery status updates from the carrier for a given order.The retailer can then follow the progress of the delivery in real time. ",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/putDeliveryStatus"
-              }
-            }
-          },
-          "description": "Contains the updated status information."
-        }
       }
     }
   },
