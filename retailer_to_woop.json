@@ -116,7 +116,7 @@
                             "id": "3ppkxetxuy0yd"
                           }
                         },
-                        "state": {
+                        "value": {
                           "type": "string",
                           "x-stoplight": {
                             "id": "zvt5m8cyuunp9"
@@ -135,7 +135,7 @@
                         }
                       },
                       "required": [
-                        "state",
+                        "value",
                         "date"
                       ]
                     }
