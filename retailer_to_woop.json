@@ -7168,6 +7168,31 @@
             },
             "barcode": {
               "$ref": "./models/barcode.yaml"
+            },
+            "state": {
+              "type": "object",
+              "x-stoplight": {
+                "id": "am11lni8ag5y5"
+              },
+              "properties": {
+                "value": {
+                  "type": "string",
+                  "x-stoplight": {
+                    "id": "4k1xtgr6eiqn7"
+                  },
+                  "enum": [
+                    "ON_DOCK",
+                    "PREPARED"
+                  ]
+                },
+                "date": {
+                  "type": "string",
+                  "x-stoplight": {
+                    "id": "st7f1fgjha3et"
+                  },
+                  "format": "date-time"
+                }
+              }
             }
           },
           "required": [
