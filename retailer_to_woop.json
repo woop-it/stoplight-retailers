@@ -7192,7 +7192,10 @@
                   },
                   "format": "date-time"
                 }
-              }
+              },
+              "required": [
+                "value"
+              ]
             }
           },
           "required": [
