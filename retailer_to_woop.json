@@ -65,7 +65,7 @@
         "summary": "Health"
       }
     },
-    "/orders/{orderId}/packages/state": {
+    "/orders/{orderId}/packages/states": {
       "parameters": [
         {
           "schema": {
@@ -110,13 +110,7 @@
                       },
                       "type": "object",
                       "properties": {
-                        "reference": {
-                          "type": "string",
-                          "x-stoplight": {
-                            "id": "3ppkxetxuy0yd"
-                          }
-                        },
-                        "value": {
+                        "state": {
                           "type": "string",
                           "x-stoplight": {
                             "id": "zvt5m8cyuunp9"
@@ -132,10 +126,16 @@
                             "id": "nouukp0mg5ut2"
                           },
                           "format": "date-time"
+                        },
+                        "reference": {
+                          "type": "string",
+                          "x-stoplight": {
+                            "id": "3ppkxetxuy0yd"
+                          }
                         }
                       },
                       "required": [
-                        "value",
+                        "state",
                         "date"
                       ]
                     }
