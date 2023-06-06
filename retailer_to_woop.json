@@ -80,7 +80,7 @@
         "summary": "Change Package State",
         "operationId": "patch-order",
         "responses": {
-          "200": {
+          "204": {
             "description": "Package status Changed successfully",
             "headers": {}
           },
