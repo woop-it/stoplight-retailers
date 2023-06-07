@@ -50,3 +50,10 @@ The delivery goes through several statuses in succession. We identify the differ
 ### Delivery at collection point : Locker
 
 ![Collection_point_status.png](../../../assets/images/Collection_point_status.png)
+
+Collection-point delivery concept between link with order and booking statuses. 
+
+![Collection_point_delivery_concept.png](../../../assets/images/Collection_point_delivery_concept.png)
+
+
+
