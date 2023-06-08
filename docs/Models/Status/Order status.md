@@ -35,6 +35,7 @@ During its life cycle, an order goes through several :
 | `ORDER_WITH_NO_QUOTE`             | No quote                 | No quotes received from the carriers contacted.                            |
 | `ORDER_DELIVERY_UNCOMPLETED`      | Delivery not complete    | In-progess delivery is not complete.                                       |
 | `ORDER_TO_BE_COMPLETED`           | Order to be completed    | Order to be completed with missing information.                            |
+| `ORDER_WITHOUT_DELIVERY_DATE`           | Order without delivery date | Order created without delivery date.                           |
 | `ORDER_CANCELLED`                 | Order cancelled          | The order has been cancelled.                                              |
 | `ORDER_REFUSED_DELIVERY`          | Order refused            | The order has been refused by the carriers.                                |
 | `ORDER_ERROR`         | Order error           | Order error related to a locker reservation.                                |
@@ -52,3 +53,4 @@ During its life cycle, an order goes through several :
 | States                  | Title                                                        |
 | ----------------------- | ------------------------------------------------------------ |
 | `ORDER_TO_BE_COMPLETED` | Order awaiting further information. Request to be completed. |
+| `ORDER_WITHOUT_DELIVERY_DATE` | Order created without delivery date. Awaiting delivery information.  |
