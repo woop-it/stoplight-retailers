@@ -1,25 +1,25 @@
-title: barcode
+title: state
 type: object
 description: Bar code / QRCode of the parcel
-properties:
-  value:
-    type: string
-    description: Barcode value
-  type:
-    type: string
-    description: Barcode display type
-    enum:
-      - barcode
-  format:
-    type: string
-    description: Bar code format
-    enum:
-      - '128'
-required:
-  - value
-  - type
-  - format
 examples:
   - value: 54fd56g4f5gfd456sd
     type: barcode
     format: '128'
+properties:
+  value:
+    type: string
+    description: Barcode value
+    enum:
+      - ON_DOCK
+      - PREPARED
+  date:
+    type: string
+    description: Barcode display type
+    enum:
+      - barcode
+    x-stoplight:
+      id: f7rkq9frrgy5h
+    format: date-time
+required:
+  - value
+  - date
