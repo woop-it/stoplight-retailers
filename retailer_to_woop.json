@@ -77,7 +77,7 @@
         }
       ],
       "patch": {
-        "summary": "Change Package State",
+        "summary": "Change package state",
         "operationId": "patch-order",
         "responses": {
           "204": {
