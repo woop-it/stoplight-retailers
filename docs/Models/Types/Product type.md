@@ -20,3 +20,7 @@ For the best delivery service, each product must be attributed a type. This allo
 | `TYPOLOGY_VOLUMINOUS`         | Bulky product                                                             |
 | `TYPOLOGY_VOLUMINOUS_FRAGILE` | Bulky and fragile product                                                 |
 | `TYPOLOGY_NON_STANDARD`       | Non-standard product                                                      |
+| `TYPOLOGY_FRAGILE_FURNITURE`    | Fragile furniture|
+| `TYPOLOGY_SMALL_FURNITURE`         | Small furniture                                                             |
+| `TYPOLOGY_LARGE_FURNITURE` | Bulky and large furniture                                                 |
+| `TYPOLOGY_ASSEMBLED_FURNITURE`       | Furniture delivered assembled                     
