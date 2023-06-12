@@ -6214,7 +6214,10 @@
               "interval": {
                 "$ref": "#/components/schemas/interval"
               }
-            }
+            },
+            "required": [
+              "interval"
+            ]
           },
           "packages": {
             "description": "All packages",
