@@ -6227,42 +6227,6 @@
             "type": "string",
             "description": "Identifier of the store issuing the request"
           },
-          "slot": {
-            "type": "object",
-            "description": "Allows you to define slot reservation criteria ",
-            "properties": {
-              "fromDate": {
-                "type": "string",
-                "description": "Start Date"
-              },
-              "toDate": {
-                "type": "string",
-                "description": "End Date"
-              },
-              "minRemainingCapacity": {
-                "type": "number",
-                "description": "Minimum remaining capacity for this slot"
-              },
-              "limit": {
-                "type": "number",
-                "description": "Max number of slot "
-              },
-              "type": {
-                "type": "string",
-                "example": "ORDERS_QUANTITY",
-                "description": "Type of delivery week",
-                "enum": [
-                  "ORDERS_QUANTITY",
-                  "PACKAGES_QUANTITY",
-                  "PALLETS_QUANTITY",
-                  "TRAYS_QUANTITY"
-                ]
-              }
-            },
-            "required": [
-              "toDate"
-            ]
-          },
           "options": {
             "type": "object",
             "description": "List of options",
@@ -6282,6 +6246,34 @@
                 "properties": {
                   "active": {
                     "type": "boolean"
+                  }
+                }
+              },
+              "slot": {
+                "type": "object",
+                "description": "Allows you to define slot reservation criteria ",
+                "properties": {
+                  "active": {
+                    "type": "boolean"
+                  },
+                  "minRemainingCapacity": {
+                    "type": "number",
+                    "description": "Minimum remaining capacity for this slot"
+                  },
+                  "limit": {
+                    "type": "number",
+                    "description": "Max number of slot "
+                  },
+                  "type": {
+                    "type": "string",
+                    "example": "ORDERS_QUANTITY",
+                    "description": "Type of delivery week",
+                    "enum": [
+                      "ORDERS_QUANTITY",
+                      "PACKAGES_QUANTITY",
+                      "PALLETS_QUANTITY",
+                      "TRAYS_QUANTITY"
+                    ]
                   }
                 }
               }
