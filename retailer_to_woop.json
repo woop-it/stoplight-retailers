@@ -4572,6 +4572,57 @@
                                     "type": "string"
                                   }
                                 }
+                              },
+                              "cutOffs": {
+                                "type": "object",
+                                "properties": {
+                                  "timezone": {
+                                    "type": "string",
+                                    "x-stoplight": {
+                                      "id": "hjlxunxjoktit"
+                                    }
+                                  },
+                                  "sameDay": {
+                                    "type": "object",
+                                    "x-stoplight": {
+                                      "id": "x2p9fadhs4qae"
+                                    },
+                                    "properties": {
+                                      "hours": {
+                                        "type": "string",
+                                        "x-stoplight": {
+                                          "id": "tlqxwyjliofm7"
+                                        }
+                                      },
+                                      "minutes": {
+                                        "type": "string",
+                                        "x-stoplight": {
+                                          "id": "9zwnefail9vss"
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "nextDay": {
+                                    "type": "object",
+                                    "x-stoplight": {
+                                      "id": "v43xd8hlfnkk9"
+                                    },
+                                    "properties": {
+                                      "hours": {
+                                        "type": "string",
+                                        "x-stoplight": {
+                                          "id": "hfftqupxnlac9"
+                                        }
+                                      },
+                                      "minutes": {
+                                        "type": "string",
+                                        "x-stoplight": {
+                                          "id": "d21ygobckgypd"
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
                               }
                             }
                           },
@@ -4624,6 +4675,18 @@
                           },
                           "workSchedule": {
                             "$ref": "./models/Carrier/workSchedule.json"
+                          },
+                          "minPickingDate": {
+                            "type": "string",
+                            "x-stoplight": {
+                              "id": "yyuz6lsxn9x7c"
+                            }
+                          },
+                          "minDeliveryDate": {
+                            "type": "string",
+                            "x-stoplight": {
+                              "id": "vq9gepfm3nyzo"
+                            }
                           }
                         },
                         "required": [
