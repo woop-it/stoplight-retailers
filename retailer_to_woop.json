@@ -4680,13 +4680,15 @@
                             "type": "string",
                             "x-stoplight": {
                               "id": "yyuz6lsxn9x7c"
-                            }
+                            },
+                            "format": "date-time"
                           },
                           "minDeliveryDate": {
                             "type": "string",
                             "x-stoplight": {
                               "id": "vq9gepfm3nyzo"
-                            }
+                            },
+                            "format": "date-time"
                           }
                         },
                         "required": [
