@@ -6335,13 +6335,14 @@
                   "type": {
                     "type": "string",
                     "example": "ORDERS_QUANTITY",
-                    "description": "Type of delivery week",
+                    "description": "Type of capacitance in the delivery week",
                     "enum": [
                       "ORDERS_QUANTITY",
                       "PACKAGES_QUANTITY",
                       "PALLETS_QUANTITY",
                       "TRAYS_QUANTITY"
-                    ]
+                    ],
+                    "default": "ORDERS_QUANTITY"
                   }
                 }
               }
