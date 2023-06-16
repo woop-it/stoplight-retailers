@@ -4953,6 +4953,104 @@
                         }
                       ]
                     }
+                  },
+                  "Example with cutOffs conf and minPickingDate + minDeliveryDate information": {
+                    "value": {
+                      "eligibilities": [
+                        {
+                          "carrier": {
+                            "code": "niji-carrier",
+                            "name": "Niji carrier"
+                          },
+                          "route": {
+                            "distance": {
+                              "unit": "km",
+                              "value": 0
+                            }
+                          },
+                          "services": [
+                            {
+                              "name": "SERVICE_COMPLEX_INSTALL"
+                            },
+                            {
+                              "name": "SERVICE_RECOVERY"
+                            },
+                            {
+                              "name": "SERVICE_PICKUP_POINT"
+                            },
+                            {
+                              "name": "SERVICE_REGULAR_FRONT_HOME"
+                            },
+                            {
+                              "name": "SERVICE_ASSEMBLY"
+                            },
+                            {
+                              "name": "SERVICE_RETURN"
+                            },
+                            {
+                              "name": "SERVICE_STANDARD_TAXI"
+                            },
+                            {
+                              "name": "SERVICE_XL_TAXI"
+                            },
+                            {
+                              "name": "SERVICE_WITH_SIGNATURE"
+                            }
+                          ],
+                          "slots": [],
+                          "delivery": {
+                            "cutoffs": {
+                              "nextDay": {
+                                "hours": "20",
+                                "minutes": "00"
+                              },
+                              "sameDay": {
+                                "hours": "20",
+                                "minutes": "00"
+                              },
+                              "timezone": "Europe/Paris"
+                            }
+                          },
+                          "workSchedule": {
+                            "friday": [
+                              {
+                                "end": "20:00",
+                                "start": "08:00"
+                              }
+                            ],
+                            "monday": [
+                              {
+                                "end": "20:00",
+                                "start": "08:00"
+                              }
+                            ],
+                            "sunday": [],
+                            "tuesday": [
+                              {
+                                "end": "20:00",
+                                "start": "08:00"
+                              }
+                            ],
+                            "saturday": [],
+                            "thursday": [
+                              {
+                                "end": "20:00",
+                                "start": "08:00"
+                              }
+                            ],
+                            "timezone": "Europe/Paris",
+                            "wednesday": [
+                              {
+                                "end": "20:00",
+                                "start": "08:00"
+                              }
+                            ]
+                          },
+                          "minPickingDate": "2023-06-16T13:22:27.287Z",
+                          "minDeliveryDate": "2023-06-16T13:22:27.287Z"
+                        }
+                      ]
+                    }
                   }
                 }
               }
