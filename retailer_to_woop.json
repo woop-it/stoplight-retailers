@@ -65,6 +65,132 @@
         "summary": "Health"
       }
     },
+    "/orders/{orderId}/labels/list": {
+      "get": {
+        "tags": [
+          "Health"
+        ],
+        "description": "Get a list of the different labels from a carrier.",
+        "operationId": "",
+        "responses": {
+          "204": {
+            "description": "OK. Contains the retrieved labels list.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "x-stoplight": {
+                      "id": "s6orhzsx0nugy"
+                    },
+                    "type": "object",
+                    "properties": {
+                      "Id": {
+                        "type": "string",
+                        "x-stoplight": {
+                          "id": "9xd0xhf7tzfyq"
+                        },
+                        "description": "Label identifier\n"
+                      },
+                      "type": {
+                        "type": "string",
+                        "x-stoplight": {
+                          "id": "frv1nxhx78gg1"
+                        },
+                        "description": "Type of label delivery",
+                        "enum": [
+                          "Base64",
+                          "url"
+                        ]
+                      },
+                      "mode": {
+                        "type": "string",
+                        "x-stoplight": {
+                          "id": "k58hr76y9p8ck"
+                        },
+                        "description": "Label format"
+                      },
+                      "value": {
+                        "type": "string",
+                        "x-stoplight": {
+                          "id": "pjjjop3uq3crg"
+                        },
+                        "description": "Label in base64 or URL to the label"
+                      },
+                      "size": {
+                        "type": "string",
+                        "x-stoplight": {
+                          "id": "e9w1wvope5ws7"
+                        },
+                        "enum": [
+                          "A4",
+                          "A5",
+                          "A6"
+                        ]
+                      },
+                      "parcelId": {
+                        "type": "string",
+                        "x-stoplight": {
+                          "id": "t9ii3ejg6pmmw"
+                        },
+                        "description": "Associated package identifier"
+                      }
+                    }
+                  }
+                },
+                "examples": {}
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "You are not authorised to access this item"
+          },
+          "404": {
+            "description": "The 'orderId' does not exist"
+          }
+        },
+        "security": [],
+        "summary": "Labels List",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "PDF",
+                "ZPL"
+              ]
+            },
+            "in": "query",
+            "name": "mode",
+            "description": "Label Format"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "A4",
+                "A5",
+                "A6"
+              ]
+            },
+            "in": "query",
+            "name": "Size",
+            "description": "Label size"
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "orderId",
+          "in": "path",
+          "required": true
+        }
+      ]
+    },
     "/orders/{orderId}/packages/states": {
       "parameters": [
         {
