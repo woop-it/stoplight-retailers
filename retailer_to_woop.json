@@ -169,7 +169,7 @@
               ]
             },
             "in": "query",
-            "name": "Size",
+            "name": "size",
             "description": "Label size"
           }
         ],
