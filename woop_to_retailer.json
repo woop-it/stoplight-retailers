@@ -2323,7 +2323,7 @@
               "id": "etit5wgcazgmw"
             },
             "properties": {
-              "hub": {
+              "agency": {
                 "type": "string",
                 "x-stoplight": {
                   "id": "xqdc3f3bizaxa"
