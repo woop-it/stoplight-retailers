@@ -67,9 +67,6 @@
     },
     "/orders/{orderId}/labels/list": {
       "get": {
-        "tags": [
-          "Health"
-        ],
         "description": "Get a list of the different labels from a carrier.",
         "operationId": "",
         "responses": {
@@ -78,62 +75,59 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "x-stoplight": {
-                      "id": "s6orhzsx0nugy"
-                    },
-                    "type": "object",
-                    "properties": {
-                      "Id": {
-                        "type": "string",
-                        "x-stoplight": {
-                          "id": "9xd0xhf7tzfyq"
-                        },
-                        "description": "Label identifier\n"
+                  "type": "object",
+                  "properties": {
+                    "labels": {
+                      "x-stoplight": {
+                        "id": "s6orhzsx0nugy"
                       },
-                      "type": {
-                        "type": "string",
+                      "type": "array",
+                      "items": {
                         "x-stoplight": {
-                          "id": "frv1nxhx78gg1"
+                          "id": "di7g1bfqk9m5q"
                         },
-                        "description": "Type of label delivery",
-                        "enum": [
-                          "Base64",
-                          "url"
-                        ]
-                      },
-                      "mode": {
-                        "type": "string",
-                        "x-stoplight": {
-                          "id": "k58hr76y9p8ck"
-                        },
-                        "description": "Label format"
-                      },
-                      "value": {
-                        "type": "string",
-                        "x-stoplight": {
-                          "id": "pjjjop3uq3crg"
-                        },
-                        "description": "Label in base64 or URL to the label"
-                      },
-                      "size": {
-                        "type": "string",
-                        "x-stoplight": {
-                          "id": "e9w1wvope5ws7"
-                        },
-                        "enum": [
-                          "A4",
-                          "A5",
-                          "A6"
-                        ]
-                      },
-                      "parcelId": {
-                        "type": "string",
-                        "x-stoplight": {
-                          "id": "t9ii3ejg6pmmw"
-                        },
-                        "description": "Associated package identifier"
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "x-stoplight": {
+                              "id": "i66o1zj9vco6l"
+                            },
+                            "description": "Label identifier"
+                          },
+                          "mode": {
+                            "type": "string",
+                            "x-stoplight": {
+                              "id": "r0cctjo5a4a2c"
+                            },
+                            "description": "Label format"
+                          },
+                          "url": {
+                            "type": "string",
+                            "x-stoplight": {
+                              "id": "jli1t1bgiqhxs"
+                            },
+                            "description": "Public url of the label"
+                          },
+                          "size": {
+                            "type": "string",
+                            "x-stoplight": {
+                              "id": "eks1rwnadxq05"
+                            },
+                            "enum": [
+                              "A4",
+                              "A5",
+                              "A6"
+                            ]
+                          },
+                          "parceId": {
+                            "type": "string",
+                            "x-stoplight": {
+                              "id": "ysdzuji63drja"
+                            },
+                            "description": "Associated package identifier"
+                          }
+                        }
                       }
                     }
                   }
@@ -178,6 +172,9 @@
             "name": "Size",
             "description": "Label size"
           }
+        ],
+        "tags": [
+          "Label"
         ]
       },
       "parameters": [
