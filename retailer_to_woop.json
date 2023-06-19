@@ -120,7 +120,7 @@
                               "A6"
                             ]
                           },
-                          "parceId": {
+                          "parcelId": {
                             "type": "string",
                             "x-stoplight": {
                               "id": "ysdzuji63drja"
