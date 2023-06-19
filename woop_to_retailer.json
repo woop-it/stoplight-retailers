@@ -2316,6 +2316,38 @@
           },
           "specifications": {
             "$ref": "#/components/schemas/specifications"
+          },
+          "Routing": {
+            "type": "object",
+            "x-stoplight": {
+              "id": "etit5wgcazgmw"
+            },
+            "properties": {
+              "hub": {
+                "type": "string",
+                "x-stoplight": {
+                  "id": "xqdc3f3bizaxa"
+                }
+              },
+              "delivery mode": {
+                "type": "string",
+                "x-stoplight": {
+                  "id": "boksq8yl7oj5n"
+                }
+              },
+              "shuttle": {
+                "type": "string",
+                "x-stoplight": {
+                  "id": "bmz90utz3dt8d"
+                }
+              },
+              "Id": {
+                "type": "string",
+                "x-stoplight": {
+                  "id": "7d047yci51no3"
+                }
+              }
+            }
           }
         },
         "required": [
