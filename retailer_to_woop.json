@@ -2811,6 +2811,15 @@
                     },
                     "trackingUrls": {
                       "$ref": "./models/trackingUrls.yaml"
+                    },
+                    "parcels": {
+                      "x-stoplight": {
+                        "id": "fea8gf8pfkhne"
+                      },
+                      "type": "array",
+                      "items": {
+                        "$ref": "./models/parcel.yaml"
+                      }
                     }
                   },
                   "required": [
@@ -5281,6 +5290,15 @@
                     },
                     "trackingUrls:": {
                       "$ref": "./models/trackingUrls.yaml"
+                    },
+                    "parcels": {
+                      "x-stoplight": {
+                        "id": "qbp5aezl0jbmd"
+                      },
+                      "type": "array",
+                      "items": {
+                        "$ref": "./models/parcel.yaml"
+                      }
                     }
                   },
                   "required": [
