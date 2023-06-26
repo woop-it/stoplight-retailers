@@ -88,13 +88,6 @@
                         },
                         "type": "object",
                         "properties": {
-                          "id": {
-                            "type": "string",
-                            "x-stoplight": {
-                              "id": "i66o1zj9vco6l"
-                            },
-                            "description": "Label identifier"
-                          },
                           "mode": {
                             "type": "string",
                             "x-stoplight": {
@@ -119,13 +112,6 @@
                               "A5",
                               "A6"
                             ]
-                          },
-                          "parcelId": {
-                            "type": "string",
-                            "x-stoplight": {
-                              "id": "ysdzuji63drja"
-                            },
-                            "description": "Associated package identifier"
                           }
                         }
                       }
