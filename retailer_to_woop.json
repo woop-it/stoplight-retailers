@@ -4510,6 +4510,9 @@
                               "code": {
                                 "type": "string",
                                 "description": "Internal carrier code"
+                              },
+                              "score": {
+                                "$ref": "#/components/schemas/score"
                               }
                             }
                           },
@@ -6284,6 +6287,26 @@
                     "type": "boolean"
                   }
                 }
+              },
+              "carrierScore": {
+                "type": "object",
+                "x-stoplight": {
+                  "id": "xmh2fuxe4ytfn"
+                },
+                "properties": {
+                  "active": {
+                    "type": "boolean",
+                    "x-stoplight": {
+                      "id": "mfpbnbv1zjcuf"
+                    }
+                  }
+                }
+              },
+              "": {
+                "type": "string",
+                "x-stoplight": {
+                  "id": "tqftywa61oo5n"
+                }
               }
             }
           },
@@ -7922,6 +7945,34 @@
           "mode",
           "carrierCodes"
         ]
+      },
+      "score": {
+        "title": "score",
+        "x-stoplight": {
+          "id": "imgiq4miab77v"
+        },
+        "type": "object",
+        "properties": {
+          "satisfaction": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "5g7yjh1lf0itg"
+            }
+          },
+          "nps": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "rjp4s25sz3o4g"
+            }
+          },
+          "onTimeDeliveryScore": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "56lly8khbuxcd"
+            }
+          }
+        },
+        "description": "Carrier quality score"
       }
     },
     "parameters": {
