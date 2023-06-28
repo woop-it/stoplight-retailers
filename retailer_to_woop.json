@@ -4891,6 +4891,23 @@
                         }
                       ]
                     }
+                  },
+                  "Example with carrierScore": {
+                    "value": {
+                      "eligibilities": [
+                        {
+                          "carrier": {
+                            "code": "carrier-number-1",
+                            "name": "Carrier number one",
+                            "score": {
+                              "satisfaction": 8,
+                              "nps": 8,
+                              "onTimeDeliveryScore": 8.2
+                            }
+                          }
+                        }
+                      ]
+                    }
                   }
                 }
               }
