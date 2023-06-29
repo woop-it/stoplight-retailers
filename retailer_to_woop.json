@@ -7451,7 +7451,8 @@
           "SERVICE_EXHIBITION_MODEL",
           "SERVICE_WHITE_GLOVE",
           "SERVICE_EXCHANGE",
-          "SERVICE_DELIVERY_TO_MAILBOX"
+          "SERVICE_DELIVERY_TO_MAILBOX",
+          "SERVICE_STORE_TO_STORE"
         ],
         "x-examples": {
           "Example": "SERVICE_PICKUP_POINT"
