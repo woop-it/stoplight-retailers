@@ -5131,6 +5131,25 @@
                       }
                     }
                   }
+                },
+                "Example with options.carrierScore": {
+                  "value": {
+                    "picking": {
+                      "location": {
+                        "type": "address",
+                        "addressLine1": "237 rue du ballon",
+                        "postalCode": "59110",
+                        "city": "La Madeleine",
+                        "country": "FR"
+                      }
+                    },
+                    "storeId": "MAG01",
+                    "options": {
+                      "carrierScore": {
+                        "active": true
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -6204,23 +6223,6 @@
                 "postalCode": "59110",
                 "city": "La Madeleine",
                 "country": "FR"
-              }
-            }
-          },
-          "Example with options.carrierScore": {
-            "picking": {
-              "location": {
-                "type": "address",
-                "addressLine1": "237 rue du ballon",
-                "postalCode": "59110",
-                "city": "La Madeleine",
-                "country": "FR"
-              }
-            },
-            "storeId": "MAG01",
-            "options": {
-              "carrierScore": {
-                "active": true
               }
             }
           }
