@@ -7932,6 +7932,34 @@
           "COLLECT_REPLANNED"
         ]
       },
+      "score": {
+        "title": "score",
+        "x-stoplight": {
+          "id": "imgiq4miab77v"
+        },
+        "type": "object",
+        "properties": {
+          "satisfaction": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "5g7yjh1lf0itg"
+            }
+          },
+          "nps": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "rjp4s25sz3o4g"
+            }
+          },
+          "onTimeDeliveryScore": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "56lly8khbuxcd"
+            }
+          }
+        },
+        "description": "Carrier quality score"
+      },
       "carrierSelection": {
         "title": "carrierSelection",
         "x-stoplight": {
@@ -7962,34 +7990,6 @@
           "mode",
           "carrierCodes"
         ]
-      },
-      "score": {
-        "title": "score",
-        "x-stoplight": {
-          "id": "imgiq4miab77v"
-        },
-        "type": "object",
-        "properties": {
-          "satisfaction": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "5g7yjh1lf0itg"
-            }
-          },
-          "nps": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "rjp4s25sz3o4g"
-            }
-          },
-          "onTimeDeliveryScore": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "56lly8khbuxcd"
-            }
-          }
-        },
-        "description": "Carrier quality score"
       }
     },
     "parameters": {
