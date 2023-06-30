@@ -26,3 +26,4 @@ List of the delivery services available when creating an order.
 | `SERVICE_WHITE_GLOVE`              | Delivery with white gloves           |
 | `SERVICE_EXCHANGE`                 | Products exchange                    |
 | `SERVICE_DELIVERY_TO_MAILBOX`      | Delivery to a mailbox                |
+| `SERVICE_SCHEDULED`                | Delivery on request                  |

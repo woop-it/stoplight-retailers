@@ -7463,7 +7463,8 @@
           "SERVICE_EXHIBITION_MODEL",
           "SERVICE_WHITE_GLOVE",
           "SERVICE_EXCHANGE",
-          "SERVICE_DELIVERY_TO_MAILBOX"
+          "SERVICE_DELIVERY_TO_MAILBOX",
+          "SERVICE_SCHEDULED"
         ],
         "x-examples": {
           "Example": "SERVICE_PICKUP_POINT"
