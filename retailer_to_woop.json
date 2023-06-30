@@ -6729,6 +6729,9 @@
           "comment": {
             "type": "string",
             "description": "Additional comments"
+          },
+          "coordinates": {
+            "$ref": "#/components/schemas/coordinates"
           }
         },
         "required": [
@@ -6787,6 +6790,15 @@
           "Exchange place": {
             "type": "exchangePlace",
             "id": "1"
+          },
+          "Coordinates": {
+            "type": "address",
+            "postalCode": "59000",
+            "country": "FR",
+            "coordinates": {
+              "latitude": 0,
+              "longitude": 0
+            }
           }
         },
         "oneOf": [
