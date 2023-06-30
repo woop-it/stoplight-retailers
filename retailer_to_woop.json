@@ -5111,6 +5111,61 @@
                       }
                     }
                   }
+                },
+                "Example with coordinates in picking and delivery location": {
+                  "value": {
+                    "value": {
+                      "picking": {
+                        "location": {
+                          "type": "address",
+                          "coordinates": {
+                            "latitude": 0,
+                            "longitude": 0
+                          }
+                        }
+                      },
+                      "delivery": {
+                        "location": {
+                          "type": "address",
+                          "coordinates": {
+                            "latitude": 0,
+                            "longitude": 0
+                          }
+                        }
+                      },
+                      "packages": [
+                        {
+                          "length": {
+                            "value": 15,
+                            "unit": "cm"
+                          },
+                          "width": {
+                            "value": 15,
+                            "unit": "cm"
+                          },
+                          "height": {
+                            "value": 1.2,
+                            "unit": "m"
+                          },
+                          "weight": {
+                            "value": 560,
+                            "unit": "g"
+                          },
+                          "products": [
+                            {
+                              "type": "TYPOLOGY_GENERIC",
+                              "ean": "4dq86zd4q6zd4q64",
+                              "cug": "q56zd4q65d4q",
+                              "label": "Lamp",
+                              "quantity": 1
+                            }
+                          ],
+                          "quantity": 1
+                        }
+                      ],
+                      "storeId": "MAG01"
+                    }
+                  }
                 }
               }
             }
