@@ -1590,6 +1590,13 @@
                           "taxIncludedAmount": 20.64,
                           "taxAmount": 3.44,
                           "currency": "EUR"
+                        },
+                        "emissions": {
+                          "estimatedCO2e": {
+                            "unit": "KgCO2e",
+                            "value": 13.91334,
+                            "reliabilityScore": 2
+                          }
                         }
                       }
                     }
