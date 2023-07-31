@@ -5832,6 +5832,13 @@
                 "taxIncludedAmount": 20.64,
                 "taxAmount": 3.44,
                 "currency": "EUR"
+              },
+              "emissions": {
+                "estimatedCO2e": {
+                  "unit": "KgCO2e",
+                  "value": 13.91334,
+                  "reliabilityScore": 2
+                }
               }
             }
           }
@@ -5939,6 +5946,9 @@
               },
               "price": {
                 "$ref": "./models/price.yaml"
+              },
+              "emissions": {
+                "$ref": "#/components/schemas/estimatedCO2e"
               }
             },
             "required": [
@@ -7988,6 +7998,73 @@
           "mode",
           "carrierCodes"
         ]
+      },
+      "estimatedCO2e": {
+        "title": "estimatedCO2e",
+        "x-stoplight": {
+          "id": "79d3wqkl7ud66"
+        },
+        "type": "object",
+        "properties": {
+          "unit": {
+            "x-stoplight": {
+              "id": "1ase6pb6hzwxn"
+            },
+            "enum": [
+              "KgCO2e"
+            ]
+          },
+          "value": {
+            "type": "integer",
+            "x-stoplight": {
+              "id": "50x6lkgekgrp3"
+            }
+          },
+          "reliabilityScore": {
+            "type": "integer",
+            "x-stoplight": {
+              "id": "m7tj4qafxlzvn"
+            }
+          }
+        },
+        "required": [
+          "unit",
+          "value",
+          "reliabilityScore"
+        ],
+        "x-examples": {
+          "Example": {
+            "unit": "KgCO2e",
+            "value": 0,
+            "reliabilityScore": 0
+          }
+        }
+      },
+      "emissions": {
+        "title": "emissions",
+        "x-stoplight": {
+          "id": "2gmtmbyaksuzv"
+        },
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/estimatedCO2e"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "x-examples": {
+          "Example": {
+            "emissions": {
+              "estimatedCO2e": {
+                "unit": "KgCO2e",
+                "value": 13.91334,
+                "reliabilityScore": 2
+              }
+            }
+          }
+        }
       }
     },
     "parameters": {
