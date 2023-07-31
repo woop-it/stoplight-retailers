@@ -2772,6 +2772,12 @@
           "comment": {
             "type": "string",
             "minLength": 1
+          },
+          "emissions": {
+            "type": "object",
+            "x-stoplight": {
+              "id": "j11t03pu9c19c"
+            }
           }
         },
         "required": [
