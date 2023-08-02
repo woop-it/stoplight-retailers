@@ -8012,6 +8012,14 @@
           "id": "79d3wqkl7ud66"
         },
         "type": "object",
+        "x-examples": {
+          "Example": {
+            "unit": "KgCO2e",
+            "value": 0,
+            "reliabilityScore": 0
+          }
+        },
+        "description": "CO2e emissions estimated by Woop based on data collected from carriers and retailers.",
         "properties": {
           "unit": {
             "x-stoplight": {
@@ -8019,33 +8027,29 @@
             },
             "enum": [
               "KgCO2e"
-            ]
+            ],
+            "description": "The unit used to calculate the CO2e emissions"
           },
           "value": {
             "type": "integer",
             "x-stoplight": {
               "id": "50x6lkgekgrp3"
-            }
+            },
+            "description": "The amount of the emission"
           },
           "reliabilityScore": {
             "type": "integer",
             "x-stoplight": {
               "id": "m7tj4qafxlzvn"
-            }
+            },
+            "description": "Calculated by Woop on the 5 points scale, based on the data collected from carriers and retailers."
           }
         },
         "required": [
           "unit",
           "value",
           "reliabilityScore"
-        ],
-        "x-examples": {
-          "Example": {
-            "unit": "KgCO2e",
-            "value": 0,
-            "reliabilityScore": 0
-          }
-        }
+        ]
       },
       "emissions": {
         "title": "emissions",
