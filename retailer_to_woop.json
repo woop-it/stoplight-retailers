@@ -7534,7 +7534,8 @@
           "SERVICE_WHITE_GLOVE",
           "SERVICE_EXCHANGE",
           "SERVICE_DELIVERY_TO_MAILBOX",
-          "SERVICE_SCHEDULED"
+          "SERVICE_SCHEDULED",
+          "SERVICE_FREIGHT_ELEVATOR"
         ],
         "x-examples": {
           "Example": "SERVICE_PICKUP_POINT"
