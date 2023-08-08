@@ -6749,16 +6749,34 @@
             "postalCode": "59000",
             "city": "Lille",
             "country": "FR"
+          },
+          "With streetNumber": {
+            "addressLine1": "Boulevard de Turien",
+            "addressLine2": "Batiment A",
+            "streetNumber": "123",
+            "elevator": true,
+            "floor": 8,
+            "postalCode": "59000",
+            "city": "Lille",
+            "country": "FR"
           }
         },
         "properties": {
           "addressLine1": {
             "type": "string",
-            "description": "Full address of the main location"
+            "description": "Full address of the main location with or without the streetNumber \n"
           },
           "addressLine2": {
             "type": "string",
             "description": "Additional address of the location"
+          },
+          "streetNumber": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "5dljwfuvsnp8p"
+            },
+            "description": "Additionnal streetNumber of the main location",
+            "example": "123"
           },
           "elevator": {
             "type": "boolean",
