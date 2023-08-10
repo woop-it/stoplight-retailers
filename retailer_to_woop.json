@@ -4579,6 +4579,57 @@
                                     "type": "string"
                                   }
                                 }
+                              },
+                              "cutOffs": {
+                                "type": "object",
+                                "properties": {
+                                  "timezone": {
+                                    "type": "string",
+                                    "x-stoplight": {
+                                      "id": "hjlxunxjoktit"
+                                    }
+                                  },
+                                  "sameDay": {
+                                    "type": "object",
+                                    "x-stoplight": {
+                                      "id": "x2p9fadhs4qae"
+                                    },
+                                    "properties": {
+                                      "hours": {
+                                        "type": "string",
+                                        "x-stoplight": {
+                                          "id": "tlqxwyjliofm7"
+                                        }
+                                      },
+                                      "minutes": {
+                                        "type": "string",
+                                        "x-stoplight": {
+                                          "id": "9zwnefail9vss"
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "nextDay": {
+                                    "type": "object",
+                                    "x-stoplight": {
+                                      "id": "v43xd8hlfnkk9"
+                                    },
+                                    "properties": {
+                                      "hours": {
+                                        "type": "string",
+                                        "x-stoplight": {
+                                          "id": "hfftqupxnlac9"
+                                        }
+                                      },
+                                      "minutes": {
+                                        "type": "string",
+                                        "x-stoplight": {
+                                          "id": "d21ygobckgypd"
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
                               }
                             }
                           },
@@ -4631,6 +4682,20 @@
                           },
                           "workSchedule": {
                             "$ref": "./models/Carrier/workSchedule.json"
+                          },
+                          "minPickingDate": {
+                            "type": "string",
+                            "x-stoplight": {
+                              "id": "yyuz6lsxn9x7c"
+                            },
+                            "format": "date-time"
+                          },
+                          "minDeliveryDate": {
+                            "type": "string",
+                            "x-stoplight": {
+                              "id": "vq9gepfm3nyzo"
+                            },
+                            "format": "date-time"
                           }
                         },
                         "required": [
@@ -4895,6 +4960,104 @@
                         }
                       ]
                     }
+                  },
+                  "Example with cutOffs conf and minPickingDate + minDeliveryDate information": {
+                    "value": {
+                      "eligibilities": [
+                        {
+                          "carrier": {
+                            "code": "niji-carrier",
+                            "name": "Niji carrier"
+                          },
+                          "route": {
+                            "distance": {
+                              "unit": "km",
+                              "value": 0
+                            }
+                          },
+                          "services": [
+                            {
+                              "name": "SERVICE_COMPLEX_INSTALL"
+                            },
+                            {
+                              "name": "SERVICE_RECOVERY"
+                            },
+                            {
+                              "name": "SERVICE_PICKUP_POINT"
+                            },
+                            {
+                              "name": "SERVICE_REGULAR_FRONT_HOME"
+                            },
+                            {
+                              "name": "SERVICE_ASSEMBLY"
+                            },
+                            {
+                              "name": "SERVICE_RETURN"
+                            },
+                            {
+                              "name": "SERVICE_STANDARD_TAXI"
+                            },
+                            {
+                              "name": "SERVICE_XL_TAXI"
+                            },
+                            {
+                              "name": "SERVICE_WITH_SIGNATURE"
+                            }
+                          ],
+                          "slots": [],
+                          "delivery": {
+                            "cutoffs": {
+                              "nextDay": {
+                                "hours": "20",
+                                "minutes": "00"
+                              },
+                              "sameDay": {
+                                "hours": "20",
+                                "minutes": "00"
+                              },
+                              "timezone": "Europe/Paris"
+                            }
+                          },
+                          "workSchedule": {
+                            "friday": [
+                              {
+                                "end": "20:00",
+                                "start": "08:00"
+                              }
+                            ],
+                            "monday": [
+                              {
+                                "end": "20:00",
+                                "start": "08:00"
+                              }
+                            ],
+                            "sunday": [],
+                            "tuesday": [
+                              {
+                                "end": "20:00",
+                                "start": "08:00"
+                              }
+                            ],
+                            "saturday": [],
+                            "thursday": [
+                              {
+                                "end": "20:00",
+                                "start": "08:00"
+                              }
+                            ],
+                            "timezone": "Europe/Paris",
+                            "wednesday": [
+                              {
+                                "end": "20:00",
+                                "start": "08:00"
+                              }
+                            ]
+                          },
+                          "minPickingDate": "2023-06-16T13:22:27.287Z",
+                          "minDeliveryDate": "2023-06-16T13:22:27.287Z"
+                        }
+                      ]
+                    }
                   }
                 }
               }
@@ -5092,11 +5255,12 @@
                       }
                     ],
                     "storeId": "MAG01",
-                    "slot": {
-                      "fromDate": "2022-05-04T17:52:01+0000",
-                      "toDate": "2022-05-07T17:52:01+0000",
-                      "minRemainingCapacity": 3,
-                      "limit": 80
+                    "options": {
+                      "slot": {
+                        "active": true,
+                        "minRemainingCapacity": 1,
+                        "limit": 2
+                      }
                     }
                   }
                 },
@@ -6216,6 +6380,12 @@
                 "country": "FR"
               }
             },
+            "delivery": {
+              "interval": {
+                "start": "2023-06-19T06:00:00.000Z",
+                "end": "2023-06-23T18:00:00.000Z"
+              }
+            },
             "packages": [
               {
                 "length": {
@@ -6247,13 +6417,11 @@
               }
             ],
             "storeId": "MAG01",
-            "slot": {
-              "location": {
-                "type": "address",
-                "addressLine1": "237 rue du ballon",
-                "postalCode": "59110",
-                "city": "La Madeleine",
-                "country": "FR"
+            "options": {
+              "slot": {
+                "active": true,
+                "minRemainingCapacity": 12,
+                "limit": 1
               }
             }
           }
@@ -6284,7 +6452,10 @@
               "interval": {
                 "$ref": "#/components/schemas/interval"
               }
-            }
+            },
+            "required": [
+              "interval"
+            ]
           },
           "packages": {
             "description": "All packages",
@@ -6296,42 +6467,6 @@
           "storeId": {
             "type": "string",
             "description": "Identifier of the store issuing the request"
-          },
-          "slot": {
-            "type": "object",
-            "description": "Allows you to define slot reservation criteria ",
-            "properties": {
-              "fromDate": {
-                "type": "string",
-                "description": "Start Date"
-              },
-              "toDate": {
-                "type": "string",
-                "description": "End Date"
-              },
-              "minRemainingCapacity": {
-                "type": "number",
-                "description": "Minimum remaining capacity for this slot"
-              },
-              "limit": {
-                "type": "number",
-                "description": "Max number of slot "
-              },
-              "type": {
-                "type": "string",
-                "example": "ORDERS_QUANTITY",
-                "description": "Type of delivery week",
-                "enum": [
-                  "ORDERS_QUANTITY",
-                  "PACKAGES_QUANTITY",
-                  "PALLETS_QUANTITY",
-                  "TRAYS_QUANTITY"
-                ]
-              }
-            },
-            "required": [
-              "toDate"
-            ]
           },
           "options": {
             "type": "object",
@@ -6352,6 +6487,35 @@
                 "properties": {
                   "active": {
                     "type": "boolean"
+                  }
+                }
+              },
+              "slot": {
+                "type": "object",
+                "description": "Allows you to define slot reservation criteria ",
+                "properties": {
+                  "active": {
+                    "type": "boolean"
+                  },
+                  "minRemainingCapacity": {
+                    "type": "number",
+                    "description": "Minimum remaining capacity for this slot"
+                  },
+                  "limit": {
+                    "type": "number",
+                    "description": "Max number of slot "
+                  },
+                  "type": {
+                    "type": "string",
+                    "example": "ORDERS_QUANTITY",
+                    "description": "Type of capacitance in the delivery week",
+                    "enum": [
+                      "ORDERS_QUANTITY",
+                      "PACKAGES_QUANTITY",
+                      "PALLETS_QUANTITY",
+                      "TRAYS_QUANTITY"
+                    ],
+                    "default": "ORDERS_QUANTITY"
                   }
                 }
               }
