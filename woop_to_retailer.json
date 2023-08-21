@@ -2317,11 +2317,12 @@
           "specifications": {
             "$ref": "#/components/schemas/specifications"
           },
-          "Routing": {
+          "routing": {
             "type": "object",
             "x-stoplight": {
               "id": "etit5wgcazgmw"
             },
+            "description": "Gives transport planification details",
             "properties": {
               "agency": {
                 "type": "string",
@@ -2329,7 +2330,7 @@
                   "id": "xqdc3f3bizaxa"
                 }
               },
-              "delivery mode": {
+              "deliveryMode": {
                 "type": "string",
                 "x-stoplight": {
                   "id": "boksq8yl7oj5n"

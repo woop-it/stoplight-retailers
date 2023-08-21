@@ -100,7 +100,7 @@
                             "x-stoplight": {
                               "id": "jli1t1bgiqhxs"
                             },
-                            "description": "Public url of the label"
+                            "description": "label's public url"
                           },
                           "size": {
                             "type": "string",
