@@ -7470,6 +7470,26 @@
               "required": [
                 "value"
               ]
+            },
+            "containerId": {
+              "type": "object",
+              "x-stoplight": {
+                "id": "inc0hic6h1ssr"
+              },
+              "properties": {
+                "trailerId": {
+                  "type": "string",
+                  "x-stoplight": {
+                    "id": "l40lhnq40wa1w"
+                  }
+                },
+                "palletId": {
+                  "type": "string",
+                  "x-stoplight": {
+                    "id": "k8kciwmdtp3f9"
+                  }
+                }
+              }
             }
           },
           "required": [
