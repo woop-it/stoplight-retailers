@@ -91,6 +91,15 @@
                         "id"
                       ]
                     }
+                  },
+                  "additionalData": {
+                    "type": "array",
+                    "x-stoplight": {
+                      "id": "6an7c3qrlb8wn"
+                    },
+                    "items": {
+                      "$ref": "#/components/schemas/additionalData"
+                    }
                   }
                 },
                 "required": [
@@ -2475,6 +2484,15 @@
           "carrierCode": {
             "type": "string",
             "description": "Carrier code"
+          },
+          "additionalData": {
+            "x-stoplight": {
+              "id": "z8jes26folcnf"
+            },
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/additionalData"
+            }
           }
         },
         "required": [
