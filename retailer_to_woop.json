@@ -6518,6 +6518,22 @@
                     "default": "ORDERS_QUANTITY"
                   }
                 }
+              },
+              "postalCode": {
+                "type": "object",
+                "x-stoplight": {
+                  "id": "d8fg2w9jsycpz"
+                },
+                "description": "Zoning option",
+                "properties": {
+                  "active": {
+                    "type": "boolean",
+                    "x-stoplight": {
+                      "id": "yz5ilvjf7dafr"
+                    },
+                    "description": "Used to launch geocoding call"
+                  }
+                }
               }
             }
           },
