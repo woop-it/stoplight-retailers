@@ -5117,6 +5117,15 @@
                         "country": "FR"
                       }
                     },
+                    "delivery": {
+                      "location": {
+                        "type": "address",
+                        "addressLine1": "179 Boulevard de Turin",
+                        "postalCode": "59000",
+                        "city": "Lille",
+                        "country": "FR"
+                      }
+                    },
                     "packages": [
                       {
                         "length": {
@@ -5140,17 +5149,11 @@
                             "type": "TYPOLOGY_GENERIC",
                             "ean": "4dq86zd4q6zd4q64",
                             "cug": "q56zd4q65d4q",
-                            "label": "Lampe",
+                            "label": "Lamp",
                             "quantity": 1
                           }
                         ],
-                        "quantity": 1,
-                        "attributes": {
-                          "footprint": {
-                            "value": 13,
-                            "unit": "m²"
-                          }
-                        }
+                        "quantity": 1
                       }
                     ],
                     "storeId": "MAG01"
@@ -5224,6 +5227,15 @@
                         "end": "2022-05-02T17:52:01+0000"
                       }
                     },
+                    "delivery": {
+                      "location": {
+                        "type": "address",
+                        "addressLine1": "179 Boulevard de Turin",
+                        "postalCode": "59000",
+                        "city": "Lille",
+                        "country": "FR"
+                      }
+                    },
                     "packages": [
                       {
                         "length": {
@@ -5273,6 +5285,15 @@
                         "postalCode": "59110",
                         "city": "La Madeleine",
                         "country": "FR"
+                      }
+                    },
+                    "delivery": {
+                      "location": {
+                        "type": "address",
+                        "coordinates": {
+                          "latitude": 0,
+                          "longitude": 0
+                        }
                       }
                     },
                     "storeId": "MAG01",
