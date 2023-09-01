@@ -6531,7 +6531,7 @@
                     "x-stoplight": {
                       "id": "yz5ilvjf7dafr"
                     },
-                    "description": "Used to launch geocoding call"
+                    "description": "Used to launch postal code eligibility"
                   }
                 }
               }
