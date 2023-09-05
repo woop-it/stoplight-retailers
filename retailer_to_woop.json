@@ -4517,6 +4517,32 @@
                               "code": {
                                 "type": "string",
                                 "description": "Internal carrier code"
+                              },
+                              "score": {
+                                "type": "object",
+                                "x-stoplight": {
+                                  "id": "5109wnjzhnwm5"
+                                },
+                                "properties": {
+                                  "satisfaction": {
+                                    "type": "string",
+                                    "x-stoplight": {
+                                      "id": "ctd1hw62czh8m"
+                                    }
+                                  },
+                                  "nps": {
+                                    "type": "string",
+                                    "x-stoplight": {
+                                      "id": "nr62s0hyyk0p1"
+                                    }
+                                  },
+                                  "onTimeDeliveryScore": {
+                                    "type": "string",
+                                    "x-stoplight": {
+                                      "id": "dw5mjrm1iu8mx"
+                                    }
+                                  }
+                                }
                               }
                             }
                           },
@@ -5058,6 +5084,23 @@
                         }
                       ]
                     }
+                  },
+                  "Example with carrierScore": {
+                    "value": {
+                      "eligibilities": [
+                        {
+                          "carrier": {
+                            "code": "carrier-number-1",
+                            "name": "Carrier number one",
+                            "score": {
+                              "satisfaction": 8,
+                              "nps": 8,
+                              "onTimeDeliveryScore": 8.2
+                            }
+                          }
+                        }
+                      ]
+                    }
                   }
                 }
               }
@@ -5355,6 +5398,25 @@
                       }
                     ],
                     "storeId": "MAG01"
+                  }
+                },
+                "Example with options.carrierScore": {
+                  "value": {
+                    "picking": {
+                      "location": {
+                        "type": "address",
+                        "addressLine1": "237 rue du ballon",
+                        "postalCode": "59110",
+                        "city": "La Madeleine",
+                        "country": "FR"
+                      }
+                    },
+                    "storeId": "MAG01",
+                    "options": {
+                      "carrierScore": {
+                        "active": true
+                      }
+                    }
                   }
                 }
               }
@@ -6537,6 +6599,20 @@
                       "TRAYS_QUANTITY"
                     ],
                     "default": "ORDERS_QUANTITY"
+                  }
+                }
+              },
+              "carrierScore": {
+                "type": "object",
+                "x-stoplight": {
+                  "id": "h9bq41n6c5idt"
+                },
+                "properties": {
+                  "active": {
+                    "type": "boolean",
+                    "x-stoplight": {
+                      "id": "92uip2l87zd4p"
+                    }
                   }
                 }
               }
