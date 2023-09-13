@@ -399,6 +399,14 @@
                       },
                       "mode": {
                         "$ref": "./models/collect/mode.yaml"
+                      },
+                      "firstAvailableSlot": {
+                        "type": "string",
+                        "x-stoplight": {
+                          "id": "848klo9fs2ve2"
+                        },
+                        "format": "date-time",
+                        "description": "date of the first available slot "
                       }
                     },
                     "required": [
@@ -1214,6 +1222,14 @@
                     },
                     "urls": {
                       "$ref": "./models/collect/urls.yaml"
+                    },
+                    "firstAvailableSlot": {
+                      "type": "string",
+                      "x-stoplight": {
+                        "id": "2xiv5k0xmwzxn"
+                      },
+                      "format": "date-time",
+                      "description": "date of the first slot available "
                     }
                   },
                   "required": [
@@ -5911,6 +5927,14 @@
             "items": {
               "$ref": "#/components/schemas/packages"
             }
+          },
+          "firstAvailableSlot": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "ejpqst3jj3rhv"
+            },
+            "description": "only on the delay mode ",
+            "format": "date-time"
           }
         },
         "required": [
@@ -5948,6 +5972,14 @@
             "items": {
               "$ref": "#/components/schemas/packages"
             }
+          },
+          "firstAvailableSlot": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "7xeyfhq3xbljh"
+            },
+            "format": "date-time",
+            "description": "only for the delay mode\ndate of the first available slot "
           }
         }
       },
