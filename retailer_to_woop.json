@@ -878,7 +878,7 @@
             },
             "in": "query",
             "name": "format",
-            "description": "pdf or zpl"
+            "description": "A6 "
           },
           {
             "schema": {
@@ -886,7 +886,7 @@
             },
             "in": "query",
             "name": "mode",
-            "description": "A4/A5/A6"
+            "description": "pdf or zpl"
           }
         ],
         "requestBody": {
