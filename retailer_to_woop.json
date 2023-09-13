@@ -72,7 +72,7 @@
         "operationId": "put-orders-orderId-packages-states",
         "responses": {
           "200": {
-            "description": "Package status Changed successfully"
+            "description": "Package state changed successfully"
           },
           "401": {
             "description": "Unauthorized"
@@ -103,27 +103,22 @@
                       "type": "object",
                       "properties": {
                         "containerId": {
-                          "type": "array",
+                          "type": "object",
                           "x-stoplight": {
                             "id": "bz93jk8z042vr"
                           },
-                          "items": {
-                            "x-stoplight": {
-                              "id": "2n6rtldowroxo"
+                          "description": "This item is required once you want to add a package state. \n\nYou can fill in the trailerId and/or the palletId.",
+                          "properties": {
+                            "trailerId": {
+                              "type": "string",
+                              "x-stoplight": {
+                                "id": "edked2d4kwp5g"
+                              }
                             },
-                            "type": "object",
-                            "properties": {
-                              "trailerId": {
-                                "type": "string",
-                                "x-stoplight": {
-                                  "id": "u7fa56piwizfc"
-                                }
-                              },
-                              "palletId": {
-                                "type": "string",
-                                "x-stoplight": {
-                                  "id": "i77ghaqmr3uu9"
-                                }
+                            "palletId": {
+                              "type": "string",
+                              "x-stoplight": {
+                                "id": "20y0bsarqld6z"
                               }
                             }
                           }
