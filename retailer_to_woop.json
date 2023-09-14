@@ -870,7 +870,8 @@
               "type": "string"
             },
             "in": "query",
-            "name": "parcelId"
+            "name": "parcelId",
+            "required": true
           },
           {
             "schema": {
@@ -878,7 +879,8 @@
             },
             "in": "query",
             "name": "format",
-            "description": "A6 "
+            "description": "A6 ",
+            "required": true
           },
           {
             "schema": {
@@ -886,7 +888,8 @@
             },
             "in": "query",
             "name": "mode",
-            "description": "pdf or zpl"
+            "description": "zpl",
+            "required": true
           }
         ],
         "requestBody": {
@@ -894,19 +897,34 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "keys": {
-                    "type": "array",
-                    "x-stoplight": {
-                      "id": "fe2u3kqeyruj6"
-                    },
-                    "description": "**string**: values contained in the template",
-                    "items": {
+                "type": "array",
+                "items": {
+                  "x-stoplight": {
+                    "id": "99omsa0lhp24z"
+                  },
+                  "type": "object",
+                  "properties": {
+                    "": {
+                      "type": "object",
                       "x-stoplight": {
-                        "id": "blaqc6gdhcq51"
+                        "id": "691uw84yx6o03"
                       },
-                      "type": "string"
+                      "properties": {
+                        "key": {
+                          "type": "string",
+                          "x-stoplight": {
+                            "id": "2vbv9wl3k8avo"
+                          },
+                          "description": "name of the key\n"
+                        },
+                        "value": {
+                          "type": "string",
+                          "x-stoplight": {
+                            "id": "ku8n902kw3q84"
+                          },
+                          "description": "value associated to the key"
+                        }
+                      }
                     }
                   }
                 }
@@ -923,7 +941,7 @@
         },
         "responses": {
           "201": {
-            "description": "Request processed successfully ",
+            "description": "Request processed successfully - Label created successfully ",
             "content": {}
           },
           "401": {
