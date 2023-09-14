@@ -2342,7 +2342,7 @@
                   "id": "bmz90utz3dt8d"
                 }
               },
-              "Id": {
+              "id": {
                 "type": "string",
                 "x-stoplight": {
                   "id": "7d047yci51no3"
