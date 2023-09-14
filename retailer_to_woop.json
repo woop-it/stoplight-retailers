@@ -878,15 +878,6 @@
               "type": "string"
             },
             "in": "query",
-            "name": "format",
-            "description": "A6 ",
-            "required": true
-          },
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "query",
             "name": "mode",
             "description": "zpl",
             "required": true
@@ -897,35 +888,31 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "array",
-                "items": {
-                  "x-stoplight": {
-                    "id": "99omsa0lhp24z"
-                  },
-                  "type": "object",
-                  "properties": {
-                    "": {
-                      "type": "object",
+                "type": "object",
+                "properties": {
+                  "keys": {
+                    "type": "array",
+                    "x-stoplight": {
+                      "id": "faa1r25x9zmyz"
+                    },
+                    "description": "Every value contained in this array corresponds to a value contained in the template preliminarily given. \n",
+                    "items": {
                       "x-stoplight": {
-                        "id": "691uw84yx6o03"
+                        "id": "kb1kgumbpjkcd"
                       },
-                      "properties": {
-                        "key": {
-                          "type": "string",
-                          "x-stoplight": {
-                            "id": "2vbv9wl3k8avo"
-                          },
-                          "description": "name of the key\n"
-                        },
-                        "value": {
-                          "type": "string",
-                          "x-stoplight": {
-                            "id": "ku8n902kw3q84"
-                          },
-                          "description": "value associated to the key"
-                        }
-                      }
+                      "type": "string"
                     }
+                  }
+                }
+              },
+              "examples": {
+                "Example 1": {
+                  "value": {
+                    "keys": [
+                      "string",
+                      "string",
+                      "string"
+                    ]
                   }
                 }
               }
