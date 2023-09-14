@@ -942,7 +942,22 @@
         "responses": {
           "201": {
             "description": "Request processed successfully - Label created successfully ",
-            "content": {}
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "base64": {
+                      "type": "string",
+                      "x-stoplight": {
+                        "id": "k2le3vjshfi6g"
+                      },
+                      "description": "The label is returned in base64 in the format indicated at the time of the call"
+                    }
+                  }
+                }
+              }
+            }
           },
           "401": {
             "description": "You are not authorised to access this item",
