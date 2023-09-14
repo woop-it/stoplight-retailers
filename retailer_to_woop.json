@@ -870,16 +870,16 @@
               "type": "string"
             },
             "in": "query",
-            "name": "parcelId",
-            "required": true
+            "name": "mode",
+            "required": true,
+            "description": "zpl"
           },
           {
             "schema": {
               "type": "string"
             },
             "in": "query",
-            "name": "mode",
-            "description": "zpl",
+            "name": "parcelId",
             "required": true
           }
         ],
