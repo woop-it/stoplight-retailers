@@ -952,7 +952,7 @@
                       "x-stoplight": {
                         "id": "k2le3vjshfi6g"
                       },
-                      "description": "The label is returned in base64 in the format indicated at the time of the call"
+                      "description": "The label is returned in base64 in the format indicated "
                     }
                   }
                 }
