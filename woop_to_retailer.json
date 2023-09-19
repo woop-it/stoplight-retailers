@@ -91,6 +91,21 @@
                         "id"
                       ]
                     }
+                  },
+                  "pickUpPoint": {
+                    "type": "object",
+                    "x-stoplight": {
+                      "id": "6t35dahfxclbp"
+                    },
+                    "properties": {
+                      "partnerCode": {
+                        "type": "string",
+                        "x-stoplight": {
+                          "id": "sb003u59ml2q2"
+                        },
+                        "description": "carrier.code of the pickup point"
+                      }
+                    }
                   }
                 },
                 "required": [
