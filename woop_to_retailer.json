@@ -2490,6 +2490,21 @@
           "carrierCode": {
             "type": "string",
             "description": "Carrier code"
+          },
+          "pickUpPoint": {
+            "type": "object",
+            "x-stoplight": {
+              "id": "nkktqg5zttwtt"
+            },
+            "properties": {
+              "partnerCode": {
+                "type": "string",
+                "x-stoplight": {
+                  "id": "7g7ovacfh7itt"
+                },
+                "description": "carrier.code of the pickup point"
+              }
+            }
           }
         },
         "required": [
