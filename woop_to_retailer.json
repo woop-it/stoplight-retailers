@@ -2435,6 +2435,21 @@
           "carrierCode": {
             "type": "string",
             "description": "Carrier code"
+          },
+          "pickUpPoint": {
+            "type": "object",
+            "x-stoplight": {
+              "id": "5i0gts90j2ln5"
+            },
+            "properties": {
+              "partnerCode": {
+                "type": "string",
+                "x-stoplight": {
+                  "id": "z1a8cc5hffblf"
+                },
+                "description": "carrier.code of the pickup point"
+              }
+            }
           }
         },
         "required": [
