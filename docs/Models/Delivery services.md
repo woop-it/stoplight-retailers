@@ -27,3 +27,4 @@ List of the delivery services available when creating an order.
 | `SERVICE_EXCHANGE`                 | Products exchange                    |
 | `SERVICE_DELIVERY_TO_MAILBOX`      | Delivery to a mailbox                |
 | `SERVICE_SCHEDULED`                | Delivery on request                  |
+| `SERVICE_FREIGHT_ELEVATOR`         | Delivery by freight elevator         |
