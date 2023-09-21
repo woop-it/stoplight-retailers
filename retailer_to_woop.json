@@ -867,12 +867,15 @@
           },
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "zpl"
+              ]
             },
             "in": "query",
             "name": "mode",
             "required": true,
-            "description": "zpl"
+            "description": "Label format"
           },
           {
             "schema": {
@@ -880,7 +883,16 @@
             },
             "in": "query",
             "name": "parcelId",
-            "required": true
+            "description": "Parcel number"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "orderId",
+            "required": true,
+            "description": "Order identifier"
           }
         ],
         "requestBody": {
@@ -888,32 +900,54 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "keys": {
-                    "type": "array",
-                    "x-stoplight": {
-                      "id": "faa1r25x9zmyz"
-                    },
-                    "description": "Every value contained in this array corresponds to a value contained in the template preliminarily given. \n",
-                    "items": {
+                "type": "array",
+                "items": {
+                  "x-stoplight": {
+                    "id": "7uueosxfeu696"
+                  },
+                  "type": "object",
+                  "properties": {
+                    "key": {
+                      "type": "object",
                       "x-stoplight": {
-                        "id": "kb1kgumbpjkcd"
+                        "id": "1w2g7uwe2t4kn"
                       },
-                      "type": "string"
+                      "properties": {
+                        "keyName": {
+                          "type": "string",
+                          "x-stoplight": {
+                            "id": "go2s3a37bxkib"
+                          },
+                          "description": "Name of the key"
+                        }
+                      }
+                    },
+                    "value": {
+                      "type": "object",
+                      "x-stoplight": {
+                        "id": "qukcchy13ja7u"
+                      },
+                      "properties": {
+                        "valueName": {
+                          "type": "string",
+                          "x-stoplight": {
+                            "id": "rtdgwst3pah6z"
+                          },
+                          "description": "object value"
+                        }
+                      }
                     }
                   }
                 }
               },
               "examples": {
                 "Example 1": {
-                  "value": {
-                    "keys": [
-                      "string",
-                      "string",
-                      "string"
-                    ]
-                  }
+                  "value": [
+                    {
+                      "Key": "string",
+                      "value": "string"
+                    }
+                  ]
                 }
               }
             },
@@ -937,9 +971,9 @@
                     "base64": {
                       "type": "string",
                       "x-stoplight": {
-                        "id": "k2le3vjshfi6g"
+                        "id": "3tbsa7upo3wg1"
                       },
-                      "description": "The label is returned in base64 in the format indicated "
+                      "description": "The label is returned in base64 in the format indicated\n\n"
                     }
                   }
                 }
