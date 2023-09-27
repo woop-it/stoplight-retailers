@@ -8276,6 +8276,9 @@
             "type": "string",
             "description": "Customer's email address"
           },
+          "optIn": {
+            "$ref": "#/components/schemas/optIn"
+          },
           "language": {
             "$ref": "#/components/schemas/language"
           },
@@ -8415,6 +8418,51 @@
             }
           }
         }
+      },
+      "optIn": {
+        "title": "Opt-in (optIn)",
+        "x-stoplight": {
+          "id": "5n7ri6a7on6ao"
+        },
+        "type": "object",
+        "description": "Defines the explicit consent of the customer to be contacted for survey or delivery tracking events for a specific channel.\nIf a channel is not present, notifications won't be sent on this channel\n\nTo ensure backward compatibility, if the optin section is not sent, then the customer's implicit consent will be considered and notifications sent.",
+        "properties": {
+          "survey": {
+            "type": "array",
+            "x-stoplight": {
+              "id": "g2srfodbx51r6"
+            },
+            "description": "For all notifications related to satisfaction survey.",
+            "items": {
+              "$ref": "#/components/schemas/channel"
+            }
+          },
+          "delivery": {
+            "type": "array",
+            "x-stoplight": {
+              "id": "5wt2mzeuyae1g"
+            },
+            "description": "For all notifications related to delivery tracking.",
+            "items": {
+              "$ref": "#/components/schemas/channel"
+            }
+          }
+        },
+        "required": [
+          "survey",
+          "delivery"
+        ]
+      },
+      "channel": {
+        "title": "Channel",
+        "x-stoplight": {
+          "id": "ticb7e682kioc"
+        },
+        "enum": [
+          "MAIL",
+          "SMS"
+        ],
+        "description": "Refers to the channel use to communicate."
       }
     },
     "parameters": {
