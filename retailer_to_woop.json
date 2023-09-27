@@ -1727,7 +1727,7 @@
                         }
                       },
                       "contact": {
-                        "$ref": "#/components/schemas/contact"
+                        "$ref": "#/components/schemas/contactDelivery"
                       }
                     }
                   },
@@ -1972,6 +1972,15 @@
                         "lastName": "Dupond",
                         "phone": "+33600000000",
                         "email": "pierre.dupond@mail.fr",
+                        "optIn": {
+                          "survey": [
+                            "MAIL"
+                          ],
+                          "delivery": [
+                            "MAIL",
+                            "SMS"
+                          ]
+                        },
                         "language": "fr",
                         "timezone": "Europe/Paris"
                       }
@@ -2085,6 +2094,15 @@
                         "lastName": "Dupond",
                         "phone": "+33600000000",
                         "email": "pierre.dupond@mail.fr",
+                        "optIn": {
+                          "survey": [
+                            "MAIL"
+                          ],
+                          "delivery": [
+                            "MAIL",
+                            "SMS"
+                          ]
+                        },
                         "language": "fr",
                         "timezone": "Europe/Paris"
                       }
@@ -2189,6 +2207,15 @@
                         "lastName": "Dupond",
                         "phone": "+33600000000",
                         "email": "pierre.dupond@mail.fr",
+                        "optIn": {
+                          "survey": [
+                            "MAIL"
+                          ],
+                          "delivery": [
+                            "MAIL",
+                            "SMS"
+                          ]
+                        },
                         "language": "fr",
                         "timezone": "Europe/Paris"
                       }
@@ -2287,6 +2314,15 @@
                         "lastName": "Dupond",
                         "phone": "+33600000000",
                         "email": "pierre.dupond@mail.fr",
+                        "optIn": {
+                          "survey": [
+                            "MAIL"
+                          ],
+                          "delivery": [
+                            "MAIL",
+                            "SMS"
+                          ]
+                        },
                         "language": "fr",
                         "timezone": "Europe/Paris"
                       }
@@ -2400,6 +2436,15 @@
                         "lastName": "Dupond",
                         "phone": "+33600000000",
                         "email": "pierre.dupond@mail.fr",
+                        "optIn": {
+                          "survey": [
+                            "MAIL"
+                          ],
+                          "delivery": [
+                            "MAIL",
+                            "SMS"
+                          ]
+                        },
                         "language": "fr",
                         "timezone": "Europe/Paris"
                       }
@@ -2508,6 +2553,15 @@
                         "lastName": "Dupond",
                         "phone": "+33600000000",
                         "email": "pierre.dupond@mail.fr",
+                        "optIn": {
+                          "survey": [
+                            "MAIL"
+                          ],
+                          "delivery": [
+                            "MAIL",
+                            "SMS"
+                          ]
+                        },
                         "language": "fr",
                         "timezone": "Europe/Paris"
                       }
