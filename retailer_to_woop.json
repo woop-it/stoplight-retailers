@@ -3364,7 +3364,7 @@
         "tags": [
           "Pickup points"
         ],
-        "description": "This method allows you to retrieve the list of relay points of carriers located around a given geolocation.\n\n[See explanation](https://woop.stoplight.io/docs/retailer/docs/Models/Pickup%20points.md)",
+        "description": "This method retrieves the list of relay-point for all the carriers associed to your account.\n\nThe method works like a search engine based on just two mandatory criteria: Latitude and Longitude of the delivery point. \n\nSearch options enable you to refine the method's eligibility engine. The more options there are, the more precise the results will be. \n\nOptionally, you can search for a relay-point based on the contents of the customer basket (parcel dimensions: length, width, height and weight). This allows you to suggest delivery points capable of receiving parcels of a certain weight. \n\n[See explanation](https://woop.stoplight.io/docs/retailer/docs/Models/Pickup%20points.md)",
         "operationId": "postPickupPoints",
         "parameters": [
           {
