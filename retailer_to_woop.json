@@ -4127,7 +4127,7 @@
                           "url"
                         ]
                       },
-                      "bookingStatus": {
+                      "pickUpPointBookingStatus": {
                         "type": "object",
                         "x-stoplight": {
                           "id": "slif0ildf7rne"
