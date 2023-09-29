@@ -1,6 +1,8 @@
 type: string
 title: subStatus
 enum:
+  - TO_CONFIRM
+  - CONFIRMED
   - FAILED
   - FAILED_WITH_RETRY
   - FAILED_WITH_RETURN
