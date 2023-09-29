@@ -16,8 +16,8 @@ List of the delivery services available when creating an order.
 | `SERVICE_SIMPLE_INSTALL`           | Simple service install               |
 | `SERVICE_COMPLEX_INSTALL`          | Complex service install              |
 | `SERVICE_PAY_ON_DELIVERY`          | Delivery with payment on receipt     |
-| `SERVICE_STANDARD_TAXI`            | Simple delivery in a (standard taxi) |
-| `SERVICE_XL_TAXI`                  | Simple delivery in a (Van taxi)      |
+| `SERVICE_STANDARD_TAXI`            | Simple delivery in a standard taxi   |
+| `SERVICE_XL_TAXI`                  | Simple delivery in a Van taxi        |
 | `SERVICE_WITH_SIGNATURE`           | Delivery with signature on receipt   |
 | `SERVICE_GREEN`                    | Eco-friendly delivery                |
 | `SERVICE_SHUTTLE`                  | Shuttle                              |
@@ -27,3 +27,7 @@ List of the delivery services available when creating an order.
 | `SERVICE_EXCHANGE`                 | Products exchange                    |
 | `SERVICE_DELIVERY_TO_MAILBOX`      | Delivery to a mailbox                |
 | `SERVICE_SCHEDULED`                | Delivery on request                  |
+| `SERVICE_DELIVERY_TO_LOCKER`       | Delivery in a locker                 |
+| `SERVICE_DELIVERY_TO_PICKUP_POINT` | Delivery in a pickup point           |
+| `SERVICE_STORE_TO_STORE`           | Delivery from one store to another   |
+| `SERVICE_FREIGHT_ELEVATOR`         | Delivery by freight elevator         |
