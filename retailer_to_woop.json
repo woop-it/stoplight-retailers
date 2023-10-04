@@ -70,7 +70,7 @@
         "description": "Get a list of the different labels from a carrier.",
         "operationId": "",
         "responses": {
-          "204": {
+          "200": {
             "description": "OK. Contains the retrieved labels list.",
             "content": {
               "application/json": {
