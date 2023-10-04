@@ -7230,7 +7230,7 @@
             "x-stoplight": {
               "id": "jpt0s5lqaclvh"
             },
-            "description": "package category - If this field not empty then length, width and height are no mandatory. "
+            "description": "package category - If this field not empty then length, width and height are no mandatory."
           },
           "length": {
             "$ref": "#/components/schemas/length"
