@@ -6519,7 +6519,7 @@
                   }
                 }
               },
-              "postalCode": {
+              "zoning": {
                 "type": "object",
                 "x-stoplight": {
                   "id": "d8fg2w9jsycpz"
