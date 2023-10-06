@@ -6482,6 +6482,22 @@
                   }
                 }
               },
+              "zoning": {
+                "type": "object",
+                "x-stoplight": {
+                  "id": "d8fg2w9jsycpz"
+                },
+                "description": "Zoning option allowing to launch the geocoding call wether or not there's GPS coordinates in picking and delivery locations",
+                "properties": {
+                  "active": {
+                    "type": "boolean",
+                    "x-stoplight": {
+                      "id": "yz5ilvjf7dafr"
+                    },
+                    "description": "Used to launch geographic eligibility"
+                  }
+                }
+              },
               "price": {
                 "type": "object",
                 "properties": {
@@ -6496,10 +6512,6 @@
                 "properties": {
                   "active": {
                     "type": "boolean"
-                  },
-                  "minRemainingCapacity": {
-                    "type": "number",
-                    "description": "Minimum remaining capacity for this slot"
                   },
                   "limit": {
                     "type": "number",
@@ -6516,22 +6528,10 @@
                       "TRAYS_QUANTITY"
                     ],
                     "default": "ORDERS_QUANTITY"
-                  }
-                }
-              },
-              "zoning": {
-                "type": "object",
-                "x-stoplight": {
-                  "id": "d8fg2w9jsycpz"
-                },
-                "description": "Zoning option",
-                "properties": {
-                  "active": {
-                    "type": "boolean",
-                    "x-stoplight": {
-                      "id": "yz5ilvjf7dafr"
-                    },
-                    "description": "Used to launch postal code eligibility"
+                  },
+                  "minRemainingCapacity": {
+                    "type": "number",
+                    "description": "Minimum remaining capacity for this slot"
                   }
                 }
               }
