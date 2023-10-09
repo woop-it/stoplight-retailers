@@ -2418,6 +2418,9 @@
           "subStatus": {
             "$ref": "./models/subStatus.yaml"
           },
+          "trackingUrls": {
+            "$ref": "./models/trackingUrls.yaml"
+          },
           "date": {
             "type": "string",
             "format": "datetime",
@@ -2490,6 +2493,12 @@
           "carrierEvent": {
             "type": "string",
             "description": "Event from the carrier "
+          },
+          "trackingUrls": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "18e8w4te5u9t1"
+            }
           },
           "status": {
             "$ref": "./models/status.yaml"
