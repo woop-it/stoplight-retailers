@@ -3502,9 +3502,8 @@
                     "offset": 0,
                     "kilometricDistance": 5,
                     "type": [
-                      "PICKUP_POINT_RELAY_WITHOUT_LOCKER"
+                      "PICKUP_POINT_RELAY_WITH_LOCKER"
                     ],
-                    "category": {},
                     "carrierCode": "string",
                     "depositDate": "2019-08-24",
                     "packages": [
@@ -3520,19 +3519,19 @@
                           }
                         ],
                         "length": {
-                          "value": 0,
-                          "unit": "mm"
+                          "value": 10,
+                          "unit": "cm"
                         },
                         "width": {
-                          "value": 0,
-                          "unit": "mm"
+                          "value": 10,
+                          "unit": "cm"
                         },
                         "height": {
-                          "value": 0,
-                          "unit": "mm"
+                          "value": 10,
+                          "unit": "cm"
                         },
                         "weight": {
-                          "value": 0,
+                          "value": 2,
                           "unit": "kg"
                         },
                         "products": [
@@ -3548,7 +3547,7 @@
                         "attributes": {
                           "footprint": {
                             "value": 13,
-                            "unit": "m2"
+                            "unit": "cm2"
                           }
                         },
                         "type": "PACKAGE"
