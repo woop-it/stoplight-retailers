@@ -6773,9 +6773,6 @@
           "services": {
             "$ref": "#/components/schemas/services"
           },
-          "productsPrice": {
-            "$ref": "#/components/schemas/productsPrice"
-          },
           "expectedPayment": {
             "type": "object",
             "description": "Rest to be paid, to be used as part of the `SERVICE_PAY_ON_DELIVERY` service",
@@ -6818,6 +6815,9 @@
           },
           "additionalData": {
             "$ref": "./models/additionalData.yaml"
+          },
+          "invoice": {
+            "$ref": "#/components/schemas/invoice"
           }
         },
         "required": [
@@ -7478,6 +7478,8 @@
       },
       "product": {
         "type": "object",
+        "title": "Product",
+        "description": "Product informations",
         "properties": {
           "type": {
             "$ref": "#/components/schemas/productType"
@@ -7498,11 +7500,46 @@
             "type": "integer",
             "default": 1,
             "description": "Product quantity"
+          },
+          "price": {
+            "$ref": "#/components/schemas/productsPrice"
+          },
+          "originCountry": {
+            "x-stoplight": {
+              "id": "xgv36r5u9xekz"
+            },
+            "enum": [
+              "FR",
+              "BE"
+            ],
+            "description": "Country code (ISO 3166 alpha-2).\n\nMandatory for shipments subject to customs declarations. "
+          },
+          "hsCode": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "rguzvgw0gt1ea"
+            },
+            "description": "Mandatory for consignments subject to a customs declaration. \n\nThis is the tarif number requested in customs documents. For international shipments, 6, 8 or 10 digits must be entered."
           }
         },
         "required": [
           "type"
-        ]
+        ],
+        "x-examples": {
+          "Example 1": {
+            "type": "TYPOLOGY_GENERIC",
+            "ean": "111257000000",
+            "cug": "643224",
+            "label": "string",
+            "quantity": 1,
+            "price": {
+              "value": 4.5,
+              "currency": "EUR"
+            },
+            "originCountry": "KH",
+            "hsCode": "61112090"
+          }
+        }
       },
       "packages": {
         "description": "Specifies the information needed to update a package. The handling unit is to be defined with the package/product structure. ",
@@ -7784,15 +7821,18 @@
           ]
         }
       },
-      "productsPrice": {
-        "description": "Corresponds to the sale prices of the products. To be entered for the service “SERVICE_INSTALL”.",
+      "productPrice": {
+        "description": "Corresponds to product selling prices. Mandatory for the \"SERVICE_INSTALL\" service and for shipments subject to customs declarations. ",
+        "x-stoplight": {
+          "id": "04673fa06d31b"
+        },
         "x-examples": {
           "Example": {
             "value": 300,
             "currency": "EUR"
           }
         },
-        "title": "Product prices (productsPrice)",
+        "title": "Product price (productPrice)",
         "type": "object",
         "properties": {
           "value": {
@@ -8410,6 +8450,65 @@
                 "unit": "KgCO2e",
                 "value": 13.91334,
                 "reliabilityScore": 2
+              }
+            }
+          }
+        }
+      },
+      "productsPrice": {
+        "type": "object",
+        "x-examples": {
+          "Example 1": {
+            "value": 300,
+            "currency": "EUR"
+          }
+        },
+        "title": "productPrice",
+        "description": "Corresponds to product selling prices. \n\nMandatory for the \"SERVICE_INSTALL\" service and for shipments subject to customs declarations. ",
+        "properties": {
+          "value": {
+            "type": "number",
+            "description": "value\n\n"
+          },
+          "currency": {
+            "$ref": "./models/currency.yaml"
+          }
+        },
+        "required": [
+          "value",
+          "currency"
+        ]
+      },
+      "invoice": {
+        "title": "invoice",
+        "x-stoplight": {
+          "id": "0ydebvifhzzcg"
+        },
+        "type": "object",
+        "description": "Purchase invoice informations\n\nMandatory for shipments subject to customs declarations. ",
+        "properties": {
+          "id": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "imwhczg18xluc"
+            },
+            "description": "Identifiant de la facture d'achât lié.\nApparaît sur la CN23 - Mandatory for shipments subject to customs declarations. "
+          },
+          "totalAmount": {
+            "x-stoplight": {
+              "id": "n4op59ln8aql5"
+            },
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "number",
+                "x-stoplight": {
+                  "id": "cnhz6jp8jfmzh"
+                },
+                "description": "value\n"
+              },
+              "currency": {
+                "$ref": "./models/currency.yaml"
               }
             }
           }
