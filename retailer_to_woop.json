@@ -1508,12 +1508,9 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": [
-                  "reasons"
-                ],
                 "properties": {
                   "reasons": {
-                    "description": "Motifs d’annulation",
+                    "description": "Cancellation reason. If the body is empty, then CANCELLED_UNKNOWN will be used and stored.",
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/cancelledReasons"
