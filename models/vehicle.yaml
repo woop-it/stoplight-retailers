@@ -1,0 +1,29 @@
+title: vehicle
+x-stoplight:
+  id: izyeebdg017mn
+type: object
+description: Vehicle information
+examples:
+  - references:
+      id: '65464768568753'
+      licencePlate: ZE-678-HD
+    vehicleType: VEHICLE_TYPE_BIKE
+properties:
+  references:
+    type: object
+    description: vehicle references
+    required:
+      - id
+    properties:
+      id:
+        type: string
+        description: technical id for a vehicle
+        example: '65464768568753'
+      licencePlate:
+        type: string
+        example: ZE-678-HD
+        description: Vehicle licence Plate
+  vehicleType:
+    $ref: ../woop_to_retailer.json#/components/schemas/vehicleType
+required:
+  - references

@@ -1,0 +1,43 @@
+title: route
+x-stoplight:
+  id: kbrjlqmwz5peb
+type: object
+description: delivery route information
+examples:
+  - references:
+      id: AAAAAAAA
+    sequenceNumber: 3
+    vehicle:
+      references:
+        id: '65464768568753'
+        licencePlate: ZE-678-HD
+      vehicleType: VEHICLE_TYPE_BIKE
+    team:
+      members:
+        - id: AAA
+    planning:
+      references:
+        id: P000001
+properties:
+  references:
+    type: object
+    description: route references
+    required:
+      - id
+    properties:
+      id:
+        type: string
+        example: AAAAAAAA
+        description: technical id for a route in a planning
+  sequenceNumber:
+    type: integer
+    description: route sequence number between all routes from one planning (starting from 1)
+    example: 3
+  vehicle:
+    $ref: ./vehicle.yaml
+  team:
+    $ref: ../woop_to_retailer.json#/components/schemas/team
+  planning:
+    $ref: ./planning.yaml
+required:
+  - references

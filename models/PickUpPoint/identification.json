@@ -1,0 +1,35 @@
+{
+  "title": "Identification",
+  "x-stoplight": {
+    "id": "htgczjhiqnho1"
+  },
+  "type": "object",
+  "description": "Identification used for a parcel on a pick up point to validate its loading or unloading",
+  "x-tags": [
+    "PickUpPoint"
+  ],
+  "properties": {
+    "barcode": {
+      "$ref": "../Common/barcode.json",
+      "x-stoplight": {
+        "id": "twxmsladrc8q9"
+      }
+    },
+    "pinCode": {
+      "$ref": "../Common/pinCode.json",
+      "x-stoplight": {
+        "id": "95v0j83p3676v"
+      }
+    }
+  },
+  "examples": [
+    {
+      "barcode": {
+        "value": "54fd56g4f5gfd456sd",
+        "type": "barcode",
+        "format": "128"
+      },
+      "pinCode": "123456"
+    }
+  ]
+}

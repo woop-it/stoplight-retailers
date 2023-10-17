@@ -7,4 +7,4 @@ enum:
   - WITH_CLAIM
   - REFUSED
   - NOT_COLLECTED
-x-internal: true
+x-internal: false
