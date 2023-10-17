@@ -1,0 +1,15 @@
+{
+  "title": "Timezone",
+  "x-stoplight": {
+    "id": "jwepxesxj9ibw"
+  },
+  "type": "string",
+  "example": "Europe/Paris",
+  "description": "Timezone",
+  "x-tags": [
+    "Common"
+  ],
+  "examples": [
+    "Europe/Paris"
+  ]
+}

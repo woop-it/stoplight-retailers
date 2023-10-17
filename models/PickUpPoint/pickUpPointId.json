@@ -1,0 +1,12 @@
+{
+  "title": "pickUpPointId",
+  "x-stoplight": {
+    "id": "m1i67waf5wvg1"
+  },
+  "type": "string",
+  "description": "Id of a pick up point",
+  "example": "PickUpPoint_001",
+  "x-tags": [
+    "PickUpPoint"
+  ]
+}
