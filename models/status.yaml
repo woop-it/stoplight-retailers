@@ -21,4 +21,4 @@ enum:
   - DELIVERY_CANCELLATION_REJECTED
   - DELIVERY_REPLANNED
 description: ''
-x-internal: false
+x-internal: true

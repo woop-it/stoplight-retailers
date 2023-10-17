@@ -65,95 +65,6 @@
         "summary": "Health"
       }
     },
-    "/orders/{orderId}/packages/states": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "orderId",
-          "in": "path",
-          "required": true
-        }
-      ],
-      "patch": {
-        "summary": "Change package state",
-        "operationId": "patch-order",
-        "responses": {
-          "204": {
-            "description": "Package status Changed successfully",
-            "headers": {}
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "404": {
-            "description": "Reference Not Found"
-          }
-        },
-        "description": "Changes the package status in order to yield the package responsability to the carrier",
-        "parameters": [],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "packages": {
-                    "type": "array",
-                    "x-stoplight": {
-                      "id": "j1wdefr72kqoo"
-                    },
-                    "items": {
-                      "x-stoplight": {
-                        "id": "mq36n9hg6f9bt"
-                      },
-                      "type": "object",
-                      "properties": {
-                        "state": {
-                          "type": "string",
-                          "x-stoplight": {
-                            "id": "zvt5m8cyuunp9"
-                          },
-                          "enum": [
-                            "ON_DOCK",
-                            "PREPARED"
-                          ]
-                        },
-                        "date": {
-                          "type": "string",
-                          "x-stoplight": {
-                            "id": "nouukp0mg5ut2"
-                          },
-                          "format": "date-time"
-                        },
-                        "reference": {
-                          "type": "string",
-                          "x-stoplight": {
-                            "id": "3ppkxetxuy0yd"
-                          }
-                        }
-                      },
-                      "required": [
-                        "state",
-                        "date"
-                      ]
-                    }
-                  }
-                },
-                "required": [
-                  "packages"
-                ]
-              }
-            }
-          }
-        },
-        "tags": [
-          "Order",
-          "package"
-        ]
-      }
-    },
     "/collects": {
       "post": {
         "tags": [
@@ -311,74 +222,6 @@
                           }
                         ],
                         "quantity": 1
-                      }
-                    ]
-                  }
-                },
-                "example-1": {
-                  "value": {
-                    "mode": "standard",
-                    "collectId": "string",
-                    "exchangePlaceId": "string",
-                    "bookingId": "string",
-                    "slot": {
-                      "start": "string",
-                      "end": "string"
-                    },
-                    "customer": {
-                      "firstName": "string",
-                      "lastName": "string",
-                      "phone": "string",
-                      "email": "string",
-                      "language": "fr",
-                      "timezone": "Europe/Paris",
-                      "main": true,
-                      "title": "string"
-                    },
-                    "packages": [
-                      {
-                        "references": [
-                          {
-                            "reference": "12345B",
-                            "barcode": {
-                              "value": "54fd56g4f5gfd456sd",
-                              "type": "barcode",
-                              "format": "128"
-                            }
-                          }
-                        ],
-                        "length": {
-                          "value": 0,
-                          "unit": "mm"
-                        },
-                        "width": {
-                          "value": 0,
-                          "unit": "mm"
-                        },
-                        "height": {
-                          "value": 0,
-                          "unit": "mm"
-                        },
-                        "weight": {
-                          "value": 0,
-                          "unit": "kg"
-                        },
-                        "products": [
-                          {
-                            "type": "TYPOLOGY_GENERIC",
-                            "ean": "string",
-                            "cug": "string",
-                            "label": "string",
-                            "quantity": 1
-                          }
-                        ],
-                        "quantity": 1,
-                        "attributes": {
-                          "footprint": {
-                            "value": 13,
-                            "unit": "m2"
-                          }
-                        }
                       }
                     ]
                   }
@@ -638,7 +481,7 @@
           {
             "schema": {
               "type": "boolean",
-              "default": false
+              "default": "false"
             },
             "in": "query",
             "description": "Also return on going slots",
@@ -780,8 +623,7 @@
                 }
               }
             }
-          },
-          "description": "Contains the creation information of the request."
+          }
         },
         "responses": {
           "201": {
@@ -857,115 +699,6 @@
         ]
       }
     },
-    "/deliveries/bookings": {
-      "post": {
-        "summary": "Book a delivery slot",
-        "description": "This method allows you to reserve an available time slot for a delivery request from the schedule of one or more given carriers.",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/apiVersion"
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/postDeliveriesBookings"
-              },
-              "examples": {
-                "Example": {
-                  "value": {
-                    "exchangePlaceId": "COLLECT01",
-                    "slot": {
-                      "start": "2021-04-20T08:00:00+0000",
-                      "end": "2021-04-20T08:30:00+0000"
-                    },
-                    "carrierCodes": [
-                      "carrier1"
-                    ]
-                  }
-                }
-              }
-            }
-          },
-          "description": "Contains the creation information of the request."
-        },
-        "responses": {
-          "201": {
-            "description": "Request processed successfully, time slot reserved",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "bookingId": {
-                      "type": "string",
-                      "description": "Reservation identifier."
-                    }
-                  }
-                },
-                "examples": {
-                  "Example": {
-                    "value": {
-                      "bookingId": "bfded21b-cbed-4256-b756-2febcea94df6"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Missing and/or incorrect items in the body",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/errorCode"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "You are not authorised to access this item",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/errorCode"
-                },
-                "examples": {}
-              }
-            }
-          },
-          "403": {
-            "description": "Request not possible for this 'exchangePlaceId'",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/errorCode"
-                },
-                "examples": {
-                  "Example": {
-                    "value": {
-                      "statusCode": 403,
-                      "error": "Forbidden",
-                      "message": "Store doesn't exist or is inactive"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "The time slot is already booked"
-          }
-        },
-        "operationId": "postDeliveriesBookings",
-        "tags": [
-          "Delivery Booking"
-        ]
-      },
-      "parameters": []
-    },
     "/bookings/{bookingId}": {
       "delete": {
         "summary": "Cancel a booking slot",
@@ -1033,66 +766,6 @@
         "operationId": "deleteBookings",
         "tags": [
           "Collect"
-        ]
-      }
-    },
-    "/deliveries/bookings/{bookingId}": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "bookingId",
-          "in": "path",
-          "required": true
-        }
-      ],
-      "delete": {
-        "summary": "Cancel a delivery booking slot",
-        "operationId": "deleteDeliveryBookingId",
-        "responses": {
-          "204": {
-            "description": "Request successfully processed time slot cancelled"
-          },
-          "401": {
-            "description": "You are not authorised to access this item",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/errorCode"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "The time slot reservation cannot be cancelled.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/errorCode"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "The 'bookingId' does not exist",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/errorCode"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Delivery Booking"
-        ],
-        "description": "This method allows you to cancel the reservation of a time slot for a delivery request at a specific carrier and location.",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/apiVersion"
-          }
         ]
       }
     },
@@ -1323,6 +996,682 @@
         ]
       }
     },
+    "/orders": {
+      "post": {
+        "tags": [
+          "Order"
+        ],
+        "description": "This method allows you to create an order from Woop.\nOnce the order has been validated, quotes will be sent to the carriers. The delivery order will then be created once a quote has been validated.",
+        "operationId": "postOrders",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "description": "Contains the order creation information.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/postOrders"
+              },
+              "examples": {
+                "Default example": {
+                  "value": {
+                    "orderId": "65z4eq1d6q54zd1",
+                    "referenceNumber": "65q41zdq65z14",
+                    "storeId": "AX645",
+                    "picking": {
+                      "location": {
+                        "type": "address",
+                        "addressLine1": "237 rue du ballon",
+                        "postalCode": "59110",
+                        "city": "La Madeleine",
+                        "country": "FR"
+                      },
+                      "interval": [
+                        {
+                          "start": "2019-11-27T12:00:00+0000",
+                          "end": "2019-11-27T14:00:00+0000"
+                        }
+                      ],
+                      "contact": {
+                        "firstName": "Michel",
+                        "lastName": "Dupont",
+                        "phone": "+33600000000",
+                        "email": "michel.dupont@mail.fr",
+                        "language": "fr",
+                        "timezone": "Europe/Paris"
+                      }
+                    },
+                    "delivery": {
+                      "location": {
+                        "type": "address",
+                        "addressLine1": "165 avenue de Bretagne",
+                        "elevator": true,
+                        "floor": 3,
+                        "postalCode": "59000",
+                        "city": "Lille",
+                        "country": "FR"
+                      },
+                      "interval": [
+                        {
+                          "start": "2019-11-28T13:30:00+0000",
+                          "end": "2019-11-28T14:30:00+0000"
+                        }
+                      ],
+                      "contact": {
+                        "firstName": "Pierre",
+                        "lastName": "Dupond",
+                        "phone": "+33600000000",
+                        "email": "pierre.dupond@mail.fr",
+                        "language": "fr",
+                        "timezone": "Europe/Paris"
+                      }
+                    },
+                    "packages": [
+                      {
+                        "length": {
+                          "value": 15,
+                          "unit": "cm"
+                        },
+                        "width": {
+                          "value": 15,
+                          "unit": "cm"
+                        },
+                        "height": {
+                          "value": 1.2,
+                          "unit": "m"
+                        },
+                        "weight": {
+                          "value": 560,
+                          "unit": "g"
+                        },
+                        "references": [
+                          "123456789A",
+                          "123456789B",
+                          "123456789C",
+                          "123456789D",
+                          "123456789E"
+                        ],
+                        "products": [
+                          {
+                            "type": "TYPOLOGY_GENERIC",
+                            "ean": "4dq86zd4q6zd4q64",
+                            "cug": "q56zd4q65d4q",
+                            "label": "Lampe",
+                            "quantity": 1
+                          }
+                        ],
+                        "quantity": 5
+                      }
+                    ],
+                    "services": [
+                      "SERVICE_SELECTED_ROOM"
+                    ]
+                  }
+                },
+                "Example with assembly": {
+                  "value": {
+                    "orderId": "65z4eq1d6q54zd1",
+                    "referenceNumber": "65q41zdq65z14",
+                    "storeId": "AX645",
+                    "picking": {
+                      "location": {
+                        "type": "address",
+                        "addressLine1": "237 rue du ballon",
+                        "postalCode": "59110",
+                        "city": "La Madeleine",
+                        "country": "FR"
+                      },
+                      "interval": [
+                        {
+                          "start": "2019-11-27T12:00:00+0000",
+                          "end": "2019-11-27T14:00:00+0000"
+                        }
+                      ],
+                      "contact": {
+                        "firstName": "Michel",
+                        "lastName": "Dupont",
+                        "phone": "+33600000000",
+                        "email": "michel.dupont@mail.fr",
+                        "language": "fr",
+                        "timezone": "Europe/Paris"
+                      }
+                    },
+                    "delivery": {
+                      "location": {
+                        "type": "address",
+                        "addressLine1": "165 avenue de Bretagne",
+                        "elevator": true,
+                        "floor": 3,
+                        "postalCode": "59000",
+                        "city": "Lille",
+                        "country": "FR"
+                      },
+                      "interval": [
+                        {
+                          "start": "2019-11-28T13:30:00+0000",
+                          "end": "2019-11-28T14:30:00+0000"
+                        }
+                      ],
+                      "contact": {
+                        "firstName": "Pierre",
+                        "lastName": "Dupond",
+                        "phone": "+33600000000",
+                        "email": "pierre.dupond@mail.fr",
+                        "language": "fr",
+                        "timezone": "Europe/Paris"
+                      }
+                    },
+                    "packages": [
+                      {
+                        "length": {
+                          "value": 15,
+                          "unit": "cm"
+                        },
+                        "width": {
+                          "value": 15,
+                          "unit": "cm"
+                        },
+                        "height": {
+                          "value": 1.2,
+                          "unit": "m"
+                        },
+                        "weight": {
+                          "value": 560,
+                          "unit": "g"
+                        },
+                        "references": [
+                          "123456789A",
+                          "123456789B",
+                          "123456789C",
+                          "123456789D",
+                          "123456789E"
+                        ],
+                        "products": [
+                          {
+                            "type": "TYPOLOGY_GENERIC",
+                            "ean": "4dq86zd4q6zd4q64",
+                            "cug": "q56zd4q65d4q",
+                            "label": "Lampe",
+                            "quantity": 1
+                          }
+                        ],
+                        "quantity": 5
+                      }
+                    ],
+                    "services": [
+                      "SERVICE_ASSEMBLY"
+                    ],
+                    "productsPrice": {
+                      "value": 30,
+                      "currency": "EUR"
+                    }
+                  }
+                },
+                "Example of delivery in pickup point": {
+                  "value": {
+                    "orderId": "65z4eq1d6q54zd1",
+                    "referenceNumber": "65q41zdq65z14",
+                    "storeId": "AX645",
+                    "picking": {
+                      "location": {
+                        "type": "pickupPoint",
+                        "carrierCode": "carrierX",
+                        "id": "36JGZ7"
+                      },
+                      "interval": [
+                        {
+                          "start": "2019-11-27T12:00:00+0000",
+                          "end": "2019-11-27T14:00:00+0000"
+                        }
+                      ],
+                      "contact": {
+                        "firstName": "Michel",
+                        "lastName": "Dupont",
+                        "phone": "+33600000000",
+                        "email": "michel.dupont@mail.fr",
+                        "language": "fr",
+                        "timezone": "Europe/Paris"
+                      }
+                    },
+                    "delivery": {
+                      "location": {
+                        "type": "pickupPoint",
+                        "carrierCode": "carrierX",
+                        "id": "19GON"
+                      },
+                      "interval": [
+                        {
+                          "start": "2019-11-28T13:30:00+0000",
+                          "end": "2019-11-28T14:30:00+0000"
+                        }
+                      ],
+                      "contact": {
+                        "firstName": "Pierre",
+                        "lastName": "Dupond",
+                        "phone": "+33600000000",
+                        "email": "pierre.dupond@mail.fr",
+                        "language": "fr",
+                        "timezone": "Europe/Paris"
+                      }
+                    },
+                    "packages": [
+                      {
+                        "length": {
+                          "value": 15,
+                          "unit": "cm"
+                        },
+                        "width": {
+                          "value": 15,
+                          "unit": "cm"
+                        },
+                        "height": {
+                          "value": 1.2,
+                          "unit": "m"
+                        },
+                        "weight": {
+                          "value": 560,
+                          "unit": "g"
+                        },
+                        "references": [
+                          "123456789A",
+                          "123456789B",
+                          "123456789C",
+                          "123456789D",
+                          "123456789E"
+                        ],
+                        "products": [
+                          {
+                            "type": "TYPOLOGY_GENERIC",
+                            "ean": "4dq86zd4q6zd4q64",
+                            "cug": "q56zd4q65d4q",
+                            "label": "Lampe",
+                            "quantity": 1
+                          }
+                        ],
+                        "quantity": 5
+                      }
+                    ],
+                    "services": [
+                      "SERVICE_SELECTED_ROOM"
+                    ]
+                  }
+                },
+                "Example of delivery in exchange place": {
+                  "value": {
+                    "orderId": "65z4eq1d6q54zd1",
+                    "referenceNumber": "65q41zdq65z14",
+                    "storeId": "AX645",
+                    "picking": {
+                      "location": {
+                        "type": "exchangePlace",
+                        "id": "EXCHANGE PLACE 1"
+                      },
+                      "interval": [
+                        {
+                          "start": "2019-11-27T12:00:00+0000",
+                          "end": "2019-11-27T14:00:00+0000"
+                        }
+                      ],
+                      "contact": {
+                        "firstName": "Michel",
+                        "lastName": "Dupont",
+                        "phone": "+33600000000",
+                        "email": "michel.dupont@mail.fr",
+                        "language": "fr",
+                        "timezone": "Europe/Paris"
+                      }
+                    },
+                    "delivery": {
+                      "location": {
+                        "type": "exchangePlace",
+                        "id": "EXCHANGE PLACE 2"
+                      },
+                      "interval": [
+                        {
+                          "start": "2019-11-28T13:30:00+0000",
+                          "end": "2019-11-28T14:30:00+0000"
+                        }
+                      ],
+                      "contact": {
+                        "firstName": "Pierre",
+                        "lastName": "Dupond",
+                        "phone": "+33600000000",
+                        "email": "pierre.dupond@mail.fr",
+                        "language": "fr",
+                        "timezone": "Europe/Paris"
+                      }
+                    },
+                    "packages": [
+                      {
+                        "length": {
+                          "value": 15,
+                          "unit": "cm"
+                        },
+                        "width": {
+                          "value": 15,
+                          "unit": "cm"
+                        },
+                        "height": {
+                          "value": 1.2,
+                          "unit": "m"
+                        },
+                        "weight": {
+                          "value": 560,
+                          "unit": "g"
+                        },
+                        "references": [
+                          "123456789A",
+                          "123456789B",
+                          "123456789C",
+                          "123456789D",
+                          "123456789E"
+                        ],
+                        "products": [
+                          {
+                            "type": "TYPOLOGY_GENERIC",
+                            "ean": "4dq86zd4q6zd4q64",
+                            "cug": "q56zd4q65d4q",
+                            "label": "Lamp",
+                            "quantity": 1
+                          }
+                        ],
+                        "quantity": 5
+                      }
+                    ],
+                    "services": [
+                      "SERVICE_ASSEMBLY"
+                    ],
+                    "tags": [
+                      {
+                        "key": "origin",
+                        "value": "web"
+                      }
+                    ],
+                    "productsPrice": {
+                      "value": 30,
+                      "currency": "EUR"
+                    }
+                  }
+                },
+                "Example with carrier choice": {
+                  "value": {
+                    "orderId": "65z4eq1d6q54zd1",
+                    "referenceNumber": "65q41zdq65z14",
+                    "storeId": "AX645",
+                    "picking": {
+                      "location": {
+                        "type": "exchangePlace",
+                        "id": "EXCHANGE PLACE 1"
+                      },
+                      "interval": [
+                        {
+                          "start": "2019-11-27T12:00:00+0000",
+                          "end": "2019-11-27T14:00:00+0000"
+                        }
+                      ],
+                      "contact": {
+                        "firstName": "Michel",
+                        "lastName": "Dupont",
+                        "phone": "+33600000000",
+                        "email": "michel.dupont@mail.fr",
+                        "language": "fr",
+                        "timezone": "Europe/Paris"
+                      }
+                    },
+                    "delivery": {
+                      "location": {
+                        "type": "address",
+                        "addressLine1": "165 avenue de Bretagne",
+                        "elevator": true,
+                        "floor": 3,
+                        "postalCode": "59000",
+                        "city": "Lille",
+                        "country": "FR"
+                      },
+                      "interval": [
+                        {
+                          "start": "2019-11-28T13:30:00+0000",
+                          "end": "2019-11-28T14:30:00+0000"
+                        }
+                      ],
+                      "contact": {
+                        "firstName": "Pierre",
+                        "lastName": "Dupond",
+                        "phone": "+33600000000",
+                        "email": "pierre.dupond@mail.fr",
+                        "language": "fr",
+                        "timezone": "Europe/Paris"
+                      }
+                    },
+                    "packages": [
+                      {
+                        "length": {
+                          "value": 15,
+                          "unit": "cm"
+                        },
+                        "width": {
+                          "value": 15,
+                          "unit": "cm"
+                        },
+                        "height": {
+                          "value": 1.2,
+                          "unit": "m"
+                        },
+                        "weight": {
+                          "value": 560,
+                          "unit": "g"
+                        },
+                        "references": [
+                          "123456789A",
+                          "123456789B",
+                          "123456789C",
+                          "123456789D",
+                          "123456789E"
+                        ],
+                        "products": [
+                          {
+                            "type": "TYPOLOGY_GENERIC",
+                            "ean": "4dq86zd4q6zd4q64",
+                            "cug": "q56zd4q65d4q",
+                            "label": "Lamp",
+                            "quantity": 1
+                          }
+                        ],
+                        "quantity": 5
+                      }
+                    ],
+                    "tags": [
+                      {
+                        "key": "selected_carrier",
+                        "value": "carrier_code"
+                      }
+                    ],
+                    "services": [
+                      "SERVICE_FRONT_HOME"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "the order has been registered"
+          },
+          "202": {
+            "description": "the order must be completed"
+          },
+          "400": {
+            "description": "Missing and/or incorrect items in the body",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "Example": {
+                    "value": {
+                      "statusCode": 400,
+                      "error": "Bad Request",
+                      "message": "child \"picking\" fails because [child \"interval\" fails because [\"interval\" at position 0 fails because [child \"start\" fails because [\"start\" is required]]]]",
+                      "validation": {
+                        "source": "payload",
+                        "keys": [
+                          "picking.interval.0.start"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "You are not authorised to access this item",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Creation of the order is not possible\n\n[See the list of reasons](https://woop.stoplight.io/docs/retailer/docs/Models/Error%20reasons.md)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "statusCode": 403,
+                      "error": "Forbidden",
+                      "message": "Store doesn't exist or is inactive",
+                      "reasons": [
+                        "STORE_NOT_FOUND"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Creation of the order with this 'orderId' is not possible",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "statusCode": 409,
+                      "error": "Conflict",
+                      "message": "Conflict"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Create order"
+      },
+      "get": {
+        "tags": [
+          "Order"
+        ],
+        "description": "This method returns the details of one or more orders according to the selected filters.\n\nThe method used is governed by the following constraints:\n\n- Result limited to 100 orders\n- Sorting orders from oldest to most recent\n\nNote: It is recommended to regularly clean old test orders on staging environment.",
+        "operationId": "getOrders",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/components/parameters/queryDeliveryStatus"
+          },
+          {
+            "$ref": "#/components/parameters/queryStoreIdRequired"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "FAILED"
+            },
+            "in": "query",
+            "name": "deliverySubStatus",
+            "description": "Filters the list of commands based on the subStatus"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "fromPickingDate",
+            "description": "Filter by picking date. Allows you to retrieve orders from this date."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "toPickingDate",
+            "description": "Filter by picking date. Allows you to retrieve orders prior to this date."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Contains retrieved orders",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/responseOrder-(getAll)"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "You are not authorised to access this item",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                },
+                "examples": {}
+              }
+            }
+          },
+          "403": {
+            "description": "Request is not possible for this 'storeId'",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "statusCode": 403,
+                      "error": "Forbidden",
+                      "message": "Store doesn't exist or is inactive"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get orders"
+      }
+    },
     "/orders/{orderId}": {
       "delete": {
         "tags": [
@@ -1449,57 +1798,18 @@
                         "updatedAt": "string",
                         "referenceNumber": "string",
                         "picking": {
-                          "interval": [
-                            {
-                              "start": "2019-12-04T12:30:00+0000",
-                              "end": "2019-12-04T14:30:00+0000"
-                            }
-                          ],
-                          "stop": {
-                            "references": {
-                              "id": "123890654FRTTY"
-                            },
-                            "sequenceNumber": 7,
-                            "route": {
-                              "references": {
-                                "id": "AAAAAAAA"
-                              },
-                              "sequenceNumber": 3,
-                              "vehicle": {
-                                "references": {
-                                  "id": "65464768568753",
-                                  "licencePlate": "ZE-678-HD"
-                                },
-                                "vehicleType": "VEHICLE_TYPE_BIKE"
-                              },
-                              "team": {
-                                "members": [
-                                  {
-                                    "id": "AAA"
-                                  }
-                                ]
-                              },
-                              "planning": {
-                                "references": {
-                                  "id": "P000001"
-                                }
-                              }
-                            },
-                            "plannedInterval": {
-                              "start": "2019-12-04T12:30:00+0000",
-                              "end": "2019-12-04T14:30:00+0000"
-                            }
+                          "interval": {
+                            "start": "string",
+                            "end": "string"
                           }
                         },
                         "delivery": {
                           "externalDeliveryId": "string",
                           "updatedAt": "string",
-                          "interval": [
-                            {
-                              "start": "2019-12-04T12:30:00+0000",
-                              "end": "2019-12-04T14:30:00+0000"
-                            }
-                          ],
+                          "interval": {
+                            "start": "string",
+                            "end": "string"
+                          },
                           "trackingUrls:": {
                             "carrier": "https://tracking.best-carrier.com/XJHSDL541",
                             "woop": {
@@ -1508,42 +1818,7 @@
                             }
                           },
                           "status": "DELIVERY_INIT",
-                          "subStatus": "FAILED",
-                          "stop": {
-                            "references": {
-                              "id": "123890654FRTTYAAAAA"
-                            },
-                            "sequenceNumber": 17,
-                            "route": {
-                              "references": {
-                                "id": "AAAAAAAA"
-                              },
-                              "sequenceNumber": 3,
-                              "vehicle": {
-                                "references": {
-                                  "id": "65464768568753",
-                                  "licencePlate": "ZE-678-HD"
-                                },
-                                "vehicleType": "VEHICLE_TYPE_BIKE"
-                              },
-                              "team": {
-                                "members": [
-                                  {
-                                    "id": "AAA"
-                                  }
-                                ]
-                              },
-                              "planning": {
-                                "references": {
-                                  "id": "P000001"
-                                }
-                              }
-                            },
-                            "plannedInterval": {
-                              "start": "2019-12-04T16:30:00+0000",
-                              "end": "2019-12-04T18:30:00+0000"
-                            }
-                          }
+                          "subStatus": "FAILED"
                         },
                         "carrier": {
                           "name": "string",
@@ -1557,8 +1832,7 @@
                             "timezone": "Europe/Paris",
                             "main": true,
                             "title": "string"
-                          },
-                          "code": "string"
+                          }
                         },
                         "parcels": [
                           {
@@ -1590,13 +1864,6 @@
                           "taxIncludedAmount": 20.64,
                           "taxAmount": 3.44,
                           "currency": "EUR"
-                        },
-                        "emissions": {
-                          "estimatedCO2e": {
-                            "unit": "KgCO2e",
-                            "value": 13.91334,
-                            "reliabilityScore": 2
-                          }
                         }
                       }
                     }
@@ -1668,7 +1935,7 @@
                       "interval": {
                         "type": "array",
                         "items": {
-                          "$ref": "#/components/schemas/pickingInterval"
+                          "$ref": "#/components/schemas/interval"
                         }
                       },
                       "contact": {
@@ -1694,7 +1961,7 @@
                       "interval": {
                         "type": "array",
                         "items": {
-                          "$ref": "#/components/schemas/deliveryInterval"
+                          "$ref": "#/components/schemas/interval"
                         }
                       },
                       "contact": {
@@ -1714,12 +1981,6 @@
                   },
                   "tags": {
                     "$ref": "#/components/schemas/tags"
-                  },
-                  "carrierSelection": {
-                    "$ref": "#/components/schemas/carrierSelection"
-                  },
-                  "additionalData": {
-                    "$ref": "./models/additionalData.yaml"
                   }
                 },
                 "required": [
@@ -1780,998 +2041,6 @@
           }
         },
         "summary": "Patch order"
-      }
-    },
-    "/orders/{orderId}/retry": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "orderId",
-          "in": "path",
-          "required": true
-        }
-      ],
-      "post": {
-        "summary": "Retry an order",
-        "operationId": "retryOrder",
-        "responses": {
-          "202": {
-            "description": "the order retry has been registered"
-          },
-          "401": {
-            "description": "You are not authorised to access this item",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/errorCode"
-                },
-                "examples": {
-                  "Example": {
-                    "value": {
-                      "statusCode": 0,
-                      "error": "string",
-                      "message": "string",
-                      "reasons": [
-                        "UNAUTHORISED"
-                      ]
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "The order can't be retried",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/errorCode"
-                },
-                "examples": {
-                  "Example": {
-                    "value": {
-                      "statusCode": 0,
-                      "error": "string",
-                      "message": "string",
-                      "reasons": [
-                        "RETRY_FORBIDDEN"
-                      ]
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "OrderId not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/errorCode"
-                },
-                "examples": {
-                  "Example": {
-                    "value": {
-                      "statusCode": 0,
-                      "error": "string",
-                      "message": "string",
-                      "reasons": [
-                        "ORDER_NOT_FOUND"
-                      ]
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "description": "The aim of this method is to perform a retry if an order has a functional error status (ORDER_WITH_NO_CARRIER_ELIGIBLE, ORDER_WITH_NO_QUOTE, ORDER_WITH_NO_CARRIER_AVAILABLE, ORDER_REFUSED_DELIVERY).\nThis API will use exactly the same data sent for the POST /orders initial call (if part of the order data has change, then the PATCH /orders/{orderId} API has to be called instead).",
-        "tags": [
-          "Order"
-        ]
-      }
-    },
-    "/orders": {
-      "post": {
-        "tags": [
-          "Order"
-        ],
-        "description": "This method allows you to create an order from Woop.\nOnce the order has been validated, quotes will be sent to the carriers. The delivery order will then be created once a quote has been validated.",
-        "operationId": "postOrders",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/apiVersion"
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "description": "Contains the order creation information.",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/postOrders"
-              },
-              "examples": {
-                "Default example": {
-                  "value": {
-                    "orderId": "65z4eq1d6q54zd1",
-                    "referenceNumber": "65q41zdq65z14",
-                    "storeId": "AX645",
-                    "picking": {
-                      "location": {
-                        "type": "address",
-                        "addressLine1": "237 rue du ballon",
-                        "postalCode": "59110",
-                        "city": "La Madeleine",
-                        "country": "FR"
-                      },
-                      "interval": [
-                        {
-                          "start": "2019-11-27T12:00:00+0000",
-                          "end": "2019-11-27T14:00:00+0000"
-                        }
-                      ],
-                      "contact": {
-                        "firstName": "Michel",
-                        "lastName": "Dupont",
-                        "phone": "+33600000000",
-                        "email": "michel.dupont@mail.fr",
-                        "language": "fr",
-                        "timezone": "Europe/Paris"
-                      }
-                    },
-                    "delivery": {
-                      "location": {
-                        "type": "address",
-                        "addressLine1": "165 avenue de Bretagne",
-                        "elevator": true,
-                        "floor": 3,
-                        "postalCode": "59000",
-                        "city": "Lille",
-                        "country": "FR"
-                      },
-                      "interval": [
-                        {
-                          "start": "2019-11-28T13:30:00+0000",
-                          "end": "2019-11-28T14:30:00+0000"
-                        }
-                      ],
-                      "contact": {
-                        "firstName": "Pierre",
-                        "lastName": "Dupond",
-                        "phone": "+33600000000",
-                        "email": "pierre.dupond@mail.fr",
-                        "language": "fr",
-                        "timezone": "Europe/Paris"
-                      }
-                    },
-                    "packages": [
-                      {
-                        "length": {
-                          "value": 15,
-                          "unit": "cm"
-                        },
-                        "width": {
-                          "value": 15,
-                          "unit": "cm"
-                        },
-                        "height": {
-                          "value": 1.2,
-                          "unit": "m"
-                        },
-                        "weight": {
-                          "value": 560,
-                          "unit": "g"
-                        },
-                        "references": [
-                          {
-                            "reference": "123456789A",
-                            "barcode": {
-                              "value": "54fd56g4f5gfd456sd",
-                              "type": "barcode",
-                              "format": "128"
-                            }
-                          },
-                          {
-                            "reference": "123456789B",
-                            "barcode": {
-                              "value": "54fd56g4f5gfd456sdsdsd",
-                              "type": "barcode",
-                              "format": "128"
-                            }
-                          }
-                        ],
-                        "products": [
-                          {
-                            "type": "TYPOLOGY_GENERIC",
-                            "ean": "4dq86zd4q6zd4q64",
-                            "cug": "q56zd4q65d4q",
-                            "label": "Lampe",
-                            "quantity": 1
-                          }
-                        ],
-                        "quantity": 2,
-                        "attributes": {
-                          "footprint": {
-                            "value": 13,
-                            "unit": "m2"
-                          }
-                        },
-                        "type": "PACKAGE"
-                      }
-                    ],
-                    "services": [
-                      "SERVICE_SELECTED_ROOM"
-                    ]
-                  }
-                },
-                "Example with assembly": {
-                  "value": {
-                    "orderId": "65z4eq1d6q54zd1",
-                    "referenceNumber": "65q41zdq65z14",
-                    "storeId": "AX645",
-                    "picking": {
-                      "location": {
-                        "type": "address",
-                        "addressLine1": "237 rue du ballon",
-                        "postalCode": "59110",
-                        "city": "La Madeleine",
-                        "country": "FR"
-                      },
-                      "interval": [
-                        {
-                          "start": "2019-11-27T12:00:00+0000",
-                          "end": "2019-11-27T14:00:00+0000"
-                        }
-                      ],
-                      "contact": {
-                        "firstName": "Michel",
-                        "lastName": "Dupont",
-                        "phone": "+33600000000",
-                        "email": "michel.dupont@mail.fr",
-                        "language": "fr",
-                        "timezone": "Europe/Paris"
-                      }
-                    },
-                    "delivery": {
-                      "location": {
-                        "type": "address",
-                        "addressLine1": "165 avenue de Bretagne",
-                        "elevator": true,
-                        "floor": 3,
-                        "postalCode": "59000",
-                        "city": "Lille",
-                        "country": "FR"
-                      },
-                      "interval": [
-                        {
-                          "start": "2019-11-28T13:30:00+0000",
-                          "end": "2019-11-28T14:30:00+0000"
-                        }
-                      ],
-                      "contact": {
-                        "firstName": "Pierre",
-                        "lastName": "Dupond",
-                        "phone": "+33600000000",
-                        "email": "pierre.dupond@mail.fr",
-                        "language": "fr",
-                        "timezone": "Europe/Paris"
-                      }
-                    },
-                    "packages": [
-                      {
-                        "length": {
-                          "value": 15,
-                          "unit": "cm"
-                        },
-                        "width": {
-                          "value": 15,
-                          "unit": "cm"
-                        },
-                        "height": {
-                          "value": 1.2,
-                          "unit": "m"
-                        },
-                        "weight": {
-                          "value": 560,
-                          "unit": "g"
-                        },
-                        "references": [
-                          {
-                            "reference": "123456789A",
-                            "barcode": {
-                              "value": "54fd56g4f5gfd456sd",
-                              "type": "barcode",
-                              "format": "128"
-                            }
-                          },
-                          {
-                            "reference": "123456789B",
-                            "barcode": {
-                              "value": "54fd56g4f5gfd456sdsdsd",
-                              "type": "barcode",
-                              "format": "128"
-                            }
-                          }
-                        ],
-                        "products": [
-                          {
-                            "type": "TYPOLOGY_GENERIC",
-                            "ean": "4dq86zd4q6zd4q64",
-                            "cug": "q56zd4q65d4q",
-                            "label": "Lampe",
-                            "quantity": 1
-                          }
-                        ],
-                        "quantity": 2
-                      }
-                    ],
-                    "services": [
-                      "SERVICE_ASSEMBLY"
-                    ],
-                    "productsPrice": {
-                      "value": 30,
-                      "currency": "EUR"
-                    }
-                  }
-                },
-                "Example of delivery in pickup point": {
-                  "value": {
-                    "orderId": "65z4eq1d6q54zd1",
-                    "referenceNumber": "65q41zdq65z14",
-                    "storeId": "AX645",
-                    "picking": {
-                      "location": {
-                        "type": "pickupPoint",
-                        "carrierCode": "carrierX",
-                        "id": "36JGZ7"
-                      },
-                      "interval": [
-                        {
-                          "start": "2019-11-27T12:00:00+0000",
-                          "end": "2019-11-27T14:00:00+0000"
-                        }
-                      ],
-                      "contact": {
-                        "firstName": "Michel",
-                        "lastName": "Dupont",
-                        "phone": "+33600000000",
-                        "email": "michel.dupont@mail.fr",
-                        "language": "fr",
-                        "timezone": "Europe/Paris"
-                      }
-                    },
-                    "delivery": {
-                      "location": {
-                        "type": "pickupPoint",
-                        "carrierCode": "carrierX",
-                        "id": "19GON"
-                      },
-                      "interval": [
-                        {
-                          "start": "2019-11-28T13:30:00+0000",
-                          "end": "2019-11-28T14:30:00+0000"
-                        }
-                      ],
-                      "contact": {
-                        "firstName": "Pierre",
-                        "lastName": "Dupond",
-                        "phone": "+33600000000",
-                        "email": "pierre.dupond@mail.fr",
-                        "language": "fr",
-                        "timezone": "Europe/Paris"
-                      }
-                    },
-                    "packages": [
-                      {
-                        "length": {
-                          "value": 15,
-                          "unit": "cm"
-                        },
-                        "width": {
-                          "value": 15,
-                          "unit": "cm"
-                        },
-                        "height": {
-                          "value": 1.2,
-                          "unit": "m"
-                        },
-                        "weight": {
-                          "value": 560,
-                          "unit": "g"
-                        },
-                        "references": [
-                          {
-                            "reference": "123456789A",
-                            "barcode": {
-                              "value": "54fd56g4f5gfd456sd",
-                              "type": "barcode",
-                              "format": "128"
-                            }
-                          },
-                          {
-                            "reference": "123456789B",
-                            "barcode": {
-                              "value": "54fd56g4f5gfd456sdsdsd",
-                              "type": "barcode",
-                              "format": "128"
-                            }
-                          }
-                        ],
-                        "products": [
-                          {
-                            "type": "TYPOLOGY_GENERIC",
-                            "ean": "4dq86zd4q6zd4q64",
-                            "cug": "q56zd4q65d4q",
-                            "label": "Lampe",
-                            "quantity": 1
-                          }
-                        ],
-                        "quantity": 2
-                      }
-                    ],
-                    "services": [
-                      "SERVICE_SELECTED_ROOM"
-                    ]
-                  }
-                },
-                "Example of delivery in exchange place": {
-                  "value": {
-                    "orderId": "65z4eq1d6q54zd1",
-                    "referenceNumber": "65q41zdq65z14",
-                    "storeId": "AX645",
-                    "picking": {
-                      "location": {
-                        "type": "exchangePlace",
-                        "id": "EXCHANGE PLACE 1"
-                      },
-                      "interval": [
-                        {
-                          "start": "2019-11-27T12:00:00+0000",
-                          "end": "2019-11-27T14:00:00+0000"
-                        }
-                      ],
-                      "contact": {
-                        "firstName": "Michel",
-                        "lastName": "Dupont",
-                        "phone": "+33600000000",
-                        "email": "michel.dupont@mail.fr",
-                        "language": "fr",
-                        "timezone": "Europe/Paris"
-                      }
-                    },
-                    "delivery": {
-                      "location": {
-                        "type": "exchangePlace",
-                        "id": "EXCHANGE PLACE 2"
-                      },
-                      "interval": [
-                        {
-                          "start": "2019-11-28T13:30:00+0000",
-                          "end": "2019-11-28T14:30:00+0000"
-                        }
-                      ],
-                      "contact": {
-                        "firstName": "Pierre",
-                        "lastName": "Dupond",
-                        "phone": "+33600000000",
-                        "email": "pierre.dupond@mail.fr",
-                        "language": "fr",
-                        "timezone": "Europe/Paris"
-                      }
-                    },
-                    "packages": [
-                      {
-                        "length": {
-                          "value": 15,
-                          "unit": "cm"
-                        },
-                        "width": {
-                          "value": 15,
-                          "unit": "cm"
-                        },
-                        "height": {
-                          "value": 1.2,
-                          "unit": "m"
-                        },
-                        "weight": {
-                          "value": 560,
-                          "unit": "g"
-                        },
-                        "references": [
-                          {
-                            "reference": "123456789A",
-                            "barcode": {
-                              "value": "54fd56g4f5gfd456sd",
-                              "type": "barcode",
-                              "format": "128"
-                            }
-                          },
-                          {
-                            "reference": "123456789B",
-                            "barcode": {
-                              "value": "54fd56g4f5gfd456sdsdsd",
-                              "type": "barcode",
-                              "format": "128"
-                            }
-                          }
-                        ],
-                        "products": [
-                          {
-                            "type": "TYPOLOGY_GENERIC",
-                            "ean": "4dq86zd4q6zd4q64",
-                            "cug": "q56zd4q65d4q",
-                            "label": "Lamp",
-                            "quantity": 1
-                          }
-                        ],
-                        "quantity": 2
-                      }
-                    ],
-                    "services": [
-                      "SERVICE_ASSEMBLY"
-                    ],
-                    "tags": [
-                      {
-                        "key": "origin",
-                        "value": "web"
-                      }
-                    ],
-                    "productsPrice": {
-                      "value": 30,
-                      "currency": "EUR"
-                    }
-                  }
-                },
-                "Example with carrier choice": {
-                  "value": {
-                    "orderId": "65z4eq1d6q54zd1",
-                    "referenceNumber": "65q41zdq65z14",
-                    "storeId": "AX645",
-                    "picking": {
-                      "location": {
-                        "type": "exchangePlace",
-                        "id": "EXCHANGE PLACE 1"
-                      },
-                      "interval": [
-                        {
-                          "start": "2019-11-27T12:00:00+0000",
-                          "end": "2019-11-27T14:00:00+0000"
-                        }
-                      ],
-                      "contact": {
-                        "firstName": "Michel",
-                        "lastName": "Dupont",
-                        "phone": "+33600000000",
-                        "email": "michel.dupont@mail.fr",
-                        "language": "fr",
-                        "timezone": "Europe/Paris"
-                      }
-                    },
-                    "delivery": {
-                      "location": {
-                        "type": "address",
-                        "addressLine1": "165 avenue de Bretagne",
-                        "elevator": true,
-                        "floor": 3,
-                        "postalCode": "59000",
-                        "city": "Lille",
-                        "country": "FR"
-                      },
-                      "interval": [
-                        {
-                          "start": "2019-11-28T13:30:00+0000",
-                          "end": "2019-11-28T14:30:00+0000"
-                        }
-                      ],
-                      "contact": {
-                        "firstName": "Pierre",
-                        "lastName": "Dupond",
-                        "phone": "+33600000000",
-                        "email": "pierre.dupond@mail.fr",
-                        "language": "fr",
-                        "timezone": "Europe/Paris"
-                      }
-                    },
-                    "packages": [
-                      {
-                        "length": {
-                          "value": 15,
-                          "unit": "cm"
-                        },
-                        "width": {
-                          "value": 15,
-                          "unit": "cm"
-                        },
-                        "height": {
-                          "value": 1.2,
-                          "unit": "m"
-                        },
-                        "weight": {
-                          "value": 560,
-                          "unit": "g"
-                        },
-                        "references": [
-                          {
-                            "reference": "123456789A",
-                            "barcode": {
-                              "value": "54fd56g4f5gfd456sd",
-                              "type": "barcode",
-                              "format": "128"
-                            }
-                          },
-                          {
-                            "reference": "123456789B",
-                            "barcode": {
-                              "value": "54fd56g4f5gfd456sdsdsd",
-                              "type": "barcode",
-                              "format": "128"
-                            }
-                          }
-                        ],
-                        "products": [
-                          {
-                            "type": "TYPOLOGY_GENERIC",
-                            "ean": "4dq86zd4q6zd4q64",
-                            "cug": "q56zd4q65d4q",
-                            "label": "Lamp",
-                            "quantity": 1
-                          }
-                        ],
-                        "quantity": 2
-                      }
-                    ],
-                    "services": [
-                      "SERVICE_FRONT_HOME"
-                    ],
-                    "carrierSelection": {
-                      "mode": "INCLUSION",
-                      "carrierCodes": [
-                        "chronopost"
-                      ]
-                    }
-                  }
-                },
-                "Example with bookingId": {
-                  "value": {
-                    "orderId": "65z4eq1d6q54zd1",
-                    "referenceNumber": "65q41zdq65z14",
-                    "storeId": "AX645",
-                    "picking": {
-                      "location": {
-                        "type": "exchangePlace",
-                        "id": "EXCHANGE PLACE 1"
-                      },
-                      "interval": [
-                        {
-                          "start": "2019-11-27T12:00:00+0000",
-                          "end": "2019-11-27T14:00:00+0000"
-                        }
-                      ],
-                      "contact": {
-                        "firstName": "Michel",
-                        "lastName": "Dupont",
-                        "phone": "+33600000000",
-                        "email": "michel.dupont@mail.fr",
-                        "language": "fr",
-                        "timezone": "Europe/Paris"
-                      }
-                    },
-                    "delivery": {
-                      "location": {
-                        "type": "address",
-                        "addressLine1": "165 avenue de Bretagne",
-                        "elevator": true,
-                        "floor": 3,
-                        "postalCode": "59000",
-                        "city": "Lille",
-                        "country": "FR"
-                      },
-                      "interval": [
-                        {
-                          "bookingId": "34452233"
-                        }
-                      ],
-                      "contact": {
-                        "firstName": "Pierre",
-                        "lastName": "Dupond",
-                        "phone": "+33600000000",
-                        "email": "pierre.dupond@mail.fr",
-                        "language": "fr",
-                        "timezone": "Europe/Paris"
-                      }
-                    },
-                    "packages": [
-                      {
-                        "length": {
-                          "value": 15,
-                          "unit": "cm"
-                        },
-                        "width": {
-                          "value": 15,
-                          "unit": "cm"
-                        },
-                        "height": {
-                          "value": 1.2,
-                          "unit": "m"
-                        },
-                        "weight": {
-                          "value": 560,
-                          "unit": "g"
-                        },
-                        "references": [
-                          {
-                            "reference": "123456789A",
-                            "barcode": {
-                              "value": "54fd56g4f5gfd456sd",
-                              "type": "barcode",
-                              "format": "128"
-                            }
-                          },
-                          {
-                            "reference": "123456789B",
-                            "barcode": {
-                              "value": "54fd56g4f5gfd456sdsdsd",
-                              "type": "barcode",
-                              "format": "128"
-                            }
-                          }
-                        ],
-                        "products": [
-                          {
-                            "type": "TYPOLOGY_GENERIC",
-                            "ean": "4dq86zd4q6zd4q64",
-                            "cug": "q56zd4q65d4q",
-                            "label": "Lamp",
-                            "quantity": 1
-                          }
-                        ],
-                        "quantity": 2
-                      }
-                    ],
-                    "services": [
-                      "SERVICE_ASSEMBLY"
-                    ],
-                    "tags": [
-                      {
-                        "key": "origin",
-                        "value": "web"
-                      }
-                    ],
-                    "productsPrice": {
-                      "value": 30,
-                      "currency": "EUR"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "the order has been registered"
-          },
-          "202": {
-            "description": "Date in some fields are incorrect",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "errors": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "message": {
-                            "type": "string",
-                            "description": "error message",
-                            "example": "Picking start MUST be before delivery start"
-                          },
-                          "translationKey": {
-                            "type": "string",
-                            "description": "technical error message for Woop Team",
-                            "example": "technical.incidents.date.pickingStartBeforeDeliveryStart"
-                          },
-                          "key": {
-                            "type": "string",
-                            "description": "technical key for Woop team",
-                            "example": "order"
-                          }
-                        },
-                        "required": [
-                          "message",
-                          "translationKey",
-                          "key"
-                        ]
-                      }
-                    }
-                  }
-                },
-                "examples": {
-                  "Example": {
-                    "value": {
-                      "errors": [
-                        {
-                          "message": "Picking start MUST be before delivery start",
-                          "translationKey": "technical.incidents.date.pickingStartBeforeDeliveryStart",
-                          "key": "order"
-                        }
-                      ]
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Missing and/or incorrect items in the body",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/errorCode"
-                },
-                "examples": {
-                  "Example": {
-                    "value": {
-                      "statusCode": 400,
-                      "error": "Bad Request",
-                      "message": "child \"picking\" fails because [child \"interval\" fails because [\"interval\" at position 0 fails because [child \"start\" fails because [\"start\" is required]]]]",
-                      "validation": {
-                        "source": "payload",
-                        "keys": [
-                          "picking.interval.0.start"
-                        ]
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "You are not authorised to access this item",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/errorCode"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Creation of the order is not possible\n\n[See the list of reasons](https://woop.stoplight.io/docs/retailer/docs/Models/Error%20reasons.md)",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/errorCode"
-                },
-                "examples": {
-                  "example": {
-                    "value": {
-                      "statusCode": 403,
-                      "error": "Forbidden",
-                      "message": "Store doesn't exist or is inactive",
-                      "reasons": [
-                        "STORE_NOT_FOUND"
-                      ]
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "Creation of the order with this 'orderId' is not possible",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/errorCode"
-                },
-                "examples": {
-                  "example": {
-                    "value": {
-                      "statusCode": 409,
-                      "error": "Conflict",
-                      "message": "Conflict"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "summary": "Create order",
-        "x-internal": false
-      },
-      "get": {
-        "tags": [
-          "Order"
-        ],
-        "description": "This method returns the details of one or more orders according to the selected filters.\n\nThe method used is governed by the following constraints:\n\n- Result limited to 100 orders\n- Sorting orders from oldest to most recent\n\nNote: It is recommended to regularly clean old test orders on staging environment.",
-        "operationId": "getOrders",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/apiVersion"
-          },
-          {
-            "$ref": "#/components/parameters/queryDeliveryStatus"
-          },
-          {
-            "$ref": "#/components/parameters/queryStoreIdRequired"
-          },
-          {
-            "schema": {
-              "type": "string",
-              "example": "FAILED"
-            },
-            "in": "query",
-            "name": "deliverySubStatus",
-            "description": "Filters the list of commands based on the subStatus"
-          },
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "query",
-            "name": "fromPickingDate",
-            "description": "Filter by picking date. Allows you to retrieve orders from this date."
-          },
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "query",
-            "name": "toPickingDate",
-            "description": "Filter by picking date. Allows you to retrieve orders prior to this date."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. Contains retrieved orders",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/responseOrder-(getAll)"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "You are not authorised to access this item",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/errorCode"
-                },
-                "examples": {}
-              }
-            }
-          },
-          "403": {
-            "description": "Request is not possible for this 'storeId'",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/errorCode"
-                },
-                "examples": {
-                  "example-1": {
-                    "value": {
-                      "statusCode": 403,
-                      "error": "Forbidden",
-                      "message": "Store doesn't exist or is inactive"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "summary": "Get orders"
       }
     },
     "/orders/{orderId}/label": {
@@ -3364,9 +2633,7 @@
                     "latitude": 50.6379636,
                     "longitude": 3.077384,
                     "kilometricDistance": 20,
-                    "type": [
-                      "PICKUP_POINT_AGENCY"
-                    ]
+                    "type": "PICKUP_POINT_AGENCY"
                   }
                 },
                 "Search by type and carrier": {
@@ -3379,12 +2646,8 @@
                       "chronopost"
                     ],
                     "type": {
-                      "bpost": [
-                        "PICKUP_POINT_AGENCY"
-                      ],
-                      "chronopost": [
-                        "PICKUP_POINT_RELAY_WITH_LOCKER"
-                      ]
+                      "bpost": "PICKUP_POINT_AGENCY",
+                      "chronopost": "PICKUP_POINT_RELAY_WITH_LOCKER"
                     }
                   }
                 },
@@ -3462,71 +2725,6 @@
                         "quantity": 1
                       }
                     ]
-                  }
-                },
-                "Search pickup point with reservation": {
-                  "value": {
-                    "storeId": "string",
-                    "latitude": 0,
-                    "longitude": 0,
-                    "limit": 25,
-                    "offset": 0,
-                    "kilometricDistance": 5,
-                    "type": [
-                      "PICKUP_POINT_RELAY_WITH_LOCKER"
-                    ],
-                    "carrierCode": "string",
-                    "depositDate": "2019-08-24",
-                    "packages": [
-                      {
-                        "references": [
-                          {
-                            "reference": "12345B",
-                            "barcode": {
-                              "value": "54fd56g4f5gfd456sd",
-                              "type": "barcode",
-                              "format": "128"
-                            }
-                          }
-                        ],
-                        "length": {
-                          "value": 10,
-                          "unit": "cm"
-                        },
-                        "width": {
-                          "value": 10,
-                          "unit": "cm"
-                        },
-                        "height": {
-                          "value": 10,
-                          "unit": "cm"
-                        },
-                        "weight": {
-                          "value": 2,
-                          "unit": "kg"
-                        },
-                        "products": [
-                          {
-                            "type": "TYPOLOGY_GENERIC",
-                            "ean": "string",
-                            "cug": "string",
-                            "label": "string",
-                            "quantity": 1
-                          }
-                        ],
-                        "quantity": 1,
-                        "attributes": {
-                          "footprint": {
-                            "value": 13,
-                            "unit": "cm2"
-                          }
-                        },
-                        "type": "PACKAGE"
-                      }
-                    ],
-                    "countryCode": "string",
-                    "pickUpPointAccessibility": "ACCESSIBLE",
-                    "boxCategoryAccessibility": "UPPER"
                   }
                 }
               }
@@ -3918,6 +3116,9 @@
                       "carrier": {
                         "type": "object",
                         "description": "Callback to receive the choice of carrier.",
+                        "required": [
+                          "url"
+                        ],
                         "properties": {
                           "url": {
                             "type": "string",
@@ -3928,14 +3129,14 @@
                             "description": "API version for this callback",
                             "example": "1.1.0"
                           }
-                        },
-                        "required": [
-                          "url"
-                        ]
+                        }
                       },
-                      "orderStatus": {
+                      "status": {
                         "type": "object",
                         "description": "Callback to receive status changes",
+                        "required": [
+                          "url"
+                        ],
                         "properties": {
                           "url": {
                             "type": "string",
@@ -3946,50 +3147,14 @@
                             "description": "API version for this callback",
                             "example": "1.1.0"
                           }
-                        },
-                        "required": [
-                          "url"
-                        ]
-                      },
-                      "deliveryStatus": {
-                        "type": "object",
-                        "description": "Callback to receive status changes",
-                        "properties": {
-                          "url": {
-                            "type": "string",
-                            "description": "URL of the API route"
-                          },
-                          "version": {
-                            "type": "string",
-                            "description": "API version for this callback",
-                            "example": "1.1.0"
-                          }
-                        },
-                        "required": [
-                          "url"
-                        ]
-                      },
-                      "parcelStatus": {
-                        "type": "object",
-                        "description": "Callback to receive status changes",
-                        "properties": {
-                          "url": {
-                            "type": "string",
-                            "description": "URL of the API route"
-                          },
-                          "version": {
-                            "type": "string",
-                            "description": "API version for this callback",
-                            "example": "1.1.0"
-                          }
-                        },
-                        "required": [
-                          "url"
-                        ]
+                        }
                       },
                       "score": {
                         "type": "object",
                         "description": "Callback to receive customer ratings",
+                        "required": [
+                          "url"
+                        ],
                         "properties": {
                           "url": {
                             "type": "string",
@@ -4000,10 +3165,7 @@
                             "description": "API version for this callback.",
                             "example": "1.1.0"
                           }
-                        },
-                        "required": [
-                          "url"
-                        ]
+                        }
                       },
                       "deliveryClosure": {
                         "type": "object",
@@ -4075,45 +3237,12 @@
                           "url"
                         ]
                       },
-                      "deliveryStop": {
-                        "type": "object",
-                        "description": "Callback to receive changes in the delivery stops of an order",
-                        "properties": {
-                          "url": {
-                            "type": "string",
-                            "description": "URL of the API route"
-                          },
-                          "version": {
-                            "type": "string",
-                            "example": "1.8.0",
-                            "description": "API version for this callback"
-                          }
-                        },
-                        "required": [
-                          "url"
-                        ]
-                      },
-                      "tracking": {
-                        "type": "object",
-                        "description": "Callback to receive changes in the tracking page url of an order",
-                        "properties": {
-                          "url": {
-                            "type": "string",
-                            "description": "URL of the API route"
-                          },
-                          "version": {
-                            "type": "string",
-                            "description": "API version for this callback",
-                            "example": "1.9.0"
-                          }
-                        },
-                        "required": [
-                          "url"
-                        ]
-                      },
                       "collectStatus": {
                         "type": "object",
                         "description": "Callback to receive changes in the status of a collection",
+                        "required": [
+                          "url"
+                        ],
                         "properties": {
                           "url": {
                             "type": "string",
@@ -4124,63 +3253,7 @@
                             "description": "API version for this callback",
                             "example": "1.1.0"
                           }
-                        },
-                        "required": [
-                          "url"
-                        ]
-                      },
-                      "loadingIdentifications": {
-                        "type": "object",
-                        "x-stoplight": {
-                          "id": "kdokrmjx1yxep"
-                        },
-                        "description": "Callback to receive the loading identifications",
-                        "properties": {
-                          "url": {
-                            "type": "string",
-                            "x-stoplight": {
-                              "id": "jzdej03iojerw"
-                            },
-                            "description": "URL of the API route"
-                          },
-                          "version": {
-                            "type": "string",
-                            "x-stoplight": {
-                              "id": "2auqf2olq42oe"
-                            },
-                            "description": "API version for this callback",
-                            "example": "1.12.0"
-                          }
-                        },
-                        "required": [
-                          "url"
-                        ]
-                      },
-                      "bookingStatus": {
-                        "type": "object",
-                        "x-stoplight": {
-                          "id": "slif0ildf7rne"
-                        },
-                        "description": "Callback to receive the booking status",
-                        "properties": {
-                          "url": {
-                            "type": "string",
-                            "x-stoplight": {
-                              "id": "n588mb7ju542x"
-                            },
-                            "description": "url of the API"
-                          },
-                          "version": {
-                            "type": "string",
-                            "x-stoplight": {
-                              "id": "ols7d22qix5jo"
-                            },
-                            "description": "u"
-                          }
-                        },
-                        "required": [
-                          "url"
-                        ]
+                        }
                       }
                     }
                   },
@@ -4304,24 +3377,8 @@
                         "url": "https://my_url/orders/{orderId}/event",
                         "version": "1.1.0"
                       },
-                      "deliveryStop": {
-                        "url": "https://my_url/orders/{orderId}/stops",
-                        "version": "1.8.0"
-                      },
-                      "tracking": {
-                        "url": "https://my_url/orders/{orderId}/trackingPageUrl",
-                        "version": "1.9.0"
-                      },
                       "collectStatus": {
                         "url": "https://my_url/collects/{collectId}/status",
-                        "version": "1.1.0"
-                      },
-                      "loadingIdentifications": {
-                        "url": "https://my_url/orders/{orderId}/bookings/{bookingId}/loadingIdentifications",
-                        "version": "1.1.0"
-                      },
-                      "bookingStatus": {
-                        "url": "https://my_url/orders/{orderId}/bookings/{bookingId}/status",
                         "version": "1.1.0"
                       }
                     },
@@ -4362,24 +3419,8 @@
                         "url": "https://my_url/orders/{orderId}/event",
                         "version": "1.1.0"
                       },
-                      "deliveryStop": {
-                        "url": "https://my_url/orders/{orderId}/stops",
-                        "version": "1.8.0"
-                      },
-                      "tracking": {
-                        "url": "https://my_url/orders/{orderId}/trackingPageUrl",
-                        "version": "1.9.0"
-                      },
                       "collectStatus": {
                         "url": "https://my_url/collects/{collectId}/status",
-                        "version": "1.1.0"
-                      },
-                      "loadingIdentifications": {
-                        "url": "https://my_url/orders/{orderId}/bookings/{bookingId}/loadingIdentifications",
-                        "version": "1.1.0"
-                      },
-                      "bookingStatus": {
-                        "url": "https://my_url/orders/{orderId}/bookings/{bookingId}/status",
                         "version": "1.1.0"
                       }
                     },
@@ -4417,24 +3458,8 @@
                         "url": "https://my_url/orders/{orderId}/event",
                         "version": "1.1.0"
                       },
-                      "deliveryStop": {
-                        "url": "https://my_url/orders/{orderId}/stops",
-                        "version": "1.8.0"
-                      },
-                      "tracking": {
-                        "url": "https://my_url/orders/{orderId}/trackingPageUrl",
-                        "version": "1.9.0"
-                      },
                       "collectStatus": {
                         "url": "https://my_url/collects/{collectId}/status",
-                        "version": "1.1.0"
-                      },
-                      "loadingIdentifications": {
-                        "url": "https://my_url/orders/{orderId}/bookings/{bookingId}/loadingIdentifications",
-                        "version": "1.1.0"
-                      },
-                      "bookingStatus": {
-                        "url": "https://my_url/orders/{orderId}/bookings/{bookingId}/status",
                         "version": "1.1.0"
                       }
                     },
@@ -4519,71 +3544,30 @@
                               }
                             }
                           },
-                          "route": {
-                            "type": "object",
-                            "properties": {
-                              "distance": {
-                                "type": "object",
-                                "description": "distance between picking address and delivery ",
-                                "properties": {
-                                  "value": {
-                                    "type": "number"
-                                  },
-                                  "unit": {
-                                    "type": "string"
-                                  }
-                                }
-                              }
+                          "service": {
+                            "$ref": "#/components/schemas/deliveryService"
+                          },
+                          "types": {
+                            "type": "array",
+                            "description": "List of eligible relay point types (for the service SERVICE_PICKUP_POINT)",
+                            "items": {
+                              "$ref": "#/components/schemas/pickupPointType"
                             }
                           },
-                          "delivery": {
-                            "type": "object",
-                            "properties": {
-                              "noticePeriod": {
-                                "type": "object",
-                                "description": "Minimum notice for delivery",
-                                "properties": {
-                                  "value": {
-                                    "type": "number"
-                                  },
-                                  "unit": {
-                                    "type": "string"
-                                  }
-                                },
-                                "required": [
-                                  "value",
-                                  "unit"
-                                ]
-                              },
-                              "promise": {
-                                "type": "object",
-                                "description": "Promise of delivery ",
-                                "properties": {
-                                  "value": {
-                                    "type": "number"
-                                  },
-                                  "unit": {
-                                    "type": "string"
-                                  }
-                                }
-                              },
-                              "minDeliveryTime": {
-                                "type": "object",
-                                "description": "Min delivery time",
-                                "properties": {
-                                  "value": {
-                                    "type": "number"
-                                  },
-                                  "unit": {
-                                    "type": "string"
-                                  }
-                                }
-                              }
+                          "categories": {
+                            "type": "array",
+                            "description": "List of eligible relay point categories (for the service SERVICE_PICKUP_POINT)",
+                            "items": {
+                              "type": "string"
                             }
                           },
-                          "durationSlot": {
+                          "delay": {
                             "type": "object",
-                            "description": "Duration of the delivery slot",
+                            "description": "Turnaround time for the service",
+                            "required": [
+                              "value",
+                              "unit"
+                            ],
                             "properties": {
                               "value": {
                                 "type": "number"
@@ -4595,301 +3579,58 @@
                                   "hour"
                                 ]
                               }
-                            },
-                            "required": [
-                              "value",
-                              "unit"
-                            ]
-                          },
-                          "services": {
-                            "type": "array",
-                            "description": "List of delivery services",
-                            "items": {
-                              "type": "object",
-                              "properties": {
-                                "name": {
-                                  "type": "string"
-                                },
-                                "types": {
-                                  "$ref": "#/components/schemas/pickupPointType"
-                                },
-                                "categories": {
-                                  "type": "array",
-                                  "items": {
-                                    "type": "string"
-                                  }
-                                }
-                              }
                             }
-                          },
-                          "slots": {
-                            "$ref": "#/components/schemas/availableSlot"
-                          },
-                          "price": {
-                            "$ref": "./models/price.yaml"
-                          },
-                          "workSchedule": {
-                            "$ref": "./models/Carrier/workSchedule.json"
                           }
                         },
                         "required": [
                           "carrier",
-                          "services"
+                          "service",
+                          "delay"
                         ]
                       }
                     }
                   }
                 },
                 "examples": {
-                  "Default Example": {
+                  "Example": {
                     "value": {
                       "eligibilities": [
+                        {
+                          "carrier": {
+                            "code": "mondial-relay",
+                            "name": "Mondial Relay"
+                          },
+                          "service": "SERVICE_PICKUP_POINT",
+                          "types": [
+                            "PICKUP_POINT_AGENCY",
+                            "PICKUP_POINT_POST_OFFICE",
+                            "PICKUP_POINT_RELAY_WITH_LOCKER",
+                            "PICKUP_POINT_RELAY_WITHOUT_LOCKER",
+                            "PICKUP_POINT_ALL"
+                          ],
+                          "categories": [
+                            "24R",
+                            "24L",
+                            "Drive"
+                          ],
+                          "price": {
+                            "taxExcludedAmount": 2.99,
+                            "currency": "EUR"
+                          },
+                          "delay": {
+                            "value": 3,
+                            "unit": "day"
+                          }
+                        },
                         {
                           "carrier": {
                             "code": "chronopost",
                             "name": "Chronopost"
                           },
-                          "service": [
-                            {
-                              "name": "SERVICE_FRONT_HOME"
-                            }
-                          ]
-                        }
-                      ]
-                    }
-                  },
-                  "Example with slots": {
-                    "value": {
-                      "eligibilities": [
-                        {
-                          "carrier": {
-                            "code": "mondial-relay",
-                            "name": "Mondial Relay"
-                          },
-                          "durationSlot": {
-                            "value": 2,
-                            "unit": "hour"
-                          },
-                          "service": [
-                            {
-                              "name": "SERVICE_PICKUP_POINT",
-                              "types": [
-                                "PICKUP_POINT_AGENCY",
-                                "PICKUP_POINT_POST_OFFICE",
-                                "PICKUP_POINT_RELAY_WITH_LOCKER",
-                                "PICKUP_POINT_RELAY_WITHOUT_LOCKER",
-                                "PICKUP_POINT_ALL"
-                              ],
-                              "categories": [
-                                "24R",
-                                "24L",
-                                "Drive"
-                              ]
-                            }
-                          ],
-                          "slots": [
-                            {
-                              "start": "2019-05-02T15:52:01+0000",
-                              "end": "2019-05-02T17:52:01+0000",
-                              "remainingCapacity": 5
-                            }
-                          ]
-                        }
-                      ]
-                    }
-                  },
-                  "Example with carrier constraints": {
-                    "value": {
-                      "eligibilities": [
-                        {
-                          "carrier": {
-                            "name": "string",
-                            "code": "string"
-                          },
-                          "delivery": {
-                            "noticePeriod": {
-                              "value": 0,
-                              "unit": "string"
-                            },
-                            "promise": {
-                              "value": 0,
-                              "unit": "string"
-                            },
-                            "minDeliveryTime": {
-                              "value": 0,
-                              "unit": "string"
-                            }
-                          },
-                          "durationSlot": {
-                            "value": 0,
+                          "service": "SERVICE_FRONT_HOME",
+                          "delay": {
+                            "value": 1,
                             "unit": "day"
-                          },
-                          "services": [
-                            {
-                              "name": "string",
-                              "types": "PICKUP_POINT_ALL",
-                              "categories": [
-                                "string"
-                              ]
-                            }
-                          ]
-                        }
-                      ]
-                    }
-                  },
-                  "Example with slots and constraints": {
-                    "value": {
-                      "eligibilities": [
-                        {
-                          "carrier": {
-                            "code": "mondial-relay",
-                            "name": "Mondial Relay"
-                          },
-                          "delivery": {
-                            "noticePeriod": {
-                              "value": 2,
-                              "unit": "day"
-                            },
-                            "promise": {
-                              "value": 2,
-                              "unit": "hour"
-                            },
-                            "minDeliveryTime": {
-                              "value": 2,
-                              "unit": "hour"
-                            }
-                          },
-                          "durationSlot": {
-                            "value": 2,
-                            "unit": "hour"
-                          },
-                          "service": [
-                            {
-                              "name": "SERVICE_PICKUP_POINT",
-                              "types": [
-                                "PICKUP_POINT_AGENCY",
-                                "PICKUP_POINT_POST_OFFICE",
-                                "PICKUP_POINT_RELAY_WITH_LOCKER",
-                                "PICKUP_POINT_RELAY_WITHOUT_LOCKER",
-                                "PICKUP_POINT_ALL"
-                              ],
-                              "categories": [
-                                "24R",
-                                "24L",
-                                "Drive"
-                              ]
-                            }
-                          ],
-                          "slots": [
-                            {
-                              "start": "2019-05-02T15:52:01+0000",
-                              "end": "2019-05-02T17:52:01+0000",
-                              "remainingCapacity": 5
-                            }
-                          ]
-                        }
-                      ]
-                    }
-                  },
-                  "Example with distance": {
-                    "value": {
-                      "eligibilities": [
-                        {
-                          "carrier": {
-                            "code": "mondial-relay",
-                            "name": "Mondial Relay"
-                          },
-                          "route": {
-                            "distance": {
-                              "value": 23.5,
-                              "unit": "km"
-                            }
-                          },
-                          "service": [
-                            {
-                              "name": "SERVICE_PICKUP_POINT",
-                              "types": [
-                                "PICKUP_POINT_AGENCY",
-                                "PICKUP_POINT_POST_OFFICE",
-                                "PICKUP_POINT_RELAY_WITH_LOCKER",
-                                "PICKUP_POINT_RELAY_WITHOUT_LOCKER",
-                                "PICKUP_POINT_ALL"
-                              ],
-                              "categories": [
-                                "24R",
-                                "24L",
-                                "Drive"
-                              ]
-                            }
-                          ]
-                        }
-                      ]
-                    }
-                  },
-                  "Example with pickup-point ": {
-                    "value": {
-                      "eligibilities": [
-                        {
-                          "carrier": {
-                            "code": "mondial-relay",
-                            "name": "Mondial Relay"
-                          },
-                          "service": [
-                            {
-                              "name": "SERVICE_PICKUP_POINT",
-                              "types": [
-                                "PICKUP_POINT_AGENCY",
-                                "PICKUP_POINT_POST_OFFICE",
-                                "PICKUP_POINT_RELAY_WITH_LOCKER",
-                                "PICKUP_POINT_RELAY_WITHOUT_LOCKER",
-                                "PICKUP_POINT_ALL"
-                              ],
-                              "categories": [
-                                "24R",
-                                "24L",
-                                "Drive"
-                              ]
-                            }
-                          ]
-                        }
-                      ]
-                    }
-                  },
-                  "Example with workSchedule": {
-                    "value": {
-                      "eligibilities": [
-                        {
-                          "carrier": {
-                            "code": "mondial-relay",
-                            "name": "Mondial Relay"
-                          },
-                          "workSchedule": {
-                            "timezone": "Europe/Paris",
-                            "monday": [
-                              {
-                                "end": "11:00",
-                                "start": "07:00"
-                              },
-                              {
-                                "end": "17:00",
-                                "start": "13:00"
-                              }
-                            ],
-                            "tuesday": [
-                              {
-                                "end": "11:00",
-                                "start": "07:00"
-                              },
-                              {
-                                "end": "17:00",
-                                "start": "13:00"
-                              }
-                            ],
-                            "wednesday": null,
-                            "thursday": null,
-                            "friday": null,
-                            "saturday": null,
-                            "sunday": null
                           }
                         }
                       ]
@@ -4934,7 +3675,7 @@
             "$ref": "#/components/parameters/apiVersion"
           }
         ],
-        "description": "This method returns the available carriers and delivery services for an order. The method returns all available services and carriers according to the starting point of the order, (optional) destination and content of the shopping cart. \n\nEligibility is calculated according to certain delivery constraints defined by the carrier. [See explanation](https://woop.stoplight.io/docs/retailer/docs/Models/Carrier%20eligibility%20constraint.md)",
+        "description": "This method returns the available carriers and delivery services for an order. The method returns all available services and carriers according to the starting point of the order, (optional) destination and content of the shopping cart. ",
         "requestBody": {
           "content": {
             "application/json": {
@@ -4980,13 +3721,7 @@
                             "quantity": 1
                           }
                         ],
-                        "quantity": 1,
-                        "attributes": {
-                          "footprint": {
-                            "value": 13,
-                            "unit": "m²"
-                          }
-                        }
+                        "quantity": 1
                       }
                     ],
                     "storeId": "MAG01"
@@ -5010,132 +3745,6 @@
                         "postalCode": "59000",
                         "city": "Lille",
                         "country": "FR"
-                      }
-                    },
-                    "packages": [
-                      {
-                        "length": {
-                          "value": 15,
-                          "unit": "cm"
-                        },
-                        "width": {
-                          "value": 15,
-                          "unit": "cm"
-                        },
-                        "height": {
-                          "value": 1.2,
-                          "unit": "m"
-                        },
-                        "weight": {
-                          "value": 560,
-                          "unit": "g"
-                        },
-                        "products": [
-                          {
-                            "type": "TYPOLOGY_GENERIC",
-                            "ean": "4dq86zd4q6zd4q64",
-                            "cug": "q56zd4q65d4q",
-                            "label": "Lamp",
-                            "quantity": 1
-                          }
-                        ],
-                        "quantity": 1
-                      }
-                    ],
-                    "storeId": "MAG01"
-                  }
-                },
-                "Example with slot": {
-                  "value": {
-                    "picking": {
-                      "location": {
-                        "type": "address",
-                        "addressLine1": "237 rue du ballon",
-                        "postalCode": "59110",
-                        "city": "La Madeleine",
-                        "country": "FR"
-                      },
-                      "interval": {
-                        "start": "2022-05-02T15:52:01+0000",
-                        "end": "2022-05-02T17:52:01+0000"
-                      }
-                    },
-                    "packages": [
-                      {
-                        "length": {
-                          "value": 15,
-                          "unit": "cm"
-                        },
-                        "width": {
-                          "value": 15,
-                          "unit": "cm"
-                        },
-                        "height": {
-                          "value": 1.2,
-                          "unit": "m"
-                        },
-                        "weight": {
-                          "value": 560,
-                          "unit": "g"
-                        },
-                        "products": [
-                          {
-                            "type": "TYPOLOGY_GENERIC",
-                            "ean": "4dq86zd4q6zd4q64",
-                            "cug": "q56zd4q65d4q",
-                            "label": "Lamp",
-                            "quantity": 1
-                          }
-                        ],
-                        "quantity": 1
-                      }
-                    ],
-                    "storeId": "MAG01",
-                    "slot": {
-                      "fromDate": "2022-05-04T17:52:01+0000",
-                      "toDate": "2022-05-07T17:52:01+0000",
-                      "minRemainingCapacity": 3,
-                      "limit": 80
-                    }
-                  }
-                },
-                "Example with distance option": {
-                  "value": {
-                    "picking": {
-                      "location": {
-                        "type": "address",
-                        "addressLine1": "237 rue du ballon",
-                        "postalCode": "59110",
-                        "city": "La Madeleine",
-                        "country": "FR"
-                      }
-                    },
-                    "storeId": "MAG01",
-                    "options": {
-                      "distance": {
-                        "active": true
-                      }
-                    }
-                  }
-                },
-                "Example with coordinates in picking and delivery location": {
-                  "value": {
-                    "picking": {
-                      "location": {
-                        "type": "address",
-                        "coordinates": {
-                          "latitude": 0,
-                          "longitude": 0
-                        }
-                      }
-                    },
-                    "delivery": {
-                      "location": {
-                        "type": "address",
-                        "coordinates": {
-                          "latitude": 0,
-                          "longitude": 0
-                        }
                       }
                     },
                     "packages": [
@@ -5742,53 +4351,23 @@
               "updatedAt": "2021-02-10T09:33:41.422Z",
               "referenceNumber": "1234",
               "picking": {
-                "interval": [
-                  {
-                    "start": "2021-02-08T05:33:41.422Z",
-                    "end": "2021-02-08T09:33:41.422Z"
-                  }
-                ],
-                "stop": {
-                  "id": "12345dsffsr",
-                  "routeId": "EZRZEG4353",
-                  "sequenceNumber": 3,
-                  "deliverySequenceNumber": 1,
-                  "team": {
-                    "members": [
-                      {
-                        "id": "176867"
-                      }
-                    ]
-                  }
+                "interval": {
+                  "start": "2021-02-08T05:33:41.422Z",
+                  "end": "2021-02-08T09:33:41.422Z"
                 }
               },
               "delivery": {
                 "externalDeliveryId": "45DDEZ6Z",
                 "updatedAt": "2021-02-10T09:33:41.422Z",
-                "interval": [
-                  {
-                    "start": "2021-02-11T06:33:41.422Z",
-                    "end": "2021-02-11T09:33:41.422Z"
-                  }
-                ],
+                "interval": {
+                  "start": "2021-02-11T06:33:41.422Z",
+                  "end": "2021-02-11T09:33:41.422Z"
+                },
                 "trackingUrls:": {
                   "carrier": "https://tracking.best-carrier.com/XJHSDL541",
                   "woop": {
                     "simple": "https://trace.woopit.fr/t/48aed-b5552d-4da5-813c-00c06e1ff327",
                     "multiple": "https://trace.woopit.fr/m/48aed-b5552d-4da5-813c-00c06e1ff327"
-                  },
-                  "stop": {
-                    "id": "12345dsffsr",
-                    "routeId": "FERGER45345T3F",
-                    "sequenceNumber": 3,
-                    "deliverySequenceNumber": 7,
-                    "team": {
-                      "members": [
-                        {
-                          "id": "234567"
-                        }
-                      ]
-                    }
                   }
                 },
                 "status": "DELIVERY_INIT",
@@ -5838,13 +4417,6 @@
                 "taxIncludedAmount": 20.64,
                 "taxAmount": 3.44,
                 "currency": "EUR"
-              },
-              "emissions": {
-                "estimatedCO2e": {
-                  "unit": "KgCO2e",
-                  "value": 13.91334,
-                  "reliabilityScore": 2
-                }
               }
             }
           }
@@ -5877,13 +4449,7 @@
                 ],
                 "properties": {
                   "interval": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/interval"
-                    }
-                  },
-                  "stop": {
-                    "$ref": "./models/stop.yaml"
+                    "$ref": "#/components/schemas/interval"
                   }
                 }
               },
@@ -5904,10 +4470,7 @@
                     "description": "Last update datetime"
                   },
                   "interval": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/interval"
-                    }
+                    "$ref": "#/components/schemas/interval"
                   },
                   "trackingUrls:": {
                     "$ref": "./models/trackingUrls.yaml"
@@ -5917,9 +4480,6 @@
                   },
                   "subStatus": {
                     "$ref": "./models/subStatus.yaml"
-                  },
-                  "stop": {
-                    "$ref": "./models/stop.yaml"
                   }
                 }
               },
@@ -5952,9 +4512,6 @@
               },
               "price": {
                 "$ref": "./models/price.yaml"
-              },
-              "emissions": {
-                "$ref": "#/components/schemas/estimatedCO2e"
               }
             },
             "required": [
@@ -6042,48 +4599,6 @@
             }
           }
         }
-      },
-      "postDeliveriesBookings": {
-        "description": "Specifies the information needed to book a delivery slot for a given carrier.",
-        "type": "object",
-        "title": "Reservation of a delivery time slot (postDeliveriesBookings)",
-        "properties": {
-          "exchangePlaceId": {
-            "type": "string",
-            "minLength": 1,
-            "description": "Picking point identifier"
-          },
-          "slot": {
-            "$ref": "#/components/schemas/slot"
-          },
-          "carrierCodes": {
-            "type": "array",
-            "description": "Carrier(s) code(s)",
-            "items": {
-              "type": "string"
-            }
-          },
-          "capacity": {
-            "type": "integer",
-            "description": "Capacity for a delivery slot"
-          },
-          "type": {
-            "type": "string",
-            "description": "Type of delivery week",
-            "example": "ORDERS_QUANTITY",
-            "enum": [
-              "ORDERS_QUANTITY",
-              "PACKAGES_QUANTITY",
-              "PALLETS_QUANTITY",
-              "TRAYS_QUANTITY"
-            ]
-          }
-        },
-        "required": [
-          "exchangePlaceId",
-          "slot",
-          "carrierCodes"
-        ]
       },
       "postCollectsBookings": {
         "description": "Specifies the information needed to reserve a collection time slot.",
@@ -6204,57 +4719,6 @@
               }
             ],
             "storeId": "MAG01"
-          },
-          "Example with slot ": {
-            "picking": {
-              "location": {
-                "type": "address",
-                "addressLine1": "237 rue du ballon",
-                "postalCode": "59110",
-                "city": "La Madeleine",
-                "country": "FR"
-              }
-            },
-            "packages": [
-              {
-                "length": {
-                  "value": 15,
-                  "unit": "cm"
-                },
-                "width": {
-                  "value": 15,
-                  "unit": "cm"
-                },
-                "height": {
-                  "value": 1.2,
-                  "unit": "m"
-                },
-                "weight": {
-                  "value": 560,
-                  "unit": "g"
-                },
-                "products": [
-                  {
-                    "type": "TYPOLOGY_GENERIC",
-                    "ean": "4dq86zd4q6zd4q64",
-                    "cug": "q56zd4q65d4q",
-                    "label": "Lamp",
-                    "quantity": 1
-                  }
-                ],
-                "quantity": 1
-              }
-            ],
-            "storeId": "MAG01",
-            "slot": {
-              "location": {
-                "type": "address",
-                "addressLine1": "237 rue du ballon",
-                "postalCode": "59110",
-                "city": "La Madeleine",
-                "country": "FR"
-              }
-            }
           }
         },
         "properties": {
@@ -6267,9 +4731,6 @@
             "properties": {
               "location": {
                 "$ref": "#/components/schemas/location"
-              },
-              "interval": {
-                "$ref": "#/components/schemas/pickingInterval"
               }
             }
           },
@@ -6279,9 +4740,6 @@
             "properties": {
               "location": {
                 "$ref": "#/components/schemas/location"
-              },
-              "interval": {
-                "$ref": "#/components/schemas/interval"
               }
             }
           },
@@ -6295,76 +4753,11 @@
           "storeId": {
             "type": "string",
             "description": "Identifier of the store issuing the request"
-          },
-          "slot": {
-            "type": "object",
-            "description": "Allows you to define slot reservation criteria ",
-            "properties": {
-              "fromDate": {
-                "type": "string",
-                "description": "Start Date"
-              },
-              "toDate": {
-                "type": "string",
-                "description": "End Date"
-              },
-              "minRemainingCapacity": {
-                "type": "number",
-                "description": "Minimum remaining capacity for this slot"
-              },
-              "limit": {
-                "type": "number",
-                "description": "Max number of slot "
-              },
-              "type": {
-                "type": "string",
-                "example": "ORDERS_QUANTITY",
-                "description": "Type of delivery week",
-                "enum": [
-                  "ORDERS_QUANTITY",
-                  "PACKAGES_QUANTITY",
-                  "PALLETS_QUANTITY",
-                  "TRAYS_QUANTITY"
-                ]
-              }
-            },
-            "required": [
-              "toDate"
-            ]
-          },
-          "options": {
-            "type": "object",
-            "description": "List of options",
-            "properties": {
-              "distance": {
-                "type": "object",
-                "description": "Distance options",
-                "properties": {
-                  "active": {
-                    "type": "boolean",
-                    "description": "Used to calculate the distance between the pick and the delivery."
-                  }
-                }
-              },
-              "price": {
-                "type": "object",
-                "properties": {
-                  "active": {
-                    "type": "boolean"
-                  }
-                }
-              }
-            }
-          },
-          "services": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/deliveryService"
-            }
           }
         },
         "required": [
           "picking",
+          "packages",
           "storeId"
         ]
       },
@@ -6372,7 +4765,120 @@
         "type": "object",
         "description": "Specifies the information required for creating the order.",
         "title": "Creation of the order (postOrders)",
-        "x-examples": {},
+        "x-examples": {
+          "example-1": {
+            "orderId": "string",
+            "referenceNumber": "string",
+            "storeId": "string",
+            "picking": {
+              "location": {
+                "type": "address",
+                "addressLine1": "string",
+                "addressLine2": "string",
+                "elevator": true,
+                "floor": 0,
+                "doorCode": "string",
+                "postalCode": "string",
+                "city": "string",
+                "district": "string",
+                "country": "FR",
+                "comment": "string"
+              },
+              "infos": "string",
+              "interval": [
+                {
+                  "start": "string",
+                  "end": "string"
+                }
+              ],
+              "contact": {
+                "firstName": "string",
+                "lastName": "string",
+                "phone": "string",
+                "email": "string",
+                "language": "fr",
+                "timezone": "Europe/Paris"
+              }
+            },
+            "delivery": {
+              "location": {
+                "type": "address",
+                "addressLine1": "string",
+                "addressLine2": "string",
+                "elevator": true,
+                "floor": 0,
+                "doorCode": "string",
+                "postalCode": "string",
+                "city": "string",
+                "district": "string",
+                "country": "FR",
+                "comment": "string"
+              },
+              "infos": "string",
+              "interval": [
+                {
+                  "start": "string",
+                  "end": "string"
+                }
+              ],
+              "contact": {
+                "firstName": "string",
+                "lastName": "string",
+                "phone": "string",
+                "email": "string",
+                "language": "fr",
+                "timezone": "Europe/Paris"
+              }
+            },
+            "numberOfPackages": 0,
+            "packages": [
+              {
+                "references": [
+                  "string"
+                ],
+                "length": {
+                  "value": 0,
+                  "unit": "mm"
+                },
+                "width": {
+                  "value": 0,
+                  "unit": "mm"
+                },
+                "height": {
+                  "value": 0,
+                  "unit": "mm"
+                },
+                "weight": {
+                  "value": 0,
+                  "unit": "kg"
+                },
+                "products": [
+                  {
+                    "type": "TYPOLOGY_GENERIC",
+                    "ean": "string",
+                    "cug": "string",
+                    "label": "string",
+                    "quantity": 1
+                  }
+                ],
+                "quantity": 1
+              }
+            ],
+            "services": [
+              "SERVICE_PICKUP_POINT"
+            ],
+            "productsPrice": {
+              "value": 0,
+              "currency": "EUR"
+            },
+            "tags": [
+              {
+                "key": "origin",
+                "value": "web"
+              }
+            ]
+          }
+        },
         "properties": {
           "orderId": {
             "type": "string",
@@ -6408,7 +4914,7 @@
                 "type": "array",
                 "description": "Collection time slots",
                 "items": {
-                  "$ref": "#/components/schemas/pickingInterval"
+                  "$ref": "#/components/schemas/interval"
                 }
               },
               "contact": {
@@ -6437,7 +4943,7 @@
                 "type": "array",
                 "description": "Delivery time slot",
                 "items": {
-                  "$ref": "#/components/schemas/deliveryInterval"
+                  "$ref": "#/components/schemas/interval"
                 }
               },
               "contact": {
@@ -6472,11 +4978,11 @@
                 "type": "string",
                 "enum": [
                   "CASH",
+                  "CREDIT_CART",
                   "DEBIT_CARD",
                   "DIRECT_DEBIT",
                   "BANK_TRANSFER",
-                  "CHECK",
-                  "CREDIT_CARD"
+                  "CHECK"
                 ]
               }
             },
@@ -6488,18 +4994,6 @@
           },
           "tags": {
             "$ref": "#/components/schemas/tags"
-          },
-          "carrierSelection": {
-            "$ref": "#/components/schemas/carrierSelection"
-          },
-          "state": {
-            "type": "string",
-            "enum": [
-              "TO_BE_COMPLETED"
-            ]
-          },
-          "additionalData": {
-            "$ref": "./models/additionalData.yaml"
           }
         },
         "required": [
@@ -6534,12 +5028,12 @@
           },
           "picking": {
             "type": "object",
-            "description": "Collection information",
             "required": [
               "location",
               "interval",
               "contact"
             ],
+            "description": "Collection information",
             "properties": {
               "location": {
                 "$ref": "#/components/schemas/location"
@@ -6552,7 +5046,7 @@
                 "type": "array",
                 "description": "Collection time slots",
                 "items": {
-                  "$ref": "#/components/schemas/pickingInterval"
+                  "$ref": "#/components/schemas/interval"
                 }
               },
               "contact": {
@@ -6562,12 +5056,12 @@
           },
           "delivery": {
             "type": "object",
-            "description": "Delivery information",
             "required": [
               "location",
               "interval",
               "contact"
             ],
+            "description": "Delivery information",
             "properties": {
               "location": {
                 "$ref": "#/components/schemas/location"
@@ -6580,7 +5074,7 @@
                 "type": "array",
                 "description": "Delivery time slot",
                 "items": {
-                  "$ref": "#/components/schemas/deliveryInterval"
+                  "$ref": "#/components/schemas/interval"
                 }
               },
               "contact": {
@@ -6610,7 +5104,6 @@
         "type": "object",
         "description": "Specifies the information for a pickup point search",
         "title": "Search for pickup points (postPickupPoints)",
-        "x-examples": {},
         "properties": {
           "storeId": {
             "type": "string",
@@ -6644,15 +5137,10 @@
           "type": {
             "oneOf": [
               {
-                "type": "array",
-                "description": "Type of relay point (see relay point documentation)",
-                "items": {
-                  "$ref": "#/components/schemas/pickupPointType"
-                }
+                "$ref": "#/components/schemas/pickupPointType"
               },
               {
                 "type": "object",
-                "example": "\"mondial-relay\": [\"PICKUP_POINT_RELAY_WITH_LOCKER\"],",
                 "description": "Type of relay point by carrier (see relay point documentation)"
               }
             ]
@@ -6689,24 +5177,13 @@
           "countryCode": {
             "type": "string",
             "description": "Country code (ISO 3166 alpha-2)."
-          },
-          "accessibility": {
-            "$ref": "./models/PickUpPoint/pickUpPointAccessibility.json",
-            "x-stoplight": {
-              "id": "5rbs8nfhv50e6"
-            }
-          },
-          "boxCategoryAccessibility": {
-            "$ref": "./models/PickUpPoint/boxCategoryAccessibility.json",
-            "x-stoplight": {
-              "id": "zu5kxiclngm6v"
-            }
           }
         },
         "required": [
           "latitude",
           "longitude"
-        ]
+        ],
+        "x-examples": {}
       },
       "tags": {
         "type": "array",
@@ -6798,9 +5275,6 @@
           "comment": {
             "type": "string",
             "description": "Additional comments"
-          },
-          "coordinates": {
-            "$ref": "#/components/schemas/coordinates"
           }
         },
         "required": [
@@ -6850,24 +5324,11 @@
           "Pickup points": {
             "type": "pickupPoint",
             "id": "76761",
-            "carrierCode": "bpost",
-            "boxCategory": {
-              "id": "XXX",
-              "accessibility": "UPPER"
-            }
+            "carrierCode": "bpost"
           },
           "Exchange place": {
             "type": "exchangePlace",
             "id": "1"
-          },
-          "Coordinates": {
-            "type": "address",
-            "postalCode": "59000",
-            "country": "FR",
-            "coordinates": {
-              "latitude": 0,
-              "longitude": 0
-            }
           }
         },
         "oneOf": [
@@ -6915,12 +5376,6 @@
               "comment": {
                 "type": "string",
                 "description": "Additional comments"
-              },
-              "boxCategory": {
-                "$ref": "./models/PickUpPoint/boxCategory(location).json",
-                "x-stoplight": {
-                  "id": "fl9ffhdzp04eq"
-                }
               }
             },
             "required": [
@@ -6955,107 +5410,32 @@
           }
         ]
       },
-      "deliveryInterval": {
-        "description": "Specifies the date range for a collection/delivery.",
-        "x-examples": {
-          "Example": {
-            "start": "2019-05-02T15:52:01+0000",
-            "end": "2019-05-02T17:52:01+0000"
-          }
-        },
-        "title": "Delivery date slot & booking (deliveryInterval)",
-        "oneOf": [
-          {
-            "properties": {
-              "start": {
-                "type": "string",
-                "format": "datetime",
-                "description": "Start of the time slot",
-                "example": "2019-12-04T12:30:00+0000"
-              },
-              "end": {
-                "type": "string",
-                "format": "datetime",
-                "description": "End of the time slot",
-                "example": "2019-12-04T14:30:00+0000"
-              }
-            },
-            "required": [
-              "start",
-              "end"
-            ]
-          },
-          {
-            "properties": {
-              "bookingId": {
-                "type": "string",
-                "description": "Booking slot"
-              }
-            },
-            "required": [
-              "bookingId"
-            ]
-          }
-        ],
-        "type": "object"
-      },
-      "pickingInterval": {
-        "description": "Specifies the date range for a collection/picking.",
-        "x-examples": {
-          "Example": {
-            "start": "2019-05-02T15:52:01+0000",
-            "end": "2019-05-02T17:52:01+0000"
-          }
-        },
-        "title": "Picking date slot (pickingInterval)",
-        "type": "object",
-        "properties": {
-          "start": {
-            "type": "string",
-            "format": "datetime",
-            "description": "Start of the time slot",
-            "example": "2019-12-04T12:30:00+0000"
-          },
-          "end": {
-            "type": "string",
-            "format": "datetime",
-            "description": "End of the time slot",
-            "example": "2019-12-04T14:30:00+0000"
-          }
-        },
-        "required": [
-          "start",
-          "end"
-        ]
-      },
       "interval": {
-        "description": "Specifies the date range for an object.",
+        "description": "Specifies the date range for a collection/delivery.",
+        "type": "object",
+        "properties": {
+          "start": {
+            "type": "string",
+            "format": "datetime",
+            "description": "Start of the time slot"
+          },
+          "end": {
+            "type": "string",
+            "format": "datetime",
+            "description": "End of the time slot"
+          }
+        },
+        "required": [
+          "start",
+          "end"
+        ],
         "x-examples": {
           "Example": {
             "start": "2019-05-02T15:52:01+0000",
             "end": "2019-05-02T17:52:01+0000"
           }
         },
-        "title": "Interval of time",
-        "type": "object",
-        "properties": {
-          "start": {
-            "type": "string",
-            "format": "datetime",
-            "description": "Start of the time slot",
-            "example": "2019-12-04T12:30:00+0000"
-          },
-          "end": {
-            "type": "string",
-            "format": "datetime",
-            "description": "End of the time slot",
-            "example": "2019-12-04T14:30:00+0000"
-          }
-        },
-        "required": [
-          "start",
-          "end"
-        ]
+        "title": "Date slot (interval)"
       },
       "interval_hour": {
         "type": "object",
@@ -7095,8 +5475,7 @@
             "language": "fr",
             "timezone": "Europe/Paris",
             "main": true,
-            "title": "Manager",
-            "isProfessional": true
+            "title": "Manager"
           }
         },
         "properties": {
@@ -7129,11 +5508,6 @@
           "title": {
             "type": "string",
             "description": "Contact title"
-          },
-          "isProfessional": {
-            "type": "boolean",
-            "description": "Indicates if the contact is a professional",
-            "default": false
           }
         },
         "required": [
@@ -7191,15 +5565,8 @@
         "type": "object",
         "x-examples": {
           "Example": {
-            "references": [
-              {
-                "reference": "12345B",
-                "barcode": {
-                  "value": "54fd56g4f5gfd456sd",
-                  "type": "barcode",
-                  "format": "128"
-                }
-              }
+            "reference": [
+              "12345B"
             ],
             "length": {
               "value": 200,
@@ -7226,14 +5593,7 @@
                 "quantity": 1
               }
             ],
-            "quantity": 1,
-            "attributes": {
-              "footprint": {
-                "value": 13,
-                "unit": "m2"
-              }
-            },
-            "type": "PACKAGE"
+            "quantity": 1
           }
         },
         "title": "Package (package)",
@@ -7264,48 +5624,6 @@
             "type": "integer",
             "default": 1,
             "description": "Quantity of packages"
-          },
-          "attributes": {
-            "type": "object",
-            "description": "package attributes",
-            "properties": {
-              "footprint": {
-                "type": "object",
-                "description": "package footprint on the ground",
-                "properties": {
-                  "value": {
-                    "type": "number",
-                    "description": "footprint value",
-                    "example": 13
-                  },
-                  "unit": {
-                    "type": "string",
-                    "description": "footprint unit",
-                    "example": "m2",
-                    "enum": [
-                      "m2",
-                      "cm2",
-                      "pallet"
-                    ]
-                  }
-                },
-                "required": [
-                  "value",
-                  "unit"
-                ]
-              }
-            }
-          },
-          "type": {
-            "type": "string",
-            "description": "package type",
-            "enum": [
-              "PACKAGE",
-              "TRAY",
-              "PALLET"
-            ],
-            "example": "PACKAGE",
-            "default": "PACKAGE"
           }
         },
         "required": [
@@ -7387,62 +5705,14 @@
       },
       "packagesReferences": {
         "type": "array",
-        "description": "Specifies package references. Note that count of reference must be equal to package quantity",
+        "items": {
+          "type": "string"
+        },
+        "description": "Specifies package reference. Note that count of reference must be equal to package quantity",
         "title": "Package references (packagesReferences)",
         "x-examples": {
-          "Example": [
-            {
-              "reference": "12345B",
-              "barcode": {
-                "value": "54fd56g4f5gfd456sd",
-                "type": "barcode",
-                "format": "128"
-              }
-            }
-          ]
-        },
-        "items": {
-          "type": "object",
-          "properties": {
-            "reference": {
-              "type": "string",
-              "description": "Specifies package references.",
-              "example": "12345B"
-            },
-            "barcode": {
-              "$ref": "./models/barcode.yaml"
-            },
-            "state": {
-              "type": "object",
-              "x-stoplight": {
-                "id": "am11lni8ag5y5"
-              },
-              "properties": {
-                "value": {
-                  "type": "string",
-                  "x-stoplight": {
-                    "id": "4k1xtgr6eiqn7"
-                  },
-                  "enum": [
-                    "ON_DOCK",
-                    "PREPARED"
-                  ]
-                },
-                "date": {
-                  "type": "string",
-                  "x-stoplight": {
-                    "id": "st7f1fgjha3et"
-                  },
-                  "format": "date-time"
-                }
-              },
-              "required": [
-                "value"
-              ]
-            }
-          },
-          "required": [
-            "reference"
+          "example-1": [
+            "string"
           ]
         }
       },
@@ -7511,29 +5781,17 @@
         "type": "string",
         "description": "Specifies the delivery service that can be used. Note that some services cannot be cumulated such as 'STANDARD_TAXI' and 'XL_TAXI' or 'FRONT_HOME' and 'SELECTED_ROOM'",
         "enum": [
-          "SERVICE_ASSEMBLY",
+          "SERVICE_PICKUP_POINT",
+          "SERVICE_REGULAR_FRONT_HOME",
+          "SERVICE_SELECTED_ROOM",
+          "SERVICE_FRONT_HOME",
+          "SERVICE_UNPACKING",
           "SERVICE_INSTALL",
           "SERVICE_RECOVERY",
-          "SERVICE_UNPACKING",
-          "SERVICE_FRONT_HOME",
-          "SERVICE_REGULAR_FRONT_HOME",
-          "SERVICE_PICKUP_POINT",
-          "SERVICE_RETURN",
-          "SERVICE_SELECTED_ROOM",
           "SERVICE_SIMPLE_INSTALL",
           "SERVICE_COMPLEX_INSTALL",
-          "SERVICE_PAY_ON_DELIVERY",
-          "SERVICE_STANDARD_TAXI",
-          "SERVICE_XL_TAXI",
-          "SERVICE_WITH_SIGNATURE",
-          "SERVICE_GREEN",
-          "SERVICE_SHUTTLE",
-          "SERVICE_TWO_DRIVERS",
-          "SERVICE_EXHIBITION_MODEL",
-          "SERVICE_WHITE_GLOVE",
-          "SERVICE_EXCHANGE",
-          "SERVICE_DELIVERY_TO_MAILBOX",
-          "SERVICE_SCHEDULED"
+          "SERVICE_ASSEMBLY",
+          "SERVICE_PAY_ON_DELIVERY"
         ],
         "x-examples": {
           "Example": "SERVICE_PICKUP_POINT"
@@ -7554,7 +5812,8 @@
           "TYPOLOGY_FRAGILE",
           "TYPOLOGY_VOLUMINOUS_FRAGILE",
           "TYPOLOGY_LARGE_HOUSEHOLD",
-          "TYPOLOGY_SMALL_HOUSEHOLD"
+          "TYPOLOGY_SMALL_HOUSEHOLD",
+          "TYPOLOGY_PALLET_GENERIC"
         ],
         "x-examples": {
           "Example": "TYPOLOGY_GENERIC"
@@ -7669,14 +5928,6 @@
       "slot": {
         "description": "Collection time slot (without reservation or availability check).",
         "type": "object",
-        "x-examples": {
-          "Example": {
-            "start": "2019-05-02T15:52:01+0000",
-            "end": "2019-05-02T17:52:01+0000",
-            "expiredAt": "2019-05-04T12:00:01+0000"
-          }
-        },
-        "title": "Collection time slot (slot)",
         "properties": {
           "start": {
             "type": "string",
@@ -7687,18 +5938,19 @@
             "type": "string",
             "format": "datetime",
             "description": "End of the time slot"
-          },
-          "expiredAt": {
-            "type": "string",
-            "format": "datetime",
-            "description": "Validity limit of slots (max 1 week)",
-            "example": "2022-11-22T09:00:007Z"
           }
         },
         "required": [
           "start",
           "end"
-        ]
+        ],
+        "x-examples": {
+          "Example": {
+            "start": "2019-05-02T15:52:01+0000",
+            "end": "2019-05-02T17:52:01+0000"
+          }
+        },
+        "title": "Collection time slot (slot)"
       },
       "orderStatus": {
         "title": "Order status (orderStatus)",
@@ -7830,18 +6082,6 @@
           },
           "maxWeight": {
             "$ref": "#/components/schemas/mass"
-          },
-          "accessibility": {
-            "$ref": "./models/PickUpPoint/pickUpPointAccessibility.json",
-            "x-stoplight": {
-              "id": "vh91tvpi0os1u"
-            }
-          },
-          "boxCategory": {
-            "$ref": "./models/PickUpPoint/boxCategory.json",
-            "x-stoplight": {
-              "id": "pemk7bytsu7w7"
-            }
           }
         },
         "required": [
@@ -7864,8 +6104,7 @@
           "PICKUP_POINT_RELAY_WITHOUT_LOCKER",
           "PICKUP_POINT_ALL"
         ],
-        "default": "PICKUP_POINT_ALL",
-        "example": "PICKUP_POINT_RELAY_WITHOUT_LOCKER"
+        "default": "PICKUP_POINT_ALL"
       },
       "errorCode": {
         "title": "Error code (errorCode)",
@@ -7915,8 +6154,7 @@
             "lastName": "Doe",
             "email": "johndoe@mail.com",
             "language": "fr",
-            "timezone": "Europe/Paris",
-            "isProfessional": true
+            "timezone": "Europe/Paris"
           }
         },
         "properties": {
@@ -7941,11 +6179,6 @@
           },
           "timezone": {
             "$ref": "#/components/schemas/timezone"
-          },
-          "isProfessional": {
-            "type": "boolean",
-            "default": false,
-            "description": "Indicates if the contact is a professional"
           }
         },
         "required": [
@@ -7973,108 +6206,6 @@
           "COLLECT_DELAYED",
           "COLLECT_REPLANNED"
         ]
-      },
-      "carrierSelection": {
-        "title": "carrierSelection",
-        "x-stoplight": {
-          "id": "xe3fbbamllx4n"
-        },
-        "type": "object",
-        "description": "contains all the data regarding the selection or exclusion of some carriers from the process involved",
-        "properties": {
-          "mode": {
-            "type": "string",
-            "description": "mode of the selection",
-            "enum": [
-              "INCLUSION",
-              "EXCLUSION"
-            ],
-            "example": "INCLUSION"
-          },
-          "carrierCodes": {
-            "type": "array",
-            "description": "list of carrierCodes concerned by the selection",
-            "items": {
-              "type": "string",
-              "example": "chronopost"
-            }
-          }
-        },
-        "required": [
-          "mode",
-          "carrierCodes"
-        ]
-      },
-      "estimatedCO2e": {
-        "title": "estimatedCO2e",
-        "x-stoplight": {
-          "id": "79d3wqkl7ud66"
-        },
-        "type": "object",
-        "x-examples": {
-          "Example": {
-            "unit": "KgCO2e",
-            "value": 0,
-            "reliabilityScore": 0
-          }
-        },
-        "description": "CO2e emissions estimated by Woop based on data collected from carriers and retailers.",
-        "properties": {
-          "unit": {
-            "x-stoplight": {
-              "id": "1ase6pb6hzwxn"
-            },
-            "enum": [
-              "KgCO2e"
-            ],
-            "description": "The unit used to calculate the CO2e emissions"
-          },
-          "value": {
-            "type": "integer",
-            "x-stoplight": {
-              "id": "50x6lkgekgrp3"
-            },
-            "description": "The amount of the emission"
-          },
-          "reliabilityScore": {
-            "type": "integer",
-            "x-stoplight": {
-              "id": "m7tj4qafxlzvn"
-            },
-            "description": "Calculated by Woop on the 5 points scale, based on the data collected from carriers and retailers."
-          }
-        },
-        "required": [
-          "unit",
-          "value",
-          "reliabilityScore"
-        ]
-      },
-      "emissions": {
-        "title": "emissions",
-        "x-stoplight": {
-          "id": "2gmtmbyaksuzv"
-        },
-        "type": "object",
-        "properties": {
-          "id": {
-            "$ref": "#/components/schemas/estimatedCO2e"
-          }
-        },
-        "required": [
-          "id"
-        ],
-        "x-examples": {
-          "Example": {
-            "emissions": {
-              "estimatedCO2e": {
-                "unit": "KgCO2e",
-                "value": 13.91334,
-                "reliabilityScore": 2
-              }
-            }
-          }
-        }
       }
     },
     "parameters": {

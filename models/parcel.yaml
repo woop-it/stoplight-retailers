@@ -40,23 +40,6 @@ properties:
       reference:
         type: string
         description: Package identifier
-      state:
-        type: object
-        x-stoplight:
-          id: 5go84yioi29vc
-        properties:
-          value:
-            type: string
-            x-stoplight:
-              id: tr0x4ib0h5p4w
-            enum:
-              - ON_DOCK
-              - PREPARED
-          date:
-            type: string
-            x-stoplight:
-              id: cidtb9e4rl0xk
-            format: date-time
       products:
         type: array
         items:
