@@ -5845,7 +5845,7 @@
       "responseOrder-(getAll)": {
         "title": "Order retrieval response (getAll)",
         "type": "object",
-        "description": "Specifies the response when retrieving an order",
+        "description": "Specifies the response when retrieving an order.",
         "x-examples": {
           "example-1": {
             "orders": [
