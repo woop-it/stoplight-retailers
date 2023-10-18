@@ -65,24 +65,14 @@
         "summary": "Health"
       }
     },
-    "/orders/{orderId}/packages/states": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "orderId",
-          "in": "path",
-          "required": true
-        }
-      ],
-      "patch": {
-        "summary": "Change package state",
-        "operationId": "patch-order",
+    "orders/package/state": {
+      "parameters": [],
+      "put": {
+        "summary": "Change Package state",
+        "operationId": "put-orders-orderId-packages-states",
         "responses": {
-          "204": {
-            "description": "Package status Changed successfully",
-            "headers": {}
+          "200": {
+            "description": "Package state changed successfully"
           },
           "401": {
             "description": "Unauthorized"
@@ -91,8 +81,10 @@
             "description": "Reference Not Found"
           }
         },
+        "x-stoplight": {
+          "id": "v4lka2el0adv6"
+        },
         "description": "Changes the package status in order to yield the package responsability to the carrier",
-        "parameters": [],
         "requestBody": {
           "content": {
             "application/json": {
@@ -102,55 +94,76 @@
                   "packages": {
                     "type": "array",
                     "x-stoplight": {
-                      "id": "j1wdefr72kqoo"
+                      "id": "c7xnzce1ky7c9"
                     },
                     "items": {
                       "x-stoplight": {
-                        "id": "mq36n9hg6f9bt"
+                        "id": "nq0b43zo9uw1u"
                       },
                       "type": "object",
                       "properties": {
-                        "state": {
+                        "containerId": {
+                          "type": "object",
+                          "x-stoplight": {
+                            "id": "bz93jk8z042vr"
+                          },
+                          "description": "This item is required once you want to add a package state. \n\nYou can fill in the trailerId and/or the palletId.",
+                          "properties": {
+                            "trailerId": {
+                              "type": "string",
+                              "x-stoplight": {
+                                "id": "edked2d4kwp5g"
+                              }
+                            },
+                            "palletId": {
+                              "type": "string",
+                              "x-stoplight": {
+                                "id": "20y0bsarqld6z"
+                              }
+                            }
+                          }
+                        },
+                        "reference": {
                           "type": "string",
                           "x-stoplight": {
-                            "id": "zvt5m8cyuunp9"
+                            "id": "b7ncp47d6686r"
+                          }
+                        },
+                        "state": {
+                          "x-stoplight": {
+                            "id": "afl46dpnjahj8"
                           },
                           "enum": [
-                            "ON_DOCK",
-                            "PREPARED"
+                            "SHIPPED"
                           ]
                         },
                         "date": {
                           "type": "string",
                           "x-stoplight": {
-                            "id": "nouukp0mg5ut2"
+                            "id": "apgee5gvn2t4b"
                           },
                           "format": "date-time"
-                        },
-                        "reference": {
-                          "type": "string",
-                          "x-stoplight": {
-                            "id": "3ppkxetxuy0yd"
-                          }
                         }
-                      },
-                      "required": [
-                        "state",
-                        "date"
-                      ]
+                      }
                     }
                   }
-                },
-                "required": [
-                  "packages"
-                ]
+                }
               }
             }
-          }
+          },
+          "description": ""
         },
         "tags": [
-          "Order",
-          "package"
+          "Order"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "orderId"
+          }
         ]
       }
     },
@@ -488,6 +501,14 @@
                       },
                       "mode": {
                         "$ref": "./models/collect/mode.yaml"
+                      },
+                      "firstAvailableSlot": {
+                        "type": "string",
+                        "x-stoplight": {
+                          "id": "tkwsb3dcm034v"
+                        },
+                        "format": "date-time",
+                        "description": "date of the first available slot"
                       }
                     },
                     "required": [
@@ -1303,6 +1324,14 @@
                     },
                     "urls": {
                       "$ref": "./models/collect/urls.yaml"
+                    },
+                    "firstAvailableSlot": {
+                      "type": "string",
+                      "x-stoplight": {
+                        "id": "214m9lkv5iwhc"
+                      },
+                      "format": "date-time",
+                      "description": "date of the first available slot"
                     }
                   },
                   "required": [
@@ -3335,7 +3364,7 @@
         "tags": [
           "Pickup points"
         ],
-        "description": "This method allows you to retrieve the list of relay points of carriers located around a given geolocation.\n\n[See explanation](https://woop.stoplight.io/docs/retailer/docs/Models/Pickup%20points.md)",
+        "description": "This method retrieves the list of relay-point for all the carriers associed to your account.\n\nThe method works like a search engine based on just two mandatory criteria: Latitude and Longitude of the delivery point. \n\nSearch options enable you to refine the method's eligibility engine. The more options there are, the more precise the results will be. \n\nOptionally, you can search for a relay-point based on the contents of the customer basket (parcel dimensions: length, width, height and weight). This allows you to suggest delivery points capable of receiving parcels of a certain weight. \n\n[See explanation](https://woop.stoplight.io/docs/retailer/docs/Models/Pickup%20points.md)",
         "operationId": "postPickupPoints",
         "parameters": [
           {
@@ -3473,9 +3502,8 @@
                     "offset": 0,
                     "kilometricDistance": 5,
                     "type": [
-                      "PICKUP_POINT_RELAY_WITHOUT_LOCKER"
+                      "PICKUP_POINT_RELAY_WITH_LOCKER"
                     ],
-                    "category": {},
                     "carrierCode": "string",
                     "depositDate": "2019-08-24",
                     "packages": [
@@ -3491,19 +3519,19 @@
                           }
                         ],
                         "length": {
-                          "value": 0,
-                          "unit": "mm"
+                          "value": 10,
+                          "unit": "cm"
                         },
                         "width": {
-                          "value": 0,
-                          "unit": "mm"
+                          "value": 10,
+                          "unit": "cm"
                         },
                         "height": {
-                          "value": 0,
-                          "unit": "mm"
+                          "value": 10,
+                          "unit": "cm"
                         },
                         "weight": {
-                          "value": 0,
+                          "value": 2,
                           "unit": "kg"
                         },
                         "products": [
@@ -3519,7 +3547,7 @@
                         "attributes": {
                           "footprint": {
                             "value": 13,
-                            "unit": "m2"
+                            "unit": "cm2"
                           }
                         },
                         "type": "PACKAGE"
@@ -4157,7 +4185,7 @@
                           "url"
                         ]
                       },
-                      "bookingStatus": {
+                      "pickUpPointBookingStatus": {
                         "type": "object",
                         "x-stoplight": {
                           "id": "slif0ildf7rne"
@@ -4517,6 +4545,32 @@
                               "code": {
                                 "type": "string",
                                 "description": "Internal carrier code"
+                              },
+                              "score": {
+                                "type": "object",
+                                "x-stoplight": {
+                                  "id": "5109wnjzhnwm5"
+                                },
+                                "properties": {
+                                  "satisfaction": {
+                                    "type": "string",
+                                    "x-stoplight": {
+                                      "id": "ctd1hw62czh8m"
+                                    }
+                                  },
+                                  "nps": {
+                                    "type": "string",
+                                    "x-stoplight": {
+                                      "id": "nr62s0hyyk0p1"
+                                    }
+                                  },
+                                  "onTimeDeliveryScore": {
+                                    "type": "string",
+                                    "x-stoplight": {
+                                      "id": "dw5mjrm1iu8mx"
+                                    }
+                                  }
+                                }
                               }
                             }
                           },
@@ -5058,6 +5112,23 @@
                         }
                       ]
                     }
+                  },
+                  "Example with carrierScore": {
+                    "value": {
+                      "eligibilities": [
+                        {
+                          "carrier": {
+                            "code": "carrier-number-1",
+                            "name": "Carrier number one",
+                            "score": {
+                              "satisfaction": 8,
+                              "nps": 8,
+                              "onTimeDeliveryScore": 8.2
+                            }
+                          }
+                        }
+                      ]
+                    }
                   }
                 }
               }
@@ -5117,6 +5188,15 @@
                         "country": "FR"
                       }
                     },
+                    "delivery": {
+                      "location": {
+                        "type": "address",
+                        "addressLine1": "179 Boulevard de Turin",
+                        "postalCode": "59000",
+                        "city": "Lille",
+                        "country": "FR"
+                      }
+                    },
                     "packages": [
                       {
                         "length": {
@@ -5140,17 +5220,11 @@
                             "type": "TYPOLOGY_GENERIC",
                             "ean": "4dq86zd4q6zd4q64",
                             "cug": "q56zd4q65d4q",
-                            "label": "Lampe",
+                            "label": "Lamp",
                             "quantity": 1
                           }
                         ],
-                        "quantity": 1,
-                        "attributes": {
-                          "footprint": {
-                            "value": 13,
-                            "unit": "m²"
-                          }
-                        }
+                        "quantity": 1
                       }
                     ],
                     "storeId": "MAG01"
@@ -5224,6 +5298,15 @@
                         "end": "2022-05-02T17:52:01+0000"
                       }
                     },
+                    "delivery": {
+                      "location": {
+                        "type": "address",
+                        "addressLine1": "179 Boulevard de Turin",
+                        "postalCode": "59000",
+                        "city": "Lille",
+                        "country": "FR"
+                      }
+                    },
                     "packages": [
                       {
                         "length": {
@@ -5273,6 +5356,15 @@
                         "postalCode": "59110",
                         "city": "La Madeleine",
                         "country": "FR"
+                      }
+                    },
+                    "delivery": {
+                      "location": {
+                        "type": "address",
+                        "coordinates": {
+                          "latitude": 0,
+                          "longitude": 0
+                        }
                       }
                     },
                     "storeId": "MAG01",
@@ -5334,6 +5426,25 @@
                       }
                     ],
                     "storeId": "MAG01"
+                  }
+                },
+                "Example with options.carrierScore": {
+                  "value": {
+                    "picking": {
+                      "location": {
+                        "type": "address",
+                        "addressLine1": "237 rue du ballon",
+                        "postalCode": "59110",
+                        "city": "La Madeleine",
+                        "country": "FR"
+                      }
+                    },
+                    "storeId": "MAG01",
+                    "options": {
+                      "carrierScore": {
+                        "active": true
+                      }
+                    }
                   }
                 }
               }
@@ -5707,6 +5818,18 @@
           "Collect"
         ],
         "description": "This method allows the retailer to send an update on the collection status.\n\nThe retailer must enter the next collection tracking status to progress the collection request. This delivery tracking status must be consistent with the defined workflow. <a href=\"/docs/retailer/docs/Modèles/Statuts-de-retrait-C&C.md\">Workflow and status list</a>"
+      }
+    },
+    "/orders/{orderId}/packages/states": {
+      "patch": {
+        "x-stoplight": {
+          "id": "800e91a2e583a"
+        }
+      },
+      "put": {
+        "x-stoplight": {
+          "id": "800e91a2e583a"
+        }
       }
     }
   },
@@ -6168,6 +6291,14 @@
             "items": {
               "$ref": "#/components/schemas/packages"
             }
+          },
+          "firstAvailableSlot": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "8hhcnyld5he2a"
+            },
+            "format": "date-time",
+            "description": "only for delay mode\ndate of the first available slot"
           }
         },
         "required": [
@@ -6205,6 +6336,14 @@
             "items": {
               "$ref": "#/components/schemas/packages"
             }
+          },
+          "firstAvailableSlot": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "vfpsl9xbfhq8o"
+            },
+            "format": "date-time",
+            "description": "only for delay mode\ndate of the first available slot"
           }
         }
       },
@@ -6532,6 +6671,20 @@
                   "minRemainingCapacity": {
                     "type": "number",
                     "description": "Minimum remaining capacity for this slot"
+                  }
+                }
+              },
+              "carrierScore": {
+                "type": "object",
+                "x-stoplight": {
+                  "id": "h9bq41n6c5idt"
+                },
+                "properties": {
+                  "active": {
+                    "type": "boolean",
+                    "x-stoplight": {
+                      "id": "92uip2l87zd4p"
+                    }
                   }
                 }
               }
@@ -7620,6 +7773,26 @@
               "required": [
                 "value"
               ]
+            },
+            "containerId": {
+              "type": "object",
+              "x-stoplight": {
+                "id": "inc0hic6h1ssr"
+              },
+              "properties": {
+                "trailerId": {
+                  "type": "string",
+                  "x-stoplight": {
+                    "id": "l40lhnq40wa1w"
+                  }
+                },
+                "palletId": {
+                  "type": "string",
+                  "x-stoplight": {
+                    "id": "k8kciwmdtp3f9"
+                  }
+                }
+              }
             }
           },
           "required": [
@@ -7714,7 +7887,8 @@
           "SERVICE_WHITE_GLOVE",
           "SERVICE_EXCHANGE",
           "SERVICE_DELIVERY_TO_MAILBOX",
-          "SERVICE_SCHEDULED"
+          "SERVICE_SCHEDULED",
+          "SERVICE_FREIGHT_ELEVATOR"
         ],
         "x-examples": {
           "Example": "SERVICE_PICKUP_POINT"
