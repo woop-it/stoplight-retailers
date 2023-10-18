@@ -7480,6 +7480,21 @@
         "type": "object",
         "title": "Product",
         "description": "Product informations",
+        "x-examples": {
+          "Example 1": {
+            "type": "TYPOLOGY_GENERIC",
+            "ean": "111257000000",
+            "cug": "643224",
+            "label": "string",
+            "quantity": 1,
+            "price": {
+              "value": 4.5,
+              "currency": "EUR"
+            },
+            "originCountry": "KH",
+            "hsCode": "61112090"
+          }
+        },
         "properties": {
           "type": {
             "$ref": "#/components/schemas/productType"
@@ -7520,26 +7535,14 @@
               "id": "rguzvgw0gt1ea"
             },
             "description": "Mandatory for consignments subject to a customs declaration. \n\nThis is the tarif number requested in customs documents. For international shipments, 6, 8 or 10 digits must be entered."
+          },
+          "weight": {
+            "$ref": "#/components/schemas/mass"
           }
         },
         "required": [
           "type"
-        ],
-        "x-examples": {
-          "Example 1": {
-            "type": "TYPOLOGY_GENERIC",
-            "ean": "111257000000",
-            "cug": "643224",
-            "label": "string",
-            "quantity": 1,
-            "price": {
-              "value": 4.5,
-              "currency": "EUR"
-            },
-            "originCountry": "KH",
-            "hsCode": "61112090"
-          }
-        }
+        ]
       },
       "packages": {
         "description": "Specifies the information needed to update a package. The handling unit is to be defined with the package/product structure. ",
