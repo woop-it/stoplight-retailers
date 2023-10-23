@@ -5347,7 +5347,7 @@
                     }
                   }
                 },
-                "Example with distance option": {
+                "Example with distance and zoning options": {
                   "value": {
                     "picking": {
                       "location": {
@@ -5362,14 +5362,17 @@
                       "location": {
                         "type": "address",
                         "coordinates": {
-                          "latitude": 0,
-                          "longitude": 0
+                          "latitude": 50.65849685668945,
+                          "longitude": 3.0207953453063965
                         }
                       }
                     },
                     "storeId": "MAG01",
                     "options": {
                       "distance": {
+                        "active": true
+                      },
+                      "zoning": {
                         "active": true
                       }
                     }
