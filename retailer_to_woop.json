@@ -4577,7 +4577,14 @@
                                 "x-stoplight": {
                                   "id": "zbix3o8qcx1hi"
                                 },
+                                "description": "GHG average emissions and reliability score for the carrier",
                                 "properties": {
+                                  "averageEmission": {
+                                    "type": "integer",
+                                    "x-stoplight": {
+                                      "id": "wmsx8qejj5q3j"
+                                    }
+                                  },
                                   "unit": {
                                     "x-stoplight": {
                                       "id": "63al1l4za6axu"
@@ -4587,12 +4594,6 @@
                                     "enum": [
                                       "kgCO2/t.km"
                                     ]
-                                  },
-                                  "averageEmission": {
-                                    "type": "integer",
-                                    "x-stoplight": {
-                                      "id": "wmsx8qejj5q3j"
-                                    }
                                   },
                                   "reliabilityScore": {
                                     "type": "integer",
@@ -6769,6 +6770,7 @@
                 "x-stoplight": {
                   "id": "egwtljbc2zvro"
                 },
+                "description": "Average GHG emissions for eligible carriers ",
                 "properties": {
                   "active": {
                     "type": "boolean",
@@ -6776,12 +6778,6 @@
                       "id": "e7lr1o2ie07z8"
                     }
                   }
-                }
-              },
-              "": {
-                "type": "string",
-                "x-stoplight": {
-                  "id": "zb7uccmkm26nn"
                 }
               }
             }
