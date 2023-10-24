@@ -15,7 +15,7 @@
   "rules": {},
   "inheritedRules": [
     {
-      "id": "joxxv3-BkLR_1Cq3FvPmQ",
+      "id": "iaZmKYHrwA-VgOOrapxOO",
       "given": [
         "#API_Contact"
       ],
@@ -30,7 +30,7 @@
       "message": "Contact object should have \"url\""
     },
     {
-      "id": "R67A8333lhMXBvtHRX6vV",
+      "id": "RqvsHvEAakJDXjZM3zxa3",
       "given": [
         "#API_Contact"
       ],
@@ -45,7 +45,7 @@
       "message": "Contact object should have \"email\""
     },
     {
-      "id": "cXScCEXxBab8mYNLtzYwN",
+      "id": "gJ9Vjgov4K4zBQjopjD1c",
       "given": [
         "#API_Document"
       ],
@@ -60,7 +60,7 @@
       "message": "Info object should have \"contact\" object."
     },
     {
-      "id": "gEgxnp16-zl8IC9dTRh23",
+      "id": "I9a956ip9B-QkJBPMJ51m",
       "given": [
         "#API_Document"
       ],
@@ -75,7 +75,7 @@
       "message": "Info object should have \"description\" object."
     },
     {
-      "id": "BjFmgFDn92hHOTBsWGW99",
+      "id": "UlUIOXxFB55xsJi1KEo6L",
       "given": [
         "#API_Document"
       ],
@@ -90,7 +90,7 @@
       "message": "Info object should have \"license\" object."
     },
     {
-      "id": "ti5C0KpQkd401hU-n4g28",
+      "id": "wX1pNx4wF29oFeMcLhRwN",
       "given": [
         "#API_License"
       ],
@@ -105,7 +105,7 @@
       "message": "License object should include \"url\"."
     },
     {
-      "id": "S-MTeBcO9fp_CpCDwAc3s",
+      "id": "outdP9NJ6eqS4HafZpYCM",
       "given": [
         "#All_Markdown"
       ],
@@ -122,7 +122,7 @@
       "message": "Markdown descriptions must not have \"eval(\"."
     },
     {
-      "id": "Ks0T9NumMI8plHhpQyBDJ",
+      "id": "WF2wXN0FkbUmhw8wARO6R",
       "given": [
         "#All_Markdown"
       ],
@@ -139,7 +139,7 @@
       "message": "Markdown descriptions must not have \"<script>\" tags."
     },
     {
-      "id": "rXhBVcU-o0bsau6CXqLV-",
+      "id": "mccRRIsULj1b_2ndmJ8_s",
       "given": [
         "#API_Tags"
       ],
@@ -156,7 +156,7 @@
       "message": "OpenAPI object should have alphabetical \"tags\"."
     },
     {
-      "id": "CibbqTyNaCZhtYWDTuzVB",
+      "id": "TRTjxaCMHZ991hJXyg-QG",
       "given": [
         "#API_Tags"
       ],
@@ -176,7 +176,7 @@
       "message": "OpenAPI object should have non-empty \"tags\" array."
     },
     {
-      "id": "Wu51WGJ6mIiOMmPy2tAeZ",
+      "id": "ft9WcdztJfZBMiunpGOlR",
       "given": [
         "#Operation_Object"
       ],
@@ -191,7 +191,7 @@
       "message": "Operation \"description\" should be present and non-empty string."
     },
     {
-      "id": "vbefyD6DtTpJj4mJhJyrc",
+      "id": "z0ShMjs_1RCIxmOQULEcn",
       "given": [
         "#Operation_Object"
       ],
@@ -206,7 +206,7 @@
       "message": "Operation should have \"operationId\"."
     },
     {
-      "id": "XS1EYAUCXoYFekk8NUYsS",
+      "id": "WhL1-9aw8JeTkEDPBbUWI",
       "given": [
         "#Operation_Object"
       ],
@@ -224,7 +224,7 @@
       "message": "OperationId should not have characters that are invalid when used in URL."
     },
     {
-      "id": "3nb3YGbNj1Zh0DVUmgCQE",
+      "id": "YYmJcDRoUVdn-pgDXGan_",
       "given": [
         "#API_Tags"
       ],
@@ -241,7 +241,7 @@
       "message": "Operation should not have more than a single tag."
     },
     {
-      "id": "g19PIPJdoT5_Zp4ZY4gOQ",
+      "id": "PJNVak2-Frg495R74c47O",
       "given": [
         "#Operation_Object"
       ],
@@ -260,7 +260,7 @@
       "message": "Operation should have non-empty \"tags\" array."
     },
     {
-      "id": "CBzOduptGAkaskpukpZLw",
+      "id": "4fd2kSiyYeLZO9TAAryGi",
       "given": [
         "#Path_Item"
       ],
@@ -278,7 +278,7 @@
       "message": "Path parameter declarations must not be empty, ex.\"/given/{}\" is invalid."
     },
     {
-      "id": "-Ie3mmd2wUojJlv1Vb_gz",
+      "id": "NTtgI_37BcXHONkEcMTI0",
       "given": [
         "#API_Contact"
       ],
@@ -293,7 +293,7 @@
       "message": "Contact object should have \"name\""
     },
     {
-      "id": "QH2Q9BtAD3ozgk0o3OnrQ",
+      "id": "uZZ_fl26Y4YhMow0Xe2a3",
       "given": [
         "#Path_Object"
       ],
@@ -311,7 +311,7 @@
       "message": "Path should not end with slash."
     },
     {
-      "id": "wzp-cunQqAqEuslBjMBN2",
+      "id": "IcsJWWh0MXx6Fw0-Kr4hM",
       "given": [
         "#Path_Object"
       ],
@@ -329,7 +329,7 @@
       "message": "Path should not include query string."
     },
     {
-      "id": "wx4YAxwUkfPQmQ9_cTu6J",
+      "id": "sETJVzee2Pwe-GVTpPWge",
       "given": [
         "#API_Tags_Item"
       ],
@@ -344,7 +344,7 @@
       "message": "Tag object should have \"description\"."
     },
     {
-      "id": "Q7xT1o3Bka9Kkl7fTGcRd",
+      "id": "6YjiKXO_qOq9TTJusgMu8",
       "given": [
         "#API_Server"
       ],
@@ -368,7 +368,7 @@
       "message": "Server should be present."
     },
     {
-      "id": "D2EQ-Uk-QULCBcH4WtmrR",
+      "id": "cyyFBqVSSH21N55J8PchX",
       "given": [
         "#API_Server_URL"
       ],
@@ -385,7 +385,7 @@
       "message": "Server URL should not have trailing slash"
     },
     {
-      "id": "5MxOsjggE3y5cebb4FlR4",
+      "id": "0wckbg-ylWspzw19f77gM",
       "given": [
         "#Operation_Object"
       ],
@@ -400,7 +400,7 @@
       "message": "Operation should have at least one \"2xx\" or \"3xx\" response."
     },
     {
-      "id": "H5KT6fq01hu5hIT2tDQKk",
+      "id": "gGo85OfvJ6NXRmIagDjQj",
       "given": [
         "#API_Document"
       ],
@@ -414,7 +414,7 @@
       "message": "{{error}}"
     },
     {
-      "id": "9vITXMQ-PoLiQ_GrfXycB",
+      "id": "XKlKyvQuQvo_jIsbAvbID",
       "given": [
         "#Operation_Object"
       ],
@@ -429,7 +429,7 @@
       "message": "Operation parameters are unique and non-repeating."
     },
     {
-      "id": "ErwbvVi2yhfMnhAh1M1_5",
+      "id": "OYSfJzDddQz7Hy6zovLYo",
       "given": [
         "#All_Enum"
       ],
@@ -443,7 +443,7 @@
       "message": "{{error}}"
     },
     {
-      "id": "cP-gsMKql-S-DcT0hhl6z",
+      "id": "GC14p3nMrspATPEPgNrOv",
       "given": [
         "#API_Document"
       ],
@@ -460,7 +460,7 @@
       ]
     },
     {
-      "id": "5pRyeLh_XcDbLID9kTj_f",
+      "id": "wFgjsisua8kuIrV0by_B4",
       "given": [
         "#API_Document"
       ],
@@ -477,7 +477,7 @@
       ]
     },
     {
-      "id": "E8jp9_tjPLnzO4QXUUA_I",
+      "id": "4iAuVfg68CQ2tC2ZbRg9B",
       "given": [
         "#API_Document"
       ],
@@ -494,7 +494,7 @@
       ]
     },
     {
-      "id": "8Oe9KpcKI4ngOFeIFKl2S",
+      "id": "RUNIE67SGROYesskQCfVO",
       "given": [
         "#API_Document"
       ],
@@ -508,7 +508,7 @@
       "message": "Every operation must have unique operationId"
     },
     {
-      "id": "0f0sSRorNa3AXvGE6huFT",
+      "id": "oYN-Y1nk_U9LXMTki2dBM",
       "given": [
         "#Operation_Object"
       ],
@@ -525,7 +525,7 @@
       ]
     },
     {
-      "id": "OLb1ZBhPBr0UGKlONvq-K",
+      "id": "ElX48vkcQ7FWV75WA8XZ5",
       "given": [
         "#API_Document"
       ],
@@ -539,7 +539,7 @@
       "message": "Operation tags must be defined in global tags"
     },
     {
-      "id": "8ms2b0DlyBIVVAm_K9iHZ",
+      "id": "luoIYNUPOPmJhUUZRc2Ui",
       "given": [
         "#All_Ref"
       ],
@@ -557,7 +557,7 @@
       ]
     },
     {
-      "id": "to5nkICIB3qS5XRBV4FJj",
+      "id": "HU4_Cr9YaxRu3N85n4xEA",
       "given": [
         "#API_Document"
       ],
@@ -579,7 +579,7 @@
       ]
     },
     {
-      "id": "DDAiGkvFtQLMRA8HoL528",
+      "id": "V87MJgihxwCRn0onVuTFd",
       "given": [
         "#API_Document"
       ],
@@ -602,7 +602,7 @@
       ]
     },
     {
-      "id": "U7RDfFSK7iRVUacSqdm9e",
+      "id": "4dZlZYoeUpW7XZZ9bZJsv",
       "given": [
         "#All_Enum"
       ],
@@ -623,7 +623,7 @@
       "message": "{{error}}"
     },
     {
-      "id": "Z4BtseJ0nab5bq357vSRF",
+      "id": "cTQP9sppMbK8dhPkZ3f0T",
       "given": [
         "#API_Document"
       ],
@@ -651,7 +651,7 @@
       ]
     },
     {
-      "id": "7PmC7faYi8isaTspHAeX7",
+      "id": "1d7E2gM48lS-ovBrPKtdw",
       "given": [
         "#API_Document"
       ],
@@ -669,7 +669,7 @@
       ]
     },
     {
-      "id": "kyD0CAEaf8GDyyIt6s2TF",
+      "id": "9BCRw0GvwcdgVWCGPugs5",
       "given": [
         "#API_Server_URL"
       ],
@@ -685,7 +685,7 @@
       "message": "Server URL must not point at example.com."
     },
     {
-      "id": "96RkJpNUFvfiOMyoWYRjD",
+      "id": "UStH-YGEyMHtrCezbmB58",
       "given": [
         "#Request_Parameter_All"
       ],
@@ -699,7 +699,7 @@
       "message": "Parameter objects must have \"description\"."
     },
     {
-      "id": "kBV6UTdOPN25yEqMX6KzL",
+      "id": "y2BDC2Df2p4POX_YOzJHH",
       "given": [
         "#API_Document_RecursiveSearch"
       ],
@@ -717,7 +717,7 @@
       ]
     },
     {
-      "id": "J8_TGrRkVgER-wRJx1CmD",
+      "id": "YEW41OGN4dm_4F49z25mY",
       "given": [
         "#API_Document_RecursiveSearch"
       ],
@@ -735,7 +735,7 @@
       ]
     },
     {
-      "id": "IoM1PUatJM-w5j6SPxLp4",
+      "id": "Ul10cq15uZDTLOVfarREB",
       "given": [
         "#All_Example"
       ],
@@ -758,7 +758,7 @@
       ]
     },
     {
-      "id": "vRup4UPVPTmYXfw5Y443P",
+      "id": "0hDDE03kjyGE1rNygMPBN",
       "given": [
         "#All_Example_Schema"
       ],
@@ -780,7 +780,7 @@
       ]
     },
     {
-      "id": "mwOE3TVXePgOMIJQpC4zf",
+      "id": "Yn65Sq4oUwZxAm5dHVr1g",
       "given": [
         "#All_Example_Schema"
       ],
@@ -802,7 +802,7 @@
       ]
     },
     {
-      "id": "YOKgelGJM4WgLSl4bKcwO",
+      "id": "q7Mk7JP0T9cBlxA-hn4Jb",
       "given": [
         "#All_Example_Media"
       ],
@@ -824,7 +824,7 @@
       ]
     },
     {
-      "id": "Z-m9scihdo_PGBU9AUHB_",
+      "id": "nVxNvcHQ_Bp4e_mmYhPq2",
       "given": [
         "#All_Example_Media"
       ],

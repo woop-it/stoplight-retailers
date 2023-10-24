@@ -5174,11 +5174,9 @@
                               "onTimeDeliveryScore": 8.2
                             },
                             "impact": {
-                              "1": null,
-                              "680": null,
                               "unit": "KgCO2/t.km",
-                              "averageEmission": 0,
-                              "reliabilityScore": 3
+                              "averageEmission": 0.68,
+                              "reliabilityScore": 3.1
                             }
                           }
                         }
