@@ -878,6 +878,148 @@
         ]
       }
     },
+    "/enhancedLabel": {
+      "post": {
+        "summary": "Enhanced Label",
+        "description": "This method allows you to add specific info below a carrier's label according to a given template.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "zpl"
+              ]
+            },
+            "in": "query",
+            "name": "mode",
+            "required": true,
+            "description": "Label format"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "parcelId",
+            "description": "Parcel number"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "orderId",
+            "required": true,
+            "description": "Order identifier"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "x-stoplight": {
+                    "id": "7uueosxfeu696"
+                  },
+                  "type": "object",
+                  "properties": {
+                    "key": {
+                      "type": "object",
+                      "x-stoplight": {
+                        "id": "1w2g7uwe2t4kn"
+                      },
+                      "properties": {
+                        "keyName": {
+                          "type": "string",
+                          "x-stoplight": {
+                            "id": "go2s3a37bxkib"
+                          },
+                          "description": "name of the key"
+                        }
+                      }
+                    },
+                    "value": {
+                      "type": "object",
+                      "x-stoplight": {
+                        "id": "qukcchy13ja7u"
+                      },
+                      "properties": {
+                        "valueName": {
+                          "type": "string",
+                          "x-stoplight": {
+                            "id": "rtdgwst3pah6z"
+                          },
+                          "description": "object value"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "examples": {
+                "Example 1": {
+                  "value": [
+                    {
+                      "Key": "string",
+                      "value": "string"
+                    }
+                  ]
+                }
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          },
+          "description": "Contains the creation information of the request."
+        },
+        "responses": {
+          "201": {
+            "description": "Request processed successfully - Label created successfully ",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "base64": {
+                      "type": "string",
+                      "x-stoplight": {
+                        "id": "3tbsa7upo3wg1"
+                      },
+                      "description": "The label is returned in base64 in the format indicated\n\n"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "You are not authorised to access this item",
+            "content": {}
+          },
+          "404": {
+            "description": "parcelId not found",
+            "content": {}
+          }
+        },
+        "operationId": "postBookings",
+        "x-stoplight": {
+          "id": "2jielfmzp8o4d"
+        },
+        "tags": [
+          "Label"
+        ]
+      },
+      "parameters": []
+    },
     "/deliveries/bookings": {
       "post": {
         "summary": "Book a delivery slot",
