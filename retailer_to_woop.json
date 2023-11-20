@@ -4583,31 +4583,35 @@
                                 "x-stoplight": {
                                   "id": "zbix3o8qcx1hi"
                                 },
-                                "description": "GHG average emissions and reliability score for the carrier",
+                                "description": "Impact values regarding carriers",
                                 "properties": {
                                   "emissionType": {
                                     "type": "object",
                                     "x-stoplight": {
                                       "id": "ujvjh2iy3it8r"
                                     },
+                                    "description": "Type of emissions emitted by the carrier",
                                     "properties": {
                                       "CO2e": {
                                         "type": "object",
                                         "x-stoplight": {
                                           "id": "7hvlzgpjgavct"
                                         },
+                                        "description": "CO2e emissions",
                                         "properties": {
                                           "reliabilityScore": {
                                             "type": "integer",
                                             "x-stoplight": {
                                               "id": "uo2ob277xd0qe"
-                                            }
+                                            },
+                                            "description": "Average of the Reliability score for the carrier "
                                           },
                                           "emissions": {
                                             "type": "array",
                                             "x-stoplight": {
                                               "id": "n69tjy24yotjb"
                                             },
+                                            "description": "Detailed values for the emissions",
                                             "items": {
                                               "x-stoplight": {
                                                 "id": "ef8qp1ufnn1gp"
@@ -4619,6 +4623,7 @@
                                                   "x-stoplight": {
                                                     "id": "3mxz4a1deiwcu"
                                                   },
+                                                  "description": "Weel to wheel emissions (from extraction to the combustion)",
                                                   "items": {
                                                     "x-stoplight": {
                                                       "id": "rh7bt9k5vhb87"
