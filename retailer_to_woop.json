@@ -4569,6 +4569,12 @@
                                     "x-stoplight": {
                                       "id": "dw5mjrm1iu8mx"
                                     }
+                                  },
+                                  "onTimeDeliveryScore - copy": {
+                                    "type": "string",
+                                    "x-stoplight": {
+                                      "id": "frto1wf7qi0jv"
+                                    }
                                   }
                                 }
                               },
@@ -4579,26 +4585,98 @@
                                 },
                                 "description": "GHG average emissions and reliability score for the carrier",
                                 "properties": {
-                                  "averageEmission": {
-                                    "type": "integer",
+                                  "emissionType": {
+                                    "type": "object",
                                     "x-stoplight": {
-                                      "id": "wmsx8qejj5q3j"
+                                      "id": "ujvjh2iy3it8r"
+                                    },
+                                    "properties": {
+                                      "CO2e": {
+                                        "type": "object",
+                                        "x-stoplight": {
+                                          "id": "7hvlzgpjgavct"
+                                        },
+                                        "properties": {
+                                          "reliabilityScore": {
+                                            "type": "integer",
+                                            "x-stoplight": {
+                                              "id": "uo2ob277xd0qe"
+                                            }
+                                          },
+                                          "emissions": {
+                                            "type": "array",
+                                            "x-stoplight": {
+                                              "id": "n69tjy24yotjb"
+                                            },
+                                            "items": {
+                                              "x-stoplight": {
+                                                "id": "ef8qp1ufnn1gp"
+                                              },
+                                              "type": "object",
+                                              "properties": {
+                                                "WTW": {
+                                                  "type": "array",
+                                                  "x-stoplight": {
+                                                    "id": "3mxz4a1deiwcu"
+                                                  },
+                                                  "items": {
+                                                    "x-stoplight": {
+                                                      "id": "rh7bt9k5vhb87"
+                                                    },
+                                                    "type": "object",
+                                                    "properties": {
+                                                      "value": {
+                                                        "type": "integer",
+                                                        "x-stoplight": {
+                                                          "id": "hirqyxkmgxn8j"
+                                                        }
+                                                      },
+                                                      "unit": {
+                                                        "x-stoplight": {
+                                                          "id": "rfqpzf325qafa"
+                                                        },
+                                                        "enum": []
+                                                      }
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
                                     }
                                   },
-                                  "unit": {
+                                  "labeling": {
+                                    "type": "array",
                                     "x-stoplight": {
-                                      "id": "63al1l4za6axu"
+                                      "id": "d1sy56up48hyg"
                                     },
-                                    "default": "kgCO2/t.km",
-                                    "example": "kgCO2/t.km",
-                                    "enum": [
-                                      "kgCO2/t.km"
-                                    ]
-                                  },
-                                  "reliabilityScore": {
-                                    "type": "integer",
-                                    "x-stoplight": {
-                                      "id": "25ohvsg2n7qb2"
+                                    "items": {
+                                      "x-stoplight": {
+                                        "id": "goxjbzwyyv5xe"
+                                      },
+                                      "type": "object",
+                                      "properties": {
+                                        "from": {
+                                          "type": "string",
+                                          "x-stoplight": {
+                                            "id": "hmxlibeeq6j7i"
+                                          }
+                                        },
+                                        "to": {
+                                          "type": "string",
+                                          "x-stoplight": {
+                                            "id": "w2oo6kui0na9d"
+                                          }
+                                        },
+                                        "name": {
+                                          "type": "string",
+                                          "x-stoplight": {
+                                            "id": "usnzrv7w1e0xj"
+                                          }
+                                        }
+                                      }
                                     }
                                   }
                                 }
@@ -8479,7 +8557,7 @@
             "x-stoplight": {
               "id": "50x6lkgekgrp3"
             },
-            "description": "The amount of the emission"
+            "description": "The amount of the GHG emission"
           },
           "reliabilityScore": {
             "type": "integer",
