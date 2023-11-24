@@ -4843,6 +4843,37 @@
                                     }
                                   }
                                 }
+                              },
+                              "impact": {
+                                "type": "object",
+                                "x-stoplight": {
+                                  "id": "zbix3o8qcx1hi"
+                                },
+                                "description": "GHG average emissions and reliability score for the carrier",
+                                "properties": {
+                                  "averageEmission": {
+                                    "type": "integer",
+                                    "x-stoplight": {
+                                      "id": "wmsx8qejj5q3j"
+                                    }
+                                  },
+                                  "unit": {
+                                    "x-stoplight": {
+                                      "id": "63al1l4za6axu"
+                                    },
+                                    "default": "kgCO2/t.km",
+                                    "example": "kgCO2/t.km",
+                                    "enum": [
+                                      "kgCO2/t.km"
+                                    ]
+                                  },
+                                  "reliabilityScore": {
+                                    "type": "integer",
+                                    "x-stoplight": {
+                                      "id": "25ohvsg2n7qb2"
+                                    }
+                                  }
+                                }
                               }
                             }
                           },
@@ -5401,6 +5432,28 @@
                         }
                       ]
                     }
+                  },
+                  "Example with carrierImpact": {
+                    "value": {
+                      "eligibilities": [
+                        {
+                          "carrier": {
+                            "code": "carrier-number-1",
+                            "name": "Carrier number one",
+                            "score": {
+                              "satisfaction": 8,
+                              "nps": 8,
+                              "onTimeDeliveryScore": 8.2
+                            },
+                            "impact": {
+                              "unit": "KgCO2/t.km",
+                              "averageEmission": 0.68,
+                              "reliabilityScore": 3.1
+                            }
+                          }
+                        }
+                      ]
+                    }
                   }
                 }
               }
@@ -5717,6 +5770,25 @@
                     "storeId": "MAG01",
                     "options": {
                       "carrierScore": {
+                        "active": true
+                      }
+                    }
+                  }
+                },
+                "Example with options.impact": {
+                  "value": {
+                    "picking": {
+                      "location": {
+                        "type": "address",
+                        "addressLine1": "237 rue du ballon",
+                        "postalCode": "59110",
+                        "city": "La Madeleine",
+                        "country": "FR"
+                      }
+                    },
+                    "storeId": "MAG01",
+                    "options": {
+                      "impact": {
                         "active": true
                       }
                     }
@@ -6959,6 +7031,21 @@
                     "type": "boolean",
                     "x-stoplight": {
                       "id": "92uip2l87zd4p"
+                    }
+                  }
+                }
+              },
+              "impact": {
+                "type": "object",
+                "x-stoplight": {
+                  "id": "egwtljbc2zvro"
+                },
+                "description": "Average GHG emissions for eligible carriers ",
+                "properties": {
+                  "active": {
+                    "type": "boolean",
+                    "x-stoplight": {
+                      "id": "e7lr1o2ie07z8"
                     }
                   }
                 }
