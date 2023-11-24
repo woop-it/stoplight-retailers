@@ -3377,6 +3377,82 @@
           }
         },
         "summary": "Retrieve documents"
+      },
+      "post": {
+        "summary": "Add an order document",
+        "operationId": "post-orders-orderId-documents",
+        "responses": {
+          "201": {
+            "description": "Request processed successfully"
+          },
+          "400": {
+            "description": "Bad Request - Request processed successfully"
+          },
+          "401": {
+            "description": "Unauthorized - You are not allowed to access this item."
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "tags": [
+          "Document"
+        ],
+        "description": "This method allows you to upload a document in base64 directly to the Woop platform, one by one. ",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "x-stoplight": {
+                      "id": "ncezaqg691wxk"
+                    },
+                    "description": "Document type",
+                    "enum": [
+                      "INVOICE",
+                      "CUSTOMS_DECLARATION",
+                      "TERMS"
+                    ],
+                    "example": "INVOICE"
+                  },
+                  "document": {
+                    "type": "string",
+                    "x-stoplight": {
+                      "id": "3e0pxqoazd7ig"
+                    },
+                    "description": "Document in base64"
+                  },
+                  "date": {
+                    "type": "string",
+                    "x-stoplight": {
+                      "id": "fh4up64tz5hw8"
+                    },
+                    "description": "Creation date of the document",
+                    "format": "date-time",
+                    "example": "2023-07-01T13:00:00+0000"
+                  },
+                  "name": {
+                    "type": "string",
+                    "x-stoplight": {
+                      "id": "tayjvwrnl5fd0"
+                    },
+                    "description": "Document name",
+                    "example": "document.pdf"
+                  }
+                },
+                "required": [
+                  "type",
+                  "document",
+                  "date",
+                  "name"
+                ]
+              }
+            }
+          }
+        }
       }
     },
     "/orders/{orderId}/documents/download": {
