@@ -92,14 +92,6 @@
                       ]
                     }
                   },
-
-                  "additionalData": {
-                    "type": "array",
-                    "x-stoplight": {
-                      "id": "6an7c3qrlb8wn"
-                    },
-                    "items": {
-                      "$ref": "#/components/schemas/additionalData"
                   "pickUpPoint": {
                     "type": "object",
                     "x-stoplight": {
@@ -112,7 +104,7 @@
                           "id": "sb003u59ml2q2"
                         },
                         "description": "carrier.code of the pickup point"
- }
+                      }
                     }
                   }
                 },
@@ -2481,7 +2473,7 @@
       "putParcelStatus": {
         "title": "Update of the parcel status (putParcelStatus)",
         "type": "object",
-        "description": "Update of the parcel status.",
+        "description": "Update of the parcel status",
         "x-stoplight": {
           "id": "330825975831c"
         },
@@ -2530,13 +2522,6 @@
             "type": "string",
             "description": "Carrier code"
           },
-          "additionalData": {
-            "x-stoplight": {
-              "id": "z8jes26folcnf"
-            },
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/additionalData"
           "pickUpPoint": {
             "type": "object",
             "x-stoplight": {
