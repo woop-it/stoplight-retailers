@@ -7865,6 +7865,7 @@
           "SERVICE_WHITE_GLOVE",
           "SERVICE_EXCHANGE",
           "SERVICE_DELIVERY_TO_MAILBOX",
+          "SERVICE_STORE_TO_STORE"
           "SERVICE_SCHEDULED",
           "SERVICE_FREIGHT_ELEVATOR"
         ],
