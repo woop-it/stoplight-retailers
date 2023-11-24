@@ -4819,6 +4819,9 @@
                                 "description": "Internal carrier code"
                               },
                               "score": {
+
+                                "$ref": "#/components/schemas/score"
+
                                 "type": "object",
                                 "x-stoplight": {
                                   "id": "5109wnjzhnwm5"
@@ -5701,6 +5704,25 @@
                       }
                     ],
                     "storeId": "MAG01"
+                  }
+                },
+                "Example with options.carrierScore": {
+                  "value": {
+                    "picking": {
+                      "location": {
+                        "type": "address",
+                        "addressLine1": "237 rue du ballon",
+                        "postalCode": "59110",
+                        "city": "La Madeleine",
+                        "country": "FR"
+                      }
+                    },
+                    "storeId": "MAG01",
+                    "options": {
+                      "carrierScore": {
+                        "active": true
+                      }
+                    }
                   }
                 },
                 "Example with options.carrierScore": {
@@ -6920,6 +6942,12 @@
                   }
                 }
               },
+
+              "carrierScore": {
+                "type": "object",
+                "x-stoplight": {
+                  "id": "xmh2fuxe4ytfn"
+
               "slot": {
                 "type": "object",
                 "description": "Allows you to define slot reservation criteria ",
@@ -6953,15 +6981,29 @@
                 "type": "object",
                 "x-stoplight": {
                   "id": "h9bq41n6c5idt"
+
                 },
                 "properties": {
                   "active": {
                     "type": "boolean",
                     "x-stoplight": {
+
+                      "id": "mfpbnbv1zjcuf"
+                    }
+                  }
+                }
+              },
+              "": {
+                "type": "string",
+                "x-stoplight": {
+                  "id": "tqftywa61oo5n"
+                }
+
                       "id": "92uip2l87zd4p"
                     }
                   }
                 }
+
               }
             }
           },
@@ -8601,6 +8643,34 @@
           "COLLECT_DELAYED",
           "COLLECT_REPLANNED"
         ]
+      },
+      "score": {
+        "title": "score",
+        "x-stoplight": {
+          "id": "imgiq4miab77v"
+        },
+        "type": "object",
+        "properties": {
+          "satisfaction": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "5g7yjh1lf0itg"
+            }
+          },
+          "nps": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "rjp4s25sz3o4g"
+            }
+          },
+          "onTimeDeliveryScore": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "56lly8khbuxcd"
+            }
+          }
+        },
+        "description": "Carrier quality score"
       },
       "carrierSelection": {
         "title": "carrierSelection",
