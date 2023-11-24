@@ -7009,16 +7009,10 @@
             "description": "Country code (ISO 3166 alpha-2)."
           },
           "accessibility": {
-            "$ref": "./models/PickUpPoint/pickUpPointAccessibility.json",
-            "x-stoplight": {
-              "id": "5rbs8nfhv50e6"
-            }
+            "$ref": "./models/PickUpPoint/pickUpPointAccessibility.json"
           },
           "boxCategoryAccessibility": {
-            "$ref": "./models/PickUpPoint/boxCategoryAccessibility.json",
-            "x-stoplight": {
-              "id": "zu5kxiclngm6v"
-            }
+            "$ref": "./models/PickUpPoint/boxCategoryAccessibility.json"
           }
         },
         "required": [
