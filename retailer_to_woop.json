@@ -7844,6 +7844,13 @@
           "references": {
             "$ref": "#/components/schemas/packagesReferences"
           },
+          "category": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "e072oi6neiege"
+            },
+            "description": "Used to retrieve the sign's parcel category. If this field is not empty, length, width and height are not mandatory"
+          },
           "length": {
             "$ref": "#/components/schemas/length"
           },
