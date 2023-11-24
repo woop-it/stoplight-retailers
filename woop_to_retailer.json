@@ -2473,7 +2473,7 @@
       "putParcelStatus": {
         "title": "Update of the parcel status (putParcelStatus)",
         "type": "object",
-        "description": "Update of the parcel status",
+        "description": "Update of the parcel status.",
         "x-stoplight": {
           "id": "330825975831c"
         },
