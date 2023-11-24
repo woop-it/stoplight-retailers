@@ -7523,7 +7523,7 @@
         ]
       },
       "packages": {
-        "description": "Specifies the information needed to update a package. The handling unit is to be defined with the package/product structure. ",
+        "description": "Specifies the information needed to update a package. The handling unit is to be defined with the package/product structure",
         "type": "object",
         "x-examples": {
           "Example": {
