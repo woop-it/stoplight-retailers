@@ -6,9 +6,9 @@ stoplight-id: 29a6c7af2fbda
 
 The delivery goes through several statuses in succession. We identify the different stages of the delivery.
 
-### Route of an order
+### Route of delivery
 
-![Workflow_status_livraison.png](https://stoplight.io/api/v1/projects/cHJqOjkyOTQ/images/zxbZCpmzQ7w)
+![Workflow_status_livraison.png](../../../assets/images/Workflow_status_livraison.png)
 
 ### List of possible delivery statuses
 
@@ -36,7 +36,8 @@ The delivery goes through several statuses in succession. We identify the differ
 | `DELIVERY_BLOCKED`              | --                   | Delivery blocked                                                     | "Customs Inspection"<br/>"Truck blocked by bad weather"<br/>"Truck blocked by traffic"                                                                                                                                                                                                                                                                                                                                                            |
 | `DELIVERY_DELAYED`              | --                   | Delivery delayed                                                     | "Customs Inspection"<br/>"Truck blocked by bad weather"<br/>"Truck blocked by traffic"                                                                                                                                                                                                                                                                                                                                                            |
 | `DELIVERY_AVAILABLE`            | --                   | Delivery available at collection points                              | "N/A"                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| `DELIVERY_REPLANNED`            | --                   | Delivery date rescheduled by making an appointment with the customer | "N/A"                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| `DELIVERY_REPLANNED`            | --                   | Delivery date rescheduled by making an appointment with the customer | "N/A"|
+| `DELIVERY_COLLECTED`            | --                   | The product has been recovered at collection points| "N/A"|
 
 ### SubStatus & use case
 
@@ -44,4 +45,15 @@ The delivery goes through several statuses in succession. We identify the differ
 
 ### Returns and error management
 
-![get-started-icon](../../assets/images/Workflow_retours_livraison.png)
+![Workflow_retours_livraison.png](../../../assets/images/Workflow_retours_livraison.png)
+
+### Delivery at collection point : Locker
+
+![Collection_point_status.png](../../../assets/images/Collection_point_status.png)
+
+Collection-point delivery concept between link with order and booking statuses. 
+
+![Collection_point_delivery_concept.png](../../../assets/images/Collection_point_delivery_concept.png)
+
+
+
