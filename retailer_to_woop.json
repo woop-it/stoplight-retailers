@@ -153,9 +153,6 @@
           },
           "description": ""
         },
-        "tags": [
-          "Order"
-        ],
         "parameters": [
           {
             "schema": {
@@ -164,6 +161,9 @@
             "in": "query",
             "name": "orderId"
           }
+        ],
+        "tags": [
+          "Package advert"
         ]
       }
     },
@@ -877,6 +877,148 @@
           "Collect"
         ]
       }
+    },
+    "/enhancedLabel": {
+      "post": {
+        "summary": "Enhanced Label",
+        "description": "This method allows you to add specific info below a carrier's label according to a given template.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "zpl"
+              ]
+            },
+            "in": "query",
+            "name": "mode",
+            "required": true,
+            "description": "Label format"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "parcelId",
+            "description": "Parcel number"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "orderId",
+            "required": true,
+            "description": "Order identifier"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "x-stoplight": {
+                    "id": "7uueosxfeu696"
+                  },
+                  "type": "object",
+                  "properties": {
+                    "key": {
+                      "type": "object",
+                      "x-stoplight": {
+                        "id": "1w2g7uwe2t4kn"
+                      },
+                      "properties": {
+                        "keyName": {
+                          "type": "string",
+                          "x-stoplight": {
+                            "id": "go2s3a37bxkib"
+                          },
+                          "description": "name of the key"
+                        }
+                      }
+                    },
+                    "value": {
+                      "type": "object",
+                      "x-stoplight": {
+                        "id": "qukcchy13ja7u"
+                      },
+                      "properties": {
+                        "valueName": {
+                          "type": "string",
+                          "x-stoplight": {
+                            "id": "rtdgwst3pah6z"
+                          },
+                          "description": "object value"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "examples": {
+                "Example 1": {
+                  "value": [
+                    {
+                      "Key": "string",
+                      "value": "string"
+                    }
+                  ]
+                }
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          },
+          "description": "Contains the creation information of the request."
+        },
+        "responses": {
+          "201": {
+            "description": "Request processed successfully - Label created successfully ",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "base64": {
+                      "type": "string",
+                      "x-stoplight": {
+                        "id": "3tbsa7upo3wg1"
+                      },
+                      "description": "The label is returned in base64 in the format indicated\n\n"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "You are not authorised to access this item",
+            "content": {}
+          },
+          "404": {
+            "description": "parcelId not found",
+            "content": {}
+          }
+        },
+        "operationId": "postBookings",
+        "x-stoplight": {
+          "id": "2jielfmzp8o4d"
+        },
+        "tags": [
+          "Label"
+        ]
+      },
+      "parameters": []
     },
     "/deliveries/bookings": {
       "post": {
@@ -1727,7 +1869,7 @@
                         }
                       },
                       "contact": {
-                        "$ref": "#/components/schemas/contact"
+                        "$ref": "#/components/schemas/contactDelivery"
                       }
                     }
                   },
@@ -1972,6 +2114,15 @@
                         "lastName": "Dupond",
                         "phone": "+33600000000",
                         "email": "pierre.dupond@mail.fr",
+                        "optIn": {
+                          "survey": [
+                            "MAIL"
+                          ],
+                          "delivery": [
+                            "MAIL",
+                            "SMS"
+                          ]
+                        },
                         "language": "fr",
                         "timezone": "Europe/Paris"
                       }
@@ -2085,6 +2236,15 @@
                         "lastName": "Dupond",
                         "phone": "+33600000000",
                         "email": "pierre.dupond@mail.fr",
+                        "optIn": {
+                          "survey": [
+                            "MAIL"
+                          ],
+                          "delivery": [
+                            "MAIL",
+                            "SMS"
+                          ]
+                        },
                         "language": "fr",
                         "timezone": "Europe/Paris"
                       }
@@ -2189,6 +2349,15 @@
                         "lastName": "Dupond",
                         "phone": "+33600000000",
                         "email": "pierre.dupond@mail.fr",
+                        "optIn": {
+                          "survey": [
+                            "MAIL"
+                          ],
+                          "delivery": [
+                            "MAIL",
+                            "SMS"
+                          ]
+                        },
                         "language": "fr",
                         "timezone": "Europe/Paris"
                       }
@@ -2287,6 +2456,15 @@
                         "lastName": "Dupond",
                         "phone": "+33600000000",
                         "email": "pierre.dupond@mail.fr",
+                        "optIn": {
+                          "survey": [
+                            "MAIL"
+                          ],
+                          "delivery": [
+                            "MAIL",
+                            "SMS"
+                          ]
+                        },
                         "language": "fr",
                         "timezone": "Europe/Paris"
                       }
@@ -2400,6 +2578,15 @@
                         "lastName": "Dupond",
                         "phone": "+33600000000",
                         "email": "pierre.dupond@mail.fr",
+                        "optIn": {
+                          "survey": [
+                            "MAIL"
+                          ],
+                          "delivery": [
+                            "MAIL",
+                            "SMS"
+                          ]
+                        },
                         "language": "fr",
                         "timezone": "Europe/Paris"
                       }
@@ -2508,6 +2695,15 @@
                         "lastName": "Dupond",
                         "phone": "+33600000000",
                         "email": "pierre.dupond@mail.fr",
+                        "optIn": {
+                          "survey": [
+                            "MAIL"
+                          ],
+                          "delivery": [
+                            "MAIL",
+                            "SMS"
+                          ]
+                        },
                         "language": "fr",
                         "timezone": "Europe/Paris"
                       }
@@ -3235,6 +3431,82 @@
           }
         },
         "summary": "Retrieve documents"
+      },
+      "post": {
+        "summary": "Add an order document",
+        "operationId": "post-orders-orderId-documents",
+        "responses": {
+          "201": {
+            "description": "Request processed successfully"
+          },
+          "400": {
+            "description": "Bad Request - Request processed successfully"
+          },
+          "401": {
+            "description": "Unauthorized - You are not allowed to access this item."
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "tags": [
+          "Document"
+        ],
+        "description": "This method allows you to upload a document in base64 directly to the Woop platform, one by one. ",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "x-stoplight": {
+                      "id": "ncezaqg691wxk"
+                    },
+                    "description": "Document type",
+                    "enum": [
+                      "INVOICE",
+                      "CUSTOMS_DECLARATION",
+                      "TERMS"
+                    ],
+                    "example": "INVOICE"
+                  },
+                  "document": {
+                    "type": "string",
+                    "x-stoplight": {
+                      "id": "3e0pxqoazd7ig"
+                    },
+                    "description": "Document in base64"
+                  },
+                  "date": {
+                    "type": "string",
+                    "x-stoplight": {
+                      "id": "fh4up64tz5hw8"
+                    },
+                    "description": "Creation date of the document",
+                    "format": "date-time",
+                    "example": "2023-07-01T13:00:00+0000"
+                  },
+                  "name": {
+                    "type": "string",
+                    "x-stoplight": {
+                      "id": "tayjvwrnl5fd0"
+                    },
+                    "description": "Document name",
+                    "example": "document.pdf"
+                  }
+                },
+                "required": [
+                  "type",
+                  "document",
+                  "date",
+                  "name"
+                ]
+              }
+            }
+          }
+        }
       }
     },
     "/orders/{orderId}/documents/download": {
@@ -4571,6 +4843,37 @@
                                     }
                                   }
                                 }
+                              },
+                              "impact": {
+                                "type": "object",
+                                "x-stoplight": {
+                                  "id": "zbix3o8qcx1hi"
+                                },
+                                "description": "GHG average emissions and reliability score for the carrier",
+                                "properties": {
+                                  "averageEmission": {
+                                    "type": "integer",
+                                    "x-stoplight": {
+                                      "id": "wmsx8qejj5q3j"
+                                    }
+                                  },
+                                  "unit": {
+                                    "x-stoplight": {
+                                      "id": "63al1l4za6axu"
+                                    },
+                                    "default": "kgCO2/t.km",
+                                    "example": "kgCO2/t.km",
+                                    "enum": [
+                                      "kgCO2/t.km"
+                                    ]
+                                  },
+                                  "reliabilityScore": {
+                                    "type": "integer",
+                                    "x-stoplight": {
+                                      "id": "25ohvsg2n7qb2"
+                                    }
+                                  }
+                                }
                               }
                             }
                           },
@@ -5129,6 +5432,28 @@
                         }
                       ]
                     }
+                  },
+                  "Example with carrierImpact": {
+                    "value": {
+                      "eligibilities": [
+                        {
+                          "carrier": {
+                            "code": "carrier-number-1",
+                            "name": "Carrier number one",
+                            "score": {
+                              "satisfaction": 8,
+                              "nps": 8,
+                              "onTimeDeliveryScore": 8.2
+                            },
+                            "impact": {
+                              "unit": "KgCO2/t.km",
+                              "averageEmission": 0.68,
+                              "reliabilityScore": 3.1
+                            }
+                          }
+                        }
+                      ]
+                    }
                   }
                 }
               }
@@ -5347,7 +5672,7 @@
                     }
                   }
                 },
-                "Example with distance option": {
+                "Example with distance and zoning options": {
                   "value": {
                     "picking": {
                       "location": {
@@ -5362,14 +5687,17 @@
                       "location": {
                         "type": "address",
                         "coordinates": {
-                          "latitude": 0,
-                          "longitude": 0
+                          "latitude": 50.65849685668945,
+                          "longitude": 3.0207953453063965
                         }
                       }
                     },
                     "storeId": "MAG01",
                     "options": {
                       "distance": {
+                        "active": true
+                      },
+                      "zoning": {
                         "active": true
                       }
                     }
@@ -5442,6 +5770,25 @@
                     "storeId": "MAG01",
                     "options": {
                       "carrierScore": {
+                        "active": true
+                      }
+                    }
+                  }
+                },
+                "Example with options.impact": {
+                  "value": {
+                    "picking": {
+                      "location": {
+                        "type": "address",
+                        "addressLine1": "237 rue du ballon",
+                        "postalCode": "59110",
+                        "city": "La Madeleine",
+                        "country": "FR"
+                      }
+                    },
+                    "storeId": "MAG01",
+                    "options": {
+                      "impact": {
                         "active": true
                       }
                     }
@@ -5824,12 +6171,18 @@
       "patch": {
         "x-stoplight": {
           "id": "800e91a2e583a"
-        }
+        },
+        "tags": [
+          "Package advert"
+        ]
       },
       "put": {
         "x-stoplight": {
           "id": "800e91a2e583a"
-        }
+        },
+        "tags": [
+          "Package advert"
+        ]
       }
     }
   },
@@ -6146,16 +6499,16 @@
                 "type": "string",
                 "description": "Order identifier"
               },
-              "status": {
-                "$ref": "#/components/schemas/orderStatus"
+              "referenceNumber": {
+                "type": "string",
+                "description": "Order reference"
               },
               "updatedAt": {
                 "type": "string",
                 "description": "Last update datetime"
               },
-              "referenceNumber": {
-                "type": "string",
-                "description": "Order reference"
+              "status": {
+                "$ref": "#/components/schemas/orderStatus"
               },
               "picking": {
                 "type": "object",
@@ -6247,8 +6600,8 @@
             },
             "required": [
               "id",
-              "status",
               "updatedAt",
+              "status",
               "picking",
               "delivery"
             ]
@@ -6621,6 +6974,22 @@
                   }
                 }
               },
+              "zoning": {
+                "type": "object",
+                "x-stoplight": {
+                  "id": "d8fg2w9jsycpz"
+                },
+                "description": "Zoning option allowing to launch the geocoding call wether or not there's GPS coordinates in picking and delivery locations",
+                "properties": {
+                  "active": {
+                    "type": "boolean",
+                    "x-stoplight": {
+                      "id": "yz5ilvjf7dafr"
+                    },
+                    "description": "Used to launch geographic eligibility"
+                  }
+                }
+              },
               "price": {
                 "type": "object",
                 "properties": {
@@ -6635,10 +7004,6 @@
                 "properties": {
                   "active": {
                     "type": "boolean"
-                  },
-                  "minRemainingCapacity": {
-                    "type": "number",
-                    "description": "Minimum remaining capacity for this slot"
                   },
                   "limit": {
                     "type": "number",
@@ -6655,6 +7020,10 @@
                       "TRAYS_QUANTITY"
                     ],
                     "default": "ORDERS_QUANTITY"
+                  },
+                  "minRemainingCapacity": {
+                    "type": "number",
+                    "description": "Minimum remaining capacity for this slot"
                   }
                 }
               },
@@ -6668,6 +7037,21 @@
                     "type": "boolean",
                     "x-stoplight": {
                       "id": "92uip2l87zd4p"
+                    }
+                  }
+                }
+              },
+              "impact": {
+                "type": "object",
+                "x-stoplight": {
+                  "id": "egwtljbc2zvro"
+                },
+                "description": "Average GHG emissions for eligible carriers ",
+                "properties": {
+                  "active": {
+                    "type": "boolean",
+                    "x-stoplight": {
+                      "id": "e7lr1o2ie07z8"
                     }
                   }
                 }
@@ -6704,6 +7088,12 @@
           "storeId": {
             "type": "string",
             "description": "Identifier of the store issuing the request"
+          },
+          "state": {
+            "type": "string",
+            "enum": [
+              "TO_BE_COMPLETED"
+            ]
           },
           "picking": {
             "description": "Information on the collection location",
@@ -6807,11 +7197,8 @@
           "carrierSelection": {
             "$ref": "#/components/schemas/carrierSelection"
           },
-          "state": {
-            "type": "string",
-            "enum": [
-              "TO_BE_COMPLETED"
-            ]
+          "invoice": {
+            "$ref": "#/components/schemas/invoices"
           },
           "additionalData": {
             "$ref": "./models/additionalData.yaml"
@@ -7009,16 +7396,10 @@
             "description": "Country code (ISO 3166 alpha-2)."
           },
           "accessibility": {
-            "$ref": "./models/PickUpPoint/pickUpPointAccessibility.json",
-            "x-stoplight": {
-              "id": "5rbs8nfhv50e6"
-            }
+            "$ref": "./models/PickUpPoint/pickUpPointAccessibility.json"
           },
           "boxCategoryAccessibility": {
-            "$ref": "./models/PickUpPoint/boxCategoryAccessibility.json",
-            "x-stoplight": {
-              "id": "zu5kxiclngm6v"
-            }
+            "$ref": "./models/PickUpPoint/boxCategoryAccessibility.json"
           }
         },
         "required": [
@@ -7521,31 +7902,103 @@
           },
           "originCountry": {
             "x-stoplight": {
-              "id": "xgv36r5u9xekz"
+              "id": "d2xnt6q4lo2cb"
             },
+            "description": "Code Pays d’origine du produit. Format (ISO 3166 alpha-2). Obligatoire pour les envois soumis à des déclarations en douane.",
             "enum": [
               "FR",
-              "BE"
-            ],
-            "description": "Country code (ISO 3166 alpha-2).\n\nMandatory for shipments subject to customs declarations. "
+              "BE",
+              "LU",
+              "DE",
+              "ES",
+              "IT",
+              "AD",
+              "MC",
+              "NL",
+              "CH",
+              "GB",
+              "RE",
+              "PT",
+              "HU",
+              "HR",
+              "SI",
+              "PL",
+              "SK",
+              "CZ",
+              "AT",
+              "XI",
+              "IE",
+              "AU",
+              "NZ",
+              "LI",
+              "LV",
+              "RO",
+              "SE",
+              "AM",
+              "BG",
+              "BL",
+              "CA",
+              "CN",
+              "CY",
+              "MT",
+              "GL",
+              "FO",
+              "DK",
+              "EE",
+              "FI",
+              "GF",
+              "GR",
+              "GT",
+              "JP",
+              "MA",
+              "MD",
+              "MF",
+              "MQ",
+              "MX",
+              "NO",
+              "PF",
+              "PH",
+              "PM",
+              "RU",
+              "SA",
+              "TH",
+              "TW",
+              "UA",
+              "US",
+              "VU",
+              "YT",
+              "ZA",
+              "BR"
+            ]
           },
           "hsCode": {
             "type": "string",
             "x-stoplight": {
-              "id": "rguzvgw0gt1ea"
+              "id": "4prcbywnrdmey"
             },
-            "description": "Mandatory for consignments subject to a customs declaration. \n\nThis is the tarif number requested in customs documents. For international shipments, 6, 8 or 10 digits must be entered."
+            "description": "Tariff number requested in customs documents = HS CODE. For international consignments, 6, 8 or 10 digits must be entered. Mandatory for consignments subject to customs declarations."
           },
           "weight": {
             "$ref": "#/components/schemas/mass"
+          },
+          "length": {
+            "$ref": "#/components/schemas/length"
+          },
+          "width": {
+            "$ref": "#/components/schemas/length"
+          },
+          "height": {
+            "$ref": "#/components/schemas/length"
           }
         },
         "required": [
           "type"
-        ]
+        ],
+        "title": "Product (product)",
+        "description": "Specifies the information needed to create a product item."
       },
       "packages": {
-        "description": "Specifies the information needed to update a package. The handling unit is to be defined with the package/product structure. ",
+        "description": "Specifies the information needed to update a package. The handling unit is to be defined with the package/product structure",
         "type": "object",
         "x-examples": {
           "Example": {
@@ -7598,6 +8051,13 @@
         "properties": {
           "references": {
             "$ref": "#/components/schemas/packagesReferences"
+          },
+          "category": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "e072oi6neiege"
+            },
+            "description": "Used to retrieve the sign's parcel category. If this field is not empty, length, width and height are not mandatory"
           },
           "length": {
             "$ref": "#/components/schemas/length"
@@ -7722,26 +8182,26 @@
         "title": "Dimension (length)"
       },
       "mass": {
-        "required": [
-          "unit",
-          "value"
-        ],
-        "properties": {
-          "value": {
-            "type": "number"
-          },
-          "unit": {
-            "$ref": "#/components/schemas/massUnits"
-          }
-        },
-        "description": "Specifies the weight of a package/product.",
+        "type": "object",
         "x-examples": {
-          "Example": {
+          "Example 1": {
             "value": 1,
             "unit": "kg"
           }
         },
-        "title": "Weight (mass)"
+        "properties": {
+          "value": {
+            "type": "integer"
+          },
+          "unit": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "value",
+          "unit"
+        ],
+        "title": ""
       },
       "packagesReferences": {
         "type": "array",
@@ -8318,6 +8778,9 @@
             "type": "string",
             "description": "Customer's email address"
           },
+          "optIn": {
+            "$ref": "#/components/schemas/optIn"
+          },
           "language": {
             "$ref": "#/components/schemas/language"
           },
@@ -8458,62 +8921,67 @@
           }
         }
       },
-      "productsPrice": {
-        "type": "object",
-        "x-examples": {
-          "Example 1": {
-            "value": 300,
-            "currency": "EUR"
-          }
+      "optIn": {
+        "title": "Opt-in (optIn)",
+        "x-stoplight": {
+          "id": "5n7ri6a7on6ao"
         },
-        "title": "productPrice",
-        "description": "Corresponds to product selling prices. \n\nMandatory for the \"SERVICE_INSTALL\" service and for shipments subject to customs declarations. ",
+        "type": "object",
+        "description": "Defines the explicit consent of the customer to be contacted for survey or delivery tracking events for a specific channel.\nIf a channel is not present, notifications won't be sent on this channel\n\nTo ensure backward compatibility, if the optin section is not sent, then the customer's implicit consent will be considered and notifications sent.",
         "properties": {
-          "value": {
-            "type": "number",
-            "description": "value\n\n"
+          "survey": {
+            "type": "array",
+            "x-stoplight": {
+              "id": "g2srfodbx51r6"
+            },
+            "description": "For all notifications related to satisfaction survey.",
+            "items": {
+              "$ref": "#/components/schemas/channel"
+            }
           },
-          "currency": {
-            "$ref": "./models/currency.yaml"
+          "delivery": {
+            "type": "array",
+            "x-stoplight": {
+              "id": "5wt2mzeuyae1g"
+            },
+            "description": "For all notifications related to delivery tracking.",
+            "items": {
+              "$ref": "#/components/schemas/channel"
+            }
           }
         },
         "required": [
-          "value",
-          "currency"
+          "survey",
+          "delivery"
         ]
       },
-      "invoice": {
-        "title": "invoice",
+      "channel": {
+        "title": "Channel",
         "x-stoplight": {
-          "id": "0ydebvifhzzcg"
+          "id": "ticb7e682kioc"
+        },
+        "enum": [
+          "MAIL",
+          "SMS"
+        ],
+        "description": "Refers to the channel use to communicate."
+      },
+      "invoices": {
+        "title": "invoices",
+        "x-stoplight": {
+          "id": "issmc0bdy82ff"
         },
         "type": "object",
-        "description": "Purchase invoice informations\n\nMandatory for shipments subject to customs declarations. ",
         "properties": {
           "id": {
             "type": "string",
             "x-stoplight": {
-              "id": "imwhczg18xluc"
+              "id": "r3nezgnn0oqlx"
             },
-            "description": "Identifiant de la facture d'achât lié.\nApparaît sur la CN23 - Mandatory for shipments subject to customs declarations. "
+            "description": "Identifier of the invoice document linked to the sales order."
           },
           "totalAmount": {
-            "x-stoplight": {
-              "id": "n4op59ln8aql5"
-            },
-            "type": "object",
-            "properties": {
-              "value": {
-                "type": "number",
-                "x-stoplight": {
-                  "id": "cnhz6jp8jfmzh"
-                },
-                "description": "value\n"
-              },
-              "currency": {
-                "$ref": "./models/currency.yaml"
-              }
-            }
+            "$ref": "./models/price.yaml"
           }
         }
       }
