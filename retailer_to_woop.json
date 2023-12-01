@@ -7876,11 +7876,106 @@
             "type": "integer",
             "default": 1,
             "description": "Product quantity"
+          },
+          "price": {
+            "$ref": "#/components/schemas/productsPrice"
+          },
+          "originCountry": {
+            "x-stoplight": {
+              "id": "d2xnt6q4lo2cb"
+            },
+            "description": "Code Pays d’origine du produit. Format (ISO 3166 alpha-2). Obligatoire pour les envois soumis à des déclarations en douane.",
+            "enum": [
+              "FR",
+              "BE",
+              "LU",
+              "DE",
+              "ES",
+              "IT",
+              "AD",
+              "MC",
+              "NL",
+              "CH",
+              "GB",
+              "RE",
+              "PT",
+              "HU",
+              "HR",
+              "SI",
+              "PL",
+              "SK",
+              "CZ",
+              "AT",
+              "XI",
+              "IE",
+              "AU",
+              "NZ",
+              "LI",
+              "LV",
+              "RO",
+              "SE",
+              "AM",
+              "BG",
+              "BL",
+              "CA",
+              "CN",
+              "CY",
+              "MT",
+              "GL",
+              "FO",
+              "DK",
+              "EE",
+              "FI",
+              "GF",
+              "GR",
+              "GT",
+              "JP",
+              "MA",
+              "MD",
+              "MF",
+              "MQ",
+              "MX",
+              "NO",
+              "PF",
+              "PH",
+              "PM",
+              "RU",
+              "SA",
+              "TH",
+              "TW",
+              "UA",
+              "US",
+              "VU",
+              "YT",
+              "ZA",
+              "BR"
+            ]
+          },
+          "hsCode": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "4prcbywnrdmey"
+            },
+            "description": "Tariff number requested in customs documents = HS CODE. For international consignments, 6, 8 or 10 digits must be entered. Mandatory for consignments subject to customs declarations."
+          },
+          "weight": {
+            "$ref": "#/components/schemas/mass"
+          },
+          "length": {
+            "$ref": "#/components/schemas/length"
+          },
+          "width": {
+            "$ref": "#/components/schemas/length"
+          },
+          "height": {
+            "$ref": "#/components/schemas/length"
           }
         },
         "required": [
           "type"
-        ]
+        ],
+        "title": "Product (product)",
+        "description": "Specifies the information needed to create a product item."
       },
       "packages": {
         "description": "Specifies the information needed to update a package. The handling unit is to be defined with the package/product structure",
@@ -8067,26 +8162,26 @@
         "title": "Dimension (length)"
       },
       "mass": {
-        "required": [
-          "unit",
-          "value"
-        ],
-        "properties": {
-          "value": {
-            "type": "number"
-          },
-          "unit": {
-            "$ref": "#/components/schemas/massUnits"
-          }
-        },
-        "description": "Specifies the weight of a package/product.",
+        "type": "object",
         "x-examples": {
-          "Example": {
+          "Example 1": {
             "value": 1,
             "unit": "kg"
           }
         },
-        "title": "Weight (mass)"
+        "properties": {
+          "value": {
+            "type": "integer"
+          },
+          "unit": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "value",
+          "unit"
+        ],
+        "title": ""
       },
       "packagesReferences": {
         "type": "array",
