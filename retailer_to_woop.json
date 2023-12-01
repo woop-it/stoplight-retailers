@@ -153,9 +153,6 @@
           },
           "description": ""
         },
-        "tags": [
-          "package advert"
-        ],
         "parameters": [
           {
             "schema": {
@@ -164,6 +161,9 @@
             "in": "query",
             "name": "orderId"
           }
+        ],
+        "tags": [
+          "Package advert"
         ]
       }
     },
@@ -6173,7 +6173,7 @@
           "id": "800e91a2e583a"
         },
         "tags": [
-          "package advert"
+          "Package advert"
         ]
       },
       "put": {
@@ -6181,7 +6181,7 @@
           "id": "800e91a2e583a"
         },
         "tags": [
-          "package advert"
+          "Package advert"
         ]
       }
     }
