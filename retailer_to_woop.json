@@ -6499,16 +6499,16 @@
                 "type": "string",
                 "description": "Order identifier"
               },
-              "status": {
-                "$ref": "#/components/schemas/orderStatus"
+              "referenceNumber": {
+                "type": "string",
+                "description": "Order reference"
               },
               "updatedAt": {
                 "type": "string",
                 "description": "Last update datetime"
               },
-              "referenceNumber": {
-                "type": "string",
-                "description": "Order reference"
+              "status": {
+                "$ref": "#/components/schemas/orderStatus"
               },
               "picking": {
                 "type": "object",
@@ -6600,8 +6600,8 @@
             },
             "required": [
               "id",
-              "status",
               "updatedAt",
+              "status",
               "picking",
               "delivery"
             ]
@@ -7089,6 +7089,12 @@
             "type": "string",
             "description": "Identifier of the store issuing the request"
           },
+          "state": {
+            "type": "string",
+            "enum": [
+              "TO_BE_COMPLETED"
+            ]
+          },
           "picking": {
             "description": "Information on the collection location",
             "type": "object",
@@ -7157,9 +7163,6 @@
           "services": {
             "$ref": "#/components/schemas/services"
           },
-          "productsPrice": {
-            "$ref": "#/components/schemas/productsPrice"
-          },
           "expectedPayment": {
             "type": "object",
             "description": "Rest to be paid, to be used as part of the `SERVICE_PAY_ON_DELIVERY` service",
@@ -7194,11 +7197,8 @@
           "carrierSelection": {
             "$ref": "#/components/schemas/carrierSelection"
           },
-          "state": {
-            "type": "string",
-            "enum": [
-              "TO_BE_COMPLETED"
-            ]
+          "invoice": {
+            "$ref": "#/components/schemas/invoices"
           },
           "additionalData": {
             "$ref": "./models/additionalData.yaml"
@@ -8942,6 +8942,25 @@
           "SMS"
         ],
         "description": "Refers to the channel use to communicate."
+      },
+      "invoices": {
+        "title": "invoices",
+        "x-stoplight": {
+          "id": "issmc0bdy82ff"
+        },
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "r3nezgnn0oqlx"
+            },
+            "description": "Identifier of the invoice document linked to the sales order."
+          },
+          "totalAmount": {
+            "$ref": "./models/price.yaml"
+          }
+        }
       }
     },
     "parameters": {
