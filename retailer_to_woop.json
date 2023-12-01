@@ -7202,6 +7202,9 @@
           },
           "additionalData": {
             "$ref": "./models/additionalData.yaml"
+          },
+          "invoice": {
+            "$ref": "#/components/schemas/invoice"
           }
         },
         "required": [
@@ -7856,6 +7859,23 @@
       },
       "product": {
         "type": "object",
+        "title": "Product",
+        "description": "Product informations",
+        "x-examples": {
+          "Example 1": {
+            "type": "TYPOLOGY_GENERIC",
+            "ean": "111257000000",
+            "cug": "643224",
+            "label": "string",
+            "quantity": 1,
+            "price": {
+              "value": 4.5,
+              "currency": "EUR"
+            },
+            "originCountry": "KH",
+            "hsCode": "61112090"
+          }
+        },
         "properties": {
           "type": {
             "$ref": "#/components/schemas/productType"
@@ -8264,15 +8284,18 @@
           ]
         }
       },
-      "productsPrice": {
-        "description": "Corresponds to the sale prices of the products. To be entered for the service “SERVICE_INSTALL”.",
+      "productPrice": {
+        "description": "Corresponds to product selling prices. Mandatory for the \"SERVICE_INSTALL\" service and for shipments subject to customs declarations. ",
+        "x-stoplight": {
+          "id": "04673fa06d31b"
+        },
         "x-examples": {
           "Example": {
             "value": 300,
             "currency": "EUR"
           }
         },
-        "title": "Product prices (productsPrice)",
+        "title": "Product price (productPrice)",
         "type": "object",
         "properties": {
           "value": {
