@@ -154,7 +154,7 @@
           "description": ""
         },
         "tags": [
-          "Order"
+          "package advert"
         ],
         "parameters": [
           {
@@ -6171,12 +6171,18 @@
       "patch": {
         "x-stoplight": {
           "id": "800e91a2e583a"
-        }
+        },
+        "tags": [
+          "package advert"
+        ]
       },
       "put": {
         "x-stoplight": {
           "id": "800e91a2e583a"
-        }
+        },
+        "tags": [
+          "package advert"
+        ]
       }
     }
   },
