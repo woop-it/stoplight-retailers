@@ -5544,7 +5544,7 @@
         "description": "This method allows the retailer to send an update on the collection status.\n\nThe retailer must enter the next collection tracking status to progress the collection request. This delivery tracking status must be consistent with the defined workflow. <a href=\"/docs/retailer/docs/Modèles/Statuts-de-retrait-C&C.md\">Workflow and status list</a>"
       }
     },
-    "/stores/{Stores}": {
+    "/stores": {
       "post": {
         "summary": "Create store",
         "operationId": "post-stores",
@@ -5607,6 +5607,9 @@
         },
         "description": "This method allows you to create a store from Woop."
       },
+      "parameters": []
+    },
+    "/stores/{storeId}": {
       "patch": {
         "summary": "Modify a store",
         "operationId": "patch-stores",
@@ -5638,9 +5641,6 @@
             "description": "Conflict An action is already in progress on this store"
           }
         },
-        "x-stoplight": {
-          "id": "6k4fkt0hq0n5w"
-        },
         "description": "This method allows you to modify a store from Woop.",
         "requestBody": {
           "content": {
@@ -5650,6 +5650,10 @@
               }
             }
           }
+        },
+        "parameters": [],
+        "x-stoplight": {
+          "id": "ujkvqnstzan4j"
         }
       },
       "parameters": [
@@ -5657,10 +5661,10 @@
           "schema": {
             "type": "string"
           },
-          "name": "Stores",
+          "name": "storeId",
           "in": "path",
           "required": true,
-          "description": "stores"
+          "description": "external Store Id"
         }
       ]
     }
