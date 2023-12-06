@@ -2,31 +2,34 @@
   "openapi": "3.0.2",
   "tags": [
     {
-      "name": "Order"
-    },
-    {
-      "name": "Label"
+      "name": "Collect"
     },
     {
       "name": "Document"
     },
     {
-      "name": "Collect"
+      "name": "Eligibility"
     },
     {
       "name": "Health"
     },
     {
-      "name": "Product return"
+      "name": "Label"
+    },
+    {
+      "name": "Order"
     },
     {
       "name": "Pickup points"
     },
     {
-      "name": "Subscription"
+      "name": "Product return"
     },
     {
-      "name": "Eligibility"
+      "name": "Store"
+    },
+    {
+      "name": "Subscription"
     }
   ],
   "info": {
@@ -5546,6 +5549,9 @@
     },
     "/stores": {
       "post": {
+        "tags": [
+          "Store"
+        ],
         "summary": "Create store",
         "operationId": "post-stores",
         "responses": {
@@ -5611,6 +5617,9 @@
     },
     "/stores/{storeId}": {
       "patch": {
+         "tags": [
+          "Store"
+        ],
         "summary": "Modify a store",
         "operationId": "patch-stores",
         "responses": {
