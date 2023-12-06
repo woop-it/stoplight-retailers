@@ -5544,7 +5544,7 @@
         "description": "This method allows the retailer to send an update on the collection status.\n\nThe retailer must enter the next collection tracking status to progress the collection request. This delivery tracking status must be consistent with the defined workflow. <a href=\"/docs/retailer/docs/Modèles/Statuts-de-retrait-C&C.md\">Workflow and status list</a>"
       }
     },
-    "/stores": {
+    "/stores/{Stores}": {
       "post": {
         "summary": "Create store",
         "operationId": "post-stores",
@@ -5651,7 +5651,18 @@
             }
           }
         }
-      }
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "Stores",
+          "in": "path",
+          "required": true,
+          "description": "stores"
+        }
+      ]
     }
   },
   "components": {
