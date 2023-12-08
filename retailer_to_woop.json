@@ -5617,7 +5617,7 @@
     },
     "/stores/{storeId}": {
       "patch": {
-         "tags": [
+        "tags": [
           "Store"
         ],
         "summary": "Modify a store",
@@ -8252,7 +8252,7 @@
               "$ref": "#/components/schemas/contact"
             }
           },
-          "activatedCarrier": {
+          "activatedCarriers": {
             "type": "array",
             "x-stoplight": {
               "id": "xcuq7aakszan3"
@@ -8304,7 +8304,7 @@
               "$ref": "#/components/schemas/contact"
             }
           },
-          "activatedCarrier": {
+          "activatedCarriers": {
             "type": "array",
             "x-stoplight": {
               "id": "hzcgypfq3sx9y"
