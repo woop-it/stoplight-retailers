@@ -4849,28 +4849,103 @@
                                 "x-stoplight": {
                                   "id": "zbix3o8qcx1hi"
                                 },
-                                "description": "GHG average emissions and reliability score for the carrier",
+                                "description": "Impact values regarding carriers",
                                 "properties": {
-                                  "averageEmission": {
-                                    "type": "integer",
+                                  "emissionType": {
+                                    "type": "object",
                                     "x-stoplight": {
-                                      "id": "wmsx8qejj5q3j"
+                                      "id": "kffw095mohix1"
+                                    },
+                                    "description": "Type of GHG emissions emitted by the carrier",
+                                    "properties": {
+                                      "CO2e": {
+                                        "type": "object",
+                                        "x-stoplight": {
+                                          "id": "tly0uhp4lcz2r"
+                                        },
+                                        "description": "CO2e emissions",
+                                        "properties": {
+                                          "reliabilityScore": {
+                                            "type": "integer",
+                                            "x-stoplight": {
+                                              "id": "h2lol3u69ulto"
+                                            },
+                                            "description": "Average of the reliability score for the carrier"
+                                          },
+                                          "emissions": {
+                                            "type": "object",
+                                            "x-stoplight": {
+                                              "id": "193k9otcze2xp"
+                                            },
+                                            "description": "Detailed values for the emissions",
+                                            "properties": {
+                                              "WTW": {
+                                                "type": "array",
+                                                "x-stoplight": {
+                                                  "id": "igpxrxmae8ztv"
+                                                },
+                                                "description": "Weel to wheel emissions (from extraction to the combustion)",
+                                                "items": {
+                                                  "x-stoplight": {
+                                                    "id": "3ts3gjxrt5byz"
+                                                  },
+                                                  "type": "object",
+                                                  "properties": {
+                                                    "value": {
+                                                      "type": "integer",
+                                                      "x-stoplight": {
+                                                        "id": "eyuiv8jhxflkc"
+                                                      }
+                                                    },
+                                                    "unit": {
+                                                      "x-stoplight": {
+                                                        "id": "01q4ugsd0z52y"
+                                                      },
+                                                      "enum": [
+                                                        "kgCO2e",
+                                                        "KgCO2e/t.km"
+                                                      ]
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
                                     }
                                   },
-                                  "unit": {
+                                  "labelling": {
+                                    "type": "array",
                                     "x-stoplight": {
-                                      "id": "63al1l4za6axu"
+                                      "id": "3hpv73ds3m9kf"
                                     },
-                                    "default": "kgCO2/t.km",
-                                    "example": "kgCO2/t.km",
-                                    "enum": [
-                                      "kgCO2/t.km"
-                                    ]
-                                  },
-                                  "reliabilityScore": {
-                                    "type": "integer",
-                                    "x-stoplight": {
-                                      "id": "25ohvsg2n7qb2"
+                                    "description": "Ecological programs in which carriers are engaged",
+                                    "items": {
+                                      "x-stoplight": {
+                                        "id": "q7ghmifbgib2b"
+                                      },
+                                      "type": "object",
+                                      "properties": {
+                                        "from": {
+                                          "type": "string",
+                                          "x-stoplight": {
+                                            "id": "78u67dkg82noy"
+                                          }
+                                        },
+                                        "to": {
+                                          "type": "string",
+                                          "x-stoplight": {
+                                            "id": "pltivgjvjeu24"
+                                          }
+                                        },
+                                        "name": {
+                                          "type": "string",
+                                          "x-stoplight": {
+                                            "id": "qhmwq84aee5x8"
+                                          }
+                                        }
+                                      }
                                     }
                                   }
                                 }
@@ -6499,16 +6574,16 @@
                 "type": "string",
                 "description": "Order identifier"
               },
-              "referenceNumber": {
-                "type": "string",
-                "description": "Order reference"
+              "status": {
+                "$ref": "#/components/schemas/orderStatus"
               },
               "updatedAt": {
                 "type": "string",
                 "description": "Last update datetime"
               },
-              "status": {
-                "$ref": "#/components/schemas/orderStatus"
+              "referenceNumber": {
+                "type": "string",
+                "description": "Order reference"
               },
               "picking": {
                 "type": "object",
@@ -6600,8 +6675,8 @@
             },
             "required": [
               "id",
-              "updatedAt",
               "status",
+              "updatedAt",
               "picking",
               "delivery"
             ]
@@ -7089,12 +7164,6 @@
             "type": "string",
             "description": "Identifier of the store issuing the request"
           },
-          "state": {
-            "type": "string",
-            "enum": [
-              "TO_BE_COMPLETED"
-            ]
-          },
           "picking": {
             "description": "Information on the collection location",
             "type": "object",
@@ -7163,6 +7232,9 @@
           "services": {
             "$ref": "#/components/schemas/services"
           },
+          "productsPrice": {
+            "$ref": "#/components/schemas/productsPrice"
+          },
           "expectedPayment": {
             "type": "object",
             "description": "Rest to be paid, to be used as part of the `SERVICE_PAY_ON_DELIVERY` service",
@@ -7197,14 +7269,14 @@
           "carrierSelection": {
             "$ref": "#/components/schemas/carrierSelection"
           },
-          "invoice": {
-            "$ref": "#/components/schemas/invoices"
+          "state": {
+            "type": "string",
+            "enum": [
+              "TO_BE_COMPLETED"
+            ]
           },
           "additionalData": {
             "$ref": "./models/additionalData.yaml"
-          },
-          "invoice": {
-            "$ref": "#/components/schemas/invoice"
           }
         },
         "required": [
@@ -7859,23 +7931,6 @@
       },
       "product": {
         "type": "object",
-        "title": "Product",
-        "description": "Product informations",
-        "x-examples": {
-          "Example 1": {
-            "type": "TYPOLOGY_GENERIC",
-            "ean": "111257000000",
-            "cug": "643224",
-            "label": "string",
-            "quantity": 1,
-            "price": {
-              "value": 4.5,
-              "currency": "EUR"
-            },
-            "originCountry": "KH",
-            "hsCode": "61112090"
-          }
-        },
         "properties": {
           "type": {
             "$ref": "#/components/schemas/productType"
@@ -7896,106 +7951,11 @@
             "type": "integer",
             "default": 1,
             "description": "Product quantity"
-          },
-          "price": {
-            "$ref": "#/components/schemas/productsPrice"
-          },
-          "originCountry": {
-            "x-stoplight": {
-              "id": "d2xnt6q4lo2cb"
-            },
-            "description": "Code Pays d’origine du produit. Format (ISO 3166 alpha-2). Obligatoire pour les envois soumis à des déclarations en douane.",
-            "enum": [
-              "FR",
-              "BE",
-              "LU",
-              "DE",
-              "ES",
-              "IT",
-              "AD",
-              "MC",
-              "NL",
-              "CH",
-              "GB",
-              "RE",
-              "PT",
-              "HU",
-              "HR",
-              "SI",
-              "PL",
-              "SK",
-              "CZ",
-              "AT",
-              "XI",
-              "IE",
-              "AU",
-              "NZ",
-              "LI",
-              "LV",
-              "RO",
-              "SE",
-              "AM",
-              "BG",
-              "BL",
-              "CA",
-              "CN",
-              "CY",
-              "MT",
-              "GL",
-              "FO",
-              "DK",
-              "EE",
-              "FI",
-              "GF",
-              "GR",
-              "GT",
-              "JP",
-              "MA",
-              "MD",
-              "MF",
-              "MQ",
-              "MX",
-              "NO",
-              "PF",
-              "PH",
-              "PM",
-              "RU",
-              "SA",
-              "TH",
-              "TW",
-              "UA",
-              "US",
-              "VU",
-              "YT",
-              "ZA",
-              "BR"
-            ]
-          },
-          "hsCode": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "4prcbywnrdmey"
-            },
-            "description": "Tariff number requested in customs documents = HS CODE. For international consignments, 6, 8 or 10 digits must be entered. Mandatory for consignments subject to customs declarations."
-          },
-          "weight": {
-            "$ref": "#/components/schemas/mass"
-          },
-          "length": {
-            "$ref": "#/components/schemas/length"
-          },
-          "width": {
-            "$ref": "#/components/schemas/length"
-          },
-          "height": {
-            "$ref": "#/components/schemas/length"
           }
         },
         "required": [
           "type"
-        ],
-        "title": "Product (product)",
-        "description": "Specifies the information needed to create a product item."
+        ]
       },
       "packages": {
         "description": "Specifies the information needed to update a package. The handling unit is to be defined with the package/product structure",
@@ -8182,26 +8142,26 @@
         "title": "Dimension (length)"
       },
       "mass": {
-        "type": "object",
+        "required": [
+          "unit",
+          "value"
+        ],
+        "properties": {
+          "value": {
+            "type": "number"
+          },
+          "unit": {
+            "$ref": "#/components/schemas/massUnits"
+          }
+        },
+        "description": "Specifies the weight of a package/product.",
         "x-examples": {
-          "Example 1": {
+          "Example": {
             "value": 1,
             "unit": "kg"
           }
         },
-        "properties": {
-          "value": {
-            "type": "integer"
-          },
-          "unit": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "value",
-          "unit"
-        ],
-        "title": ""
+        "title": "Weight (mass)"
       },
       "packagesReferences": {
         "type": "array",
@@ -8284,18 +8244,15 @@
           ]
         }
       },
-      "productPrice": {
-        "description": "Corresponds to product selling prices. Mandatory for the \"SERVICE_INSTALL\" service and for shipments subject to customs declarations. ",
-        "x-stoplight": {
-          "id": "04673fa06d31b"
-        },
+      "productsPrice": {
+        "description": "Corresponds to the sale prices of the products. To be entered for the service “SERVICE_INSTALL”.",
         "x-examples": {
           "Example": {
             "value": 300,
             "currency": "EUR"
           }
         },
-        "title": "Product price (productPrice)",
+        "title": "Product prices (productsPrice)",
         "type": "object",
         "properties": {
           "value": {
@@ -8965,25 +8922,6 @@
           "SMS"
         ],
         "description": "Refers to the channel use to communicate."
-      },
-      "invoices": {
-        "title": "invoices",
-        "x-stoplight": {
-          "id": "issmc0bdy82ff"
-        },
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "r3nezgnn0oqlx"
-            },
-            "description": "Identifier of the invoice document linked to the sales order."
-          },
-          "totalAmount": {
-            "$ref": "./models/price.yaml"
-          }
-        }
       }
     },
     "parameters": {
