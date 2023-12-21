@@ -7338,7 +7338,9 @@
         "required": [
           "firstName",
           "lastName",
-          "email"
+          "email",
+          "language",
+          "timezone"
         ]
       },
       "services": {
@@ -8329,7 +8331,8 @@
           "isActive",
           "storeId",
           "name",
-          "language"
+          "language",
+          "timezone"
         ]
       },
       "patchStores": {
@@ -8379,7 +8382,9 @@
         },
         "required": [
           "actif",
-          "name"
+          "name",
+          "language",
+          "timezone"
         ]
       }
     },
