@@ -2895,7 +2895,7 @@
             "bookingId": "Booking_001",
             "loadingIdentification": {
               "pinCode": "123456",
-              "barCode": {
+              "barcode": {
                 "value": "54fd56g4f5gfd456sd",
                 "type": "barcode",
                 "format": "128"
@@ -2907,7 +2907,7 @@
             "bookingId": "Booking_001",
             "unloadingIdentification": {
               "pinCode": "123456",
-              "barCode": {
+              "barcode": {
                 "value": "54fd56g4f5gfd456sd",
                 "type": "barcode",
                 "format": "128"
