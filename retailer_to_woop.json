@@ -4519,6 +4519,138 @@
                               "code": {
                                 "type": "string",
                                 "description": "Internal carrier code"
+                              },
+                              "score": {
+                                "type": "object",
+                                "x-stoplight": {
+                                  "id": "5109wnjzhnwm5"
+                                },
+                                "properties": {
+                                  "satisfaction": {
+                                    "type": "string",
+                                    "x-stoplight": {
+                                      "id": "ctd1hw62czh8m"
+                                    }
+                                  },
+                                  "nps": {
+                                    "type": "string",
+                                    "x-stoplight": {
+                                      "id": "nr62s0hyyk0p1"
+                                    }
+                                  },
+                                  "onTimeDeliveryScore": {
+                                    "type": "string",
+                                    "x-stoplight": {
+                                      "id": "dw5mjrm1iu8mx"
+                                    }
+                                  }
+                                }
+                              },
+                              "impact": {
+                                "type": "object",
+                                "x-stoplight": {
+                                  "id": "zbix3o8qcx1hi"
+                                },
+                                "description": "Impact values regarding carriers",
+                                "properties": {
+                                  "emissionType": {
+                                    "type": "object",
+                                    "x-stoplight": {
+                                      "id": "kffw095mohix1"
+                                    },
+                                    "description": "Type of GHG emissions emitted by the carrier",
+                                    "properties": {
+                                      "CO2e": {
+                                        "type": "object",
+                                        "x-stoplight": {
+                                          "id": "tly0uhp4lcz2r"
+                                        },
+                                        "description": "CO2e emissions",
+                                        "properties": {
+                                          "reliabilityScore": {
+                                            "type": "integer",
+                                            "x-stoplight": {
+                                              "id": "h2lol3u69ulto"
+                                            },
+                                            "description": "Average of the reliability score for the carrier"
+                                          },
+                                          "emissions": {
+                                            "type": "object",
+                                            "x-stoplight": {
+                                              "id": "193k9otcze2xp"
+                                            },
+                                            "description": "Detailed values for the emissions",
+                                            "properties": {
+                                              "WTW": {
+                                                "type": "array",
+                                                "x-stoplight": {
+                                                  "id": "igpxrxmae8ztv"
+                                                },
+                                                "description": "Weel to wheel emissions (from extraction to the combustion)",
+                                                "items": {
+                                                  "x-stoplight": {
+                                                    "id": "3ts3gjxrt5byz"
+                                                  },
+                                                  "type": "object",
+                                                  "properties": {
+                                                    "value": {
+                                                      "type": "integer",
+                                                      "x-stoplight": {
+                                                        "id": "eyuiv8jhxflkc"
+                                                      }
+                                                    },
+                                                    "unit": {
+                                                      "x-stoplight": {
+                                                        "id": "01q4ugsd0z52y"
+                                                      },
+                                                      "enum": [
+                                                        "kgCO2e",
+                                                        "KgCO2e/t.km"
+                                                      ]
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "labelling": {
+                                    "type": "array",
+                                    "x-stoplight": {
+                                      "id": "3hpv73ds3m9kf"
+                                    },
+                                    "description": "Ecological programs in which carriers are engaged",
+                                    "items": {
+                                      "x-stoplight": {
+                                        "id": "q7ghmifbgib2b"
+                                      },
+                                      "type": "object",
+                                      "properties": {
+                                        "from": {
+                                          "type": "string",
+                                          "x-stoplight": {
+                                            "id": "78u67dkg82noy"
+                                          }
+                                        },
+                                        "to": {
+                                          "type": "string",
+                                          "x-stoplight": {
+                                            "id": "pltivgjvjeu24"
+                                          }
+                                        },
+                                        "name": {
+                                          "type": "string",
+                                          "x-stoplight": {
+                                            "id": "qhmwq84aee5x8"
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
                               }
                             }
                           },
@@ -7358,21 +7490,58 @@
       },
       "product": {
         "type": "object",
+        "x-stoplight": {
+          "id": "293c815a3a088"
+        },
+        "x-examples": {
+          "Example 1": {
+            "type": "TYPOLOGY_GENERIC",
+            "ean": "string",
+            "cug": "string",
+            "label": "string",
+            "quantity": 1,
+            "price": {
+              "value": "1000",
+              "currency": "EUR"
+            },
+            "originCountry": "FR",
+            "hsCode": 1,
+            "weight": {
+              "value": "1",
+              "unit": "kg"
+            },
+            "length": {
+              "value": "1",
+              "unit": "cm"
+            },
+            "width": {
+              "value": "1",
+              "unit": "cm"
+            },
+            "height": {
+              "value": "1",
+              "unit": "cm"
+            }
+          }
+        },
+        "title": "Product packages (product)",
+        "description": "Specifies the information needed to update a product.",
         "properties": {
           "type": {
-            "$ref": "#/components/schemas/productType"
+            "type": "string",
+            "description": "Product typologie. "
           },
           "ean": {
             "type": "string",
-            "description": "Product EAN"
+            "description": "Product EAN code."
           },
           "cug": {
             "type": "string",
-            "description": "Product Cug"
+            "description": "Product CUG code. "
           },
           "label": {
             "type": "string",
-            "description": "Product description"
+            "description": "Product name. "
           },
           "quantity": {
             "type": "integer",
@@ -7383,6 +7552,32 @@
         "required": [
           "type"
         ]
+            "description": "Identical quantity of product. "
+          },
+          "price": {
+            "$ref": "#/components/schemas/productsPrice"
+          },
+          "originCountry": {
+            "type": "string",
+            "description": "Code Pays d’origine du produit. Format (ISO 3166 alpha-2). Obligatoire pour les envois soumis à des déclarations en douane."
+          },
+          "hsCode": {
+            "type": "integer",
+            "description": "Tariff number requested in customs documents = HS CODE. "
+          },
+          "weight": {
+            "$ref": "#/components/schemas/mass"
+          },
+          "length": {
+            "$ref": "#/components/schemas/length"
+          },
+          "width": {
+            "$ref": "#/components/schemas/length"
+          },
+          "height": {
+            "$ref": "#/components/schemas/length"
+          }
+        }
       },
       "packages": {
         "description": "Specifies the information needed to update a package. The handling unit is to be defined with the package/product structure. ",
@@ -7574,7 +7769,7 @@
             "$ref": "#/components/schemas/massUnits"
           }
         },
-        "description": "Specifies the weight of a package/product.",
+        "description": "Specifies the weight of a package/product. Mandatory for consignments subject to customs declarations.",
         "x-examples": {
           "Example": {
             "value": 1,
@@ -7645,7 +7840,7 @@
         }
       },
       "productsPrice": {
-        "description": "Corresponds to the sale prices of the products. To be entered for the service “SERVICE_INSTALL”.",
+        "description": "Corresponds to the selling price of the products. Mandatory for the \"SERVICE_INSTALL\" service and for shipments subject to customs declarations.",
         "x-examples": {
           "Example": {
             "value": 300,
@@ -8342,6 +8537,26 @@
         },
         "type": "object",
         "description": "This method allows you to modify a store",
+          "id": "ticb7e682kioc"
+        },
+        "enum": [
+          "MAIL",
+          "SMS"
+        ],
+        "description": "Refers to the channel use to communicate."
+      },
+      "invoices": {
+        "type": "object",
+        "x-examples": {
+          "Example 1": {
+            "id": "fffffff",
+            "totalAmount": {
+              "value": 5,
+              "currency": "EUR"
+            }
+          }
+        },
+        "title": "Invoices (invoices)",
         "properties": {
           "actif": {
             "type": "boolean",
@@ -8386,7 +8601,32 @@
           "language",
           "timezone"
         ]
-      }
+            "description": "Identifier of the invoice document linked to the sales order. Mandatory for shipments subject to customs declarations."
+          },
+          "totalAmount": {
+            "$ref": "#/components/schemas/totalAmount"
+          }
+        },
+        "description": "Purchase invoice linked to customer order."
+      },
+      "totalAmount": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "integer"
+          },
+          "currency": {
+            "type": "string"
+          }
+        },
+        "x-examples": {
+          "Example 1": {
+            "value": 300,
+            "currency": "EUR"
+          }
+        },
+        "title": "TotalAmount",
+        "description": "Total price of the customer order (sum of productPrice if applicable). Mandatory for shipments subject to customs declarations."      }
     },
     "parameters": {
       "apiVersion": {
