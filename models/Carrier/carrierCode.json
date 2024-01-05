@@ -1,0 +1,13 @@
+{
+  "title": "Carrier Code",
+  "x-stoplight": {
+    "id": "jkptsydq44nme"
+  },
+  "type": "string",
+  "description": "id of the carrier",
+  "example": "Carrier_001",
+  "x-tags": [
+    "Carrier"
+  ],
+  "examples": []
+}

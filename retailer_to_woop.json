@@ -2,31 +2,34 @@
   "openapi": "3.0.2",
   "tags": [
     {
-      "name": "Order"
-    },
-    {
-      "name": "Label"
+      "name": "Collect"
     },
     {
       "name": "Document"
     },
     {
-      "name": "Collect"
+      "name": "Eligibility"
     },
     {
       "name": "Health"
     },
     {
-      "name": "Product return"
+      "name": "Label"
+    },
+    {
+      "name": "Order"
     },
     {
       "name": "Pickup points"
     },
     {
-      "name": "Subscription"
+      "name": "Product return"
     },
     {
-      "name": "Eligibility"
+      "name": "Store"
+    },
+    {
+      "name": "Subscription"
     }
   ],
   "info": {
@@ -65,14 +68,24 @@
         "summary": "Health"
       }
     },
-    "orders/package/state": {
-      "parameters": [],
-      "put": {
-        "summary": "Change Package state",
-        "operationId": "put-orders-orderId-packages-states",
+    "/orders/{orderId}/packages/states": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "orderId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "patch": {
+        "summary": "Change package state",
+        "operationId": "patch-order",
         "responses": {
-          "200": {
-            "description": "Package state changed successfully"
+          "204": {
+            "description": "Package status Changed successfully",
+            "headers": {}
           },
           "401": {
             "description": "Unauthorized"
@@ -81,10 +94,8 @@
             "description": "Reference Not Found"
           }
         },
-        "x-stoplight": {
-          "id": "v4lka2el0adv6"
-        },
         "description": "Changes the package status in order to yield the package responsability to the carrier",
+        "parameters": [],
         "requestBody": {
           "content": {
             "application/json": {
@@ -94,76 +105,55 @@
                   "packages": {
                     "type": "array",
                     "x-stoplight": {
-                      "id": "c7xnzce1ky7c9"
+                      "id": "j1wdefr72kqoo"
                     },
                     "items": {
                       "x-stoplight": {
-                        "id": "nq0b43zo9uw1u"
+                        "id": "mq36n9hg6f9bt"
                       },
                       "type": "object",
                       "properties": {
-                        "containerId": {
-                          "type": "object",
-                          "x-stoplight": {
-                            "id": "bz93jk8z042vr"
-                          },
-                          "description": "This item is required once you want to add a package state. \n\nYou can fill in the trailerId and/or the palletId.",
-                          "properties": {
-                            "trailerId": {
-                              "type": "string",
-                              "x-stoplight": {
-                                "id": "edked2d4kwp5g"
-                              }
-                            },
-                            "palletId": {
-                              "type": "string",
-                              "x-stoplight": {
-                                "id": "20y0bsarqld6z"
-                              }
-                            }
-                          }
-                        },
-                        "reference": {
+                        "state": {
                           "type": "string",
                           "x-stoplight": {
-                            "id": "b7ncp47d6686r"
-                          }
-                        },
-                        "state": {
-                          "x-stoplight": {
-                            "id": "afl46dpnjahj8"
+                            "id": "zvt5m8cyuunp9"
                           },
                           "enum": [
-                            "SHIPPED"
+                            "ON_DOCK",
+                            "PREPARED"
                           ]
                         },
                         "date": {
                           "type": "string",
                           "x-stoplight": {
-                            "id": "apgee5gvn2t4b"
+                            "id": "nouukp0mg5ut2"
                           },
                           "format": "date-time"
+                        },
+                        "reference": {
+                          "type": "string",
+                          "x-stoplight": {
+                            "id": "3ppkxetxuy0yd"
+                          }
                         }
-                      }
+                      },
+                      "required": [
+                        "state",
+                        "date"
+                      ]
                     }
                   }
-                }
+                },
+                "required": [
+                  "packages"
+                ]
               }
             }
-          },
-          "description": ""
-        },
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "query",
-            "name": "orderId"
           }
-        ],
+        },
         "tags": [
-          "Package advert"
+          "Order",
+          "package"
         ]
       }
     },
@@ -501,14 +491,6 @@
                       },
                       "mode": {
                         "$ref": "./models/collect/mode.yaml"
-                      },
-                      "firstAvailableSlot": {
-                        "type": "string",
-                        "x-stoplight": {
-                          "id": "tkwsb3dcm034v"
-                        },
-                        "format": "date-time",
-                        "description": "date of the first available slot"
                       }
                     },
                     "required": [
@@ -877,148 +859,6 @@
           "Collect"
         ]
       }
-    },
-    "/enhancedLabel": {
-      "post": {
-        "summary": "Enhanced Label",
-        "description": "This method allows you to add specific info below a carrier's label according to a given template.",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/apiVersion"
-          },
-          {
-            "schema": {
-              "type": "string",
-              "enum": [
-                "zpl"
-              ]
-            },
-            "in": "query",
-            "name": "mode",
-            "required": true,
-            "description": "Label format"
-          },
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "query",
-            "name": "parcelId",
-            "description": "Parcel number"
-          },
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "query",
-            "name": "orderId",
-            "required": true,
-            "description": "Order identifier"
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "x-stoplight": {
-                    "id": "7uueosxfeu696"
-                  },
-                  "type": "object",
-                  "properties": {
-                    "key": {
-                      "type": "object",
-                      "x-stoplight": {
-                        "id": "1w2g7uwe2t4kn"
-                      },
-                      "properties": {
-                        "keyName": {
-                          "type": "string",
-                          "x-stoplight": {
-                            "id": "go2s3a37bxkib"
-                          },
-                          "description": "name of the key"
-                        }
-                      }
-                    },
-                    "value": {
-                      "type": "object",
-                      "x-stoplight": {
-                        "id": "qukcchy13ja7u"
-                      },
-                      "properties": {
-                        "valueName": {
-                          "type": "string",
-                          "x-stoplight": {
-                            "id": "rtdgwst3pah6z"
-                          },
-                          "description": "object value"
-                        }
-                      }
-                    }
-                  }
-                }
-              },
-              "examples": {
-                "Example 1": {
-                  "value": [
-                    {
-                      "Key": "string",
-                      "value": "string"
-                    }
-                  ]
-                }
-              }
-            },
-            "application/xml": {
-              "schema": {
-                "type": "object",
-                "properties": {}
-              }
-            }
-          },
-          "description": "Contains the creation information of the request."
-        },
-        "responses": {
-          "201": {
-            "description": "Request processed successfully - Label created successfully ",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "base64": {
-                      "type": "string",
-                      "x-stoplight": {
-                        "id": "3tbsa7upo3wg1"
-                      },
-                      "description": "The label is returned in base64 in the format indicated\n\n"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "You are not authorised to access this item",
-            "content": {}
-          },
-          "404": {
-            "description": "parcelId not found",
-            "content": {}
-          }
-        },
-        "operationId": "postBookings",
-        "x-stoplight": {
-          "id": "2jielfmzp8o4d"
-        },
-        "tags": [
-          "Label"
-        ]
-      },
-      "parameters": []
     },
     "/deliveries/bookings": {
       "post": {
@@ -1466,14 +1306,6 @@
                     },
                     "urls": {
                       "$ref": "./models/collect/urls.yaml"
-                    },
-                    "firstAvailableSlot": {
-                      "type": "string",
-                      "x-stoplight": {
-                        "id": "214m9lkv5iwhc"
-                      },
-                      "format": "date-time",
-                      "description": "date of the first available slot"
                     }
                   },
                   "required": [
@@ -1869,7 +1701,7 @@
                         }
                       },
                       "contact": {
-                        "$ref": "#/components/schemas/contactDelivery"
+                        "$ref": "#/components/schemas/contact"
                       }
                     }
                   },
@@ -2114,15 +1946,6 @@
                         "lastName": "Dupond",
                         "phone": "+33600000000",
                         "email": "pierre.dupond@mail.fr",
-                        "optIn": {
-                          "survey": [
-                            "MAIL"
-                          ],
-                          "delivery": [
-                            "MAIL",
-                            "SMS"
-                          ]
-                        },
                         "language": "fr",
                         "timezone": "Europe/Paris"
                       }
@@ -2236,15 +2059,6 @@
                         "lastName": "Dupond",
                         "phone": "+33600000000",
                         "email": "pierre.dupond@mail.fr",
-                        "optIn": {
-                          "survey": [
-                            "MAIL"
-                          ],
-                          "delivery": [
-                            "MAIL",
-                            "SMS"
-                          ]
-                        },
                         "language": "fr",
                         "timezone": "Europe/Paris"
                       }
@@ -2349,15 +2163,6 @@
                         "lastName": "Dupond",
                         "phone": "+33600000000",
                         "email": "pierre.dupond@mail.fr",
-                        "optIn": {
-                          "survey": [
-                            "MAIL"
-                          ],
-                          "delivery": [
-                            "MAIL",
-                            "SMS"
-                          ]
-                        },
                         "language": "fr",
                         "timezone": "Europe/Paris"
                       }
@@ -2456,15 +2261,6 @@
                         "lastName": "Dupond",
                         "phone": "+33600000000",
                         "email": "pierre.dupond@mail.fr",
-                        "optIn": {
-                          "survey": [
-                            "MAIL"
-                          ],
-                          "delivery": [
-                            "MAIL",
-                            "SMS"
-                          ]
-                        },
                         "language": "fr",
                         "timezone": "Europe/Paris"
                       }
@@ -2578,15 +2374,6 @@
                         "lastName": "Dupond",
                         "phone": "+33600000000",
                         "email": "pierre.dupond@mail.fr",
-                        "optIn": {
-                          "survey": [
-                            "MAIL"
-                          ],
-                          "delivery": [
-                            "MAIL",
-                            "SMS"
-                          ]
-                        },
                         "language": "fr",
                         "timezone": "Europe/Paris"
                       }
@@ -2695,15 +2482,6 @@
                         "lastName": "Dupond",
                         "phone": "+33600000000",
                         "email": "pierre.dupond@mail.fr",
-                        "optIn": {
-                          "survey": [
-                            "MAIL"
-                          ],
-                          "delivery": [
-                            "MAIL",
-                            "SMS"
-                          ]
-                        },
                         "language": "fr",
                         "timezone": "Europe/Paris"
                       }
@@ -3431,82 +3209,6 @@
           }
         },
         "summary": "Retrieve documents"
-      },
-      "post": {
-        "summary": "Add an order document",
-        "operationId": "post-orders-orderId-documents",
-        "responses": {
-          "201": {
-            "description": "Request processed successfully"
-          },
-          "400": {
-            "description": "Bad Request - Request processed successfully"
-          },
-          "401": {
-            "description": "Unauthorized - You are not allowed to access this item."
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        },
-        "tags": [
-          "Document"
-        ],
-        "description": "This method allows you to upload a document in base64 directly to the Woop platform, one by one. ",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "type": {
-                    "type": "string",
-                    "x-stoplight": {
-                      "id": "ncezaqg691wxk"
-                    },
-                    "description": "Document type",
-                    "enum": [
-                      "INVOICE",
-                      "CUSTOMS_DECLARATION",
-                      "TERMS"
-                    ],
-                    "example": "INVOICE"
-                  },
-                  "document": {
-                    "type": "string",
-                    "x-stoplight": {
-                      "id": "3e0pxqoazd7ig"
-                    },
-                    "description": "Document in base64"
-                  },
-                  "date": {
-                    "type": "string",
-                    "x-stoplight": {
-                      "id": "fh4up64tz5hw8"
-                    },
-                    "description": "Creation date of the document",
-                    "format": "date-time",
-                    "example": "2023-07-01T13:00:00+0000"
-                  },
-                  "name": {
-                    "type": "string",
-                    "x-stoplight": {
-                      "id": "tayjvwrnl5fd0"
-                    },
-                    "description": "Document name",
-                    "example": "document.pdf"
-                  }
-                },
-                "required": [
-                  "type",
-                  "document",
-                  "date",
-                  "name"
-                ]
-              }
-            }
-          }
-        }
       }
     },
     "/orders/{orderId}/documents/download": {
@@ -3636,7 +3338,7 @@
         "tags": [
           "Pickup points"
         ],
-        "description": "This method retrieves the list of relay-point for all the carriers associed to your account.\n\nThe method works like a search engine based on just two mandatory criteria: Latitude and Longitude of the delivery point. \n\nSearch options enable you to refine the method's eligibility engine. The more options there are, the more precise the results will be. \n\nOptionally, you can search for a relay-point based on the contents of the customer basket (parcel dimensions: length, width, height and weight). This allows you to suggest delivery points capable of receiving parcels of a certain weight. \n\n[See explanation](https://woop.stoplight.io/docs/retailer/docs/Models/Pickup%20points.md)",
+        "description": "This method allows you to retrieve the list of relay points of carriers located around a given geolocation.\n\n[See explanation](https://woop.stoplight.io/docs/retailer/docs/Models/Pickup%20points.md)",
         "operationId": "postPickupPoints",
         "parameters": [
           {
@@ -5011,57 +4713,6 @@
                                     "type": "string"
                                   }
                                 }
-                              },
-                              "cutOffs": {
-                                "type": "object",
-                                "properties": {
-                                  "timezone": {
-                                    "type": "string",
-                                    "x-stoplight": {
-                                      "id": "hjlxunxjoktit"
-                                    }
-                                  },
-                                  "sameDay": {
-                                    "type": "object",
-                                    "x-stoplight": {
-                                      "id": "x2p9fadhs4qae"
-                                    },
-                                    "properties": {
-                                      "hours": {
-                                        "type": "string",
-                                        "x-stoplight": {
-                                          "id": "tlqxwyjliofm7"
-                                        }
-                                      },
-                                      "minutes": {
-                                        "type": "string",
-                                        "x-stoplight": {
-                                          "id": "9zwnefail9vss"
-                                        }
-                                      }
-                                    }
-                                  },
-                                  "nextDay": {
-                                    "type": "object",
-                                    "x-stoplight": {
-                                      "id": "v43xd8hlfnkk9"
-                                    },
-                                    "properties": {
-                                      "hours": {
-                                        "type": "string",
-                                        "x-stoplight": {
-                                          "id": "hfftqupxnlac9"
-                                        }
-                                      },
-                                      "minutes": {
-                                        "type": "string",
-                                        "x-stoplight": {
-                                          "id": "d21ygobckgypd"
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
                               }
                             }
                           },
@@ -5114,20 +4765,6 @@
                           },
                           "workSchedule": {
                             "$ref": "./models/Carrier/workSchedule.json"
-                          },
-                          "minPickingDate": {
-                            "type": "string",
-                            "x-stoplight": {
-                              "id": "yyuz6lsxn9x7c"
-                            },
-                            "format": "date-time"
-                          },
-                          "minDeliveryDate": {
-                            "type": "string",
-                            "x-stoplight": {
-                              "id": "vq9gepfm3nyzo"
-                            },
-                            "format": "date-time"
                           }
                         },
                         "required": [
@@ -5392,143 +5029,6 @@
                         }
                       ]
                     }
-                  },
-                  "Example with cutOffs conf and minPickingDate + minDeliveryDate information": {
-                    "value": {
-                      "eligibilities": [
-                        {
-                          "carrier": {
-                            "code": "niji-carrier",
-                            "name": "Niji carrier"
-                          },
-                          "route": {
-                            "distance": {
-                              "unit": "km",
-                              "value": 0
-                            }
-                          },
-                          "services": [
-                            {
-                              "name": "SERVICE_COMPLEX_INSTALL"
-                            },
-                            {
-                              "name": "SERVICE_RECOVERY"
-                            },
-                            {
-                              "name": "SERVICE_PICKUP_POINT"
-                            },
-                            {
-                              "name": "SERVICE_REGULAR_FRONT_HOME"
-                            },
-                            {
-                              "name": "SERVICE_ASSEMBLY"
-                            },
-                            {
-                              "name": "SERVICE_RETURN"
-                            },
-                            {
-                              "name": "SERVICE_STANDARD_TAXI"
-                            },
-                            {
-                              "name": "SERVICE_XL_TAXI"
-                            },
-                            {
-                              "name": "SERVICE_WITH_SIGNATURE"
-                            }
-                          ],
-                          "slots": [],
-                          "delivery": {
-                            "cutoffs": {
-                              "nextDay": {
-                                "hours": "20",
-                                "minutes": "00"
-                              },
-                              "sameDay": {
-                                "hours": "20",
-                                "minutes": "00"
-                              },
-                              "timezone": "Europe/Paris"
-                            }
-                          },
-                          "workSchedule": {
-                            "friday": [
-                              {
-                                "end": "20:00",
-                                "start": "08:00"
-                              }
-                            ],
-                            "monday": [
-                              {
-                                "end": "20:00",
-                                "start": "08:00"
-                              }
-                            ],
-                            "sunday": [],
-                            "tuesday": [
-                              {
-                                "end": "20:00",
-                                "start": "08:00"
-                              }
-                            ],
-                            "saturday": [],
-                            "thursday": [
-                              {
-                                "end": "20:00",
-                                "start": "08:00"
-                              }
-                            ],
-                            "timezone": "Europe/Paris",
-                            "wednesday": [
-                              {
-                                "end": "20:00",
-                                "start": "08:00"
-                              }
-                            ]
-                          },
-                          "minPickingDate": "2023-06-16T13:22:27.287Z",
-                          "minDeliveryDate": "2023-06-16T13:22:27.287Z"
-                        }
-                      ]
-                    }
-                  },
-                  "Example with carrierScore": {
-                    "value": {
-                      "eligibilities": [
-                        {
-                          "carrier": {
-                            "code": "carrier-number-1",
-                            "name": "Carrier number one",
-                            "score": {
-                              "satisfaction": 8,
-                              "nps": 8,
-                              "onTimeDeliveryScore": 8.2
-                            }
-                          }
-                        }
-                      ]
-                    }
-                  },
-                  "Example with carrierImpact": {
-                    "value": {
-                      "eligibilities": [
-                        {
-                          "carrier": {
-                            "code": "carrier-number-1",
-                            "name": "Carrier number one",
-                            "score": {
-                              "satisfaction": 8,
-                              "nps": 8,
-                              "onTimeDeliveryScore": 8.2
-                            },
-                            "impact": {
-                              "unit": "KgCO2/t.km",
-                              "averageEmission": 0.68,
-                              "reliabilityScore": 3.1
-                            }
-                          }
-                        }
-                      ]
-                    }
                   }
                 }
               }
@@ -5588,15 +5088,6 @@
                         "country": "FR"
                       }
                     },
-                    "delivery": {
-                      "location": {
-                        "type": "address",
-                        "addressLine1": "179 Boulevard de Turin",
-                        "postalCode": "59000",
-                        "city": "Lille",
-                        "country": "FR"
-                      }
-                    },
                     "packages": [
                       {
                         "length": {
@@ -5620,11 +5111,17 @@
                             "type": "TYPOLOGY_GENERIC",
                             "ean": "4dq86zd4q6zd4q64",
                             "cug": "q56zd4q65d4q",
-                            "label": "Lamp",
+                            "label": "Lampe",
                             "quantity": 1
                           }
                         ],
-                        "quantity": 1
+                        "quantity": 1,
+                        "attributes": {
+                          "footprint": {
+                            "value": 13,
+                            "unit": "m²"
+                          }
+                        }
                       }
                     ],
                     "storeId": "MAG01"
@@ -5698,15 +5195,6 @@
                         "end": "2022-05-02T17:52:01+0000"
                       }
                     },
-                    "delivery": {
-                      "location": {
-                        "type": "address",
-                        "addressLine1": "179 Boulevard de Turin",
-                        "postalCode": "59000",
-                        "city": "Lille",
-                        "country": "FR"
-                      }
-                    },
                     "packages": [
                       {
                         "length": {
@@ -5738,16 +5226,15 @@
                       }
                     ],
                     "storeId": "MAG01",
-                    "options": {
-                      "slot": {
-                        "active": true,
-                        "minRemainingCapacity": 1,
-                        "limit": 2
-                      }
+                    "slot": {
+                      "fromDate": "2022-05-04T17:52:01+0000",
+                      "toDate": "2022-05-07T17:52:01+0000",
+                      "minRemainingCapacity": 3,
+                      "limit": 80
                     }
                   }
                 },
-                "Example with distance and zoning options": {
+                "Example with distance option": {
                   "value": {
                     "picking": {
                       "location": {
@@ -5758,21 +5245,9 @@
                         "country": "FR"
                       }
                     },
-                    "delivery": {
-                      "location": {
-                        "type": "address",
-                        "coordinates": {
-                          "latitude": 50.65849685668945,
-                          "longitude": 3.0207953453063965
-                        }
-                      }
-                    },
                     "storeId": "MAG01",
                     "options": {
                       "distance": {
-                        "active": true
-                      },
-                      "zoning": {
                         "active": true
                       }
                     }
@@ -5829,44 +5304,6 @@
                       }
                     ],
                     "storeId": "MAG01"
-                  }
-                },
-                "Example with options.carrierScore": {
-                  "value": {
-                    "picking": {
-                      "location": {
-                        "type": "address",
-                        "addressLine1": "237 rue du ballon",
-                        "postalCode": "59110",
-                        "city": "La Madeleine",
-                        "country": "FR"
-                      }
-                    },
-                    "storeId": "MAG01",
-                    "options": {
-                      "carrierScore": {
-                        "active": true
-                      }
-                    }
-                  }
-                },
-                "Example with options.impact": {
-                  "value": {
-                    "picking": {
-                      "location": {
-                        "type": "address",
-                        "addressLine1": "237 rue du ballon",
-                        "postalCode": "59110",
-                        "city": "La Madeleine",
-                        "country": "FR"
-                      }
-                    },
-                    "storeId": "MAG01",
-                    "options": {
-                      "impact": {
-                        "active": true
-                      }
-                    }
                   }
                 }
               }
@@ -6242,23 +5679,135 @@
         "description": "This method allows the retailer to send an update on the collection status.\n\nThe retailer must enter the next collection tracking status to progress the collection request. This delivery tracking status must be consistent with the defined workflow. <a href=\"/docs/retailer/docs/Modèles/Statuts-de-retrait-C&C.md\">Workflow and status list</a>"
       }
     },
-    "/orders/{orderId}/packages/states": {
-      "patch": {
-        "x-stoplight": {
-          "id": "800e91a2e583a"
-        },
+    "/stores": {
+      "post": {
         "tags": [
-          "Package advert"
-        ]
+          "Store"
+        ],
+        "summary": "Create store",
+        "operationId": "post-stores",
+        "responses": {
+          "201": {
+            "description": "the store has been registered"
+          },
+          "400": {
+            "description": "Bad Request - Missing and/or incorrect items in the body",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized You are not authorised to access this item",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden - Creation of the store is not possible",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict - Creation of the store with this 'storeId' is not possible",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
+          }
+        },
+        "x-stoplight": {
+          "id": "p1kk5o46v1y8d"
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/postStores"
+              }
+            }
+          }
+        },
+        "description": "This method allows you to create a store from Woop."
       },
-      "put": {
-        "x-stoplight": {
-          "id": "800e91a2e583a"
-        },
+      "parameters": []
+    },
+    "/stores/{storeId}": {
+      "patch": {
         "tags": [
-          "Package advert"
-        ]
-      }
+          "Store"
+        ],
+        "summary": "Modify a store",
+        "operationId": "patch-stores",
+        "responses": {
+          "200": {
+            "description": "OK Request processed successfully"
+          },
+          "401": {
+            "description": "You are not authorised to access this item",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden Updating the store is not possible",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict An action is already in progress on this store"
+          }
+        },
+        "description": "This method allows you to modify a store from Woop.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/patchStores"
+              }
+            }
+          }
+        },
+        "parameters": [],
+        "x-stoplight": {
+          "id": "ujkvqnstzan4j"
+        }
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "storeId",
+          "in": "path",
+          "required": true,
+          "description": "external Store Id"
+        }
+      ]
     }
   },
   "components": {
@@ -6719,14 +6268,6 @@
             "items": {
               "$ref": "#/components/schemas/packages"
             }
-          },
-          "firstAvailableSlot": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "8hhcnyld5he2a"
-            },
-            "format": "date-time",
-            "description": "only for delay mode\ndate of the first available slot"
           }
         },
         "required": [
@@ -6764,14 +6305,6 @@
             "items": {
               "$ref": "#/components/schemas/packages"
             }
-          },
-          "firstAvailableSlot": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "vfpsl9xbfhq8o"
-            },
-            "format": "date-time",
-            "description": "only for delay mode\ndate of the first available slot"
           }
         }
       },
@@ -6947,12 +6480,6 @@
                 "country": "FR"
               }
             },
-            "delivery": {
-              "interval": {
-                "start": "2023-06-19T06:00:00.000Z",
-                "end": "2023-06-23T18:00:00.000Z"
-              }
-            },
             "packages": [
               {
                 "length": {
@@ -6984,11 +6511,13 @@
               }
             ],
             "storeId": "MAG01",
-            "options": {
-              "slot": {
-                "active": true,
-                "minRemainingCapacity": 12,
-                "limit": 1
+            "slot": {
+              "location": {
+                "type": "address",
+                "addressLine1": "237 rue du ballon",
+                "postalCode": "59110",
+                "city": "La Madeleine",
+                "country": "FR"
               }
             }
           }
@@ -7019,10 +6548,7 @@
               "interval": {
                 "$ref": "#/components/schemas/interval"
               }
-            },
-            "required": [
-              "interval"
-            ]
+            }
           },
           "packages": {
             "description": "All packages",
@@ -7034,6 +6560,42 @@
           "storeId": {
             "type": "string",
             "description": "Identifier of the store issuing the request"
+          },
+          "slot": {
+            "type": "object",
+            "description": "Allows you to define slot reservation criteria ",
+            "properties": {
+              "fromDate": {
+                "type": "string",
+                "description": "Start Date"
+              },
+              "toDate": {
+                "type": "string",
+                "description": "End Date"
+              },
+              "minRemainingCapacity": {
+                "type": "number",
+                "description": "Minimum remaining capacity for this slot"
+              },
+              "limit": {
+                "type": "number",
+                "description": "Max number of slot "
+              },
+              "type": {
+                "type": "string",
+                "example": "ORDERS_QUANTITY",
+                "description": "Type of delivery week",
+                "enum": [
+                  "ORDERS_QUANTITY",
+                  "PACKAGES_QUANTITY",
+                  "PALLETS_QUANTITY",
+                  "TRAYS_QUANTITY"
+                ]
+              }
+            },
+            "required": [
+              "toDate"
+            ]
           },
           "options": {
             "type": "object",
@@ -7049,85 +6611,11 @@
                   }
                 }
               },
-              "zoning": {
-                "type": "object",
-                "x-stoplight": {
-                  "id": "d8fg2w9jsycpz"
-                },
-                "description": "Zoning option allowing to launch the geocoding call wether or not there's GPS coordinates in picking and delivery locations",
-                "properties": {
-                  "active": {
-                    "type": "boolean",
-                    "x-stoplight": {
-                      "id": "yz5ilvjf7dafr"
-                    },
-                    "description": "Used to launch geographic eligibility"
-                  }
-                }
-              },
               "price": {
                 "type": "object",
                 "properties": {
                   "active": {
                     "type": "boolean"
-                  }
-                }
-              },
-              "slot": {
-                "type": "object",
-                "description": "Allows you to define slot reservation criteria ",
-                "properties": {
-                  "active": {
-                    "type": "boolean"
-                  },
-                  "limit": {
-                    "type": "number",
-                    "description": "Max number of slot "
-                  },
-                  "type": {
-                    "type": "string",
-                    "example": "ORDERS_QUANTITY",
-                    "description": "Type of capacitance in the delivery week",
-                    "enum": [
-                      "ORDERS_QUANTITY",
-                      "PACKAGES_QUANTITY",
-                      "PALLETS_QUANTITY",
-                      "TRAYS_QUANTITY"
-                    ],
-                    "default": "ORDERS_QUANTITY"
-                  },
-                  "minRemainingCapacity": {
-                    "type": "number",
-                    "description": "Minimum remaining capacity for this slot"
-                  }
-                }
-              },
-              "carrierScore": {
-                "type": "object",
-                "x-stoplight": {
-                  "id": "h9bq41n6c5idt"
-                },
-                "properties": {
-                  "active": {
-                    "type": "boolean",
-                    "x-stoplight": {
-                      "id": "92uip2l87zd4p"
-                    }
-                  }
-                }
-              },
-              "impact": {
-                "type": "object",
-                "x-stoplight": {
-                  "id": "egwtljbc2zvro"
-                },
-                "description": "Average GHG emissions for eligible carriers ",
-                "properties": {
-                  "active": {
-                    "type": "boolean",
-                    "x-stoplight": {
-                      "id": "e7lr1o2ie07z8"
-                    }
                   }
                 }
               }
@@ -7163,12 +6651,6 @@
           "storeId": {
             "type": "string",
             "description": "Identifier of the store issuing the request"
-          },
-          "state": {
-            "type": "string",
-            "enum": [
-              "TO_BE_COMPLETED"
-            ]
           },
           "picking": {
             "description": "Information on the collection location",
@@ -7238,6 +6720,9 @@
           "services": {
             "$ref": "#/components/schemas/services"
           },
+          "productsPrice": {
+            "$ref": "#/components/schemas/productsPrice"
+          },
           "expectedPayment": {
             "type": "object",
             "description": "Rest to be paid, to be used as part of the `SERVICE_PAY_ON_DELIVERY` service",
@@ -7272,8 +6757,11 @@
           "carrierSelection": {
             "$ref": "#/components/schemas/carrierSelection"
           },
-          "invoice": {
-            "$ref": "#/components/schemas/invoices"
+          "state": {
+            "type": "string",
+            "enum": [
+              "TO_BE_COMPLETED"
+            ]
           },
           "additionalData": {
             "$ref": "./models/additionalData.yaml"
@@ -7468,10 +6956,16 @@
             "description": "Country code (ISO 3166 alpha-2)."
           },
           "accessibility": {
-            "$ref": "./models/PickUpPoint/pickUpPointAccessibility.json"
+            "$ref": "./models/PickUpPoint/pickUpPointAccessibility.json",
+            "x-stoplight": {
+              "id": "5rbs8nfhv50e6"
+            }
           },
           "boxCategoryAccessibility": {
-            "$ref": "./models/PickUpPoint/boxCategoryAccessibility.json"
+            "$ref": "./models/PickUpPoint/boxCategoryAccessibility.json",
+            "x-stoplight": {
+              "id": "zu5kxiclngm6v"
+            }
           }
         },
         "required": [
@@ -7916,6 +7410,71 @@
           "timezone"
         ]
       },
+      "contact-stores": {
+        "title": "Contact",
+        "x-stoplight": {
+          "id": "dusnatmb5s2j2"
+        },
+        "description": "Contact informations for the store",
+        "type": "object",
+        "x-examples": {
+          "Example": {
+            "firstName": "Jogn",
+            "lastName": "Doe",
+            "phone": "+33610101010",
+            "email": "johndoe@mail.com",
+            "language": "fr",
+            "timezone": "Europe/Paris",
+            "main": true,
+            "title": "Manager",
+            "isProfessional": true
+          }
+        },
+        "properties": {
+          "firstName": {
+            "type": "string",
+            "description": "Customer's first name"
+          },
+          "lastName": {
+            "type": "string",
+            "description": "Customer's last name"
+          },
+          "phone": {
+            "type": "string",
+            "description": "Customer's telephone number"
+          },
+          "email": {
+            "type": "string",
+            "description": "Customer's email address"
+          },
+          "language": {
+            "$ref": "#/components/schemas/language"
+          },
+          "timezone": {
+            "$ref": "#/components/schemas/timezone"
+          },
+          "main": {
+            "type": "boolean",
+            "description": "Main contact"
+          },
+          "title": {
+            "type": "string",
+            "description": "Contact title"
+          },
+          "isProfessional": {
+            "type": "boolean",
+            "description": "Indicates if the contact is a professional",
+            "default": false
+          }
+        },
+        "required": [
+          "firstName",
+          "lastName",
+          "email",
+          "language",
+          "timezone"
+        ]
+      },
       "services": {
         "type": "array",
         "description": "Specifies the delivery services to be used. ",
@@ -7986,6 +7545,13 @@
           },
           "quantity": {
             "type": "integer",
+            "default": 1,
+            "description": "Product quantity"
+          }
+        },
+        "required": [
+          "type"
+        ]
             "description": "Identical quantity of product. "
           },
           "price": {
@@ -8014,7 +7580,7 @@
         }
       },
       "packages": {
-        "description": "Specifies the information needed to update a package. The handling unit is to be defined with the package/product structure",
+        "description": "Specifies the information needed to update a package. The handling unit is to be defined with the package/product structure. ",
         "type": "object",
         "x-examples": {
           "Example": {
@@ -8067,13 +7633,6 @@
         "properties": {
           "references": {
             "$ref": "#/components/schemas/packagesReferences"
-          },
-          "category": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "e072oi6neiege"
-            },
-            "description": "Used to retrieve the sign's parcel category. If this field is not empty, length, width and height are not mandatory"
           },
           "length": {
             "$ref": "#/components/schemas/length"
@@ -8273,26 +7832,6 @@
               "required": [
                 "value"
               ]
-            },
-            "containerId": {
-              "type": "object",
-              "x-stoplight": {
-                "id": "inc0hic6h1ssr"
-              },
-              "properties": {
-                "trailerId": {
-                  "type": "string",
-                  "x-stoplight": {
-                    "id": "l40lhnq40wa1w"
-                  }
-                },
-                "palletId": {
-                  "type": "string",
-                  "x-stoplight": {
-                    "id": "k8kciwmdtp3f9"
-                  }
-                }
-              }
             }
           },
           "required": [
@@ -8387,8 +7926,7 @@
           "SERVICE_WHITE_GLOVE",
           "SERVICE_EXCHANGE",
           "SERVICE_DELIVERY_TO_MAILBOX",
-          "SERVICE_SCHEDULED",
-          "SERVICE_FREIGHT_ELEVATOR"
+          "SERVICE_SCHEDULED"
         ],
         "x-examples": {
           "Example": "SERVICE_PICKUP_POINT"
@@ -8791,9 +8329,6 @@
             "type": "string",
             "description": "Customer's email address"
           },
-          "optIn": {
-            "$ref": "#/components/schemas/optIn"
-          },
           "language": {
             "$ref": "#/components/schemas/language"
           },
@@ -8934,43 +8469,74 @@
           }
         }
       },
-      "optIn": {
-        "title": "Opt-in (optIn)",
+      "postStores": {
+        "title": "postStores",
         "x-stoplight": {
-          "id": "5n7ri6a7on6ao"
+          "id": "ahb9tplh8nej1"
         },
         "type": "object",
-        "description": "Defines the explicit consent of the customer to be contacted for survey or delivery tracking events for a specific channel.\nIf a channel is not present, notifications won't be sent on this channel\n\nTo ensure backward compatibility, if the optin section is not sent, then the customer's implicit consent will be considered and notifications sent.",
+        "description": "This method allows you to create a store",
         "properties": {
-          "survey": {
-            "type": "array",
+          "isActive": {
+            "type": "boolean",
             "x-stoplight": {
-              "id": "g2srfodbx51r6"
-            },
-            "description": "For all notifications related to satisfaction survey.",
-            "items": {
-              "$ref": "#/components/schemas/channel"
+              "id": "5hdb4ioudk1qf"
             }
           },
-          "delivery": {
+          "storeId": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "800xlt912q3vb"
+            },
+            "description": "external id of the store"
+          },
+          "name": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "rqf3495th2x0k"
+            },
+            "description": "name of the store"
+          },
+          "language": {
+            "$ref": "#/components/schemas/language"
+          },
+          "timezone": {
+            "$ref": "#/components/schemas/timezone"
+          },
+          "contacts": {
             "type": "array",
             "x-stoplight": {
-              "id": "5wt2mzeuyae1g"
+              "id": "142ekm51o2voy"
             },
-            "description": "For all notifications related to delivery tracking.",
             "items": {
-              "$ref": "#/components/schemas/channel"
+              "$ref": "#/components/schemas/contact-stores"
+            }
+          },
+          "activatedCarriers": {
+            "type": "array",
+            "x-stoplight": {
+              "id": "xcuq7aakszan3"
+            },
+            "items": {
+              "$ref": "./models/Carrier/carrierCode.json"
             }
           }
         },
         "required": [
-          "survey",
-          "delivery"
+          "isActive",
+          "storeId",
+          "name",
+          "language",
+          "timezone"
         ]
       },
-      "channel": {
-        "title": "Channel",
+      "patchStores": {
+        "title": "patchStores",
         "x-stoplight": {
+          "id": "flwnifad37cvz"
+        },
+        "type": "object",
+        "description": "This method allows you to modify a store",
           "id": "ticb7e682kioc"
         },
         "enum": [
@@ -8992,8 +8558,49 @@
         },
         "title": "Invoices (invoices)",
         "properties": {
-          "id": {
+          "actif": {
+            "type": "boolean",
+            "x-stoplight": {
+              "id": "h4je0efb5bd16"
+            }
+          },
+          "name": {
             "type": "string",
+            "x-stoplight": {
+              "id": "1ngsek5mdpocf"
+            }
+          },
+          "language": {
+            "$ref": "#/components/schemas/language"
+          },
+          "timezone": {
+            "$ref": "#/components/schemas/timezone"
+          },
+          "contacts": {
+            "type": "array",
+            "x-stoplight": {
+              "id": "cq42boxvlff30"
+            },
+            "items": {
+              "$ref": "#/components/schemas/contact-stores"
+            }
+          },
+          "activatedCarriers": {
+            "type": "array",
+            "x-stoplight": {
+              "id": "hzcgypfq3sx9y"
+            },
+            "items": {
+              "$ref": "./models/Carrier/carrierCode.json"
+            }
+          }
+        },
+        "required": [
+          "actif",
+          "name",
+          "language",
+          "timezone"
+        ]
             "description": "Identifier of the invoice document linked to the sales order. Mandatory for shipments subject to customs declarations."
           },
           "totalAmount": {
@@ -9019,8 +8626,7 @@
           }
         },
         "title": "TotalAmount",
-        "description": "Total price of the customer order (sum of productPrice if applicable). Mandatory for shipments subject to customs declarations."
-      }
+        "description": "Total price of the customer order (sum of productPrice if applicable). Mandatory for shipments subject to customs declarations."      }
     },
     "parameters": {
       "apiVersion": {
