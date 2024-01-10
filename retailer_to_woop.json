@@ -84,7 +84,7 @@
         "x-stoplight": {
           "id": "v4lka2el0adv6"
         },
-        "description": "Changes the package status in order to yield the package responsability to the carrier.",
+        "description": "Changes the package status in order to yield the package responsability to the carrier",
         "requestBody": {
           "content": {
             "application/json": {
