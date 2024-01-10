@@ -3452,7 +3452,7 @@
         "tags": [
           "Document"
         ],
-        "description": "This method allows you to upload a document in base64 directly to the Woop platform, one by one. ",
+        "description": "This method allows you to upload a document in base64 directly to the Woop platform, one by one.",
         "requestBody": {
           "content": {
             "application/json": {
