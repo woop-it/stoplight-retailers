@@ -8140,6 +8140,53 @@
             ],
             "example": "PACKAGE",
             "default": "PACKAGE"
+          },
+          "volume": {
+            "type": "array",
+            "x-stoplight": {
+              "id": "r4pzo383fekgb"
+            },
+            "items": {
+              "x-stoplight": {
+                "id": "moi081c5t9vzt"
+              },
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "string",
+                  "x-stoplight": {
+                    "id": "2kvcx6vg7un33"
+                  },
+                  "example": "15"
+                },
+                "unit": {
+                  "x-stoplight": {
+                    "id": "revd4uqptzejw"
+                  },
+                  "example": "m3",
+                  "default": "m3",
+                  "enum": [
+                    "mm3",
+                    "cm3",
+                    "ml",
+                    "l",
+                    "kl",
+                    "m3",
+                    "km3",
+                    "tsp",
+                    "Tbs",
+                    "in3",
+                    "fl-oz",
+                    "cup",
+                    "pnt",
+                    "qt",
+                    "gal",
+                    "ft3",
+                    "yd3"
+                  ]
+                }
+              }
+            }
           }
         },
         "required": [
