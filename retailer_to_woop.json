@@ -3025,7 +3025,15 @@
             },
             "in": "query",
             "name": "size",
-            "description": "Size of the label ***[Only for a single package]***"
+            "description": "Set the size (A4, A5, A6) of the label ***[For single pack only]***. "
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "resize",
+            "description": "Enables you to retrieve resized A6 labels"
           }
         ],
         "responses": {
@@ -6146,7 +6154,7 @@
               ]
             },
             "in": "query",
-            "name": "size",
+            "name": "resize",
             "description": "Label size"
           }
         ]
