@@ -2799,8 +2799,21 @@
               ]
             },
             "in": "query",
-            "name": "size",
+            "name": "resize",
             "description": "Size of the label ***[Only for a single package]***"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "A4",
+                "A5",
+                "A6"
+              ]
+            },
+            "in": "query",
+            "name": "size",
+            "description": "Choose in which size you get the label "
           }
         ],
         "responses": {
