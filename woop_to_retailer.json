@@ -2047,6 +2047,12 @@
           }
         },
         "description": "Specifies the rating for the delivery given by the end customer and if it is included in the calculation of the carrier rating. ",
+        "required": [
+          "note",
+          "type",
+          "includedInCarrierScore",
+          "question"
+        ],
         "properties": {
           "note": {
             "type": "number",
@@ -2063,13 +2069,15 @@
           "includedInCarrierScore": {
             "type": "boolean",
             "description": "Included in the carrier rating"
+          },
+          "question": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "z3rd3afci8t1f"
+            },
+            "description": "Question for the end customer"
           }
-        },
-        "required": [
-          "note",
-          "type",
-          "includedInCarrierScore"
-        ]
+        }
       },
       "contact": {
         "title": "Contact (contact)",

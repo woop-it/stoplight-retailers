@@ -6071,7 +6071,7 @@
               ]
             },
             "in": "query",
-            "name": "size",
+            "name": "resize",
             "description": "Label size"
           }
         ]
