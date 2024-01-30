@@ -53,6 +53,7 @@ Types available by carrier:
 | Bpost      | bpost      | PICKUP_POINT_AGENCY, PICKUP_POINT_POST_OFFICE, PICKUP_POINT_RELAY_WITH_LOCKER, PICKUP_POINT_RELAY_WITHOUT_LOCKER |
 | Chronopost | chronopost | PICKUP_POINT_AGENCY, PICKUP_POINT_POST_OFFICE, PICKUP_POINT_RELAY_WITH_LOCKER, PICKUP_POINT_RELAY_WITHOUT_LOCKER |
 | Colissimo  | colissimo  | PICKUP_POINT_AGENCY, PICKUP_POINT_POST_OFFICE, PICKUP_POINT_RELAY_WITHOUT_LOCKER                                 |
+| Geodis  | geodis  | PICKUP_POINT_AGENCY                                 |
 
 _Eg:_
 
