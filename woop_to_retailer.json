@@ -2043,7 +2043,8 @@
           "Example": {
             "note": 5,
             "type": "SCORE_TYPE_RECOMMENDATION",
-            "includedInCarrierScore": true
+            "includedInCarrierScore": true,
+            "question": "Would you recommend our delivery service to your friends ?"
           }
         },
         "description": "Specifies the rating for the delivery given by the end customer and if it is included in the calculation of the carrier rating. ",
