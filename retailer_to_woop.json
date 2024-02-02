@@ -923,42 +923,7 @@
               "schema": {
                 "type": "array",
                 "items": {
-                  "x-stoplight": {
-                    "id": "7uueosxfeu696"
-                  },
-                  "type": "object",
-                  "properties": {
-                    "key": {
-                      "type": "object",
-                      "x-stoplight": {
-                        "id": "1w2g7uwe2t4kn"
-                      },
-                      "properties": {
-                        "keyName": {
-                          "type": "string",
-                          "x-stoplight": {
-                            "id": "go2s3a37bxkib"
-                          },
-                          "description": "name of the key"
-                        }
-                      }
-                    },
-                    "value": {
-                      "type": "object",
-                      "x-stoplight": {
-                        "id": "qukcchy13ja7u"
-                      },
-                      "properties": {
-                        "valueName": {
-                          "type": "string",
-                          "x-stoplight": {
-                            "id": "rtdgwst3pah6z"
-                          },
-                          "description": "object value"
-                        }
-                      }
-                    }
-                  }
+                  "$ref": "#/components/schemas/enhancedLabel"
                 }
               },
               "examples": {
