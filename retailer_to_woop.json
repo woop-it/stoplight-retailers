@@ -9319,6 +9319,9 @@
         },
         "items": {
           "type": "object",
+          "required": [
+            "reference"
+          ],
           "properties": {
             "reference": {
               "type": "string",
@@ -9333,6 +9336,9 @@
               "x-stoplight": {
                 "id": "am11lni8ag5y5"
               },
+              "required": [
+                "value"
+              ],
               "properties": {
                 "value": {
                   "type": "string",
@@ -9340,8 +9346,7 @@
                     "id": "4k1xtgr6eiqn7"
                   },
                   "enum": [
-                    "ON_DOCK",
-                    "PREPARED"
+                    "SHIPPED"
                   ]
                 },
                 "date": {
@@ -9351,10 +9356,7 @@
                   },
                   "format": "date-time"
                 }
-              },
-              "required": [
-                "value"
-              ]
+              }
             },
             "containerId": {
               "type": "object",
@@ -9376,10 +9378,7 @@
                 }
               }
             }
-          },
-          "required": [
-            "reference"
-          ]
+          }
         }
       },
       "productsPrice": {
