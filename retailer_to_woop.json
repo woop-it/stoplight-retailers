@@ -2999,6 +2999,879 @@
         "summary": "Get orders"
       }
     },
+    "/labels": {
+      "post": {
+        "description": "This method allows you to create an order with a return label. ",
+        "operationId": "postLabels",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "description": "Contains the order creation information.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/postLabels"
+              },
+              "examples": {
+                "Default example": {
+                  "value": {
+                    "orderId": "65z4eq1d6q54zd1",
+                    "referenceNumber": "65q41zdq65z14",
+                    "storeId": "AX645",
+                    "picking": {
+                      "location": {
+                        "type": "address",
+                        "addressLine1": "237 rue du ballon",
+                        "postalCode": "59110",
+                        "city": "La Madeleine",
+                        "country": "FR"
+                      },
+                      "interval": [
+                        {
+                          "start": "2019-11-27T12:00:00+0000",
+                          "end": "2019-11-27T14:00:00+0000"
+                        }
+                      ],
+                      "contact": {
+                        "firstName": "Michel",
+                        "lastName": "Dupont",
+                        "phone": "+33600000000",
+                        "email": "michel.dupont@mail.fr",
+                        "language": "fr",
+                        "timezone": "Europe/Paris"
+                      }
+                    },
+                    "delivery": {
+                      "location": {
+                        "type": "address",
+                        "addressLine1": "165 avenue de Bretagne",
+                        "elevator": true,
+                        "floor": 3,
+                        "postalCode": "59000",
+                        "city": "Lille",
+                        "country": "FR"
+                      },
+                      "interval": [
+                        {
+                          "start": "2019-11-28T13:30:00+0000",
+                          "end": "2019-11-28T14:30:00+0000"
+                        }
+                      ],
+                      "contact": {
+                        "firstName": "Pierre",
+                        "lastName": "Dupond",
+                        "phone": "+33600000000",
+                        "email": "pierre.dupond@mail.fr",
+                        "optIn": {
+                          "survey": [
+                            "MAIL"
+                          ],
+                          "delivery": [
+                            "MAIL",
+                            "SMS"
+                          ]
+                        },
+                        "language": "fr",
+                        "timezone": "Europe/Paris"
+                      }
+                    },
+                    "packages": [
+                      {
+                        "length": {
+                          "value": 15,
+                          "unit": "cm"
+                        },
+                        "width": {
+                          "value": 15,
+                          "unit": "cm"
+                        },
+                        "height": {
+                          "value": 1.2,
+                          "unit": "m"
+                        },
+                        "weight": {
+                          "value": 560,
+                          "unit": "g"
+                        },
+                        "references": [
+                          {
+                            "reference": "123456789A",
+                            "barcode": {
+                              "value": "54fd56g4f5gfd456sd",
+                              "type": "barcode",
+                              "format": "128"
+                            }
+                          },
+                          {
+                            "reference": "123456789B",
+                            "barcode": {
+                              "value": "54fd56g4f5gfd456sdsdsd",
+                              "type": "barcode",
+                              "format": "128"
+                            }
+                          }
+                        ],
+                        "products": [
+                          {
+                            "type": "TYPOLOGY_GENERIC",
+                            "ean": "4dq86zd4q6zd4q64",
+                            "cug": "q56zd4q65d4q",
+                            "label": "Lampe",
+                            "quantity": 1
+                          }
+                        ],
+                        "quantity": 2,
+                        "attributes": {
+                          "footprint": {
+                            "value": 13,
+                            "unit": "m2"
+                          }
+                        },
+                        "type": "PACKAGE"
+                      }
+                    ],
+                    "services": [
+                      "SERVICE_SELECTED_ROOM"
+                    ]
+                  }
+                },
+                "Example with assembly": {
+                  "value": {
+                    "orderId": "65z4eq1d6q54zd1",
+                    "referenceNumber": "65q41zdq65z14",
+                    "storeId": "AX645",
+                    "picking": {
+                      "location": {
+                        "type": "address",
+                        "addressLine1": "237 rue du ballon",
+                        "postalCode": "59110",
+                        "city": "La Madeleine",
+                        "country": "FR"
+                      },
+                      "interval": [
+                        {
+                          "start": "2019-11-27T12:00:00+0000",
+                          "end": "2019-11-27T14:00:00+0000"
+                        }
+                      ],
+                      "contact": {
+                        "firstName": "Michel",
+                        "lastName": "Dupont",
+                        "phone": "+33600000000",
+                        "email": "michel.dupont@mail.fr",
+                        "language": "fr",
+                        "timezone": "Europe/Paris"
+                      }
+                    },
+                    "delivery": {
+                      "location": {
+                        "type": "address",
+                        "addressLine1": "165 avenue de Bretagne",
+                        "elevator": true,
+                        "floor": 3,
+                        "postalCode": "59000",
+                        "city": "Lille",
+                        "country": "FR"
+                      },
+                      "interval": [
+                        {
+                          "start": "2019-11-28T13:30:00+0000",
+                          "end": "2019-11-28T14:30:00+0000"
+                        }
+                      ],
+                      "contact": {
+                        "firstName": "Pierre",
+                        "lastName": "Dupond",
+                        "phone": "+33600000000",
+                        "email": "pierre.dupond@mail.fr",
+                        "optIn": {
+                          "survey": [
+                            "MAIL"
+                          ],
+                          "delivery": [
+                            "MAIL",
+                            "SMS"
+                          ]
+                        },
+                        "language": "fr",
+                        "timezone": "Europe/Paris"
+                      }
+                    },
+                    "packages": [
+                      {
+                        "length": {
+                          "value": 15,
+                          "unit": "cm"
+                        },
+                        "width": {
+                          "value": 15,
+                          "unit": "cm"
+                        },
+                        "height": {
+                          "value": 1.2,
+                          "unit": "m"
+                        },
+                        "weight": {
+                          "value": 560,
+                          "unit": "g"
+                        },
+                        "references": [
+                          {
+                            "reference": "123456789A",
+                            "barcode": {
+                              "value": "54fd56g4f5gfd456sd",
+                              "type": "barcode",
+                              "format": "128"
+                            }
+                          },
+                          {
+                            "reference": "123456789B",
+                            "barcode": {
+                              "value": "54fd56g4f5gfd456sdsdsd",
+                              "type": "barcode",
+                              "format": "128"
+                            }
+                          }
+                        ],
+                        "products": [
+                          {
+                            "type": "TYPOLOGY_GENERIC",
+                            "ean": "4dq86zd4q6zd4q64",
+                            "cug": "q56zd4q65d4q",
+                            "label": "Lampe",
+                            "quantity": 1
+                          }
+                        ],
+                        "quantity": 2
+                      }
+                    ],
+                    "services": [
+                      "SERVICE_ASSEMBLY"
+                    ],
+                    "productsPrice": {
+                      "value": 30,
+                      "currency": "EUR"
+                    }
+                  }
+                },
+                "Example of delivery in pickup point": {
+                  "value": {
+                    "orderId": "65z4eq1d6q54zd1",
+                    "referenceNumber": "65q41zdq65z14",
+                    "storeId": "AX645",
+                    "picking": {
+                      "location": {
+                        "type": "pickupPoint",
+                        "carrierCode": "carrierX",
+                        "id": "36JGZ7"
+                      },
+                      "interval": [
+                        {
+                          "start": "2019-11-27T12:00:00+0000",
+                          "end": "2019-11-27T14:00:00+0000"
+                        }
+                      ],
+                      "contact": {
+                        "firstName": "Michel",
+                        "lastName": "Dupont",
+                        "phone": "+33600000000",
+                        "email": "michel.dupont@mail.fr",
+                        "language": "fr",
+                        "timezone": "Europe/Paris"
+                      }
+                    },
+                    "delivery": {
+                      "location": {
+                        "type": "pickupPoint",
+                        "carrierCode": "carrierX",
+                        "id": "19GON"
+                      },
+                      "interval": [
+                        {
+                          "start": "2019-11-28T13:30:00+0000",
+                          "end": "2019-11-28T14:30:00+0000"
+                        }
+                      ],
+                      "contact": {
+                        "firstName": "Pierre",
+                        "lastName": "Dupond",
+                        "phone": "+33600000000",
+                        "email": "pierre.dupond@mail.fr",
+                        "optIn": {
+                          "survey": [
+                            "MAIL"
+                          ],
+                          "delivery": [
+                            "MAIL",
+                            "SMS"
+                          ]
+                        },
+                        "language": "fr",
+                        "timezone": "Europe/Paris"
+                      }
+                    },
+                    "packages": [
+                      {
+                        "length": {
+                          "value": 15,
+                          "unit": "cm"
+                        },
+                        "width": {
+                          "value": 15,
+                          "unit": "cm"
+                        },
+                        "height": {
+                          "value": 1.2,
+                          "unit": "m"
+                        },
+                        "weight": {
+                          "value": 560,
+                          "unit": "g"
+                        },
+                        "references": [
+                          {
+                            "reference": "123456789A",
+                            "barcode": {
+                              "value": "54fd56g4f5gfd456sd",
+                              "type": "barcode",
+                              "format": "128"
+                            }
+                          },
+                          {
+                            "reference": "123456789B",
+                            "barcode": {
+                              "value": "54fd56g4f5gfd456sdsdsd",
+                              "type": "barcode",
+                              "format": "128"
+                            }
+                          }
+                        ],
+                        "products": [
+                          {
+                            "type": "TYPOLOGY_GENERIC",
+                            "ean": "4dq86zd4q6zd4q64",
+                            "cug": "q56zd4q65d4q",
+                            "label": "Lampe",
+                            "quantity": 1
+                          }
+                        ],
+                        "quantity": 2
+                      }
+                    ],
+                    "services": [
+                      "SERVICE_SELECTED_ROOM"
+                    ]
+                  }
+                },
+                "Example of delivery in exchange place": {
+                  "value": {
+                    "orderId": "65z4eq1d6q54zd1",
+                    "referenceNumber": "65q41zdq65z14",
+                    "storeId": "AX645",
+                    "picking": {
+                      "location": {
+                        "type": "exchangePlace",
+                        "id": "EXCHANGE PLACE 1"
+                      },
+                      "interval": [
+                        {
+                          "start": "2019-11-27T12:00:00+0000",
+                          "end": "2019-11-27T14:00:00+0000"
+                        }
+                      ],
+                      "contact": {
+                        "firstName": "Michel",
+                        "lastName": "Dupont",
+                        "phone": "+33600000000",
+                        "email": "michel.dupont@mail.fr",
+                        "language": "fr",
+                        "timezone": "Europe/Paris"
+                      }
+                    },
+                    "delivery": {
+                      "location": {
+                        "type": "exchangePlace",
+                        "id": "EXCHANGE PLACE 2"
+                      },
+                      "interval": [
+                        {
+                          "start": "2019-11-28T13:30:00+0000",
+                          "end": "2019-11-28T14:30:00+0000"
+                        }
+                      ],
+                      "contact": {
+                        "firstName": "Pierre",
+                        "lastName": "Dupond",
+                        "phone": "+33600000000",
+                        "email": "pierre.dupond@mail.fr",
+                        "optIn": {
+                          "survey": [
+                            "MAIL"
+                          ],
+                          "delivery": [
+                            "MAIL",
+                            "SMS"
+                          ]
+                        },
+                        "language": "fr",
+                        "timezone": "Europe/Paris"
+                      }
+                    },
+                    "packages": [
+                      {
+                        "length": {
+                          "value": 15,
+                          "unit": "cm"
+                        },
+                        "width": {
+                          "value": 15,
+                          "unit": "cm"
+                        },
+                        "height": {
+                          "value": 1.2,
+                          "unit": "m"
+                        },
+                        "weight": {
+                          "value": 560,
+                          "unit": "g"
+                        },
+                        "references": [
+                          {
+                            "reference": "123456789A",
+                            "barcode": {
+                              "value": "54fd56g4f5gfd456sd",
+                              "type": "barcode",
+                              "format": "128"
+                            }
+                          },
+                          {
+                            "reference": "123456789B",
+                            "barcode": {
+                              "value": "54fd56g4f5gfd456sdsdsd",
+                              "type": "barcode",
+                              "format": "128"
+                            }
+                          }
+                        ],
+                        "products": [
+                          {
+                            "type": "TYPOLOGY_GENERIC",
+                            "ean": "4dq86zd4q6zd4q64",
+                            "cug": "q56zd4q65d4q",
+                            "label": "Lamp",
+                            "quantity": 1
+                          }
+                        ],
+                        "quantity": 2
+                      }
+                    ],
+                    "services": [
+                      "SERVICE_ASSEMBLY"
+                    ],
+                    "tags": [
+                      {
+                        "key": "origin",
+                        "value": "web"
+                      }
+                    ],
+                    "productsPrice": {
+                      "value": 30,
+                      "currency": "EUR"
+                    }
+                  }
+                },
+                "Example with carrier choice": {
+                  "value": {
+                    "orderId": "65z4eq1d6q54zd1",
+                    "referenceNumber": "65q41zdq65z14",
+                    "storeId": "AX645",
+                    "picking": {
+                      "location": {
+                        "type": "exchangePlace",
+                        "id": "EXCHANGE PLACE 1"
+                      },
+                      "interval": [
+                        {
+                          "start": "2019-11-27T12:00:00+0000",
+                          "end": "2019-11-27T14:00:00+0000"
+                        }
+                      ],
+                      "contact": {
+                        "firstName": "Michel",
+                        "lastName": "Dupont",
+                        "phone": "+33600000000",
+                        "email": "michel.dupont@mail.fr",
+                        "language": "fr",
+                        "timezone": "Europe/Paris"
+                      }
+                    },
+                    "delivery": {
+                      "location": {
+                        "type": "address",
+                        "addressLine1": "165 avenue de Bretagne",
+                        "elevator": true,
+                        "floor": 3,
+                        "postalCode": "59000",
+                        "city": "Lille",
+                        "country": "FR"
+                      },
+                      "interval": [
+                        {
+                          "start": "2019-11-28T13:30:00+0000",
+                          "end": "2019-11-28T14:30:00+0000"
+                        }
+                      ],
+                      "contact": {
+                        "firstName": "Pierre",
+                        "lastName": "Dupond",
+                        "phone": "+33600000000",
+                        "email": "pierre.dupond@mail.fr",
+                        "optIn": {
+                          "survey": [
+                            "MAIL"
+                          ],
+                          "delivery": [
+                            "MAIL",
+                            "SMS"
+                          ]
+                        },
+                        "language": "fr",
+                        "timezone": "Europe/Paris"
+                      }
+                    },
+                    "packages": [
+                      {
+                        "length": {
+                          "value": 15,
+                          "unit": "cm"
+                        },
+                        "width": {
+                          "value": 15,
+                          "unit": "cm"
+                        },
+                        "height": {
+                          "value": 1.2,
+                          "unit": "m"
+                        },
+                        "weight": {
+                          "value": 560,
+                          "unit": "g"
+                        },
+                        "references": [
+                          {
+                            "reference": "123456789A",
+                            "barcode": {
+                              "value": "54fd56g4f5gfd456sd",
+                              "type": "barcode",
+                              "format": "128"
+                            }
+                          },
+                          {
+                            "reference": "123456789B",
+                            "barcode": {
+                              "value": "54fd56g4f5gfd456sdsdsd",
+                              "type": "barcode",
+                              "format": "128"
+                            }
+                          }
+                        ],
+                        "products": [
+                          {
+                            "type": "TYPOLOGY_GENERIC",
+                            "ean": "4dq86zd4q6zd4q64",
+                            "cug": "q56zd4q65d4q",
+                            "label": "Lamp",
+                            "quantity": 1
+                          }
+                        ],
+                        "quantity": 2
+                      }
+                    ],
+                    "services": [
+                      "SERVICE_FRONT_HOME"
+                    ],
+                    "carrierSelection": {
+                      "mode": "INCLUSION",
+                      "carrierCodes": [
+                        "chronopost"
+                      ]
+                    }
+                  }
+                },
+                "Example with bookingId": {
+                  "value": {
+                    "orderId": "65z4eq1d6q54zd1",
+                    "referenceNumber": "65q41zdq65z14",
+                    "storeId": "AX645",
+                    "picking": {
+                      "location": {
+                        "type": "exchangePlace",
+                        "id": "EXCHANGE PLACE 1"
+                      },
+                      "interval": [
+                        {
+                          "start": "2019-11-27T12:00:00+0000",
+                          "end": "2019-11-27T14:00:00+0000"
+                        }
+                      ],
+                      "contact": {
+                        "firstName": "Michel",
+                        "lastName": "Dupont",
+                        "phone": "+33600000000",
+                        "email": "michel.dupont@mail.fr",
+                        "language": "fr",
+                        "timezone": "Europe/Paris"
+                      }
+                    },
+                    "delivery": {
+                      "location": {
+                        "type": "address",
+                        "addressLine1": "165 avenue de Bretagne",
+                        "elevator": true,
+                        "floor": 3,
+                        "postalCode": "59000",
+                        "city": "Lille",
+                        "country": "FR"
+                      },
+                      "interval": [
+                        {
+                          "bookingId": "34452233"
+                        }
+                      ],
+                      "contact": {
+                        "firstName": "Pierre",
+                        "lastName": "Dupond",
+                        "phone": "+33600000000",
+                        "email": "pierre.dupond@mail.fr",
+                        "optIn": {
+                          "survey": [
+                            "MAIL"
+                          ],
+                          "delivery": [
+                            "MAIL",
+                            "SMS"
+                          ]
+                        },
+                        "language": "fr",
+                        "timezone": "Europe/Paris"
+                      }
+                    },
+                    "packages": [
+                      {
+                        "length": {
+                          "value": 15,
+                          "unit": "cm"
+                        },
+                        "width": {
+                          "value": 15,
+                          "unit": "cm"
+                        },
+                        "height": {
+                          "value": 1.2,
+                          "unit": "m"
+                        },
+                        "weight": {
+                          "value": 560,
+                          "unit": "g"
+                        },
+                        "references": [
+                          {
+                            "reference": "123456789A",
+                            "barcode": {
+                              "value": "54fd56g4f5gfd456sd",
+                              "type": "barcode",
+                              "format": "128"
+                            }
+                          },
+                          {
+                            "reference": "123456789B",
+                            "barcode": {
+                              "value": "54fd56g4f5gfd456sdsdsd",
+                              "type": "barcode",
+                              "format": "128"
+                            }
+                          }
+                        ],
+                        "products": [
+                          {
+                            "type": "TYPOLOGY_GENERIC",
+                            "ean": "4dq86zd4q6zd4q64",
+                            "cug": "q56zd4q65d4q",
+                            "label": "Lamp",
+                            "quantity": 1
+                          }
+                        ],
+                        "quantity": 2
+                      }
+                    ],
+                    "services": [
+                      "SERVICE_ASSEMBLY"
+                    ],
+                    "tags": [
+                      {
+                        "key": "origin",
+                        "value": "web"
+                      }
+                    ],
+                    "productsPrice": {
+                      "value": 30,
+                      "currency": "EUR"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "the order has been registered"
+          },
+          "202": {
+            "description": "Date in some fields are incorrect",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "message": {
+                            "type": "string",
+                            "description": "error message",
+                            "example": "Picking start MUST be before delivery start"
+                          },
+                          "translationKey": {
+                            "type": "string",
+                            "description": "technical error message for Woop Team",
+                            "example": "technical.incidents.date.pickingStartBeforeDeliveryStart"
+                          },
+                          "key": {
+                            "type": "string",
+                            "description": "technical key for Woop team",
+                            "example": "order"
+                          }
+                        },
+                        "required": [
+                          "message",
+                          "translationKey",
+                          "key"
+                        ]
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Example": {
+                    "value": {
+                      "errors": [
+                        {
+                          "message": "Picking start MUST be before delivery start",
+                          "translationKey": "technical.incidents.date.pickingStartBeforeDeliveryStart",
+                          "key": "order"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Missing and/or incorrect items in the body",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "Example": {
+                    "value": {
+                      "statusCode": 400,
+                      "error": "Bad Request",
+                      "message": "child \"picking\" fails because [child \"interval\" fails because [\"interval\" at position 0 fails because [child \"start\" fails because [\"start\" is required]]]]",
+                      "validation": {
+                        "source": "payload",
+                        "keys": [
+                          "picking.interval.0.start"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "You are not authorised to access this item",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Creation of the order is not possible\n\n[See the list of reasons](https://woop.stoplight.io/docs/retailer/docs/Models/Error%20reasons.md)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "statusCode": 403,
+                      "error": "Forbidden",
+                      "message": "Store doesn't exist or is inactive",
+                      "reasons": [
+                        "STORE_NOT_FOUND"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Creation of the order with this 'orderId' is not possible",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "statusCode": 409,
+                      "error": "Conflict",
+                      "message": "Conflict"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Create shipment with label",
+        "x-internal": false,
+        "x-stoplight": {
+          "id": "1yek4xqgrektm"
+        },
+        "tags": [
+          "Label"
+        ]
+      },
+      "parameters": []
+    },
     "/orders/{orderId}/label": {
       "get": {
         "tags": [
@@ -7296,6 +8169,105 @@
           "services"
         ]
       },
+      "postLabels": {
+        "type": "object",
+        "x-stoplight": {
+          "id": "r14k4hchct8mb"
+        },
+        "description": "Specifies the information needed to create a delivery request with a transport label in response",
+        "title": "Creation of the order (postLabels)",
+        "x-examples": {},
+        "required": [
+          "orderId",
+          "storeId",
+          "delivery",
+          "packages",
+          "services",
+          "labelMode"
+        ],
+        "properties": {
+          "orderId": {
+            "type": "string",
+            "description": "Unique order identifier (maximum 36 characters)",
+            "maxLength": 36
+          },
+          "referenceNumber": {
+            "type": "string",
+            "description": "Order reference, store number. Can be the same as the orderId."
+          },
+          "storeId": {
+            "type": "string",
+            "description": "Identifier of the store issuing the request"
+          },
+          "exchangePlaceId": {
+            "type": "string",
+            "description": "Identifier of the picking location\n",
+            "x-stoplight": {
+              "id": "wbev1a8ii93zl"
+            }
+          },
+          "state": {
+            "type": "string",
+            "enum": [
+              "TO_BE_COMPLETED"
+            ]
+          },
+          "delivery": {
+            "description": "Information on the delivery location",
+            "type": "object",
+            "required": [
+              "location",
+              "interval",
+              "contact"
+            ],
+            "properties": {
+              "location": {
+                "$ref": "#/components/schemas/location"
+              },
+              "infos": {
+                "type": "string",
+                "description": "Depreciated - Use \"delivery.location.comment\"",
+                "deprecated": true
+              },
+              "interval": {
+                "type": "array",
+                "description": "Delivery time slot",
+                "items": {
+                  "$ref": "#/components/schemas/deliveryInterval"
+                }
+              },
+              "contact": {
+                "$ref": "#/components/schemas/contactDelivery"
+              }
+            }
+          },
+          "packages": {
+            "description": "All packages",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/packages"
+            }
+          },
+          "services": {
+            "$ref": "#/components/schemas/services"
+          },
+          "labelMode": {
+            "$ref": "#/components/schemas/labelMode"
+          },
+          "carrierSelection": {
+            "$ref": "#/components/schemas/carrierSelection"
+          },
+          "invoice": {
+            "$ref": "#/components/schemas/invoices"
+          },
+          "additionalData": {
+            "$ref": "./models/additionalData.yaml"
+          },
+          "tags": {
+            "$ref": "#/components/schemas/tags"
+          }
+        }
+      },
       "postProductReturn": {
         "type": "object",
         "description": "Specifies the information needed to create a product return. ",
@@ -8158,6 +9130,153 @@
           "products"
         ]
       },
+      "packageSimply": {
+        "description": "Specifies the information needed to add a package.",
+        "x-stoplight": {
+          "id": "su1a6lco6jw11"
+        },
+        "type": "object",
+        "x-examples": {
+          "Example 1": {
+            "references": [
+              {
+                "reference": "12345B",
+                "barcode": {
+                  "value": "54fd56g4f5gfd456sd",
+                  "type": "barcode",
+                  "format": "128"
+                },
+                "state": {
+                  "value": "ON_DOCK",
+                  "date": "2019-08-24T14:15:22Z"
+                },
+                "containerId": {
+                  "trailerId": "string",
+                  "palletId": "string"
+                }
+              }
+            ],
+            "maxLength": {
+              "value": 0,
+              "unit": "string"
+            },
+            "weight": {
+              "value": 0,
+              "unit": "string"
+            },
+            "products": [
+              {
+                "type": "string",
+                "ean": "string",
+                "cug": "string",
+                "label": "string",
+                "quantity": 0,
+                "price": {
+                  "value": 0,
+                  "currency": "EUR"
+                },
+                "originCountry": "string",
+                "hsCode": 0,
+                "weight": {
+                  "value": 0,
+                  "unit": "string"
+                },
+                "length": {
+                  "value": 0,
+                  "unit": "string"
+                },
+                "width": {
+                  "value": 0,
+                  "unit": "string"
+                },
+                "height": {
+                  "value": 0,
+                  "unit": "string"
+                }
+              }
+            ],
+            "quantity": 1,
+            "attributes": {
+              "footprint": {
+                "value": 13,
+                "unit": "m2"
+              }
+            },
+            "type": "PACKAGE"
+          }
+        },
+        "title": "simplified package model (packageSimply)",
+        "required": [
+          "maxLength",
+          "weight",
+          "products"
+        ],
+        "properties": {
+          "references": {
+            "$ref": "#/components/schemas/packagesReferences"
+          },
+          "maxLength": {
+            "$ref": "#/components/schemas/length"
+          },
+          "weight": {
+            "$ref": "#/components/schemas/mass"
+          },
+          "products": {
+            "type": "array",
+            "description": "List of products in the package",
+            "items": {
+              "$ref": "#/components/schemas/product"
+            }
+          },
+          "quantity": {
+            "type": "integer",
+            "default": 1,
+            "description": "Quantity of packages"
+          },
+          "attributes": {
+            "type": "object",
+            "description": "package attributes",
+            "properties": {
+              "footprint": {
+                "type": "object",
+                "description": "package footprint on the ground",
+                "required": [
+                  "value",
+                  "unit"
+                ],
+                "properties": {
+                  "value": {
+                    "type": "number",
+                    "description": "footprint value",
+                    "example": 13
+                  },
+                  "unit": {
+                    "type": "string",
+                    "description": "footprint unit",
+                    "example": "m2",
+                    "enum": [
+                      "m2",
+                      "cm2",
+                      "pallet"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "type": {
+            "type": "string",
+            "description": "package type",
+            "enum": [
+              "PACKAGE",
+              "TRAY",
+              "PALLET"
+            ],
+            "example": "PACKAGE",
+            "default": "PACKAGE"
+          }
+        }
+      },
       "coordinates": {
         "type": "object",
         "description": "Specifies the geographical coordinates to be used for creation. ",
@@ -8184,48 +9303,38 @@
         ]
       },
       "length": {
-        "required": [
-          "unit",
-          "value"
-        ],
+        "type": "object",
         "properties": {
           "value": {
-            "type": "number"
+            "type": "integer"
           },
           "unit": {
-            "$ref": "#/components/schemas/lengthUnits"
+            "type": "string"
           }
         },
-        "description": "Specifies the size of a package.",
         "x-examples": {
-          "Example": {
+          "Example 1": {
             "value": 200,
             "unit": "mm"
           }
-        },
-        "title": "Dimension (length)"
+        }
       },
       "mass": {
-        "required": [
-          "unit",
-          "value"
-        ],
+        "type": "object",
         "properties": {
           "value": {
-            "type": "number"
+            "type": "integer"
           },
           "unit": {
-            "$ref": "#/components/schemas/massUnits"
+            "type": "string"
           }
         },
-        "description": "Specifies the weight of a package/product. Mandatory for consignments subject to customs declarations.",
         "x-examples": {
-          "Example": {
+          "Example 1": {
             "value": 1,
             "unit": "kg"
           }
-        },
-        "title": "Weight (mass)"
+        }
       },
       "packagesReferences": {
         "type": "array",
@@ -9028,6 +10137,56 @@
         },
         "title": "TotalAmount",
         "description": "Total price of the customer order (sum of productPrice if applicable). Mandatory for shipments subject to customs declarations."
+      },
+      "labelMode": {
+        "type": "object",
+        "x-examples": {
+          "Example 1": {
+            "mode": "zpl",
+            "format": "A6",
+            "enhancedLabel": [
+              {
+                "key": "keyName",
+                "value": "valueName"
+              }
+            ]
+          }
+        },
+        "properties": {
+          "mode": {
+            "type": "string"
+          },
+          "format": {
+            "type": "string"
+          },
+          "enhancedLabel": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/enhancedLabel"
+            }
+          }
+        },
+        "title": "Configuration of the label (labelMode)",
+        "description": "Elements required to define the type of label expected, in the right format and size. "
+      },
+      "enhancedLabel": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        },
+        "x-examples": {
+          "Example 1": {
+            "key": "keyName",
+            "value": "valueName"
+          }
+        },
+        "title": "Configuration of the enhanced label (enhancedLabel)",
+        "description": "Elements required to define the enhanced label, adding a key/value. "
       }
     },
     "parameters": {
