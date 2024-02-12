@@ -9028,6 +9028,53 @@
         },
         "title": "TotalAmount",
         "description": "Total price of the customer order (sum of productPrice if applicable). Mandatory for shipments subject to customs declarations."
+      },
+      "orderStates": {
+        "type": "object",
+        "properties": {
+          "state": {
+            "type": "object",
+            "properties": {
+              "code": {
+                "type": "string"
+              },
+              "options": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "deliveryId": {
+                      "type": "string"
+                    },
+                    "parcelId": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-examples": {
+          "Example 1": {
+            "state": {
+              "code": "WITHOUT_SHIPMENT",
+              "options": [
+                {
+                  "deliveryId": "A234D4F",
+                  "parcelId": [
+                    "12345"
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        "title": "orderState",
+        "description": "Allows you to define a specific status for the order when it is created. "
       }
     },
     "parameters": {
