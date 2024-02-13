@@ -7158,6 +7158,14 @@
         "description": "Specifies the information required for creating the order.",
         "title": "Creation of the order (postOrders)",
         "x-examples": {},
+        "required": [
+          "orderId",
+          "storeId",
+          "picking",
+          "delivery",
+          "packages",
+          "services"
+        ],
         "properties": {
           "orderId": {
             "type": "string",
@@ -7173,10 +7181,7 @@
             "description": "Identifier of the store issuing the request"
           },
           "state": {
-            "type": "string",
-            "enum": [
-              "TO_BE_COMPLETED"
-            ]
+            "$ref": "#/components/schemas/orderStates"
           },
           "picking": {
             "description": "Information on the collection location",
@@ -7249,6 +7254,11 @@
           "expectedPayment": {
             "type": "object",
             "description": "Rest to be paid, to be used as part of the `SERVICE_PAY_ON_DELIVERY` service",
+            "required": [
+              "value",
+              "currency",
+              "paymentMethod"
+            ],
             "properties": {
               "value": {
                 "type": "number"
@@ -7267,12 +7277,7 @@
                   "CREDIT_CARD"
                 ]
               }
-            },
-            "required": [
-              "value",
-              "currency",
-              "paymentMethod"
-            ]
+            }
           },
           "tags": {
             "$ref": "#/components/schemas/tags"
@@ -7286,15 +7291,7 @@
           "additionalData": {
             "$ref": "./models/additionalData.yaml"
           }
-        },
-        "required": [
-          "orderId",
-          "storeId",
-          "picking",
-          "delivery",
-          "packages",
-          "services"
-        ]
+        }
       },
       "postProductReturn": {
         "type": "object",
