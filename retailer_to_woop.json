@@ -7181,7 +7181,7 @@
             "description": "Identifier of the store issuing the request"
           },
           "state": {
-            "$ref": "#/components/schemas/orderStates"
+            "$ref": "#/components/schemas/state"
           },
           "picking": {
             "description": "Information on the collection location",
@@ -9026,45 +9026,66 @@
         "title": "TotalAmount",
         "description": "Total price of the customer order (sum of productPrice if applicable). Mandatory for shipments subject to customs declarations."
       },
-      "orderStates": {
+      "state": {
         "type": "object",
+        "x-examples": {
+          "Example 1": {
+            "code": "WITHOUT_SHIPMENT",
+            "options": {
+              "deliveries": [
+                {
+                  "deliveryId": "A234D4F",
+                  "parcelId": [
+                    "1Z601FF06800128696"
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        "description": "Allows you to define a specific status for the order when it is created.",
+        "title": "State of order",
         "properties": {
           "code": {
-            "type": "string"
+            "$ref": "#/components/schemas/orderStates"
           },
           "options": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "deliveryId": {
-                  "type": "string"
-                },
-                "parcelId": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
+            "type": "object",
+            "properties": {
+              "deliveries": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "deliveryId": {
+                      "type": "string",
+                      "description": "Unique delivery identifier (maximum 36 characters)"
+                    },
+                    "parcelId": {
+                      "type": "array",
+                      "description": "Identifier of the package returned by the carrier. Can also be used for tracking ",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
                   }
                 }
               }
             }
           }
+        }
+      },
+      "orderStates": {
+        "x-stoplight": {
+          "id": "3htjg65i1e3fq"
         },
-        "x-examples": {
-          "Example 1": {
-            "code": "WITHOUT_SHIPMENT",
-            "options": [
-              {
-                "deliveryId": "A234D4F",
-                "parcelId": [
-                  "12345"
-                ]
-              }
-            ]
-          }
-        },
-        "title": "orderStates",
-        "description": "Allows you to define a specific status for the order when it is created."
+        "x-examples": {},
+        "title": "orderStates (List of orderStates)",
+        "description": "List of orderStates.",
+        "enum": [
+          "ORDER_TO_BE_COMPLETED",
+          "ORDER_WITHOUT_SHIPMENT"
+        ]
       }
     },
     "parameters": {
