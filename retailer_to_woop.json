@@ -9045,6 +9045,9 @@
         },
         "description": "Allows you to define a specific status for the order when it is created.",
         "title": "State of order",
+        "required": [
+          "code"
+        ],
         "properties": {
           "code": {
             "$ref": "#/components/schemas/orderStates"
