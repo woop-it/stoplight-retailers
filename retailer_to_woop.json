@@ -1923,8 +1923,8 @@
           }
         },
         "responses": {
-          "200": {
-            "description": "Request processed successfully"
+          "204": {
+            "description": "No Content"
           },
           "401": {
             "description": "You are not authorised to access this item",
