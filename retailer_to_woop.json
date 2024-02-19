@@ -9032,13 +9032,10 @@
           "Example 1": {
             "code": "WITHOUT_SHIPMENT",
             "options": {
-              "deliveries": [
-                {
-                  "deliveryId": "A234D4F",
-                  "parcelId": [
-                    "1Z601FF06800128696"
-                  ]
-                }
+              "deliveryId": "A234D4F",
+              "parcelIds": [
+                "12345",
+                "94554J"
               ]
             }
           }
@@ -9055,23 +9052,30 @@
           "options": {
             "type": "object",
             "properties": {
-              "deliveries": {
+              "deliveryId": {
+                "type": "string",
+                "x-stoplight": {
+                  "id": "aqojx778k8y9v"
+                },
+                "description": "Unique delivery identifier (maximum 36 characters)",
+                "example": "A234D4F",
+                "minLength": 1,
+                "maxLength": 36
+              },
+              "parcelIds": {
                 "type": "array",
+                "x-stoplight": {
+                  "id": "1fnawjg7526fu"
+                },
+                "description": "Identifier of the package returned by the carrier. Can also be used for tracking ",
                 "items": {
-                  "type": "object",
-                  "properties": {
-                    "deliveryId": {
-                      "type": "string",
-                      "description": "Unique delivery identifier (maximum 36 characters)"
-                    },
-                    "parcelId": {
-                      "type": "array",
-                      "description": "Identifier of the package returned by the carrier. Can also be used for tracking ",
-                      "items": {
-                        "type": "string"
-                      }
-                    }
-                  }
+                  "x-stoplight": {
+                    "id": "i1c0f89tc3kbr"
+                  },
+                  "type": "string",
+                  "maxLength": 36,
+                  "minLength": 1,
+                  "example": "1Z601FF06800128696"
                 }
               }
             }
