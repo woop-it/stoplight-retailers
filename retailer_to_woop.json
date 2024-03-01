@@ -65,7 +65,7 @@
         "summary": "Health"
       }
     },
-    "orders/package/state": {
+    "/orders/{orderId}/packages/states": {
       "parameters": [],
       "put": {
         "summary": "Change Package state",
@@ -73,6 +73,9 @@
         "responses": {
           "200": {
             "description": "Package state changed successfully"
+          },
+          "204": {
+            "description": "No Content"
           },
           "401": {
             "description": "Unauthorized"
