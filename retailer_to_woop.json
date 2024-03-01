@@ -4805,6 +4805,10 @@
                       "type": "array",
                       "items": {
                         "type": "object",
+                        "required": [
+                          "carrier",
+                          "services"
+                        ],
                         "properties": {
                           "carrier": {
                             "type": "object",
@@ -4908,6 +4912,93 @@
                                                     }
                                                   }
                                                 }
+                                              },
+                                              "WTT": {
+                                                "type": "array",
+                                                "x-stoplight": {
+                                                  "id": "0h855w7dq1uz5"
+                                                },
+                                                "items": {
+                                                  "x-stoplight": {
+                                                    "id": "xtj71i1cys148"
+                                                  },
+                                                  "type": "object",
+                                                  "properties": {
+                                                    "value": {
+                                                      "type": "integer",
+                                                      "x-stoplight": {
+                                                        "id": "ydh62zpoi3yuv"
+                                                      }
+                                                    },
+                                                    "unit": {
+                                                      "x-stoplight": {
+                                                        "id": "2po0ck190iewj"
+                                                      },
+                                                      "enum": [
+                                                        "KgCO2e/km",
+                                                        "KgCO2e/tkm."
+                                                      ]
+                                                    }
+                                                  }
+                                                }
+                                              },
+                                              "TTW": {
+                                                "type": "array",
+                                                "x-stoplight": {
+                                                  "id": "w5y3kft0izpoy"
+                                                },
+                                                "items": {
+                                                  "x-stoplight": {
+                                                    "id": "1pzy3fadr0wy0"
+                                                  },
+                                                  "type": "object",
+                                                  "properties": {
+                                                    "value": {
+                                                      "type": "integer",
+                                                      "x-stoplight": {
+                                                        "id": "e8v91xlh90fnl"
+                                                      }
+                                                    },
+                                                    "unit": {
+                                                      "x-stoplight": {
+                                                        "id": "d8npz9269d8dp"
+                                                      },
+                                                      "enum": [
+                                                        "KgCO2e/km",
+                                                        "KgCO2e/t.km"
+                                                      ]
+                                                    }
+                                                  }
+                                                }
+                                              },
+                                              "production": {
+                                                "type": "array",
+                                                "x-stoplight": {
+                                                  "id": "8tr07lc0n3fvr"
+                                                },
+                                                "items": {
+                                                  "x-stoplight": {
+                                                    "id": "ls4w5fx3ksl6m"
+                                                  },
+                                                  "type": "object",
+                                                  "properties": {
+                                                    "value": {
+                                                      "type": "integer",
+                                                      "x-stoplight": {
+                                                        "id": "7867bcssv0dqb"
+                                                      }
+                                                    },
+                                                    "unit": {
+                                                      "x-stoplight": {
+                                                        "id": "qzyy6mgwjl2rh"
+                                                      },
+                                                      "enum": [
+                                                        "KgCO2e/km",
+                                                        "KgCO2e/t.km"
+                                                      ]
+                                                    }
+                                                  }
+                                                }
                                               }
                                             }
                                           }
@@ -4975,6 +5066,10 @@
                               "noticePeriod": {
                                 "type": "object",
                                 "description": "Minimum notice for delivery",
+                                "required": [
+                                  "value",
+                                  "unit"
+                                ],
                                 "properties": {
                                   "value": {
                                     "type": "number"
@@ -4982,11 +5077,7 @@
                                   "unit": {
                                     "type": "string"
                                   }
-                                },
-                                "required": [
-                                  "value",
-                                  "unit"
-                                ]
+                                }
                               },
                               "promise": {
                                 "type": "object",
@@ -5068,6 +5159,10 @@
                           "durationSlot": {
                             "type": "object",
                             "description": "Duration of the delivery slot",
+                            "required": [
+                              "value",
+                              "unit"
+                            ],
                             "properties": {
                               "value": {
                                 "type": "number"
@@ -5079,11 +5174,7 @@
                                   "hour"
                                 ]
                               }
-                            },
-                            "required": [
-                              "value",
-                              "unit"
-                            ]
+                            }
                           },
                           "services": {
                             "type": "array",
@@ -5129,11 +5220,7 @@
                             },
                             "format": "date-time"
                           }
-                        },
-                        "required": [
-                          "carrier",
-                          "services"
-                        ]
+                        }
                       }
                     }
                   }
@@ -5521,9 +5608,69 @@
                               "onTimeDeliveryScore": 8.2
                             },
                             "impact": {
-                              "unit": "KgCO2/t.km",
-                              "averageEmission": 0.68,
-                              "reliabilityScore": 3.1
+                              "labeling": [
+                                {
+                                  "from": "2023-10-10",
+                                  "to": "2024-10-10",
+                                  "name": "Charte Objectif CO2"
+                                },
+                                {
+                                  "from": "2023-10-10",
+                                  "to": "2024-10-10",
+                                  "name": "Label WOOP"
+                                }
+                              ],
+                              "emissionType": {
+                                "CO2e": {
+                                  "reliabilityScore": 1,
+                                  "emissions": [
+                                    {
+                                      "WTT": [
+                                        {
+                                          "value": 0.14,
+                                          "unit": "KgCo2e/T.km"
+                                        }
+                                      ],
+                                      "TTW": [
+                                        {
+                                          "value": 0.55,
+                                          "unit": "KgCo2e/T.km"
+                                        }
+                                      ],
+                                      "WTW": [
+                                        {
+                                          "value": 0.69,
+                                          "unit": "KgCo2e/T.km"
+                                        },
+                                        {
+                                          "value": 12.1,
+                                          "unit": "KgCo2e"
+                                        }
+                                      ],
+                                      "production": [
+                                        {
+                                          "value": 0.69,
+                                          "unit": "KgCo2e/T.km"
+                                        },
+                                        {
+                                          "value": 12.1,
+                                          "unit": "KgCo2e"
+                                        }
+                                      ],
+                                      "infrastructure": [
+                                        {
+                                          "value": 0.69,
+                                          "unit": "KgCo2e/T.km"
+                                        },
+                                        {
+                                          "value": 12.1,
+                                          "unit": "KgCo2e"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              }
                             }
                           }
                         }
