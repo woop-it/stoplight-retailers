@@ -5991,7 +5991,10 @@
         },
         "tags": [
           "Eligibility"
-        ]
+        ],
+        "x-stoplight": {
+          "id": "2mcv1861o038b"
+        }
       },
       "parameters": []
     },
@@ -7108,6 +7111,10 @@
             }
           }
         },
+        "required": [
+          "picking",
+          "storeId"
+        ],
         "properties": {
           "picking": {
             "description": "Information on the collection location",
@@ -7117,7 +7124,7 @@
             ],
             "properties": {
               "location": {
-                "$ref": "#/components/schemas/location"
+                "$ref": "#/components/schemas/locationForEligibility"
               },
               "interval": {
                 "$ref": "#/components/schemas/pickingInterval"
@@ -7127,17 +7134,17 @@
           "delivery": {
             "type": "object",
             "description": "Information on the delivery location",
+            "required": [
+              "interval"
+            ],
             "properties": {
               "location": {
-                "$ref": "#/components/schemas/location"
+                "$ref": "#/components/schemas/locationForEligibility"
               },
               "interval": {
                 "$ref": "#/components/schemas/interval"
               }
-            },
-            "required": [
-              "interval"
-            ]
+            }
           },
           "packages": {
             "description": "All packages",
@@ -7254,11 +7261,7 @@
               "$ref": "#/components/schemas/deliveryService"
             }
           }
-        },
-        "required": [
-          "picking",
-          "storeId"
-        ]
+        }
       },
       "postOrders": {
         "type": "object",
@@ -7627,6 +7630,7 @@
         "type": "object",
         "x-examples": {
           "Example": {
+            "type": "address",
             "addressLine1": "179 boulevard de Turien",
             "addressLine2": "Woop",
             "elevator": true,
@@ -7636,7 +7640,21 @@
             "country": "FR"
           }
         },
+        "required": [
+          "addressLine1",
+          "postalCode",
+          "city",
+          "country"
+        ],
         "properties": {
+          "type": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "eclpccfxu4hm9"
+            },
+            "description": "type required is address",
+            "example": "address"
+          },
           "addressLine1": {
             "type": "string",
             "description": "Full address of the main location"
@@ -7688,13 +7706,166 @@
           "coordinates": {
             "$ref": "#/components/schemas/coordinates"
           }
+        }
+      },
+      "exchangePlaceType": {
+        "type": "object",
+        "x-examples": {
+          "Example 1": {
+            "type": "exchangePlace",
+            "id": "0123",
+            "comment": "commentaire"
+          }
+        },
+        "title": "exchangePlace",
+        "description": "All relevant information for a delivery/collection exchangePlace.",
+        "required": [
+          "type",
+          "id"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "type required is exchangePlace",
+            "example": "exchangePlace"
+          },
+          "id": {
+            "type": "string",
+            "description": "Collection point ID"
+          },
+          "comment": {
+            "type": "string",
+            "description": "A comment (overwriting comment recorded in the back-office for exchange place)"
+          }
+        }
+      },
+      "pickupPointTypes": {
+        "type": "object",
+        "x-stoplight": {
+          "id": "b3154d3cc1e6b"
+        },
+        "x-examples": {
+          "Example 1": {
+            "type": "pickupPoint",
+            "id": "FR-023265",
+            "carrierCode": "mondial-relay"
+          }
+        },
+        "description": "All relevant information for a delivery/collection pickupPoint.",
+        "title": "pickupPoint",
+        "required": [
+          "type",
+          "id",
+          "carrierCode"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "type required is pickupPoint",
+            "example": "pickupPoint"
+          },
+          "id": {
+            "type": "string",
+            "description": "ID of the relay point"
+          },
+          "carrierCode": {
+            "type": "string",
+            "description": "Carrier code"
+          },
+          "comment": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "g5scvwojk6vge"
+            },
+            "description": "Additional comments"
+          },
+          "boxCategory": {
+            "$ref": "./models/PickUpPoint/boxCategory(location).json"
+          }
+        }
+      },
+      "addressForEligibility": {
+        "description": "All relevant information for a delivery/collection address.",
+        "x-stoplight": {
+          "id": "ai6r20urg3t8d"
+        },
+        "title": "address",
+        "type": "object",
+        "x-examples": {
+          "Example": {
+            "type": "address",
+            "addressLine1": "179 boulevard de Turien",
+            "addressLine2": "Woop",
+            "elevator": true,
+            "floor": 8,
+            "postalCode": "59000",
+            "city": "Lille",
+            "country": "FR"
+          }
         },
         "required": [
-          "addressLine1",
+          "type",
           "postalCode",
           "city",
           "country"
-        ]
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "hfcly6k0ldz6w"
+            },
+            "description": "type required is address",
+            "example": "address"
+          },
+          "addressLine1": {
+            "type": "string",
+            "description": "Full address of the main location"
+          },
+          "addressLine2": {
+            "type": "string",
+            "description": "Additional address of the location"
+          },
+          "elevator": {
+            "type": "boolean",
+            "description": "Indicates whether the address has a lift, Default value: false"
+          },
+          "floor": {
+            "type": "integer",
+            "description": "Specifies the floor of the address in question, Default value: 0"
+          },
+          "doorCode": {
+            "type": "string",
+            "description": "Door code"
+          },
+          "postalCode": {
+            "type": "string",
+            "description": "Postcode"
+          },
+          "city": {
+            "type": "string",
+            "description": "City"
+          },
+          "district": {
+            "type": "string",
+            "description": "Borough name"
+          },
+          "country": {
+            "type": "string",
+            "description": "Country code (ISO 3166 alpha-2). View list : [Country code.md]",
+            "x-examples": {
+              "Example": "FR"
+            },
+            "title": "Country (country)"
+          },
+          "comment": {
+            "type": "string",
+            "description": "Additional comments"
+          },
+          "coordinates": {
+            "$ref": "#/components/schemas/coordinates"
+          }
+        }
       },
       "deliveryStatus": {
         "type": "string",
@@ -7758,85 +7929,79 @@
         },
         "oneOf": [
           {
-            "allOf": [
-              {
-                "type": "object",
-                "description": "Location for an Address",
-                "properties": {
-                  "type": {
-                    "type": "string",
-                    "enum": [
-                      "address"
-                    ]
-                  }
-                },
-                "required": [
-                  "type"
-                ]
-              },
+            "x-stoplight": {
+              "id": "pzlgs6gfprft4"
+            },
+            "oneOf": [
               {
                 "$ref": "#/components/schemas/address"
+              },
+              {
+                "$ref": "#/components/schemas/pickupPointTypes"
+              },
+              {
+                "$ref": "#/components/schemas/exchangePlaceType"
               }
-            ]
+            ],
+            "description": "Here, 3 location.types are possible (address, pickupPoint and exchangePlace). The request must be made using one of these three options."
+          }
+        ]
+      },
+      "locationForEligibility": {
+        "title": "Location for eligibility method (locationForEligibility)",
+        "x-stoplight": {
+          "id": "8gx4wbsz21y1h"
+        },
+        "description": "A location represents a physical collection or delivery location.",
+        "x-examples": {
+          "Adress": {
+            "type": "address",
+            "addressLine1": "179 boulevard de Turin",
+            "elevator": true,
+            "floor": 8,
+            "postalCode": "59000",
+            "city": "Lille",
+            "country": "FR"
           },
-          {
-            "type": "object",
-            "description": "Location for a Relay point",
-            "properties": {
-              "type": {
-                "type": "string",
-                "enum": [
-                  "pickupPoint"
-                ]
-              },
-              "id": {
-                "type": "string",
-                "description": "ID of the relay point"
-              },
-              "carrierCode": {
-                "type": "string",
-                "description": "Carrier code",
-                "example": "bpost"
-              },
-              "comment": {
-                "type": "string",
-                "description": "Additional comments"
-              },
-              "boxCategory": {
-                "$ref": "./models/PickUpPoint/boxCategory(location).json",
-                "x-stoplight": {
-                  "id": "fl9ffhdzp04eq"
-                }
-              }
-            },
-            "required": [
-              "type",
-              "id",
-              "carrierCode"
-            ]
+          "Pickup points": {
+            "type": "pickupPoint",
+            "id": "76761",
+            "carrierCode": "bpost",
+            "boxCategory": {
+              "id": "XXX",
+              "accessibility": "UPPER"
+            }
           },
+          "Exchange place": {
+            "type": "exchangePlace",
+            "id": "1"
+          },
+          "Coordinates": {
+            "type": "address",
+            "postalCode": "59000",
+            "country": "FR",
+            "coordinates": {
+              "latitude": 0,
+              "longitude": 0
+            }
+          }
+        },
+        "oneOf": [
           {
-            "type": "object",
-            "description": "Location of a collection point type",
-            "properties": {
-              "type": {
-                "type": "string",
-                "enum": [
-                  "exchangePlace"
-                ]
-              },
-              "id": {
-                "type": "string",
-                "description": "Collection point ID"
-              },
-              "comment": {
-                "type": "string",
-                "description": "A comment (overwriting comment recorded in the back-office for exchange place)"
-              }
+            "x-stoplight": {
+              "id": "nxttbv5tsf2vf"
             },
-            "required": [
-              "type",
-              "id"
+            "description": "Here, 3 location.types are possible (address, pickupPoint and exchangePlace). The request must be made using one of these three options.",
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/addressForEligibility"
+              },
+              {
+                "$ref": "#/components/schemas/exchangePlaceType"
+              },
+              {
+                "$ref": "#/components/schemas/pickupPointTypes"
+              }
             ]
           }
         ]
