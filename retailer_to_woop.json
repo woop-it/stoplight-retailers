@@ -7893,7 +7893,7 @@
       },
       "location": {
         "title": "Location (location)",
-        "description": "A location represents a physical collection or delivery location.",
+        "description": "Here, 3 location.types are possible (address, pickupPoint and exchangePlace). The request must be made using one of these three options.",
         "x-examples": {
           "Adress": {
             "type": "address",
@@ -7952,7 +7952,7 @@
         "x-stoplight": {
           "id": "8gx4wbsz21y1h"
         },
-        "description": "A location represents a physical collection or delivery location.",
+        "description": "Here, 3 location.types are possible (address, pickupPoint and exchangePlace). The request must be made using one of these three options.",
         "x-examples": {
           "Adress": {
             "type": "address",
