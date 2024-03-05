@@ -8374,6 +8374,140 @@
           "products"
         ]
       },
+      "packagesForEligibility": {
+        "description": "Specifies the information needed to update a package. The handling unit is to be defined with the package/product structure",
+        "x-stoplight": {
+          "id": "v01namuxp7bxy"
+        },
+        "type": "object",
+        "x-examples": {
+          "Example": {
+            "references": [
+              {
+                "reference": "12345B",
+                "barcode": {
+                  "value": "54fd56g4f5gfd456sd",
+                  "type": "barcode",
+                  "format": "128"
+                }
+              }
+            ],
+            "length": {
+              "value": 200,
+              "unit": "mm"
+            },
+            "width": {
+              "value": 200,
+              "unit": "mm"
+            },
+            "height": {
+              "value": 100,
+              "unit": "mm"
+            },
+            "weight": {
+              "value": 1,
+              "unit": "kg"
+            },
+            "products": [
+              {
+                "type": "TYPOLOGY_GENERIC",
+                "ean": "11233",
+                "cug": "KJJNN",
+                "label": "Computer",
+                "quantity": 1
+              }
+            ],
+            "quantity": 1,
+            "attributes": {
+              "footprint": {
+                "value": 13,
+                "unit": "m2"
+              }
+            },
+            "type": "PACKAGE"
+          }
+        },
+        "title": "Package used for eligibility (packagesForEligibility)",
+        "required": [
+          "length",
+          "width",
+          "height",
+          "weight",
+          "products"
+        ],
+        "properties": {
+          "category": {
+            "type": "string",
+            "description": "Used to retrieve the sign's parcel category. If this field is not empty, length, width and height are not mandatory"
+          },
+          "length": {
+            "$ref": "#/components/schemas/length"
+          },
+          "width": {
+            "$ref": "#/components/schemas/length"
+          },
+          "height": {
+            "$ref": "#/components/schemas/length"
+          },
+          "weight": {
+            "$ref": "#/components/schemas/mass"
+          },
+          "products": {
+            "type": "array",
+            "description": "List of products in the package",
+            "items": {
+              "$ref": "#/components/schemas/product"
+            }
+          },
+          "quantity": {
+            "type": "integer",
+            "default": 1,
+            "description": "Quantity of packages"
+          },
+          "attributes": {
+            "type": "object",
+            "description": "package attributes",
+            "properties": {
+              "footprint": {
+                "type": "object",
+                "description": "package footprint on the ground",
+                "required": [
+                  "value",
+                  "unit"
+                ],
+                "properties": {
+                  "value": {
+                    "type": "number",
+                    "description": "footprint value",
+                    "example": 13
+                  },
+                  "unit": {
+                    "type": "string",
+                    "description": "footprint unit",
+                    "example": "m2",
+                    "enum": [
+                      "m2",
+                      "cm2",
+                      "pallet"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "type": {
+            "type": "string",
+            "description": "package type",
+            "enum": [
+              "PACKAGE",
+              "TRAY",
+              "PALLET"
+            ],
+            "example": "PACKAGE",
+            "default": "PACKAGE"
+          }
+        }
+      },
       "coordinates": {
         "type": "object",
         "description": "Specifies the geographical coordinates to be used for creation. ",
@@ -8475,6 +8609,9 @@
               "x-stoplight": {
                 "id": "am11lni8ag5y5"
               },
+              "required": [
+                "value"
+              ],
               "properties": {
                 "value": {
                   "type": "string",
@@ -8493,10 +8630,7 @@
                   },
                   "format": "date-time"
                 }
-              },
-              "required": [
-                "value"
-              ]
+              }
             },
             "containerId": {
               "type": "object",
@@ -8518,10 +8652,7 @@
                 }
               }
             }
-          },
-          "required": [
-            "reference"
-          ]
+          }
         }
       },
       "productsPrice": {
