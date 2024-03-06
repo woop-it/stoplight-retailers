@@ -1953,6 +1953,336 @@
         "summary": "Patch order"
       }
     },
+    "/zoning/geoShape": {
+      "delete": {
+        "tags": [
+          "Order"
+        ],
+        "description": "Delete order",
+        "operationId": "deleteOrders",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/components/parameters/pathOrderId"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "description": "Contains the order cancellation information.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "reasons"
+                ],
+                "properties": {
+                  "reasons": {
+                    "description": "Reasons for cancellation",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/cancelledReasons"
+                    }
+                  },
+                  "comment": {
+                    "type": "string",
+                    "description": "If necessary, an optional comment can be added when cancelling"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "The cancellation has been processed, but may result in additional costs"
+          },
+          "204": {
+            "description": "Request processed successfully"
+          },
+          "401": {
+            "description": "You are not authorised to access this item",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The order cannot be cancelled",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                },
+                "examples": {}
+              }
+            }
+          },
+          "404": {
+            "description": "The 'orderId' does not exist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "statusCode": 404,
+                      "error": "Not Found",
+                      "message": "Not Found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "The order is already cancelled or an action is already in progress on this order"
+          }
+        },
+        "summary": "Delete order",
+        "x-stoplight": {
+          "id": "93yricmetot8p"
+        }
+      },
+      "get": {
+        "tags": [
+          "Order"
+        ],
+        "description": "This method returns the geoShape details",
+        "operationId": "getGeoShape",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/components/parameters/pathOrderId"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "carrierId",
+            "required": true,
+            "description": "Carrier ID"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "store21"
+            },
+            "in": "query",
+            "name": "storeId",
+            "description": "Identifier of the store issuing the request"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "1234"
+            },
+            "in": "query",
+            "name": "exchangePlaceId",
+            "description": "Collection point ID"
+          },
+          {
+            "in": "query",
+            "name": "countryCode",
+            "schema": {
+              "type": "string",
+              "example": "FR"
+            },
+            "required": true,
+            "description": "Country code (ISO 3166 alpha-2). View list : [Country code.md]"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/GeoShapeGetResponse"
+          },
+          "400": {
+            "description": "Bad request\n\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error\n\n"
+          }
+        },
+        "summary": "Retrive a geoShape",
+        "x-stoplight": {
+          "id": "obxfcxcjtq0ip"
+        }
+      },
+      "patch": {
+        "tags": [
+          "Order"
+        ],
+        "description": "This method allows you to modify an order. The update may trigger a cancellation of the order + creation of a new order if the modified information is considered important and directly impacts the delivery.",
+        "operationId": "patchOrder",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/components/parameters/pathOrderId"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "description": "Contains the update information.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "picking": {
+                    "description": "Information on the collection location",
+                    "type": "object",
+                    "required": [
+                      "location",
+                      "interval",
+                      "contact"
+                    ],
+                    "properties": {
+                      "location": {
+                        "$ref": "#/components/schemas/location"
+                      },
+                      "infos": {
+                        "type": "string"
+                      },
+                      "interval": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/components/schemas/pickingInterval"
+                        }
+                      },
+                      "contact": {
+                        "$ref": "#/components/schemas/contact"
+                      }
+                    }
+                  },
+                  "delivery": {
+                    "description": "Information on the delivery location",
+                    "type": "object",
+                    "required": [
+                      "location",
+                      "interval",
+                      "contact"
+                    ],
+                    "properties": {
+                      "location": {
+                        "$ref": "#/components/schemas/location"
+                      },
+                      "infos": {
+                        "type": "string"
+                      },
+                      "interval": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/components/schemas/deliveryInterval"
+                        }
+                      },
+                      "contact": {
+                        "$ref": "#/components/schemas/contactDelivery"
+                      }
+                    }
+                  },
+                  "packages": {
+                    "type": "array",
+                    "description": "All packages",
+                    "items": {
+                      "$ref": "#/components/schemas/packages"
+                    }
+                  },
+                  "services": {
+                    "$ref": "#/components/schemas/services"
+                  },
+                  "tags": {
+                    "$ref": "#/components/schemas/tags"
+                  },
+                  "carrierSelection": {
+                    "$ref": "#/components/schemas/carrierSelection"
+                  },
+                  "additionalData": {
+                    "$ref": "./models/additionalData.yaml"
+                  }
+                },
+                "required": [
+                  "picking",
+                  "delivery",
+                  "packages",
+                  "services"
+                ]
+              },
+              "examples": {
+                "Example": {
+                  "value": {
+                    "picking": {
+                      "contact": {
+                        "firstName": "Michel",
+                        "lastName": "Dupont"
+                      },
+                      "location": {
+                        "type": "address",
+                        "addressLine1": "237 rue du ballon",
+                        "postalCode": "59110",
+                        "city": "La Madeleine",
+                        "country": "FR"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Request processed successfully"
+          },
+          "401": {
+            "description": "You are not authorised to access this item",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Updating the order is not possible\n\n[See the list of reasons](https://woop.stoplight.io/docs/retailer/docs/Models/Error%20reasons.md)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "An action is already in progress on this delivery"
+          }
+        },
+        "summary": "Patch order",
+        "x-stoplight": {
+          "id": "lcnvgwuwl7us9"
+        }
+      },
+      "parameters": []
+    },
     "/orders/{orderId}/retry": {
       "parameters": [
         {
@@ -9461,6 +9791,128 @@
         "name": "pickupPointId",
         "schema": {
           "type": "string"
+        }
+      }
+    },
+    "responses": {
+      "GeoShapeGetResponse": {
+        "description": "GeoShape retrieved successfully\n\n",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "array",
+              "x-examples": {
+                "Example 1": [
+                  {
+                    "id": 1,
+                    "title": "Example Title",
+                    "zoneType": "include",
+                    "type": "iris",
+                    "countryCode": "FR",
+                    "storageKey": "example_storage_key",
+                    "carrierId": 12345,
+                    "storeId": 67890,
+                    "exchangePlaceId": 54321
+                  }
+                ]
+              },
+              "items": {
+                "type": "object",
+                "required": [
+                  "id",
+                  "title",
+                  "zoneType",
+                  "type",
+                  "countryCode",
+                  "storageKey",
+                  "carrierId",
+                  "storeId",
+                  "exchangePlaceId",
+                  "createdAt",
+                  "expiredAt"
+                ],
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "description": "ID of the geoShape\n\n"
+                  },
+                  "title": {
+                    "type": "string",
+                    "description": "Title of the geoShape\n\n",
+                    "example": "example title"
+                  },
+                  "zoneType": {
+                    "enum": [
+                      "exclude",
+                      "include"
+                    ],
+                    "description": "Type of the zone\n\n"
+                  },
+                  "type": {
+                    "enum": [
+                      "iris",
+                      "insee",
+                      "custom"
+                    ],
+                    "description": "Type of the geoShape"
+                  },
+                  "countryCode": {
+                    "type": "string",
+                    "example": "FR",
+                    "description": "Country code (ISO 3166 alpha-2). View list : [Country code.md]"
+                  },
+                  "storageKey": {
+                    "type": "string",
+                    "example": "example_storage_key ",
+                    "description": "Storage key of the file"
+                  },
+                  "carrierId": {
+                    "type": "string",
+                    "description": "Carrier ID\n\n"
+                  },
+                  "storeId": {
+                    "type": "string",
+                    "description": "storeId"
+                  },
+                  "exchangePlaceId": {
+                    "type": "string",
+                    "description": "Exchange place ID\n\n"
+                  },
+                  "createdAt": {
+                    "type": "string",
+                    "x-stoplight": {
+                      "id": "epoqbumsa0w1q"
+                    },
+                    "description": "Date of creation\n\n"
+                  },
+                  "expiredAt": {
+                    "type": "string",
+                    "x-stoplight": {
+                      "id": "06uqwxk1rpiey"
+                    },
+                    "description": "Date on which file ceased to be stored\n\n"
+                  }
+                }
+              }
+            },
+            "examples": {
+              "Example 1": {
+                "value": [
+                  {
+                    "id": 1,
+                    "title": "Example Title",
+                    "zoneType": "include",
+                    "type": "iris",
+                    "countryCode": "FR",
+                    "storageKey": "example_storage_key",
+                    "carrierId": 12345,
+                    "storeId": 67890,
+                    "exchangePlaceId": 54321
+                  }
+                ]
+              }
+            }
+          }
         }
       }
     }
