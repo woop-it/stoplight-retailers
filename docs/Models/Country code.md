@@ -6,12 +6,83 @@ stoplight-id: sua3xqn83k59l
 
 List of country code available in Woop plateform (ISO 3166 alpha-2). 
 
-Code | Title
+## EU countries code
+
+Country | Code alpha-2
 ---------|----------
- `CANCELLED_CANNOT_SERVICE`|Cancellation due to lack of service
- `CANCELLED_UNKNOWN`|No reason for cancellation 
- `CANCELLED_PREPARATION_DELAYED`|Cancellation because preparation was delayed 
- `CANCELLED_BY_CLIENT`|Cancellation by the customer
- `CANCELLED_NEW_ADDRESS`|Cancellation due to change of address
- `CANCELLED_INCOMPLETE `|Cancellation due to incomplete order
- `CANCELLED_FOR_UPDATED `|Cancellation due to updating the order
+`FRANCE`|`FR`
+`BELGIUM`|`BE`
+`LUXEMBOURG`|`LU`
+`GERMANY`|`DE`
+`SPAIN`|`ES`
+`ITALY`|`IT`
+`NETHERLANDS`|`NL`
+`POLAND`|`PL`
+`PORTUGAL`|`PT`
+`IRELAND`|`IE`
+`HUNGARY`|`HU`
+`CROATIA`|`HR`
+`CZECH_REPUBLIC`|`CZ`
+`AUSTRIA`|`AT`
+`BULGARIA`|`BG`
+`CYPRUS`|`CY`
+`SLOVENIA`|`SI`
+`SLOVAKIA`|`SK`
+`GREECE`|`GR`
+`FINLAND`|`FI`
+`ESTONIA`|`EE`
+`DENMARK`|`DK`
+`LITHUANIA`|`LT`
+`LIECHTENSTEIN`|`LI`
+`LATVIA`|`LV`
+`ROMANIA`|`RO`
+`SWEDEN`|`SE`
+`MALTA`|`MT`
+
+## World country code
+
+Country | Code alpha-2
+---------|----------
+`ANDORRA`|`AD`
+`MONACO`|`MC`
+`SWITZERLAND`|`CH`
+`GREAT_BRITAIN`|`GB`
+`REUNION`|`RE`
+`FRENCH_SOUTHERN_AND_ANTARCTIC_LANDS`|`TF`
+`WALLIS_AND_FUTUNA`|`WF`
+`GUADELOUPE`|`GP`
+`NORTH_IRELAND`|`XI`
+`AUSTRALIA`|`AU`
+`NEW_ZEALAND`|`NZ`
+`ARMENIA`|`AM`
+`SAINT_BARTHELEMY`|`BL`
+`CANADA`|`CA`
+`CHINA`|`CN`
+`CYPRUS`|`CY`
+`MALTA`|`MT`
+`GREENLAND`|`GL`
+`FAROE_ISLAND`|`FO`
+`FRENCH_GUIANA`|`GF`
+`NEW_CALEDONIA`|`NC`
+`GUATEMALA`|`GT`
+`JAPAN`|`JP`
+`MOROCCO`|`MA`
+`MOLDOVA`|`MD`
+`SAINT_MARTIN`|`MF`
+`MARTINIQUE`|`MQ`
+`MEXICO`|`MX`
+`NORWAY`|`NO`
+`FRENCH_POLYNESIA`|`PF`
+`PHILIPPINES`|`PH`
+`SAINT_PIERRE_AND_MIQUELON`|`PM`
+`RUSSIAN_FEDERATION`|`RU`
+`SAUDI_ARABIAN`|`SA`
+`THAILAND`|`TH`
+`TAIWAN`|`TW`
+`UKRAINE`|`UA`
+`UNITED_STATES_OF_AMERICA`|`US`
+`VANUATU`|`VU`
+`MAYOTTE`|`YT`
+`SOUTH_AFRICA`|`ZA`
+`BRAZIL`|`BR`
+`CHILI`|`CL`
