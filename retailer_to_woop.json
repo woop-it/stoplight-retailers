@@ -27,6 +27,9 @@
     },
     {
       "name": "Eligibility"
+    },
+    {
+      "name": "Store"
     }
   ],
   "info": {
@@ -6376,9 +6379,10 @@
       }
     },
     "/stores": {
+
       "post": {
         "summary": "Create a store",
-        "tags": [],
+        "tags": ["Store"],
         "responses": {
           "201": {
             "description": "the store has been registered"
@@ -6462,7 +6466,7 @@
       ],
       "patch": {
         "summary": "Modify a store",
-        "tags": [],
+        "tags": ["Store"],
         "responses": {
           "200": {
             "description": "OK - Request processed successfully"
