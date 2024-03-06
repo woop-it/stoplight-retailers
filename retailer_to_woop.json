@@ -33,7 +33,7 @@
     }
   ],
   "info": {
-    "title": "Retailer to Woop",
+    "title": "Patch exchangePlaces",
     "description": "This document contains the technical information about Woop APIs for carriers. For any questions or clarification, please contact the internal technical team.\n\nTo use \"Retailer to Woop\" APIs, you must use the confidential access codes provided when you created your retailer account on the platform. [See documentation](https://woop.stoplight.io/docs/retailer/docs/Basis/2.Authentication.md)\n\nThe version currently available in the documentation is <b>Version 1.7.0</b>",
     "version": "1.7.0"
   },
@@ -6614,6 +6614,77 @@
           }
         }
       }
+    },
+    "/stores/{storeId}/exchangePlaces/{exchangePlaceId}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "storeId",
+          "in": "path",
+          "required": true
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "exchangePlaceId",
+          "in": "path",
+          "required": true
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "storeId",
+          "in": "path",
+          "required": true
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "storeId",
+          "in": "path",
+          "required": true
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "storeId",
+          "in": "path",
+          "required": true
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "exchangePlaceId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "patch": {
+        "summary": "Your PATCH endpoint",
+        "tags": [],
+        "responses": {},
+        "operationId": "patch-stores-storeId-exchangePlaces-exchangePlaceId",
+        "x-stoplight": {
+          "id": "m9w2nmjf7wupp"
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/patchExchangePlace"
+              }
+            }
+          }
+        },
+        "description": "This method allows you to modify an exchange place. "
+      }
     }
   },
   "components": {
@@ -9475,6 +9546,111 @@
             "x-stoplight": {
               "id": "yhh1o1m63b07z"
             }
+          },
+          "orderIdConfig": {
+            "$ref": "#/components/schemas/Config"
+          },
+          "referenceNumberconfig": {
+            "$ref": "#/components/schemas/Config"
+          }
+        },
+        "description": ""
+      },
+      "patchExchangePlace": {
+        "title": "patchExchangePlaces",
+        "x-stoplight": {
+          "id": "w1ybvppnesar8"
+        },
+        "type": "object",
+        "required": [
+          "isActive",
+          "name",
+          "type",
+          "language",
+          "timezone",
+          "contacts",
+          "openingHours",
+          "address"
+        ],
+        "properties": {
+          "isActive": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "description": "exchangePlace type"
+          },
+          "language": {
+            "type": "string",
+            "default": "français"
+          },
+          "timezone": {
+            "$ref": "#/components/schemas/timezone"
+          },
+          "contacts": {
+            "$ref": "#/components/schemas/contact"
+          },
+          "activatedCarriers": {
+            "type": "array",
+            "description": "array of carrier.code",
+            "items": {
+              "type": "string",
+              "default": "carrier.code"
+            }
+          },
+          "openingHours": {
+            "type": "object",
+            "properties": {
+              "monday": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/interval_hour"
+                }
+              },
+              "tuesday": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/interval_hour"
+                }
+              },
+              "wednesday": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/interval_hour"
+                }
+              },
+              "thursday": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/interval_hour"
+                }
+              },
+              "friday": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/interval_hour"
+                }
+              },
+              "saturday": {
+                "type": "array",
+                "items": {}
+              },
+              "sunday": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/interval_hour"
+                }
+              }
+            }
+          },
+          "address": {
+            "$ref": "#/components/schemas/address"
+          },
+          "minuteBeforeCutoff": {
+            "type": "number"
           },
           "orderIdConfig": {
             "$ref": "#/components/schemas/Config"
