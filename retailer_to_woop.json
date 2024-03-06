@@ -7163,55 +7163,48 @@
         "title": "Request for eligibility of services (postEligibilities)",
         "x-examples": {
           "Default example": {
+            "storeId": "MAG01",
             "picking": {
               "location": {
-                "type": "address",
-                "addressLine1": "237 rue du ballon",
-                "postalCode": "59110",
-                "city": "La Madeleine",
-                "country": "FR"
+                "type": "exchangePlace",
+                "id": "MAG01"
               }
             },
             "packages": [
               {
                 "length": {
-                  "value": 15,
+                  "value": 1,
                   "unit": "cm"
                 },
                 "width": {
-                  "value": 15,
+                  "value": 1,
                   "unit": "cm"
                 },
                 "height": {
-                  "value": 1.2,
-                  "unit": "m"
+                  "value": 1,
+                  "unit": "cm"
                 },
                 "weight": {
-                  "value": 560,
-                  "unit": "g"
+                  "value": 2.4,
+                  "unit": "kg"
                 },
                 "products": [
                   {
                     "type": "TYPOLOGY_GENERIC",
                     "ean": "4dq86zd4q6zd4q64",
-                    "cug": "q56zd4q65d4q",
-                    "label": "Lamp",
                     "quantity": 1
                   }
                 ],
                 "quantity": 1
               }
-            ],
-            "storeId": "MAG01"
+            ]
           },
           "Example with delivery location": {
+            "storeId": "MAG01",
             "picking": {
               "location": {
-                "type": "address",
-                "addressLine1": "237 rue du ballon",
-                "postalCode": "59110",
-                "city": "La Madeleine",
-                "country": "FR"
+                "type": "exchangePlace",
+                "id": "MAG01"
               }
             },
             "delivery": {
@@ -7226,82 +7219,68 @@
             "packages": [
               {
                 "length": {
-                  "value": 15,
+                  "value": 1,
                   "unit": "cm"
                 },
                 "width": {
-                  "value": 15,
+                  "value": 1,
                   "unit": "cm"
                 },
                 "height": {
-                  "value": 1.2,
-                  "unit": "m"
+                  "value": 1,
+                  "unit": "cm"
                 },
                 "weight": {
-                  "value": 560,
-                  "unit": "g"
+                  "value": 2.4,
+                  "unit": "kg"
                 },
                 "products": [
                   {
                     "type": "TYPOLOGY_GENERIC",
                     "ean": "4dq86zd4q6zd4q64",
-                    "cug": "q56zd4q65d4q",
-                    "label": "Lamp",
                     "quantity": 1
                   }
                 ],
                 "quantity": 1
               }
-            ],
-            "storeId": "MAG01"
+            ]
           },
           "Example with slot ": {
+            "storeId": "MAG01",
             "picking": {
               "location": {
-                "type": "address",
-                "addressLine1": "237 rue du ballon",
-                "postalCode": "59110",
-                "city": "La Madeleine",
-                "country": "FR"
-              }
-            },
-            "delivery": {
-              "interval": {
-                "start": "2023-06-19T06:00:00.000Z",
-                "end": "2023-06-23T18:00:00.000Z"
+                "type": "exchangePlace",
+                "id": "MAG01"
               }
             },
             "packages": [
               {
                 "length": {
-                  "value": 15,
+                  "value": 1,
                   "unit": "cm"
                 },
                 "width": {
-                  "value": 15,
+                  "value": 1,
                   "unit": "cm"
                 },
                 "height": {
-                  "value": 1.2,
-                  "unit": "m"
+                  "value": 1,
+                  "unit": "cm"
                 },
                 "weight": {
-                  "value": 560,
-                  "unit": "g"
+                  "value": 2.4,
+                  "unit": "kg"
                 },
                 "products": [
                   {
                     "type": "TYPOLOGY_GENERIC",
                     "ean": "4dq86zd4q6zd4q64",
-                    "cug": "q56zd4q65d4q",
-                    "label": "Lamp",
                     "quantity": 1
                   }
                 ],
                 "quantity": 1
               }
             ],
-            "storeId": "MAG01",
             "options": {
               "slot": {
                 "active": true,
