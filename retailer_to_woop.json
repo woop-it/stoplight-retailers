@@ -6377,7 +6377,7 @@
     },
     "/stores": {
       "post": {
-        "summary": "Your POST endpoint",
+        "summary": "Create a store",
         "tags": [],
         "responses": {
           "201": {
@@ -6424,7 +6424,7 @@
             }
           }
         },
-        "operationId": "post-stores",
+        "operationId": "postStores",
         "x-stoplight": {
           "id": "ml24zn56zvfwx"
         },
@@ -6439,6 +6439,80 @@
           "description": "Contains the store creation information."
         },
         "description": "This method allows you to create a store\n"
+      }
+    },
+    "/stores/{storeId}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "storeId",
+          "in": "path",
+          "required": true
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "storeId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "patch": {
+        "summary": "Modify a store",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK - Request processed successfully"
+          },
+          "401": {
+            "description": "Unauthorized - You are not authorised to access this item",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden - Updating the store is not possible",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict - An action is already in progress on this store",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "patchStores",
+        "x-stoplight": {
+          "id": "9loavxc57bn0x"
+        },
+        "description": "This method allows you to modify a store. ",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/patchStores"
+              }
+            }
+          },
+          "description": "This method allows you to modify a store. "
+        }
       }
     }
   },
@@ -9163,6 +9237,48 @@
           }
         },
         "description": ""
+      },
+      "patchStores": {
+        "title": "patchStores",
+        "x-stoplight": {
+          "id": "tb3gveuak7sw4"
+        },
+        "type": "object",
+        "required": [
+          "isActive",
+          "name",
+          "storeId",
+          "language"
+        ],
+        "properties": {
+          "isActive": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "storeId": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string",
+            "default": "français"
+          },
+          "timezone": {
+            "$ref": "#/components/schemas/timezone"
+          },
+          "contacts": {
+            "$ref": "#/components/schemas/contact"
+          },
+          "activatedCarriers": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "default": "carrier.code"
+            }
+          }
+        },
+        "description": "This method allows you to modify a store."
       }
     },
     "parameters": {
