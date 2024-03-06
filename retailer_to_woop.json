@@ -2096,7 +2096,9 @@
       "parameters": [],
       "post": {
         "summary": "Create a new geoShape",
-        "tags": [],
+        "tags": [
+          "Zoning"
+        ],
         "responses": {
           "201": {
             "$ref": "#/components/responses/GeoShapePostResponse"
