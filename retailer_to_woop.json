@@ -1955,9 +1955,6 @@
     },
     "/zoning/geoShape/{id}": {
       "delete": {
-        "tags": [
-          "Order"
-        ],
         "description": "Delete a geoShape",
         "operationId": "deleteGeoShape",
         "parameters": [
@@ -2005,7 +2002,10 @@
         "summary": "Delete a geoShape",
         "x-stoplight": {
           "id": "93yricmetot8p"
-        }
+        },
+        "tags": [
+          "Zoning"
+        ]
       },
       "parameters": [
         {
@@ -2019,107 +2019,7 @@
       ]
     },
     "/zoning/geoShape": {
-      "delete": {
-        "tags": [
-          "Order"
-        ],
-        "description": "Delete a geoShape",
-        "operationId": "deleteGeoShape",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/apiVersion"
-          },
-          {
-            "$ref": "#/components/parameters/pathOrderId"
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "description": "Contains the order cancellation information.",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "required": [
-                  "reasons"
-                ],
-                "properties": {
-                  "reasons": {
-                    "description": "Reasons for cancellation",
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/cancelledReasons"
-                    }
-                  },
-                  "comment": {
-                    "type": "string",
-                    "description": "If necessary, an optional comment can be added when cancelling"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "202": {
-            "description": "The cancellation has been processed, but may result in additional costs"
-          },
-          "204": {
-            "description": "Request processed successfully"
-          },
-          "401": {
-            "description": "You are not authorised to access this item",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/errorCode"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "The order cannot be cancelled",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/errorCode"
-                },
-                "examples": {}
-              }
-            }
-          },
-          "404": {
-            "description": "The 'orderId' does not exist",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/errorCode"
-                },
-                "examples": {
-                  "example": {
-                    "value": {
-                      "statusCode": 404,
-                      "error": "Not Found",
-                      "message": "Not Found"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "The order is already cancelled or an action is already in progress on this order"
-          }
-        },
-        "summary": "Delete a geoShape",
-        "x-stoplight": {
-          "id": "j0kvwz5exlels"
-        }
-      },
       "get": {
-        "tags": [
-          "Order"
-        ],
         "description": "This method returns the geoShape details",
         "operationId": "getGeoShape",
         "parameters": [
@@ -2188,9 +2088,68 @@
         "summary": "Retrieve a geoShape",
         "x-stoplight": {
           "id": "w09wlih8hx20h"
-        }
+        },
+        "tags": [
+          "Zoning"
+        ]
       },
-      "parameters": []
+      "parameters": [],
+      "post": {
+        "summary": "Create a new geoShape",
+        "tags": [],
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/GeoShapePostResponse"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "operationId": "postGeoShape",
+        "x-stoplight": {
+          "id": "6x8s1fjqklj4g"
+        },
+        "description": "Create a new geoShape",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          }
+        ],
+        "requestBody": {
+          "description": "Contains the information for create a new geoShape",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/postGeShape"
+              },
+              "examples": {
+                "Example 1": {
+                  "value": {
+                    "title": "string",
+                    "zoneType": "exclude",
+                    "type": "iris",
+                    "file": "string",
+                    "countryCode": "string",
+                    "carrierId": 0,
+                    "storeId": 0,
+                    "exchangePlaceId": 0
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     },
     "/orders/{orderId}/retry": {
       "parameters": [
@@ -9564,6 +9523,74 @@
           "SMS"
         ],
         "description": "Refers to the channel use to communicate."
+      },
+      "postGeoShape": {
+        "type": "object",
+        "x-stoplight": {
+          "id": "4766bb51a1262"
+        },
+        "x-examples": {
+          "Example 1": {
+            "title": "string",
+            "zoneType": "exclude",
+            "type": "iris",
+            "file": "string",
+            "countryCode": "string",
+            "carrierId": 0,
+            "storeId": 0,
+            "exchangePlaceId": 0
+          }
+        },
+        "title": "postGeoShape",
+        "description": "Create a new geoShape",
+        "required": [
+          "title",
+          "zoneType",
+          "type",
+          "file",
+          "countryCode"
+        ],
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "Title of the geoShape\n\n"
+          },
+          "zoneType": {
+            "description": "Type of the zone\n\n",
+            "enum": [
+              "exclude",
+              "include"
+            ]
+          },
+          "type": {
+            "description": "Type of the geoShape\n\n",
+            "enum": [
+              "iris",
+              "insee",
+              "custom"
+            ]
+          },
+          "file": {
+            "type": "string",
+            "description": "GeoJSON or KML file\n\n"
+          },
+          "countryCode": {
+            "type": "string",
+            "description": "Country code (ISO 3166 alpha-2). View list : [Country code.md]"
+          },
+          "carrierId": {
+            "type": "string",
+            "description": "Carrier ID\n\n"
+          },
+          "storeId": {
+            "type": "string",
+            "description": "Store ID\n\n"
+          },
+          "exchangePlaceId": {
+            "type": "string",
+            "description": "Exchange place ID\n\n"
+          }
+        }
       }
     },
     "parameters": {
@@ -9819,6 +9846,72 @@
                     "exchangePlaceId": 54321
                   }
                 ]
+              }
+            }
+          }
+        }
+      },
+      "GeoShapePostResponse": {
+        "description": "GeoShape created successfully\n\n",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "x-examples": {
+                "Example 1": {
+                  "id": 0,
+                  "title": "string",
+                  "zoneType": "exclude",
+                  "type": "iris",
+                  "countryCode": "string",
+                  "storageKey": "string",
+                  "expiredAt": "2024-03-06T09:08:22.814Z"
+                }
+              },
+              "required": [
+                "id",
+                "title",
+                "zoneType",
+                "type",
+                "countryCode",
+                "storageKey"
+              ],
+              "properties": {
+                "id": {
+                  "type": "integer",
+                  "description": "ID of the geoShape\n\n"
+                },
+                "title": {
+                  "type": "string",
+                  "description": "Title of the geoShape\n\n"
+                },
+                "zoneType": {
+                  "description": "Type of the zone\n\n",
+                  "enum": [
+                    "exclude",
+                    "include"
+                  ]
+                },
+                "type": {
+                  "enum": [
+                    "iris",
+                    "insee",
+                    "custom"
+                  ],
+                  "description": "Type of the geoShape\n\n"
+                },
+                "countryCode": {
+                  "type": "string",
+                  "description": "Country code\n\n"
+                },
+                "storageKey": {
+                  "type": "string",
+                  "description": "Storage key\n\n"
+                },
+                "expiredAt": {
+                  "type": "string",
+                  "description": "Whether the geoShape is expired or not\n\n"
+                }
               }
             }
           }
