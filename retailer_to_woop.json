@@ -1962,9 +1962,6 @@
             "$ref": "#/components/parameters/apiVersion"
           },
           {
-            "$ref": "#/components/parameters/pathOrderId"
-          },
-          {
             "schema": {
               "type": "string",
               "example": "123"
@@ -2011,10 +2008,7 @@
         {
           "schema": {
             "type": "string"
-          },
-          "name": "id",
-          "in": "path",
-          "required": true
+          }
         }
       ]
     },
@@ -2025,9 +2019,6 @@
         "parameters": [
           {
             "$ref": "#/components/parameters/apiVersion"
-          },
-          {
-            "$ref": "#/components/parameters/pathOrderId"
           },
           {
             "schema": {
