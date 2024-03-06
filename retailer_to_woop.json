@@ -6379,10 +6379,11 @@
       }
     },
     "/stores": {
-
       "post": {
         "summary": "Create a store",
-        "tags": ["Store"],
+        "tags": [
+          "Store"
+        ],
         "responses": {
           "201": {
             "description": "the store has been registered"
@@ -6466,10 +6467,12 @@
       ],
       "patch": {
         "summary": "Modify a store",
-        "tags": ["Store"],
+        "tags": [
+          "Store"
+        ],
         "responses": {
-          "200": {
-            "description": "OK - Request processed successfully"
+          "201": {
+            "description": "Created - the store has been modified"
           },
           "401": {
             "description": "Unauthorized - You are not authorised to access this item",
@@ -8129,22 +8132,30 @@
             "isProfessional": true
           }
         },
+        "required": [
+          "firstName",
+          "lastName",
+          "phone",
+          "email",
+          "language",
+          "timezone"
+        ],
         "properties": {
           "firstName": {
             "type": "string",
-            "description": "Customer's first name"
+            "description": "Contact's first name"
           },
           "lastName": {
             "type": "string",
-            "description": "Customer's last name"
+            "description": "Contact's last name"
           },
           "phone": {
             "type": "string",
-            "description": "Customer's telephone number"
+            "description": "Contact's telephone number"
           },
           "email": {
             "type": "string",
-            "description": "Customer's email address"
+            "description": "Contact's email address"
           },
           "language": {
             "$ref": "#/components/schemas/language"
@@ -8165,15 +8176,7 @@
             "description": "Indicates if the contact is a professional",
             "default": false
           }
-        },
-        "required": [
-          "firstName",
-          "lastName",
-          "phone",
-          "email",
-          "language",
-          "timezone"
-        ]
+        }
       },
       "services": {
         "type": "array",
@@ -9188,6 +9191,29 @@
           "id": "9uj004ljgx6g2"
         },
         "type": "object",
+        "x-examples": {
+          "Example 1": {
+            "isActive": true,
+            "name": "nom du magasin",
+            "storeId": "storeId",
+            "language": "fr",
+            "timezone": "Europe/Paris",
+            "contacts": {
+              "firstName": "firstName",
+              "lastName": "lastName",
+              "phone": "+33600000000",
+              "email": "test@email.com",
+              "language": "fr",
+              "timezone": "Europe/Paris",
+              "main": true,
+              "title": "string",
+              "isProfessional": false
+            },
+            "activatedCarriers": [
+              "carrier.code"
+            ]
+          }
+        },
         "required": [
           "isActive",
           "name",
@@ -9199,26 +9225,30 @@
             "type": "boolean",
             "x-stoplight": {
               "id": "7v1wll05co8d8"
-            }
+            },
+            "description": "Store activation"
           },
           "name": {
             "type": "string",
             "x-stoplight": {
               "id": "jle33k8dd33c5"
-            }
+            },
+            "description": "Store's name"
           },
           "storeId": {
             "type": "string",
             "x-stoplight": {
               "id": "1txmtcd0j11r9"
-            }
+            },
+            "description": "Store's id"
           },
           "language": {
             "type": "string",
             "x-stoplight": {
               "id": "hbutpw1e3ym6g"
             },
-            "default": "français"
+            "default": "fr",
+            "description": "Store's language"
           },
           "timezone": {
             "$ref": "#/components/schemas/timezone"
@@ -9231,6 +9261,7 @@
             "x-stoplight": {
               "id": "x9r8hbz8735dz"
             },
+            "description": "array of activated carriers on the store\n",
             "items": {
               "x-stoplight": {
                 "id": "gp9dijeumizg6"
@@ -9240,7 +9271,7 @@
             }
           }
         },
-        "description": ""
+        "description": "create a store"
       },
       "patchStores": {
         "title": "patchStores",
@@ -9248,6 +9279,30 @@
           "id": "tb3gveuak7sw4"
         },
         "type": "object",
+        "description": "This method allows you to modify a store.",
+        "x-examples": {
+          "Example 1": {
+            "isActive": true,
+            "name": "nom du magasin",
+            "storeId": "StoreID",
+            "language": "fr",
+            "timezone": "Europe/Paris",
+            "contacts": {
+              "firstName": "firstName",
+              "lastName": "lastName",
+              "phone": "+33600000000",
+              "email": "test@email.com",
+              "language": "fr",
+              "timezone": "Europe/Paris",
+              "main": true,
+              "title": "string",
+              "isProfessional": false
+            },
+            "activatedCarriers": [
+              "carrier.code"
+            ]
+          }
+        },
         "required": [
           "isActive",
           "name",
@@ -9256,17 +9311,21 @@
         ],
         "properties": {
           "isActive": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Store activation"
           },
           "name": {
-            "type": "string"
+            "type": "string",
+            "description": "Store's name"
           },
           "storeId": {
-            "type": "string"
+            "type": "string",
+            "description": "External store's id "
           },
           "language": {
             "type": "string",
-            "default": "français"
+            "default": "fr",
+            "description": "store's language"
           },
           "timezone": {
             "$ref": "#/components/schemas/timezone"
@@ -9276,13 +9335,13 @@
           },
           "activatedCarriers": {
             "type": "array",
+            "description": "array of activated carriers on the store\n",
             "items": {
               "type": "string",
               "default": "carrier.code"
             }
           }
-        },
-        "description": "This method allows you to modify a store."
+        }
       }
     },
     "parameters": {
