@@ -6374,6 +6374,72 @@
           "Package advert"
         ]
       }
+    },
+    "/stores": {
+      "post": {
+        "summary": "Your POST endpoint",
+        "tags": [],
+        "responses": {
+          "201": {
+            "description": "the store has been registered"
+          },
+          "400": {
+            "description": "Bad Request - Missing and/or incorrect items in the body",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - You are not authorised to access this item",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden - Creation of the store is not possible",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict - \tCreation of the store with this 'storeId' is not possible",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "post-stores",
+        "x-stoplight": {
+          "id": "ml24zn56zvfwx"
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/postStores"
+              }
+            }
+          },
+          "description": "Contains the store creation information."
+        },
+        "description": "This method allows you to create a store\n"
+      }
     }
   },
   "components": {
@@ -9037,6 +9103,66 @@
           "SMS"
         ],
         "description": "Refers to the channel use to communicate."
+      },
+      "postStores": {
+        "title": "postStores",
+        "x-stoplight": {
+          "id": "9uj004ljgx6g2"
+        },
+        "type": "object",
+        "required": [
+          "isActive",
+          "name",
+          "storeId",
+          "language"
+        ],
+        "properties": {
+          "isActive": {
+            "type": "boolean",
+            "x-stoplight": {
+              "id": "7v1wll05co8d8"
+            }
+          },
+          "name": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "jle33k8dd33c5"
+            }
+          },
+          "storeId": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "1txmtcd0j11r9"
+            }
+          },
+          "language": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "hbutpw1e3ym6g"
+            },
+            "default": "français"
+          },
+          "timezone": {
+            "$ref": "#/components/schemas/timezone"
+          },
+          "contacts": {
+            "$ref": "#/components/schemas/contact"
+          },
+          "activatedCarriers": {
+            "type": "array",
+            "x-stoplight": {
+              "id": "x9r8hbz8735dz"
+            },
+            "items": {
+              "x-stoplight": {
+                "id": "gp9dijeumizg6"
+              },
+              "type": "string",
+              "default": "carrier.code"
+            }
+          }
+        },
+        "description": ""
       }
     },
     "parameters": {
