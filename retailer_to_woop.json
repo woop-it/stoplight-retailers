@@ -1953,6 +1953,197 @@
         "summary": "Patch order"
       }
     },
+    "/zoning/geoShape/{id}": {
+      "delete": {
+        "description": "Delete a geoShape",
+        "operationId": "deleteGeoShape",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "123"
+            },
+            "in": "query",
+            "name": "id",
+            "required": true,
+            "description": "ID of the geoShape to delete"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "description": "",
+          "content": {}
+        },
+        "responses": {
+          "200": {
+            "description": "GeoShape deleted successfully\n\n",
+            "content": {}
+          },
+          "400": {
+            "description": "Bad request\n\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "summary": "Delete a geoShape",
+        "x-stoplight": {
+          "id": "93yricmetot8p"
+        },
+        "tags": [
+          "Zoning"
+        ]
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/zoning/geoShape": {
+      "get": {
+        "description": "This method returns the geoShape details",
+        "operationId": "getGeoShape",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "carrierId",
+            "required": true,
+            "description": "Carrier ID"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "store21"
+            },
+            "in": "query",
+            "name": "storeId",
+            "description": "Identifier of the store issuing the request"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "1234"
+            },
+            "in": "query",
+            "name": "exchangePlaceId",
+            "description": "Collection point ID"
+          },
+          {
+            "in": "query",
+            "name": "countryCode",
+            "schema": {
+              "type": "string",
+              "example": "FR"
+            },
+            "required": true,
+            "description": "Country code (ISO 3166 alpha-2). View list : [Country code.md]"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/GeoShapeGetResponse"
+          },
+          "400": {
+            "description": "Bad request\n\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error\n\n"
+          }
+        },
+        "summary": "Retrieve a geoShape",
+        "x-stoplight": {
+          "id": "w09wlih8hx20h"
+        },
+        "tags": [
+          "Zoning"
+        ]
+      },
+      "parameters": [],
+      "post": {
+        "summary": "Create a new geoShape",
+        "tags": [
+          "Zoning"
+        ],
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/GeoShapePostResponse"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "operationId": "postGeoShape",
+        "x-stoplight": {
+          "id": "6x8s1fjqklj4g"
+        },
+        "description": "Create a new geoShape",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          }
+        ],
+        "requestBody": {
+          "description": "Contains the information for create a new geoShape",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/postGeoShape"
+              },
+              "examples": {
+                "Example 1": {
+                  "value": {
+                    "title": "string",
+                    "zoneType": "exclude",
+                    "type": "iris",
+                    "file": "string",
+                    "countryCode": "string",
+                    "carrierId": 0,
+                    "storeId": 0,
+                    "exchangePlaceId": 0
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/orders/{orderId}/retry": {
       "parameters": [
         {
@@ -5991,7 +6182,10 @@
         },
         "tags": [
           "Eligibility"
-        ]
+        ],
+        "x-stoplight": {
+          "id": "2mcv1861o038b"
+        }
       },
       "parameters": []
     },
@@ -6960,55 +7154,48 @@
         "title": "Request for eligibility of services (postEligibilities)",
         "x-examples": {
           "Default example": {
+            "storeId": "MAG01",
             "picking": {
               "location": {
-                "type": "address",
-                "addressLine1": "237 rue du ballon",
-                "postalCode": "59110",
-                "city": "La Madeleine",
-                "country": "FR"
+                "type": "exchangePlace",
+                "id": "MAG01"
               }
             },
             "packages": [
               {
                 "length": {
-                  "value": 15,
+                  "value": 1,
                   "unit": "cm"
                 },
                 "width": {
-                  "value": 15,
+                  "value": 1,
                   "unit": "cm"
                 },
                 "height": {
-                  "value": 1.2,
-                  "unit": "m"
+                  "value": 1,
+                  "unit": "cm"
                 },
                 "weight": {
-                  "value": 560,
-                  "unit": "g"
+                  "value": 2.4,
+                  "unit": "kg"
                 },
                 "products": [
                   {
                     "type": "TYPOLOGY_GENERIC",
                     "ean": "4dq86zd4q6zd4q64",
-                    "cug": "q56zd4q65d4q",
-                    "label": "Lamp",
                     "quantity": 1
                   }
                 ],
                 "quantity": 1
               }
-            ],
-            "storeId": "MAG01"
+            ]
           },
           "Example with delivery location": {
+            "storeId": "MAG01",
             "picking": {
               "location": {
-                "type": "address",
-                "addressLine1": "237 rue du ballon",
-                "postalCode": "59110",
-                "city": "La Madeleine",
-                "country": "FR"
+                "type": "exchangePlace",
+                "id": "MAG01"
               }
             },
             "delivery": {
@@ -7023,82 +7210,68 @@
             "packages": [
               {
                 "length": {
-                  "value": 15,
+                  "value": 1,
                   "unit": "cm"
                 },
                 "width": {
-                  "value": 15,
+                  "value": 1,
                   "unit": "cm"
                 },
                 "height": {
-                  "value": 1.2,
-                  "unit": "m"
+                  "value": 1,
+                  "unit": "cm"
                 },
                 "weight": {
-                  "value": 560,
-                  "unit": "g"
+                  "value": 2.4,
+                  "unit": "kg"
                 },
                 "products": [
                   {
                     "type": "TYPOLOGY_GENERIC",
                     "ean": "4dq86zd4q6zd4q64",
-                    "cug": "q56zd4q65d4q",
-                    "label": "Lamp",
                     "quantity": 1
                   }
                 ],
                 "quantity": 1
               }
-            ],
-            "storeId": "MAG01"
+            ]
           },
           "Example with slot ": {
+            "storeId": "MAG01",
             "picking": {
               "location": {
-                "type": "address",
-                "addressLine1": "237 rue du ballon",
-                "postalCode": "59110",
-                "city": "La Madeleine",
-                "country": "FR"
-              }
-            },
-            "delivery": {
-              "interval": {
-                "start": "2023-06-19T06:00:00.000Z",
-                "end": "2023-06-23T18:00:00.000Z"
+                "type": "exchangePlace",
+                "id": "MAG01"
               }
             },
             "packages": [
               {
                 "length": {
-                  "value": 15,
+                  "value": 1,
                   "unit": "cm"
                 },
                 "width": {
-                  "value": 15,
+                  "value": 1,
                   "unit": "cm"
                 },
                 "height": {
-                  "value": 1.2,
-                  "unit": "m"
+                  "value": 1,
+                  "unit": "cm"
                 },
                 "weight": {
-                  "value": 560,
-                  "unit": "g"
+                  "value": 2.4,
+                  "unit": "kg"
                 },
                 "products": [
                   {
                     "type": "TYPOLOGY_GENERIC",
                     "ean": "4dq86zd4q6zd4q64",
-                    "cug": "q56zd4q65d4q",
-                    "label": "Lamp",
                     "quantity": 1
                   }
                 ],
                 "quantity": 1
               }
             ],
-            "storeId": "MAG01",
             "options": {
               "slot": {
                 "active": true,
@@ -7108,7 +7281,15 @@
             }
           }
         },
+        "required": [
+          "storeId",
+          "picking"
+        ],
         "properties": {
+          "storeId": {
+            "type": "string",
+            "description": "Identifier of the store issuing the request"
+          },
           "picking": {
             "description": "Information on the collection location",
             "type": "object",
@@ -7117,7 +7298,7 @@
             ],
             "properties": {
               "location": {
-                "$ref": "#/components/schemas/location"
+                "$ref": "#/components/schemas/locationForEligibility"
               },
               "interval": {
                 "$ref": "#/components/schemas/pickingInterval"
@@ -7127,28 +7308,24 @@
           "delivery": {
             "type": "object",
             "description": "Information on the delivery location",
+            "required": [
+              "interval"
+            ],
             "properties": {
               "location": {
-                "$ref": "#/components/schemas/location"
+                "$ref": "#/components/schemas/locationForEligibility"
               },
               "interval": {
                 "$ref": "#/components/schemas/interval"
               }
-            },
-            "required": [
-              "interval"
-            ]
+            }
           },
           "packages": {
             "description": "All packages",
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/packages"
+              "$ref": "#/components/schemas/packagesForEligibility"
             }
-          },
-          "storeId": {
-            "type": "string",
-            "description": "Identifier of the store issuing the request"
           },
           "options": {
             "type": "object",
@@ -7190,7 +7367,7 @@
               },
               "slot": {
                 "type": "object",
-                "description": "Allows you to define slot reservation criteria ",
+                "description": "Allows you to define slot reservation criteria. \nWarning : To use this option, you need to enter the parcel dimensions !",
                 "properties": {
                   "active": {
                     "type": "boolean"
@@ -7254,17 +7431,21 @@
               "$ref": "#/components/schemas/deliveryService"
             }
           }
-        },
-        "required": [
-          "picking",
-          "storeId"
-        ]
+        }
       },
       "postOrders": {
         "type": "object",
         "description": "Specifies the information required for creating the order.",
         "title": "Creation of the order (postOrders)",
         "x-examples": {},
+        "required": [
+          "orderId",
+          "storeId",
+          "picking",
+          "delivery",
+          "packages",
+          "services"
+        ],
         "properties": {
           "orderId": {
             "type": "string",
@@ -7291,11 +7472,6 @@
               "location": {
                 "$ref": "#/components/schemas/location"
               },
-              "infos": {
-                "type": "string",
-                "description": "Depreciated - Use \"picking.location.comment\"",
-                "deprecated": true
-              },
               "interval": {
                 "type": "array",
                 "description": "Collection time slots",
@@ -7319,11 +7495,6 @@
             "properties": {
               "location": {
                 "$ref": "#/components/schemas/location"
-              },
-              "infos": {
-                "type": "string",
-                "description": "Depreciated - Use \"delivery.location.comment\"",
-                "deprecated": true
               },
               "interval": {
                 "type": "array",
@@ -7353,6 +7524,11 @@
           "expectedPayment": {
             "type": "object",
             "description": "Rest to be paid, to be used as part of the `SERVICE_PAY_ON_DELIVERY` service",
+            "required": [
+              "value",
+              "currency",
+              "paymentMethod"
+            ],
             "properties": {
               "value": {
                 "type": "number"
@@ -7371,12 +7547,7 @@
                   "CREDIT_CARD"
                 ]
               }
-            },
-            "required": [
-              "value",
-              "currency",
-              "paymentMethod"
-            ]
+            }
           },
           "tags": {
             "$ref": "#/components/schemas/tags"
@@ -7393,15 +7564,7 @@
           "additionalData": {
             "$ref": "./models/additionalData.yaml"
           }
-        },
-        "required": [
-          "orderId",
-          "storeId",
-          "picking",
-          "delivery",
-          "packages",
-          "services"
-        ]
+        }
       },
       "postProductReturn": {
         "type": "object",
@@ -7622,11 +7785,12 @@
         }
       },
       "address": {
-        "description": "All relevant information for a delivery/collection address.",
+        "description": "Here, 3 location.types are possible (address, pickupPoint and exchangePlace). The request must be made using one of these three options.",
         "title": "Address (address)",
         "type": "object",
         "x-examples": {
           "Example": {
+            "type": "address",
             "addressLine1": "179 boulevard de Turien",
             "addressLine2": "Woop",
             "elevator": true,
@@ -7636,7 +7800,21 @@
             "country": "FR"
           }
         },
+        "required": [
+          "addressLine1",
+          "postalCode",
+          "city",
+          "country"
+        ],
         "properties": {
+          "type": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "eclpccfxu4hm9"
+            },
+            "description": "type required is address",
+            "example": "address"
+          },
           "addressLine1": {
             "type": "string",
             "description": "Full address of the main location"
@@ -7659,11 +7837,13 @@
           },
           "postalCode": {
             "type": "string",
-            "description": "Postcode"
+            "description": "Postcode",
+            "example": "59800"
           },
           "city": {
             "type": "string",
-            "description": "City"
+            "description": "City",
+            "example": "LILLE"
           },
           "district": {
             "type": "string",
@@ -7671,15 +7851,12 @@
           },
           "country": {
             "type": "string",
-            "description": "Country code (ISO 3166 alpha-2).",
-            "enum": [
-              "FR",
-              "BE"
-            ],
+            "description": "Country code (ISO 3166 alpha-2). View list : [Country code.md]",
             "x-examples": {
               "Example": "FR"
             },
-            "title": "Country (country)"
+            "title": "Country (country)",
+            "example": "FR"
           },
           "comment": {
             "type": "string",
@@ -7688,13 +7865,169 @@
           "coordinates": {
             "$ref": "#/components/schemas/coordinates"
           }
+        }
+      },
+      "exchangePlaceType": {
+        "type": "object",
+        "x-examples": {
+          "Example 1": {
+            "type": "exchangePlace",
+            "id": "0123",
+            "comment": "commentaire"
+          }
+        },
+        "title": "exchangePlace",
+        "description": "Here, 3 location.types are possible (address, pickupPoint and exchangePlace). The request must be made using one of these three options.",
+        "required": [
+          "type",
+          "id"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "type required is exchangePlace",
+            "example": "exchangePlace"
+          },
+          "id": {
+            "type": "string",
+            "description": "Collection point ID"
+          },
+          "comment": {
+            "type": "string",
+            "description": "A comment (overwriting comment recorded in the back-office for exchange place)"
+          }
+        }
+      },
+      "pickupPointTypes": {
+        "type": "object",
+        "x-stoplight": {
+          "id": "b3154d3cc1e6b"
+        },
+        "x-examples": {
+          "Example 1": {
+            "type": "pickupPoint",
+            "id": "FR-023265",
+            "carrierCode": "mondial-relay"
+          }
+        },
+        "description": "Here, 3 location.types are possible (address, pickupPoint and exchangePlace). The request must be made using one of these three options.",
+        "title": "pickupPoint",
+        "required": [
+          "type",
+          "id",
+          "carrierCode"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "type required is pickupPoint",
+            "example": "pickupPoint"
+          },
+          "id": {
+            "type": "string",
+            "description": "ID of the relay point"
+          },
+          "carrierCode": {
+            "type": "string",
+            "description": "Carrier code"
+          },
+          "comment": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "g5scvwojk6vge"
+            },
+            "description": "Additional comments"
+          },
+          "boxCategory": {
+            "$ref": "./models/PickUpPoint/boxCategory(location).json"
+          }
+        }
+      },
+      "addressForEligibility": {
+        "description": "Here, 3 location.types are possible (address, pickupPoint and exchangePlace). The request must be made using one of these three options.",
+        "x-stoplight": {
+          "id": "ai6r20urg3t8d"
+        },
+        "title": "address",
+        "type": "object",
+        "x-examples": {
+          "Example": {
+            "type": "address",
+            "addressLine1": "179 boulevard de Turien",
+            "addressLine2": "Woop",
+            "elevator": true,
+            "floor": 8,
+            "postalCode": "59000",
+            "city": "Lille",
+            "country": "FR"
+          }
         },
         "required": [
-          "addressLine1",
+          "type",
           "postalCode",
           "city",
           "country"
-        ]
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "hfcly6k0ldz6w"
+            },
+            "description": "type required is address",
+            "example": "address"
+          },
+          "addressLine1": {
+            "type": "string",
+            "description": "Full address of the main location"
+          },
+          "addressLine2": {
+            "type": "string",
+            "description": "Additional address of the location"
+          },
+          "elevator": {
+            "type": "boolean",
+            "description": "Indicates whether the address has a lift, Default value: false"
+          },
+          "floor": {
+            "type": "integer",
+            "description": "Specifies the floor of the address in question, Default value: 0"
+          },
+          "doorCode": {
+            "type": "string",
+            "description": "Door code"
+          },
+          "postalCode": {
+            "type": "string",
+            "description": "Postcode",
+            "example": "59800"
+          },
+          "city": {
+            "type": "string",
+            "description": "City",
+            "example": "LILLE"
+          },
+          "district": {
+            "type": "string",
+            "description": "Borough name"
+          },
+          "country": {
+            "type": "string",
+            "description": "Country code (ISO 3166 alpha-2). View list : [Country code.md]",
+            "x-examples": {
+              "Example": "FR"
+            },
+            "title": "Country (country)",
+            "example": "FR"
+          },
+          "comment": {
+            "type": "string",
+            "description": "Additional comments"
+          },
+          "coordinates": {
+            "$ref": "#/components/schemas/coordinates"
+          }
+        }
       },
       "deliveryStatus": {
         "type": "string",
@@ -7722,7 +8055,7 @@
       },
       "location": {
         "title": "Location (location)",
-        "description": "A location represents a physical collection or delivery location.",
+        "description": "Here, 3 location.types are possible (address, pickupPoint and exchangePlace). The request must be made using one of these three options.",
         "x-examples": {
           "Adress": {
             "type": "address",
@@ -7758,85 +8091,79 @@
         },
         "oneOf": [
           {
-            "allOf": [
-              {
-                "type": "object",
-                "description": "Location for an Address",
-                "properties": {
-                  "type": {
-                    "type": "string",
-                    "enum": [
-                      "address"
-                    ]
-                  }
-                },
-                "required": [
-                  "type"
-                ]
-              },
+            "x-stoplight": {
+              "id": "pzlgs6gfprft4"
+            },
+            "oneOf": [
               {
                 "$ref": "#/components/schemas/address"
+              },
+              {
+                "$ref": "#/components/schemas/pickupPointTypes"
+              },
+              {
+                "$ref": "#/components/schemas/exchangePlaceType"
               }
-            ]
+            ],
+            "description": "Here, 3 location.types are possible (address, pickupPoint and exchangePlace). The request must be made using one of these three options."
+          }
+        ]
+      },
+      "locationForEligibility": {
+        "title": "Location for eligibility method (locationForEligibility)",
+        "x-stoplight": {
+          "id": "8gx4wbsz21y1h"
+        },
+        "description": "Here, 3 location.types are possible (address, pickupPoint and exchangePlace). The request must be made using one of these three options.",
+        "x-examples": {
+          "Adress": {
+            "type": "address",
+            "addressLine1": "179 boulevard de Turin",
+            "elevator": true,
+            "floor": 8,
+            "postalCode": "59000",
+            "city": "Lille",
+            "country": "FR"
           },
-          {
-            "type": "object",
-            "description": "Location for a Relay point",
-            "properties": {
-              "type": {
-                "type": "string",
-                "enum": [
-                  "pickupPoint"
-                ]
-              },
-              "id": {
-                "type": "string",
-                "description": "ID of the relay point"
-              },
-              "carrierCode": {
-                "type": "string",
-                "description": "Carrier code",
-                "example": "bpost"
-              },
-              "comment": {
-                "type": "string",
-                "description": "Additional comments"
-              },
-              "boxCategory": {
-                "$ref": "./models/PickUpPoint/boxCategory(location).json",
-                "x-stoplight": {
-                  "id": "fl9ffhdzp04eq"
-                }
-              }
-            },
-            "required": [
-              "type",
-              "id",
-              "carrierCode"
-            ]
+          "Pickup points": {
+            "type": "pickupPoint",
+            "id": "76761",
+            "carrierCode": "bpost",
+            "boxCategory": {
+              "id": "XXX",
+              "accessibility": "UPPER"
+            }
           },
+          "Exchange place": {
+            "type": "exchangePlace",
+            "id": "1"
+          },
+          "Coordinates": {
+            "type": "address",
+            "postalCode": "59000",
+            "country": "FR",
+            "coordinates": {
+              "latitude": 0,
+              "longitude": 0
+            }
+          }
+        },
+        "oneOf": [
           {
-            "type": "object",
-            "description": "Location of a collection point type",
-            "properties": {
-              "type": {
-                "type": "string",
-                "enum": [
-                  "exchangePlace"
-                ]
-              },
-              "id": {
-                "type": "string",
-                "description": "Collection point ID"
-              },
-              "comment": {
-                "type": "string",
-                "description": "A comment (overwriting comment recorded in the back-office for exchange place)"
-              }
+            "x-stoplight": {
+              "id": "nxttbv5tsf2vf"
             },
-            "required": [
-              "type",
-              "id"
+            "description": "Here, 3 location.types are possible (address, pickupPoint and exchangePlace). The request must be made using one of these three options.",
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/addressForEligibility"
+              },
+              {
+                "$ref": "#/components/schemas/exchangePlaceType"
+              },
+              {
+                "$ref": "#/components/schemas/pickupPointTypes"
+              }
             ]
           }
         ]
@@ -8209,6 +8536,140 @@
           "products"
         ]
       },
+      "packagesForEligibility": {
+        "description": "Default : Parcel dimensions are not mandatory ! \nWarning : If you want to create eligibility with delivery slots, parcel dimensions are mandatory ! ",
+        "x-stoplight": {
+          "id": "v01namuxp7bxy"
+        },
+        "type": "object",
+        "x-examples": {
+          "Example": {
+            "references": [
+              {
+                "reference": "12345B",
+                "barcode": {
+                  "value": "54fd56g4f5gfd456sd",
+                  "type": "barcode",
+                  "format": "128"
+                }
+              }
+            ],
+            "length": {
+              "value": 200,
+              "unit": "mm"
+            },
+            "width": {
+              "value": 200,
+              "unit": "mm"
+            },
+            "height": {
+              "value": 100,
+              "unit": "mm"
+            },
+            "weight": {
+              "value": 1,
+              "unit": "kg"
+            },
+            "products": [
+              {
+                "type": "TYPOLOGY_GENERIC",
+                "ean": "11233",
+                "cug": "KJJNN",
+                "label": "Computer",
+                "quantity": 1
+              }
+            ],
+            "quantity": 1,
+            "attributes": {
+              "footprint": {
+                "value": 13,
+                "unit": "m2"
+              }
+            },
+            "type": "PACKAGE"
+          }
+        },
+        "title": "Package used for eligibility (packagesForEligibility)",
+        "required": [
+          "length",
+          "width",
+          "height",
+          "weight",
+          "products"
+        ],
+        "properties": {
+          "category": {
+            "type": "string",
+            "description": "Used to retrieve the sign's parcel category. If this field is not empty, length, width and height are not mandatory"
+          },
+          "length": {
+            "$ref": "#/components/schemas/length"
+          },
+          "width": {
+            "$ref": "#/components/schemas/length"
+          },
+          "height": {
+            "$ref": "#/components/schemas/length"
+          },
+          "weight": {
+            "$ref": "#/components/schemas/mass"
+          },
+          "products": {
+            "type": "array",
+            "description": "List of products in the package",
+            "items": {
+              "$ref": "#/components/schemas/product"
+            }
+          },
+          "quantity": {
+            "type": "integer",
+            "default": 1,
+            "description": "Quantity of packages"
+          },
+          "attributes": {
+            "type": "object",
+            "description": "package attributes",
+            "properties": {
+              "footprint": {
+                "type": "object",
+                "description": "package footprint on the ground",
+                "required": [
+                  "value",
+                  "unit"
+                ],
+                "properties": {
+                  "value": {
+                    "type": "number",
+                    "description": "footprint value",
+                    "example": 13
+                  },
+                  "unit": {
+                    "type": "string",
+                    "description": "footprint unit",
+                    "example": "m2",
+                    "enum": [
+                      "m2",
+                      "cm2",
+                      "pallet"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "type": {
+            "type": "string",
+            "description": "package type",
+            "enum": [
+              "PACKAGE",
+              "TRAY",
+              "PALLET"
+            ],
+            "example": "PACKAGE",
+            "default": "PACKAGE"
+          }
+        }
+      },
       "coordinates": {
         "type": "object",
         "description": "Specifies the geographical coordinates to be used for creation. ",
@@ -8310,6 +8771,9 @@
               "x-stoplight": {
                 "id": "am11lni8ag5y5"
               },
+              "required": [
+                "value"
+              ],
               "properties": {
                 "value": {
                   "type": "string",
@@ -8328,10 +8792,7 @@
                   },
                   "format": "date-time"
                 }
-              },
-              "required": [
-                "value"
-              ]
+              }
             },
             "containerId": {
               "type": "object",
@@ -8353,10 +8814,7 @@
                 }
               }
             }
-          },
-          "required": [
-            "reference"
-          ]
+          }
         }
       },
       "productsPrice": {
@@ -9037,6 +9495,74 @@
           "SMS"
         ],
         "description": "Refers to the channel use to communicate."
+      },
+      "postGeoShape": {
+        "type": "object",
+        "x-stoplight": {
+          "id": "4766bb51a1262"
+        },
+        "x-examples": {
+          "Example 1": {
+            "title": "string",
+            "zoneType": "exclude",
+            "type": "iris",
+            "file": "string",
+            "countryCode": "string",
+            "carrierId": 0,
+            "storeId": 0,
+            "exchangePlaceId": 0
+          }
+        },
+        "title": "postGeoShape",
+        "description": "Create a new geoShape",
+        "required": [
+          "title",
+          "zoneType",
+          "type",
+          "file",
+          "countryCode"
+        ],
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "Title of the geoShape\n\n"
+          },
+          "zoneType": {
+            "description": "Type of the zone\n\n",
+            "enum": [
+              "exclude",
+              "include"
+            ]
+          },
+          "type": {
+            "description": "Type of the geoShape\n\n",
+            "enum": [
+              "iris",
+              "insee",
+              "custom"
+            ]
+          },
+          "file": {
+            "type": "string",
+            "description": "GeoJSON or KML file\n\n"
+          },
+          "countryCode": {
+            "type": "string",
+            "description": "Country code (ISO 3166 alpha-2). View list : [Country code.md]"
+          },
+          "carrierId": {
+            "type": "string",
+            "description": "Carrier ID\n\n"
+          },
+          "storeId": {
+            "type": "string",
+            "description": "Store ID\n\n"
+          },
+          "exchangePlaceId": {
+            "type": "string",
+            "description": "Exchange place ID\n\n"
+          }
+        }
       }
     },
     "parameters": {
@@ -9173,6 +9699,197 @@
         "name": "pickupPointId",
         "schema": {
           "type": "string"
+        }
+      }
+    },
+    "responses": {
+      "GeoShapeGetResponse": {
+        "description": "GeoShape retrieved successfully\n\n",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "array",
+              "x-examples": {
+                "Example 1": [
+                  {
+                    "id": 1,
+                    "title": "Example Title",
+                    "zoneType": "include",
+                    "type": "iris",
+                    "countryCode": "FR",
+                    "storageKey": "example_storage_key",
+                    "carrierId": 12345,
+                    "storeId": 67890,
+                    "exchangePlaceId": 54321
+                  }
+                ]
+              },
+              "items": {
+                "type": "object",
+                "required": [
+                  "id",
+                  "title",
+                  "zoneType",
+                  "type",
+                  "countryCode",
+                  "storageKey",
+                  "carrierId",
+                  "storeId",
+                  "exchangePlaceId",
+                  "createdAt",
+                  "expiredAt"
+                ],
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "description": "ID of the geoShape\n\n"
+                  },
+                  "title": {
+                    "type": "string",
+                    "description": "Title of the geoShape\n\n",
+                    "example": "example title"
+                  },
+                  "zoneType": {
+                    "enum": [
+                      "exclude",
+                      "include"
+                    ],
+                    "description": "Type of the zone\n\n"
+                  },
+                  "type": {
+                    "enum": [
+                      "iris",
+                      "insee",
+                      "custom"
+                    ],
+                    "description": "Type of the geoShape"
+                  },
+                  "countryCode": {
+                    "type": "string",
+                    "example": "FR",
+                    "description": "Country code (ISO 3166 alpha-2). View list : [Country code.md]"
+                  },
+                  "storageKey": {
+                    "type": "string",
+                    "example": "example_storage_key ",
+                    "description": "Storage key of the file"
+                  },
+                  "carrierId": {
+                    "type": "string",
+                    "description": "Carrier ID\n\n"
+                  },
+                  "storeId": {
+                    "type": "string",
+                    "description": "storeId"
+                  },
+                  "exchangePlaceId": {
+                    "type": "string",
+                    "description": "Exchange place ID\n\n"
+                  },
+                  "createdAt": {
+                    "type": "string",
+                    "x-stoplight": {
+                      "id": "epoqbumsa0w1q"
+                    },
+                    "description": "Date of creation\n\n",
+                    "format": "date-time"
+                  },
+                  "expiredAt": {
+                    "type": "string",
+                    "x-stoplight": {
+                      "id": "06uqwxk1rpiey"
+                    },
+                    "description": "Date on which file ceased to be stored\n\n",
+                    "format": "date-time"
+                  }
+                }
+              }
+            },
+            "examples": {
+              "Example 1": {
+                "value": [
+                  {
+                    "id": 1,
+                    "title": "Example Title",
+                    "zoneType": "include",
+                    "type": "iris",
+                    "countryCode": "FR",
+                    "storageKey": "example_storage_key",
+                    "carrierId": 12345,
+                    "storeId": 67890,
+                    "exchangePlaceId": 54321
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "GeoShapePostResponse": {
+        "description": "GeoShape created successfully\n\n",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "x-examples": {
+                "Example 1": {
+                  "id": 0,
+                  "title": "string",
+                  "zoneType": "exclude",
+                  "type": "iris",
+                  "countryCode": "string",
+                  "storageKey": "string",
+                  "expiredAt": "2024-03-06T09:08:22.814Z"
+                }
+              },
+              "required": [
+                "id",
+                "title",
+                "zoneType",
+                "type",
+                "countryCode",
+                "storageKey"
+              ],
+              "properties": {
+                "id": {
+                  "type": "integer",
+                  "description": "ID of the geoShape\n\n"
+                },
+                "title": {
+                  "type": "string",
+                  "description": "Title of the geoShape\n\n"
+                },
+                "zoneType": {
+                  "description": "Type of the zone\n\n",
+                  "enum": [
+                    "exclude",
+                    "include"
+                  ]
+                },
+                "type": {
+                  "enum": [
+                    "iris",
+                    "insee",
+                    "custom"
+                  ],
+                  "description": "Type of the geoShape\n\n"
+                },
+                "countryCode": {
+                  "type": "string",
+                  "description": "Country code\n\n"
+                },
+                "storageKey": {
+                  "type": "string",
+                  "description": "Storage key\n\n"
+                },
+                "expiredAt": {
+                  "type": "string",
+                  "description": "Whether the geoShape is expired or not\n\n",
+                  "format": "date-time"
+                }
+              }
+            }
+          }
         }
       }
     }
