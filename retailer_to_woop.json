@@ -1953,13 +1953,78 @@
         "summary": "Patch order"
       }
     },
+    "/zoning/geoShape/{id}": {
+      "delete": {
+        "tags": [
+          "Order"
+        ],
+        "description": "Delete a geoShape",
+        "operationId": "deleteGeoShape",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/components/parameters/pathOrderId"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "123"
+            },
+            "in": "query",
+            "name": "id",
+            "required": true,
+            "description": "ID of the geoShape to delete"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "description": "",
+          "content": {}
+        },
+        "responses": {
+          "200": {
+            "description": "GeoShape deleted successfully\n\n",
+            "content": {}
+          },
+          "400": {
+            "description": "Bad request\n\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "summary": "Delete a geoShape",
+        "x-stoplight": {
+          "id": "93yricmetot8p"
+        }
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true
+        }
+      ]
+    },
     "/zoning/geoShape": {
       "delete": {
         "tags": [
           "Order"
         ],
-        "description": "Delete order",
-        "operationId": "deleteOrders",
+        "description": "Delete a geoShape",
+        "operationId": "deleteGeoShape",
         "parameters": [
           {
             "$ref": "#/components/parameters/apiVersion"
@@ -2046,9 +2111,9 @@
             "description": "The order is already cancelled or an action is already in progress on this order"
           }
         },
-        "summary": "Delete order",
+        "summary": "Delete a geoShape",
         "x-stoplight": {
-          "id": "93yricmetot8p"
+          "id": "j0kvwz5exlels"
         }
       },
       "get": {
@@ -2120,165 +2185,9 @@
             "description": "Internal server error\n\n"
           }
         },
-        "summary": "Retrive a geoShape",
+        "summary": "Retrieve a geoShape",
         "x-stoplight": {
-          "id": "obxfcxcjtq0ip"
-        }
-      },
-      "patch": {
-        "tags": [
-          "Order"
-        ],
-        "description": "This method allows you to modify an order. The update may trigger a cancellation of the order + creation of a new order if the modified information is considered important and directly impacts the delivery.",
-        "operationId": "patchOrder",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/apiVersion"
-          },
-          {
-            "$ref": "#/components/parameters/pathOrderId"
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "description": "Contains the update information.",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "picking": {
-                    "description": "Information on the collection location",
-                    "type": "object",
-                    "required": [
-                      "location",
-                      "interval",
-                      "contact"
-                    ],
-                    "properties": {
-                      "location": {
-                        "$ref": "#/components/schemas/location"
-                      },
-                      "infos": {
-                        "type": "string"
-                      },
-                      "interval": {
-                        "type": "array",
-                        "items": {
-                          "$ref": "#/components/schemas/pickingInterval"
-                        }
-                      },
-                      "contact": {
-                        "$ref": "#/components/schemas/contact"
-                      }
-                    }
-                  },
-                  "delivery": {
-                    "description": "Information on the delivery location",
-                    "type": "object",
-                    "required": [
-                      "location",
-                      "interval",
-                      "contact"
-                    ],
-                    "properties": {
-                      "location": {
-                        "$ref": "#/components/schemas/location"
-                      },
-                      "infos": {
-                        "type": "string"
-                      },
-                      "interval": {
-                        "type": "array",
-                        "items": {
-                          "$ref": "#/components/schemas/deliveryInterval"
-                        }
-                      },
-                      "contact": {
-                        "$ref": "#/components/schemas/contactDelivery"
-                      }
-                    }
-                  },
-                  "packages": {
-                    "type": "array",
-                    "description": "All packages",
-                    "items": {
-                      "$ref": "#/components/schemas/packages"
-                    }
-                  },
-                  "services": {
-                    "$ref": "#/components/schemas/services"
-                  },
-                  "tags": {
-                    "$ref": "#/components/schemas/tags"
-                  },
-                  "carrierSelection": {
-                    "$ref": "#/components/schemas/carrierSelection"
-                  },
-                  "additionalData": {
-                    "$ref": "./models/additionalData.yaml"
-                  }
-                },
-                "required": [
-                  "picking",
-                  "delivery",
-                  "packages",
-                  "services"
-                ]
-              },
-              "examples": {
-                "Example": {
-                  "value": {
-                    "picking": {
-                      "contact": {
-                        "firstName": "Michel",
-                        "lastName": "Dupont"
-                      },
-                      "location": {
-                        "type": "address",
-                        "addressLine1": "237 rue du ballon",
-                        "postalCode": "59110",
-                        "city": "La Madeleine",
-                        "country": "FR"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Request processed successfully"
-          },
-          "401": {
-            "description": "You are not authorised to access this item",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/errorCode"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Updating the order is not possible\n\n[See the list of reasons](https://woop.stoplight.io/docs/retailer/docs/Models/Error%20reasons.md)",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/errorCode"
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "An action is already in progress on this delivery"
-          }
-        },
-        "summary": "Patch order",
-        "x-stoplight": {
-          "id": "lcnvgwuwl7us9"
+          "id": "w09wlih8hx20h"
         }
       },
       "parameters": []
