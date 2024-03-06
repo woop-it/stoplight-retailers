@@ -7268,6 +7268,14 @@
         "description": "Specifies the information required for creating the order.",
         "title": "Creation of the order (postOrders)",
         "x-examples": {},
+        "required": [
+          "orderId",
+          "storeId",
+          "picking",
+          "delivery",
+          "packages",
+          "services"
+        ],
         "properties": {
           "orderId": {
             "type": "string",
@@ -7294,11 +7302,6 @@
               "location": {
                 "$ref": "#/components/schemas/location"
               },
-              "infos": {
-                "type": "string",
-                "description": "Depreciated - Use \"picking.location.comment\"",
-                "deprecated": true
-              },
               "interval": {
                 "type": "array",
                 "description": "Collection time slots",
@@ -7322,11 +7325,6 @@
             "properties": {
               "location": {
                 "$ref": "#/components/schemas/location"
-              },
-              "infos": {
-                "type": "string",
-                "description": "Depreciated - Use \"delivery.location.comment\"",
-                "deprecated": true
               },
               "interval": {
                 "type": "array",
@@ -7356,6 +7354,11 @@
           "expectedPayment": {
             "type": "object",
             "description": "Rest to be paid, to be used as part of the `SERVICE_PAY_ON_DELIVERY` service",
+            "required": [
+              "value",
+              "currency",
+              "paymentMethod"
+            ],
             "properties": {
               "value": {
                 "type": "number"
@@ -7374,12 +7377,7 @@
                   "CREDIT_CARD"
                 ]
               }
-            },
-            "required": [
-              "value",
-              "currency",
-              "paymentMethod"
-            ]
+            }
           },
           "tags": {
             "$ref": "#/components/schemas/tags"
@@ -7396,15 +7394,7 @@
           "additionalData": {
             "$ref": "./models/additionalData.yaml"
           }
-        },
-        "required": [
-          "orderId",
-          "storeId",
-          "picking",
-          "delivery",
-          "packages",
-          "services"
-        ]
+        }
       },
       "postProductReturn": {
         "type": "object",
@@ -7625,7 +7615,7 @@
         }
       },
       "address": {
-        "description": "All relevant information for a delivery/collection address.",
+        "description": "Here, 3 location.types are possible (address, pickupPoint and exchangePlace). The request must be made using one of these three options.",
         "title": "Address (address)",
         "type": "object",
         "x-examples": {
