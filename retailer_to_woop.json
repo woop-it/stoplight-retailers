@@ -7112,10 +7112,14 @@
           }
         },
         "required": [
-          "picking",
-          "storeId"
+          "storeId",
+          "picking"
         ],
         "properties": {
+          "storeId": {
+            "type": "string",
+            "description": "Identifier of the store issuing the request"
+          },
           "picking": {
             "description": "Information on the collection location",
             "type": "object",
@@ -7150,12 +7154,8 @@
             "description": "All packages",
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/packages"
+              "$ref": "#/components/schemas/packagesForEligibility"
             }
-          },
-          "storeId": {
-            "type": "string",
-            "description": "Identifier of the store issuing the request"
           },
           "options": {
             "type": "object",
@@ -7197,7 +7197,7 @@
               },
               "slot": {
                 "type": "object",
-                "description": "Allows you to define slot reservation criteria ",
+                "description": "Allows you to define slot reservation criteria. \nWarning : To use this option, you need to enter the parcel dimensions !",
                 "properties": {
                   "active": {
                     "type": "boolean"
@@ -7677,11 +7677,13 @@
           },
           "postalCode": {
             "type": "string",
-            "description": "Postcode"
+            "description": "Postcode",
+            "example": "59800"
           },
           "city": {
             "type": "string",
-            "description": "City"
+            "description": "City",
+            "example": "LILLE"
           },
           "district": {
             "type": "string",
@@ -7689,15 +7691,12 @@
           },
           "country": {
             "type": "string",
-            "description": "Country code (ISO 3166 alpha-2).",
-            "enum": [
-              "FR",
-              "BE"
-            ],
+            "description": "Country code (ISO 3166 alpha-2). View list : [Country code.md]",
             "x-examples": {
               "Example": "FR"
             },
-            "title": "Country (country)"
+            "title": "Country (country)",
+            "example": "FR"
           },
           "comment": {
             "type": "string",
@@ -7718,7 +7717,7 @@
           }
         },
         "title": "exchangePlace",
-        "description": "All relevant information for a delivery/collection exchangePlace.",
+        "description": "Here, 3 location.types are possible (address, pickupPoint and exchangePlace). The request must be made using one of these three options.",
         "required": [
           "type",
           "id"
@@ -7751,7 +7750,7 @@
             "carrierCode": "mondial-relay"
           }
         },
-        "description": "All relevant information for a delivery/collection pickupPoint.",
+        "description": "Here, 3 location.types are possible (address, pickupPoint and exchangePlace). The request must be made using one of these three options.",
         "title": "pickupPoint",
         "required": [
           "type",
@@ -7785,7 +7784,7 @@
         }
       },
       "addressForEligibility": {
-        "description": "All relevant information for a delivery/collection address.",
+        "description": "Here, 3 location.types are possible (address, pickupPoint and exchangePlace). The request must be made using one of these three options.",
         "x-stoplight": {
           "id": "ai6r20urg3t8d"
         },
@@ -7840,11 +7839,13 @@
           },
           "postalCode": {
             "type": "string",
-            "description": "Postcode"
+            "description": "Postcode",
+            "example": "59800"
           },
           "city": {
             "type": "string",
-            "description": "City"
+            "description": "City",
+            "example": "LILLE"
           },
           "district": {
             "type": "string",
@@ -7856,7 +7857,8 @@
             "x-examples": {
               "Example": "FR"
             },
-            "title": "Country (country)"
+            "title": "Country (country)",
+            "example": "FR"
           },
           "comment": {
             "type": "string",
@@ -8375,7 +8377,7 @@
         ]
       },
       "packagesForEligibility": {
-        "description": "Specifies the information needed to update a package. The handling unit is to be defined with the package/product structure",
+        "description": "Default : Parcel dimensions are not mandatory ! \nWarning : If you want to create eligibility with delivery slots, parcel dimensions are mandatory ! ",
         "x-stoplight": {
           "id": "v01namuxp7bxy"
         },
