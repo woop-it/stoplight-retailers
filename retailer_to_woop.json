@@ -2132,7 +2132,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/postGeShape"
+                "$ref": "#/components/schemas/postGeoShape"
               },
               "examples": {
                 "Example 1": {
@@ -9800,14 +9800,16 @@
                     "x-stoplight": {
                       "id": "epoqbumsa0w1q"
                     },
-                    "description": "Date of creation\n\n"
+                    "description": "Date of creation\n\n",
+                    "format": "date-time"
                   },
                   "expiredAt": {
                     "type": "string",
                     "x-stoplight": {
                       "id": "06uqwxk1rpiey"
                     },
-                    "description": "Date on which file ceased to be stored\n\n"
+                    "description": "Date on which file ceased to be stored\n\n",
+                    "format": "date-time"
                   }
                 }
               }
@@ -9891,7 +9893,8 @@
                 },
                 "expiredAt": {
                   "type": "string",
-                  "description": "Whether the geoShape is expired or not\n\n"
+                  "description": "Whether the geoShape is expired or not\n\n",
+                  "format": "date-time"
                 }
               }
             }
