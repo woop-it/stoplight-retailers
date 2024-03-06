@@ -7295,7 +7295,7 @@
           },
           "storeId": {
             "type": "string",
-            "description": "Identifier of the store issuing the request"
+            "description": "Identifier of the store issing the request"
           },
           "options": {
             "type": "object",
@@ -9186,7 +9186,7 @@
         "description": "Refers to the channel use to communicate."
       },
       "postStores": {
-        "title": "postStores",
+        "title": "Creation of the store (postStores)",
         "x-stoplight": {
           "id": "9uj004ljgx6g2"
         },
@@ -9214,6 +9214,7 @@
             ]
           }
         },
+        "description": "Specifies the information required for creating the store in the WOOP plateform.",
         "required": [
           "isActive",
           "name",
@@ -9226,29 +9227,26 @@
             "x-stoplight": {
               "id": "7v1wll05co8d8"
             },
-            "description": "Store activation"
+            "description": "Indicates whether or not the shop is activated on the WOOP platform. "
           },
           "name": {
             "type": "string",
             "x-stoplight": {
               "id": "jle33k8dd33c5"
             },
-            "description": "Store's name"
+            "description": "Name of the store",
+            "example": "store12"
           },
           "storeId": {
             "type": "string",
             "x-stoplight": {
               "id": "1txmtcd0j11r9"
             },
-            "description": "Store's id"
+            "description": "Store identifier",
+            "example": "123"
           },
           "language": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "hbutpw1e3ym6g"
-            },
-            "default": "fr",
-            "description": "Store's language"
+            "$ref": "#/components/schemas/language"
           },
           "timezone": {
             "$ref": "#/components/schemas/timezone"
@@ -9272,14 +9270,18 @@
           }
         },
         "description": "create a store"
+
+        }
+
       },
       "patchStores": {
-        "title": "patchStores",
+        "title": "Modify a store (patchStores)",
         "x-stoplight": {
           "id": "tb3gveuak7sw4"
         },
         "type": "object",
         "description": "This method allows you to modify a store.",
+
         "x-examples": {
           "Example 1": {
             "isActive": true,
@@ -9303,6 +9305,7 @@
             ]
           }
         },
+
         "required": [
           "isActive",
           "name",
@@ -9312,20 +9315,21 @@
         "properties": {
           "isActive": {
             "type": "boolean",
-            "description": "Store activation"
+
+            "description": "Indicates whether or not the shop is activated on the WOOP platform. "
           },
           "name": {
             "type": "string",
-            "description": "Store's name"
+            "description": "Name of the store",
+            "example": "store23"
           },
           "storeId": {
             "type": "string",
-            "description": "External store's id "
+            "description": "Store identifier",
+            "example": "124"
           },
           "language": {
-            "type": "string",
-            "default": "fr",
-            "description": "store's language"
+            "$ref": "#/components/schemas/language"
           },
           "timezone": {
             "$ref": "#/components/schemas/timezone"
