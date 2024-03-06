@@ -7870,9 +7870,6 @@
           "comment": {
             "type": "string",
             "description": "Additional comments"
-          },
-          "coordinates": {
-            "$ref": "#/components/schemas/coordinates"
           }
         }
       },
@@ -8075,9 +8072,6 @@
           "comment": {
             "type": "string",
             "description": "Additional comments"
-          },
-          "coordinates": {
-            "$ref": "#/components/schemas/coordinates"
           }
         }
       },
