@@ -6379,10 +6379,11 @@
       }
     },
     "/stores": {
-
       "post": {
         "summary": "Create a store",
-        "tags": ["Store"],
+        "tags": [
+          "Store"
+        ],
         "responses": {
           "201": {
             "description": "the store has been registered"
@@ -6466,7 +6467,9 @@
       ],
       "patch": {
         "summary": "Modify a store",
-        "tags": ["Store"],
+        "tags": [
+          "Store"
+        ],
         "responses": {
           "200": {
             "description": "OK - Request processed successfully"
@@ -6516,6 +6519,99 @@
             }
           },
           "description": "This method allows you to modify a store. "
+        }
+      }
+    },
+    "/stores/{storeId}/exchangePlaces": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "storeId",
+          "in": "path",
+          "required": true
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "storeId",
+          "in": "path",
+          "required": true
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "storeId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "post": {
+        "summary": "Create an exchangePlace",
+        "tags": [
+          "ExchangePlaces"
+        ],
+        "responses": {
+          "201": {
+            "description": "Created - the exchangePlace has been registered",
+            "content": {}
+          },
+          "400": {
+            "description": "Bad Request - Missing and/or incorrect items in the body",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - You are not authorised to access this item",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden - Creation of the exchangePlace is not possible",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict - Creation of the exchangePlace with this 'exchangePlaceId' is not possible",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "postExchangePlaces",
+        "x-stoplight": {
+          "id": "gpetfwqd5b6h8"
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/postExchangePlace"
+              }
+            }
+          }
         }
       }
     }
@@ -9242,6 +9338,153 @@
         },
         "description": ""
       },
+      "postExchangePlace": {
+        "title": "postExchangePlaces",
+        "x-stoplight": {
+          "id": "x3o87x0qgkqwd"
+        },
+        "type": "object",
+        "required": [
+          "isActive",
+          "name",
+          "exchangePlaceId",
+          "storeId",
+          "type",
+          "language",
+          "timezone",
+          "openingHours",
+          "address"
+        ],
+        "properties": {
+          "isActive": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "exchangePlaceId": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "0ytgyoep018o6"
+            },
+            "description": "exchange place id"
+          },
+          "storeId": {
+            "type": "string",
+            "description": "store ID associate to the exchange place "
+          },
+          "type": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "1aojn4so22okj"
+            },
+            "description": "exchangePlace type"
+          },
+          "language": {
+            "type": "string",
+            "default": "français"
+          },
+          "timezone": {
+            "$ref": "#/components/schemas/timezone"
+          },
+          "contacts": {
+            "$ref": "#/components/schemas/contact"
+          },
+          "activatedCarriers": {
+            "type": "array",
+            "description": "array of carrier.code",
+            "items": {
+              "type": "string",
+              "default": "carrier.code"
+            }
+          },
+          "openingHours": {
+            "x-stoplight": {
+              "id": "ucyk1764wzq8o"
+            },
+            "type": "object",
+            "properties": {
+              "monday": {
+                "type": "array",
+                "x-stoplight": {
+                  "id": "mox3rlf7x7g5c"
+                },
+                "items": {
+                  "$ref": "#/components/schemas/interval_hour"
+                }
+              },
+              "tuesday": {
+                "type": "array",
+                "x-stoplight": {
+                  "id": "lm06xoah49d08"
+                },
+                "items": {
+                  "$ref": "#/components/schemas/interval_hour"
+                }
+              },
+              "wednesday": {
+                "type": "array",
+                "x-stoplight": {
+                  "id": "usqgjpsvnou7v"
+                },
+                "items": {
+                  "$ref": "#/components/schemas/interval_hour"
+                }
+              },
+              "thursday": {
+                "type": "array",
+                "x-stoplight": {
+                  "id": "x0ngvyy4rqu2k"
+                },
+                "items": {
+                  "$ref": "#/components/schemas/interval_hour"
+                }
+              },
+              "friday": {
+                "type": "array",
+                "x-stoplight": {
+                  "id": "c1q8z0jmljoyp"
+                },
+                "items": {
+                  "$ref": "#/components/schemas/interval_hour"
+                }
+              },
+              "saturday": {
+                "type": "array",
+                "x-stoplight": {
+                  "id": "crf21orlhhu8q"
+                },
+                "items": {}
+              },
+              "sunday": {
+                "type": "array",
+                "x-stoplight": {
+                  "id": "ojgs45lyw8hei"
+                },
+                "items": {
+                  "$ref": "#/components/schemas/interval_hour"
+                }
+              }
+            }
+          },
+          "address": {
+            "$ref": "#/components/schemas/address"
+          },
+          "minuteBeforeCutoff": {
+            "type": "number",
+            "x-stoplight": {
+              "id": "yhh1o1m63b07z"
+            }
+          },
+          "orderIdConfig": {
+            "$ref": "#/components/schemas/Config"
+          },
+          "referenceNumberconfig": {
+            "$ref": "#/components/schemas/Config"
+          }
+        },
+        "description": ""
+      },
       "patchStores": {
         "title": "patchStores",
         "x-stoplight": {
@@ -9283,6 +9526,40 @@
           }
         },
         "description": "This method allows you to modify a store."
+      },
+      "Config": {
+        "title": "Config",
+        "x-stoplight": {
+          "id": "qtxbkm35g9lc3"
+        },
+        "type": "object",
+        "properties": {
+          "suffix": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "lddhq4qe6jnkr"
+            }
+          },
+          "timeStamp": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "1yvpmlpd0fine"
+            }
+          },
+          "prefix": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "rc89q89wua90b"
+            }
+          },
+          "generate": {
+            "type": "boolean",
+            "x-stoplight": {
+              "id": "aabgtwp1h5twa"
+            }
+          }
+        },
+        "description": "config for the reference number or the order Id"
       }
     },
     "parameters": {
