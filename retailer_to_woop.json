@@ -7794,7 +7794,7 @@
         }
       },
       "address": {
-        "description": "Here, 3 location.types are possible (address, pickupPoint and exchangePlace). The request must be made using one of these three options.",
+        "description": "Here, 4 location.types are possible (address, pickupPoint, exchangePlace, and coordinates). The request must be made using one of these four options.",
         "title": "Address (address)",
         "type": "object",
         "x-examples": {
@@ -7886,7 +7886,7 @@
           }
         },
         "title": "exchangePlace",
-        "description": "Here, 3 location.types are possible (address, pickupPoint and exchangePlace). The request must be made using one of these three options.",
+        "description": "Here, 4 location.types are possible (address, pickupPoint, exchangePlace, and coordinates). The request must be made using one of these four options.",
         "required": [
           "type",
           "id"
@@ -7907,6 +7907,49 @@
           }
         }
       },
+      "coordinatesType": {
+        "type": "object",
+        "x-stoplight": {
+          "id": "oofbovwe8se8w"
+        },
+        "x-examples": {
+          "Example 1": {
+            "type": "exchangePlace",
+            "id": "0123",
+            "comment": "commentaire"
+          }
+        },
+        "title": "coordinates",
+        "description": "Here, 4 location.types are possible (address, pickupPoint, exchangePlace, and coordinates). The request must be made using one of these four options.",
+        "required": [
+          "type",
+          "latitude",
+          "longitude"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "type required is coordinates",
+            "example": "coordinates"
+          },
+          "latitude": {
+            "type": "number",
+            "description": "Latitude of geoPoint",
+            "x-stoplight": {
+              "id": "4sz7wl0o181z6"
+            },
+            "example": 50.6389507
+          },
+          "longitude": {
+            "type": "number",
+            "description": "Longitude of geoPoint",
+            "x-stoplight": {
+              "id": "b5yl95vvlkw7t"
+            },
+            "example": 3.0630828
+          }
+        }
+      },
       "pickupPointTypes": {
         "type": "object",
         "x-stoplight": {
@@ -7919,7 +7962,7 @@
             "carrierCode": "mondial-relay"
           }
         },
-        "description": "Here, 3 location.types are possible (address, pickupPoint and exchangePlace). The request must be made using one of these three options.",
+        "description": "Here, 4 location.types are possible (address, pickupPoint, exchangePlace, and coordinates). The request must be made using one of these four options.",
         "title": "pickupPoint",
         "required": [
           "type",
@@ -7953,7 +7996,7 @@
         }
       },
       "addressForEligibility": {
-        "description": "Here, 3 location.types are possible (address, pickupPoint and exchangePlace). The request must be made using one of these three options.",
+        "description": "Here, 4 location.types are possible (address, pickupPoint, exchangePlace, and coordinates). The request must be made using one of these four options.",
         "x-stoplight": {
           "id": "ai6r20urg3t8d"
         },
@@ -8064,7 +8107,7 @@
       },
       "location": {
         "title": "Location (location)",
-        "description": "Here, 3 location.types are possible (address, pickupPoint and exchangePlace). The request must be made using one of these three options.",
+        "description": "Here, 4 location.types are possible (address, pickupPoint, exchangePlace, and coordinates). The request must be made using one of these four options.",
         "x-examples": {
           "Adress": {
             "type": "address",
@@ -8112,6 +8155,9 @@
               },
               {
                 "$ref": "#/components/schemas/exchangePlaceType"
+              },
+              {
+                "$ref": "#/components/schemas/coordinatesType"
               }
             ],
             "description": "Here, 3 location.types are possible (address, pickupPoint and exchangePlace). The request must be made using one of these three options."
@@ -8123,7 +8169,7 @@
         "x-stoplight": {
           "id": "8gx4wbsz21y1h"
         },
-        "description": "Here, 3 location.types are possible (address, pickupPoint and exchangePlace). The request must be made using one of these three options.",
+        "description": "Here, 4 location.types are possible (address, pickupPoint, exchangePlace, and coordinates). The request must be made using one of these four options.",
         "x-examples": {
           "Adress": {
             "type": "address",
@@ -8172,6 +8218,9 @@
               },
               {
                 "$ref": "#/components/schemas/pickupPointTypes"
+              },
+              {
+                "$ref": "#/components/schemas/coordinatesType"
               }
             ]
           }
