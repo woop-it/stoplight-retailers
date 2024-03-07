@@ -7435,7 +7435,7 @@
       },
       "postOrders": {
         "type": "object",
-        "description": "Specifies the information required for creating the order.",
+        "description": "Specifies the information required for creating the order",
         "title": "Creation of the order (postOrders)",
         "x-examples": {},
         "required": [
