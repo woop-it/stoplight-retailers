@@ -9192,6 +9192,29 @@
         },
         "type": "object",
         "description": "Specifies the information required for creating the store in the WOOP plateform.",
+        "x-examples": {
+          "Example 1": {
+            "isActive": true,
+            "name": "store12",
+            "storeId": "123",
+            "language": "fr",
+            "timezone": "Europe/Paris",
+            "contacts": {
+              "firstName": "Dupont",
+              "lastName": "Dupont",
+              "phone": "+330600000000",
+              "email": "test@mail.com",
+              "language": "fr",
+              "timezone": "Europe/Paris",
+              "main": true,
+              "title": "title",
+              "isProfessional": false
+            },
+            "activatedCarriers": [
+              "carrier"
+            ]
+          }
+        },
         "required": [
           "isActive",
           "name",
@@ -9236,6 +9259,7 @@
             "x-stoplight": {
               "id": "x9r8hbz8735dz"
             },
+            "description": "list of carriers to be activated",
             "items": {
               "x-stoplight": {
                 "id": "gp9dijeumizg6"
@@ -9244,12 +9268,20 @@
               "default": "carrier.code"
             }
           }
+        }
+      },
+      "patchStores": {
+        "title": "Modify a store (patchStores)",
+        "x-stoplight": {
+          "id": "tb3gveuak7sw4"
         },
+        "type": "object",
+        "description": "This method allows you to modify a store.",
         "x-examples": {
           "Example 1": {
             "isActive": true,
-            "name": "store12",
-            "storeId": "123",
+            "name": "store23",
+            "storeId": "124",
             "language": "fr",
             "timezone": "Europe/Paris",
             "contacts": {
@@ -9267,15 +9299,7 @@
               "carrier"
             ]
           }
-        }
-      },
-      "patchStores": {
-        "title": "Modify a store (patchStores)",
-        "x-stoplight": {
-          "id": "tb3gveuak7sw4"
         },
-        "type": "object",
-        "description": "This method allows you to modify a store.",
         "required": [
           "isActive",
           "name",
@@ -9308,33 +9332,11 @@
           },
           "activatedCarriers": {
             "type": "array",
+            "description": "list of carriers to be activated",
             "items": {
               "type": "string",
               "default": "carrier.code"
             }
-          }
-        },
-        "x-examples": {
-          "Example 1": {
-            "isActive": true,
-            "name": "store23",
-            "storeId": "124",
-            "language": "fr",
-            "timezone": "Europe/Paris",
-            "contacts": {
-              "firstName": "Dupont",
-              "lastName": "Dupont",
-              "phone": "+330600000000",
-              "email": "test@mail.com",
-              "language": "fr",
-              "timezone": "Europe/Paris",
-              "main": true,
-              "title": "title",
-              "isProfessional": false
-            },
-            "activatedCarriers": [
-              "carrier"
-            ]
           }
         }
       }
