@@ -9244,6 +9244,29 @@
               "default": "carrier.code"
             }
           }
+        },
+        "x-examples": {
+          "Example 1": {
+            "isActive": true,
+            "name": "store12",
+            "storeId": "123",
+            "language": "fr",
+            "timezone": "Europe/Paris",
+            "contacts": {
+              "firstName": "Dupont",
+              "lastName": "Dupont",
+              "phone": "+330600000000",
+              "email": "test@mail.com",
+              "language": "fr",
+              "timezone": "Europe/Paris",
+              "main": true,
+              "title": "title",
+              "isProfessional": false
+            },
+            "activatedCarriers": [
+              "carrier"
+            ]
+          }
         }
       },
       "patchStores": {
@@ -9289,6 +9312,29 @@
               "type": "string",
               "default": "carrier.code"
             }
+          }
+        },
+        "x-examples": {
+          "Example 1": {
+            "isActive": true,
+            "name": "store23",
+            "storeId": "124",
+            "language": "fr",
+            "timezone": "Europe/Paris",
+            "contacts": {
+              "firstName": "Dupont",
+              "lastName": "Dupont",
+              "phone": "+330600000000",
+              "email": "test@mail.com",
+              "language": "fr",
+              "timezone": "Europe/Paris",
+              "main": true,
+              "title": "title",
+              "isProfessional": false
+            },
+            "activatedCarriers": [
+              "carrier"
+            ]
           }
         }
       }
