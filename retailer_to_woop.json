@@ -8456,6 +8456,14 @@
             "isProfessional": true
           }
         },
+        "required": [
+          "firstName",
+          "lastName",
+          "phone",
+          "email",
+          "language",
+          "timezone"
+        ],
         "properties": {
           "firstName": {
             "type": "string",
@@ -8491,16 +8499,17 @@
             "type": "boolean",
             "description": "Indicates if the contact is a professional",
             "default": false
+          },
+          "companyName": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "8s5xm9rvykd54"
+            },
+            "description": "Is used to indicate the company name if the contact is a professional.\n\n",
+            "maxLength": 50,
+            "example": "woop"
           }
-        },
-        "required": [
-          "firstName",
-          "lastName",
-          "phone",
-          "email",
-          "language",
-          "timezone"
-        ]
+        }
       },
       "services": {
         "type": "array",
@@ -9482,6 +9491,13 @@
             "isProfessional": true
           }
         },
+        "required": [
+          "firstName",
+          "lastName",
+          "email",
+          "language",
+          "timezone"
+        ],
         "properties": {
           "firstName": {
             "type": "string",
@@ -9512,15 +9528,17 @@
             "type": "boolean",
             "default": false,
             "description": "Indicates if the contact is a professional"
+          },
+          "companyName": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "hg79trwlnhx76"
+            },
+            "description": "Is used to indicate the company name if the contact is a professional.\n",
+            "maxLength": 50,
+            "example": "woop"
           }
-        },
-        "required": [
-          "firstName",
-          "lastName",
-          "email",
-          "language",
-          "timezone"
-        ]
+        }
       },
       "collectStatus": {
         "type": "string",
