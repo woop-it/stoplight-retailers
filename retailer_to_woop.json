@@ -27,6 +27,9 @@
     },
     {
       "name": "Eligibility"
+    },
+    {
+      "name": "Store"
     }
   ],
   "info": {
@@ -6568,6 +6571,150 @@
           "Package advert"
         ]
       }
+    },
+    "/stores": {
+      "post": {
+        "summary": "Create a store",
+        "tags": [
+          "Store"
+        ],
+        "responses": {
+          "201": {
+            "description": "the store has been registered"
+          },
+          "400": {
+            "description": "Bad Request - Missing and/or incorrect items in the body",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - You are not authorised to access this item",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden - Creation of the store is not possible",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict - \tCreation of the store with this 'storeId' is not possible",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "postStores",
+        "x-stoplight": {
+          "id": "ml24zn56zvfwx"
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/postStores"
+              }
+            }
+          },
+          "description": "Contains the store creation information."
+        },
+        "description": "This method allows you to create a store\n"
+      }
+    },
+    "/stores/{storeId}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "storeId",
+          "in": "path",
+          "required": true
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "storeId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "patch": {
+        "summary": "Modify a store",
+        "tags": [
+          "Store"
+        ],
+        "responses": {
+          "201": {
+            "description": "OK - Request processed successfully"
+          },
+          "401": {
+            "description": "Unauthorized - You are not authorised to access this item",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden - Updating the store is not possible",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict - An action is already in progress on this store",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "patchStores",
+        "x-stoplight": {
+          "id": "9loavxc57bn0x"
+        },
+        "description": "This method allows you to modify a store. ",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/patchStores"
+              }
+            }
+          },
+          "description": "This method allows you to modify a store. "
+        }
+      }
     }
   },
   "components": {
@@ -7326,6 +7473,10 @@
             "items": {
               "$ref": "#/components/schemas/packagesForEligibility"
             }
+          },
+          "storeId": {
+            "type": "string",
+            "description": "Identifier of the store issing the request"
           },
           "options": {
             "type": "object",
@@ -9496,6 +9647,160 @@
         ],
         "description": "Refers to the channel use to communicate."
       },
+      "postStores": {
+        "title": "Creation of the store (postStores)",
+        "x-stoplight": {
+          "id": "9uj004ljgx6g2"
+        },
+        "type": "object",
+        "description": "Specifies the information required for creating the store in the WOOP plateform.",
+        "required": [
+          "isActive",
+          "name",
+          "storeId",
+          "language"
+        ],
+        "properties": {
+          "isActive": {
+            "type": "boolean",
+            "x-stoplight": {
+              "id": "7v1wll05co8d8"
+            },
+            "description": "Indicates whether or not the shop is activated on the WOOP platform. "
+          },
+          "name": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "jle33k8dd33c5"
+            },
+            "description": "Name of the store",
+            "example": "store12"
+          },
+          "storeId": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "1txmtcd0j11r9"
+            },
+            "description": "Store identifier",
+            "example": "123"
+          },
+          "language": {
+            "$ref": "#/components/schemas/language"
+          },
+          "timezone": {
+            "$ref": "#/components/schemas/timezone"
+          },
+          "contacts": {
+            "$ref": "#/components/schemas/contact"
+          },
+          "activatedCarriers": {
+            "type": "array",
+            "x-stoplight": {
+              "id": "x9r8hbz8735dz"
+            },
+            "items": {
+              "x-stoplight": {
+                "id": "gp9dijeumizg6"
+              },
+              "type": "string",
+              "default": "carrier.code"
+            }
+          }
+        },
+        "x-examples": {
+          "Example 1": {
+            "isActive": true,
+            "name": "store12",
+            "storeId": "123",
+            "language": "fr",
+            "timezone": "Europe/Paris",
+            "contacts": {
+              "firstName": "Dupont",
+              "lastName": "Dupont",
+              "phone": "+330600000000",
+              "email": "test@mail.com",
+              "language": "fr",
+              "timezone": "Europe/Paris",
+              "main": true,
+              "title": "title",
+              "isProfessional": false
+            },
+            "activatedCarriers": [
+              "carrier"
+            ]
+          }
+        }
+      },
+      "patchStores": {
+        "title": "Modify a store (patchStores)",
+        "x-stoplight": {
+          "id": "tb3gveuak7sw4"
+        },
+        "type": "object",
+        "description": "This method allows you to modify a store.",
+        "required": [
+          "isActive",
+          "name",
+          "storeId",
+          "language"
+        ],
+        "properties": {
+          "isActive": {
+            "type": "boolean",
+            "description": "Indicates whether or not the shop is activated on the WOOP platform. "
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the store",
+            "example": "store23"
+          },
+          "storeId": {
+            "type": "string",
+            "description": "Store identifier",
+            "example": "124"
+          },
+          "language": {
+            "$ref": "#/components/schemas/language"
+          },
+          "timezone": {
+            "$ref": "#/components/schemas/timezone"
+          },
+          "contacts": {
+            "$ref": "#/components/schemas/contact"
+          },
+          "activatedCarriers": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "default": "carrier.code"
+            }
+          }
+        },
+        "x-examples": {
+          "Example 1": {
+            "isActive": true,
+            "name": "store23",
+            "storeId": "124",
+            "language": "fr",
+            "timezone": "Europe/Paris",
+            "contacts": {
+              "firstName": "Dupont",
+              "lastName": "Dupont",
+              "phone": "+330600000000",
+              "email": "test@mail.com",
+              "language": "fr",
+              "timezone": "Europe/Paris",
+              "main": true,
+              "title": "title",
+              "isProfessional": false
+            },
+            "activatedCarriers": [
+              "carrier"
+            ]
+          }
+        }
+      },
+
       "postGeoShape": {
         "type": "object",
         "x-stoplight": {
