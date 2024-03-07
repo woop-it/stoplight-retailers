@@ -8951,6 +8951,14 @@
                 "value": "54fd56g4f5gfd456sd",
                 "type": "barcode",
                 "format": "128"
+              },
+              "state": {
+                "value": "ON_DOCK",
+                "date": "2019-08-24T14:15:22Z"
+              },
+              "containerId": {
+                "trailerId": "432394RDK",
+                "palletId": "344JK3"
               }
             }
           ]
@@ -8960,7 +8968,7 @@
           "properties": {
             "reference": {
               "type": "string",
-              "description": "Specifies package references.",
+              "description": "Specifies package references",
               "example": "12345B"
             },
             "barcode": {
@@ -8972,7 +8980,8 @@
                 "id": "am11lni8ag5y5"
               },
               "required": [
-                "value"
+                "value",
+                "date"
               ],
               "properties": {
                 "value": {
@@ -8980,17 +8989,16 @@
                   "x-stoplight": {
                     "id": "4k1xtgr6eiqn7"
                   },
-                  "enum": [
-                    "ON_DOCK",
-                    "PREPARED"
-                  ]
+                  "example": "ON_DOCK",
+                  "description": "Package state value"
                 },
                 "date": {
                   "type": "string",
                   "x-stoplight": {
                     "id": "st7f1fgjha3et"
                   },
-                  "format": "date-time"
+                  "format": "date-time",
+                  "description": "Last date registed"
                 }
               }
             },
