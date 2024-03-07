@@ -6471,7 +6471,7 @@
           "Store"
         ],
         "responses": {
-          "200": {
+          "201": {
             "description": "OK - Request processed successfully"
           },
           "401": {
