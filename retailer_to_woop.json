@@ -8550,7 +8550,113 @@
         },
         "required": [
           "type"
-        ]
+        ],
+        "x-examples": {
+          "Example 1": {
+            "type": "TYPOLOGY_GENERIC",
+            "ean": "12345JFDFD",
+            "cug": "234J",
+            "label": "Mon produit",
+            "quantity": 1
+          }
+        },
+        "description": "Specifies the information needed to update a product",
+        "title": "Product (product)"
+      },
+      "productCustomDeclaration": {
+        "type": "object",
+        "x-examples": {
+          "Example 1": {
+            "type": "TYPOLOGY_GENERIC",
+            "ean": "12345JFDFD",
+            "cug": "234J",
+            "label": "Mon produit",
+            "quantity": 1,
+            "price": {
+              "value": "1000",
+              "currency": "EUR"
+            },
+            "originCountry": "FR",
+            "hsCode": 1,
+            "weight": {
+              "value": "1",
+              "unit": "kg"
+            },
+            "length": {
+              "value": "1",
+              "unit": "cm"
+            },
+            "width": {
+              "value": "1",
+              "unit": "cm"
+            },
+            "height": {
+              "value": "1",
+              "unit": "cm"
+            }
+          }
+        },
+        "description": "Specifies the information needed to update a specify product used for customs declaration",
+        "title": "Product for customs declaration (productCustomDeclaration)",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Product typologie. ",
+            "example": "TYPOLOGY_GENERIC"
+          },
+          "ean": {
+            "type": "string",
+            "description": "Product EAN code."
+          },
+          "cug": {
+            "type": "string",
+            "description": "Product CUG code. "
+          },
+          "label": {
+            "type": "string",
+            "description": "Product name. "
+          },
+          "quantity": {
+            "type": "integer",
+            "description": "Identical quantity of product.\n\n"
+          },
+          "price": {
+            "$ref": "#/components/schemas/productsPrice"
+          },
+          "originCountry": {
+            "type": "string",
+            "description": "Code Pays d’origine du produit. Format (ISO 3166 alpha-2). Obligatoire pour les envois soumis à des déclarations en douane.\n\n",
+            "example": "FR"
+          },
+          "hsCode": {
+            "type": "integer",
+            "description": "Tariff number requested in customs documents = HS CODE.\n\n",
+            "example": 36004
+          },
+          "weight": {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "string"
+              },
+              "unit": {
+                "type": "string"
+              }
+            }
+          },
+          "length": {
+            "$ref": "#/components/schemas/mass"
+          },
+          "width": {
+            "$ref": "#/components/schemas/length"
+          },
+          "height": {
+            "$ref": "#/components/schemas/length"
+          }
+        }
       },
       "packages": {
         "description": "Specifies the information needed to update a package. The handling unit is to be defined with the package/product structure",
@@ -8896,9 +9002,18 @@
         ]
       },
       "length": {
+        "description": "Specifies the size of a package/product. ",
+        "x-examples": {
+          "Example": {
+            "value": 200,
+            "unit": "mm"
+          }
+        },
+        "title": "Dimension (length)",
+        "type": "object",
         "required": [
-          "unit",
-          "value"
+          "value",
+          "unit"
         ],
         "properties": {
           "value": {
@@ -8907,20 +9022,21 @@
           "unit": {
             "$ref": "#/components/schemas/lengthUnits"
           }
-        },
-        "description": "Specifies the size of a package.",
-        "x-examples": {
-          "Example": {
-            "value": 200,
-            "unit": "mm"
-          }
-        },
-        "title": "Dimension (length)"
+        }
       },
       "mass": {
+        "description": "Specifies the weight of a package/product. Mandatory for consignments subject to customs declarations.",
+        "x-examples": {
+          "Example": {
+            "value": 1,
+            "unit": "kg"
+          }
+        },
+        "title": "Weight (mass)",
+        "type": "object",
         "required": [
-          "unit",
-          "value"
+          "value",
+          "unit"
         ],
         "properties": {
           "value": {
@@ -8929,15 +9045,7 @@
           "unit": {
             "$ref": "#/components/schemas/massUnits"
           }
-        },
-        "description": "Specifies the weight of a package/product.",
-        "x-examples": {
-          "Example": {
-            "value": 1,
-            "unit": "kg"
-          }
-        },
-        "title": "Weight (mass)"
+        }
       },
       "packagesReferences": {
         "type": "array",
@@ -9026,7 +9134,7 @@
         }
       },
       "productsPrice": {
-        "description": "Corresponds to the sale prices of the products. To be entered for the service “SERVICE_INSTALL”.",
+        "description": "Corresponds to the selling price of the products. Mandatory for the \"SERVICE_INSTALL\" service and for shipments subject to customs declarations.\n\n",
         "x-examples": {
           "Example": {
             "value": 300,
@@ -9123,23 +9231,11 @@
       "productType": {
         "type": "string",
         "description": "Specifies the product type.",
-        "enum": [
-          "TYPOLOGY_GENERIC",
-          "TYPOLOGY_GROCERY",
-          "TYPOLOGY_FRESH",
-          "TYPOLOGY_FROZEN",
-          "TYPOLOGY_DANGEROUS",
-          "TYPOLOGY_HOUSEHOLD",
-          "TYPOLOGY_VOLUMINOUS",
-          "TYPOLOGY_FRAGILE",
-          "TYPOLOGY_VOLUMINOUS_FRAGILE",
-          "TYPOLOGY_LARGE_HOUSEHOLD",
-          "TYPOLOGY_SMALL_HOUSEHOLD"
-        ],
         "x-examples": {
           "Example": "TYPOLOGY_GENERIC"
         },
-        "title": "Product type (productType)"
+        "title": "Product type (productType)",
+        "example": "TYPOLOGY_GENERIC"
       },
       "lengthUnits": {
         "type": "string",
