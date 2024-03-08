@@ -8709,6 +8709,13 @@
           }
         },
         "title": "Package (package)",
+        "required": [
+          "length",
+          "width",
+          "height",
+          "weight",
+          "products"
+        ],
         "properties": {
           "references": {
             "$ref": "#/components/schemas/packagesReferences"
@@ -8733,11 +8740,23 @@
             "$ref": "#/components/schemas/mass"
           },
           "products": {
-            "type": "array",
-            "description": "List of products in the package",
-            "items": {
-              "$ref": "#/components/schemas/product"
-            }
+            "description": "List of products in the package. \nWarning , 2 types of product list possible: 1) Simplified declaration - 2) Declaration for customs declaration ",
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/product"
+                }
+              },
+              {
+                "x-stoplight": {
+                  "id": "nchrhqnft99p0"
+                },
+                "items": {
+                  "$ref": "#/components/schemas/productCustomDeclaration"
+                }
+              }
+            ],
+            "type": "array"
           },
           "quantity": {
             "type": "integer",
@@ -8751,6 +8770,10 @@
               "footprint": {
                 "type": "object",
                 "description": "package footprint on the ground",
+                "required": [
+                  "value",
+                  "unit"
+                ],
                 "properties": {
                   "value": {
                     "type": "number",
@@ -8767,11 +8790,7 @@
                       "pallet"
                     ]
                   }
-                },
-                "required": [
-                  "value",
-                  "unit"
-                ]
+                }
               }
             }
           },
@@ -8833,14 +8852,7 @@
               }
             }
           }
-        },
-        "required": [
-          "length",
-          "width",
-          "height",
-          "weight",
-          "products"
-        ]
+        }
       },
       "packagesForEligibility": {
         "description": "Default : Parcel dimensions are not mandatory ! \nWarning : If you want to create eligibility with delivery slots, parcel dimensions are mandatory ! ",
