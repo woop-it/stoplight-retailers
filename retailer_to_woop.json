@@ -8561,7 +8561,7 @@
           }
         },
         "description": "Specifies the information needed to update a product",
-        "title": "Product (product)"
+        "title": "Product simplified"
       },
       "productCustomDeclaration": {
         "type": "object",
@@ -8597,9 +8597,12 @@
           }
         },
         "description": "Specifies the information needed to update a specify product used for customs declaration",
-        "title": "Product for customs declaration (productCustomDeclaration)",
+        "title": "Product for customs declaration",
         "required": [
-          "type"
+          "type",
+          "price",
+          "originCountry",
+          "weight"
         ],
         "properties": {
           "type": {
