@@ -9856,7 +9856,8 @@
           "zoneType",
           "type",
           "file",
-          "countryCode"
+          "countryCode",
+          "carrierId"
         ],
         "properties": {
           "title": {
