@@ -6724,7 +6724,9 @@
     "/shipments": {
       "post": {
         "summary": "Create shipment with label",
-        "tags": [],
+        "tags": [
+          "Shipment"
+        ],
         "responses": {
           "201": {
             "$ref": "#/components/responses/ShipmentPostResponse"
@@ -7970,9 +7972,6 @@
           },
           "services": {
             "$ref": "#/components/schemas/services"
-          },
-          "productsPrice": {
-            "$ref": "#/components/schemas/productsPrice"
           },
           "tags": {
             "$ref": "#/components/schemas/tags"
@@ -10865,16 +10864,12 @@
                   "type": "object",
                   "required": [
                     "id",
-                    "status",
                     "updatedAt"
                   ],
                   "properties": {
                     "id": {
                       "type": "string",
                       "description": "Order identifier\n\n"
-                    },
-                    "status": {
-                      "$ref": "#/components/schemas/orderStatus"
                     },
                     "updatedAt": {
                       "type": "string",
@@ -10898,12 +10893,6 @@
                       "type": "string",
                       "format": "date-time"
                     },
-                    "status": {
-                      "$ref": "#/components/schemas/deliveryStatus"
-                    },
-                    "subStatus": {
-                      "$ref": "./models/subStatus.yaml"
-                    },
                     "trackingUrls:": {
                       "$ref": "./models/trackingUrls.yaml"
                     }
@@ -10918,12 +10907,6 @@
                     "code": {
                       "type": "string"
                     }
-                  }
-                },
-                "parcels": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "./models/parcel.yaml"
                   }
                 },
                 "labels": {
