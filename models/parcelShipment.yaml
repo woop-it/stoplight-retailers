@@ -1,0 +1,50 @@
+title: Parcel with label for shipment (parcelShipment)
+x-stoplight:
+  id: 3lw3t8ei0tbvs
+type: object
+description: 'Parcel informations with label value in base64 type used for created shipment. '
+examples:
+  - id: 56f74d65s4f564ds6
+    trackingId: 77899656544BY
+    status: DELIVERY_KO
+    subStatus: FAILED_WITH_RETURN
+    barcode:
+      value: '7841122236655'
+      type: barcode
+      format: '128'
+    package:
+      reference: EARB1225
+      products:
+        - type: TYPOLOGY_GENERIC
+          ean: '1259456954845'
+          cug: LAMPE785AD
+          label: Bedside lamp
+          quantity: 1
+required:
+  - id
+  - status
+  - package
+properties:
+  id:
+    type: string
+    description: Parcel identifier
+    x-stoplight:
+      id: kokestu12axk5
+  status:
+    $ref: ./status.yaml
+    x-stoplight:
+      id: kqeo1rpn1fjv5
+  subStatus:
+    $ref: ./subStatus.yaml
+    x-stoplight:
+      id: yo1zrsgkkh97i
+  trackingId:
+    type: string
+    description: Tracking identifier
+    x-stoplight:
+      id: uyejrkg9hyfef
+  package:
+    $ref: ./Package/package.json
+    description: Package contained in the parcel
+    x-stoplight:
+      id: a6kev7iqr34ju
