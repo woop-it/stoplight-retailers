@@ -6732,13 +6732,35 @@
             "$ref": "#/components/responses/ShipmentPostResponse"
           },
           "400": {
-            "description": "Bad Request"
+            "description": "Missing and/or incorrect items in the body\n\n",
+            "headers": {},
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
           },
           "403": {
-            "description": "Forbidden"
+            "description": "Creation of the order is not possible\n\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
           },
           "409": {
-            "description": "Conflict"
+            "description": "Creation of the order with this 'orderId' is not possible\n\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
           }
         },
         "operationId": "post-shipments",
@@ -10932,7 +10954,7 @@
         }
       },
       "ShipmentPostResponse": {
-        "description": "Example response",
+        "description": "The delivery is accepted, a 'deliveryId' is returned, additionally a table of 'parcels' ids can be returned if tracking by parcel. A table of labels can also be returned.\n\n",
         "content": {
           "application/json": {
             "schema": {
