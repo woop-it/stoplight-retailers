@@ -7937,7 +7937,7 @@
         }
       },
       "address": {
-        "description": "Here, 3 location.types are possible (address, pickupPoint and exchangePlace). The request must be made using one of these three options.",
+        "description": "Here, 3 location.types are possible (`address`, `pickupPoint` and `exchangePlace`). The request must be made using one of these three options.\n\n> If location.type = `address` then the full address must be sent ",
         "title": "Address (address)",
         "type": "object",
         "x-examples": {
@@ -8029,7 +8029,7 @@
           }
         },
         "title": "exchangePlace",
-        "description": "Here, 3 location.types are possible (address, pickupPoint and exchangePlace). The request must be made using one of these three options.",
+        "description": "Here, 3 location.types are possible (`address`, `pickupPoint` and `exchangePlace`). The request must be made using one of these three options.\n\n> If location.type = `exchangePlace` then the identifier of the collection point configured and registered on the WOOP platform. ",
         "required": [
           "type",
           "id"
@@ -8062,7 +8062,7 @@
             "carrierCode": "mondial-relay"
           }
         },
-        "description": "Here, 3 location.types are possible (address, pickupPoint and exchangePlace). The request must be made using one of these three options.",
+        "description": "Here, 3 location.types are possible (`address`, `pickupPoint` and `exchangePlace`). The request must be made using one of these three options.\n\n> If location.type = `pickupPoint` then you need to enter the relay point identifier ",
         "title": "pickupPoint",
         "required": [
           "type",
@@ -8096,7 +8096,7 @@
         }
       },
       "addressForEligibility": {
-        "description": "Here, 3 location.types are possible (address, pickupPoint and exchangePlace). The request must be made using one of these three options.",
+        "description": "Here, 3 location.types are possible (`address`, `pickupPoint` and `exchangePlace`). The request must be made using one of these three options.",
         "x-stoplight": {
           "id": "ai6r20urg3t8d"
         },
@@ -8207,7 +8207,7 @@
       },
       "location": {
         "title": "Location (location)",
-        "description": "Here, 3 location.types are possible (address, pickupPoint and exchangePlace). The request must be made using one of these three options.",
+        "description": "Here, 3 location.types are possible (`address`, `pickupPoint` and `exchangePlace`). The request must be made using one of these three options.",
         "x-examples": {
           "Adress": {
             "type": "address",
@@ -8256,8 +8256,7 @@
               {
                 "$ref": "#/components/schemas/exchangePlaceType"
               }
-            ],
-            "description": "Here, 3 location.types are possible (address, pickupPoint and exchangePlace). The request must be made using one of these three options."
+            ]
           }
         ]
       },
@@ -8266,7 +8265,7 @@
         "x-stoplight": {
           "id": "8gx4wbsz21y1h"
         },
-        "description": "Here, 3 location.types are possible (address, pickupPoint and exchangePlace). The request must be made using one of these three options.",
+        "description": "Here, 3 location.types are possible (`address`, `pickupPoint` and `exchangePlace`). The request must be made using one of these three options.",
         "x-examples": {
           "Adress": {
             "type": "address",
@@ -8305,7 +8304,6 @@
             "x-stoplight": {
               "id": "nxttbv5tsf2vf"
             },
-            "description": "Here, 3 location.types are possible (address, pickupPoint and exchangePlace). The request must be made using one of these three options.",
             "oneOf": [
               {
                 "$ref": "#/components/schemas/addressForEligibility"
@@ -8449,7 +8447,7 @@
       },
       "contact": {
         "title": "Contact",
-        "description": "Contact informations",
+        "description": "Full contact informations! \n\n> If location.type = `exchangePlace`this section is not mandatory. In this case, the contact information will be retrieved from the configuration set up on the WOOP platform.  ",
         "type": "object",
         "x-examples": {
           "Example": {
@@ -9606,7 +9604,7 @@
       },
       "contactDelivery": {
         "title": "Delivery contact (contactDelivery)",
-        "description": "Delivery contact information. (telephone not required)",
+        "description": "Full contact informations! \n\n> If location.type = `exchangePlace`this section is not mandatory. In this case, the contact information will be retrieved from the configuration set up on the WOOP platform.  ",
         "type": "object",
         "x-examples": {
           "Example": {
