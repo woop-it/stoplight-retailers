@@ -6720,6 +6720,92 @@
           }
         }
       }
+    },
+    "/deliveryPromise": {
+      "post": {
+        "summary": "/deliveryPromise",
+        "tags": [],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/DeliveryPromisePostResponse"
+          }
+        },
+        "operationId": "post-deliveryPromise",
+        "x-stoplight": {
+          "id": "ndzktv1jygbre"
+        },
+        "description": "This method calculates the delivery promise, considering carrier constraints. This method can calculate the delivery promise with or without picking and delivery intervals.\n\n",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "x-api-version",
+            "required": true,
+            "description": "version of API used"
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/postDeliveryPromise"
+              },
+              "examples": {
+                "Example 1": {
+                  "value": {
+                    "storeId": "string",
+                    "carrierIds": [
+                      "string"
+                    ],
+                    "picking": {
+                      "location": {
+                        "type": "address",
+                        "addressLine1": "string",
+                        "addressLine2": "string",
+                        "elevator": true,
+                        "floor": 0,
+                        "doorCode": "string",
+                        "postalCode": "59800",
+                        "city": "LILLE",
+                        "district": "string",
+                        "country": "FR",
+                        "comment": "string",
+                        "coordinates": {
+                          "latitude": 0,
+                          "longitude": 0
+                        }
+                      }
+                    },
+                    "delivery": {
+                      "location": {
+                        "type": "address",
+                        "addressLine1": "string",
+                        "addressLine2": "string",
+                        "elevator": true,
+                        "floor": 0,
+                        "doorCode": "string",
+                        "postalCode": "59800",
+                        "city": "LILLE",
+                        "district": "string",
+                        "country": "FR",
+                        "comment": "string",
+                        "coordinates": {
+                          "latitude": 0,
+                          "longitude": 0
+                        }
+                      }
+                    },
+                    "orderDate": "2024-01-30T10:00:00"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -7030,6 +7116,13 @@
           "order": {
             "type": "object",
             "description": "Order informations",
+            "required": [
+              "id",
+              "status",
+              "updatedAt",
+              "picking",
+              "delivery"
+            ],
             "properties": {
               "id": {
                 "type": "string",
@@ -7101,25 +7194,7 @@
                 }
               },
               "carrier": {
-                "type": "object",
-                "description": "Information from the selected carrier",
-                "properties": {
-                  "name": {
-                    "type": "string",
-                    "description": "Carrier name"
-                  },
-                  "claimUrl": {
-                    "type": "string",
-                    "description": "Carrier claim URL"
-                  },
-                  "contact": {
-                    "$ref": "#/components/schemas/contact"
-                  },
-                  "code": {
-                    "type": "string",
-                    "description": "Carrier identifier"
-                  }
-                }
+                "$ref": "#/components/schemas/carrier"
               },
               "parcels": {
                 "type": "array",
@@ -7133,14 +7208,7 @@
               "emissions": {
                 "$ref": "#/components/schemas/estimatedCO2e"
               }
-            },
-            "required": [
-              "id",
-              "status",
-              "updatedAt",
-              "picking",
-              "delivery"
-            ]
+            }
           }
         }
       },
@@ -10077,6 +10145,114 @@
           "ORDER_TO_BE_COMPLETED",
           "ORDER_WITHOUT_SHIPMENT"
         ]
+      },
+      "postDeliveryPromise": {
+        "type": "object",
+        "x-examples": {
+          "Example 1": {
+            "carrierIds": [
+              "chronopost"
+            ],
+            "delivery": {
+              "location": {
+                "addressLine1": "67 rue de Luxembourg",
+                "city": "Lille",
+                "country": "FR",
+                "postalCode": "59777",
+                "type": "address"
+              }
+            },
+            "orderDate": "2024-01-30T10:00:02.668Z",
+            "picking": {
+              "location": {
+                "id": "6",
+                "type": "exchangePlace"
+              }
+            },
+            "storeId": "6"
+          }
+        },
+        "title": "Delivery promise calculation (postDeliveryPromise)",
+        "description": "Launch the delivery promise calculation",
+        "required": [
+          "storeId",
+          "picking",
+          "delivery"
+        ],
+        "properties": {
+          "storeId": {
+            "type": "string",
+            "description": "Identifier of the store issuing the request"
+          },
+          "carrierIds": {
+            "type": "array",
+            "description": "List of carrierId",
+            "items": {
+              "type": "string"
+            }
+          },
+          "picking": {
+            "type": "object",
+            "properties": {
+              "location": {
+                "$ref": "#/components/schemas/location"
+              }
+            }
+          },
+          "delivery": {
+            "type": "object",
+            "properties": {
+              "location": {
+                "$ref": "#/components/schemas/location"
+              }
+            }
+          },
+          "orderDate": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2024-01-30T10:00:00"
+          }
+        }
+      },
+      "carrier": {
+        "title": "carrier",
+        "x-stoplight": {
+          "id": "m3kneqrvj5u4e"
+        },
+        "type": "object",
+        "description": "carrier informations required",
+        "required": [
+          "name",
+          "code"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "kuc510w6ryl3k"
+            },
+            "description": "Carrier name",
+            "example": "DPD"
+          },
+          "code": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "249ewq0vkn99d"
+            },
+            "description": "Carrier identifier",
+            "example": "dpd"
+          },
+          "claimUrl": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "qckw356fk50o1"
+            },
+            "description": "Carrier claim URL"
+          },
+          "contact": {
+            "$ref": "#/components/schemas/contact"
+          }
+        }
       }
     },
     "parameters": {
@@ -10400,6 +10576,73 @@
                   "type": "string",
                   "description": "Whether the geoShape is expired or not\n\n",
                   "format": "date-time"
+                }
+              }
+            }
+          }
+        }
+      },
+      "DeliveryPromisePostResponse": {
+        "description": "Delivery promise calculated successfully\n",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "x-examples": {
+                "Example 1": {
+                  "promises": [
+                    {
+                      "carrierName": "Chronopost",
+                      "carrierCode": "chronopost",
+                      "picking": {
+                        "interval": {
+                          "start": "2024-01-30T00:00:00.668Z",
+                          "end": "2024-01-30T11:49:02.668Z"
+                        }
+                      },
+                      "delivery": {
+                        "interval": {
+                          "start": "2024-01-30T13:49:02.668Z",
+                          "end": "2024-01-30T13:49:02.668Z"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "properties": {
+                "promises": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "carrierCode": {
+                        "$ref": "#/components/schemas/carrier"
+                      },
+                      "picking": {
+                        "type": "object",
+                        "properties": {
+                          "interval": {
+                            "type": "array",
+                            "items": {
+                              "$ref": "#/components/schemas/pickingInterval"
+                            }
+                          }
+                        }
+                      },
+                      "delivery": {
+                        "type": "object",
+                        "properties": {
+                          "interval": {
+                            "type": "array",
+                            "items": {
+                              "$ref": "#/components/schemas/deliveryInterval"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
