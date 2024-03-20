@@ -6723,7 +6723,7 @@
     },
     "/deliveryPromise": {
       "post": {
-        "summary": "/deliveryPromise",
+        "summary": "Determine the delivery promise",
         "tags": [
           "Promise"
         ],
