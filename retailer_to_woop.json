@@ -7612,6 +7612,9 @@
             "type": "string",
             "description": "Identifier of the store issuing the request"
           },
+          "state": {
+            "$ref": "#/components/schemas/state"
+          },
           "picking": {
             "description": "Information on the collection location",
             "type": "object",
@@ -10030,7 +10033,74 @@
               "type": "string"
             }
           }
+      },
+      "state": {
+        "type": "object",
+        "x-examples": {
+          "Example 1": {
+            "code": "WITHOUT_SHIPMENT",
+            "options": {
+              "deliveryId": "A234D4F",
+              "parcelIds": [
+                "12345",
+                "94554J"
+              ]
+            }
+          }
+        },
+        "description": "Allows you to define a specific status for the order when it is created.",
+        "title": "State of order",
+        "required": [
+          "code"
+        ],
+        "properties": {
+          "code": {
+            "$ref": "#/components/schemas/orderStates"
+          },
+          "options": {
+            "type": "object",
+            "properties": {
+              "deliveryId": {
+                "type": "string",
+                "x-stoplight": {
+                  "id": "aqojx778k8y9v"
+                },
+                "description": "Unique delivery identifier (maximum 36 characters)",
+                "example": "A234D4F",
+                "minLength": 1,
+                "maxLength": 36
+              },
+              "parcelIds": {
+                "type": "array",
+                "x-stoplight": {
+                  "id": "1fnawjg7526fu"
+                },
+                "description": "Identifier of the package returned by the carrier. Can also be used for tracking ",
+                "items": {
+                  "x-stoplight": {
+                    "id": "i1c0f89tc3kbr"
+                  },
+                  "type": "string",
+                  "maxLength": 36,
+                  "minLength": 1,
+                  "example": "1Z601FF06800128696"
+                }
+              }
+            }
+          }
         }
+      },
+      "orderStates": {
+        "x-stoplight": {
+          "id": "3htjg65i1e3fq"
+        },
+        "x-examples": {},
+        "title": "orderStates (List of orderStates)",
+        "description": "List of orderStates.",
+        "enum": [
+          "ORDER_TO_BE_COMPLETED",
+          "ORDER_WITHOUT_SHIPMENT"
+        ]
       }
     },
     "parameters": {
