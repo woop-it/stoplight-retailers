@@ -6724,7 +6724,9 @@
     "/deliveryPromise": {
       "post": {
         "summary": "/deliveryPromise",
-        "tags": [],
+        "tags": [
+          "Promise"
+        ],
         "responses": {
           "200": {
             "$ref": "#/components/responses/DeliveryPromisePostResponse"
