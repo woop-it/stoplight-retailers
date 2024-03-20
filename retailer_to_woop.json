@@ -2240,7 +2240,7 @@
         "tags": [
           "Order"
         ],
-        "description": "This method allows you to create an order from Woop.\nOnce the order has been validated, quotes will be sent to the carriers. The delivery order will then be created once a quote has been validated.",
+        "description": "This method allows you to create an order from Woop\nOnce the order has been validated, quotes will be sent to the carriers. The delivery order will then be created once a quote has been validated.",
         "operationId": "postOrders",
         "parameters": [
           {
