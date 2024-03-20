@@ -7612,6 +7612,9 @@
             "type": "string",
             "description": "Identifier of the store issuing the request"
           },
+          "state": {
+            "$ref": "#/components/schemas/state"
+          },
           "picking": {
             "description": "Information on the collection location",
             "type": "object",
@@ -7670,9 +7673,6 @@
           "services": {
             "$ref": "#/components/schemas/services"
           },
-          "productsPrice": {
-            "$ref": "#/components/schemas/productsPrice"
-          },
           "expectedPayment": {
             "type": "object",
             "description": "Rest to be paid, to be used as part of the `SERVICE_PAY_ON_DELIVERY` service",
@@ -7706,12 +7706,6 @@
           },
           "carrierSelection": {
             "$ref": "#/components/schemas/carrierSelection"
-          },
-          "state": {
-            "type": "string",
-            "enum": [
-              "TO_BE_COMPLETED"
-            ]
           },
           "additionalData": {
             "$ref": "./models/additionalData.yaml"
@@ -10031,6 +10025,58 @@
             }
           }
         }
+      },
+      "state": {
+        "type": "object",
+        "x-examples": {
+          "Example 1": {
+            "code": "WITHOUT_SHIPMENT",
+            "options": {
+              "deliveryId": "A234D4F",
+              "parcelIds": [
+                "12345",
+                "94554J"
+              ]
+            }
+          }
+        },
+        "description": "Allows you to define a specific status for the order when it is created.",
+        "title": "State of order",
+        "required": [
+          "code"
+        ],
+        "properties": {
+          "code": {
+            "$ref": "#/components/schemas/orderStates"
+          },
+          "options": {
+            "type": "object",
+            "properties": {
+              "deliveryId": {
+                "type": "string",
+                "description": "Unique delivery identifier (maximum 36 characters)"
+              },
+              "parcelIds": {
+                "type": "array",
+                "description": "Identifier of the package returned by the carrier. Can also be used for tracking ",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "orderStates": {
+        "title": "orderStates (List of orderStates)",
+        "x-stoplight": {
+          "id": "sc0f5s9khuvkd"
+        },
+        "description": "List of orderStates.",
+        "enum": [
+          "ORDER_TO_BE_COMPLETED",
+          "ORDER_WITHOUT_SHIPMENT"
+        ]
       }
     },
     "parameters": {
