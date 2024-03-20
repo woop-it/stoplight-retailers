@@ -326,14 +326,8 @@
   "properties": {
     "references": {
       "type": "array",
-      "x-stoplight": {
-        "id": "6d6ijlar4d964"
-      },
       "items": {
         "type": "object",
-        "x-stoplight": {
-          "id": "q2kfilssaxbdi"
-        },
         "properties": {
           "reference": {
             "$ref": "../Package/packageReference.json",
@@ -347,7 +341,13 @@
               "id": "knig4zy79seb2"
             }
           }
+        },
+        "x-stoplight": {
+          "id": "q2kfilssaxbdi"
         }
+      },
+      "x-stoplight": {
+        "id": "6d6ijlar4d964"
       }
     },
     "length": {
@@ -377,14 +377,14 @@
     "products": {
       "type": "array",
       "description": "List of products in the package",
-      "x-stoplight": {
-        "id": "hdj7n87ph2hql"
-      },
       "items": {
         "$ref": "../Product/product.json",
         "x-stoplight": {
           "id": "nxraasbz96rew"
         }
+      },
+      "x-stoplight": {
+        "id": "hdj7n87ph2hql"
       }
     },
     "quantity": {
@@ -398,9 +398,6 @@
     "attributes": {
       "type": "object",
       "description": "package attributes",
-      "x-stoplight": {
-        "id": "uova7hs9tvrjo"
-      },
       "properties": {
         "footprint": {
           "$ref": "../Dimension/footprint.json",
@@ -409,6 +406,9 @@
             "id": "o8qxe2nqlgl58"
           }
         }
+      },
+      "x-stoplight": {
+        "id": "uova7hs9tvrjo"
       }
     },
     "type": {
@@ -416,52 +416,6 @@
       "description": "package type",
       "x-stoplight": {
         "id": "wy0xtswdfrliy"
-      }
-    },
-    "volume": {
-      "type": "array",
-      "x-stoplight": {
-        "id": "wxz55qqavuxiv"
-      },
-      "items": {
-        "x-stoplight": {
-          "id": "5cr626q8nestl"
-        },
-        "type": "object",
-        "properties": {
-          "value": {
-            "type": "string",
-            "x-stoplight": {
-              "id": "vtgxpzz3p40g9"
-            },
-            "example": "15"
-          },
-          "unit": {
-            "x-stoplight": {
-              "id": "bf9fifbry3oav"
-            },
-            "example": "m3",
-            "enum": [
-                    "mm3",
-                    "cm3",
-                    "ml",
-                    "l",
-                    "kl",
-                    "m3",
-                    "km3",
-                    "tsp",
-                    "Tbs",
-                    "in3",
-                    "fl-oz",
-                    "cup",
-                    "pnt",
-                    "qt",
-                    "gal",
-                    "ft3",
-                    "yd3"
-            ]
-          }
-        }
       }
     }
   },
