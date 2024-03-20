@@ -6632,7 +6632,7 @@
         "x-stoplight": {
           "id": "oid5los3kqrhy"
         },
-        "description": "This method allows you to create a store\n",
+        "description": "This method allows you to create a store.\n",
         "requestBody": {
           "description": "Contains the store creation information.",
           "content": {
