@@ -8096,7 +8096,7 @@
         }
       },
       "addressForEligibility": {
-        "description": "Here, 3 location.types are possible (`address`, `pickupPoint` and `exchangePlace`). The request must be made using one of these three options.",
+        "description": "Here, 3 location.types are possible (`address`, `pickupPoint` and `exchangePlace`). The request must be made using one of these three options.\n\n> If location.type = `address` then the full address must be sent ",
         "x-stoplight": {
           "id": "ai6r20urg3t8d"
         },
@@ -8447,7 +8447,7 @@
       },
       "contact": {
         "title": "Contact",
-        "description": "Full contact informations! \n\n> If location.type = `exchangePlace`this section is not mandatory. In this case, the contact information will be retrieved from the configuration set up on the WOOP platform.  ",
+        "description": "Full contact informations ! \n\n> If location.type = `exchangePlace`this section is not mandatory. In this case, the contact information will be retrieved from the configuration set up on the WOOP platform.  ",
         "type": "object",
         "x-examples": {
           "Example": {
@@ -8602,7 +8602,7 @@
             }
           }
         },
-        "description": "Specifies the information needed to update a specify product used for customs declaration",
+        "description": "Specifies the information needed to update a specify product used for customs declaration\n\n> This system can be used to declare a list of specific products on the customs declaration.",
         "title": "Product for customs declaration",
         "required": [
           "type",
@@ -8749,7 +8749,7 @@
             "$ref": "#/components/schemas/mass"
           },
           "products": {
-            "description": "List of products in the package. \nWarning , 2 types of product list possible: 1) Simplified declaration - 2) Declaration for customs declaration ",
+            "description": "List of products in the package. \nTwo types of product list possible:  \n- `Simplified declaration`\n- `Customs declaration` ",
             "anyOf": [
               {
                 "items": {
