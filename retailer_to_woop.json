@@ -31,7 +31,7 @@
   ],
   "info": {
     "title": "Retailer to Woop",
-    "description": "This document contains the technical information about Woop APIs for carriers. For any questions or clarification, please contact the internal technical team.\n\nTo use \"Retailer to Woop\" APIs, you must use the confidential access codes provided when you created your retailer account on the platform. [See documentation](https://woop.stoplight.io/docs/retailer/docs/Basis/2.Authentication.md)\n\nThe version currently available in the documentation is <b>Version 1.7.0</b>",
+    "description": "This document contains the technical information about Woop APIs for carriers. For any questions or clarification, please contact the internal technical team\n\nTo use \"Retailer to Woop\" APIs, you must use the confidential access codes provided when you created your retailer account on the platform. [See documentation](https://woop.stoplight.io/docs/retailer/docs/Basis/2.Authentication.md)\n\nThe version currently available in the documentation is <b>Version 1.7.0</b>",
     "version": "1.7.0"
   },
   "servers": [
@@ -8002,7 +8002,7 @@
         }
       },
       "address": {
-        "description": "Here, 3 location.types are possible (address, pickupPoint and exchangePlace). The request must be made using one of these three options.",
+        "description": "Here, 3 location.types are possible (`address`, `pickupPoint` and `exchangePlace`). The request must be made using one of these three options.\n\n> If location.type = `address` then the full address must be sent ",
         "title": "Address (address)",
         "type": "object",
         "x-examples": {
@@ -8094,7 +8094,7 @@
           }
         },
         "title": "exchangePlace",
-        "description": "Here, 3 location.types are possible (address, pickupPoint and exchangePlace). The request must be made using one of these three options.",
+        "description": "Here, 3 location.types are possible (`address`, `pickupPoint` and `exchangePlace`). The request must be made using one of these three options.\n\n> If location.type = `exchangePlace` then the identifier of the collection point configured and registered on the WOOP platform. ",
         "required": [
           "type",
           "id"
@@ -8127,7 +8127,7 @@
             "carrierCode": "mondial-relay"
           }
         },
-        "description": "Here, 3 location.types are possible (address, pickupPoint and exchangePlace). The request must be made using one of these three options.",
+        "description": "Here, 3 location.types are possible (`address`, `pickupPoint` and `exchangePlace`). The request must be made using one of these three options.\n\n> If location.type = `pickupPoint` then you need to enter the relay point identifier ",
         "title": "pickupPoint",
         "required": [
           "type",
@@ -8161,7 +8161,7 @@
         }
       },
       "addressForEligibility": {
-        "description": "Here, 3 location.types are possible (address, pickupPoint and exchangePlace). The request must be made using one of these three options.",
+        "description": "Here, 3 location.types are possible (`address`, `pickupPoint` and `exchangePlace`). The request must be made using one of these three options.\n\n> If location.type = `address` then the full address must be sent ",
         "x-stoplight": {
           "id": "ai6r20urg3t8d"
         },
@@ -8272,7 +8272,7 @@
       },
       "location": {
         "title": "Location (location)",
-        "description": "Here, 3 location.types are possible (address, pickupPoint and exchangePlace). The request must be made using one of these three options.",
+        "description": "Here, 3 location.types are possible (`address`, `pickupPoint` and `exchangePlace`). The request must be made using one of these three options.",
         "x-examples": {
           "Adress": {
             "type": "address",
@@ -8321,8 +8321,7 @@
               {
                 "$ref": "#/components/schemas/exchangePlaceType"
               }
-            ],
-            "description": "Here, 3 location.types are possible (address, pickupPoint and exchangePlace). The request must be made using one of these three options."
+            ]
           }
         ]
       },
@@ -8331,7 +8330,7 @@
         "x-stoplight": {
           "id": "8gx4wbsz21y1h"
         },
-        "description": "Here, 3 location.types are possible (address, pickupPoint and exchangePlace). The request must be made using one of these three options.",
+        "description": "Here, 3 location.types are possible (`address`, `pickupPoint` and `exchangePlace`). The request must be made using one of these three options.",
         "x-examples": {
           "Adress": {
             "type": "address",
@@ -8370,7 +8369,6 @@
             "x-stoplight": {
               "id": "nxttbv5tsf2vf"
             },
-            "description": "Here, 3 location.types are possible (address, pickupPoint and exchangePlace). The request must be made using one of these three options.",
             "oneOf": [
               {
                 "$ref": "#/components/schemas/addressForEligibility"
@@ -8514,7 +8512,7 @@
       },
       "contact": {
         "title": "Contact",
-        "description": "Contact informations",
+        "description": "Full contact informations ! \n\n> If location.type = `exchangePlace`this section is not mandatory. In this case, the contact information will be retrieved from the configuration set up on the WOOP platform.  ",
         "type": "object",
         "x-examples": {
           "Example": {
@@ -8669,7 +8667,7 @@
             }
           }
         },
-        "description": "Specifies the information needed to update a specify product used for customs declaration",
+        "description": "Specifies the information needed to update a specify product used for customs declaration\n\n> This system can be used to declare a list of specific products on the customs declaration.",
         "title": "Product for customs declaration",
         "required": [
           "type",
@@ -8816,7 +8814,7 @@
             "$ref": "#/components/schemas/mass"
           },
           "products": {
-            "description": "List of products in the package. \nWarning , 2 types of product list possible: 1) Simplified declaration - 2) Declaration for customs declaration ",
+            "description": "List of products in the package. \nTwo types of product list possible:  \n- `Simplified declaration`\n- `Customs declaration` ",
             "anyOf": [
               {
                 "items": {
@@ -9671,7 +9669,7 @@
       },
       "contactDelivery": {
         "title": "Delivery contact (contactDelivery)",
-        "description": "Delivery contact information. (telephone not required)",
+        "description": "Full contact informations! \n\n> If location.type = `exchangePlace`this section is not mandatory. In this case, the contact information will be retrieved from the configuration set up on the WOOP platform.  ",
         "type": "object",
         "x-examples": {
           "Example": {
