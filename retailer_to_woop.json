@@ -31,7 +31,7 @@
   ],
   "info": {
     "title": "Retailer to Woop",
-    "description": "This document contains the technical information about Woop APIs for carriers. For any questions or clarification, please contact the internal technical team.\n\nTo use \"Retailer to Woop\" APIs, you must use the confidential access codes provided when you created your retailer account on the platform. [See documentation](https://woop.stoplight.io/docs/retailer/docs/Basis/2.Authentication.md)\n\nThe version currently available in the documentation is <b>Version 1.7.0</b>",
+    "description": "This document contains the technical information about Woop APIs for carriers. For any questions or clarification, please contact the internal technical team\n\nTo use \"Retailer to Woop\" APIs, you must use the confidential access codes provided when you created your retailer account on the platform. [See documentation](https://woop.stoplight.io/docs/retailer/docs/Basis/2.Authentication.md)\n\nThe version currently available in the documentation is <b>Version 1.7.0</b>",
     "version": "1.7.0"
   },
   "servers": [
