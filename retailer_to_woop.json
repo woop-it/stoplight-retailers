@@ -7670,9 +7670,6 @@
           "services": {
             "$ref": "#/components/schemas/services"
           },
-          "productsPrice": {
-            "$ref": "#/components/schemas/productsPrice"
-          },
           "expectedPayment": {
             "type": "object",
             "description": "Rest to be paid, to be used as part of the `SERVICE_PAY_ON_DELIVERY` service",
