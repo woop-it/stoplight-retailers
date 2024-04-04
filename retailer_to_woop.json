@@ -6720,6 +6720,175 @@
           }
         }
       }
+    },
+    "/orders/{orderId}/events": {
+      "get": {
+        "summary": "Retrieve notifications sent by Woop",
+        "responses": {
+          "200": {
+            "description": "OK. Contains  all events for the  provided orderId.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "x-examples": {
+                    "Example 1": {
+                      "events": [
+                        {
+                          "status": "",
+                          "type": "EVENT_TYPE_MAIL",
+                          "subject": "",
+                          "message": "",
+                          "sender": "",
+                          "date": "",
+                          "failReason": ""
+                        }
+                      ]
+                    }
+                  },
+                  "properties": {
+                    "events": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "status",
+                          "type",
+                          "subject",
+                          "message",
+                          "sender",
+                          "date"
+                        ],
+                        "properties": {
+                          "status": {
+                            "type": "boolean",
+                            "description": "Indicates whether the event was correctly sent to the customer\n\n"
+                          },
+                          "type": {
+                            "enum": [
+                              "EVENT_TYPE_SMS",
+                              "EVENT_TYPE_MAIL"
+                            ],
+                            "description": "Event type\n\n"
+                          },
+                          "subject": {
+                            "type": "string",
+                            "description": "subject of the event corresponding to a delivery status",
+                            "example": "DELIVERY_DELIVERED_OK"
+                          },
+                          "message": {
+                            "type": "string",
+                            "description": "Message sent to the customer\n\n"
+                          },
+                          "sender": {
+                            "type": "string",
+                            "description": "Sender event"
+                          },
+                          "date": {
+                            "type": "string",
+                            "format": "date-time",
+                            "description": "Event date\n\n"
+                          },
+                          "failReason": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "events": [
+                        {
+                          "status": true,
+                          "type": "EVENT_TYPE_SMS",
+                          "subject": "DELIVERY_DELIVERED_OK",
+                          "message": "string",
+                          "sender": "string",
+                          "date": "2019-08-24T14:15:22Z"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "You are not authorised to access this item",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getEvents",
+        "x-stoplight": {
+          "id": "eqn95ylc4kknv"
+        },
+        "tags": [
+          "Event"
+        ],
+        "description": "This method is used to receive all events related to an order / delivery. All notifications sent to the customer will be forwarded to the retailer. \n\n",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "example": "1.15.0"
+            },
+            "in": "header",
+            "name": "x-api-version",
+            "description": "Target API version",
+            "required": true
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "orderId",
+          "in": "path",
+          "required": true,
+          "description": "Order identifier"
+        }
+      ]
     }
   },
   "components": {
