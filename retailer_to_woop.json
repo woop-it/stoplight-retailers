@@ -6889,6 +6889,152 @@
           "description": "Order identifier"
         }
       ]
+    },
+    "/orders/{orderId}/labels/list": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string",
+            "example": "A1234ED"
+          },
+          "name": "orderId",
+          "in": "path",
+          "required": true,
+          "description": "Order identifier"
+        }
+      ],
+      "get": {
+        "summary": "Retrieve URI for list of package ",
+        "tags": [
+          "Label"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Contains the URI of labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "x-examples": {
+                    "Example 1": {
+                      "labels": [
+                        {
+                          "mode": "pdf",
+                          "size": "A4",
+                          "url": "https://labels.woopit.fr/XXX"
+                        }
+                      ]
+                    }
+                  },
+                  "properties": {
+                    "labels": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "mode",
+                          "size",
+                          "url"
+                        ],
+                        "properties": {
+                          "mode": {
+                            "type": "string",
+                            "description": "Label mode (ZPL or PDF)"
+                          },
+                          "size": {
+                            "type": "string",
+                            "description": "Size label defined"
+                          },
+                          "url": {
+                            "type": "string",
+                            "description": "Label redirection URI"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "labels": [
+                        {
+                          "mode": "pdf",
+                          "size": "A6",
+                          "url": "https://labels.woopit.fr/XXX"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getLabelsLlist",
+        "x-stoplight": {
+          "id": "zlm0lfoxkaxgk"
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "example": "1.10.0"
+            },
+            "in": "header",
+            "name": "x-api-version",
+            "description": "Target API version",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "pdf",
+                "zpl"
+              ],
+              "example": "zpl"
+            },
+            "in": "query",
+            "name": "mode",
+            "description": "Label format"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "A6",
+                "A4"
+              ],
+              "example": "A6"
+            },
+            "in": "query",
+            "description": "Set the size of the label ***[For single pack only]***. ",
+            "name": "size"
+          }
+        ],
+        "description": "This method retrieves a download link for all the package labels in a customer order. \n\nThe labels retrieved are either unique or consolidated for the entire order. "
+      }
     }
   },
   "components": {
