@@ -7027,11 +7027,11 @@
                         "properties": {
                           "mode": {
                             "type": "string",
-                            "description": "label mode"
+                            "description": "Label mode (ZPL or PDF)"
                           },
                           "size": {
                             "type": "string",
-                            "description": "size label "
+                            "description": "Size label defined"
                           },
                           "url": {
                             "type": "string",
@@ -7086,7 +7086,8 @@
         "parameters": [
           {
             "schema": {
-              "type": "string"
+              "type": "string",
+              "example": "1.10.0"
             },
             "in": "header",
             "name": "x-api-version",
@@ -7119,7 +7120,8 @@
             "description": "Set the size of the label ***[For single pack only]***. ",
             "name": "size"
           }
-        ]
+        ],
+        "description": "This method retrieves a download link for all the package labels in a customer order. \n\nThe labels retrieved are either unique or consolidated for the entire order. "
       }
     }
   },
