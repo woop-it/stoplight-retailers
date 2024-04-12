@@ -8952,7 +8952,7 @@
           },
           "originCountry": {
             "type": "string",
-            "description": "Code Pays d’origine du produit. Format (ISO 3166 alpha-2). Obligatoire pour les envois soumis à des déclarations en douane.\n\n",
+            "description": "Code Pays d’origine du produit. Format (ISO 3166 alpha-2). Mandatory for consignments subject to customs declarations.\n\n\n",
             "example": "FR"
           },
           "hsCode": {
@@ -10401,7 +10401,8 @@
               }
             }
           }
-        }
+        },
+        "description": "Mandatory for consignments subject to customs declarations.\n"
       }
     },
     "parameters": {
