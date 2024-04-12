@@ -7927,6 +7927,12 @@
             "type": "string",
             "description": "Identifier of the store issuing the request"
           },
+          "state": {
+            "type": "string",
+            "enum": [
+              "TO_BE_COMPLETED"
+            ]
+          },
           "picking": {
             "description": "Information on the collection location",
             "type": "object",
@@ -8019,14 +8025,11 @@
           "carrierSelection": {
             "$ref": "#/components/schemas/carrierSelection"
           },
-          "state": {
-            "type": "string",
-            "enum": [
-              "TO_BE_COMPLETED"
-            ]
-          },
           "additionalData": {
             "$ref": "./models/additionalData.yaml"
+          },
+          "invoice": {
+            "$ref": "#/components/schemas/invoices"
           }
         }
       },
@@ -10338,6 +10341,64 @@
             "description": "list of carriers to be activated",
             "items": {
               "type": "string"
+            }
+          }
+        }
+      },
+      "invoices": {
+        "type": "object",
+        "x-examples": {
+          "Example 1": {
+            "invoice": {
+              "id": "fffffff",
+              "totalAmount": {
+                "value": 5,
+                "currency": "EUR"
+              }
+            }
+          }
+        },
+        "title": "Invoices (invoices)",
+        "required": [
+          "id",
+          "totalAmount"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "4c5ifr7divcy3"
+            },
+            "description": "Identifier of the invoice document linked to the sales order. \n",
+            "example": "12K3ED3"
+          },
+          "totalAmount": {
+            "type": "object",
+            "x-stoplight": {
+              "id": "k4gf3ttz4xyx5"
+            },
+            "description": "Total price of customer order (sum of productPrice if applicable)\n",
+            "required": [
+              "value",
+              "currency"
+            ],
+            "properties": {
+              "value": {
+                "type": "string",
+                "x-stoplight": {
+                  "id": "a6mdtxvfeadk4"
+                },
+                "description": "value",
+                "example": "10"
+              },
+              "currency": {
+                "type": "string",
+                "x-stoplight": {
+                  "id": "cdo8xp7rmvjde"
+                },
+                "description": "currency\n",
+                "example": "EUR"
+              }
             }
           }
         }
