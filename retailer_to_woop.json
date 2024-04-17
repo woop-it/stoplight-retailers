@@ -1499,7 +1499,7 @@
         "tags": [
           "Order"
         ],
-        "description": "Delete order",
+        "description": "Delete order.",
         "operationId": "deleteOrders",
         "parameters": [
           {
@@ -1590,6 +1590,216 @@
         "summary": "Delete order"
       },
       "get": {
+        "tags": [
+          "Order"
+        ],
+        "description": "This method returns the order details.",
+        "operationId": "getOrder",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/components/parameters/pathOrderId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Contains order detail",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/responseOrder-(getById)"
+                },
+                "examples": {
+                  "Example": {
+                    "value": {
+                      "order": {
+                        "id": "string",
+                        "status": "ORDER_CREATED",
+                        "updatedAt": "string",
+                        "referenceNumber": "string",
+                        "picking": {
+                          "interval": [
+                            {
+                              "start": "2019-12-04T12:30:00+0000",
+                              "end": "2019-12-04T14:30:00+0000"
+                            }
+                          ],
+                          "stop": {
+                            "references": {
+                              "id": "123890654FRTTY"
+                            },
+                            "sequenceNumber": 7,
+                            "route": {
+                              "references": {
+                                "id": "AAAAAAAA"
+                              },
+                              "sequenceNumber": 3,
+                              "vehicle": {
+                                "references": {
+                                  "id": "65464768568753",
+                                  "licencePlate": "ZE-678-HD"
+                                },
+                                "vehicleType": "VEHICLE_TYPE_BIKE"
+                              },
+                              "team": {
+                                "members": [
+                                  {
+                                    "id": "AAA"
+                                  }
+                                ]
+                              },
+                              "planning": {
+                                "references": {
+                                  "id": "P000001"
+                                }
+                              }
+                            },
+                            "plannedInterval": {
+                              "start": "2019-12-04T12:30:00+0000",
+                              "end": "2019-12-04T14:30:00+0000"
+                            }
+                          }
+                        },
+                        "delivery": {
+                          "externalDeliveryId": "string",
+                          "updatedAt": "string",
+                          "interval": [
+                            {
+                              "start": "2019-12-04T12:30:00+0000",
+                              "end": "2019-12-04T14:30:00+0000"
+                            }
+                          ],
+                          "trackingUrls:": {
+                            "carrier": "https://tracking.best-carrier.com/XJHSDL541",
+                            "woop": {
+                              "simple": "https://trace.woopit.fr/t/48aed-b5552d-4da5-813c-00c06e1ff327",
+                              "multiple": "https://trace.woopit.fr/m/48aed-b5552d-4da5-813c-00c06e1ff327"
+                            }
+                          },
+                          "status": "DELIVERY_INIT",
+                          "subStatus": "FAILED",
+                          "stop": {
+                            "references": {
+                              "id": "123890654FRTTYAAAAA"
+                            },
+                            "sequenceNumber": 17,
+                            "route": {
+                              "references": {
+                                "id": "AAAAAAAA"
+                              },
+                              "sequenceNumber": 3,
+                              "vehicle": {
+                                "references": {
+                                  "id": "65464768568753",
+                                  "licencePlate": "ZE-678-HD"
+                                },
+                                "vehicleType": "VEHICLE_TYPE_BIKE"
+                              },
+                              "team": {
+                                "members": [
+                                  {
+                                    "id": "AAA"
+                                  }
+                                ]
+                              },
+                              "planning": {
+                                "references": {
+                                  "id": "P000001"
+                                }
+                              }
+                            },
+                            "plannedInterval": {
+                              "start": "2019-12-04T16:30:00+0000",
+                              "end": "2019-12-04T18:30:00+0000"
+                            }
+                          }
+                        },
+                        "carrier": {
+                          "name": "string",
+                          "claimUrl": "string",
+                          "contact": {
+                            "firstName": "string",
+                            "lastName": "string",
+                            "phone": "string",
+                            "email": "string",
+                            "language": "fr",
+                            "timezone": "Europe/Paris",
+                            "main": true,
+                            "title": "string"
+                          },
+                          "code": "string"
+                        },
+                        "parcels": [
+                          {
+                            "id": "56f74d65s4f564ds6",
+                            "trackingId": "77899656544BY",
+                            "status": "DELIVERY_KO",
+                            "subStatus": "FAILED_WITH_RETURN",
+                            "barcode": {
+                              "value": "7841122236655",
+                              "type": "barcode",
+                              "format": "128"
+                            },
+                            "package": {
+                              "reference": "EARB1225",
+                              "products": [
+                                {
+                                  "type": "TYPOLOGY_GENERIC",
+                                  "ean": "1259456954845",
+                                  "cug": "LAMPE785AD",
+                                  "label": "Bedside lamp",
+                                  "quantity": 1
+                                }
+                              ]
+                            }
+                          }
+                        ],
+                        "price": {
+                          "taxExcludedAmount": 17.2,
+                          "taxIncludedAmount": 20.64,
+                          "taxAmount": 3.44,
+                          "currency": "EUR"
+                        },
+                        "emissions": {
+                          "estimatedCO2e": {
+                            "unit": "KgCO2e",
+                            "value": 13.91334,
+                            "reliabilityScore": 2
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "You are not authorised to access this item",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Order not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get an order"
+      },
+      "get - copy": {
         "tags": [
           "Order"
         ],
@@ -6920,6 +7130,122 @@
           }
         }
       }
+    },
+    "/orders/statement/{statementId}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "statementId",
+          "in": "path",
+          "required": true,
+          "description": "Global identifier"
+        }
+      ],
+      "get": {
+        "summary": "Get an statement information by id",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK. Contains global details"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "statusCode": 0,
+                      "error": "string",
+                      "message": "string",
+                      "reasons": [
+                        "STORE_NOT_FOUND"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "statusCode": 0,
+                      "error": "string",
+                      "message": "string",
+                      "reasons": [
+                        "STORE_NOT_FOUND"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getStatement",
+        "x-stoplight": {
+          "id": "3x3ru7dkt2mfy"
+        },
+        "description": "This method returns the statement global details.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          }
+        ]
+      },
+      "delete": {
+        "summary": "Delete statement",
+        "tags": [],
+        "responses": {},
+        "operationId": "deleteStatement",
+        "x-stoplight": {
+          "id": "y7ocsdio70qp1"
+        },
+        "description": "Delete global statement.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          }
+        ],
+        "requestBody": {
+          "description": "Contains the global cancellation information.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "reasons"
+                ],
+                "properties": {
+                  "reasons": {
+                    "$ref": "#/components/schemas/cancelledReasons"
+                  },
+                  "comment": {
+                    "type": "string",
+                    "x-stoplight": {
+                      "id": "0lq381mhlgntg"
+                    },
+                    "description": "If necessary, an optional comment can be added when cancelling"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -8000,6 +8326,93 @@
             "x-stoplight": {
               "id": "wy2qkf6x64r8b"
             },
+            "type": "string",
+            "description": "code of the carrier selected for delivery"
+          },
+          "additionalData": {
+            "$ref": "./models/additionalData.yaml"
+          }
+        }
+      },
+      "postStatement": {
+        "type": "object",
+        "x-stoplight": {
+          "id": "m44ghsz2gmyzb"
+        },
+        "description": "Specifies the information needed to create a single customer request without shipping. The method is used to declare customer content, which is used as a reference for future shipments created and attached to it.",
+        "title": "Declare the contents of a sales order (postStatement)",
+        "x-examples": {},
+        "required": [
+          "storeId",
+          "picking",
+          "delivery",
+          "packages",
+          "services",
+          "carrierCode"
+        ],
+        "properties": {
+          "statementId": {
+            "type": "string",
+            "description": "Global identifier (maximum 36 characters).",
+            "maxLength": 36,
+            "x-stoplight": {
+              "id": "q30cwcmf715bu"
+            }
+          },
+          "referenceNumber": {
+            "type": "string",
+            "description": "Order reference, store number. Can be the same as the orderId."
+          },
+          "storeId": {
+            "type": "string",
+            "description": "Identifier of the store issuing the request"
+          },
+          "picking": {
+            "type": "object",
+            "properties": {
+              "location": {
+                "$ref": "#/components/schemas/pickingShipmentLocation"
+              },
+              "contact": {
+                "$ref": "#/components/schemas/contact"
+              }
+            }
+          },
+          "delivery": {
+            "description": "Information on the delivery location",
+            "type": "object",
+            "required": [
+              "location",
+              "interval",
+              "contact"
+            ],
+            "properties": {
+              "location": {
+                "$ref": "#/components/schemas/location"
+              },
+              "interval": {
+                "type": "array",
+                "description": "Delivery time slot",
+                "items": {
+                  "$ref": "#/components/schemas/deliveryInterval"
+                }
+              },
+              "contact": {
+                "$ref": "#/components/schemas/contactDelivery"
+              }
+            }
+          },
+          "packages": {
+            "description": "All packages",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/packagesForShipment"
+            }
+          },
+          "services": {
+            "$ref": "#/components/schemas/services"
+          },
+          "carrierCode": {
             "type": "string",
             "description": "code of the carrier selected for delivery"
           },
