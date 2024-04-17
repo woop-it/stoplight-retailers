@@ -9275,7 +9275,7 @@
         }
       },
       "packagesForShipment": {
-        "description": "Specifies the information needed to update a package. The handling unit is to be defined with the package/product structure\n\nDefault : Parcel dimensions are not mandatory ! ",
+        "description": "Specifies the information needed to update a package. The handling unit is to be defined with the package/product structure\n\nDefault : Parcel dimensions are not mandatory ! \n\n<!-- theme: danger -->\n\n> #### Important information \n> The current version of this method only authorises the creation of single-package orders.",
         "x-stoplight": {
           "id": "9mms82ea40clt"
         },
