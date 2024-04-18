@@ -7936,11 +7936,11 @@
         "x-examples": {},
         "required": [
           "storeId",
+          "carrierCode",
           "picking",
           "delivery",
           "packages",
-          "services",
-          "carrierCode"
+          "services"
         ],
         "properties": {
           "orderId": {
@@ -7956,17 +7956,22 @@
             "type": "string",
             "description": "Identifier of the store issuing the request"
           },
+          "carrierCode": {
+            "x-stoplight": {
+              "id": "wy2qkf6x64r8b"
+            },
+            "type": "string",
+            "description": "code of the carrier selected for delivery"
+          },
           "picking": {
             "type": "object",
             "x-stoplight": {
               "id": "0glwrhdylzqxf"
             },
+            "description": "Information on the picking location",
             "properties": {
               "location": {
                 "$ref": "#/components/schemas/pickingShipmentLocation"
-              },
-              "contact": {
-                "$ref": "#/components/schemas/contact"
               }
             }
           },
@@ -8003,16 +8008,6 @@
           },
           "services": {
             "$ref": "#/components/schemas/services"
-          },
-          "carrierCode": {
-            "x-stoplight": {
-              "id": "wy2qkf6x64r8b"
-            },
-            "type": "string",
-            "description": "code of the carrier selected for delivery"
-          },
-          "additionalData": {
-            "$ref": "./models/additionalData.yaml"
           }
         }
       },
@@ -9372,11 +9367,6 @@
             ],
             "type": "array"
           },
-          "quantity": {
-            "type": "integer",
-            "default": 1,
-            "description": "Quantity of packages"
-          },
           "attributes": {
             "type": "object",
             "description": "package attributes",
@@ -9407,6 +9397,11 @@
                 }
               }
             }
+          },
+          "quantity": {
+            "type": "integer",
+            "default": 1,
+            "description": "Quantity of packages"
           },
           "type": {
             "type": "string",
