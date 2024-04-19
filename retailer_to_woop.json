@@ -7036,6 +7036,13 @@
                           "url": {
                             "type": "string",
                             "description": "Label redirection URI"
+                          },
+                          "packageId": {
+                            "type": "string",
+                            "x-stoplight": {
+                              "id": "34flk3xmilfs4"
+                            },
+                            "description": "Associated parcel identifier "
                           }
                         }
                       }
