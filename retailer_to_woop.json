@@ -7374,7 +7374,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/postShipments"
+                "$ref": "#/components/schemas/postStatement"
               },
               "examples": {
                 "Example 1": {
