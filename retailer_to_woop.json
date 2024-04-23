@@ -6679,6 +6679,24 @@
         ]
       }
     },
+    "/orders/{orderId}/packages/states": {
+      "patch": {
+        "x-stoplight": {
+          "id": "800e91a2e583a"
+        },
+        "tags": [
+          "Package advert"
+        ]
+      },
+      "put": {
+        "x-stoplight": {
+          "id": "800e91a2e583a"
+        },
+        "tags": [
+          "Package advert"
+        ]
+      }
+    },
     "/collects/{collectId}/status": {
       "parameters": [
         {
@@ -6767,24 +6785,6 @@
           "Collect"
         ],
         "description": "This method allows the retailer to send an update on the collection status.\n\nThe retailer must enter the next collection tracking status to progress the collection request. This delivery tracking status must be consistent with the defined workflow. <a href=\"/docs/retailer/docs/Modèles/Statuts-de-retrait-C&C.md\">Workflow and status list</a>"
-      }
-    },
-    "/orders/{orderId}/packages/states": {
-      "patch": {
-        "x-stoplight": {
-          "id": "800e91a2e583a"
-        },
-        "tags": [
-          "Package advert"
-        ]
-      },
-      "put": {
-        "x-stoplight": {
-          "id": "800e91a2e583a"
-        },
-        "tags": [
-          "Package advert"
-        ]
       }
     },
     "/stores": {
@@ -8934,16 +8934,15 @@
         "x-stoplight": {
           "id": "m44ghsz2gmyzb"
         },
-        "description": "",
         "title": "Declare the contents of a sales order (postStatement)",
         "x-examples": {},
         "required": [
           "storeId",
           "picking",
           "delivery",
-          "packages",
+          "products",
           "services",
-          "carrierCode"
+          "carrierSelection"
         ],
         "properties": {
           "statementId": {
@@ -8997,22 +8996,18 @@
               }
             }
           },
-          "packages": {
+          "products": {
             "description": "All packages",
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/packagesForShipment"
+              "$ref": "#/components/schemas/productForStatement"
             }
           },
           "services": {
             "$ref": "#/components/schemas/services"
           },
-          "carrierCode": {
-            "type": "string",
-            "description": "code of the carrier selected for delivery"
-          },
-          "additionalData": {
-            "$ref": "./models/additionalData.yaml"
+          "carrierSelection": {
+            "$ref": "#/components/schemas/carrierSelection"
           }
         }
       },
@@ -9997,6 +9992,94 @@
             "type": "integer",
             "description": "Tariff number requested in customs documents = HS CODE.\n\n",
             "example": 36004
+          },
+          "weight": {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "string"
+              },
+              "unit": {
+                "type": "string"
+              }
+            }
+          },
+          "length": {
+            "$ref": "#/components/schemas/mass"
+          },
+          "width": {
+            "$ref": "#/components/schemas/length"
+          },
+          "height": {
+            "$ref": "#/components/schemas/length"
+          }
+        }
+      },
+      "productForStatement": {
+        "type": "object",
+        "x-stoplight": {
+          "id": "zy39ixl1207tc"
+        },
+        "x-examples": {
+          "Example 1": {
+            "type": "TYPOLOGY_GENERIC",
+            "ean": "12345JFDFD",
+            "cug": "234J",
+            "label": "Mon produit",
+            "quantity": 1,
+            "price": {
+              "value": "1000",
+              "currency": "EUR"
+            },
+            "originCountry": "FR",
+            "hsCode": 1,
+            "weight": {
+              "value": "1",
+              "unit": "kg"
+            },
+            "length": {
+              "value": "1",
+              "unit": "cm"
+            },
+            "width": {
+              "value": "1",
+              "unit": "cm"
+            },
+            "height": {
+              "value": "1",
+              "unit": "cm"
+            }
+          }
+        },
+        "description": "Specifies the information needed to update a specify product used for statement order",
+        "title": "Product for statement order",
+        "required": [
+          "type",
+          "ean",
+          "label",
+          "quantity",
+          "weight",
+          "length",
+          "width",
+          "height"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Product typologie. ",
+            "example": "TYPOLOGY_GENERIC"
+          },
+          "ean": {
+            "type": "string",
+            "description": "Product EAN code."
+          },
+          "label": {
+            "type": "string",
+            "description": "Product name. "
+          },
+          "quantity": {
+            "type": "integer",
+            "description": "Identical quantity of product.\n\n"
           },
           "weight": {
             "type": "object",
