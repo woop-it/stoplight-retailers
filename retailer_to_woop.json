@@ -8937,12 +8937,12 @@
         "title": "Declare the contents of a sales order (postStatement)",
         "x-examples": {},
         "required": [
+          "carrierSelection",
           "storeId",
           "picking",
           "delivery",
           "products",
-          "services",
-          "carrierSelection"
+          "services"
         ],
         "properties": {
           "statementId": {
@@ -8956,6 +8956,10 @@
           "referenceNumber": {
             "type": "string",
             "description": "Order reference, store number. Can be the same as the orderId."
+          },
+          "carrierSelection": {
+            "type": "string",
+            "description": "code of the carrier selected for delivery\n\n"
           },
           "storeId": {
             "type": "string",
@@ -9005,9 +9009,6 @@
           },
           "services": {
             "$ref": "#/components/schemas/services"
-          },
-          "carrierSelection": {
-            "$ref": "#/components/schemas/carrierSelection"
           }
         }
       },
