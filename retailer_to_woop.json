@@ -10317,7 +10317,9 @@
           "isActive",
           "name",
           "storeId",
-          "language"
+          "language",
+          "timezone",
+          "contacts"
         ],
         "properties": {
           "isActive": {
@@ -10339,7 +10341,10 @@
             "$ref": "#/components/schemas/timezone"
           },
           "contacts": {
-            "$ref": "#/components/schemas/contact"
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/contact"
+            }
           },
           "activatedCarriers": {
             "type": "array",
@@ -10383,8 +10388,9 @@
         "required": [
           "isActive",
           "name",
-          "storeId",
-          "language"
+          "language",
+          "timezone",
+          "contacts"
         ],
         "properties": {
           "isActive": {
@@ -10395,10 +10401,6 @@
             "type": "string",
             "description": "Name of the store"
           },
-          "storeId": {
-            "type": "string",
-            "description": "Store identifier"
-          },
           "language": {
             "$ref": "#/components/schemas/language"
           },
@@ -10406,7 +10408,10 @@
             "$ref": "#/components/schemas/timezone"
           },
           "contacts": {
-            "$ref": "#/components/schemas/contact"
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/contact"
+            }
           },
           "activatedCarriers": {
             "type": "array",
