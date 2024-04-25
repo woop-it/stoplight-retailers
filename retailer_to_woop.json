@@ -9317,13 +9317,7 @@
         "title": "Parcel with label value in base64 (parcelWithLabel)",
         "properties": {
           "labels": {
-            "type": "array",
-            "x-stoplight": {
-              "id": "mgov5ft0a2i11"
-            },
-            "items": {
-              "$ref": "#/components/schemas/labels"
-            }
+            "$ref": "#/components/schemas/labels"
           }
         }
       },
@@ -11106,10 +11100,7 @@
                   }
                 },
                 "parcels": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/parcelWithLabel"
-                  }
+                  "$ref": "#/components/schemas/parcelWithLabel"
                 }
               }
             },
@@ -11118,33 +11109,24 @@
                 "value": {
                   "order": {
                     "id": "string",
-                    "updatedAt": "2019-08-24T14:15:22Z",
                     "referenceNumber": "string"
                   },
                   "delivery": {
-                    "externalDeliveryId": "string",
-                    "updatedAt": "2019-08-24T14:15:22Z",
-                    "trackingUrls:": {
-                      "carrier": "https://tracking.best-carrier.com/XJHSDL541",
-                      "woop": {
-                        "simple": "https://trace.woopit.fr/t/48aed-b5552d-4da5-813c-00c06e1ff327",
-                        "multiple": "https://trace.woopit.fr/m/48aed-b5552d-4da5-813c-00c06e1ff327"
-                      }
-                    }
+                    "externalDeliveryId": "string"
                   },
                   "carrier": {
                     "name": "string",
                     "code": "string"
                   },
-                  "parcels": [
-                    {
+                  "parcels": {
+                    "labels": {
                       "id": "string",
-                      "type": "string",
-                      "mode": "string",
+                      "type": "base64",
+                      "mode": "zpl",
                       "value": "string",
                       "parcelId": "string"
                     }
-                  ]
+                  }
                 }
               }
             }
