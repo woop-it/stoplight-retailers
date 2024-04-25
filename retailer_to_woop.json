@@ -7857,11 +7857,15 @@
                 "$ref": "#/components/schemas/location"
               },
               "interval": {
-                "type": "array",
                 "description": "Delivery time slot",
-                "items": {
-                  "$ref": "#/components/schemas/deliveryInterval"
-                }
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/deliveryInterval"
+                  },
+                  {
+                    "$ref": "#/components/schemas/deliveryBooking"
+                  }
+                ]
               },
               "contact": {
                 "$ref": "#/components/schemas/contactDelivery"
@@ -7940,7 +7944,8 @@
           "picking",
           "delivery",
           "packages",
-          "services"
+          "services",
+          "labelMode"
         ],
         "properties": {
           "orderId": {
@@ -7969,9 +7974,16 @@
               "id": "0glwrhdylzqxf"
             },
             "description": "Information on the picking location",
+            "required": [
+              "location",
+              "interval"
+            ],
             "properties": {
               "location": {
                 "$ref": "#/components/schemas/pickingShipmentLocation"
+              },
+              "interval": {
+                "$ref": "#/components/schemas/pickingInterval"
               }
             }
           },
@@ -7988,11 +8000,7 @@
                 "$ref": "#/components/schemas/location"
               },
               "interval": {
-                "type": "array",
-                "description": "Delivery time slot",
-                "items": {
-                  "$ref": "#/components/schemas/deliveryInterval"
-                }
+                "$ref": "#/components/schemas/deliveryInterval"
               },
               "contact": {
                 "$ref": "#/components/schemas/contactDelivery"
@@ -8008,6 +8016,36 @@
           },
           "services": {
             "$ref": "#/components/schemas/services"
+          },
+          "labelMode": {
+            "type": "object",
+            "x-stoplight": {
+              "id": "d4cgk8px94cx8"
+            },
+            "required": [
+              "mode"
+            ],
+            "description": "Specifies the label options to be used.\n\n",
+            "properties": {
+              "mode": {
+                "x-stoplight": {
+                  "id": "n97grkm5xeaio"
+                },
+                "description": "Label format\n",
+                "enum": [
+                  "zpl",
+                  "pdf"
+                ]
+              },
+              "size": {
+                "x-stoplight": {
+                  "id": "0pnq603mn7qbo"
+                },
+                "default": "A6",
+                "type": "string",
+                "description": "Label size A6 only "
+              }
+            }
           }
         }
       },
@@ -8595,15 +8633,10 @@
         },
         "oneOf": [
           {
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/address"
-              },
-              {
-                "$ref": "#/components/schemas/exchangePlaceType"
-              }
-            ],
-            "description": "Here, 3 location.types are possible (address, pickupPoint and exchangePlace). The request must be made using one of these three options."
+            "$ref": "#/components/schemas/address"
+          },
+          {
+            "$ref": "#/components/schemas/exchangePlaceType"
           }
         ]
       },
@@ -8674,41 +8707,58 @@
             "end": "2019-05-02T17:52:01+0000"
           }
         },
-        "title": "Delivery date slot & booking (deliveryInterval)",
-        "oneOf": [
-          {
-            "properties": {
-              "start": {
-                "type": "string",
-                "format": "datetime",
-                "description": "Start of the time slot",
-                "example": "2019-12-04T12:30:00+0000"
-              },
-              "end": {
-                "type": "string",
-                "format": "datetime",
-                "description": "End of the time slot",
-                "example": "2019-12-04T14:30:00+0000"
-              }
-            },
-            "required": [
-              "start",
-              "end"
-            ]
-          },
-          {
-            "properties": {
-              "bookingId": {
-                "type": "string",
-                "description": "Booking slot"
-              }
-            },
-            "required": [
-              "bookingId"
-            ]
-          }
+        "title": "Delivery date slot",
+        "type": "object",
+        "required": [
+          "start",
+          "end"
         ],
-        "type": "object"
+        "properties": {
+          "start": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "u2a9kj7zbzhrs"
+            },
+            "format": "date-time",
+            "description": "Start of the time slot. ",
+            "example": "2019-12-04T12:30:00+0000"
+          },
+          "end": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "94emhhe6jq0x8"
+            },
+            "format": "date-time",
+            "example": "2019-12-04T12:30:00+0000",
+            "description": "End of the time slot. "
+          }
+        }
+      },
+      "deliveryBooking": {
+        "description": "Specifies the booking identifier for a delivery.",
+        "x-stoplight": {
+          "id": "vru7l4wq0ks22"
+        },
+        "x-examples": {
+          "Example": {
+            "start": "2019-05-02T15:52:01+0000",
+            "end": "2019-05-02T17:52:01+0000"
+          }
+        },
+        "title": "Delivery booking",
+        "type": "object",
+        "required": [
+          "bookingId"
+        ],
+        "properties": {
+          "bookingId": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "849068whgr5oj"
+            },
+            "description": "Booking slot"
+          }
+        }
       },
       "pickingInterval": {
         "description": "Specifies the date range for a collection/picking.",
