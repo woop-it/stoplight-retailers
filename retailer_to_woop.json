@@ -7326,7 +7326,7 @@
         }
       }
     },
-    "/shipments/statement": {
+    "/shipments/fulfillments": {
       "post": {
         "summary": "Declare the contents of an order",
         "tags": [
@@ -7368,13 +7368,13 @@
             }
           }
         },
-        "operationId": "postStatement",
+        "operationId": "postfulfillments",
         "description": "Specifies the information needed to create a single customer request without shipping. The method is used to declare customer content, which is used as a reference for future shipments created and attached to it.",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/postStatement"
+                "$ref": "#/components/schemas/postfulfillments"
               },
               "examples": {
                 "Example 1": {
@@ -7519,11 +7519,17 @@
                 }
               }
             }
-          }
+          },
+          "description": "Contains the fulfillment creation information."
         },
         "x-stoplight": {
           "id": "s2cto3nlzjlyk"
-        }
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          }
+        ]
       },
       "post - copy": {
         "summary": "Create shipment with label",
@@ -7722,20 +7728,20 @@
       },
       "parameters": []
     },
-    "/shipments/statement/{statementId}": {
+    "/shipments/fulfillment/{fulfillmentId}": {
       "parameters": [
         {
           "schema": {
             "type": "string"
           },
-          "name": "statementId",
+          "name": "fulfillmentId",
           "in": "path",
           "required": true,
           "description": "Global identifier"
         }
       ],
       "get": {
-        "summary": "Get an statement information by id",
+        "summary": "Get an fulfillmentinformation by id",
         "tags": [
           "Shipment"
         ],
@@ -7788,11 +7794,11 @@
             }
           }
         },
-        "operationId": "getStatement",
+        "operationId": "getfulfillments",
         "x-stoplight": {
           "id": "3x3ru7dkt2mfy"
         },
-        "description": "This method returns the statement global details.",
+        "description": "This method returns the fulfillmentglobal details.",
         "parameters": [
           {
             "$ref": "#/components/parameters/apiVersion"
@@ -7800,16 +7806,16 @@
         ]
       },
       "delete": {
-        "summary": "Delete statement",
+        "summary": "Delete fulfillments",
         "tags": [
           "Shipment"
         ],
         "responses": {},
-        "operationId": "deleteStatement",
+        "operationId": "deletefulfillments",
         "x-stoplight": {
           "id": "y7ocsdio70qp1"
         },
-        "description": "Delete global statement.",
+        "description": "Delete global fulfillments.",
         "parameters": [
           {
             "$ref": "#/components/parameters/apiVersion"
@@ -8929,12 +8935,12 @@
           }
         }
       },
-      "postStatement": {
+      "postfulfillments": {
         "type": "object",
         "x-stoplight": {
           "id": "m44ghsz2gmyzb"
         },
-        "title": "Declare the contents of a sales order (postStatement)",
+        "title": "Declare the contents of a sales order (postfulfillments)",
         "x-examples": {},
         "required": [
           "carrierSelection",
@@ -8945,7 +8951,7 @@
           "services"
         ],
         "properties": {
-          "statementId": {
+          "fulfillmentId": {
             "type": "string",
             "description": "Global identifier (maximum 36 characters).",
             "maxLength": 36,
@@ -9004,7 +9010,7 @@
             "description": "All packages",
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/productForStatement"
+              "$ref": "#/components/schemas/productForfulfillments"
             }
           },
           "services": {
@@ -10016,7 +10022,7 @@
           }
         }
       },
-      "productForStatement": {
+      "productForfulfillments": {
         "type": "object",
         "x-stoplight": {
           "id": "zy39ixl1207tc"
@@ -10052,8 +10058,8 @@
             }
           }
         },
-        "description": "Specifies the information needed to update a specify product used for statement order",
-        "title": "Product for statement order",
+        "description": "Specifies the information needed to update a specify product used for fulfillmentorder",
+        "title": "Product for fulfillmentorder",
         "required": [
           "type",
           "ean",
