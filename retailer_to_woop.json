@@ -7328,13 +7328,10 @@
     },
     "/shipments/fulfillments": {
       "post": {
-        "summary": "Declare the contents of an order",
-        "tags": [
-          "Shipment"
-        ],
+        "summary": "Create fulfillment with product list ",
         "responses": {
           "201": {
-            "description": "the order has been registered"
+            "description": "the request has been registered"
           },
           "400": {
             "description": "Missing and/or incorrect items in the body\n\n",
@@ -7348,7 +7345,7 @@
             }
           },
           "403": {
-            "description": "Creation of the order is not possible\n\n",
+            "description": "Creation of the fulfillment is not possible\n\n",
             "content": {
               "application/json": {
                 "schema": {
@@ -7358,7 +7355,7 @@
             }
           },
           "409": {
-            "description": "Creation of the order with this 'orderId' is not possible\n\n",
+            "description": "Conflict\n",
             "content": {
               "application/json": {
                 "schema": {
@@ -7379,11 +7376,41 @@
               "examples": {
                 "Example 1": {
                   "value": {
-                    "orderId": "string",
+                    "fulfillmentId": "string",
                     "referenceNumber": "string",
+                    "carrierSelection": "string",
                     "storeId": "string",
-                    "exchangePlaceId": "string",
-                    "state": "TO_BE_COMPLETED",
+                    "picking": {
+                      "location": {
+                        "type": "address",
+                        "addressLine1": "string",
+                        "addressLine2": "string",
+                        "elevator": true,
+                        "floor": 0,
+                        "doorCode": "string",
+                        "postalCode": "59800",
+                        "city": "LILLE",
+                        "district": "string",
+                        "country": "FR",
+                        "comment": "string",
+                        "coordinates": {
+                          "latitude": 0,
+                          "longitude": 0
+                        }
+                      },
+                      "contact": {
+                        "firstName": "string",
+                        "lastName": "string",
+                        "phone": "string",
+                        "email": "string",
+                        "language": "fr",
+                        "timezone": "Europe/Paris",
+                        "main": true,
+                        "title": "string",
+                        "isProfessional": false,
+                        "companyName": "woop"
+                      }
+                    },
                     "delivery": {
                       "location": {
                         "type": "address",
@@ -7427,30 +7454,19 @@
                         "companyName": "woop"
                       }
                     },
-                    "packages": [
+                    "products": [
                       {
-                        "references": [
-                          {
-                            "reference": "12345B",
-                            "barcode": {
-                              "value": "54fd56g4f5gfd456sd",
-                              "type": "barcode",
-                              "format": "128"
-                            },
-                            "state": {
-                              "value": "ON_DOCK",
-                              "date": "2019-08-24T14:15:22Z"
-                            },
-                            "containerId": {
-                              "trailerId": "string",
-                              "palletId": "string"
-                            }
-                          }
-                        ],
-                        "category": "string",
+                        "type": "TYPOLOGY_GENERIC",
+                        "ean": "string",
+                        "label": "string",
+                        "quantity": 0,
+                        "weight": {
+                          "value": "string",
+                          "unit": "string"
+                        },
                         "length": {
                           "value": 0,
-                          "unit": "mm"
+                          "unit": "kg"
                         },
                         "width": {
                           "value": 0,
@@ -7459,61 +7475,11 @@
                         "height": {
                           "value": 0,
                           "unit": "mm"
-                        },
-                        "weight": {
-                          "value": 0,
-                          "unit": "kg"
-                        },
-                        "products": [
-                          {
-                            "type": "TYPOLOGY_GENERIC",
-                            "ean": "string",
-                            "cug": "string",
-                            "label": "string",
-                            "quantity": 1
-                          }
-                        ],
-                        "quantity": 1,
-                        "attributes": {
-                          "footprint": {
-                            "value": 13,
-                            "unit": "m2"
-                          }
-                        },
-                        "type": "PACKAGE",
-                        "volume": [
-                          {
-                            "value": "15",
-                            "unit": "m3"
-                          }
-                        ]
+                        }
                       }
                     ],
                     "services": [
                       "SERVICE_ASSEMBLY"
-                    ],
-                    "productsPrice": {
-                      "value": 0,
-                      "currency": "EUR"
-                    },
-                    "tags": [
-                      {
-                        "key": "origin",
-                        "value": "web",
-                        "applyToOrchestration": true
-                      }
-                    ],
-                    "carrierSelection": {
-                      "mode": "INCLUSION",
-                      "carrierCodes": [
-                        "chronopost"
-                      ]
-                    },
-                    "additionalData": [
-                      {
-                        "key": "string",
-                        "value": "string"
-                      }
                     ]
                   }
                 }
@@ -7529,6 +7495,9 @@
           {
             "$ref": "#/components/parameters/apiVersion"
           }
+        ],
+        "tags": [
+          "Fulfillment"
         ]
       },
       "post - copy": {
@@ -7741,10 +7710,7 @@
         }
       ],
       "get": {
-        "summary": "Get an fulfillmentinformation by id",
-        "tags": [
-          "Shipment"
-        ],
+        "summary": "Get a fulfillment information",
         "responses": {
           "200": {
             "description": "OK. Contains global details"
@@ -7798,24 +7764,24 @@
         "x-stoplight": {
           "id": "3x3ru7dkt2mfy"
         },
-        "description": "This method returns the fulfillmentglobal details.",
+        "description": "This method returns the fulfillment's global details.",
         "parameters": [
           {
             "$ref": "#/components/parameters/apiVersion"
           }
+        ],
+        "tags": [
+          "Fulfillment"
         ]
       },
       "delete": {
-        "summary": "Delete fulfillments",
-        "tags": [
-          "Shipment"
-        ],
+        "summary": "Delete fulfillment",
         "responses": {},
         "operationId": "deletefulfillments",
         "x-stoplight": {
           "id": "y7ocsdio70qp1"
         },
-        "description": "Delete global fulfillments.",
+        "description": "Delete global fulfillment with reference",
         "parameters": [
           {
             "$ref": "#/components/parameters/apiVersion"
@@ -7845,7 +7811,10 @@
               }
             }
           }
-        }
+        },
+        "tags": [
+          "Fulfillment"
+        ]
       }
     }
   },
@@ -8940,9 +8909,10 @@
         "x-stoplight": {
           "id": "m44ghsz2gmyzb"
         },
-        "title": "Declare the contents of a sales order (postfulfillments)",
+        "title": "postFulfillments",
         "x-examples": {},
         "required": [
+          "fulfillmentId",
           "carrierSelection",
           "storeId",
           "picking",
@@ -8973,6 +8943,9 @@
           },
           "picking": {
             "type": "object",
+            "required": [
+              "location"
+            ],
             "properties": {
               "location": {
                 "$ref": "#/components/schemas/pickingShipmentLocation"
