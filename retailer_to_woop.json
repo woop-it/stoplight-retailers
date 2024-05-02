@@ -103,6 +103,13 @@
                   "packages"
                 ],
                 "properties": {
+                  "fulfillmentId": {
+                    "type": "string",
+                    "x-stoplight": {
+                      "id": "ezpdklrn4bg0q"
+                    },
+                    "description": "Fulfillment identifier (maximum 36 characters)."
+                  },
                   "packages": {
                     "type": "array",
                     "x-stoplight": {
