@@ -10619,6 +10619,18 @@
             "items": {
               "$ref": "#/components/schemas/labels"
             }
+          },
+          "packages": {
+            "type": "object",
+            "x-stoplight": {
+              "id": "vxhjjs4tzj9sy"
+            },
+            "description": "Information on the delivery packages\n",
+            "properties": {
+              "references": {
+                "$ref": "#/components/schemas/packagesReferences"
+              }
+            }
           }
         }
       },
