@@ -5421,6 +5421,33 @@
                           }
                         }
                       }
+                    },
+                    "ineligibleCarriers": {
+                      "type": "array",
+                      "x-stoplight": {
+                        "id": "k6ccq8z5celkt"
+                      },
+                      "items": {
+                        "x-stoplight": {
+                          "id": "qdckcgh1gveev"
+                        },
+                        "type": "object",
+                        "properties": {
+                          "carrierName": {
+                            "type": "string",
+                            "x-stoplight": {
+                              "id": "ae5eerg8qoy80"
+                            }
+                          },
+                          "reason": {
+                            "type": "array",
+                            "x-stoplight": {
+                              "id": "vfskqxm07gdho"
+                            },
+                            "items": {}
+                          }
+                        }
+                      }
                     }
                   }
                 },
@@ -7854,7 +7881,7 @@
             "type": "object",
             "description": "Information on the delivery location",
             "required": [
-              "interval"
+              "location"
             ],
             "properties": {
               "location": {
@@ -7964,6 +7991,21 @@
                     "type": "boolean",
                     "x-stoplight": {
                       "id": "e7lr1o2ie07z8"
+                    }
+                  }
+                }
+              },
+              "ineligibleCarriers": {
+                "type": "object",
+                "x-stoplight": {
+                  "id": "i9fw84eq5vkmm"
+                },
+                "description": "Used to retrieve carriers ineligibility reasons",
+                "properties": {
+                  "active": {
+                    "type": "boolean",
+                    "x-stoplight": {
+                      "id": "c4dlo1nm4xqfz"
                     }
                   }
                 }
