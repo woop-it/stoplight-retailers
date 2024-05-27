@@ -10550,6 +10550,11 @@
           "delivery"
         ],
         "properties": {
+          "orderDate": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2024-01-30T10:00:00"
+          },
           "storeId": {
             "type": "string",
             "description": "Identifier of the store issuing the request"
@@ -10576,11 +10581,6 @@
                 "$ref": "#/components/schemas/location"
               }
             }
-          },
-          "orderDate": {
-            "type": "string",
-            "format": "date-time",
-            "example": "2024-01-30T10:00:00"
           }
         }
       },
@@ -10986,17 +10986,31 @@
                   "items": {
                     "type": "object",
                     "properties": {
-                      "carrierCode": {
-                        "$ref": "#/components/schemas/carrier"
+                      "carrier": {
+                        "type": "object",
+                        "x-stoplight": {
+                          "id": "zov2snjowt0nl"
+                        },
+                        "properties": {
+                          "code": {
+                            "type": "string",
+                            "x-stoplight": {
+                              "id": "5l9u73ox1jckp"
+                            }
+                          },
+                          "name": {
+                            "type": "string",
+                            "x-stoplight": {
+                              "id": "rt458ux2dh9ne"
+                            }
+                          }
+                        }
                       },
                       "picking": {
                         "type": "object",
                         "properties": {
                           "interval": {
-                            "type": "array",
-                            "items": {
-                              "$ref": "#/components/schemas/pickingInterval"
-                            }
+                            "$ref": "#/components/schemas/pickingInterval"
                           }
                         }
                       },
@@ -11004,15 +11018,38 @@
                         "type": "object",
                         "properties": {
                           "interval": {
-                            "type": "array",
-                            "items": {
-                              "$ref": "#/components/schemas/deliveryInterval"
-                            }
+                            "$ref": "#/components/schemas/deliveryInterval"
                           }
                         }
                       }
                     }
                   }
+                }
+              }
+            },
+            "examples": {
+              "Example 1": {
+                "value": {
+                  "promises": [
+                    {
+                      "carrier": {
+                        "code": "string",
+                        "name": "string"
+                      },
+                      "picking": {
+                        "interval": {
+                          "start": "2019-12-04T12:30:00+0000",
+                          "end": "2019-12-04T14:30:00+0000"
+                        }
+                      },
+                      "delivery": {
+                        "interval": {
+                          "start": "2019-12-04T12:30:00+0000",
+                          "end": "2019-12-04T14:30:00+0000"
+                        }
+                      }
+                    }
+                  ]
                 }
               }
             }
