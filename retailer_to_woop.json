@@ -10559,11 +10559,14 @@
             "type": "string",
             "description": "Identifier of the store issuing the request"
           },
-          "carrierIds": {
+          "carrierCodes": {
             "type": "array",
             "description": "List of carrierId",
             "items": {
-              "type": "string"
+              "type": "string",
+              "x-stoplight": {
+                "id": "svzaqxj54ayn4"
+              }
             }
           },
           "picking": {
