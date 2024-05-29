@@ -10519,27 +10519,58 @@
       "postDeliveryPromise": {
         "type": "object",
         "x-examples": {
-          "Example 1": {
-            "carrierIds": [
-              "chronopost"
+          "Example 2": {
+            "orderDate": "2024-01-30T10:00:00",
+            "storeId": "string",
+            "carrierCodes": [
+              "string"
             ],
-            "delivery": {
-              "location": {
-                "addressLine1": "67 rue de Luxembourg",
-                "city": "Lille",
-                "country": "FR",
-                "postalCode": "59777",
-                "type": "address"
-              }
-            },
-            "orderDate": "2024-01-30T10:00:02.668Z",
             "picking": {
               "location": {
-                "id": "6",
-                "type": "exchangePlace"
+                "type": "address",
+                "addressLine1": "string",
+                "addressLine2": "string",
+                "elevator": true,
+                "floor": 0,
+                "doorCode": "string",
+                "postalCode": "59800",
+                "city": "LILLE",
+                "district": "string",
+                "country": "FR",
+                "comment": "string",
+                "coordinates": {
+                  "latitude": 0,
+                  "longitude": 0
+                }
+              },
+              "interval": {
+                "start": "2019-12-04T12:30:00+0000",
+                "end": "2019-12-04T14:30:00+0000"
               }
             },
-            "storeId": "6"
+            "delivery": {
+              "location": {
+                "type": "address",
+                "addressLine1": "string",
+                "addressLine2": "string",
+                "elevator": true,
+                "floor": 0,
+                "doorCode": "string",
+                "postalCode": "59800",
+                "city": "LILLE",
+                "district": "string",
+                "country": "FR",
+                "comment": "string",
+                "coordinates": {
+                  "latitude": 0,
+                  "longitude": 0
+                }
+              },
+              "interval": {
+                "start": "2019-12-04T12:30:00+0000",
+                "end": "2019-12-04T14:30:00+0000"
+              }
+            }
           }
         },
         "title": "Delivery promise calculation (postDeliveryPromise)",
@@ -10561,7 +10592,7 @@
           },
           "carrierCodes": {
             "type": "array",
-            "description": "List of carrierId",
+            "description": "List of carrier codes",
             "items": {
               "type": "string",
               "x-stoplight": {
@@ -10571,17 +10602,29 @@
           },
           "picking": {
             "type": "object",
+            "required": [
+              "location"
+            ],
             "properties": {
               "location": {
                 "$ref": "#/components/schemas/location"
+              },
+              "interval": {
+                "$ref": "#/components/schemas/pickingInterval"
               }
             }
           },
           "delivery": {
             "type": "object",
+            "required": [
+              "location"
+            ],
             "properties": {
               "location": {
                 "$ref": "#/components/schemas/location"
+              },
+              "interval": {
+                "$ref": "#/components/schemas/deliveryInterval"
               }
             }
           }
