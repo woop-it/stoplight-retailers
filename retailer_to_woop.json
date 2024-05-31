@@ -5358,7 +5358,7 @@
                               "delivery": {
                                 "type": "object",
                                 "properties": {
-                                  "intervak": {
+                                  "interval": {
                                     "$ref": "#/components/schemas/deliveryInterval"
                                   }
                                 }
