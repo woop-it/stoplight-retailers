@@ -10320,13 +10320,8 @@
         "title": "Product for fulfillmentorder",
         "required": [
           "type",
-          "ean",
-          "label",
           "quantity",
-          "weight",
-          "length",
-          "width",
-          "height"
+          "weight"
         ],
         "properties": {
           "type": {
