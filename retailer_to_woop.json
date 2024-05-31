@@ -5348,10 +5348,20 @@
                                 }
                               },
                               "picking": {
-                                "$ref": "#/components/schemas/pickingInterval"
+                                "type": "object",
+                                "properties": {
+                                  "interval": {
+                                    "$ref": "#/components/schemas/pickingInterval"
+                                  }
+                                }
                               },
                               "delivery": {
-                                "$ref": "#/components/schemas/deliveryInterval"
+                                "type": "object",
+                                "properties": {
+                                  "intervak": {
+                                    "$ref": "#/components/schemas/deliveryInterval"
+                                  }
+                                }
                               }
                             }
                           },
