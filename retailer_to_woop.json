@@ -11100,16 +11100,8 @@
                     }
                   }
                 },
-                "carrier": {
-                  "type": "object",
-                  "properties": {
-                    "code": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "parcels": {
-                  "$ref": "#/components/schemas/parcelWithLabel"
+                "labels": {
+                  "$ref": "#/components/schemas/labels"
                 }
               }
             },
