@@ -7087,6 +7087,18 @@
                         }
                       ]
                     }
+                  },
+                  "Example 2": {
+                    "value": {
+                      "labels": [
+                        {
+                          "mode": "string",
+                          "size": "string",
+                          "url": "string",
+                          "packageId": "string"
+                        }
+                      ]
+                    }
                   }
                 }
               }
