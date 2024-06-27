@@ -2412,6 +2412,13 @@
         "title": "Update of the delivery status (putDeliveryStatus)",
         "type": "object",
         "description": "Update of the delivery status.",
+        "required": [
+          "deliveryId",
+          "orderId",
+          "status",
+          "date",
+          "carrier"
+        ],
         "properties": {
           "deliveryId": {
             "type": "string",
@@ -2451,9 +2458,8 @@
           "appointment": {
             "$ref": "#/components/schemas/appointment"
           },
-          "carrierCode": {
-            "type": "string",
-            "description": "Carrier code"
+          "carrier": {
+            "$ref": "#/components/schemas/requestedCarriers"
           },
           "pickUpPoint": {
             "type": "object",
@@ -2470,14 +2476,7 @@
               }
             }
           }
-        },
-        "required": [
-          "deliveryId",
-          "orderId",
-          "status",
-          "date",
-          "carrierCode"
-        ]
+        }
       },
       "putParcelStatus": {
         "title": "Update of the parcel status (putParcelStatus)",
@@ -2486,6 +2485,15 @@
         "x-stoplight": {
           "id": "330825975831c"
         },
+        "required": [
+          "orderId",
+          "deliveryId",
+          "parcelId",
+          "carrierEvent",
+          "status",
+          "date",
+          "carrier"
+        ],
         "properties": {
           "orderId": {
             "type": "string",
@@ -2527,9 +2535,8 @@
           "team": {
             "$ref": "#/components/schemas/team"
           },
-          "carrierCode": {
-            "type": "string",
-            "description": "Carrier code"
+          "carrier": {
+            "$ref": "#/components/schemas/requestedCarriers"
           },
           "pickUpPoint": {
             "type": "object",
@@ -2546,16 +2553,7 @@
               }
             }
           }
-        },
-        "required": [
-          "orderId",
-          "deliveryId",
-          "parcelId",
-          "carrierEvent",
-          "status",
-          "date",
-          "carrierCode"
-        ]
+        }
       },
       "putOrderStatus": {
         "title": "Update of the order status (putOrderStatus)",
