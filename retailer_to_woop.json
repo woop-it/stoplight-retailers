@@ -7049,7 +7049,9 @@
                         "required": [
                           "mode",
                           "size",
-                          "url"
+                          "url",
+                          "packageReference",
+                          "parcelId"
                         ],
                         "properties": {
                           "mode": {
