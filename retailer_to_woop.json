@@ -7064,12 +7064,18 @@
                             "type": "string",
                             "description": "Label redirection URI"
                           },
-                          "packageId": {
+                          "packageReference": {
                             "type": "string",
                             "x-stoplight": {
                               "id": "34flk3xmilfs4"
                             },
                             "description": "Associated parcel identifier "
+                          },
+                          "parcelId": {
+                            "type": "string",
+                            "x-stoplight": {
+                              "id": "codkpye2g3g80"
+                            }
                           }
                         }
                       }
