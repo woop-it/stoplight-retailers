@@ -5825,6 +5825,167 @@
                         }
                       ]
                     }
+                  },
+                  "Example with deliveryPromise": {
+                    "value": {
+                      "eligibilities": [
+                        {
+                          "carrier": {
+                            "name": "string",
+                            "code": "string",
+                            "score": {
+                              "satisfaction": "string",
+                              "nps": "string",
+                              "onTimeDeliveryScore": "string"
+                            },
+                            "impact": {
+                              "emissionType": {
+                                "CO2e": {
+                                  "reliabilityScore": 0,
+                                  "emissions": {
+                                    "WTW": [
+                                      {
+                                        "value": 0,
+                                        "unit": "kgCO2e"
+                                      }
+                                    ],
+                                    "WTT": [
+                                      {
+                                        "value": 0,
+                                        "unit": "KgCO2e/km"
+                                      }
+                                    ],
+                                    "TTW": [
+                                      {
+                                        "value": 0,
+                                        "unit": "KgCO2e/km"
+                                      }
+                                    ],
+                                    "production": [
+                                      {
+                                        "value": 0,
+                                        "unit": "KgCO2e/km"
+                                      }
+                                    ]
+                                  }
+                                }
+                              },
+                              "labelling": [
+                                {
+                                  "from": "string",
+                                  "to": "string",
+                                  "name": "string"
+                                }
+                              ]
+                            }
+                          },
+                          "route": {
+                            "distance": {
+                              "value": 0,
+                              "unit": "string"
+                            }
+                          },
+                          "durationSlot": {
+                            "value": 0,
+                            "unit": "day"
+                          },
+                          "services": [
+                            {
+                              "name": "string",
+                              "types": "PICKUP_POINT_RELAY_WITHOUT_LOCKER",
+                              "categories": [
+                                "string"
+                              ]
+                            }
+                          ],
+                          "promises": {
+                            "noticePeriod": {
+                              "unit": "string",
+                              "value": "string"
+                            },
+                            "minDeliveryTime": {
+                              "unit": "string",
+                              "value": "string"
+                            },
+                            "picking": {
+                              "interval": {
+                                "start": "2019-12-04T12:30:00+0000",
+                                "end": "2019-12-04T14:30:00+0000"
+                              }
+                            },
+                            "delivery": {
+                              "interval": {
+                                "start": "2019-12-04T12:30:00+0000",
+                                "end": "2019-12-04T14:30:00+0000"
+                              }
+                            }
+                          },
+                          "slots": {
+                            "start": "string",
+                            "end": "string",
+                            "remainingCapacity": 0
+                          },
+                          "price": {
+                            "taxExcludedAmount": 17.2,
+                            "taxIncludedAmount": 20.64,
+                            "taxAmount": 3.44,
+                            "currency": "EUR"
+                          },
+                          "workSchedule": {
+                            "monday": [
+                              {
+                                "start": "14:00",
+                                "end": "18:00"
+                              }
+                            ],
+                            "tuesday": [
+                              {
+                                "start": "14:00",
+                                "end": "18:00"
+                              }
+                            ],
+                            "wednesday": [
+                              {
+                                "start": "14:00",
+                                "end": "18:00"
+                              }
+                            ],
+                            "thursday": [
+                              {
+                                "start": "14:00",
+                                "end": "18:00"
+                              }
+                            ],
+                            "friday": [
+                              {
+                                "start": "14:00",
+                                "end": "18:00"
+                              }
+                            ],
+                            "saturday": [
+                              {
+                                "start": "14:00",
+                                "end": "18:00"
+                              }
+                            ],
+                            "sunday": [
+                              {
+                                "start": "14:00",
+                                "end": "18:00"
+                              }
+                            ]
+                          }
+                        }
+                      ],
+                      "ineligibleCarriers": [
+                        {
+                          "carrierName": "string",
+                          "reason": [
+                            null
+                          ]
+                        }
+                      ]
+                    }
                   }
                 }
               }
