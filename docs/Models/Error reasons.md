@@ -25,4 +25,4 @@ Code | Title
   `NO_CARRIER_SELECTED`| No carrier selected
   `MORE_THAN_ONE_PARCEL`| More than one parcel 
   `CANCELLED_BY_CLIENT`| Cancelled by client
-  `CARRIER_ERROR`| Cancellation by the carrier
+  `CANCELLATION_REFUSED_BY_CARRIER`| Carrier error
