@@ -5006,7 +5006,8 @@
                         "type": "object",
                         "required": [
                           "carrier",
-                          "services"
+                          "services",
+                          "promises"
                         ],
                         "properties": {
                           "carrier": {
@@ -5259,102 +5260,6 @@
                               }
                             }
                           },
-                          "delivery": {
-                            "type": "object",
-                            "properties": {
-                              "noticePeriod": {
-                                "type": "object",
-                                "description": "Minimum notice for delivery",
-                                "required": [
-                                  "value",
-                                  "unit"
-                                ],
-                                "properties": {
-                                  "value": {
-                                    "type": "number"
-                                  },
-                                  "unit": {
-                                    "type": "string"
-                                  }
-                                }
-                              },
-                              "promise": {
-                                "type": "object",
-                                "description": "Promise of delivery ",
-                                "properties": {
-                                  "value": {
-                                    "type": "number"
-                                  },
-                                  "unit": {
-                                    "type": "string"
-                                  }
-                                }
-                              },
-                              "minDeliveryTime": {
-                                "type": "object",
-                                "description": "Min delivery time",
-                                "properties": {
-                                  "value": {
-                                    "type": "number"
-                                  },
-                                  "unit": {
-                                    "type": "string"
-                                  }
-                                }
-                              },
-                              "cutOffs": {
-                                "type": "object",
-                                "properties": {
-                                  "timezone": {
-                                    "type": "string",
-                                    "x-stoplight": {
-                                      "id": "hjlxunxjoktit"
-                                    }
-                                  },
-                                  "sameDay": {
-                                    "type": "object",
-                                    "x-stoplight": {
-                                      "id": "x2p9fadhs4qae"
-                                    },
-                                    "properties": {
-                                      "hours": {
-                                        "type": "string",
-                                        "x-stoplight": {
-                                          "id": "tlqxwyjliofm7"
-                                        }
-                                      },
-                                      "minutes": {
-                                        "type": "string",
-                                        "x-stoplight": {
-                                          "id": "9zwnefail9vss"
-                                        }
-                                      }
-                                    }
-                                  },
-                                  "nextDay": {
-                                    "type": "object",
-                                    "x-stoplight": {
-                                      "id": "v43xd8hlfnkk9"
-                                    },
-                                    "properties": {
-                                      "hours": {
-                                        "type": "string",
-                                        "x-stoplight": {
-                                          "id": "hfftqupxnlac9"
-                                        }
-                                      },
-                                      "minutes": {
-                                        "type": "string",
-                                        "x-stoplight": {
-                                          "id": "d21ygobckgypd"
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
-                              }
-                            }
-                          },
                           "durationSlot": {
                             "type": "object",
                             "description": "Duration of the delivery slot",
@@ -5396,6 +5301,121 @@
                               }
                             }
                           },
+                          "promises": {
+                            "type": "object",
+                            "x-stoplight": {
+                              "id": "iedlzsxciwvb6"
+                            },
+                            "properties": {
+                              "noticePeriod": {
+                                "type": "object",
+                                "x-stoplight": {
+                                  "id": "xvhxqdef100in"
+                                },
+                                "properties": {
+                                  "unit": {
+                                    "type": "string",
+                                    "x-stoplight": {
+                                      "id": "ygyt27z1713qs"
+                                    }
+                                  },
+                                  "value": {
+                                    "type": "string",
+                                    "x-stoplight": {
+                                      "id": "93aro4be0fyv9"
+                                    }
+                                  }
+                                }
+                              },
+                              "minDeliveryTime": {
+                                "type": "object",
+                                "x-stoplight": {
+                                  "id": "afep4worytxmx"
+                                },
+                                "properties": {
+                                  "unit": {
+                                    "type": "string",
+                                    "x-stoplight": {
+                                      "id": "bsz2i3ul8zo97"
+                                    }
+                                  },
+                                  "value": {
+                                    "type": "string",
+                                    "x-stoplight": {
+                                      "id": "4zciho92bfcut"
+                                    }
+                                  }
+                                }
+                              },
+                              "picking": {
+                                "type": "object",
+                                "properties": {
+                                  "interval": {
+                                    "$ref": "#/components/schemas/pickingInterval"
+                                  }
+                                }
+                              },
+                              "delivery": {
+                                "type": "object",
+                                "properties": {
+                                  "interval": {
+                                    "$ref": "#/components/schemas/deliveryInterval"
+                                  }
+                                }
+                              },
+                              "cutOffs": {
+                                "type": "object",
+                                "x-stoplight": {
+                                  "id": "jimv55078rxsi"
+                                },
+                                "properties": {
+                                  "nextDay": {
+                                    "type": "object",
+                                    "x-stoplight": {
+                                      "id": "ulfb8nu6sq0s9"
+                                    },
+                                    "properties": {
+                                      "hours": {
+                                        "x-stoplight": {
+                                          "id": "9mialiq8gyyun"
+                                        },
+                                        "type": "string"
+                                      },
+                                      "minutes": {
+                                        "x-stoplight": {
+                                          "id": "yw9l5m3czfer4"
+                                        },
+                                        "type": "string"
+                                      }
+                                    }
+                                  },
+                                  "sameDay": {
+                                    "type": "object",
+                                    "x-stoplight": {
+                                      "id": "s1wnmrb1vv236"
+                                    },
+                                    "properties": {
+                                      "hours": {
+                                        "x-stoplight": {
+                                          "id": "56uaoq019s2do"
+                                        },
+                                        "type": "string"
+                                      },
+                                      "minutes": {
+                                        "x-stoplight": {
+                                          "id": "85kuaoo8lk9vw"
+                                        },
+                                        "type": "string"
+                                      }
+                                    }
+                                  },
+                                  "timezone": {
+                                    "$ref": "#/components/schemas/timezone"
+                                  }
+                                }
+                              }
+                            }
+                          },
                           "slots": {
                             "$ref": "#/components/schemas/availableSlot"
                           },
@@ -5404,20 +5424,6 @@
                           },
                           "workSchedule": {
                             "$ref": "./models/Carrier/workSchedule.json"
-                          },
-                          "minPickingDate": {
-                            "type": "string",
-                            "x-stoplight": {
-                              "id": "yyuz6lsxn9x7c"
-                            },
-                            "format": "date-time"
-                          },
-                          "minDeliveryDate": {
-                            "type": "string",
-                            "x-stoplight": {
-                              "id": "vq9gepfm3nyzo"
-                            },
-                            "format": "date-time"
                           }
                         }
                       }
@@ -5867,6 +5873,167 @@
                               }
                             }
                           }
+                        }
+                      ]
+                    }
+                  },
+                  "Example with deliveryPromise": {
+                    "value": {
+                      "eligibilities": [
+                        {
+                          "carrier": {
+                            "name": "string",
+                            "code": "string",
+                            "score": {
+                              "satisfaction": "string",
+                              "nps": "string",
+                              "onTimeDeliveryScore": "string"
+                            },
+                            "impact": {
+                              "emissionType": {
+                                "CO2e": {
+                                  "reliabilityScore": 0,
+                                  "emissions": {
+                                    "WTW": [
+                                      {
+                                        "value": 0,
+                                        "unit": "kgCO2e"
+                                      }
+                                    ],
+                                    "WTT": [
+                                      {
+                                        "value": 0,
+                                        "unit": "KgCO2e/km"
+                                      }
+                                    ],
+                                    "TTW": [
+                                      {
+                                        "value": 0,
+                                        "unit": "KgCO2e/km"
+                                      }
+                                    ],
+                                    "production": [
+                                      {
+                                        "value": 0,
+                                        "unit": "KgCO2e/km"
+                                      }
+                                    ]
+                                  }
+                                }
+                              },
+                              "labelling": [
+                                {
+                                  "from": "string",
+                                  "to": "string",
+                                  "name": "string"
+                                }
+                              ]
+                            }
+                          },
+                          "route": {
+                            "distance": {
+                              "value": 0,
+                              "unit": "string"
+                            }
+                          },
+                          "durationSlot": {
+                            "value": 0,
+                            "unit": "day"
+                          },
+                          "services": [
+                            {
+                              "name": "string",
+                              "types": "PICKUP_POINT_RELAY_WITHOUT_LOCKER",
+                              "categories": [
+                                "string"
+                              ]
+                            }
+                          ],
+                          "promises": {
+                            "noticePeriod": {
+                              "unit": "string",
+                              "value": "string"
+                            },
+                            "minDeliveryTime": {
+                              "unit": "string",
+                              "value": "string"
+                            },
+                            "picking": {
+                              "interval": {
+                                "start": "2019-12-04T12:30:00+0000",
+                                "end": "2019-12-04T14:30:00+0000"
+                              }
+                            },
+                            "delivery": {
+                              "interval": {
+                                "start": "2019-12-04T12:30:00+0000",
+                                "end": "2019-12-04T14:30:00+0000"
+                              }
+                            }
+                          },
+                          "slots": {
+                            "start": "string",
+                            "end": "string",
+                            "remainingCapacity": 0
+                          },
+                          "price": {
+                            "taxExcludedAmount": 17.2,
+                            "taxIncludedAmount": 20.64,
+                            "taxAmount": 3.44,
+                            "currency": "EUR"
+                          },
+                          "workSchedule": {
+                            "monday": [
+                              {
+                                "start": "14:00",
+                                "end": "18:00"
+                              }
+                            ],
+                            "tuesday": [
+                              {
+                                "start": "14:00",
+                                "end": "18:00"
+                              }
+                            ],
+                            "wednesday": [
+                              {
+                                "start": "14:00",
+                                "end": "18:00"
+                              }
+                            ],
+                            "thursday": [
+                              {
+                                "start": "14:00",
+                                "end": "18:00"
+                              }
+                            ],
+                            "friday": [
+                              {
+                                "start": "14:00",
+                                "end": "18:00"
+                              }
+                            ],
+                            "saturday": [
+                              {
+                                "start": "14:00",
+                                "end": "18:00"
+                              }
+                            ],
+                            "sunday": [
+                              {
+                                "start": "14:00",
+                                "end": "18:00"
+                              }
+                            ]
+                          }
+                        }
+                      ],
+                      "ineligibleCarriers": [
+                        {
+                          "carrierName": "string",
+                          "reason": [
+                            null
+                          ]
                         }
                       ]
                     }
@@ -7049,9 +7216,7 @@
                         "required": [
                           "mode",
                           "size",
-                          "url",
-                          "packageReference",
-                          "parcelId"
+                          "url"
                         ],
                         "properties": {
                           "mode": {
@@ -7066,18 +7231,12 @@
                             "type": "string",
                             "description": "Label redirection URI"
                           },
-                          "packageReference": {
+                          "packageId": {
                             "type": "string",
                             "x-stoplight": {
                               "id": "34flk3xmilfs4"
                             },
                             "description": "Associated parcel identifier "
-                          },
-                          "parcelId": {
-                            "type": "string",
-                            "x-stoplight": {
-                              "id": "codkpye2g3g80"
-                            }
                           }
                         }
                       }
@@ -7092,18 +7251,6 @@
                           "mode": "pdf",
                           "size": "A6",
                           "url": "https://labels.woopit.fr/XXX"
-                        }
-                      ]
-                    }
-                  },
-                  "Example 2": {
-                    "value": {
-                      "labels": [
-                        {
-                          "mode": "string",
-                          "size": "string",
-                          "url": "string",
-                          "packageId": "string"
                         }
                       ]
                     }
