@@ -8,7 +8,7 @@ The delivery goes through several statuses in succession. We identify the differ
 
 ### Route of delivery
 
-![Workflow_status_livraison.png](../../../assets/images/Workflow_status_livraison.png)
+![Workflow_status_livraison.png](../../../assets/images/workflowDeliveryStatus.png)
 
 ### List of possible delivery statuses
 
