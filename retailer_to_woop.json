@@ -8907,8 +8907,7 @@
                 "default": "ZPL",
                 "example": "ZPL",
                 "enum": [
-                  "ZPL",
-                  "PDF"
+                  "ZPL"
                 ]
               },
               "size": {
@@ -9131,8 +9130,7 @@
               "mode": {
                 "description": "Label format\n",
                 "enum": [
-                  "zpl",
-                  "pdf"
+                  "zpl"
                 ]
               },
               "size": {
