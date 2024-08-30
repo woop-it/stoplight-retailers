@@ -8544,6 +8544,30 @@
           }
         }
       },
+      "deliveryStatus": {
+        "type": "string",
+        "enum": [
+          "DELIVERY_INIT",
+          "DELIVERY_STARTED",
+          "DELIVERY_PICK_UP_REACHED",
+          "DELIVERY_PICK_UP_OK",
+          "DELIVERY_PICK_UP_PARTIALLY",
+          "DELIVERY_IN_PROGRESS",
+          "DELIVERY_AT_DROP_OF_LOCATION",
+          "DELIVERY_PICK_UP_FAILED",
+          "DELIVERY_DELIVERED_WITH_CLAIM",
+          "DELIVERY_CANCELLED_WITH_RETURN",
+          "DELIVERY_FAILED_WITH_RETURN",
+          "DELIVERY_RETURNED_TO_PICK_UP",
+          "DELIVERY_DELIVERED_OK",
+          "DELIVERY_DELIVERED_PARTIALLY"
+        ],
+        "description": "Specifies the delivery status that can be used.",
+        "x-examples": {
+          "Example": "DELIVERY_STARTED"
+        },
+        "title": "Delivery status (deliveryStatus)"
+      },
       "addressForEligibility": {
         "description": "Here, 3 location.types are possible (`address`, `pickupPoint` and `exchangePlace`). The request must be made using one of these three options.\n\n> If location.type = `address` then the full address must be sent ",
         "x-stoplight": {
@@ -8629,30 +8653,6 @@
             "$ref": "#/components/schemas/coordinates"
           }
         }
-      },
-      "deliveryStatus": {
-        "type": "string",
-        "enum": [
-          "DELIVERY_INIT",
-          "DELIVERY_STARTED",
-          "DELIVERY_PICK_UP_REACHED",
-          "DELIVERY_PICK_UP_OK",
-          "DELIVERY_PICK_UP_PARTIALLY",
-          "DELIVERY_IN_PROGRESS",
-          "DELIVERY_AT_DROP_OF_LOCATION",
-          "DELIVERY_PICK_UP_FAILED",
-          "DELIVERY_DELIVERED_WITH_CLAIM",
-          "DELIVERY_CANCELLED_WITH_RETURN",
-          "DELIVERY_FAILED_WITH_RETURN",
-          "DELIVERY_RETURNED_TO_PICK_UP",
-          "DELIVERY_DELIVERED_OK",
-          "DELIVERY_DELIVERED_PARTIALLY"
-        ],
-        "description": "Specifies the delivery status that can be used.",
-        "x-examples": {
-          "Example": "DELIVERY_STARTED"
-        },
-        "title": "Delivery status (deliveryStatus)"
       },
       "location": {
         "title": "Location (location)",
