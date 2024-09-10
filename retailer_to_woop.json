@@ -203,7 +203,7 @@
         "tags": [
           "Collect"
         ],
-        "description": "This method allows a Click&Collect collection request to be made at a specific collection location. The collection order will be created once the request is validated and the booking slot selected.",
+        "description": "This method allows a Click&Collect collection request to be made at a specific collection location. The collection order will be created once the request is validated and the booking slot selected",
         "operationId": "postCollects",
         "parameters": [
           {
