@@ -261,9 +261,6 @@
     },
     "/orders/{orderId}/status": {
       "put": {
-        "tags": [
-          "Order"
-        ],
         "operationId": "putOrderStatus",
         "description": "This method allows the retailer to receive orders status. The retailer can then follow the progress of his order in real time. ",
         "parameters": [
@@ -383,7 +380,10 @@
             }
           }
         },
-        "summary": "Receive order status updates"
+        "summary": "Receive order status updates",
+        "tags": [
+          "Tracking"
+        ]
       }
     },
     "/orders/{orderId}/deliveries/{deliveryId}/status": {
@@ -459,9 +459,6 @@
             "description": "The 'orderId' was not found"
           }
         },
-        "tags": [
-          "Order"
-        ],
         "description": "This method allows the retailer to receive delivery status updates from the carrier for a given order.The retailer can then follow the progress of the delivery in real time. ",
         "requestBody": {
           "content": {
@@ -472,7 +469,10 @@
             }
           },
           "description": "Contains the updated status information."
-        }
+        },
+        "tags": [
+          "Tracking"
+        ]
       }
     },
     "/orders/{orderId}/bookings/{bookingId}/status": {
@@ -752,9 +752,6 @@
     },
     "/orders/{orderId}/deliveries/{deliveryId}/parcels/{parcelId}/status": {
       "put": {
-        "tags": [
-          "Order"
-        ],
         "operationId": "putParcelStatus",
         "description": "This method allows the retailer to receive package status updates from the carrier during the delivery of a given sales order. The retailer can then track the progress of the delivery in real time on an individual parcel-by-parcel basis.  ",
         "parameters": [
@@ -865,7 +862,10 @@
             }
           }
         },
-        "summary": "Receive parcel status updates"
+        "summary": "Receive parcel status updates",
+        "tags": [
+          "Tracking"
+        ]
       },
       "parameters": [
         {
@@ -1461,7 +1461,7 @@
           "description": "Contains the the tracking page url."
         },
         "tags": [
-          "Order"
+          "Tracking"
         ]
       }
     },
@@ -2356,6 +2356,34 @@
           "specifications"
         ]
       },
+      "carrierName": {
+        "title": "Carrier name & code (carrierName)",
+        "x-stoplight": {
+          "id": "of9zwmtp0104k"
+        },
+        "x-examples": {
+          "Example 1": {
+            "name": "string",
+            "code": "string"
+          }
+        },
+        "type": "object",
+        "description": "Specifies the carrier name and code. ",
+        "required": [
+          "name",
+          "code"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Carrier name"
+          },
+          "code": {
+            "type": "string",
+            "description": "Carrier code"
+          }
+        }
+      },
       "requestedCarriers": {
         "title": "requestedCarriers (carrier)",
         "x-stoplight": {
@@ -2412,6 +2440,13 @@
         "title": "Update of the delivery status (putDeliveryStatus)",
         "type": "object",
         "description": "Update of the delivery status.",
+        "required": [
+          "deliveryId",
+          "orderId",
+          "status",
+          "date",
+          "carrier"
+        ],
         "properties": {
           "deliveryId": {
             "type": "string",
@@ -2442,18 +2477,17 @@
           "team": {
             "$ref": "#/components/schemas/team"
           },
-          "additionalData": {
+          "metadata": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/additionalData"
+              "$ref": "#/components/schemas/metadata"
             }
           },
           "appointment": {
             "$ref": "#/components/schemas/appointment"
           },
-          "carrierCode": {
-            "type": "string",
-            "description": "Carrier code"
+          "carrier": {
+            "$ref": "#/components/schemas/carrierName"
           },
           "pickUpPoint": {
             "type": "object",
@@ -2470,14 +2504,7 @@
               }
             }
           }
-        },
-        "required": [
-          "deliveryId",
-          "orderId",
-          "status",
-          "date",
-          "carrierCode"
-        ]
+        }
       },
       "putParcelStatus": {
         "title": "Update of the parcel status (putParcelStatus)",
@@ -2486,6 +2513,15 @@
         "x-stoplight": {
           "id": "330825975831c"
         },
+        "required": [
+          "orderId",
+          "deliveryId",
+          "parcelId",
+          "carrierEvent",
+          "status",
+          "date",
+          "carrier"
+        ],
         "properties": {
           "orderId": {
             "type": "string",
@@ -2527,9 +2563,8 @@
           "team": {
             "$ref": "#/components/schemas/team"
           },
-          "carrierCode": {
-            "type": "string",
-            "description": "Carrier code"
+          "carrier": {
+            "$ref": "#/components/schemas/carrierName"
           },
           "pickUpPoint": {
             "type": "object",
@@ -2546,16 +2581,7 @@
               }
             }
           }
-        },
-        "required": [
-          "orderId",
-          "deliveryId",
-          "parcelId",
-          "carrierEvent",
-          "status",
-          "date",
-          "carrierCode"
-        ]
+        }
       },
       "putOrderStatus": {
         "title": "Update of the order status (putOrderStatus)",
@@ -2600,10 +2626,24 @@
           "status"
         ]
       },
-      "additionalData": {
-        "title": "Additional data (additionalData)",
+      "metadata": {
+        "title": "Additional data (metadata)",
+        "x-stoplight": {
+          "id": "8f9ad8a8d99bb"
+        },
         "type": "object",
-        "description": "Allows you to receive personalised information/data from the carrier.",
+        "description": "Allows you to receive personalised information/data from the carrier, the order or the retailer. Use to retrieve information added as extras when creating an order. ",
+        "x-examples": {
+          "example": {
+            "key": "string",
+            "value": "string"
+          }
+        },
+        "required": [
+          "key",
+          "value",
+          "type"
+        ],
         "properties": {
           "key": {
             "type": "string",
@@ -2612,16 +2652,16 @@
           "value": {
             "type": "string",
             "description": "Value of the information transmitted"
-          }
-        },
-        "required": [
-          "key",
-          "value"
-        ],
-        "x-examples": {
-          "example": {
-            "key": "string",
-            "value": "string"
+          },
+          "type": {
+            "x-stoplight": {
+              "id": "9f5cqe8stb7eb"
+            },
+            "enum": [
+              "carrier",
+              "order"
+            ],
+            "description": "Use to define the type of data received. The information can either come from the carrier or directly from the order. "
           }
         }
       },

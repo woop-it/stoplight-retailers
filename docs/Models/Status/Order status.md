@@ -1,5 +1,5 @@
 ---
-stoplight-id: lqrmkot4qwpc2
+stoplight-id: 7o8f8dqjmr2h7
 ---
 
 # Order status & states
@@ -52,3 +52,4 @@ During its life cycle, an order goes through several :
 | States                  | Title                                                        |
 | ----------------------- | ------------------------------------------------------------ |
 | `ORDER_TO_BE_COMPLETED` | Order awaiting further information. Request to be completed. |
+| `ORDER_WITHOUT_SHIPMENT` | Order without carrier charter. Orders in this status are received with delivery information only.|

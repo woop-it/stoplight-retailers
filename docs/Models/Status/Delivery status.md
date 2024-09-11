@@ -8,7 +8,7 @@ The delivery goes through several statuses in succession. We identify the differ
 
 ### Route of delivery
 
-![Workflow_status_livraison.png](../../../assets/images/Workflow_status_livraison.png)
+![Workflow_status_livraison.png](../../../assets/images/workflowDeliveryStatus.png)
 
 ### List of possible delivery statuses
 
@@ -39,17 +39,18 @@ The delivery goes through several statuses in succession. We identify the differ
 | `DELIVERY_REPLANNED`            | --                   | Delivery date rescheduled by making an appointment with the customer | "N/A"|
 | `DELIVERY_COLLECTED`            | --                   | The product has been recovered at collection points| "N/A"|
 
-### SubStatus & use case
+### Sub-status & use case
 
-![Stoplight PNG-Page-10.jpg](https://stoplight.io/api/v1/projects/cHJqOjkyOTQ/images/x91RqQHJML4)
+![subStatusAndUseCase.png](../../../assets/images/subStatusAndUseCase.png)
 
-### Returns and error management
+### Error management
+Each of these statuses can be visible at any stage of the delivery workflow.
 
-![Workflow_retours_livraison.png](../../../assets/images/Workflow_retours_livraison.png)
+![errorManagement.png](../../../assets/images/errorManagement.png)
 
 ### Delivery at collection point : Locker
 
-![Collection_point_status.png](../../../assets/images/Collection_point_status.png)
+![collectionPointFinalStatus.png](../../../assets/images/collectionPointFinalStatus.png)
 
 Collection-point delivery concept between link with order and booking statuses. 
 

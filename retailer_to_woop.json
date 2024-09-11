@@ -31,7 +31,7 @@
   ],
   "info": {
     "title": "Retailer to Woop",
-    "description": "This document contains the technical information about Woop APIs for carriers. For any questions or clarification, please contact the internal technical team.\n\nTo use \"Retailer to Woop\" APIs, you must use the confidential access codes provided when you created your retailer account on the platform. [See documentation](https://woop.stoplight.io/docs/retailer/docs/Basis/2.Authentication.md)\n\nThe version currently available in the documentation is <b>Version 1.7.0</b>",
+    "description": "This document contains the technical information about Woop APIs for carriers. For any questions or clarification, please contact the internal technical team\n\nTo use \"Retailer to Woop\" APIs, you must use the confidential access codes provided when you created your retailer account on the platform. [See documentation](https://woop.stoplight.io/docs/retailer/docs/Basis/2.Authentication.md)\n\nThe version currently available in the documentation is <b>Version 1.7.0</b>",
     "version": "1.7.0"
   },
   "servers": [
@@ -2481,7 +2481,7 @@
         "tags": [
           "Order"
         ],
-        "description": "This method allows you to create an order from Woop.\nOnce the order has been validated, quotes will be sent to the carriers. The delivery order will then be created once a quote has been validated.",
+        "description": "This method allows you to create an order from Woop.\nOnce the order has been validated, quotes will be sent to the carriers. The delivery order will then be created once a quote has been validated",
         "operationId": "postOrders",
         "parameters": [
           {
@@ -5662,6 +5662,33 @@
                           }
                         }
                       }
+                    },
+                    "ineligibleCarriers": {
+                      "type": "array",
+                      "x-stoplight": {
+                        "id": "k6ccq8z5celkt"
+                      },
+                      "items": {
+                        "x-stoplight": {
+                          "id": "qdckcgh1gveev"
+                        },
+                        "type": "object",
+                        "properties": {
+                          "carrierName": {
+                            "type": "string",
+                            "x-stoplight": {
+                              "id": "ae5eerg8qoy80"
+                            }
+                          },
+                          "reason": {
+                            "type": "array",
+                            "x-stoplight": {
+                              "id": "vfskqxm07gdho"
+                            },
+                            "items": {}
+                          }
+                        }
+                      }
                     }
                   }
                 },
@@ -6942,6 +6969,445 @@
             }
           }
         }
+      }
+    },
+    "/deliveryPromise": {
+      "post": {
+        "summary": "Determine the delivery promise",
+        "tags": [
+          "Promise"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/DeliveryPromisePostResponse"
+          }
+        },
+        "operationId": "post-deliveryPromise",
+        "x-stoplight": {
+          "id": "ndzktv1jygbre"
+        },
+        "description": "This method calculates the delivery promise, considering carrier constraints. This method can calculate the delivery promise with or without picking and delivery intervals.\n\n",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "x-api-version",
+            "required": true,
+            "description": "version of API used"
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/postDeliveryPromise"
+              },
+              "examples": {
+                "Example 1": {
+                  "value": {
+                    "storeId": "string",
+                    "carrierIds": [
+                      "string"
+                    ],
+                    "picking": {
+                      "location": {
+                        "type": "address",
+                        "addressLine1": "string",
+                        "addressLine2": "string",
+                        "elevator": true,
+                        "floor": 0,
+                        "doorCode": "string",
+                        "postalCode": "59800",
+                        "city": "LILLE",
+                        "district": "string",
+                        "country": "FR",
+                        "comment": "string",
+                        "coordinates": {
+                          "latitude": 0,
+                          "longitude": 0
+                        }
+                      }
+                    },
+                    "delivery": {
+                      "location": {
+                        "type": "address",
+                        "addressLine1": "string",
+                        "addressLine2": "string",
+                        "elevator": true,
+                        "floor": 0,
+                        "doorCode": "string",
+                        "postalCode": "59800",
+                        "city": "LILLE",
+                        "district": "string",
+                        "country": "FR",
+                        "comment": "string",
+                        "coordinates": {
+                          "latitude": 0,
+                          "longitude": 0
+                        }
+                      }
+                    },
+                    "orderDate": "2024-01-30T10:00:00"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/orders/{orderId}/events": {
+      "get": {
+        "summary": "Retrieve notifications sent by Woop",
+        "responses": {
+          "200": {
+            "description": "OK. Contains  all events for the  provided orderId.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "x-examples": {
+                    "Example 1": {
+                      "events": [
+                        {
+                          "status": "",
+                          "type": "EVENT_TYPE_MAIL",
+                          "subject": "",
+                          "message": "",
+                          "sender": "",
+                          "date": "",
+                          "failReason": ""
+                        }
+                      ]
+                    }
+                  },
+                  "properties": {
+                    "events": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "status",
+                          "type",
+                          "subject",
+                          "message",
+                          "sender",
+                          "date"
+                        ],
+                        "properties": {
+                          "status": {
+                            "type": "boolean",
+                            "description": "Indicates whether the event was correctly sent to the customer\n\n"
+                          },
+                          "type": {
+                            "enum": [
+                              "EVENT_TYPE_SMS",
+                              "EVENT_TYPE_MAIL"
+                            ],
+                            "description": "Event type\n\n"
+                          },
+                          "subject": {
+                            "type": "string",
+                            "description": "subject of the event corresponding to a delivery status",
+                            "example": "DELIVERY_DELIVERED_OK"
+                          },
+                          "message": {
+                            "type": "string",
+                            "description": "Message sent to the customer\n\n"
+                          },
+                          "sender": {
+                            "type": "string",
+                            "description": "Sender event"
+                          },
+                          "date": {
+                            "type": "string",
+                            "format": "date-time",
+                            "description": "Event date\n\n"
+                          },
+                          "failReason": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "events": [
+                        {
+                          "status": true,
+                          "type": "EVENT_TYPE_SMS",
+                          "subject": "DELIVERY_DELIVERED_OK",
+                          "message": "string",
+                          "sender": "string",
+                          "date": "2019-08-24T14:15:22Z"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "You are not authorised to access this item",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getEvents",
+        "x-stoplight": {
+          "id": "eqn95ylc4kknv"
+        },
+        "tags": [
+          "Event"
+        ],
+        "description": "This method is used to receive all events related to an order / delivery. All notifications sent to the customer will be forwarded to the retailer. \n\n",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "example": "1.15.0"
+            },
+            "in": "header",
+            "name": "x-api-version",
+            "description": "Target API version",
+            "required": true
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "orderId",
+          "in": "path",
+          "required": true,
+          "description": "Order identifier"
+        }
+      ]
+    },
+    "/orders/{orderId}/labels/list": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string",
+            "example": "A1234ED"
+          },
+          "name": "orderId",
+          "in": "path",
+          "required": true,
+          "description": "Order identifier"
+        }
+      ],
+      "get": {
+        "summary": "Retrieve URI for list of package ",
+        "tags": [
+          "Label"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Contains the URI of labels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "x-examples": {
+                    "Example 1": {
+                      "labels": [
+                        {
+                          "mode": "pdf",
+                          "size": "A4",
+                          "url": "https://labels.woopit.fr/XXX"
+                        }
+                      ]
+                    }
+                  },
+                  "properties": {
+                    "labels": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "mode",
+                          "size",
+                          "url",
+                          "packageReference",
+                          "parcelId"
+                        ],
+                        "properties": {
+                          "mode": {
+                            "type": "string",
+                            "description": "Label mode (ZPL or PDF)"
+                          },
+                          "size": {
+                            "type": "string",
+                            "description": "Size label defined"
+                          },
+                          "url": {
+                            "type": "string",
+                            "description": "Label redirection URI"
+                          },
+                          "packageReference": {
+                            "type": "string",
+                            "x-stoplight": {
+                              "id": "34flk3xmilfs4"
+                            },
+                            "description": "Associated parcel identifier "
+                          },
+                          "parcelId": {
+                            "type": "string",
+                            "x-stoplight": {
+                              "id": "codkpye2g3g80"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "labels": [
+                        {
+                          "mode": "pdf",
+                          "size": "A6",
+                          "url": "https://labels.woopit.fr/XXX"
+                        }
+                      ]
+                    }
+                  },
+                  "Example 2": {
+                    "value": {
+                      "labels": [
+                        {
+                          "mode": "string",
+                          "size": "string",
+                          "url": "string",
+                          "packageId": "string"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getLabelsLlist",
+        "x-stoplight": {
+          "id": "zlm0lfoxkaxgk"
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "example": "1.10.0"
+            },
+            "in": "header",
+            "name": "x-api-version",
+            "description": "Target API version",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "pdf",
+                "zpl"
+              ],
+              "example": "zpl"
+            },
+            "in": "query",
+            "name": "mode",
+            "description": "Label format"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "A6",
+                "A4"
+              ],
+              "example": "A6"
+            },
+            "in": "query",
+            "description": "Set the size of the label ***[For single pack only]***. ",
+            "name": "size"
+          }
+        ],
+        "description": "This method retrieves a download link for all the package labels in a customer order. \n\nThe labels retrieved are either unique or consolidated for the entire order. "
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "Bearer": {
+        "type": "oauth2",
+        "flows": {},
+        "description": "[See documentation](https://woop.stoplight.io/docs/retailer/docs/Basis/2.Authentication.md)"
       }
     },
     "/shipments": {
@@ -9178,6 +9644,9 @@
             "type": "string",
             "description": "Identifier of the store issuing the request"
           },
+          "state": {
+            "$ref": "#/components/schemas/state"
+          },
           "picking": {
             "type": "object",
             "required": [
@@ -9225,6 +9694,43 @@
           },
           "services": {
             "$ref": "#/components/schemas/services"
+          },
+          "expectedPayment": {
+            "type": "object",
+            "description": "Rest to be paid, to be used as part of the `SERVICE_PAY_ON_DELIVERY` service",
+            "required": [
+              "value",
+              "currency",
+              "paymentMethod"
+            ],
+            "properties": {
+              "value": {
+                "type": "number"
+              },
+              "currency": {
+                "$ref": "./models/currency.yaml"
+              },
+              "paymentMethod": {
+                "type": "string",
+                "enum": [
+                  "CASH",
+                  "DEBIT_CARD",
+                  "DIRECT_DEBIT",
+                  "BANK_TRANSFER",
+                  "CHECK",
+                  "CREDIT_CARD"
+                ]
+              }
+            }
+          },
+          "tags": {
+            "$ref": "#/components/schemas/tags"
+          },
+          "carrierSelection": {
+            "$ref": "#/components/schemas/carrierSelection"
+          },
+          "additionalData": {
+            "$ref": "./models/additionalData.yaml"
           }
         }
       },
@@ -9605,8 +10111,32 @@
           }
         }
       },
+      "deliveryStatus": {
+        "type": "string",
+        "enum": [
+          "DELIVERY_INIT",
+          "DELIVERY_STARTED",
+          "DELIVERY_PICK_UP_REACHED",
+          "DELIVERY_PICK_UP_OK",
+          "DELIVERY_PICK_UP_PARTIALLY",
+          "DELIVERY_IN_PROGRESS",
+          "DELIVERY_AT_DROP_OF_LOCATION",
+          "DELIVERY_PICK_UP_FAILED",
+          "DELIVERY_DELIVERED_WITH_CLAIM",
+          "DELIVERY_CANCELLED_WITH_RETURN",
+          "DELIVERY_FAILED_WITH_RETURN",
+          "DELIVERY_RETURNED_TO_PICK_UP",
+          "DELIVERY_DELIVERED_OK",
+          "DELIVERY_DELIVERED_PARTIALLY"
+        ],
+        "description": "Specifies the delivery status that can be used.",
+        "x-examples": {
+          "Example": "DELIVERY_STARTED"
+        },
+        "title": "Delivery status (deliveryStatus)"
+      },
       "addressForEligibility": {
-        "description": "Here, 3 location.types are possible (address, pickupPoint and exchangePlace). The request must be made using one of these three options.",
+        "description": "Here, 3 location.types are possible (`address`, `pickupPoint` and `exchangePlace`). The request must be made using one of these three options.\n\n> If location.type = `address` then the full address must be sent ",
         "x-stoplight": {
           "id": "ai6r20urg3t8d"
         },
@@ -9691,33 +10221,9 @@
           }
         }
       },
-      "deliveryStatus": {
-        "type": "string",
-        "enum": [
-          "DELIVERY_INIT",
-          "DELIVERY_STARTED",
-          "DELIVERY_PICK_UP_REACHED",
-          "DELIVERY_PICK_UP_OK",
-          "DELIVERY_PICK_UP_PARTIALLY",
-          "DELIVERY_IN_PROGRESS",
-          "DELIVERY_AT_DROP_OF_LOCATION",
-          "DELIVERY_PICK_UP_FAILED",
-          "DELIVERY_DELIVERED_WITH_CLAIM",
-          "DELIVERY_CANCELLED_WITH_RETURN",
-          "DELIVERY_FAILED_WITH_RETURN",
-          "DELIVERY_RETURNED_TO_PICK_UP",
-          "DELIVERY_DELIVERED_OK",
-          "DELIVERY_DELIVERED_PARTIALLY"
-        ],
-        "description": "Specifies the delivery status that can be used.",
-        "x-examples": {
-          "Example": "DELIVERY_STARTED"
-        },
-        "title": "Delivery status (deliveryStatus)"
-      },
       "location": {
         "title": "Location (location)",
-        "description": "Here, 3 location.types are possible (address, pickupPoint and exchangePlace). The request must be made using one of these three options.",
+        "description": "Here, 3 location.types are possible (`address`, `pickupPoint` and `exchangePlace`). The request must be made using one of these three options.",
         "x-examples": {
           "Adress": {
             "type": "address",
@@ -9766,8 +10272,7 @@
               {
                 "$ref": "#/components/schemas/exchangePlaceType"
               }
-            ],
-            "description": "Here, 3 location.types are possible (address, pickupPoint and exchangePlace). The request must be made using one of these three options."
+            ]
           }
         ]
       },
@@ -9805,7 +10310,7 @@
         "x-stoplight": {
           "id": "8gx4wbsz21y1h"
         },
-        "description": "Here, 3 location.types are possible (address, pickupPoint and exchangePlace). The request must be made using one of these three options.",
+        "description": "Here, 3 location.types are possible (`address`, `pickupPoint` and `exchangePlace`). The request must be made using one of these three options.",
         "x-examples": {
           "Adress": {
             "type": "address",
@@ -9844,7 +10349,6 @@
             "x-stoplight": {
               "id": "nxttbv5tsf2vf"
             },
-            "description": "Here, 3 location.types are possible (address, pickupPoint and exchangePlace). The request must be made using one of these three options.",
             "oneOf": [
               {
                 "$ref": "#/components/schemas/addressForEligibility"
@@ -10298,6 +10802,7 @@
           }
         }
       },
+
       "packages": {
         "description": "Specifies the information needed to update a package. The handling unit is to be defined with the package/product structure",
         "type": "object",
@@ -10658,7 +11163,7 @@
             "$ref": "#/components/schemas/mass"
           },
           "products": {
-            "description": "List of products in the package. \nWarning , 2 types of product list possible: 1) Simplified declaration - 2) Declaration for customs declaration ",
+            "description": "List of products in the package. \nTwo types of product list possible:  \n- `Simplified declaration`\n- `Customs declaration` ",
             "anyOf": [
               {
                 "items": {
@@ -11789,7 +12294,9 @@
           "isActive",
           "name",
           "storeId",
-          "language"
+          "language",
+          "timezone",
+          "contacts"
         ],
         "properties": {
           "isActive": {
@@ -11811,7 +12318,10 @@
             "$ref": "#/components/schemas/timezone"
           },
           "contacts": {
-            "$ref": "#/components/schemas/contact"
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/contact"
+            }
           },
           "activatedCarriers": {
             "type": "array",
@@ -11855,8 +12365,9 @@
         "required": [
           "isActive",
           "name",
-          "storeId",
-          "language"
+          "language",
+          "timezone",
+          "contacts"
         ],
         "properties": {
           "isActive": {
@@ -11867,10 +12378,6 @@
             "type": "string",
             "description": "Name of the store"
           },
-          "storeId": {
-            "type": "string",
-            "description": "Store identifier"
-          },
           "language": {
             "$ref": "#/components/schemas/language"
           },
@@ -11878,7 +12385,10 @@
             "$ref": "#/components/schemas/timezone"
           },
           "contacts": {
-            "$ref": "#/components/schemas/contact"
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/contact"
+            }
           },
           "activatedCarriers": {
             "type": "array",
@@ -11937,7 +12447,211 @@
             "description": "Associated package identifier\n\n"
           }
         },
-        "description": "Mandatory for consignments subject to customs declarations.\n"
+      "state": {
+        "type": "object",
+        "x-examples": {
+          "Example 1": {
+            "code": "WITHOUT_SHIPMENT",
+            "options": {
+              "deliveryId": "A234D4F",
+              "parcelIds": [
+                "12345",
+                "94554J"
+              ]
+            }
+          }
+        },
+        "description": "Allows you to define a specific status for the order when it is created.",
+        "title": "State of order",
+        "required": [
+          "code"
+        ],
+        "properties": {
+          "code": {
+            "$ref": "#/components/schemas/orderStates"
+          },
+          "options": {
+            "type": "object",
+            "properties": {
+              "deliveryId": {
+                "type": "string",
+                "description": "Unique delivery identifier (maximum 36 characters)"
+              },
+              "parcelIds": {
+                "type": "array",
+                "description": "Identifier of the package returned by the carrier. Can also be used for tracking ",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "orderStates": {
+        "title": "orderStates (List of orderStates)",
+        "x-stoplight": {
+          "id": "sc0f5s9khuvkd"
+        },
+        "description": "List of orderStates.",
+        "enum": [
+          "ORDER_TO_BE_COMPLETED",
+          "ORDER_WITHOUT_SHIPMENT"
+        ]
+      },
+      "postDeliveryPromise": {
+        "type": "object",
+        "x-examples": {
+          "Example 2": {
+            "orderDate": "2024-01-30T10:00:00",
+            "storeId": "string",
+            "carrierCodes": [
+              "string"
+            ],
+            "picking": {
+              "location": {
+                "type": "address",
+                "addressLine1": "string",
+                "addressLine2": "string",
+                "elevator": true,
+                "floor": 0,
+                "doorCode": "string",
+                "postalCode": "59800",
+                "city": "LILLE",
+                "district": "string",
+                "country": "FR",
+                "comment": "string",
+                "coordinates": {
+                  "latitude": 0,
+                  "longitude": 0
+                }
+              },
+              "interval": {
+                "start": "2019-12-04T12:30:00+0000",
+                "end": "2019-12-04T14:30:00+0000"
+              }
+            },
+            "delivery": {
+              "location": {
+                "type": "address",
+                "addressLine1": "string",
+                "addressLine2": "string",
+                "elevator": true,
+                "floor": 0,
+                "doorCode": "string",
+                "postalCode": "59800",
+                "city": "LILLE",
+                "district": "string",
+                "country": "FR",
+                "comment": "string",
+                "coordinates": {
+                  "latitude": 0,
+                  "longitude": 0
+                }
+              },
+              "interval": {
+                "start": "2019-12-04T12:30:00+0000",
+                "end": "2019-12-04T14:30:00+0000"
+              }
+            }
+          }
+        },
+        "title": "Delivery promise calculation (postDeliveryPromise)",
+        "description": "Launch the delivery promise calculation",
+        "required": [
+          "storeId",
+          "picking",
+          "delivery"
+        ],
+        "properties": {
+          "orderDate": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2024-01-30T10:00:00"
+          },
+          "storeId": {
+            "type": "string",
+            "description": "Identifier of the store issuing the request"
+          },
+          "carrierCodes": {
+            "type": "array",
+            "description": "List of carrier codes",
+            "items": {
+              "type": "string",
+              "x-stoplight": {
+                "id": "svzaqxj54ayn4"
+              }
+            }
+          },
+          "picking": {
+            "type": "object",
+            "required": [
+              "location"
+            ],
+            "properties": {
+              "location": {
+                "$ref": "#/components/schemas/location"
+              },
+              "interval": {
+                "$ref": "#/components/schemas/pickingInterval"
+              }
+            }
+          },
+          "delivery": {
+            "type": "object",
+            "required": [
+              "location"
+            ],
+            "properties": {
+              "location": {
+                "$ref": "#/components/schemas/location"
+              },
+              "interval": {
+                "$ref": "#/components/schemas/deliveryInterval"
+              }
+            }
+          }
+        }
+      },
+      "carrier": {
+        "title": "carrier",
+        "x-stoplight": {
+          "id": "m3kneqrvj5u4e"
+        },
+        "type": "object",
+        "description": "carrier informations required",
+        "required": [
+          "name",
+          "code"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "kuc510w6ryl3k"
+            },
+            "description": "Carrier name",
+            "example": "DPD"
+          },
+          "code": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "249ewq0vkn99d"
+            },
+            "description": "Carrier identifier",
+            "example": "dpd"
+          },
+          "claimUrl": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "qckw356fk50o1"
+            },
+            "description": "Carrier claim URL"
+          },
+          "contact": {
+            "$ref": "#/components/schemas/contact"
+          }
+        }
       }
     },
     "parameters": {
@@ -12269,6 +12983,7 @@
       },
       "ShipmentPostResponse": {
         "description": "The delivery is accepted, a 'deliveryId' is returned, additionally a table of 'parcels' ids can be returned if tracking by parcel. A table of labels can also be returned.\n\n",
+
         "content": {
           "application/json": {
             "schema": {
@@ -12319,6 +13034,7 @@
                       "value": "string",
                       "parcelId": "string"
                     }
+
                   ]
                 }
               },
@@ -12411,6 +13127,7 @@
               "type": "object",
               "properties": {}
             }
+
           }
         }
       }
