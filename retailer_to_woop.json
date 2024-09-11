@@ -7177,6 +7177,75 @@
         ],
         "description": "This method retrieves a download link for all the package labels in a customer order. \n\nThe labels retrieved are either unique or consolidated for the entire order. "
       }
+    },
+    "/shipments": {
+      "post": {
+        "summary": "Create shipment",
+        "tags": [
+          "Shipment"
+        ],
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/ShipmentPostResponse"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "post-shipments",
+        "x-stoplight": {
+          "id": "p1r3djrlo62lw"
+        },
+        "description": "Specifies the information required for creating a synchrone shipping request to retrieve the associated label.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/postShipments"
+                  },
+                  {
+                    "$ref": "#/components/schemas/postShipmentsWithFulfillment"
+                  }
+                ],
+                "type": "object"
+              },
+              "examples": {}
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -11964,6 +12033,56 @@
                   "items": {
                     "$ref": "#/components/schemas/parcelWithLabel"
                   }
+                }
+              }
+            },
+            "examples": {
+              "Example 1": {
+                "value": {
+                  "order": {
+                    "id": "string",
+                    "referenceNumber": "string"
+                  },
+                  "delivery": {
+                    "externalDeliveryId": "string"
+                  },
+                  "carrier": {
+                    "name": "string",
+                    "code": "string"
+                  },
+                  "parcels": [
+                    {
+                      "labels": [
+                        {
+                          "id": "string",
+                          "type": "string",
+                          "mode": "string",
+                          "value": "string",
+                          "parcelId": "string"
+                        }
+                      ],
+                      "packages": {
+                        "references": [
+                          {
+                            "reference": "12345B",
+                            "barcode": {
+                              "value": "54fd56g4f5gfd456sd",
+                              "type": "barcode",
+                              "format": "128"
+                            },
+                            "state": {
+                              "value": "ON_DOCK",
+                              "date": "2019-08-24T14:15:22Z"
+                            },
+                            "containerId": {
+                              "trailerId": "string",
+                              "palletId": "string"
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
                 }
               }
             }
