@@ -5198,6 +5198,75 @@
                                                     }
                                                   }
                                                 }
+                                              },
+                                              "infrastructure": {
+                                                "type": "object",
+                                                "x-stoplight": {
+                                                  "id": "k5odovkiayvkn"
+                                                },
+                                                "description": "Estimated GHG emissions of logistic hubs or other infrastructure buildings potentially used for delivery",
+                                                "properties": {
+                                                  "pickupPoints": {
+                                                    "type": "array",
+                                                    "x-stoplight": {
+                                                      "id": "zq0k0qj6u8ima"
+                                                    },
+                                                    "description": "GHG emissions for pickup points",
+                                                    "items": {
+                                                      "x-stoplight": {
+                                                        "id": "jd16b5fuzcz8r"
+                                                      },
+                                                      "type": "object",
+                                                      "properties": {
+                                                        "value": {
+                                                          "type": "integer",
+                                                          "x-stoplight": {
+                                                            "id": "nl87kly42ne69"
+                                                          }
+                                                        },
+                                                        "unit": {
+                                                          "x-stoplight": {
+                                                            "id": "x7d3gzigvnood"
+                                                          },
+                                                          "enum": [
+                                                            "KgCo2e",
+                                                            "KgCo2e/package"
+                                                          ]
+                                                        }
+                                                      }
+                                                    }
+                                                  },
+                                                  "transshipmentHubs": {
+                                                    "type": "array",
+                                                    "x-stoplight": {
+                                                      "id": "qjae7unkxblly"
+                                                    },
+                                                    "description": "GHG emissions for transshiplogistic hubs",
+                                                    "items": {
+                                                      "x-stoplight": {
+                                                        "id": "9x30hdsas3yd4"
+                                                      },
+                                                      "type": "object",
+                                                      "properties": {
+                                                        "value": {
+                                                          "type": "integer",
+                                                          "x-stoplight": {
+                                                            "id": "dc1mk1g8w905c"
+                                                          }
+                                                        },
+                                                        "unit": {
+                                                          "x-stoplight": {
+                                                            "id": "h0686fezojejp"
+                                                          },
+                                                          "enum": [
+                                                            "KgCo2e",
+                                                            "KgCo2e/ton"
+                                                          ]
+                                                        }
+                                                      }
+                                                    }
+                                                  }
+                                                }
                                               }
                                             }
                                           }
@@ -5859,6 +5928,30 @@
                                         {
                                           "value": 12.1,
                                           "unit": "KgCo2e"
+                                        }
+                                      ]
+                                    }
+                                  ],
+                                  "infrastructure": [
+                                    {
+                                      "pickupPoints": [
+                                        {
+                                          "value": 2,
+                                          "unit": "KgCo2e"
+                                        },
+                                        {
+                                          "value": 0.0027,
+                                          "unit": "KgCo2e/package"
+                                        }
+                                      ],
+                                      "transshipmentHubs": [
+                                        {
+                                          "value": 2,
+                                          "unit": "KgCo2e"
+                                        },
+                                        {
+                                          "value": 0.6,
+                                          "unit": "KgCo2e/ton"
                                         }
                                       ]
                                     }
