@@ -10693,7 +10693,7 @@
       "postShipmentsWithFulfillment": {
         "type": "object",
         "x-examples": {
-          "Example 1": {
+          "Example 2": {
             "fulfillmentId": "string",
             "orderId": "string",
             "referenceNumber": "string",
@@ -10785,11 +10785,11 @@
                     "quantity": 1
                   }
                 ],
-                "quantity": 4,
+                "quantity": 1,
                 "attributes": "string",
                 "footprint": {
                   "value": 0,
-                  "unit": "m2"
+                  "": "m2"
                 },
                 "type": "PACKAGE"
               }
@@ -10806,7 +10806,9 @@
         "required": [
           "fulfillmentId",
           "storeId",
-          "carrierCode"
+          "carrierCode",
+          "packages",
+          "services"
         ],
         "properties": {
           "fulfillmentId": {
@@ -10866,70 +10868,248 @@
           },
           "packages": {
             "type": "array",
+            "x-stoplight": {
+              "id": "80rfrhhdnck4i"
+            },
             "items": {
-              "type": "object",
-              "properties": {
-                "references": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "reference": {
-                        "type": "string"
-                      },
-                      "barcode": {
-                        "type": "object",
-                        "properties": {
-                          "value": {
-                            "type": "string"
-                          },
-                          "type": {
-                            "type": "string"
-                          },
-                          "format": {
-                            "type": "string"
-                          }
-                        }
-                      },
-                      "state": {
-                        "type": "object",
-                        "properties": {
-                          "value": {
-                            "type": "string"
-                          },
-                          "date": {
-                            "type": "string"
-                          }
-                        }
-                      },
-                      "containerId": {
-                        "type": "object",
-                        "properties": {
-                          "trailerId": {
-                            "type": "string"
-                          },
-                          "palletId": {
-                            "type": "string"
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
+              "$ref": "#/components/schemas/packagesForShipment"
             }
           },
           "services": {
-            "type": "string"
+            "$ref": "#/components/schemas/servicesForShipment"
           },
           "labelMode": {
             "type": "object",
+            "x-stoplight": {
+              "id": "69dhfghzs34rb"
+            },
+            "required": [
+              "mode",
+              "size"
+            ],
             "properties": {
               "mode": {
-                "type": "string"
+                "x-stoplight": {
+                  "id": "5svudivnsgf49"
+                },
+                "enum": [
+                  "ZPL"
+                ],
+                "description": "Label format\n"
               },
               "size": {
-                "type": "string"
+                "x-stoplight": {
+                  "id": "wckh8j9jzchnl"
+                },
+                "description": "Label size A6 only ",
+                "enum": [
+                  "A6"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "postShipments": {
+        "type": "object",
+        "x-stoplight": {
+          "id": "k2bqrnqnzyrem"
+        },
+        "x-examples": {
+          "Example 2": {
+            "orderId": "string",
+            "referenceNumber": "string",
+            "storeId": "string",
+            "carrierCode": "string",
+            "picking": {
+              "location": {
+                "type": "exchangePlace",
+                "id": "string",
+                "comment": "string"
+              },
+              "interval": {
+                "start": "2019-12-04T12:30:00+0000",
+                "end": "2019-12-04T14:30:00+0000"
+              }
+            },
+            "delivery": {
+              "location": {
+                "type": "exchangePlace",
+                "id": "string",
+                "comment": "string"
+              },
+              "interval": {
+                "start": "2019-12-04T12:30:00+0000",
+                "end": "2019-12-04T14:30:00+0000"
+              },
+              "contact": {
+                "firstName": "string",
+                "lastName": "string",
+                "phone": "string",
+                "email": "string",
+                "optIn": {
+                  "survey": [
+                    "MAIL"
+                  ],
+                  "delivery": [
+                    "MAIL"
+                  ]
+                },
+                "language": "fr",
+                "timezone": "Europe/Paris",
+                "isProfessional": false,
+                "companyName": "woop"
+              }
+            },
+            "packages": [
+              {
+                "references": [
+                  {
+                    "reference": "12345B",
+                    "barcode": {
+                      "value": "54fd56g4f5gfd456sd",
+                      "type": "barcode",
+                      "format": "128"
+                    },
+                    "state": {
+                      "value": "ON_DOCK",
+                      "date": "2019-08-24T14:15:22Z"
+                    },
+                    "containerId": {
+                      "trailerId": "string",
+                      "palletId": "string"
+                    }
+                  }
+                ],
+                "category": "string",
+                "length": {
+                  "value": 0,
+                  "unit": "mm"
+                },
+                "width": {
+                  "value": 0,
+                  "unit": "mm"
+                },
+                "height": {
+                  "value": 0,
+                  "unit": "mm"
+                },
+                "weight": {
+                  "value": 0,
+                  "unit": "kg"
+                },
+                "products": [
+                  {
+                    "type": "TYPOLOGY_GENERIC",
+                    "ean": "string",
+                    "cug": "string",
+                    "label": "string",
+                    "quantity": 1
+                  }
+                ],
+                "quantity": 1,
+                "attributes": "string",
+                "footprint": {
+                  "value": 0,
+                  "": "m2"
+                },
+                "type": "PACKAGE"
+              }
+            ],
+            "services": "SERVICE_PICKUP_POINT",
+            "labelMode": {
+              "mode": "ZPL",
+              "size": "A6"
+            }
+          }
+        },
+        "description": "Specifies the information required for creating a synchrone shipping request to retrieve the associated label.",
+        "title": "Create shipment",
+        "required": [
+          "storeId",
+          "carrierCode",
+          "packages",
+          "services"
+        ],
+        "properties": {
+          "orderId": {
+            "type": "string",
+            "description": "Order identifier (maximum 36 characters). If not indicated, identifier generated by Woop as UUID "
+          },
+          "referenceNumber": {
+            "type": "string",
+            "description": "Order reference, store number. Can be the same as the orderId."
+          },
+          "storeId": {
+            "type": "string",
+            "description": "Identifier of the store issuing the request"
+          },
+          "carrierCode": {
+            "type": "string",
+            "description": "code of the carrier selected for delivery"
+          },
+          "picking": {
+            "type": "object",
+            "description": "Information on the picking location",
+            "required": [
+              "location",
+              "interval"
+            ],
+            "properties": {
+              "location": {
+                "$ref": "#/components/schemas/pickingShipmentLocation"
+              },
+              "interval": {
+                "$ref": "#/components/schemas/pickingInterval"
+              }
+            }
+          },
+          "delivery": {
+            "type": "object",
+            "required": [
+              "location",
+              "interval",
+              "contact"
+            ],
+            "properties": {
+              "location": {
+                "$ref": "#/components/schemas/deliveryShipmentLocation"
+              },
+              "interval": {
+                "$ref": "#/components/schemas/deliveryInterval"
+              },
+              "contact": {
+                "$ref": "#/components/schemas/contactDelivery"
+              }
+            }
+          },
+          "packages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/packagesForShipment"
+            }
+          },
+          "services": {
+            "$ref": "#/components/schemas/servicesForShipment"
+          },
+          "labelMode": {
+            "type": "object",
+            "required": [
+              "mode",
+              "size"
+            ],
+            "properties": {
+              "mode": {
+                "enum": [
+                  "ZPL"
+                ],
+                "description": "Label format\n"
+              },
+              "size": {
+                "description": "Label size A6 only ",
+                "enum": [
+                  "A6"
+                ]
               }
             }
           }
@@ -11124,6 +11304,122 @@
               "TRAY",
               "PALLET"
             ]
+          }
+        }
+      },
+      "servicesForShipment": {
+        "title": "Delivery services (services)",
+        "x-stoplight": {
+          "id": "jfd4ld5v7kjbj"
+        },
+        "enum": [
+          "SERVICE_PICKUP_POINT"
+        ],
+        "description": "Specifies the delivery services to be used. \n\n>There is currently only one authorised delivery service for this method. "
+      },
+      "parcelWithLabel": {
+        "title": "Parcel with label value in base64 (parcelWithLabel)",
+        "x-stoplight": {
+          "id": "ydjmoc23ex9zl"
+        },
+        "type": "object",
+        "properties": {
+          "labels": {
+            "type": "array",
+            "x-stoplight": {
+              "id": "kl7d8de7armzw"
+            },
+            "items": {
+              "$ref": "#/components/schemas/labels"
+            }
+          },
+          "packages": {
+            "type": "object",
+            "x-stoplight": {
+              "id": "j883knh71tfd4"
+            },
+            "properties": {
+              "references": {
+                "$ref": "#/components/schemas/packagesReferences"
+              }
+            }
+          }
+        },
+        "description": "Specifies the information needed to update a package. The handling unit is to be defined with the package/product structure",
+        "x-examples": {
+          "Example 1": {
+            "labels": [
+              {
+                "id": "string",
+                "type": "string",
+                "mode": "string",
+                "value": "string",
+                "parcelId": "string"
+              }
+            ],
+            "packages": {
+              "references": [
+                {
+                  "reference": "12345B",
+                  "barcode": {
+                    "value": "54fd56g4f5gfd456sd",
+                    "type": "barcode",
+                    "format": "128"
+                  },
+                  "state": {
+                    "value": "ON_DOCK",
+                    "date": "2019-08-24T14:15:22Z"
+                  },
+                  "containerId": {
+                    "trailerId": "string",
+                    "palletId": "string"
+                  }
+                }
+              ]
+            }
+          }
+        }
+      },
+      "labels": {
+        "type": "object",
+        "x-examples": {
+          "Example 1": {
+            "id": "string",
+            "type": "string",
+            "mode": "string",
+            "value": "string",
+            "parcelId": "string"
+          }
+        },
+        "description": "Information on the delivery labels",
+        "title": "Labels (labels)",
+        "required": [
+          "id",
+          "type",
+          "mode",
+          "value",
+          "parcelId"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Label identifier\n"
+          },
+          "type": {
+            "type": "string",
+            "description": "Type of label delivery"
+          },
+          "mode": {
+            "type": "string",
+            "description": "Label format\n"
+          },
+          "value": {
+            "type": "string",
+            "description": "Label in base64 or URL to the label\n\n"
+          },
+          "parcelId": {
+            "type": "string",
+            "description": "Associated package identifier\n"
           }
         }
       }
@@ -11553,6 +11849,121 @@
                       }
                     }
                   ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "ShipmentPostResponse": {
+        "description": "The delivery is accepted, a 'deliveryId' is returned, additionally a table of 'parcels' ids can be returned if tracking by parcel. A table of labels can also be returned.\n",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "x-examples": {
+                "Example 1": {
+                  "order": {
+                    "id": "string",
+                    "referenceNumber": "string"
+                  },
+                  "delivery": {
+                    "externalDeliveryId": "string"
+                  },
+                  "carrier": {
+                    "name": "string",
+                    "code": "string"
+                  },
+                  "parcels": [
+                    {
+                      "labels": [
+                        {
+                          "id": "string",
+                          "type": "string",
+                          "mode": "string",
+                          "value": "string",
+                          "parcelId": "string"
+                        }
+                      ],
+                      "packages": {
+                        "references": [
+                          {
+                            "reference": "12345B",
+                            "barcode": {
+                              "value": "54fd56g4f5gfd456sd",
+                              "type": "barcode",
+                              "format": "128"
+                            },
+                            "state": {
+                              "value": "ON_DOCK",
+                              "date": "2019-08-24T14:15:22Z"
+                            },
+                            "containerId": {
+                              "trailerId": "string",
+                              "palletId": "string"
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "order",
+                "delivery",
+                "carrier",
+                "parcels"
+              ],
+              "properties": {
+                "order": {
+                  "type": "object",
+                  "required": [
+                    "id"
+                  ],
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "referenceNumber": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "delivery": {
+                  "type": "object",
+                  "required": [
+                    "externalDeliveryId"
+                  ],
+                  "properties": {
+                    "externalDeliveryId": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "carrier": {
+                  "type": "object",
+                  "required": [
+                    "name",
+                    "code"
+                  ],
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "parcels": {
+                  "type": "array",
+                  "x-stoplight": {
+                    "id": "g4ljderb0e1la"
+                  },
+                  "items": {
+                    "$ref": "#/components/schemas/parcelWithLabel"
+                  }
                 }
               }
             }
