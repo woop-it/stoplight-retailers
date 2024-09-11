@@ -11012,18 +11012,118 @@
         },
         "title": "Package used for shipment (packagesForShipment)",
         "description": "Specifies the information needed to update a package. The handling unit is to be defined with the package/product structure\n\nDefault : Parcel dimensions are not mandatory ! \n\n<!-- theme: danger -->\n\n> #### Important information \n> The current version of this method only authorises the creation of single-package orders.",
+        "required": [
+          "length",
+          "width",
+          "height",
+          "weight",
+          "products"
+        ],
         "properties": {
           "references": {
             "$ref": "#/components/schemas/packagesReferences"
           },
+          "category": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "v4vpnd01pfa8m"
+            }
+          },
+          "length": {
+            "$ref": "#/components/schemas/length"
+          },
+          "width": {
+            "$ref": "#/components/schemas/length"
+          },
+          "height": {
+            "$ref": "#/components/schemas/length"
+          },
+          "weight": {
+            "$ref": "#/components/schemas/mass"
+          },
+          "products": {
+            "x-stoplight": {
+              "id": "4zdm0r7s9m6s1"
+            },
+            "anyOf": [
+              {
+                "x-stoplight": {
+                  "id": "nvumgx34oc4ca"
+                },
+                "items": {
+                  "$ref": "#/components/schemas/product"
+                }
+              },
+              {
+                "x-stoplight": {
+                  "id": "qtz7takqnqoke"
+                },
+                "items": {
+                  "$ref": "#/components/schemas/productCustomDeclaration"
+                }
+              }
+            ],
+            "description": "List of products in the package. \nWarning , 2 types of product list possible: 1) Simplified declaration - 2) Declaration for customs declaration ",
+            "type": "array"
+          },
           "quantity": {
-            "type": "integer"
+            "type": "integer",
+            "x-stoplight": {
+              "id": "kfxab6vfoy0u5"
+            },
+            "default": 1,
+            "example": 1,
+            "minimum": 1,
+            "description": "Quantity of packages"
           },
           "attributes": {
-            "type": "string"
+            "type": "string",
+            "x-stoplight": {
+              "id": "ohg1f5hzxjlld"
+            },
+            "description": "package attributes"
+          },
+          "footprint": {
+            "type": "object",
+            "x-stoplight": {
+              "id": "yi0ke9sutk3rj"
+            },
+            "description": "package footprint on the ground",
+            "required": [
+              "value",
+              ""
+            ],
+            "properties": {
+              "value": {
+                "type": "number",
+                "x-stoplight": {
+                  "id": "rruisrs4xo0ml"
+                },
+                "description": "footprint value"
+              },
+              "": {
+                "x-stoplight": {
+                  "id": "8ugwnx9gd56rd"
+                },
+                "description": "footprint unit",
+                "enum": [
+                  "m2",
+                  "cm2",
+                  "pallet"
+                ]
+              }
+            }
           },
           "type": {
-            "type": "string"
+            "x-stoplight": {
+              "id": "qb91ltwh1i6t8"
+            },
+            "description": "package type",
+            "enum": [
+              "PACKAGE",
+              "TRAY",
+              "PALLET"
+            ]
           }
         }
       }
