@@ -11292,16 +11292,9 @@
       },
       "deliveryShipmentLocation": {
         "type": "object",
-        "$ref": "#/components/schemas/exchangePlaceType",
+        "$ref": "#/components/schemas/pickupPointTypes",
         "description": "Only Location.type = `pickupPoint` is permitted actually for this method. For this location.type then you need to enter the relay point identifier ",
-        "title": "deliveryLocation object for shipment",
-        "x-examples": {
-          "Example 1": {
-            "type": "exchangePlace",
-            "id": "23D34D",
-            "comment": "string"
-          }
-        }
+        "title": "deliveryLocation object for shipment"
       },
       "packagesForShipment": {
         "type": "object",
