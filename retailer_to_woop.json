@@ -7337,14 +7337,18 @@
               "examples": {}
             }
           }
-        }
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          }
+        ]
       }
     },
     "/shipments/fulfillments": {
       "parameters": [],
       "post": {
         "summary": "Declare the contents of an order",
-        "tags": [],
         "responses": {
           "201": {
             "description": "the order has been registered"
@@ -7547,6 +7551,184 @@
                       }
                     ],
                     "services": "SERVICE_PICKUP_POINT"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Shipment"
+        ]
+      }
+    },
+    "/shipments/fulfillment/{fulfillmentId}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "fulfillmentId",
+          "in": "path",
+          "required": true
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "fulfillmentId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Get an fulfillmentinformation by id",
+        "tags": [
+          "Shipment"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "statusCode": 0,
+                      "error": "string",
+                      "message": "string",
+                      "reasons": [
+                        "STORE_NOT_FOUND"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "statusCode": 0,
+                      "error": "string",
+                      "message": "string",
+                      "reasons": [
+                        "STORE_NOT_FOUND"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "statusCode": 0,
+                      "error": "string",
+                      "message": "string",
+                      "reasons": [
+                        "STORE_NOT_FOUND"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "statusCode": 0,
+                      "error": "string",
+                      "message": "string",
+                      "reasons": [
+                        "STORE_NOT_FOUND"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getfulfillmentsById",
+        "x-stoplight": {
+          "id": "0kvyj7ypzgvwf"
+        },
+        "description": "This method returns the fulfillmentglobal details.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          }
+        ]
+      },
+      "delete": {
+        "summary": "Delete fulfillments",
+        "tags": [
+          "Shipment"
+        ],
+        "responses": {},
+        "operationId": "deletefulfillments",
+        "x-stoplight": {
+          "id": "dp4v0mqizfbti"
+        },
+        "description": "Delete global fulfillments.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          }
+        ],
+        "requestBody": {
+          "description": "Contains the global cancellation information.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "reasons"
+                ],
+                "properties": {
+                  "reasons": {
+                    "$ref": "#/components/schemas/cancelledReasons"
+                  },
+                  "comment": {
+                    "type": "string",
+                    "x-stoplight": {
+                      "id": "m55q78ab5s0o7"
+                    },
+                    "description": "If necessary, an optional comment can be added when cancelling"
                   }
                 }
               }
