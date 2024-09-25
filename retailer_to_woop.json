@@ -7570,15 +7570,8 @@
           },
           "name": "fulfillmentId",
           "in": "path",
-          "required": true
-        },
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "fulfillmentId",
-          "in": "path",
-          "required": true
+          "required": true,
+          "description": "fulfillment identifier (maximum 36 characters)."
         }
       ],
       "get": {
@@ -7699,19 +7692,115 @@
         "tags": [
           "Shipment"
         ],
-        "responses": {},
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "statusCode": 0,
+                      "error": "string",
+                      "message": "string",
+                      "reasons": [
+                        "STORE_NOT_FOUND"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "statusCode": 0,
+                      "error": "string",
+                      "message": "string",
+                      "reasons": [
+                        "STORE_NOT_FOUND"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "statusCode": 0,
+                      "error": "string",
+                      "message": "string",
+                      "reasons": [
+                        "STORE_NOT_FOUND"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "statusCode": 0,
+                      "error": "string",
+                      "message": "string",
+                      "reasons": [
+                        "STORE_NOT_FOUND"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
         "operationId": "deletefulfillments",
         "x-stoplight": {
           "id": "dp4v0mqizfbti"
         },
-        "description": "Delete global fulfillments.",
+        "description": "Delete global fulfillments.\n\n> If the fulfilment identifier (fulfilmentId) is already associated with a shipment (created shipment), then the request to cancel the fulfilment will not be successful. \n> \n> In this case, the method will return the following error: ‘Cannot delete because a shipment has already been created’. ",
         "parameters": [
           {
             "$ref": "#/components/parameters/apiVersion"
           }
         ],
         "requestBody": {
-          "description": "Contains the global cancellation information.",
+          "description": "Contains the global cancellation information.\n\nPositive cases:\n- Sending a request with a valid fulfilmentId.\n\nNegative cases:\n- Sending a request with a missing or empty fulfilmentId.\n- Sending a request without authentication or with invalid authentication.\n- Sending a request with a non-existent fulfilmentId.",
           "content": {
             "application/json": {
               "schema": {
