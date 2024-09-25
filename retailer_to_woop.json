@@ -65,7 +65,7 @@
         "summary": "Health"
       }
     },
-    "orders/package/state": {
+    "/orders/package/state": {
       "parameters": [],
       "put": {
         "summary": "Change Package state",
@@ -7339,6 +7339,221 @@
           }
         }
       }
+    },
+    "/shipments/fulfillments": {
+      "parameters": [],
+      "post": {
+        "summary": "Declare the contents of an order",
+        "tags": [],
+        "responses": {
+          "201": {
+            "description": "the order has been registered"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "statusCode": 0,
+                      "error": "string",
+                      "message": "string",
+                      "reasons": [
+                        "STORE_NOT_FOUND"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "statusCode": 0,
+                      "error": "string",
+                      "message": "string",
+                      "reasons": [
+                        "STORE_NOT_FOUND"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "statusCode": 0,
+                      "error": "string",
+                      "message": "string",
+                      "reasons": [
+                        "STORE_NOT_FOUND"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "statusCode": 0,
+                      "error": "string",
+                      "message": "string",
+                      "reasons": [
+                        "STORE_NOT_FOUND"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "postfulfillments",
+        "x-stoplight": {
+          "id": "ndw4mfx6rmjsj"
+        },
+        "description": "Specifies the information needed to create a single customer request without shipping. The method is used to declare customer content, which is used as a reference for future shipments created and attached to it.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          }
+        ],
+        "requestBody": {
+          "description": "Contains the fulfillment creation information.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "$ref": "#/components/schemas/postfulfillments"
+              },
+              "examples": {
+                "Example 1": {
+                  "value": {
+                    "fulfillmentId": "string",
+                    "referenceNumber": "string",
+                    "carrierSelection": "string",
+                    "storeId": "string",
+                    "picking": {
+                      "location": {
+                        "type": "exchangePlace",
+                        "id": "string",
+                        "comment": "string"
+                      },
+                      "contact": {
+                        "firstName": "string",
+                        "lastName": "string",
+                        "phone": "string",
+                        "email": "string",
+                        "language": "fr",
+                        "timezone": "Europe/Paris",
+                        "main": true,
+                        "title": "string",
+                        "isProfessional": false,
+                        "companyName": "woop"
+                      }
+                    },
+                    "delivery": {
+                      "location": {
+                        "type": "pickupPoint",
+                        "id": "string",
+                        "carrierCode": "string",
+                        "comment": "string",
+                        "boxCategory": {
+                          "id": "BoxCategory_001",
+                          "accessibility": "UPPER"
+                        }
+                      },
+                      "interval": [
+                        {
+                          "start": "2019-12-04T12:30:00+0000",
+                          "end": "2019-12-04T14:30:00+0000"
+                        }
+                      ],
+                      "contact": {
+                        "firstName": "string",
+                        "lastName": "string",
+                        "phone": "string",
+                        "email": "string",
+                        "optIn": {
+                          "survey": [
+                            "MAIL"
+                          ],
+                          "delivery": [
+                            "MAIL"
+                          ]
+                        },
+                        "language": "fr",
+                        "timezone": "Europe/Paris",
+                        "isProfessional": false,
+                        "companyName": "woop"
+                      }
+                    },
+                    "products": [
+                      {
+                        "type": "string",
+                        "ean": "string",
+                        "label": "string",
+                        "quantity": 0,
+                        "weight": {
+                          "value": 0,
+                          "unit": "kg"
+                        },
+                        "length": {
+                          "value": 0,
+                          "unit": "mm"
+                        },
+                        "width": {
+                          "value": 0,
+                          "unit": "mm"
+                        },
+                        "height": {
+                          "value": 0,
+                          "unit": "mm"
+                        }
+                      }
+                    ],
+                    "services": "SERVICE_PICKUP_POINT"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -11575,6 +11790,260 @@
           "parcelId": {
             "type": "string",
             "description": "Associated package identifier\n"
+          }
+        }
+      },
+      "postfulfillments": {
+        "type": "object",
+        "x-examples": {
+          "Example 2": {
+            "fulfillmentId": "string",
+            "referenceNumber": "string",
+            "carrierSelection": "string",
+            "storeId": "string",
+            "picking": {
+              "location": {
+                "type": "exchangePlace",
+                "id": "string",
+                "comment": "string"
+              },
+              "contact": {
+                "firstName": "string",
+                "lastName": "string",
+                "phone": "string",
+                "email": "string",
+                "language": "fr",
+                "timezone": "Europe/Paris",
+                "main": true,
+                "title": "string",
+                "isProfessional": false,
+                "companyName": "woop"
+              }
+            },
+            "delivery": {
+              "location": {
+                "type": "pickupPoint",
+                "id": "string",
+                "carrierCode": "string",
+                "comment": "string",
+                "boxCategory": {
+                  "id": "BoxCategory_001",
+                  "accessibility": "UPPER"
+                }
+              },
+              "interval": [
+                {
+                  "start": "2019-12-04T12:30:00+0000",
+                  "end": "2019-12-04T14:30:00+0000"
+                }
+              ],
+              "contact": {
+                "firstName": "string",
+                "lastName": "string",
+                "phone": "string",
+                "email": "string",
+                "optIn": {
+                  "survey": [
+                    "MAIL"
+                  ],
+                  "delivery": [
+                    "MAIL"
+                  ]
+                },
+                "language": "fr",
+                "timezone": "Europe/Paris",
+                "isProfessional": false,
+                "companyName": "woop"
+              }
+            },
+            "products": [
+              {
+                "type": "string",
+                "ean": "string",
+                "label": "string",
+                "quantity": 0,
+                "weight": {
+                  "value": 0,
+                  "unit": "kg"
+                },
+                "length": {
+                  "value": 0,
+                  "unit": "mm"
+                },
+                "width": {
+                  "value": 0,
+                  "unit": "mm"
+                },
+                "height": {
+                  "value": 0,
+                  "unit": "mm"
+                }
+              }
+            ],
+            "services": "SERVICE_PICKUP_POINT"
+          }
+        },
+        "title": "Create fulfillments (postfulfillments)",
+        "description": "Declare the contents of a sales order",
+        "required": [
+          "fulfillmentId",
+          "carrierSelection",
+          "storeId",
+          "picking",
+          "delivery",
+          "products",
+          "services"
+        ],
+        "properties": {
+          "fulfillmentId": {
+            "type": "string",
+            "description": "Global identifier (maximum 36 characters)."
+          },
+          "referenceNumber": {
+            "type": "string",
+            "description": "Order reference, store number. Can be the same as the orderId."
+          },
+          "carrierSelection": {
+            "type": "string",
+            "description": "code of the carrier selected for delivery\n\n"
+          },
+          "storeId": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "d1d17n0h0fpqa"
+            },
+            "description": "Identifier of the store issuing the request"
+          },
+          "picking": {
+            "type": "object",
+            "required": [
+              "location",
+              "contact"
+            ],
+            "x-stoplight": {
+              "id": "72x3ihy7x86qz"
+            },
+            "properties": {
+              "location": {
+                "$ref": "#/components/schemas/pickingShipmentLocation"
+              },
+              "contact": {
+                "$ref": "#/components/schemas/contact"
+              }
+            }
+          },
+          "delivery": {
+            "type": "object",
+            "x-stoplight": {
+              "id": "aui9kqmmctxdx"
+            },
+            "required": [
+              "location",
+              "interval",
+              "contact"
+            ],
+            "properties": {
+              "location": {
+                "$ref": "#/components/schemas/deliveryShipmentLocation"
+              },
+              "interval": {
+                "x-stoplight": {
+                  "id": "362efpwrxdqmv"
+                },
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/deliveryInterval"
+                }
+              },
+              "contact": {
+                "$ref": "#/components/schemas/contactDelivery"
+              }
+            }
+          },
+          "products": {
+            "type": "array",
+            "x-stoplight": {
+              "id": "lllm6n0memz66"
+            },
+            "items": {
+              "$ref": "#/components/schemas/productForfulfillments"
+            }
+          },
+          "services": {
+            "$ref": "#/components/schemas/servicesForShipment"
+          }
+        }
+      },
+      "productForfulfillments": {
+        "type": "object",
+        "x-examples": {
+          "Example 2": {
+            "type": "string",
+            "ean": "string",
+            "label": "string",
+            "quantity": 0,
+            "weight": {
+              "value": 0,
+              "unit": "kg"
+            },
+            "length": {
+              "value": 0,
+              "unit": "mm"
+            },
+            "width": {
+              "value": 0,
+              "unit": "mm"
+            },
+            "height": {
+              "value": 0,
+              "unit": "mm"
+            }
+          }
+        },
+        "description": "Specifies the information needed to update a specify product used for fulfillment",
+        "title": "Product for fulfillment",
+        "required": [
+          "type",
+          "ean",
+          "label",
+          "quantity",
+          "weight",
+          "length",
+          "width",
+          "height"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Product typologie. "
+          },
+          "ean": {
+            "type": "string",
+            "description": "Product EAN code."
+          },
+          "label": {
+            "type": "string",
+            "description": "Product name. "
+          },
+          "quantity": {
+            "type": "integer",
+            "description": "Identical quantity of product.\n\n"
+          },
+          "weight": {
+            "type": "object",
+            "$ref": "#/components/schemas/mass"
+          },
+          "length": {
+            "type": "object",
+            "$ref": "#/components/schemas/length"
+          },
+          "width": {
+            "type": "object",
+            "$ref": "#/components/schemas/length"
+          },
+          "height": {
+            "type": "object",
+            "$ref": "#/components/schemas/length"
           }
         }
       }
