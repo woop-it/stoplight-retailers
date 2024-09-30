@@ -11676,6 +11676,8 @@
         "required": [
           "storeId",
           "carrierCode",
+          "picking",
+          "delivery",
           "packages",
           "services"
         ],
@@ -12037,9 +12039,8 @@
         "required": [
           "id",
           "type",
-          "mode",
-          "value",
-          "parcelId"
+          "parcelId",
+          "value"
         ],
         "properties": {
           "id": {
@@ -12048,19 +12049,29 @@
           },
           "type": {
             "type": "string",
-            "description": "Type of label delivery"
+            "description": "Type of label delivery",
+            "example": "base64"
           },
           "mode": {
             "type": "string",
-            "description": "Label format\n"
+            "description": "Label format\n",
+            "example": "zpl"
           },
-          "value": {
+          "size": {
             "type": "string",
-            "description": "Label in base64 or URL to the label\n\n"
+            "x-stoplight": {
+              "id": "h5fhhyj2vb2w4"
+            },
+            "example": "A6",
+            "description": "Size format\n"
           },
           "parcelId": {
             "type": "string",
             "description": "Associated package identifier\n"
+          },
+          "value": {
+            "type": "string",
+            "description": "Label in base64 or URL to the label\n\n"
           }
         }
       },
@@ -12807,8 +12818,7 @@
               "required": [
                 "order",
                 "delivery",
-                "carrier",
-                "parcels"
+                "labels"
               ],
               "properties": {
                 "order": {
@@ -12836,28 +12846,13 @@
                     }
                   }
                 },
-                "carrier": {
-                  "type": "object",
-                  "required": [
-                    "name",
-                    "code"
-                  ],
-                  "properties": {
-                    "name": {
-                      "type": "string"
-                    },
-                    "code": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "parcels": {
+                "labels": {
                   "type": "array",
                   "x-stoplight": {
                     "id": "g4ljderb0e1la"
                   },
                   "items": {
-                    "$ref": "#/components/schemas/parcelWithLabel"
+                    "$ref": "#/components/schemas/labels"
                   }
                 }
               }
@@ -12872,41 +12867,14 @@
                   "delivery": {
                     "externalDeliveryId": "string"
                   },
-                  "carrier": {
-                    "name": "string",
-                    "code": "string"
-                  },
-                  "parcels": [
+                  "labels": [
                     {
-                      "labels": [
-                        {
-                          "id": "string",
-                          "type": "string",
-                          "mode": "string",
-                          "value": "string",
-                          "parcelId": "string"
-                        }
-                      ],
-                      "packages": {
-                        "references": [
-                          {
-                            "reference": "12345B",
-                            "barcode": {
-                              "value": "54fd56g4f5gfd456sd",
-                              "type": "barcode",
-                              "format": "128"
-                            },
-                            "state": {
-                              "value": "ON_DOCK",
-                              "date": "2019-08-24T14:15:22Z"
-                            },
-                            "containerId": {
-                              "trailerId": "string",
-                              "palletId": "string"
-                            }
-                          }
-                        ]
-                      }
+                      "id": "string",
+                      "type": "base64",
+                      "mode": "zpl",
+                      "size": "A6",
+                      "parcelId": "string",
+                      "value": "string"
                     }
                   ]
                 }
