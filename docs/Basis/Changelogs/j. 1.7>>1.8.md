@@ -1,0 +1,461 @@
+---
+stoplight-id: vko9licz8vh58
+---
+
+# Changelog 1.7 -> 1.8
+
+All changes between version 1.7 and version 1.8 are listed here.
+
+## POST /orders et PATCH /orders/{orderId}
+
+- Section `references` of `package` updated : section `barcode` added.
+
+<!--
+type: tab
+title: 1.7.0
+-->
+
+```json
+{
+  .....,
+  "packages":
+  [
+    {
+      ...,
+      "references":
+      [
+        "123456789A",
+        "123456789B"
+      ],
+      ...
+    }
+  ]
+  ....
+}
+```
+
+<!--
+type: tab
+title: 1.8.0
+-->
+
+```json
+{
+  ...,
+  "packages":
+  [
+    {
+      ...,
+      "references":
+      [
+        {
+          "reference":"123456789A",
+          "barcode":
+          {
+            "value":"54fd56g4f5gfd456sd",
+            "type":"barcode",
+            "format":"128"
+          }
+        },
+        {
+          "reference":"123456789B",
+          "barcode":
+          {
+            "value":"54fd56g4f5gfd456sdsdsd",
+            "type":"barcode",
+            "format":"128"
+          }
+        }
+      ],
+      ...
+    }
+  ],
+  ...
+}
+```
+
+
+<!-- type: tab-end -->
+
+- Section `attributes` of `package` added including `footprint`  (package footprint on the ground), expressed in m2, cm2 or pallet
+
+- `type` of a `package` added
+
+- `product.type` TYPOLOGY_PALLET_GENERIC has been deleted. Please now use `package.type` as PALLET and `product.type` as TYPOLOGY_GENERIC instead
+
+- Added a `bookingId` option on the delivery interval. Allows you to place an order on a previously booked slot.
+
+<!--
+type: tab
+title: 1.7.0
+-->
+
+```json
+{
+  .....,
+  "delivery": {
+    "interval": [
+      {
+        "start": "2019-11-28T13:30:00+0000",
+        "end": "2019-11-28T14:30:00+0000"
+      }
+    ],
+  ....
+}
+```
+
+<!--
+type: tab
+title: 1.8.0
+-->
+
+```json
+{
+  ...,
+  "delivery": {
+    "interval": [
+      {
+        "bookingId": "34452233"
+      }
+    ],
+  ...
+}
+```
+
+<!-- type: tab-end -->
+
+## POST /eligibilities
+
+Added `slot` node when calling the method to display all available slots for the eligible carrier. 
+
+<!--
+type: tab
+title: 1.7.0
+-->
+
+```json
+{
+......,
+  "picking": {
+    "location": {
+      "type": "address",
+      "addressLine1": "237 rue du ballon",
+      "postalCode": "59110",
+      "city": "La Madeleine",
+      "country": "FR"
+    }
+  }
+  ....
+}
+```
+<!--
+type: tab
+title: 1.8.0
+-->
+
+```json
+{
+......,
+ "interval": {
+      "start": "2022-05-02T15:52:01+0000",
+      "end": "2022-05-02T17:52:01+0000"
+    }
+  },
+  ....
+
+  "slot": {
+    "fromDate": "2022-05-04T17:52:01+0000",
+    "toDate": "2022-05-07T17:52:01+0000",
+    "minRemainingCapacity": 3,
+    "limit": 80
+  }
+}
+```
+
+<!-- type: tab-end -->
+
+The following information was added to the answers: 
+- `delivery.promise`
+- `durationSlot`
+- `delivery.noticePeriod`
+- `delivery.minDeliveryTime`
+- `slots`
+
+<!--
+type: tab
+title: 1.7.0
+-->
+
+```json
+{
+  "eligibilities": [
+    {
+      "carrier": {
+        "code": "mondial-relay",
+        "name": "Mondial Relay"
+      },
+      "service": "SERVICE_PICKUP_POINT",
+      "types": [
+        "PICKUP_POINT_AGENCY",
+        "PICKUP_POINT_POST_OFFICE",
+        "PICKUP_POINT_RELAY_WITH_LOCKER",
+        "PICKUP_POINT_RELAY_WITHOUT_LOCKER",
+        "PICKUP_POINT_ALL"
+      ],
+      "categories": [
+        "24R",
+        "24L",
+        "Drive"
+      ],
+      "price": {
+        "taxExcludedAmount": 2.99,
+        "currency": "EUR"
+      },
+      "delay": {
+        "value": 3,
+        "unit": "day"
+      }
+    }
+  ]
+}
+```
+
+<!--
+type: tab
+title: 1.8.0
+-->
+
+```json
+{
+  "eligibilities": [
+    {
+      "carrier": {
+        "code": "mondial-relay",
+        "name": "Mondial Relay"
+      },
+      "delivery": {
+        "noticePeriod": {
+          "value": 2,
+          "unit": "day"
+        },
+        "promise": {
+          "value": 2,
+          "unit": "hour"
+        },
+        "minDeliveryTime": {
+          "value": 2,
+          "unit": "hour"
+        }
+      },
+      "durationSlot": {
+        "value": 2,
+        "unit": "hour"
+      },
+      "service": [
+        {
+          "name": "SERVICE_PICKUP_POINT",
+          "types": [
+            "PICKUP_POINT_AGENCY",
+            "PICKUP_POINT_POST_OFFICE",
+            "PICKUP_POINT_RELAY_WITH_LOCKER",
+            "PICKUP_POINT_RELAY_WITHOUT_LOCKER",
+            "PICKUP_POINT_ALL"
+          ],
+          "categories": [
+            "24R",
+            "24L",
+            "Drive"
+          ]
+        }
+      ],
+      "slots": [
+        {
+          "start": "2019-05-02T15:52:01+0000",
+          "end": "2019-05-02T17:52:01+0000",
+          "remainingCapacity": 5
+        }
+      ]
+    }
+  ]
+}
+```
+
+<!-- type: tab-end -->
+
+## GET /orders/{orderId}
+
+Section `stop` added to `order.picking` and `order.delivery` sections.
+
+<!--
+type: tab
+title: 1.7.0
+-->
+
+```json
+{
+  "order": {
+   ...
+    "picking": {
+      "interval": {
+        "start": "string",
+        "end": "string"
+      }
+    },
+    "delivery": {
+      "externalDeliveryId": "string",
+      "updatedAt": "string",
+      "interval": {
+        "start": "string",
+        "end": "string"
+      },
+      "trackingUrls:": {
+        "carrier": "https://tracking.best-carrier.com/XJHSDL541",
+        "woop": {
+          "simple": "https://trace.woopit.fr/t/48aed-b5552d-4da5-813c-00c06e1ff327",
+          "multiple": "https://trace.woopit.fr/m/48aed-b5552d-4da5-813c-00c06e1ff327"
+        }
+      },
+      "status": "DELIVERY_INIT",
+      "subStatus": "FAILED"
+    },
+    ...
+  }
+}
+```
+
+<!--
+type: tab
+title: 1.8.0
+-->
+
+```json
+{
+  "order": {
+   ...
+    "picking": {
+      "interval": {
+        "start": "string",
+        "end": "string"
+      },
+      "stop":{
+        "references": {
+          "id": "123890654FRTTY"
+        },
+        "sequenceNumber": 7,
+        "route": {
+          "references": {
+            "id": "AAAAAAAA"
+          },
+          "sequenceNumber": 3,
+          "vehicle": {
+            "references": {
+              "id": "65464768568753",
+              "licencePlate": "ZE-678-HD"
+            },
+            "vehicleType": "VEHICLE_TYPE_BIKE"
+          },
+          "team": {
+            "members": [
+              {
+                "id": "AAA"
+              }
+            ]
+          },
+          "planning": {
+            "references": {
+              "id": "P000001"
+            }
+          },
+        },
+        "plannedInterval": {
+          "start": "2019-12-04T12:30:00+0000",
+          "end": "2019-12-04T14:30:00+0000"
+        }
+      }
+    },
+    "delivery": {
+      "externalDeliveryId": "string",
+      "updatedAt": "string",
+      "interval": {
+        "start": "string",
+        "end": "string"
+      },
+      "trackingUrls:": {
+        "carrier": "https://tracking.best-carrier.com/XJHSDL541",
+        "woop": {
+          "simple": "https://trace.woopit.fr/t/48aed-b5552d-4da5-813c-00c06e1ff327",
+          "multiple": "https://trace.woopit.fr/m/48aed-b5552d-4da5-813c-00c06e1ff327"
+        }
+      },
+      "status": "DELIVERY_INIT",
+      "subStatus": "FAILED",
+      "stop":{
+        "references": {
+          "id": "123890654FRTTYAAAAA"
+        },
+        "sequenceNumber": 7,
+        "route": {
+          "references": {
+            "id": "AAAAAAAA"
+          },
+          "sequenceNumber": 3,
+          "vehicle": {
+            "references": {
+              "id": "65464768568753",
+              "licencePlate": "ZE-678-HD"
+            },
+            "vehicleType": "VEHICLE_TYPE_BIKE"
+          },
+          "team": {
+            "members": [
+              {
+                "id": "AAA"
+              }
+            ]
+          },
+          "planning": {
+            "references": {
+              "id": "P000001"
+            }
+          },
+        },
+        "plannedInterval": {
+          "start": "2019-12-04T16:30:00+0000",
+          "end": "2019-12-04T18:30:00+0000"
+        }
+      }
+    },
+    ...
+  }
+}
+```
+
+<!-- type: tab-end -->
+
+## PUT /orders/{orderId}/stops
+
+Creation of this callback, enabling a retailer to collect the `picking` or `delivery` stops of a specific order, including for each stop : 
+- `references.id`: id of the stop
+- `sequenceNumber`: stop sequence number between all stops from one route (starting from 1)
+- `stop.route.references.id`: id of the route
+- `stop.route.sequenceNumber`: route sequence number between all routes from one planning (starting from 1)
+- `stop.route.vehicle`: vehicle that will be used
+- `stop.route.team` : list of member Ids performing the route
+- `stop.route.planning.references.id`: id of the planning
+
+
+## POST /deliveriesBookings
+
+Creation of this method allowing a user to reserve a delivery slot on one or more carriers. The method expects the following information as input: 
+- an `exchangePlaceId`: Picking point identifier
+- a `slot`: Collection time slot (without reservation or availability check).
+- an array of `carrierCodes`
+- a `storeId`: Identifier of the ordering shop
+
+## DELETE /orders/{deliveryBookingId}
+
+Creation of this method allowing a user to release a delivery slot. The method expects `deliveryBookingId`.
+
+## POST /orders/{orderId}/retry
+
+Creation of this method allowing a user to ask for a retry for a specific order. This retry can be performed only on orders whoses statuses are in functional error ones (ORDER_WITH_NO_CARRIER_ELIGIBLE, ORDER_WITH_NO_QUOTE,ORDER_WITH_NO_CARRIER_AVAILABLE, ORDER_REFUSED_DELIVERY).
