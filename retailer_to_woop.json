@@ -7825,6 +7825,34 @@
           }
         }
       }
+    },
+    "/timeslots/search": {
+      "post": {
+        "summary": "Search a timeslots",
+        "tags": [],
+        "responses": {},
+        "operationId": "postTimeslots",
+        "x-stoplight": {
+          "id": "0ackn9ccxbxb1"
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "": {
+                    "type": "string",
+                    "x-stoplight": {
+                      "id": "qfvoxy1e5jhaz"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -8325,45 +8353,59 @@
       },
       "postDeliveriesBookings": {
         "description": "Specifies the information needed to book a delivery slot for a given carrier.",
-        "type": "object",
         "title": "Reservation of a delivery time slot (postDeliveriesBookings)",
-        "properties": {
-          "exchangePlaceId": {
-            "type": "string",
-            "minLength": 1,
-            "description": "Picking point identifier"
-          },
-          "slot": {
-            "$ref": "#/components/schemas/slot"
-          },
-          "carrierCodes": {
-            "type": "array",
-            "description": "Carrier(s) code(s)",
-            "items": {
-              "type": "string"
+        "oneOf": [
+          {
+            "required": [
+              "exchangePlaceId",
+              "slot",
+              "carrierCodes"
+            ],
+            "properties": {
+              "exchangePlaceId": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Picking point identifier"
+              },
+              "slot": {
+                "$ref": "#/components/schemas/slot"
+              },
+              "carrierCodes": {
+                "type": "array",
+                "description": "Carrier(s) code(s)",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "capacity": {
+                "type": "integer",
+                "description": "Capacity for a delivery slot"
+              },
+              "type": {
+                "type": "string",
+                "description": "Type of delivery week",
+                "example": "ORDERS_QUANTITY",
+                "enum": [
+                  "ORDERS_QUANTITY",
+                  "PACKAGES_QUANTITY",
+                  "PALLETS_QUANTITY",
+                  "TRAYS_QUANTITY"
+                ]
+              }
             }
           },
-          "capacity": {
-            "type": "integer",
-            "description": "Capacity for a delivery slot"
-          },
-          "type": {
-            "type": "string",
-            "description": "Type of delivery week",
-            "example": "ORDERS_QUANTITY",
-            "enum": [
-              "ORDERS_QUANTITY",
-              "PACKAGES_QUANTITY",
-              "PALLETS_QUANTITY",
-              "TRAYS_QUANTITY"
-            ]
+          {
+            "x-stoplight": {
+              "id": "wo8flk9pcxdzs"
+            },
+            "properties": {
+              "slot": {
+                "$ref": "#/components/schemas/slotById"
+              }
+            }
           }
-        },
-        "required": [
-          "exchangePlaceId",
-          "slot",
-          "carrierCodes"
-        ]
+        ],
+        "type": "object"
       },
       "postCollectsBookings": {
         "description": "Specifies the information needed to reserve a collection time slot.",
@@ -10471,6 +10513,10 @@
           }
         },
         "title": "Collection time slot (slot)",
+        "required": [
+          "start",
+          "end"
+        ],
         "properties": {
           "start": {
             "type": "string",
@@ -10485,14 +10531,45 @@
           "expiredAt": {
             "type": "string",
             "format": "datetime",
-            "description": "Validity limit of slots (max 1 week)",
+            "description": "Validity limit of slots \n> Default value : 30 minutes / Max value : 100 days",
             "example": "2022-11-22T09:00:007Z"
           }
+        }
+      },
+      "slotById": {
+        "description": "Collection time generated with a slot id.",
+        "x-stoplight": {
+          "id": "28kxd43xllssb"
         },
+        "type": "object",
+        "x-examples": {
+          "Example": {
+            "start": "2019-05-02T15:52:01+0000",
+            "end": "2019-05-02T17:52:01+0000",
+            "expiredAt": "2019-05-04T12:00:01+0000"
+          }
+        },
+        "title": "Collection time slot (slot)",
         "required": [
-          "start",
-          "end"
-        ]
+          "id",
+          "expiredAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "16yhyxur9g7ul"
+            },
+            "description": "Slot number"
+          },
+          "expiredAt": {
+            "type": "string",
+            "format": "datetime",
+            "description": "Validity limit of slots \n> Default value : 30 minutes / Max value : 100 days",
+            "example": "2022-11-22T09:00:007Z",
+            "default": "30 min"
+          }
+        }
       },
       "orderStatus": {
         "title": "Order status (orderStatus)",
