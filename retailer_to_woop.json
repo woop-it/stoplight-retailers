@@ -7830,7 +7830,38 @@
       "post": {
         "summary": "Search a timeslots",
         "tags": [],
-        "responses": {},
+        "responses": {
+          "2XX": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "carrierSlots": {
+                      "type": "array",
+                      "x-stoplight": {
+                        "id": "6wiyt1az60ma9"
+                      },
+                      "items": {
+                        "$ref": "#/components/schemas/carrier"
+                      }
+                    },
+                    "slots": {
+                      "type": "array",
+                      "x-stoplight": {
+                        "id": "xaicq3xbklx04"
+                      },
+                      "items": {
+                        "$ref": "#/components/schemas/slot"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
         "operationId": "postTimeslots",
         "x-stoplight": {
           "id": "0ackn9ccxbxb1"
@@ -7840,12 +7871,195 @@
             "application/json": {
               "schema": {
                 "type": "object",
+                "x-examples": {
+                  "Example 1": {
+                    "picking": {
+                      "location": {
+                        "type": "exchangePlace",
+                        "id": "123",
+                        "storeId": "MAGLMMP1"
+                      }
+                    },
+                    "carrierCodes": [
+                      "123",
+                      "456"
+                    ],
+                    "packages": [
+                      {
+                        "length": {
+                          "value": 15,
+                          "unit": "cm"
+                        },
+                        "width": {
+                          "value": 15,
+                          "unit": "cm"
+                        },
+                        "height": {
+                          "value": 1.2,
+                          "unit": "m"
+                        },
+                        "weight": {
+                          "value": 560,
+                          "unit": "g"
+                        },
+                        "products": [
+                          {
+                            "type": "TYPOLOGY_GENERIC",
+                            "ean": "4dq86zd4q6zd4q64",
+                            "cug": "q56zd4q65d4q",
+                            "label": "Lamp",
+                            "quantity": 1
+                          }
+                        ],
+                        "quantity": 1
+                      }
+                    ]
+                  }
+                },
                 "properties": {
-                  "": {
-                    "type": "string",
-                    "x-stoplight": {
-                      "id": "qfvoxy1e5jhaz"
+                  "picking": {
+                    "type": "object",
+                    "properties": {
+                      "location": {
+                        "type": "object",
+                        "$ref": "#/components/schemas/location"
+                      }
                     }
+                  },
+                  "delivery": {
+                    "type": "object",
+                    "x-stoplight": {
+                      "id": "0wp0cy8xi731j"
+                    },
+                    "properties": {
+                      "location": {
+                        "$ref": "#/components/schemas/location"
+                      },
+                      "interval": {
+                        "$ref": "#/components/schemas/interval"
+                      }
+                    }
+                  },
+                  "carrierCodes": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "packages": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "length": {
+                          "type": "object",
+                          "$ref": "#/components/schemas/length"
+                        },
+                        "width": {
+                          "type": "object",
+                          "$ref": "#/components/schemas/length"
+                        },
+                        "height": {
+                          "type": "object",
+                          "$ref": "#/components/schemas/length"
+                        },
+                        "weight": {
+                          "type": "object",
+                          "$ref": "#/components/schemas/mass"
+                        },
+                        "products": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "$ref": "#/components/schemas/product"
+                          }
+                        },
+                        "quantity": {
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "examples": {
+                "Example 1": {
+                  "value": {
+                    "picking": {
+                      "location": {
+                        "type": "address",
+                        "addressLine1": "string",
+                        "addressLine2": "string",
+                        "elevator": true,
+                        "floor": 0,
+                        "doorCode": "string",
+                        "postalCode": "59800",
+                        "city": "LILLE",
+                        "district": "string",
+                        "country": "FR",
+                        "comment": "string",
+                        "coordinates": {
+                          "latitude": 0,
+                          "longitude": 0
+                        }
+                      }
+                    },
+                    "delivery": {
+                      "location": {
+                        "type": "address",
+                        "addressLine1": "string",
+                        "addressLine2": "string",
+                        "elevator": true,
+                        "floor": 0,
+                        "doorCode": "string",
+                        "postalCode": "59800",
+                        "city": "LILLE",
+                        "district": "string",
+                        "country": "FR",
+                        "comment": "string",
+                        "coordinates": {
+                          "latitude": 0,
+                          "longitude": 0
+                        }
+                      },
+                      "interval": {
+                        "start": "2019-12-04T12:30:00+0000",
+                        "end": "2019-12-04T14:30:00+0000"
+                      }
+                    },
+                    "carrierCodes": [
+                      "string"
+                    ],
+                    "packages": [
+                      {
+                        "length": {
+                          "value": 0,
+                          "unit": "mm"
+                        },
+                        "width": {
+                          "value": 0,
+                          "unit": "mm"
+                        },
+                        "height": {
+                          "value": 0,
+                          "unit": "mm"
+                        },
+                        "weight": {
+                          "value": 0,
+                          "unit": "kg"
+                        },
+                        "products": [
+                          {
+                            "type": "TYPOLOGY_GENERIC",
+                            "ean": "string",
+                            "cug": "string",
+                            "label": "string",
+                            "quantity": 1
+                          }
+                        ],
+                        "quantity": 0
+                      }
+                    ]
                   }
                 }
               }
