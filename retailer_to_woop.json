@@ -8570,6 +8570,7 @@
         "title": "Reservation of a delivery time slot (postDeliveriesBookings)",
         "oneOf": [
           {
+            "description": "Slot with interval start/end ",
             "required": [
               "exchangePlaceId",
               "slot",
@@ -8612,6 +8613,7 @@
             "x-stoplight": {
               "id": "wo8flk9pcxdzs"
             },
+            "description": "Slot with an id ",
             "properties": {
               "slot": {
                 "$ref": "#/components/schemas/slotById"
