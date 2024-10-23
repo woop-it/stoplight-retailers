@@ -7829,7 +7829,9 @@
     "/timeslots/search": {
       "post": {
         "summary": "Search a timeslots",
-        "tags": [],
+        "tags": [
+          "Delivery Booking"
+        ],
         "responses": {
           "2XX": {
             "description": "Success",
@@ -8570,57 +8572,31 @@
         "title": "Reservation of a delivery time slot (postDeliveriesBookings)",
         "oneOf": [
           {
-            "description": "Slot with interval start/end ",
-            "required": [
-              "exchangePlaceId",
-              "slot",
-              "carrierCodes"
-            ],
-            "properties": {
-              "exchangePlaceId": {
-                "type": "string",
-                "minLength": 1,
-                "description": "Picking point identifier"
-              },
-              "slot": {
-                "$ref": "#/components/schemas/slot"
-              },
-              "carrierCodes": {
-                "type": "array",
-                "description": "Carrier(s) code(s)",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "capacity": {
-                "type": "integer",
-                "description": "Capacity for a delivery slot"
-              },
-              "type": {
-                "type": "string",
-                "description": "Type of delivery week",
-                "example": "ORDERS_QUANTITY",
-                "enum": [
-                  "ORDERS_QUANTITY",
-                  "PACKAGES_QUANTITY",
-                  "PALLETS_QUANTITY",
-                  "TRAYS_QUANTITY"
-                ]
-              }
-            }
+            "$ref": "#/components/schemas/slotByInterval"
           },
           {
-            "x-stoplight": {
-              "id": "wo8flk9pcxdzs"
-            },
-            "description": "Slot with an id ",
-            "properties": {
-              "slot": {
-                "$ref": "#/components/schemas/slotById"
-              }
-            }
+            "$ref": "#/components/schemas/slotById"
           }
         ],
+        "x-examples": {
+          "Example 2": {
+            "id": "string",
+            "expiredAt": "2022-11-22T09:00:007Z"
+          },
+          "Example 1": {
+            "exchangePlaceId": "string",
+            "slot": {
+              "start": "string",
+              "end": "string",
+              "expiredAt": "2022-11-22T09:00:007Z"
+            },
+            "carrierCodes": [
+              "string"
+            ],
+            "capacity": 0,
+            "type": "ORDERS_QUANTITY"
+          }
+        },
         "type": "object"
       },
       "postCollectsBookings": {
@@ -10753,19 +10729,18 @@
         }
       },
       "slotById": {
-        "description": "Collection time generated with a slot id.",
+        "description": "Reservation with a slot id",
         "x-stoplight": {
           "id": "28kxd43xllssb"
         },
         "type": "object",
         "x-examples": {
-          "Example": {
-            "start": "2019-05-02T15:52:01+0000",
-            "end": "2019-05-02T17:52:01+0000",
-            "expiredAt": "2019-05-04T12:00:01+0000"
+          "Example 1": {
+            "id": "string",
+            "expiredAt": "2022-11-22T09:00:007Z"
           }
         },
-        "title": "Collection time slot (slot)",
+        "title": "Reservation with a slot id",
         "required": [
           "id",
           "expiredAt"
@@ -10786,6 +10761,61 @@
             "default": "30 min"
           }
         }
+      },
+      "slotByInterval": {
+        "type": "object",
+        "x-examples": {
+          "Example 1": {
+            "exchangePlaceId": "string",
+            "slot": {
+              "start": "string",
+              "end": "string",
+              "expiredAt": "2022-11-22T09:00:007Z"
+            },
+            "carrierCodes": [
+              "string"
+            ],
+            "capacity": 0,
+            "type": "ORDERS_QUANTITY"
+          }
+        },
+        "required": [
+          "exchangePlaceId",
+          "slot",
+          "carrierCodes"
+        ],
+        "properties": {
+          "exchangePlaceId": {
+            "type": "string",
+            "description": "exchangePlace identifier"
+          },
+          "slot": {
+            "type": "object",
+            "$ref": "#/components/schemas/slot"
+          },
+          "carrierCodes": {
+            "type": "array",
+            "description": "Carrier(s) code(s)",
+            "items": {
+              "type": "string"
+            }
+          },
+          "capacity": {
+            "type": "integer",
+            "description": "Capacity for a delivery slot"
+          },
+          "type": {
+            "enum": [
+              "ORDERS_QUANTITY",
+              "PACKAGES_QUANTITY",
+              "PALLETS_QUANTITY",
+              "TRAYS_QUANTITY"
+            ],
+            "description": "Type of delivery week"
+          }
+        },
+        "title": "Reservation with a interval",
+        "description": "Reservation with a interval"
       },
       "orderStatus": {
         "title": "Order status (orderStatus)",
@@ -10964,7 +10994,7 @@
             "message": "Conflict"
           }
         },
-        "description": "Corresponds to the model returned in the event of an API error.",
+        "description": "Corresponds to the model returned in the event of an API error.\n\n> List of error reasons :**https://woop.stoplight.io/docs/Models/Error_reasons.md**",
         "properties": {
           "statusCode": {
             "type": "integer",
