@@ -1937,7 +1937,7 @@
             }
           },
           "403": {
-            "description": "Updating the order is not possible\n\n[See the list of reasons](https://woop.stoplight.io/docs/retailer/docs/Models/Error%20reasons.md)",
+            "description": "Updating the order is not possible\n\n[See the list of reasons](https://woop.stoplight.io/docs/retailer/docs/Models/Error_reasons.md)",
             "content": {
               "application/json": {
                 "schema": {
@@ -1947,7 +1947,7 @@
             }
           },
           "409": {
-            "description": "An action is already in progress on this delivery"
+            "description": "An action is already in progress on this delivery\n\n[See the list of reasons](https://woop.stoplight.io/docs/retailer/docs/Models/Error_reasons.md)"
           }
         },
         "summary": "Patch order"
@@ -10994,7 +10994,7 @@
             "message": "Conflict"
           }
         },
-        "description": "Corresponds to the model returned in the event of an API error.\n\n> List of error reasons :**https://woop.stoplight.io/docs/Models/Error_reasons.md**",
+        "description": "Corresponds to the model returned in the event of an API error.\n\n[See the list of reasons](https://woop.stoplight.io/docs/retailer/docs/Models/Error_reasons.md)",
         "properties": {
           "statusCode": {
             "type": "integer",
