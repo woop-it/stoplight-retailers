@@ -1554,7 +1554,7 @@
             }
           },
           "403": {
-            "description": "The order cannot be cancelled",
+            "description": "The order cannot be cancelled\n\n[See the list of reasons](https://woop.stoplight.io/docs/retailer/docs/Models/Error_reasons.md)",
             "content": {
               "application/json": {
                 "schema": {
