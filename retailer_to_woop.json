@@ -8091,7 +8091,8 @@
               }
             }
           }
-        }
+        },
+        "description": "This method allows to retrieve the delivery times available with they carriers. \n"
       }
     }
   },
