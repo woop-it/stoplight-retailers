@@ -7833,6 +7833,31 @@
           "Delivery Booking"
         ],
         "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
+          },
           "2XX": {
             "description": "Success",
             "content": {
@@ -7846,7 +7871,7 @@
                         "id": "6wiyt1az60ma9"
                       },
                       "items": {
-                        "$ref": "#/components/schemas/carrier"
+                        "$ref": "#/components/schemas/carrierName"
                       }
                     },
                     "slots": {
@@ -7855,8 +7880,30 @@
                         "id": "xaicq3xbklx04"
                       },
                       "items": {
-                        "$ref": "#/components/schemas/slot"
+                        "$ref": "#/components/schemas/availableSlot"
                       }
+                    }
+                  }
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "carrierSlots": [
+                        {
+                          "carrier": {
+                            "code": "chronopost",
+                            "name": "Chronopost"
+                          },
+                          "slots": [
+                            {
+                              "id": "12234-3445-566777",
+                              "start": "2024-04-20T08:00:00+0000",
+                              "end": "2024-04-20T09:00:00+0000",
+                              "remainingCapacity": "10"
+                            }
+                          ]
+                        }
+                      ]
                     }
                   }
                 }
@@ -7989,77 +8036,54 @@
                   "value": {
                     "picking": {
                       "location": {
-                        "type": "address",
-                        "addressLine1": "string",
-                        "addressLine2": "string",
-                        "elevator": true,
-                        "floor": 0,
-                        "doorCode": "string",
-                        "postalCode": "59800",
-                        "city": "LILLE",
-                        "district": "string",
-                        "country": "FR",
-                        "comment": "string",
-                        "coordinates": {
-                          "latitude": 0,
-                          "longitude": 0
-                        }
-                      }
-                    },
-                    "delivery": {
-                      "location": {
-                        "type": "address",
-                        "addressLine1": "string",
-                        "addressLine2": "string",
-                        "elevator": true,
-                        "floor": 0,
-                        "doorCode": "string",
-                        "postalCode": "59800",
-                        "city": "LILLE",
-                        "district": "string",
-                        "country": "FR",
-                        "comment": "string",
-                        "coordinates": {
-                          "latitude": 0,
-                          "longitude": 0
-                        }
-                      },
-                      "interval": {
-                        "start": "2019-12-04T12:30:00+0000",
-                        "end": "2019-12-04T14:30:00+0000"
+                        "type": "exchangePlace",
+                        "id": "123",
+                        "storeId": "MAGLMMP1"
                       }
                     },
                     "carrierCodes": [
-                      "string"
+                      "dpd"
                     ],
+                    "delivery": {
+                      "location": {
+                        "addressLine1": "179 Boulevard de Turin",
+                        "postalCode": "59000",
+                        "city": "Lille",
+                        "country": "FR"
+                      },
+                      "interval": {
+                        "start": "2024-04-20T08:00:00+0000",
+                        "end": "2024-04-30T08:00:00+0000"
+                      }
+                    },
                     "packages": [
                       {
                         "length": {
-                          "value": 0,
-                          "unit": "mm"
+                          "value": 15,
+                          "unit": "cm"
                         },
                         "width": {
-                          "value": 0,
-                          "unit": "mm"
+                          "value": 15,
+                          "unit": "cm"
                         },
                         "height": {
-                          "value": 0,
-                          "unit": "mm"
+                          "value": 1.2,
+                          "unit": "m"
                         },
                         "weight": {
-                          "value": 0,
-                          "unit": "kg"
+                          "value": 560,
+                          "unit": "g"
                         },
                         "products": [
                           {
                             "type": "TYPOLOGY_GENERIC",
-                            "ean": "string",
-                            "cug": "string",
-                            "label": "string",
+                            "ean": "4dq86zd4q6zd4q64",
+                            "cug": "q56zd4q65d4q",
+                            "label": "Lamp",
                             "quantity": 1
                           }
                         ],
-                        "quantity": 0
+                        "quantity": 1
                       }
                     ]
                   }
@@ -10664,7 +10688,29 @@
       "availableSlot": {
         "description": "Collection time slot.",
         "type": "object",
+        "x-examples": {
+          "Example 1": {
+            "id": "12234-3445-566777",
+            "start": "2024-04-20T08:00:00+0000",
+            "end": "2024-04-20T09:00:00+0000",
+            "remainingCapacity": "10"
+          }
+        },
+        "title": "Available collection time slot (availableSlot)",
+        "required": [
+          "id",
+          "start",
+          "end",
+          "remainingCapacity"
+        ],
         "properties": {
+          "id": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "aymxt0vam5fmd"
+            },
+            "description": "Slot number"
+          },
           "start": {
             "type": "string",
             "format": "datetime",
@@ -10679,20 +10725,7 @@
             "type": "number",
             "description": "Remaining availability for this time slot"
           }
-        },
-        "required": [
-          "start",
-          "end",
-          "remainingCapacity"
-        ],
-        "x-examples": {
-          "Example": {
-            "start": "2019-05-02T15:52:01+0000",
-            "end": "2019-05-02T17:52:01+0000",
-            "remainingCapacity": 5
-          }
-        },
-        "title": "Available collection time slot (availableSlot)"
+        }
       },
       "slot": {
         "description": "Collection time slot (without reservation or availability check).",
@@ -11658,6 +11691,36 @@
           },
           "contact": {
             "$ref": "#/components/schemas/contact"
+          }
+        }
+      },
+      "carrierName": {
+        "title": "carrierName",
+        "x-stoplight": {
+          "id": "j5mh0xg6fdfnf"
+        },
+        "type": "object",
+        "description": "carrier name and code",
+        "required": [
+          "name",
+          "code"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Carrier name",
+            "example": "DPD"
+          },
+          "code": {
+            "type": "string",
+            "description": "Carrier identifier",
+            "example": "dpd"
+          }
+        },
+        "x-examples": {
+          "Example 1": {
+            "name": "DPD",
+            "code": "dpd"
           }
         }
       },
