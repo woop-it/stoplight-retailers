@@ -7965,6 +7965,12 @@
                     ]
                   }
                 },
+                "required": [
+                  "picking",
+                  "delivery",
+                  "carrierCodes",
+                  "packages"
+                ],
                 "properties": {
                   "picking": {
                     "type": "object",
