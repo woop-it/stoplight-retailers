@@ -10096,7 +10096,7 @@
         "description": "Specifies the information needed to update a package. The handling unit is to be defined with the package/product structure",
         "type": "object",
         "x-examples": {
-          "Example": {
+          "Example 1": {
             "references": [
               {
                 "reference": "12345B",
@@ -10104,31 +10104,40 @@
                   "value": "54fd56g4f5gfd456sd",
                   "type": "barcode",
                   "format": "128"
+                },
+                "state": {
+                  "value": "ON_DOCK",
+                  "date": "2019-08-24T14:15:22Z"
+                },
+                "containerId": {
+                  "trailerId": "string",
+                  "palletId": "string"
                 }
               }
             ],
+            "category": "string",
             "length": {
-              "value": 200,
+              "value": 0,
               "unit": "mm"
             },
             "width": {
-              "value": 200,
+              "value": 0,
               "unit": "mm"
             },
             "height": {
-              "value": 100,
+              "value": 0,
               "unit": "mm"
             },
             "weight": {
-              "value": 1,
+              "value": 0,
               "unit": "kg"
             },
             "products": [
               {
                 "type": "TYPOLOGY_GENERIC",
-                "ean": "11233",
-                "cug": "KJJNN",
-                "label": "Computer",
+                "ean": "string",
+                "cug": "string",
+                "label": "string",
                 "quantity": 1
               }
             ],
@@ -10139,7 +10148,11 @@
                 "unit": "m2"
               }
             },
-            "type": "PACKAGE"
+            "type": "PACKAGE",
+            "volume": {
+              "value": "15",
+              "unit": "mm3"
+            }
           }
         },
         "title": "Package (package)",
@@ -10240,51 +10253,7 @@
             "default": "PACKAGE"
           },
           "volume": {
-            "type": "array",
-            "x-stoplight": {
-              "id": "r4pzo383fekgb"
-            },
-            "items": {
-              "x-stoplight": {
-                "id": "moi081c5t9vzt"
-              },
-              "type": "object",
-              "properties": {
-                "value": {
-                  "type": "string",
-                  "x-stoplight": {
-                    "id": "2kvcx6vg7un33"
-                  },
-                  "example": "15"
-                },
-                "unit": {
-                  "x-stoplight": {
-                    "id": "revd4uqptzejw"
-                  },
-                  "example": "m3",
-                  "default": "m3",
-                  "enum": [
-                    "mm3",
-                    "cm3",
-                    "ml",
-                    "l",
-                    "kl",
-                    "m3",
-                    "km3",
-                    "tsp",
-                    "Tbs",
-                    "in3",
-                    "fl-oz",
-                    "cup",
-                    "pnt",
-                    "qt",
-                    "gal",
-                    "ft3",
-                    "yd3"
-                  ]
-                }
-              }
-            }
+            "$ref": "#/components/schemas/volume"
           }
         }
       },
@@ -12817,6 +12786,49 @@
           "height": {
             "type": "object",
             "$ref": "#/components/schemas/length"
+          }
+        }
+      },
+      "volume": {
+        "title": "volume",
+        "x-stoplight": {
+          "id": "g714nlx9s8h7b"
+        },
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "okz69pc5x0dwb"
+            },
+            "example": "15",
+            "description": "Value of the declared volume"
+          },
+          "unit": {
+            "x-stoplight": {
+              "id": "g2gfssyddj6st"
+            },
+            "enum": [
+              "mm3",
+              "cm3",
+              "ml",
+              "l",
+              "kl",
+              "",
+              "m3",
+              "km3",
+              "tsp",
+              "tbs",
+              "in3",
+              "fi-oz",
+              "cup",
+              "pnt",
+              "qt",
+              "gal",
+              "ft3",
+              "yd3"
+            ],
+            "description": "Specific unit of volume. \nDefault = m3"
           }
         }
       }
