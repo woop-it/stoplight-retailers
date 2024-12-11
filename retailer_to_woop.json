@@ -7974,10 +7974,18 @@
                 "properties": {
                   "picking": {
                     "type": "object",
+                    "required": [
+                      "location",
+                      "interval"
+                    ],
+                    "description": "Information on the collection location",
                     "properties": {
                       "location": {
                         "type": "object",
-                        "$ref": "#/components/schemas/location"
+                        "$ref": "#/components/schemas/locationForTimeSlots"
+                      },
+                      "interval": {
+                        "$ref": "#/components/schemas/interval"
                       }
                     }
                   },
@@ -7986,9 +7994,14 @@
                     "x-stoplight": {
                       "id": "0wp0cy8xi731j"
                     },
+                    "required": [
+                      "location",
+                      "interval"
+                    ],
+                    "description": "Information on the delivery location ",
                     "properties": {
                       "location": {
-                        "$ref": "#/components/schemas/location"
+                        "$ref": "#/components/schemas/address"
                       },
                       "interval": {
                         "$ref": "#/components/schemas/interval"
@@ -8006,11 +8019,24 @@
                     "items": {
                       "$ref": "#/components/schemas/packages"
                     }
+                  },
+                  "additionalData": {
+                    "$ref": "./models/additionalData.yaml"
+                  },
+                  "limit": {
+                    "type": "integer",
+                    "x-stoplight": {
+                      "id": "9f41r648kyzxy"
+                    },
+                    "minimum": 1,
+                    "maximum": 200,
+                    "example": 50,
+                    "description": "Information sent to the carrier to limit the number of slots. "
                   }
                 }
               },
               "examples": {
-                "Example 2": {
+                "Example 1": {
                   "value": {
                     "picking": {
                       "location": {
@@ -8029,6 +8055,10 @@
                           "latitude": 0,
                           "longitude": 0
                         }
+                      },
+                      "interval": {
+                        "start": "2019-12-04T12:30:00+0000",
+                        "end": "2019-12-04T14:30:00+0000"
                       }
                     },
                     "delivery": {
@@ -8111,14 +8141,19 @@
                           }
                         },
                         "type": "PACKAGE",
-                        "volume": [
-                          {
-                            "value": "15",
-                            "unit": "m3"
-                          }
-                        ]
+                        "volume": {
+                          "value": "15",
+                          "unit": "mm3"
+                        }
                       }
-                    ]
+                    ],
+                    "additionalData": [
+                      {
+                        "key": "customerId",
+                        "value": "123RD"
+                      }
+                    ],
+                    "limit": 50
                   }
                 }
               }
@@ -9035,7 +9070,7 @@
             }
           },
           "delivery": {
-            "description": "Information on the delivery location",
+            "description": "Information on the delivery location ",
             "type": "object",
             "required": [
               "location",
@@ -9683,6 +9718,58 @@
               },
               {
                 "$ref": "#/components/schemas/pickupPointTypes"
+              },
+              {
+                "$ref": "#/components/schemas/exchangePlaceTypeForTimeSlot"
+              }
+            ]
+          }
+        ]
+      },
+      "locationForTimeSlots": {
+        "title": "Location (location)",
+        "x-stoplight": {
+          "id": "8gdeqk7oel5by"
+        },
+        "description": "Here, 2 location.types are possible (`address` and `exchangePlace`). The request must be made using one of these options.",
+        "x-examples": {
+          "Adress": {
+            "type": "address",
+            "addressLine1": "179 boulevard de Turin",
+            "elevator": true,
+            "floor": 8,
+            "postalCode": "59000",
+            "city": "Lille",
+            "country": "FR"
+          },
+          "Pickup points": {
+            "type": "pickupPoint",
+            "id": "76761",
+            "carrierCode": "bpost",
+            "boxCategory": {
+              "id": "XXX",
+              "accessibility": "UPPER"
+            }
+          },
+          "Exchange place": {
+            "type": "exchangePlace",
+            "id": "1"
+          },
+          "Coordinates": {
+            "type": "address",
+            "postalCode": "59000",
+            "country": "FR",
+            "coordinates": {
+              "latitude": 0,
+              "longitude": 0
+            }
+          }
+        },
+        "oneOf": [
+          {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/address"
               },
               {
                 "$ref": "#/components/schemas/exchangePlaceTypeForTimeSlot"
