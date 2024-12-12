@@ -7969,6 +7969,7 @@
                   "picking",
                   "delivery",
                   "packages",
+                  "services",
                   "carrierCodes"
                 ],
                 "properties": {
@@ -8013,6 +8014,9 @@
                     "items": {
                       "$ref": "#/components/schemas/packages"
                     }
+                  },
+                  "services": {
+                    "$ref": "#/components/schemas/services"
                   },
                   "additionalData": {
                     "$ref": "./models/additionalData.yaml"
