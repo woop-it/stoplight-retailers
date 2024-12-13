@@ -7871,16 +7871,7 @@
                         "id": "6wiyt1az60ma9"
                       },
                       "items": {
-                        "$ref": "#/components/schemas/carrierName"
-                      }
-                    },
-                    "slots": {
-                      "type": "array",
-                      "x-stoplight": {
-                        "id": "xaicq3xbklx04"
-                      },
-                      "items": {
-                        "$ref": "#/components/schemas/availableSlot"
+                        "$ref": "#/components/schemas/carrierSlots"
                       }
                     }
                   }
@@ -7891,15 +7882,15 @@
                       "carrierSlots": [
                         {
                           "carrier": {
-                            "code": "chronopost",
-                            "name": "Chronopost"
+                            "name": "DPD",
+                            "code": "dpd"
                           },
                           "slots": [
                             {
-                              "id": "12234-3445-566777",
-                              "start": "2024-04-20T08:00:00+0000",
-                              "end": "2024-04-20T09:00:00+0000",
-                              "remainingCapacity": "10"
+                              "id": "string",
+                              "start": "string",
+                              "end": "string",
+                              "remainingCapacity": 0
                             }
                           ]
                         }
@@ -11863,6 +11854,25 @@
           "contact": {
             "$ref": "#/components/schemas/contact"
           }
+        },
+        "x-examples": {
+          "Example 1": {
+            "name": "DPD",
+            "code": "dpd",
+            "claimUrl": "string",
+            "contact": {
+              "firstName": "string",
+              "lastName": "string",
+              "phone": "string",
+              "email": "string",
+              "language": "fr",
+              "timezone": "Europe/Paris",
+              "main": true,
+              "title": "string",
+              "isProfessional": false,
+              "companyName": "woop"
+            }
+          }
         }
       },
       "carrierName": {
@@ -11872,6 +11882,12 @@
         },
         "type": "object",
         "description": "carrier name and code",
+        "x-examples": {
+          "Example 1": {
+            "name": "DPD",
+            "code": "dpd"
+          }
+        },
         "required": [
           "name",
           "code"
@@ -11887,11 +11903,46 @@
             "description": "Carrier identifier",
             "example": "dpd"
           }
+        }
+      },
+      "carrierSlots": {
+        "title": "carrierSlots",
+        "x-stoplight": {
+          "id": "rghcnzefzzlc0"
         },
+        "type": "object",
+        "description": "carrier slots",
         "x-examples": {
-          "Example 1": {
-            "name": "DPD",
-            "code": "dpd"
+          "Example 2": {
+            "carrier": {
+              "name": "DPD",
+              "code": "dpd"
+            },
+            "slots": [
+              {
+                "id": "string",
+                "start": "string",
+                "end": "string",
+                "remainingCapacity": 0
+              }
+            ]
+          }
+        },
+        "required": [
+          "carrier"
+        ],
+        "properties": {
+          "carrier": {
+            "$ref": "#/components/schemas/carrierName"
+          },
+          "slots": {
+            "type": "array",
+            "x-stoplight": {
+              "id": "xa5d77qe6rhle"
+            },
+            "items": {
+              "$ref": "#/components/schemas/availableSlot"
+            }
           }
         }
       },

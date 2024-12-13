@@ -2540,9 +2540,12 @@
             "description": "Event from the carrier "
           },
           "trackingUrls": {
-            "type": "string",
+            "type": "array",
             "x-stoplight": {
               "id": "18e8w4te5u9t1"
+            },
+            "items": {
+              "$ref": "./models/trackingUrls.yaml"
             }
           },
           "status": {
