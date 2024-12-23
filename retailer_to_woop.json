@@ -10931,29 +10931,40 @@
         },
         "type": "object",
         "x-examples": {
-          "Example 1": {
-            "id": "string",
-            "expiredAt": "2022-11-22T09:00:007Z"
+          "Example 2": {
+            "slot": {
+              "id": "string",
+              "expiredAt": "2019-08-24T14:15:22Z"
+            }
           }
         },
         "title": "Reservation with a slot id",
-        "required": [
-          "id"
-        ],
         "properties": {
-          "id": {
-            "type": "string",
+          "slot": {
+            "type": "object",
             "x-stoplight": {
-              "id": "16yhyxur9g7ul"
+              "id": "9lds175xfiuf0"
             },
-            "description": "Slot number"
-          },
-          "expiredAt": {
-            "type": "string",
-            "format": "datetime",
-            "description": "Validity limit of slots \n> Default value : 30 minutes / Max value : 100 days",
-            "example": "2022-11-22T09:00:007Z",
-            "default": "30 min"
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "x-stoplight": {
+                  "id": "9z44mcmzp2bcz"
+                },
+                "description": "Slot number"
+              },
+              "expiredAt": {
+                "type": "string",
+                "x-stoplight": {
+                  "id": "ad26pozjngnt7"
+                },
+                "format": "date-time",
+                "description": "Validity limit of slots \n> Default value : 30 minutes / Max value : 100 days"
+              }
+            }
           }
         }
       },
