@@ -2961,6 +2961,113 @@
                       "currency": "EUR"
                     }
                   }
+                },
+                "Example without interval ": {
+                  "value": {
+                    "orderId": "string",
+                    "referenceNumber": "string",
+                    "storeId": "string",
+                    "state": {
+                      "code": "ORDER_TO_BE_COMPLETED",
+                      "options": {
+                        "deliveryId": "string",
+                        "parcelIds": [
+                          "string"
+                        ]
+                      }
+                    },
+                    "picking": {
+                      "location": {
+                        "type": "exchangePlace",
+                        "id": "MAGLMMP1"
+                      }
+                    },
+                    "delivery": {
+                      "location": {
+                        "type": "address",
+                        "addressLine1": "string",
+                        "addressLine2": "string",
+                        "elevator": true,
+                        "floor": 0,
+                        "doorCode": "string",
+                        "postalCode": "59800",
+                        "city": "LILLE",
+                        "district": "string",
+                        "country": "FR",
+                        "comment": "string",
+                        "coordinates": {
+                          "latitude": 0,
+                          "longitude": 0
+                        }
+                      },
+                      "contact": {
+                        "firstName": "string",
+                        "lastName": "string",
+                        "phone": "string",
+                        "email": "string",
+                        "language": "fr",
+                        "timezone": "Europe/Paris",
+                        "isProfessional": false,
+                        "companyName": "woop"
+                      }
+                    },
+                    "packages": [
+                      {
+                        "references": [
+                          {
+                            "reference": "12345B",
+                            "barcode": {
+                              "value": "54fd56g4f5gfd456sd",
+                              "type": "barcode",
+                              "format": "128"
+                            }
+                          }
+                        ],
+                        "length": {
+                          "value": 0,
+                          "unit": "mm"
+                        },
+                        "width": {
+                          "value": 0,
+                          "unit": "mm"
+                        },
+                        "height": {
+                          "value": 0,
+                          "unit": "mm"
+                        },
+                        "weight": {
+                          "value": 0,
+                          "unit": "kg"
+                        },
+                        "products": [
+                          {
+                            "type": "TYPOLOGY_GENERIC",
+                            "ean": "string",
+                            "cug": "string",
+                            "label": "string",
+                            "quantity": 1
+                          }
+                        ],
+                        "quantity": 1,
+                        "attributes": {
+                          "footprint": {
+                            "value": 13,
+                            "unit": "m2"
+                          }
+                        },
+                        "type": "PACKAGE",
+                        "volume": [
+                          {
+                            "value": "15",
+                            "unit": "m3"
+                          }
+                        ]
+                      }
+                    ],
+                    "services": [
+                      "SERVICE_ASSEMBLY"
+                    ]
+                  }
                 }
               }
             }
@@ -8222,7 +8329,6 @@
             "type": "object",
             "required": [
               "location",
-              "interval",
               "contact"
             ],
             "properties": {
@@ -8246,7 +8352,6 @@
             "type": "object",
             "required": [
               "location",
-              "interval",
               "contact"
             ],
             "properties": {
