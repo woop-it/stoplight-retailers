@@ -9715,7 +9715,7 @@
                 "$ref": "#/components/schemas/pickupPointTypes"
               },
               {
-                "$ref": "#/components/schemas/exchangePlaceTypeForTimeSlot"
+                "$ref": "#/components/schemas/exchangePlaceType"
               }
             ]
           }
