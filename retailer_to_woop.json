@@ -31,7 +31,7 @@
   ],
   "info": {
     "title": "Retailer to Woop",
-    "description": "This document contains the technical information about Woop APIs for carriers. For any questions or clarification, please contact the internal technical team\n\nTo use \"Retailer to Woop\" APIs, you must use the confidential access codes provided when you created your retailer account on the platform. [See documentation](https://woop.stoplight.io/docs/retailer/docs/Basis/2.Authentication.md)\n\nThe version currently available in the documentation is <b>Version 1.7.0</b>",
+    "description": "This document contains the technical information about Woop APIs for carriers. For any questions or clarification, please contact the internal technical team.\n\nTo use \"Retailer to Woop\" APIs, you must use the confidential access codes provided when you created your retailer account on the platform. [See documentation](https://woop.stoplight.io/docs/retailer/docs/Basis/2.Authentication.md)\n\nThe version currently available in the documentation is <b>Version 1.7.0</b>",
     "version": "1.7.0"
   },
   "servers": [
@@ -65,7 +65,7 @@
         "summary": "Health"
       }
     },
-    "orders/package/state": {
+    "/orders/package/state": {
       "parameters": [],
       "put": {
         "summary": "Change Package state",
@@ -1554,7 +1554,7 @@
             }
           },
           "403": {
-            "description": "The order cannot be cancelled",
+            "description": "The order cannot be cancelled\n\n[See the list of reasons](https://woop.stoplight.io/docs/retailer/docs/Models/Error_reasons.md)",
             "content": {
               "application/json": {
                 "schema": {
@@ -1937,7 +1937,7 @@
             }
           },
           "403": {
-            "description": "Updating the order is not possible\n\n[See the list of reasons](https://woop.stoplight.io/docs/retailer/docs/Models/Error%20reasons.md)",
+            "description": "Updating the order is not possible\n\n[See the list of reasons](https://woop.stoplight.io/docs/retailer/docs/Models/Error_reasons.md)",
             "content": {
               "application/json": {
                 "schema": {
@@ -1947,7 +1947,7 @@
             }
           },
           "409": {
-            "description": "An action is already in progress on this delivery"
+            "description": "An action is already in progress on this delivery\n\n[See the list of reasons](https://woop.stoplight.io/docs/retailer/docs/Models/Error_reasons.md)"
           }
         },
         "summary": "Patch order"
@@ -5306,6 +5306,75 @@
                                                     }
                                                   }
                                                 }
+                                              },
+                                              "infrastructure": {
+                                                "type": "object",
+                                                "x-stoplight": {
+                                                  "id": "k5odovkiayvkn"
+                                                },
+                                                "description": "Estimated GHG emissions of logistic hubs or other infrastructure buildings potentially used for delivery",
+                                                "properties": {
+                                                  "pickupPoints": {
+                                                    "type": "array",
+                                                    "x-stoplight": {
+                                                      "id": "zq0k0qj6u8ima"
+                                                    },
+                                                    "description": "GHG emissions for pickup points",
+                                                    "items": {
+                                                      "x-stoplight": {
+                                                        "id": "jd16b5fuzcz8r"
+                                                      },
+                                                      "type": "object",
+                                                      "properties": {
+                                                        "value": {
+                                                          "type": "integer",
+                                                          "x-stoplight": {
+                                                            "id": "nl87kly42ne69"
+                                                          }
+                                                        },
+                                                        "unit": {
+                                                          "x-stoplight": {
+                                                            "id": "x7d3gzigvnood"
+                                                          },
+                                                          "enum": [
+                                                            "KgCo2e",
+                                                            "KgCo2e/package"
+                                                          ]
+                                                        }
+                                                      }
+                                                    }
+                                                  },
+                                                  "transshipmentHubs": {
+                                                    "type": "array",
+                                                    "x-stoplight": {
+                                                      "id": "qjae7unkxblly"
+                                                    },
+                                                    "description": "GHG emissions for logistic hubs",
+                                                    "items": {
+                                                      "x-stoplight": {
+                                                        "id": "9x30hdsas3yd4"
+                                                      },
+                                                      "type": "object",
+                                                      "properties": {
+                                                        "value": {
+                                                          "type": "integer",
+                                                          "x-stoplight": {
+                                                            "id": "dc1mk1g8w905c"
+                                                          }
+                                                        },
+                                                        "unit": {
+                                                          "x-stoplight": {
+                                                            "id": "h0686fezojejp"
+                                                          },
+                                                          "enum": [
+                                                            "KgCo2e",
+                                                            "KgCo2e/ton"
+                                                          ]
+                                                        }
+                                                      }
+                                                    }
+                                                  }
+                                                }
                                               }
                                             }
                                           }
@@ -5524,7 +5593,7 @@
                             }
                           },
                           "slots": {
-                            "$ref": "#/components/schemas/availableSlot"
+                            "$ref": "#/components/schemas/eligibilitySlot"
                           },
                           "price": {
                             "$ref": "./models/price.yaml"
@@ -5972,6 +6041,30 @@
                                         {
                                           "value": 12.1,
                                           "unit": "KgCo2e"
+                                        }
+                                      ]
+                                    }
+                                  ],
+                                  "infrastructure": [
+                                    {
+                                      "pickupPoints": [
+                                        {
+                                          "value": 2,
+                                          "unit": "KgCo2e"
+                                        },
+                                        {
+                                          "value": 0.0027,
+                                          "unit": "KgCo2e/package"
+                                        }
+                                      ],
+                                      "transshipmentHubs": [
+                                        {
+                                          "value": 2,
+                                          "unit": "KgCo2e"
+                                        },
+                                        {
+                                          "value": 0.6,
+                                          "unit": "KgCo2e/ton"
                                         }
                                       ]
                                     }
@@ -7431,6 +7524,893 @@
         ],
         "description": "This method retrieves a download link for all the package labels in a customer order. \n\nThe labels retrieved are either unique or consolidated for the entire order. "
       }
+    },
+    "/shipments": {
+      "post": {
+        "summary": "Create shipment",
+        "tags": [
+          "Shipment"
+        ],
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/ShipmentPostResponse"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "post-shipments",
+        "x-stoplight": {
+          "id": "p1r3djrlo62lw"
+        },
+        "description": "Specifies the information required for creating a synchrone shipping request to retrieve the associated label.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/postShipments"
+                  },
+                  {
+                    "$ref": "#/components/schemas/postShipmentsWithFulfillment"
+                  }
+                ],
+                "type": "object"
+              },
+              "examples": {}
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          }
+        ]
+      }
+    },
+    "/shipments/fulfillments": {
+      "parameters": [],
+      "post": {
+        "summary": "Declare the contents of an order",
+        "responses": {
+          "201": {
+            "description": "the order has been registered"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "statusCode": 0,
+                      "error": "string",
+                      "message": "string",
+                      "reasons": [
+                        "STORE_NOT_FOUND"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "statusCode": 0,
+                      "error": "string",
+                      "message": "string",
+                      "reasons": [
+                        "STORE_NOT_FOUND"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "statusCode": 0,
+                      "error": "string",
+                      "message": "string",
+                      "reasons": [
+                        "STORE_NOT_FOUND"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "statusCode": 0,
+                      "error": "string",
+                      "message": "string",
+                      "reasons": [
+                        "STORE_NOT_FOUND"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "postfulfillments",
+        "x-stoplight": {
+          "id": "ndw4mfx6rmjsj"
+        },
+        "description": "Specifies the information needed to create a single customer request without shipping. The method is used to declare customer content, which is used as a reference for future shipments created and attached to it.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          }
+        ],
+        "requestBody": {
+          "description": "Contains the fulfillment creation information.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "$ref": "#/components/schemas/postfulfillments"
+              },
+              "examples": {
+                "Example 1": {
+                  "value": {
+                    "fulfillmentId": "string",
+                    "referenceNumber": "string",
+                    "carrierSelection": "string",
+                    "storeId": "string",
+                    "picking": {
+                      "location": {
+                        "type": "exchangePlace",
+                        "id": "string",
+                        "comment": "string"
+                      },
+                      "contact": {
+                        "firstName": "string",
+                        "lastName": "string",
+                        "phone": "string",
+                        "email": "string",
+                        "language": "fr",
+                        "timezone": "Europe/Paris",
+                        "main": true,
+                        "title": "string",
+                        "isProfessional": false,
+                        "companyName": "woop"
+                      }
+                    },
+                    "delivery": {
+                      "location": {
+                        "type": "pickupPoint",
+                        "id": "string",
+                        "carrierCode": "string",
+                        "comment": "string",
+                        "boxCategory": {
+                          "id": "BoxCategory_001",
+                          "accessibility": "UPPER"
+                        }
+                      },
+                      "interval": [
+                        {
+                          "start": "2019-12-04T12:30:00+0000",
+                          "end": "2019-12-04T14:30:00+0000"
+                        }
+                      ],
+                      "contact": {
+                        "firstName": "string",
+                        "lastName": "string",
+                        "phone": "string",
+                        "email": "string",
+                        "optIn": {
+                          "survey": [
+                            "MAIL"
+                          ],
+                          "delivery": [
+                            "MAIL"
+                          ]
+                        },
+                        "language": "fr",
+                        "timezone": "Europe/Paris",
+                        "isProfessional": false,
+                        "companyName": "woop"
+                      }
+                    },
+                    "products": [
+                      {
+                        "type": "string",
+                        "ean": "string",
+                        "label": "string",
+                        "quantity": 0,
+                        "weight": {
+                          "value": 0,
+                          "unit": "kg"
+                        },
+                        "length": {
+                          "value": 0,
+                          "unit": "mm"
+                        },
+                        "width": {
+                          "value": 0,
+                          "unit": "mm"
+                        },
+                        "height": {
+                          "value": 0,
+                          "unit": "mm"
+                        }
+                      }
+                    ],
+                    "services": "SERVICE_PICKUP_POINT"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Shipment"
+        ]
+      }
+    },
+    "/shipments/fulfillment/{fulfillmentId}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "fulfillmentId",
+          "in": "path",
+          "required": true,
+          "description": "fulfillment identifier (maximum 36 characters)."
+        }
+      ],
+      "get": {
+        "summary": "Get an fulfillmentinformation by id",
+        "tags": [
+          "Shipment"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "statusCode": 0,
+                      "error": "string",
+                      "message": "string",
+                      "reasons": [
+                        "STORE_NOT_FOUND"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "statusCode": 0,
+                      "error": "string",
+                      "message": "string",
+                      "reasons": [
+                        "STORE_NOT_FOUND"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "statusCode": 0,
+                      "error": "string",
+                      "message": "string",
+                      "reasons": [
+                        "STORE_NOT_FOUND"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "statusCode": 0,
+                      "error": "string",
+                      "message": "string",
+                      "reasons": [
+                        "STORE_NOT_FOUND"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getfulfillmentsById",
+        "x-stoplight": {
+          "id": "0kvyj7ypzgvwf"
+        },
+        "description": "This method returns the fulfillmentglobal details.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          }
+        ]
+      },
+      "delete": {
+        "summary": "Delete fulfillments",
+        "tags": [
+          "Shipment"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "statusCode": 0,
+                      "error": "string",
+                      "message": "string",
+                      "reasons": [
+                        "STORE_NOT_FOUND"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "statusCode": 0,
+                      "error": "string",
+                      "message": "string",
+                      "reasons": [
+                        "STORE_NOT_FOUND"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "statusCode": 0,
+                      "error": "string",
+                      "message": "string",
+                      "reasons": [
+                        "STORE_NOT_FOUND"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/errorCode"
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "statusCode": 0,
+                      "error": "string",
+                      "message": "string",
+                      "reasons": [
+                        "STORE_NOT_FOUND"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "deletefulfillments",
+        "x-stoplight": {
+          "id": "dp4v0mqizfbti"
+        },
+        "description": "Delete global fulfillments.\n\n> If the fulfilment identifier (fulfilmentId) is already associated with a shipment (created shipment), then the request to cancel the fulfilment will not be successful. \n> \n> In this case, the method will return the following error: ‘Cannot delete because a shipment has already been created’. ",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/apiVersion"
+          }
+        ],
+        "requestBody": {
+          "description": "Contains the global cancellation information.\n\nPositive cases:\n- Sending a request with a valid fulfilmentId.\n\nNegative cases:\n- Sending a request with a missing or empty fulfilmentId.\n- Sending a request without authentication or with invalid authentication.\n- Sending a request with a non-existent fulfilmentId.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "reasons"
+                ],
+                "properties": {
+                  "reasons": {
+                    "$ref": "#/components/schemas/cancelledReasons"
+                  },
+                  "comment": {
+                    "type": "string",
+                    "x-stoplight": {
+                      "id": "m55q78ab5s0o7"
+                    },
+                    "description": "If necessary, an optional comment can be added when cancelling"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/timeslots/search": {
+      "post": {
+        "summary": "Search a timeslots",
+        "tags": [
+          "Delivery Booking"
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
+          },
+          "2XX": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "carrierSlots": {
+                      "type": "array",
+                      "x-stoplight": {
+                        "id": "6wiyt1az60ma9"
+                      },
+                      "items": {
+                        "$ref": "#/components/schemas/carrierSlots"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "carrierSlots": [
+                        {
+                          "carrier": {
+                            "name": "DPD",
+                            "code": "dpd"
+                          },
+                          "slots": [
+                            {
+                              "id": "string",
+                              "start": "string",
+                              "end": "string",
+                              "remainingCapacity": 0
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "postTimeslots",
+        "x-stoplight": {
+          "id": "0ackn9ccxbxb1"
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "x-examples": {
+                  "Example 1": {
+                    "picking": {
+                      "location": {
+                        "type": "exchangePlace",
+                        "id": "123",
+                        "storeId": "MAGLMMP1"
+                      }
+                    },
+                    "carrierCodes": [
+                      "123",
+                      "456"
+                    ],
+                    "packages": [
+                      {
+                        "length": {
+                          "value": 15,
+                          "unit": "cm"
+                        },
+                        "width": {
+                          "value": 15,
+                          "unit": "cm"
+                        },
+                        "height": {
+                          "value": 1.2,
+                          "unit": "m"
+                        },
+                        "weight": {
+                          "value": 560,
+                          "unit": "g"
+                        },
+                        "products": [
+                          {
+                            "type": "TYPOLOGY_GENERIC",
+                            "ean": "4dq86zd4q6zd4q64",
+                            "cug": "q56zd4q65d4q",
+                            "label": "Lamp",
+                            "quantity": 1
+                          }
+                        ],
+                        "quantity": 1
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "picking",
+                  "delivery",
+                  "packages",
+                  "services",
+                  "carrierCodes"
+                ],
+                "properties": {
+                  "picking": {
+                    "type": "object",
+                    "description": "Information on the collection location",
+                    "required": [
+                      "location",
+                      "interval"
+                    ],
+                    "properties": {
+                      "location": {
+                        "type": "object",
+                        "$ref": "#/components/schemas/locationForTimeSlots"
+                      },
+                      "interval": {
+                        "$ref": "#/components/schemas/interval"
+                      }
+                    }
+                  },
+                  "delivery": {
+                    "type": "object",
+                    "x-stoplight": {
+                      "id": "0wp0cy8xi731j"
+                    },
+                    "description": "Information on the delivery location ",
+                    "required": [
+                      "location",
+                      "interval"
+                    ],
+                    "properties": {
+                      "location": {
+                        "$ref": "#/components/schemas/address"
+                      },
+                      "interval": {
+                        "$ref": "#/components/schemas/interval"
+                      }
+                    }
+                  },
+                  "packages": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/packages"
+                    }
+                  },
+                  "services": {
+                    "$ref": "#/components/schemas/services"
+                  },
+                  "additionalData": {
+                    "$ref": "./models/additionalData.yaml"
+                  },
+                  "carrierCodes": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "limit": {
+                    "type": "integer",
+                    "x-stoplight": {
+                      "id": "9f41r648kyzxy"
+                    },
+                    "minimum": 1,
+                    "maximum": 200,
+                    "example": 50,
+                    "description": "Information sent to the carrier to limit the number of slots. "
+                  }
+                }
+              },
+              "examples": {
+                "Example 1": {
+                  "value": {
+                    "picking": {
+                      "location": {
+                        "type": "address",
+                        "addressLine1": "string",
+                        "addressLine2": "string",
+                        "elevator": true,
+                        "floor": 0,
+                        "doorCode": "string",
+                        "postalCode": "59800",
+                        "city": "LILLE",
+                        "district": "string",
+                        "country": "FR",
+                        "comment": "string",
+                        "coordinates": {
+                          "latitude": 0,
+                          "longitude": 0
+                        }
+                      },
+                      "interval": {
+                        "start": "2019-12-04T12:30:00+0000",
+                        "end": "2019-12-04T14:30:00+0000"
+                      }
+                    },
+                    "delivery": {
+                      "location": {
+                        "type": "address",
+                        "addressLine1": "string",
+                        "addressLine2": "string",
+                        "elevator": true,
+                        "floor": 0,
+                        "doorCode": "string",
+                        "postalCode": "59800",
+                        "city": "LILLE",
+                        "district": "string",
+                        "country": "FR",
+                        "comment": "string",
+                        "coordinates": {
+                          "latitude": 0,
+                          "longitude": 0
+                        }
+                      },
+                      "interval": {
+                        "start": "2019-12-04T12:30:00+0000",
+                        "end": "2019-12-04T14:30:00+0000"
+                      }
+                    },
+                    "carrierCodes": [
+                      "string"
+                    ],
+                    "packages": [
+                      {
+                        "references": [
+                          {
+                            "reference": "12345B",
+                            "barcode": {
+                              "value": "54fd56g4f5gfd456sd",
+                              "type": "barcode",
+                              "format": "128"
+                            },
+                            "state": {
+                              "value": "ON_DOCK",
+                              "date": "2019-08-24T14:15:22Z"
+                            },
+                            "containerId": {
+                              "trailerId": "string",
+                              "palletId": "string"
+                            }
+                          }
+                        ],
+                        "category": "string",
+                        "length": {
+                          "value": 0,
+                          "unit": "mm"
+                        },
+                        "width": {
+                          "value": 0,
+                          "unit": "mm"
+                        },
+                        "height": {
+                          "value": 0,
+                          "unit": "mm"
+                        },
+                        "weight": {
+                          "value": 0,
+                          "unit": "kg"
+                        },
+                        "products": [
+                          {
+                            "type": "TYPOLOGY_GENERIC",
+                            "ean": "string",
+                            "cug": "string",
+                            "label": "string",
+                            "quantity": 1
+                          }
+                        ],
+                        "quantity": 1,
+                        "attributes": {
+                          "footprint": {
+                            "value": 13,
+                            "unit": "m2"
+                          }
+                        },
+                        "type": "PACKAGE",
+                        "volume": {
+                          "value": "15",
+                          "unit": "mm3"
+                        }
+                      }
+                    ],
+                    "additionalData": [
+                      {
+                        "key": "customerId",
+                        "value": "123RD"
+                      }
+                    ],
+                    "limit": 50
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "This method allows to retrieve the delivery times available with they carriers. \n"
+      }
     }
   },
   "components": {
@@ -7931,45 +8911,35 @@
       },
       "postDeliveriesBookings": {
         "description": "Specifies the information needed to book a delivery slot for a given carrier.",
-        "type": "object",
         "title": "Reservation of a delivery time slot (postDeliveriesBookings)",
-        "properties": {
-          "exchangePlaceId": {
-            "type": "string",
-            "minLength": 1,
-            "description": "Picking point identifier"
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/slotByInterval"
           },
-          "slot": {
-            "$ref": "#/components/schemas/slot"
+          {
+            "$ref": "#/components/schemas/slotById"
+          }
+        ],
+        "x-examples": {
+          "Example 2": {
+            "id": "string",
+            "expiredAt": "2022-11-22T09:00:007Z"
           },
-          "carrierCodes": {
-            "type": "array",
-            "description": "Carrier(s) code(s)",
-            "items": {
-              "type": "string"
-            }
-          },
-          "capacity": {
-            "type": "integer",
-            "description": "Capacity for a delivery slot"
-          },
-          "type": {
-            "type": "string",
-            "description": "Type of delivery week",
-            "example": "ORDERS_QUANTITY",
-            "enum": [
-              "ORDERS_QUANTITY",
-              "PACKAGES_QUANTITY",
-              "PALLETS_QUANTITY",
-              "TRAYS_QUANTITY"
-            ]
+          "Example 1": {
+            "exchangePlaceId": "string",
+            "slot": {
+              "start": "string",
+              "end": "string",
+              "expiredAt": "2022-11-22T09:00:007Z"
+            },
+            "carrierCodes": [
+              "string"
+            ],
+            "capacity": 0,
+            "type": "ORDERS_QUANTITY"
           }
         },
-        "required": [
-          "exchangePlaceId",
-          "slot",
-          "carrierCodes"
-        ]
+        "type": "object"
       },
       "postCollectsBookings": {
         "description": "Specifies the information needed to reserve a collection time slot.",
@@ -8319,7 +9289,7 @@
           },
           "storeId": {
             "type": "string",
-            "description": "Identifier of the store issuing the request"
+            "description": "Identifier of the store using the request"
           },
           "state": {
             "$ref": "#/components/schemas/state"
@@ -8348,7 +9318,7 @@
             }
           },
           "delivery": {
-            "description": "Information on the delivery location",
+            "description": "Information on the delivery location ",
             "type": "object",
             "required": [
               "location",
@@ -8751,6 +9721,48 @@
           }
         }
       },
+      "exchangePlaceTypeForTimeSlot": {
+        "type": "object",
+        "x-stoplight": {
+          "id": "p561cfsjzpgqx"
+        },
+        "x-examples": {
+          "Example 1": {
+            "type": "exchangePlace",
+            "id": "0123",
+            "comment": "commentaire"
+          }
+        },
+        "title": "exchangePlace",
+        "description": "Here, 3 location.types are possible (`address`, `pickupPoint` and `exchangePlace`). The request must be made using one of these three options.\n\n> If location.type = `exchangePlace` then the identifier of the collection point configured and registered on the WOOP platform. ",
+        "required": [
+          "id",
+          "storeId",
+          "type"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Collection point ID"
+          },
+          "storeId": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "n4x7ayj3figdq"
+            },
+            "description": "Specific store id"
+          },
+          "type": {
+            "type": "string",
+            "description": "type required is exchangePlace",
+            "example": "exchangePlace"
+          },
+          "comment": {
+            "type": "string",
+            "description": "A comment (overwriting comment recorded in the back-office for exchange place)"
+          }
+        }
+      },
       "pickupPointTypes": {
         "type": "object",
         "x-stoplight": {
@@ -8795,6 +9807,30 @@
             "$ref": "./models/PickUpPoint/boxCategory(location).json"
           }
         }
+      },
+      "deliveryStatus": {
+        "type": "string",
+        "enum": [
+          "DELIVERY_INIT",
+          "DELIVERY_STARTED",
+          "DELIVERY_PICK_UP_REACHED",
+          "DELIVERY_PICK_UP_OK",
+          "DELIVERY_PICK_UP_PARTIALLY",
+          "DELIVERY_IN_PROGRESS",
+          "DELIVERY_AT_DROP_OF_LOCATION",
+          "DELIVERY_PICK_UP_FAILED",
+          "DELIVERY_DELIVERED_WITH_CLAIM",
+          "DELIVERY_CANCELLED_WITH_RETURN",
+          "DELIVERY_FAILED_WITH_RETURN",
+          "DELIVERY_RETURNED_TO_PICK_UP",
+          "DELIVERY_DELIVERED_OK",
+          "DELIVERY_DELIVERED_PARTIALLY"
+        ],
+        "description": "Specifies the delivery status that can be used.",
+        "x-examples": {
+          "Example": "DELIVERY_STARTED"
+        },
+        "title": "Delivery status (deliveryStatus)"
       },
       "addressForEligibility": {
         "description": "Here, 3 location.types are possible (`address`, `pickupPoint` and `exchangePlace`). The request must be made using one of these three options.\n\n> If location.type = `address` then the full address must be sent ",
@@ -8882,30 +9918,6 @@
           }
         }
       },
-      "deliveryStatus": {
-        "type": "string",
-        "enum": [
-          "DELIVERY_INIT",
-          "DELIVERY_STARTED",
-          "DELIVERY_PICK_UP_REACHED",
-          "DELIVERY_PICK_UP_OK",
-          "DELIVERY_PICK_UP_PARTIALLY",
-          "DELIVERY_IN_PROGRESS",
-          "DELIVERY_AT_DROP_OF_LOCATION",
-          "DELIVERY_PICK_UP_FAILED",
-          "DELIVERY_DELIVERED_WITH_CLAIM",
-          "DELIVERY_CANCELLED_WITH_RETURN",
-          "DELIVERY_FAILED_WITH_RETURN",
-          "DELIVERY_RETURNED_TO_PICK_UP",
-          "DELIVERY_DELIVERED_OK",
-          "DELIVERY_DELIVERED_PARTIALLY"
-        ],
-        "description": "Specifies the delivery status that can be used.",
-        "x-examples": {
-          "Example": "DELIVERY_STARTED"
-        },
-        "title": "Delivery status (deliveryStatus)"
-      },
       "location": {
         "title": "Location (location)",
         "description": "Here, 3 location.types are possible (`address`, `pickupPoint` and `exchangePlace`). The request must be made using one of these three options.",
@@ -8956,6 +9968,58 @@
               },
               {
                 "$ref": "#/components/schemas/exchangePlaceType"
+              }
+            ]
+          }
+        ]
+      },
+      "locationForTimeSlots": {
+        "title": "Location (location)",
+        "x-stoplight": {
+          "id": "8gdeqk7oel5by"
+        },
+        "description": "Here, 2 location.types are possible (`address` and `exchangePlace`). The request must be made using one of these options.",
+        "x-examples": {
+          "Adress": {
+            "type": "address",
+            "addressLine1": "179 boulevard de Turin",
+            "elevator": true,
+            "floor": 8,
+            "postalCode": "59000",
+            "city": "Lille",
+            "country": "FR"
+          },
+          "Pickup points": {
+            "type": "pickupPoint",
+            "id": "76761",
+            "carrierCode": "bpost",
+            "boxCategory": {
+              "id": "XXX",
+              "accessibility": "UPPER"
+            }
+          },
+          "Exchange place": {
+            "type": "exchangePlace",
+            "id": "1"
+          },
+          "Coordinates": {
+            "type": "address",
+            "postalCode": "59000",
+            "country": "FR",
+            "coordinates": {
+              "latitude": 0,
+              "longitude": 0
+            }
+          }
+        },
+        "oneOf": [
+          {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/address"
+              },
+              {
+                "$ref": "#/components/schemas/exchangePlaceTypeForTimeSlot"
               }
             ]
           }
@@ -9372,7 +10436,7 @@
         "description": "Specifies the information needed to update a package. The handling unit is to be defined with the package/product structure",
         "type": "object",
         "x-examples": {
-          "Example": {
+          "Example 1": {
             "references": [
               {
                 "reference": "12345B",
@@ -9380,31 +10444,40 @@
                   "value": "54fd56g4f5gfd456sd",
                   "type": "barcode",
                   "format": "128"
+                },
+                "state": {
+                  "value": "ON_DOCK",
+                  "date": "2019-08-24T14:15:22Z"
+                },
+                "containerId": {
+                  "trailerId": "string",
+                  "palletId": "string"
                 }
               }
             ],
+            "category": "string",
             "length": {
-              "value": 200,
+              "value": 0,
               "unit": "mm"
             },
             "width": {
-              "value": 200,
+              "value": 0,
               "unit": "mm"
             },
             "height": {
-              "value": 100,
+              "value": 0,
               "unit": "mm"
             },
             "weight": {
-              "value": 1,
+              "value": 0,
               "unit": "kg"
             },
             "products": [
               {
                 "type": "TYPOLOGY_GENERIC",
-                "ean": "11233",
-                "cug": "KJJNN",
-                "label": "Computer",
+                "ean": "string",
+                "cug": "string",
+                "label": "string",
                 "quantity": 1
               }
             ],
@@ -9415,7 +10488,11 @@
                 "unit": "m2"
               }
             },
-            "type": "PACKAGE"
+            "type": "PACKAGE",
+            "volume": {
+              "value": "15",
+              "unit": "mm3"
+            }
           }
         },
         "title": "Package (package)",
@@ -9516,51 +10593,7 @@
             "default": "PACKAGE"
           },
           "volume": {
-            "type": "array",
-            "x-stoplight": {
-              "id": "r4pzo383fekgb"
-            },
-            "items": {
-              "x-stoplight": {
-                "id": "moi081c5t9vzt"
-              },
-              "type": "object",
-              "properties": {
-                "value": {
-                  "type": "string",
-                  "x-stoplight": {
-                    "id": "2kvcx6vg7un33"
-                  },
-                  "example": "15"
-                },
-                "unit": {
-                  "x-stoplight": {
-                    "id": "revd4uqptzejw"
-                  },
-                  "example": "m3",
-                  "default": "m3",
-                  "enum": [
-                    "mm3",
-                    "cm3",
-                    "ml",
-                    "l",
-                    "kl",
-                    "m3",
-                    "km3",
-                    "tsp",
-                    "Tbs",
-                    "in3",
-                    "fl-oz",
-                    "cup",
-                    "pnt",
-                    "qt",
-                    "gal",
-                    "ft3",
-                    "yd3"
-                  ]
-                }
-              }
-            }
+            "$ref": "#/components/schemas/volume"
           }
         }
       },
@@ -10034,6 +11067,64 @@
       "availableSlot": {
         "description": "Collection time slot.",
         "type": "object",
+        "x-examples": {
+          "Example 1": {
+            "id": "12234-3445-566777",
+            "start": "2024-04-20T08:00:00+0000",
+            "end": "2024-04-20T09:00:00+0000",
+            "remainingCapacity": "10"
+          }
+        },
+        "title": "Available collection time slot (availableSlot)",
+        "required": [
+          "id",
+          "start",
+          "end"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "aymxt0vam5fmd"
+            },
+            "description": "Slot number"
+          },
+          "start": {
+            "type": "string",
+            "format": "datetime",
+            "description": "Start of the time slot"
+          },
+          "end": {
+            "type": "string",
+            "format": "datetime",
+            "description": "End of the time slot"
+          },
+          "remainingCapacity": {
+            "type": "number",
+            "description": "Remaining availability for this time slot"
+          }
+        }
+      },
+      "eligibilitySlot": {
+        "description": "Collection time slot.",
+        "x-stoplight": {
+          "id": "3gj7hifvcrzg4"
+        },
+        "type": "object",
+        "x-examples": {
+          "Example 1": {
+            "id": "12234-3445-566777",
+            "start": "2024-04-20T08:00:00+0000",
+            "end": "2024-04-20T09:00:00+0000",
+            "remainingCapacity": "10"
+          }
+        },
+        "title": "Available collection time slot (availableSlot)",
+        "required": [
+          "start",
+          "end",
+          "remainingCapacity"
+        ],
         "properties": {
           "start": {
             "type": "string",
@@ -10049,20 +11140,7 @@
             "type": "number",
             "description": "Remaining availability for this time slot"
           }
-        },
-        "required": [
-          "start",
-          "end",
-          "remainingCapacity"
-        ],
-        "x-examples": {
-          "Example": {
-            "start": "2019-05-02T15:52:01+0000",
-            "end": "2019-05-02T17:52:01+0000",
-            "remainingCapacity": 5
-          }
-        },
-        "title": "Available collection time slot (availableSlot)"
+        }
       },
       "slot": {
         "description": "Collection time slot (without reservation or availability check).",
@@ -10075,6 +11153,10 @@
           }
         },
         "title": "Collection time slot (slot)",
+        "required": [
+          "start",
+          "end"
+        ],
         "properties": {
           "start": {
             "type": "string",
@@ -10089,14 +11171,109 @@
           "expiredAt": {
             "type": "string",
             "format": "datetime",
-            "description": "Validity limit of slots (max 1 week)",
+            "description": "Validity limit of slots \n> Default value : 30 minutes / Max value : 100 days",
             "example": "2022-11-22T09:00:007Z"
+          }
+        }
+      },
+      "slotById": {
+        "description": "Reservation with a slot id",
+        "x-stoplight": {
+          "id": "28kxd43xllssb"
+        },
+        "type": "object",
+        "x-examples": {
+          "Example 2": {
+            "slot": {
+              "id": "string",
+              "expiredAt": "2019-08-24T14:15:22Z"
+            }
+          }
+        },
+        "title": "Reservation with a slot id",
+        "properties": {
+          "slot": {
+            "type": "object",
+            "x-stoplight": {
+              "id": "9lds175xfiuf0"
+            },
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "x-stoplight": {
+                  "id": "9z44mcmzp2bcz"
+                },
+                "description": "Slot number"
+              },
+              "expiredAt": {
+                "type": "string",
+                "x-stoplight": {
+                  "id": "ad26pozjngnt7"
+                },
+                "format": "date-time",
+                "description": "Validity limit of slots \n> Default value : 30 minutes / Max value : 100 days"
+              }
+            }
+          }
+        }
+      },
+      "slotByInterval": {
+        "type": "object",
+        "x-examples": {
+          "Example 1": {
+            "exchangePlaceId": "string",
+            "slot": {
+              "start": "string",
+              "end": "string",
+              "expiredAt": "2022-11-22T09:00:007Z"
+            },
+            "carrierCodes": [
+              "string"
+            ],
+            "capacity": 0,
+            "type": "ORDERS_QUANTITY"
           }
         },
         "required": [
-          "start",
-          "end"
-        ]
+          "exchangePlaceId",
+          "slot",
+          "carrierCodes"
+        ],
+        "properties": {
+          "exchangePlaceId": {
+            "type": "string",
+            "description": "exchangePlace identifier"
+          },
+          "slot": {
+            "type": "object",
+            "$ref": "#/components/schemas/slot"
+          },
+          "carrierCodes": {
+            "type": "array",
+            "description": "Carrier(s) code(s)",
+            "items": {
+              "type": "string"
+            }
+          },
+          "capacity": {
+            "type": "integer",
+            "description": "Capacity for a delivery slot"
+          },
+          "type": {
+            "enum": [
+              "ORDERS_QUANTITY",
+              "PACKAGES_QUANTITY",
+              "PALLETS_QUANTITY",
+              "TRAYS_QUANTITY"
+            ],
+            "description": "Type of delivery week"
+          }
+        },
+        "title": "Reservation with a interval",
+        "description": "Reservation with a interval"
       },
       "orderStatus": {
         "title": "Order status (orderStatus)",
@@ -10275,7 +11452,7 @@
             "message": "Conflict"
           }
         },
-        "description": "Corresponds to the model returned in the event of an API error.",
+        "description": "Corresponds to the model returned in the event of an API error.\n\n[See the list of reasons](https://woop.stoplight.io/docs/retailer/docs/Models/Error_reasons.md)",
         "properties": {
           "statusCode": {
             "type": "integer",
@@ -10940,6 +12117,1130 @@
           "contact": {
             "$ref": "#/components/schemas/contact"
           }
+        },
+        "x-examples": {
+          "Example 1": {
+            "name": "DPD",
+            "code": "dpd",
+            "claimUrl": "string",
+            "contact": {
+              "firstName": "string",
+              "lastName": "string",
+              "phone": "string",
+              "email": "string",
+              "language": "fr",
+              "timezone": "Europe/Paris",
+              "main": true,
+              "title": "string",
+              "isProfessional": false,
+              "companyName": "woop"
+            }
+          }
+        }
+      },
+      "carrierName": {
+        "title": "carrierName",
+        "x-stoplight": {
+          "id": "j5mh0xg6fdfnf"
+        },
+        "type": "object",
+        "description": "carrier name and code",
+        "x-examples": {
+          "Example 1": {
+            "name": "DPD",
+            "code": "dpd"
+          }
+        },
+        "required": [
+          "name",
+          "code"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Carrier name",
+            "example": "DPD"
+          },
+          "code": {
+            "type": "string",
+            "description": "Carrier identifier",
+            "example": "dpd"
+          }
+        }
+      },
+      "carrierSlots": {
+        "title": "carrierSlots",
+        "x-stoplight": {
+          "id": "rghcnzefzzlc0"
+        },
+        "type": "object",
+        "description": "carrier slots",
+        "x-examples": {
+          "Example 2": {
+            "carrier": {
+              "name": "DPD",
+              "code": "dpd"
+            },
+            "slots": [
+              {
+                "id": "string",
+                "start": "string",
+                "end": "string",
+                "remainingCapacity": 0
+              }
+            ]
+          }
+        },
+        "required": [
+          "carrier"
+        ],
+        "properties": {
+          "carrier": {
+            "$ref": "#/components/schemas/carrierName"
+          },
+          "slots": {
+            "type": "array",
+            "x-stoplight": {
+              "id": "xa5d77qe6rhle"
+            },
+            "items": {
+              "$ref": "#/components/schemas/availableSlot"
+            }
+          }
+        }
+      },
+      "postShipmentsWithFulfillment": {
+        "type": "object",
+        "x-examples": {
+          "Example 2": {
+            "fulfillmentId": "string",
+            "orderId": "string",
+            "referenceNumber": "string",
+            "storeId": "string",
+            "carrierCode": "string",
+            "picking": {
+              "location": {
+                "type": "exchangePlace",
+                "id": "string",
+                "comment": "string"
+              },
+              "interval": {
+                "start": "2019-12-04T12:30:00+0000",
+                "end": "2019-12-04T14:30:00+0000"
+              }
+            },
+            "delivery": {
+              "location": {
+                "type": "exchangePlace",
+                "id": "string",
+                "comment": "string"
+              },
+              "interval": {
+                "start": "2019-12-04T12:30:00+0000",
+                "end": "2019-12-04T14:30:00+0000"
+              },
+              "contact": {
+                "firstName": "string",
+                "lastName": "string",
+                "phone": "string",
+                "email": "string",
+                "optIn": {
+                  "survey": [
+                    "MAIL"
+                  ],
+                  "delivery": [
+                    "MAIL"
+                  ]
+                },
+                "language": "fr",
+                "timezone": "Europe/Paris",
+                "isProfessional": false,
+                "companyName": "woop"
+              }
+            },
+            "packages": [
+              {
+                "references": [
+                  {
+                    "reference": "12345B",
+                    "barcode": {
+                      "value": "54fd56g4f5gfd456sd",
+                      "type": "barcode",
+                      "format": "128"
+                    },
+                    "state": {
+                      "value": "ON_DOCK",
+                      "date": "2019-08-24T14:15:22Z"
+                    },
+                    "containerId": {
+                      "trailerId": "string",
+                      "palletId": "string"
+                    }
+                  }
+                ],
+                "category": "string",
+                "length": {
+                  "value": 0,
+                  "unit": "mm"
+                },
+                "width": {
+                  "value": 0,
+                  "unit": "mm"
+                },
+                "height": {
+                  "value": 0,
+                  "unit": "mm"
+                },
+                "weight": {
+                  "value": 0,
+                  "unit": "kg"
+                },
+                "products": [
+                  {
+                    "type": "TYPOLOGY_GENERIC",
+                    "ean": "string",
+                    "cug": "string",
+                    "label": "string",
+                    "quantity": 1
+                  }
+                ],
+                "quantity": 1,
+                "attributes": "string",
+                "footprint": {
+                  "value": 0,
+                  "": "m2"
+                },
+                "type": "PACKAGE"
+              }
+            ],
+            "services": "SERVICE_PICKUP_POINT",
+            "labelMode": {
+              "mode": "ZPL",
+              "size": "A6"
+            }
+          }
+        },
+        "description": "Specifies the information needed to create a synchronous shipping request to retrieve the associated label based on fulfillmentId. ",
+        "title": "Create shipment with fulfillmentId",
+        "required": [
+          "fulfillmentId",
+          "storeId",
+          "carrierCode",
+          "packages",
+          "services"
+        ],
+        "properties": {
+          "fulfillmentId": {
+            "type": "string",
+            "description": "fulfillment identifier (maximum 36 characters).\n"
+          },
+          "orderId": {
+            "type": "string",
+            "description": "Order identifier (maximum 36 characters). If not indicated, identifier generated by Woop as UUID "
+          },
+          "referenceNumber": {
+            "type": "string",
+            "description": "Order reference, store number. Can be the same as the orderId."
+          },
+          "storeId": {
+            "type": "string",
+            "description": "Identifier of the store issuing the request"
+          },
+          "carrierCode": {
+            "type": "string",
+            "description": "code of the carrier selected for delivery"
+          },
+          "picking": {
+            "type": "object",
+            "description": "Information on the picking location",
+            "required": [
+              "location",
+              "interval"
+            ],
+            "properties": {
+              "location": {
+                "$ref": "#/components/schemas/pickingShipmentLocation"
+              },
+              "interval": {
+                "$ref": "#/components/schemas/pickingInterval"
+              }
+            }
+          },
+          "delivery": {
+            "type": "object",
+            "required": [
+              "location",
+              "interval",
+              "contact"
+            ],
+            "properties": {
+              "location": {
+                "$ref": "#/components/schemas/deliveryShipmentLocation"
+              },
+              "interval": {
+                "$ref": "#/components/schemas/deliveryInterval"
+              },
+              "contact": {
+                "$ref": "#/components/schemas/contactDelivery"
+              }
+            }
+          },
+          "packages": {
+            "type": "array",
+            "x-stoplight": {
+              "id": "80rfrhhdnck4i"
+            },
+            "items": {
+              "$ref": "#/components/schemas/packagesForShipment"
+            }
+          },
+          "services": {
+            "$ref": "#/components/schemas/servicesForShipment"
+          },
+          "labelMode": {
+            "type": "object",
+            "x-stoplight": {
+              "id": "69dhfghzs34rb"
+            },
+            "required": [
+              "mode",
+              "size"
+            ],
+            "properties": {
+              "mode": {
+                "x-stoplight": {
+                  "id": "5svudivnsgf49"
+                },
+                "enum": [
+                  "ZPL"
+                ],
+                "description": "Label format\n"
+              },
+              "size": {
+                "x-stoplight": {
+                  "id": "wckh8j9jzchnl"
+                },
+                "description": "Label size A6 only ",
+                "enum": [
+                  "A6"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "postShipments": {
+        "type": "object",
+        "x-stoplight": {
+          "id": "k2bqrnqnzyrem"
+        },
+        "x-examples": {
+          "Example 2": {
+            "orderId": "string",
+            "referenceNumber": "string",
+            "storeId": "string",
+            "carrierCode": "string",
+            "picking": {
+              "location": {
+                "type": "exchangePlace",
+                "id": "string",
+                "comment": "string"
+              },
+              "interval": {
+                "start": "2019-12-04T12:30:00+0000",
+                "end": "2019-12-04T14:30:00+0000"
+              }
+            },
+            "delivery": {
+              "location": {
+                "type": "exchangePlace",
+                "id": "string",
+                "comment": "string"
+              },
+              "interval": {
+                "start": "2019-12-04T12:30:00+0000",
+                "end": "2019-12-04T14:30:00+0000"
+              },
+              "contact": {
+                "firstName": "string",
+                "lastName": "string",
+                "phone": "string",
+                "email": "string",
+                "optIn": {
+                  "survey": [
+                    "MAIL"
+                  ],
+                  "delivery": [
+                    "MAIL"
+                  ]
+                },
+                "language": "fr",
+                "timezone": "Europe/Paris",
+                "isProfessional": false,
+                "companyName": "woop"
+              }
+            },
+            "packages": [
+              {
+                "references": [
+                  {
+                    "reference": "12345B",
+                    "barcode": {
+                      "value": "54fd56g4f5gfd456sd",
+                      "type": "barcode",
+                      "format": "128"
+                    },
+                    "state": {
+                      "value": "ON_DOCK",
+                      "date": "2019-08-24T14:15:22Z"
+                    },
+                    "containerId": {
+                      "trailerId": "string",
+                      "palletId": "string"
+                    }
+                  }
+                ],
+                "category": "string",
+                "length": {
+                  "value": 0,
+                  "unit": "mm"
+                },
+                "width": {
+                  "value": 0,
+                  "unit": "mm"
+                },
+                "height": {
+                  "value": 0,
+                  "unit": "mm"
+                },
+                "weight": {
+                  "value": 0,
+                  "unit": "kg"
+                },
+                "products": [
+                  {
+                    "type": "TYPOLOGY_GENERIC",
+                    "ean": "string",
+                    "cug": "string",
+                    "label": "string",
+                    "quantity": 1
+                  }
+                ],
+                "quantity": 1,
+                "attributes": "string",
+                "footprint": {
+                  "value": 0,
+                  "": "m2"
+                },
+                "type": "PACKAGE"
+              }
+            ],
+            "services": "SERVICE_PICKUP_POINT",
+            "labelMode": {
+              "mode": "ZPL",
+              "size": "A6"
+            }
+          }
+        },
+        "description": "Specifies the information required for creating a synchrone shipping request to retrieve the associated label.",
+        "title": "Create shipment",
+        "required": [
+          "storeId",
+          "carrierCode",
+          "picking",
+          "delivery",
+          "packages",
+          "services"
+        ],
+        "properties": {
+          "orderId": {
+            "type": "string",
+            "description": "Order identifier (maximum 36 characters). If not indicated, identifier generated by Woop as UUID "
+          },
+          "referenceNumber": {
+            "type": "string",
+            "description": "Order reference, store number. Can be the same as the orderId."
+          },
+          "storeId": {
+            "type": "string",
+            "description": "Identifier of the store issuing the request"
+          },
+          "carrierCode": {
+            "type": "string",
+            "description": "code of the carrier selected for delivery"
+          },
+          "picking": {
+            "type": "object",
+            "description": "Information on the picking location",
+            "required": [
+              "location",
+              "interval"
+            ],
+            "properties": {
+              "location": {
+                "$ref": "#/components/schemas/pickingShipmentLocation"
+              },
+              "interval": {
+                "$ref": "#/components/schemas/pickingInterval"
+              }
+            }
+          },
+          "delivery": {
+            "type": "object",
+            "required": [
+              "location",
+              "interval",
+              "contact"
+            ],
+            "properties": {
+              "location": {
+                "$ref": "#/components/schemas/deliveryShipmentLocation"
+              },
+              "interval": {
+                "$ref": "#/components/schemas/deliveryInterval"
+              },
+              "contact": {
+                "$ref": "#/components/schemas/contactDelivery"
+              }
+            }
+          },
+          "packages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/packagesForShipment"
+            }
+          },
+          "services": {
+            "$ref": "#/components/schemas/servicesForShipment"
+          },
+          "labelMode": {
+            "type": "object",
+            "required": [
+              "mode",
+              "size"
+            ],
+            "properties": {
+              "mode": {
+                "enum": [
+                  "ZPL"
+                ],
+                "description": "Label format\n"
+              },
+              "size": {
+                "description": "Label size A6 only ",
+                "enum": [
+                  "A6"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "pickingShipmentLocation": {
+        "type": "object",
+        "$ref": "#/components/schemas/exchangePlaceType",
+        "x-examples": {
+          "Example 1": {
+            "type": "exchangePlace",
+            "id": "string",
+            "comment": "string"
+          }
+        },
+        "description": "Only Location.type = `exchangePlace` is permitted actually for this method. It's the identifier of the shipping point configured and registered on the WOOP platform. ",
+        "title": "pickingLocation object for shipment"
+      },
+      "deliveryShipmentLocation": {
+        "type": "object",
+        "$ref": "#/components/schemas/pickupPointTypes",
+        "description": "Only Location.type = `pickupPoint` is permitted actually for this method. For this location.type then you need to enter the relay point identifier ",
+        "title": "deliveryLocation object for shipment"
+      },
+      "packagesForShipment": {
+        "type": "object",
+        "x-examples": {
+          "Example 1": {
+            "references": [
+              {
+                "reference": "12345B",
+                "barcode": {
+                  "value": "54fd56g4f5gfd456sd",
+                  "type": "barcode",
+                  "format": "128"
+                }
+              }
+            ],
+            "length": {
+              "value": 200,
+              "unit": "mm"
+            },
+            "width": {
+              "value": 200,
+              "unit": "mm"
+            },
+            "height": {
+              "value": 100,
+              "unit": "mm"
+            },
+            "weight": {
+              "value": 1,
+              "unit": "kg"
+            },
+            "products": [
+              {
+                "type": "TYPOLOGY_GENERIC",
+                "ean": "11233",
+                "cug": "KJJNN",
+                "label": "Computer",
+                "quantity": 1
+              }
+            ],
+            "quantity": 1,
+            "attributes": {
+              "footprint": {
+                "value": 13,
+                "unit": "m2"
+              }
+            },
+            "type": "PACKAGE"
+          }
+        },
+        "title": "Package used for shipment (packagesForShipment)",
+        "description": "Specifies the information needed to update a package. The handling unit is to be defined with the package/product structure\n\nDefault : Parcel dimensions are not mandatory ! \n\n<!-- theme: danger -->\n\n> #### Important information \n> The current version of this method only authorises the creation of single-package orders.",
+        "required": [
+          "length",
+          "width",
+          "height",
+          "weight",
+          "products"
+        ],
+        "properties": {
+          "references": {
+            "$ref": "#/components/schemas/packagesReferences"
+          },
+          "category": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "v4vpnd01pfa8m"
+            }
+          },
+          "length": {
+            "$ref": "#/components/schemas/length"
+          },
+          "width": {
+            "$ref": "#/components/schemas/length"
+          },
+          "height": {
+            "$ref": "#/components/schemas/length"
+          },
+          "weight": {
+            "$ref": "#/components/schemas/mass"
+          },
+          "products": {
+            "x-stoplight": {
+              "id": "4zdm0r7s9m6s1"
+            },
+            "anyOf": [
+              {
+                "x-stoplight": {
+                  "id": "nvumgx34oc4ca"
+                },
+                "items": {
+                  "$ref": "#/components/schemas/product"
+                }
+              },
+              {
+                "x-stoplight": {
+                  "id": "qtz7takqnqoke"
+                },
+                "items": {
+                  "$ref": "#/components/schemas/productCustomDeclaration"
+                }
+              }
+            ],
+            "description": "List of products in the package. \nWarning , 2 types of product list possible: 1) Simplified declaration - 2) Declaration for customs declaration ",
+            "type": "array"
+          },
+          "quantity": {
+            "type": "integer",
+            "x-stoplight": {
+              "id": "kfxab6vfoy0u5"
+            },
+            "default": 1,
+            "example": 1,
+            "minimum": 1,
+            "description": "Quantity of packages"
+          },
+          "attributes": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "ohg1f5hzxjlld"
+            },
+            "description": "package attributes"
+          },
+          "footprint": {
+            "type": "object",
+            "x-stoplight": {
+              "id": "yi0ke9sutk3rj"
+            },
+            "description": "package footprint on the ground",
+            "required": [
+              "value",
+              ""
+            ],
+            "properties": {
+              "value": {
+                "type": "number",
+                "x-stoplight": {
+                  "id": "rruisrs4xo0ml"
+                },
+                "description": "footprint value"
+              },
+              "": {
+                "x-stoplight": {
+                  "id": "8ugwnx9gd56rd"
+                },
+                "description": "footprint unit",
+                "enum": [
+                  "m2",
+                  "cm2",
+                  "pallet"
+                ]
+              }
+            }
+          },
+          "type": {
+            "x-stoplight": {
+              "id": "qb91ltwh1i6t8"
+            },
+            "description": "package type",
+            "enum": [
+              "PACKAGE",
+              "TRAY",
+              "PALLET"
+            ]
+          }
+        }
+      },
+      "servicesForShipment": {
+        "title": "Delivery services (services)",
+        "x-stoplight": {
+          "id": "jfd4ld5v7kjbj"
+        },
+        "enum": [
+          "SERVICE_PICKUP_POINT"
+        ],
+        "description": "Specifies the delivery services to be used. \n\n>There is currently only one authorised delivery service for this method. "
+      },
+      "parcelWithLabel": {
+        "title": "Parcel with label value in base64 (parcelWithLabel)",
+        "x-stoplight": {
+          "id": "ydjmoc23ex9zl"
+        },
+        "type": "object",
+        "properties": {
+          "labels": {
+            "type": "array",
+            "x-stoplight": {
+              "id": "kl7d8de7armzw"
+            },
+            "items": {
+              "$ref": "#/components/schemas/labels"
+            }
+          },
+          "packages": {
+            "type": "object",
+            "x-stoplight": {
+              "id": "j883knh71tfd4"
+            },
+            "properties": {
+              "references": {
+                "$ref": "#/components/schemas/packagesReferences"
+              }
+            }
+          }
+        },
+        "description": "Specifies the information needed to update a package. The handling unit is to be defined with the package/product structure",
+        "x-examples": {
+          "Example 1": {
+            "labels": [
+              {
+                "id": "string",
+                "type": "string",
+                "mode": "string",
+                "value": "string",
+                "parcelId": "string"
+              }
+            ],
+            "packages": {
+              "references": [
+                {
+                  "reference": "12345B",
+                  "barcode": {
+                    "value": "54fd56g4f5gfd456sd",
+                    "type": "barcode",
+                    "format": "128"
+                  },
+                  "state": {
+                    "value": "ON_DOCK",
+                    "date": "2019-08-24T14:15:22Z"
+                  },
+                  "containerId": {
+                    "trailerId": "string",
+                    "palletId": "string"
+                  }
+                }
+              ]
+            }
+          }
+        }
+      },
+      "labels": {
+        "type": "object",
+        "x-examples": {
+          "Example 1": {
+            "id": "string",
+            "type": "string",
+            "mode": "string",
+            "value": "string",
+            "parcelId": "string"
+          }
+        },
+        "description": "Information on the delivery labels",
+        "title": "Labels (labels)",
+        "required": [
+          "id",
+          "type",
+          "parcelId",
+          "value"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Label identifier\n"
+          },
+          "type": {
+            "type": "string",
+            "description": "Type of label delivery",
+            "example": "base64"
+          },
+          "mode": {
+            "type": "string",
+            "description": "Label format\n",
+            "example": "zpl"
+          },
+          "size": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "h5fhhyj2vb2w4"
+            },
+            "example": "A6",
+            "description": "Size format\n"
+          },
+          "parcelId": {
+            "type": "string",
+            "description": "Associated package identifier\n"
+          },
+          "value": {
+            "type": "string",
+            "description": "Label in base64 or URL to the label\n\n"
+          }
+        }
+      },
+      "postfulfillments": {
+        "type": "object",
+        "x-examples": {
+          "Example 2": {
+            "fulfillmentId": "string",
+            "referenceNumber": "string",
+            "carrierSelection": "string",
+            "storeId": "string",
+            "picking": {
+              "location": {
+                "type": "exchangePlace",
+                "id": "string",
+                "comment": "string"
+              },
+              "contact": {
+                "firstName": "string",
+                "lastName": "string",
+                "phone": "string",
+                "email": "string",
+                "language": "fr",
+                "timezone": "Europe/Paris",
+                "main": true,
+                "title": "string",
+                "isProfessional": false,
+                "companyName": "woop"
+              }
+            },
+            "delivery": {
+              "location": {
+                "type": "pickupPoint",
+                "id": "string",
+                "carrierCode": "string",
+                "comment": "string",
+                "boxCategory": {
+                  "id": "BoxCategory_001",
+                  "accessibility": "UPPER"
+                }
+              },
+              "interval": [
+                {
+                  "start": "2019-12-04T12:30:00+0000",
+                  "end": "2019-12-04T14:30:00+0000"
+                }
+              ],
+              "contact": {
+                "firstName": "string",
+                "lastName": "string",
+                "phone": "string",
+                "email": "string",
+                "optIn": {
+                  "survey": [
+                    "MAIL"
+                  ],
+                  "delivery": [
+                    "MAIL"
+                  ]
+                },
+                "language": "fr",
+                "timezone": "Europe/Paris",
+                "isProfessional": false,
+                "companyName": "woop"
+              }
+            },
+            "products": [
+              {
+                "type": "string",
+                "ean": "string",
+                "label": "string",
+                "quantity": 0,
+                "weight": {
+                  "value": 0,
+                  "unit": "kg"
+                },
+                "length": {
+                  "value": 0,
+                  "unit": "mm"
+                },
+                "width": {
+                  "value": 0,
+                  "unit": "mm"
+                },
+                "height": {
+                  "value": 0,
+                  "unit": "mm"
+                }
+              }
+            ],
+            "services": "SERVICE_PICKUP_POINT"
+          }
+        },
+        "title": "Create fulfillments (postfulfillments)",
+        "description": "Declare the contents of a sales order",
+        "required": [
+          "fulfillmentId",
+          "carrierSelection",
+          "storeId",
+          "picking",
+          "delivery",
+          "products",
+          "services"
+        ],
+        "properties": {
+          "fulfillmentId": {
+            "type": "string",
+            "description": "Global identifier (maximum 36 characters)."
+          },
+          "referenceNumber": {
+            "type": "string",
+            "description": "Order reference, store number. Can be the same as the orderId."
+          },
+          "carrierSelection": {
+            "type": "string",
+            "description": "code of the carrier selected for delivery\n\n"
+          },
+          "storeId": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "d1d17n0h0fpqa"
+            },
+            "description": "Identifier of the store issuing the request"
+          },
+          "picking": {
+            "type": "object",
+            "required": [
+              "location",
+              "contact"
+            ],
+            "x-stoplight": {
+              "id": "72x3ihy7x86qz"
+            },
+            "properties": {
+              "location": {
+                "$ref": "#/components/schemas/pickingShipmentLocation"
+              },
+              "contact": {
+                "$ref": "#/components/schemas/contact"
+              }
+            }
+          },
+          "delivery": {
+            "type": "object",
+            "x-stoplight": {
+              "id": "aui9kqmmctxdx"
+            },
+            "required": [
+              "location",
+              "interval",
+              "contact"
+            ],
+            "properties": {
+              "location": {
+                "$ref": "#/components/schemas/deliveryShipmentLocation"
+              },
+              "interval": {
+                "x-stoplight": {
+                  "id": "362efpwrxdqmv"
+                },
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/deliveryInterval"
+                }
+              },
+              "contact": {
+                "$ref": "#/components/schemas/contactDelivery"
+              }
+            }
+          },
+          "products": {
+            "type": "array",
+            "x-stoplight": {
+              "id": "lllm6n0memz66"
+            },
+            "items": {
+              "$ref": "#/components/schemas/productForfulfillments"
+            }
+          },
+          "services": {
+            "$ref": "#/components/schemas/servicesForShipment"
+          }
+        }
+      },
+      "productForfulfillments": {
+        "type": "object",
+        "x-examples": {
+          "Example 2": {
+            "type": "string",
+            "ean": "string",
+            "label": "string",
+            "quantity": 0,
+            "weight": {
+              "value": 0,
+              "unit": "kg"
+            },
+            "length": {
+              "value": 0,
+              "unit": "mm"
+            },
+            "width": {
+              "value": 0,
+              "unit": "mm"
+            },
+            "height": {
+              "value": 0,
+              "unit": "mm"
+            }
+          }
+        },
+        "description": "Specifies the information needed to update a specify product used for fulfillment",
+        "title": "Product for fulfillment",
+        "required": [
+          "type",
+          "ean",
+          "label",
+          "quantity",
+          "weight",
+          "length",
+          "width",
+          "height"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Product typologie. "
+          },
+          "ean": {
+            "type": "string",
+            "description": "Product EAN code."
+          },
+          "label": {
+            "type": "string",
+            "description": "Product name. "
+          },
+          "quantity": {
+            "type": "integer",
+            "description": "Identical quantity of product.\n\n"
+          },
+          "weight": {
+            "type": "object",
+            "$ref": "#/components/schemas/mass"
+          },
+          "length": {
+            "type": "object",
+            "$ref": "#/components/schemas/length"
+          },
+          "width": {
+            "type": "object",
+            "$ref": "#/components/schemas/length"
+          },
+          "height": {
+            "type": "object",
+            "$ref": "#/components/schemas/length"
+          }
+        }
+      },
+      "volume": {
+        "title": "volume",
+        "x-stoplight": {
+          "id": "g714nlx9s8h7b"
+        },
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "okz69pc5x0dwb"
+            },
+            "example": "15",
+            "description": "Value of the declared volume"
+          },
+          "unit": {
+            "x-stoplight": {
+              "id": "g2gfssyddj6st"
+            },
+            "enum": [
+              "mm3",
+              "cm3",
+              "ml",
+              "l",
+              "kl",
+              "",
+              "m3",
+              "km3",
+              "tsp",
+              "tbs",
+              "in3",
+              "fi-oz",
+              "cup",
+              "pnt",
+              "qt",
+              "gal",
+              "ft3",
+              "yd3"
+            ],
+            "description": "Specific unit of volume. \nDefault = m3"
+          }
         }
       }
     },
@@ -11366,6 +13667,128 @@
                           "end": "2019-12-04T14:30:00+0000"
                         }
                       }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "ShipmentPostResponse": {
+        "description": "The delivery is accepted, a 'deliveryId' is returned, additionally a table of 'parcels' ids can be returned if tracking by parcel. A table of labels can also be returned.\n",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "x-examples": {
+                "Example 1": {
+                  "order": {
+                    "id": "string",
+                    "referenceNumber": "string"
+                  },
+                  "delivery": {
+                    "externalDeliveryId": "string"
+                  },
+                  "carrier": {
+                    "name": "string",
+                    "code": "string"
+                  },
+                  "parcels": [
+                    {
+                      "labels": [
+                        {
+                          "id": "string",
+                          "type": "string",
+                          "mode": "string",
+                          "value": "string",
+                          "parcelId": "string"
+                        }
+                      ],
+                      "packages": {
+                        "references": [
+                          {
+                            "reference": "12345B",
+                            "barcode": {
+                              "value": "54fd56g4f5gfd456sd",
+                              "type": "barcode",
+                              "format": "128"
+                            },
+                            "state": {
+                              "value": "ON_DOCK",
+                              "date": "2019-08-24T14:15:22Z"
+                            },
+                            "containerId": {
+                              "trailerId": "string",
+                              "palletId": "string"
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "order",
+                "delivery",
+                "labels"
+              ],
+              "properties": {
+                "order": {
+                  "type": "object",
+                  "required": [
+                    "id"
+                  ],
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "referenceNumber": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "delivery": {
+                  "type": "object",
+                  "required": [
+                    "externalDeliveryId"
+                  ],
+                  "properties": {
+                    "externalDeliveryId": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "labels": {
+                  "type": "array",
+                  "x-stoplight": {
+                    "id": "g4ljderb0e1la"
+                  },
+                  "items": {
+                    "$ref": "#/components/schemas/labels"
+                  }
+                }
+              }
+            },
+            "examples": {
+              "Example 1": {
+                "value": {
+                  "order": {
+                    "id": "string",
+                    "referenceNumber": "string"
+                  },
+                  "delivery": {
+                    "externalDeliveryId": "string"
+                  },
+                  "labels": [
+                    {
+                      "id": "string",
+                      "type": "base64",
+                      "mode": "zpl",
+                      "size": "A6",
+                      "parcelId": "string",
+                      "value": "string"
                     }
                   ]
                 }

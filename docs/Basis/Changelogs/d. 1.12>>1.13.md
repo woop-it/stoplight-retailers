@@ -1,6 +1,6 @@
 ---
 tags: [changelog]
-stoplight-id: w7azchbu42vw1
+stoplight-id: ey31tsim00tfx
 ---
 
 # Changelog 1.12 -> 1.13
