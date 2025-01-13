@@ -1,6 +1,6 @@
 ---
 tags: [changelog]
-stoplight-id: 0gchp6x2folkj
+stoplight-id: nt7r2ojmpq86h
 ---
 
 # Changelog 1.15 -> 1.16
