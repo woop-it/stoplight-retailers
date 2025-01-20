@@ -1065,13 +1065,21 @@
                     "bookingId": {
                       "type": "string",
                       "description": "Reservation identifier."
+                    },
+                    "expiredAt": {
+                      "type": "string",
+                      "x-stoplight": {
+                        "id": "5k77qxo34tyaj"
+                      },
+                      "format": "date-time"
                     }
                   }
                 },
                 "examples": {
-                  "Example": {
+                  "Example 1": {
                     "value": {
-                      "bookingId": "bfded21b-cbed-4256-b756-2febcea94df6"
+                      "bookingId": "string",
+                      "expiredAt": "2019-08-24T14:15:22Z"
                     }
                   }
                 }
