@@ -11969,8 +11969,8 @@
         },
         "description": "List of orderStates.",
         "enum": [
-          "ORDER_TO_BE_COMPLETED",
-          "ORDER_WITHOUT_SHIPMENT"
+          "TO_BE_COMPLETED",
+          "WITHOUT_SHIPMENT"
         ]
       },
       "postDeliveryPromise": {
