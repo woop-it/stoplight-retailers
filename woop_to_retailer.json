@@ -1444,10 +1444,7 @@
                     "description": "Tracking Page Url",
                     "example": "https://myTrackingPageUrl.com"
                   }
-                },
-                "required": [
-                  "trackingPageUrl"
-                ]
+                }
               },
               "examples": {
                 "Example 1": {
