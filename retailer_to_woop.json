@@ -7375,10 +7375,183 @@
           },
           "name": "orderId",
           "in": "path",
-          "required": true,
-          "description": "Order identifier"
+          "required": true
         }
-      ]
+      ],
+      "post": {
+        "summary": "Delivery History",
+        "tags": [],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "orderId": {
+                      "type": "string",
+                      "x-stoplight": {
+                        "id": "ou6bwx6mb5i4o"
+                      }
+                    },
+                    "deliveryId": {
+                      "type": "string",
+                      "x-stoplight": {
+                        "id": "hdpdma9ommeg7"
+                      }
+                    },
+                    "carrierName": {
+                      "type": "string",
+                      "x-stoplight": {
+                        "id": "l3kzyzrkv89gi"
+                      }
+                    },
+                    "trackingUrl": {
+                      "type": "string",
+                      "x-stoplight": {
+                        "id": "j7oeziohrngyj"
+                      }
+                    },
+                    "events": {
+                      "type": "array",
+                      "x-stoplight": {
+                        "id": "txs25uthkena3"
+                      },
+                      "items": {
+                        "x-stoplight": {
+                          "id": "i6a1yej535d3v"
+                        },
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string",
+                            "x-stoplight": {
+                              "id": "v3mclowm9q4tu"
+                            }
+                          },
+                          "substatus": {
+                            "type": "string",
+                            "x-stoplight": {
+                              "id": "8g18urwc1i0g4"
+                            }
+                          },
+                          "carrierEvent": {
+                            "type": "string",
+                            "x-stoplight": {
+                              "id": "sxmgqgy9d7n2x"
+                            }
+                          },
+                          "date": {
+                            "type": "string",
+                            "x-stoplight": {
+                              "id": "szzbj9e26vzmc"
+                            },
+                            "format": "date"
+                          },
+                          "comment": {
+                            "type": "string",
+                            "x-stoplight": {
+                              "id": "curnb9o05tpuk"
+                            }
+                          },
+                          "additionalData": {
+                            "type": "string",
+                            "x-stoplight": {
+                              "id": "17nj5dirc5kbl"
+                            }
+                          },
+                          "team": {
+                            "type": "string",
+                            "x-stoplight": {
+                              "id": "p7fprxvmgd6rp"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "parcelEvents": {
+                      "type": "array",
+                      "x-stoplight": {
+                        "id": "9h1p42qg2iate"
+                      },
+                      "items": {
+                        "x-stoplight": {
+                          "id": "q66lbjtajnane"
+                        },
+                        "type": "object",
+                        "properties": {
+                          "parcelId": {
+                            "type": "string",
+                            "x-stoplight": {
+                              "id": "qhjd9xyvu7k3e"
+                            }
+                          },
+                          "carrierEvent": {
+                            "type": "string",
+                            "x-stoplight": {
+                              "id": "d5ishhj6ug0xu"
+                            }
+                          },
+                          "carrierCode": {
+                            "type": "string",
+                            "x-stoplight": {
+                              "id": "pbx03o7dxgxjo"
+                            }
+                          },
+                          "comment": {
+                            "type": "string",
+                            "x-stoplight": {
+                              "id": "sijrsmuqdlnfg"
+                            }
+                          },
+                          "origin": {
+                            "type": "string",
+                            "x-stoplight": {
+                              "id": "lb5zvptpqjsi3"
+                            }
+                          },
+                          "date": {
+                            "type": "string",
+                            "x-stoplight": {
+                              "id": "1tjs0n3er7m2e"
+                            },
+                            "format": "date-time"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "post-orders-orderId-events",
+        "x-stoplight": {
+          "id": "chlhfishr7tzt"
+        },
+        "description": "This endpoint helps to get all delivery events connected to an order ",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "orderId"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "deliveryId"
+          }
+        ],
+        "requestBody": {
+          "content": {}
+        }
+      }
     },
     "/orders/{orderId}/labels/list": {
       "parameters": [
@@ -8419,6 +8592,28 @@
         },
         "description": "This method allows to retrieve the delivery times available with they carriers. \n"
       }
+    },
+    "/{orderId}/deliveries/events": {
+      "get": {
+        "x-stoplight": {
+          "id": "bf07c159c3d21"
+        }
+      },
+      "post": {
+        "x-stoplight": {
+          "id": "bf07c159c3d21"
+        }
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "orderId",
+          "in": "path",
+          "required": true
+        }
+      ]
     }
   },
   "components": {
