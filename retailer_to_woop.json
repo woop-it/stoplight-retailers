@@ -10342,6 +10342,157 @@
         "description": "Specifies the information needed to update a product",
         "title": "Product simplified"
       },
+      "productWithADROptions": {
+        "type": "object",
+        "x-stoplight": {
+          "id": "1lulfd1heuiex"
+        },
+        "x-examples": {
+          "Example 1": {
+            "type": "TYPOLOGY_GENERIC",
+            "ean": "12345JFDFD",
+            "cug": "234J",
+            "label": "Mon produit",
+            "quantity": 1
+          }
+        },
+        "description": "Specifies the information needed to update a product",
+        "title": "Product simplified",
+        "required": [
+          "type",
+          "ean",
+          "onu_code",
+          "adr_classification",
+          "limited_quantity",
+          "excepted_quantity",
+          "dangerous_goods",
+          "package_count",
+          "package_type",
+          "description",
+          "environmental_risk",
+          "technical_name",
+          "quantity_code"
+        ],
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/productType"
+          },
+          "ean": {
+            "type": "string",
+            "description": "Product EAN",
+            "x-stoplight": {
+              "id": "4zgr15f0voj2b"
+            }
+          },
+          "cug": {
+            "type": "string",
+            "description": "Product Cug"
+          },
+          "label": {
+            "type": "string",
+            "description": "Product description"
+          },
+          "quantity": {
+            "type": "integer",
+            "default": 1,
+            "description": "Product quantity"
+          },
+          "onu_code": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "ua16rrgpfhrbm"
+            },
+            "example": "UN1203",
+            "description": "Four-digit numbers identifying dangerous goods for international transport"
+          },
+          "adr_classification": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "f1gjeywi7bbh9"
+            },
+            "example": "Class 3",
+            "description": "ADR classification"
+          },
+          "limited_quantity": {
+            "x-stoplight": {
+              "id": "5b5k3bv50c9na"
+            },
+            "anyOf": [
+              {
+                "type": "string",
+                "x-stoplight": {
+                  "id": "3vefvt7ox4h3h"
+                }
+              },
+              {
+                "type": "string",
+                "x-stoplight": {
+                  "id": "8v6g213re3g9n"
+                }
+              },
+              {
+                "type": "object",
+                "x-stoplight": {
+                  "id": "zwm2phkre2pyj"
+                }
+              }
+            ]
+          },
+          "excepted_quantity": {
+            "type": "boolean",
+            "x-stoplight": {
+              "id": "84zkf9zqwyxsc"
+            },
+            "description": "Indicate if it's a excepted quantity"
+          },
+          "dangerous_goods": {
+            "type": "boolean",
+            "x-stoplight": {
+              "id": "tvqmicyktjuby"
+            },
+            "description": "Indicate if it's a dangerous goods"
+          },
+          "package_count": {
+            "type": "integer",
+            "x-stoplight": {
+              "id": "90dxnoyvdcttt"
+            },
+            "maximum": 999,
+            "description": "Indicate the number of packages containing dangerous products. "
+          },
+          "package_type": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "1vtor45g66oq9"
+            },
+            "example": "Metal drum"
+          },
+          "description": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "9560y5fsh5ma2"
+            }
+          },
+          "environmental_risk": {
+            "type": "boolean",
+            "x-stoplight": {
+              "id": "ccpfrw703qg17"
+            }
+          },
+          "technical_name": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "ly9iyywwn9uhf"
+            }
+          },
+          "quantity_code": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "nbflx8evjiu5q"
+            }
+          }
+        }
+      },
       "productCustomDeclaration": {
         "type": "object",
         "x-examples": {
