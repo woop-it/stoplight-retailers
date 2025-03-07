@@ -10488,7 +10488,8 @@
             "type": "boolean",
             "x-stoplight": {
               "id": "ccpfrw703qg17"
-            }
+            },
+            "description": "Indicate if the product have a environmental risk\n"
           },
           "technical_name": {
             "type": "string",
