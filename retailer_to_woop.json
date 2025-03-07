@@ -10368,7 +10368,7 @@
           }
         },
         "description": "Specifies the information needed to update a product type dangerous\n\n> This system can be used to declare a list of specific products for dangerous goods -> List of additionnals fields",
-        "title": "Product with ADR options",
+        "title": "Product for dangerous goods (ADR)",
         "required": [
           "type",
           "ean",
@@ -10697,7 +10697,7 @@
             "$ref": "#/components/schemas/mass"
           },
           "products": {
-            "description": "List of products in the package. \n3 types of product list possible:  \n- `Simplified declaration`\n- `Customs declaration` \n- ",
+            "description": "List of products in the package. \n3 types of product list possible:  \n- `Simplified declaration`\n- `Customs declaration` \n- `Dangerous goods` ",
             "anyOf": [
               {
                 "items": {
