@@ -1,7 +1,7 @@
 {
   "title": "Week Schedule",
   "x-stoplight": {
-    "id": "l4rjxzoz3co92"
+    "id": "ib5cl0z5hz6sd"
   },
   "type": "object",
   "description": "Week schedule, if a day has no schedule it will be then sent as null",
@@ -54,31 +54,52 @@
   "properties": {
     "monday": {
       "$ref": "#/definitions/DaySchedule",
-      "description": "Monday slots"
+      "description": "Monday slots",
+      "x-stoplight": {
+        "id": "61z3r9fhvhwhl"
+      }
     },
     "tuesday": {
       "$ref": "#/definitions/DaySchedule",
-      "description": "Tuesday slots"
+      "description": "Tuesday slots",
+      "x-stoplight": {
+        "id": "o1d7nbdwtwp9y"
+      }
     },
     "wednesday": {
       "$ref": "#/definitions/DaySchedule",
-      "description": "Wednesday slots"
+      "description": "Wednesday slots",
+      "x-stoplight": {
+        "id": "2h9z3b0dco02p"
+      }
     },
     "thursday": {
       "$ref": "#/definitions/DaySchedule",
-      "description": "Thursday slots"
+      "description": "Thursday slots",
+      "x-stoplight": {
+        "id": "eyrk5pve6q5gw"
+      }
     },
     "friday": {
       "$ref": "#/definitions/DaySchedule",
-      "description": "Friday slots"
+      "description": "Friday slots",
+      "x-stoplight": {
+        "id": "ilwl7jkbrxbl6"
+      }
     },
     "saturday": {
       "$ref": "#/definitions/DaySchedule",
-      "description": "Saturday slots"
+      "description": "Saturday slots",
+      "x-stoplight": {
+        "id": "yu9jdm8h13c9c"
+      }
     },
     "sunday": {
       "$ref": "#/definitions/DaySchedule",
-      "description": "Sunday slots"
+      "description": "Sunday slots",
+      "x-stoplight": {
+        "id": "i4qhywxy0wvfc"
+      }
     }
   },
   "x-tags": [
@@ -89,11 +110,14 @@
       "description": "Monday slots",
       "title": "Schedule of a day",
       "x-stoplight": {
-        "id": "zgpymncklu3es"
+        "id": "g3v6xgly4fsf5"
       },
       "type": "array",
       "items": {
-        "$ref": "#/definitions/Slot"
+        "$ref": "#/definitions/Slot",
+        "x-stoplight": {
+          "id": "nagcnat22sgut"
+        }
       },
       "examples": [
         [
@@ -110,7 +134,7 @@
     "Slot": {
       "type": "object",
       "x-stoplight": {
-        "id": "ts8v22plvhvu8"
+        "id": "5cl0dbr88wu5r"
       },
       "x-examples": {
         "Example": {
@@ -124,12 +148,18 @@
         "start": {
           "type": "string",
           "format": "time",
-          "example": "14:00"
+          "example": "14:00",
+          "x-stoplight": {
+            "id": "iu2pst8ugty2j"
+          }
         },
         "end": {
           "type": "string",
           "format": "time",
-          "example": "18:00"
+          "example": "18:00",
+          "x-stoplight": {
+            "id": "p6l2rna84hoh8"
+          }
         }
       },
       "required": [

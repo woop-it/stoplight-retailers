@@ -6964,7 +6964,7 @@
     "/orders/{orderId}/packages/states": {
       "patch": {
         "x-stoplight": {
-          "id": "800e91a2e583a"
+          "id": "sd2j890dk4csc"
         },
         "tags": [
           "Package advert"
@@ -6972,7 +6972,7 @@
       },
       "put": {
         "x-stoplight": {
-          "id": "800e91a2e583a"
+          "id": "qe1b6jnfmdq8n"
         },
         "tags": [
           "Package advert"
@@ -10350,14 +10350,25 @@
         "x-examples": {
           "Example 1": {
             "type": "TYPOLOGY_GENERIC",
-            "ean": "12345JFDFD",
-            "cug": "234J",
-            "label": "Mon produit",
-            "quantity": 1
+            "ean": "string",
+            "cug": "string",
+            "label": "string",
+            "quantity": 1,
+            "onu_code": "UN1203",
+            "adr_classification": "Class 3",
+            "limited_quantity": "string",
+            "excepted_quantity": true,
+            "dangerous_goods": true,
+            "package_count": 999,
+            "package_type": "Metal drum",
+            "description": "string",
+            "environmental_risk": true,
+            "technical_name": "string",
+            "quantity_code": "string"
           }
         },
-        "description": "Specifies the information needed to update a product",
-        "title": "Product simplified",
+        "description": "Specifies the information needed to update a product type dangerous\n\n> This system can be used to declare a list of specific products for dangerous goods -> List of additionnals fields",
+        "title": "Product with ADR options",
         "required": [
           "type",
           "ean",
@@ -10686,7 +10697,7 @@
             "$ref": "#/components/schemas/mass"
           },
           "products": {
-            "description": "List of products in the package. \nTwo types of product list possible:  \n- `Simplified declaration`\n- `Customs declaration` ",
+            "description": "List of products in the package. \n3 types of product list possible:  \n- `Simplified declaration`\n- `Customs declaration` \n- ",
             "anyOf": [
               {
                 "items": {
@@ -10699,6 +10710,14 @@
                 },
                 "items": {
                   "$ref": "#/components/schemas/productCustomDeclaration"
+                }
+              },
+              {
+                "x-stoplight": {
+                  "id": "wgfmjioa7qrwg"
+                },
+                "items": {
+                  "$ref": "#/components/schemas/productWithADROptions"
                 }
               }
             ],
