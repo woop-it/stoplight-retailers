@@ -9261,6 +9261,21 @@
                     }
                   }
                 }
+              },
+              "deliveryPromise": {
+                "type": "object",
+                "x-stoplight": {
+                  "id": "6s19a54n8ic46"
+                },
+                "description": "Determine whether the delivery promise should be returned or not.",
+                "properties": {
+                  "active": {
+                    "type": "boolean",
+                    "x-stoplight": {
+                      "id": "79l2p2svc4koj"
+                    }
+                  }
+                }
               }
             }
           },
