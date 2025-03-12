@@ -12176,7 +12176,8 @@
         },
         "required": [
           "name",
-          "code"
+          "code",
+          "type"
         ],
         "properties": {
           "name": {
@@ -12188,6 +12189,17 @@
             "type": "string",
             "description": "Carrier identifier",
             "example": "dpd"
+          },
+          "type": {
+            "x-stoplight": {
+              "id": "k9jmq5zxrih35"
+            },
+            "enum": [
+              "static",
+              "dynamic",
+              "smart"
+            ],
+            "description": "Type of carrier slot \n- static : week type of carrier delivery slot \n- dynamic : availability slots retrieved by carrier API\n- smart : optimized smart delivery slots"
           }
         }
       },
