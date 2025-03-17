@@ -8417,7 +8417,7 @@
             }
           }
         },
-        "description": "This method allows to retrieve the delivery times available with they carriers. \n"
+        "description": "This method allows to retrieve the delivery times available with their carriers. \nIt is recommended to call the postDeliveryPromise endpoint in advance to retrieve accurate delivery dates that take into account carrier constraints such as cut-offs, notice periods, and carrier schedules."
       }
     }
   },
