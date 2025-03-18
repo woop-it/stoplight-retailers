@@ -1,25 +1,24 @@
-title: state
 type: object
-description: Bar code / QRCode of the parcel
-examples:
-  - value: 54fd56g4f5gfd456sd
+x-examples:
+  Example 1:
+    value: 54fd56g4f5gfd456sd
     type: barcode
     format: '128'
+title: barcode references (barcodeRef)
+description: Bar code / QRCode of the parcel
+required:
+  - value
+  - type
+  - format
 properties:
   value:
     type: string
     description: Barcode value
-    enum:
-      - ON_DOCK
-      - PREPARED
-  date:
-    type: string
-    description: Barcode display type
+  type:
+    description: 'Barcode format (128) '
     enum:
       - barcode
-    x-stoplight:
-      id: f7rkq9frrgy5h
-    format: date-time
-required:
-  - value
-  - date
+  format:
+    description: Barcode display type
+    enum:
+      - '128'
