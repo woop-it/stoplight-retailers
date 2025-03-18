@@ -1,28 +1,24 @@
-title: barcode references (barcodeRef)
 type: object
-description: Bar code / QRCode of the parcel
-examples:
-  - value: 54fd56g4f5gfd456sd
+x-examples:
+  Example 1:
+    value: 54fd56g4f5gfd456sd
     type: barcode
     format: '128'
+title: barcode references (barcodeRef)
+description: Bar code / QRCode of the parcel
 required:
   - value
-  - format
   - type
+  - format
 properties:
   value:
     type: string
     description: Barcode value
-    example: 54fd56g4f5gfd456sd
-  format:
-    type: string
-    description: 'Barcode format (128) '
-    x-stoplight:
-      id: f7rkq9frrgy5h
-    example: '128'
   type:
-    type: string
-    x-stoplight:
-      id: bvs8u4humgl06
-    example: barcode
+    description: 'Barcode format (128) '
+    enum:
+      - barcode
+  format:
     description: Barcode display type
+    enum:
+      - '128'
