@@ -10379,14 +10379,15 @@
           "dangerous_goods",
           "package_count",
           "package_type",
-          "description",
           "environmental_risk",
-          "technical_name",
           "quantity_code"
         ],
         "properties": {
           "type": {
-            "$ref": "#/components/schemas/productType"
+            "default": "TYPOLOGY_DANGEROUS",
+            "enum": [
+              "TYPOLOGY_DANGEROUS"
+            ]
           },
           "ean": {
             "type": "string",
@@ -10428,26 +10429,8 @@
             "x-stoplight": {
               "id": "5b5k3bv50c9na"
             },
-            "anyOf": [
-              {
-                "type": "string",
-                "x-stoplight": {
-                  "id": "3vefvt7ox4h3h"
-                }
-              },
-              {
-                "type": "string",
-                "x-stoplight": {
-                  "id": "8v6g213re3g9n"
-                }
-              },
-              {
-                "type": "object",
-                "x-stoplight": {
-                  "id": "zwm2phkre2pyj"
-                }
-              }
-            ]
+            "type": "boolean",
+            "description": "Indicate if it's a limited quantity"
           },
           "excepted_quantity": {
             "type": "boolean",
@@ -10548,9 +10531,7 @@
         ],
         "properties": {
           "type": {
-            "type": "string",
-            "description": "Product typologie. ",
-            "example": "TYPOLOGY_GENERIC"
+            "$ref": "#/components/schemas/productType"
           },
           "ean": {
             "type": "string",
@@ -10699,7 +10680,7 @@
           },
           "products": {
             "description": "List of products in the package. \n3 types of product list possible:  \n- `Simplified declaration`\n- `Customs declaration` \n- `Dangerous goods` ",
-            "anyOf": [
+            "oneOf": [
               {
                 "items": {
                   "$ref": "#/components/schemas/product"
