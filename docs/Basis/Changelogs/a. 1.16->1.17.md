@@ -18,3 +18,5 @@ In version 1.17.0, the response format has evolved. The difference between versi
 
 The behavior of the calculation in the postOrders endpoint varies depending on the API version used.
 Starting with version 1.17.0, no intervals are mandatory. If no parameters are provided by the user, an empty call is made, allowing the evaluation of available slots based on default data.
+
+## Dangerous goods
