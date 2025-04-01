@@ -10414,6 +10414,7 @@
           "package_type",
           "environmental_risk",
           "quantity_code",
+          "volume_weight",
           "weight"
         ],
         "properties": {
