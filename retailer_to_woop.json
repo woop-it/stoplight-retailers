@@ -10413,9 +10413,9 @@
           "package_count",
           "package_type",
           "environmental_risk",
+          "technical_name",
           "quantity_code",
-          "volume_weight",
-          "weight"
+          "volume_weight"
         ],
         "properties": {
           "label": {
