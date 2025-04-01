@@ -3047,13 +3047,13 @@
           "orderId": {
             "$ref": "./models/order/orderId.json",
             "x-stoplight": {
-              "id": "eeq9aux7zwlbf"
+              "id": "swphy92r6ue51"
             }
           },
           "bookingId": {
             "$ref": "./models/PickUpPoint/bookingId.json",
             "x-stoplight": {
-              "id": "gjz4fiuw4n4uh"
+              "id": "ljcovxamy0k7o"
             }
           },
           "status": {

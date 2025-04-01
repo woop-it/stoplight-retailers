@@ -6964,7 +6964,7 @@
     "/orders/{orderId}/packages/states": {
       "patch": {
         "x-stoplight": {
-          "id": "800e91a2e583a"
+          "id": "sd2j890dk4csc"
         },
         "tags": [
           "Package advert"
@@ -6972,7 +6972,7 @@
       },
       "put": {
         "x-stoplight": {
-          "id": "800e91a2e583a"
+          "id": "qe1b6jnfmdq8n"
         },
         "tags": [
           "Package advert"
@@ -10357,6 +10357,208 @@
         "description": "Specifies the information needed to update a product",
         "title": "Product simplified"
       },
+      "productWithADROptions": {
+        "type": "object",
+        "x-stoplight": {
+          "id": "1lulfd1heuiex"
+        },
+        "x-examples": {
+          "Example 1": {
+            "type": "TYPOLOGY_GENERIC",
+            "ean": "string",
+            "cug": "string",
+            "label": "string",
+            "quantity": 1,
+            "onu_code": "UN1203",
+            "adr_classification": "Class 3",
+            "limited_quantity": "string",
+            "excepted_quantity": true,
+            "dangerous_goods": true,
+            "package_count": 999,
+            "package_type": "Metal drum",
+            "description": "string",
+            "environmental_risk": true,
+            "technical_name": "string",
+            "quantity_code": "string"
+          },
+          "Example 2": {
+            "label": "Test",
+            "ean": "ean test 12",
+            "type": "TYPOLOGY_DANGEROUS",
+            "onu_code": "UN1234",
+            "adr_classification": "Class 3",
+            "limited_quantity": true,
+            "excepted_quantity": false,
+            "dangerous_goods": true,
+            "package_count": 1,
+            "package_type": "DRUM",
+            "description": "Flammable liquid",
+            "environmental_risk": true,
+            "technical_name": "Flammable solvent",
+            "quantity_code": "F3",
+            "volume_weight": 12.57,
+            "weight": {
+              "unit": "kg",
+              "value": "1"
+            },
+            "lenght": {
+              "unit": "cm",
+              "value": "1"
+            },
+            "width": {
+              "unit": "cm",
+              "value": "1"
+            },
+            "height": {
+              "unit": "cm",
+              "value": "1"
+            }
+          }
+        },
+        "description": "Specifies the information needed to update a product type dangerous\n\n> This system can be used to declare a list of specific products for dangerous goods -> List of additionnals fields",
+        "title": "Product for dangerous goods (ADR)",
+        "required": [
+          "ean",
+          "type",
+          "onu_code",
+          "adr_classification",
+          "limited_quantity",
+          "excepted_quantity",
+          "dangerous_goods",
+          "package_count",
+          "package_type",
+          "environmental_risk",
+          "technical_name",
+          "quantity_code",
+          "volume_weight"
+        ],
+        "properties": {
+          "label": {
+            "type": "string",
+            "description": "Product description"
+          },
+          "ean": {
+            "type": "string",
+            "description": "Product EAN",
+            "x-stoplight": {
+              "id": "4zgr15f0voj2b"
+            }
+          },
+          "type": {
+            "default": "TYPOLOGY_DANGEROUS",
+            "enum": [
+              "TYPOLOGY_DANGEROUS"
+            ]
+          },
+          "cug": {
+            "type": "string",
+            "description": "Product Cug"
+          },
+          "quantity": {
+            "type": "integer",
+            "default": 1,
+            "description": "Product quantity"
+          },
+          "onu_code": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "ua16rrgpfhrbm"
+            },
+            "example": "UN1203",
+            "description": "Four-digit numbers identifying dangerous goods for international transport"
+          },
+          "adr_classification": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "f1gjeywi7bbh9"
+            },
+            "example": "Class 3",
+            "description": "ADR classification"
+          },
+          "limited_quantity": {
+            "x-stoplight": {
+              "id": "5b5k3bv50c9na"
+            },
+            "type": "boolean",
+            "description": "Indicate if it's a limited quantity"
+          },
+          "excepted_quantity": {
+            "type": "boolean",
+            "x-stoplight": {
+              "id": "84zkf9zqwyxsc"
+            },
+            "description": "Indicate if it's a excepted quantity"
+          },
+          "dangerous_goods": {
+            "type": "boolean",
+            "x-stoplight": {
+              "id": "tvqmicyktjuby"
+            },
+            "description": "Indicate if it's a dangerous goods"
+          },
+          "package_count": {
+            "type": "integer",
+            "x-stoplight": {
+              "id": "90dxnoyvdcttt"
+            },
+            "maximum": 999,
+            "description": "Indicate the number of packages containing dangerous products. "
+          },
+          "package_type": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "1vtor45g66oq9"
+            },
+            "example": "Metal drum"
+          },
+          "description": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "9560y5fsh5ma2"
+            }
+          },
+          "environmental_risk": {
+            "type": "boolean",
+            "x-stoplight": {
+              "id": "ccpfrw703qg17"
+            },
+            "description": "Indicate if the product have a environmental risk\n"
+          },
+          "technical_name": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "ly9iyywwn9uhf"
+            },
+            "example": "Flammable solvent"
+          },
+          "quantity_code": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "nbflx8evjiu5q"
+            },
+            "example": "F3"
+          },
+          "volume_weight": {
+            "type": "number",
+            "x-stoplight": {
+              "id": "7bj3baiesyk79"
+            },
+            "example": 12.57
+          },
+          "weight": {
+            "$ref": "#/components/schemas/mass"
+          },
+          "length": {
+            "$ref": "#/components/schemas/length"
+          },
+          "width": {
+            "$ref": "#/components/schemas/length"
+          },
+          "height": {
+            "$ref": "#/components/schemas/length"
+          }
+        }
+      },
       "productCustomDeclaration": {
         "type": "object",
         "x-examples": {
@@ -10400,9 +10602,7 @@
         ],
         "properties": {
           "type": {
-            "type": "string",
-            "description": "Product typologie. ",
-            "example": "TYPOLOGY_GENERIC"
+            "$ref": "#/components/schemas/productType"
           },
           "ean": {
             "type": "string",
@@ -10550,8 +10750,8 @@
             "$ref": "#/components/schemas/mass"
           },
           "products": {
-            "description": "List of products in the package. \nTwo types of product list possible:  \n- `Simplified declaration`\n- `Customs declaration` ",
-            "anyOf": [
+            "description": "List of products in the package. \n3 types of product list possible:  \n- `Simplified declaration`\n- `Customs declaration` \n- `Dangerous goods` ",
+            "oneOf": [
               {
                 "items": {
                   "$ref": "#/components/schemas/product"
@@ -10563,6 +10763,14 @@
                 },
                 "items": {
                   "$ref": "#/components/schemas/productCustomDeclaration"
+                }
+              },
+              {
+                "x-stoplight": {
+                  "id": "wgfmjioa7qrwg"
+                },
+                "items": {
+                  "$ref": "#/components/schemas/productWithADROptions"
                 }
               }
             ],
