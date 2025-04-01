@@ -10380,7 +10380,8 @@
           "package_count",
           "package_type",
           "environmental_risk",
-          "quantity_code"
+          "quantity_code",
+          "weight"
         ],
         "properties": {
           "type": {
@@ -10485,6 +10486,18 @@
             "x-stoplight": {
               "id": "nbflx8evjiu5q"
             }
+          },
+          "weight": {
+            "$ref": "#/components/schemas/mass"
+          },
+          "length": {
+            "$ref": "#/components/schemas/length"
+          },
+          "width": {
+            "$ref": "#/components/schemas/length"
+          },
+          "height": {
+            "$ref": "#/components/schemas/length"
           }
         }
       },
