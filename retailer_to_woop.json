@@ -10365,13 +10365,46 @@
             "environmental_risk": true,
             "technical_name": "string",
             "quantity_code": "string"
+          },
+          "Example 2": {
+            "label": "Test",
+            "ean": "ean test 12",
+            "type": "TYPOLOGY_DANGEROUS",
+            "onu_code": "UN1234",
+            "adr_classification": "Class 3",
+            "limited_quantity": true,
+            "excepted_quantity": false,
+            "dangerous_goods": true,
+            "package_count": 1,
+            "package_type": "DRUM",
+            "description": "Flammable liquid",
+            "environmental_risk": true,
+            "technical_name": "Flammable solvent",
+            "quantity_code": "F3",
+            "volume_weight": 12.57,
+            "weight": {
+              "unit": "kg",
+              "value": "1"
+            },
+            "lenght": {
+              "unit": "cm",
+              "value": "1"
+            },
+            "width": {
+              "unit": "cm",
+              "value": "1"
+            },
+            "height": {
+              "unit": "cm",
+              "value": "1"
+            }
           }
         },
         "description": "Specifies the information needed to update a product type dangerous\n\n> This system can be used to declare a list of specific products for dangerous goods -> List of additionnals fields",
         "title": "Product for dangerous goods (ADR)",
         "required": [
-          "type",
           "ean",
+          "type",
           "onu_code",
           "adr_classification",
           "limited_quantity",
@@ -10384,11 +10417,9 @@
           "weight"
         ],
         "properties": {
-          "type": {
-            "default": "TYPOLOGY_DANGEROUS",
-            "enum": [
-              "TYPOLOGY_DANGEROUS"
-            ]
+          "label": {
+            "type": "string",
+            "description": "Product description"
           },
           "ean": {
             "type": "string",
@@ -10397,13 +10428,15 @@
               "id": "4zgr15f0voj2b"
             }
           },
+          "type": {
+            "default": "TYPOLOGY_DANGEROUS",
+            "enum": [
+              "TYPOLOGY_DANGEROUS"
+            ]
+          },
           "cug": {
             "type": "string",
             "description": "Product Cug"
-          },
-          "label": {
-            "type": "string",
-            "description": "Product description"
           },
           "quantity": {
             "type": "integer",
@@ -10479,13 +10512,22 @@
             "type": "string",
             "x-stoplight": {
               "id": "ly9iyywwn9uhf"
-            }
+            },
+            "example": "Flammable solvent"
           },
           "quantity_code": {
             "type": "string",
             "x-stoplight": {
               "id": "nbflx8evjiu5q"
-            }
+            },
+            "example": "F3"
+          },
+          "volume_weight": {
+            "type": "number",
+            "x-stoplight": {
+              "id": "7bj3baiesyk79"
+            },
+            "example": 12.57
           },
           "weight": {
             "$ref": "#/components/schemas/mass"
