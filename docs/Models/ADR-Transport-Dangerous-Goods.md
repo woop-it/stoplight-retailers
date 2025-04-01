@@ -2,7 +2,7 @@
 stoplight-id: j5kovwhc4wvjr
 ---
 
-# Transport dangerous goods : ADR
+# Dangerous goods : ADR
 
 Each dangerous good is assigned a unique four-digit UN number for identification. While the first digit of Class 1 substances is always 0, the hazard class of other substances cannot be directly determined from their UN number and must be looked up in the ADR list.
 
