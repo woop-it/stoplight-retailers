@@ -13405,8 +13405,15 @@
           "id": "1q7w8u5bd0igx"
         },
         "type": "object",
+        "x-examples": {
+          "Example 2": {
+            "packing_count": 999,
+            "environmental_risk": true
+          }
+        },
         "required": [
-          "packing_count"
+          "packing_count",
+          "environmental_risk"
         ],
         "properties": {
           "packing_count": {
@@ -13416,11 +13423,13 @@
             },
             "maximum": 999,
             "description": "Indicate the packing of dangerous products.\n\n"
-          }
-        },
-        "x-examples": {
-          "Example 1": {
-            "packing_count": 999
+          },
+          "environmental_risk": {
+            "type": "boolean",
+            "x-stoplight": {
+              "id": "pqx01joo59qnq"
+            },
+            "description": "Indicate if the product have a environmental risk\n\n"
           }
         }
       },
@@ -13430,8 +13439,15 @@
           "id": "f6o12l4ghvas1"
         },
         "type": "object",
+        "x-examples": {
+          "Example 2": {
+            "volume_weight": 15.3,
+            "environmental_risk": true
+          }
+        },
         "required": [
-          "volume_weight"
+          "volume_weight",
+          "environmental_risk"
         ],
         "properties": {
           "volume_weight": {
@@ -13441,11 +13457,13 @@
             },
             "example": 15.3,
             "description": "Weight MD Limited Quantity"
-          }
-        },
-        "x-examples": {
-          "Example 1": {
-            "volume_weight": 15.3
+          },
+          "environmental_risk": {
+            "type": "boolean",
+            "x-stoplight": {
+              "id": "hcje2zijbzy6i"
+            },
+            "description": "Indicate if the product have a environmental risk\n\n"
           }
         }
       },
@@ -13469,7 +13487,9 @@
           "adr_classification",
           "packing_count",
           "package_type",
-          "environmental_risk"
+          "environmental_risk",
+          "technical_name",
+          "quantity_code"
         ],
         "properties": {
           "onu_code": {
