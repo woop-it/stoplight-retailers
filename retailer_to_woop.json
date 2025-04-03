@@ -10419,13 +10419,10 @@
         "title": "Product for dangerous goods (ADR)",
         "required": [
           "ean",
+          "type",
           "category"
         ],
         "properties": {
-          "label": {
-            "type": "string",
-            "description": "Product description"
-          },
           "ean": {
             "type": "string",
             "description": "Product EAN",
@@ -10433,28 +10430,22 @@
               "id": "4zgr15f0voj2b"
             }
           },
+          "type": {
+            "$ref": "#/components/schemas/productType"
+          },
+          "label": {
+            "type": "string",
+            "description": "Product description"
+          },
           "cug": {
             "type": "string",
             "description": "Product Cug"
-          },
-          "type": {
-            "$ref": "#/components/schemas/productType"
           },
           "category": {
             "x-stoplight": {
               "id": "cl8e7qucjlq6o"
             },
             "oneOf": [
-              {
-                "x-stoplight": {
-                  "id": "701z3u0vg50p7"
-                },
-                "enum": [
-                  "excepted_quantity",
-                  "limited_quantity",
-                  "dangerous_goods"
-                ]
-              },
               {
                 "$ref": "#/components/schemas/product_limited_quantity"
               },
