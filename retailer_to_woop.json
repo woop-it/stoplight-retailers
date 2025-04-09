@@ -10451,8 +10451,7 @@
               {
                 "$ref": "#/components/schemas/product_dangerous_goods"
               }
-            ],
-            "description": "> Only if type = TYPOLOGY_DANGEROUS"
+            ]
           },
           "weight": {
             "$ref": "#/components/schemas/mass"
@@ -13436,7 +13435,8 @@
             },
             "enum": [
               "TYPOLOGY_EXCEPTED_QUANTITY"
-            ]
+            ],
+            "description": "> TYPOLOGY_EXCEPTED_QUANTITY"
           },
           "packing_count": {
             "type": "integer",
@@ -13480,7 +13480,8 @@
             },
             "enum": [
               "TYPOLOGY_LIMITED_QUANTITY"
-            ]
+            ],
+            "description": "> TYPOLOGY_LIMITED_QUANTITY"
           },
           "volume_weight": {
             "type": "number",
@@ -13532,7 +13533,8 @@
             },
             "enum": [
               "TYPOLOGY_DANGEROUS"
-            ]
+            ],
+            "description": "> TYPOLOGY_DANGEROUS"
           },
           "onu_code": {
             "type": "string",
