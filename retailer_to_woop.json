@@ -10419,6 +10419,7 @@
         "title": "Dangerous goods (ADR)",
         "required": [
           "ean",
+          "quantity",
           "type"
         ],
         "properties": {
@@ -10436,6 +10437,13 @@
           "label": {
             "type": "string",
             "description": "Product description"
+          },
+          "quantity": {
+            "type": "integer",
+            "x-stoplight": {
+              "id": "coybvpw8y5n9g"
+            },
+            "description": "Product quantity"
           },
           "type": {
             "x-stoplight": {
