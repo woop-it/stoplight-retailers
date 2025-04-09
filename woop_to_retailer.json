@@ -1443,6 +1443,13 @@
                     "type": "string",
                     "description": "Tracking Page Url",
                     "example": "https://myTrackingPageUrl.com"
+                  },
+                  "backOfficeUrl": {
+                    "type": "string",
+                    "x-stoplight": {
+                      "id": "y1c0u61ihbl3y"
+                    },
+                    "description": "https://just.woopit.fr/orders/XXXXXX "
                   }
                 }
               },

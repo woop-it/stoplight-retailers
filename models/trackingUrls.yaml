@@ -27,4 +27,4 @@ properties:
     type: string
     x-stoplight:
       id: kddmb2rutz3iz
-    description: 'Exemple: https://just.woopit.fr/orders/XXXXXX '
+    description: 'https://just.woopit.fr/orders/XXXXXX '
