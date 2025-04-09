@@ -753,7 +753,7 @@
     "/orders/{orderId}/deliveries/{deliveryId}/parcels/{parcelId}/status": {
       "put": {
         "operationId": "putParcelStatus",
-        "description": "This method allows the retailer to receive package status updates from the carrier during the delivery of a given sales order. The retailer can then track the progress of the delivery in real time on an individual parcel-by-parcel basis.  ",
+        "description": "This method allows the retailer to receive package status updates from the carrier during the delivery of a given sales order. The retailer can then track the progress of the delivery in real time on an individual parcel-by-parcel basis.   ",
         "parameters": [
           {
             "$ref": "#/components/parameters/pathOrderId"
