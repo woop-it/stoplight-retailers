@@ -23,9 +23,3 @@ properties:
         type: string
         description: Tracking link as part of order grouping
         example: 'https://trace.woopit.fr/m/48aed-b5552d-4da5-813c-00c06e1ff327'
-  backOfficeUrl:
-    type: string
-    x-stoplight:
-      id: kddmb2rutz3iz
-    example: 'https://just.woopit.fr/orders/XXXXXX'
-    description: link to an order from Woop backoffice
