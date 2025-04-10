@@ -8289,6 +8289,29 @@
                     "maximum": 200,
                     "example": 50,
                     "description": "Information sent to the carrier to limit the number of slots. "
+                  },
+                  "options": {
+                    "type": "object",
+                    "x-stoplight": {
+                      "id": "w1kjzcyahwdrf"
+                    },
+                    "properties": {
+                      "deliveryPromise": {
+                        "type": "object",
+                        "x-stoplight": {
+                          "id": "rgwb46kit532y"
+                        },
+                        "description": "Determine whether the proposed slots take into account the carriers’ constraints included in the delivery promise.",
+                        "properties": {
+                          "active": {
+                            "type": "boolean",
+                            "x-stoplight": {
+                              "id": "hch39xkkzozfv"
+                            }
+                          }
+                        }
+                      }
+                    }
                   }
                 }
               },
@@ -12448,6 +12471,108 @@
             },
             "items": {
               "$ref": "#/components/schemas/availableSlot"
+            }
+          },
+          "promises": {
+            "type": "object",
+            "x-stoplight": {
+              "id": "0zolbly7yej1l"
+            },
+            "properties": {
+              "noticePeriod": {
+                "type": "object",
+                "x-stoplight": {
+                  "id": "h81ilukkvtugb"
+                },
+                "properties": {
+                  "unit": {
+                    "type": "string",
+                    "x-stoplight": {
+                      "id": "eombn3eduu6mg"
+                    }
+                  },
+                  "value": {
+                    "type": "string",
+                    "x-stoplight": {
+                      "id": "n565sbl6fgkod"
+                    }
+                  }
+                }
+              },
+              "minDeliveryTime": {
+                "type": "object",
+                "x-stoplight": {
+                  "id": "rsdjar62a77l2"
+                },
+                "properties": {
+                  "unit": {
+                    "type": "string",
+                    "x-stoplight": {
+                      "id": "84j7ltcqkd9o5"
+                    }
+                  },
+                  "value": {
+                    "type": "string",
+                    "x-stoplight": {
+                      "id": "5katf57vyq17i"
+                    }
+                  }
+                }
+              },
+              "cutOffs": {
+                "type": "object",
+                "x-stoplight": {
+                  "id": "9rqn8txzcavmt"
+                },
+                "properties": {
+                  "nextDay": {
+                    "type": "object",
+                    "x-stoplight": {
+                      "id": "lq1xc0lvn7mz1"
+                    },
+                    "properties": {
+                      "hours": {
+                        "type": "string",
+                        "x-stoplight": {
+                          "id": "uak62rjdv9sm3"
+                        }
+                      },
+                      "minutes": {
+                        "type": "string",
+                        "x-stoplight": {
+                          "id": "akn6hga878vqv"
+                        }
+                      }
+                    }
+                  },
+                  "sameDay": {
+                    "type": "object",
+                    "x-stoplight": {
+                      "id": "xcxa1s8eo6tgs"
+                    },
+                    "properties": {
+                      "hours": {
+                        "type": "string",
+                        "x-stoplight": {
+                          "id": "uch1wkfhgnbur"
+                        }
+                      },
+                      "minutes": {
+                        "type": "string",
+                        "x-stoplight": {
+                          "id": "trn3ahlsrj8u0"
+                        }
+                      }
+                    }
+                  },
+                  "timezone": {
+                    "type": "string",
+                    "x-stoplight": {
+                      "id": "4t5ag2hcnkwtz"
+                    }
+                  }
+                }
+              }
             }
           }
         }
