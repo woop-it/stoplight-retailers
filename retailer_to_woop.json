@@ -8289,29 +8289,6 @@
                     "maximum": 200,
                     "example": 50,
                     "description": "Information sent to the carrier to limit the number of slots. "
-                  },
-                  "options": {
-                    "type": "object",
-                    "x-stoplight": {
-                      "id": "w1kjzcyahwdrf"
-                    },
-                    "properties": {
-                      "deliveryPromise": {
-                        "type": "object",
-                        "x-stoplight": {
-                          "id": "rgwb46kit532y"
-                        },
-                        "description": "Determine whether the proposed slots take into account the carriers’ constraints included in the delivery promise.",
-                        "properties": {
-                          "active": {
-                            "type": "boolean",
-                            "x-stoplight": {
-                              "id": "hch39xkkzozfv"
-                            }
-                          }
-                        }
-                      }
-                    }
                   }
                 }
               },
