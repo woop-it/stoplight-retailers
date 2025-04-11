@@ -13433,8 +13433,8 @@
         },
         "required": [
           "type",
-          "packing_count",
-          "environmental_risk"
+          "packingCount",
+          "environmentalRisk"
         ],
         "properties": {
           "type": {
@@ -13446,7 +13446,7 @@
             ],
             "description": "> TYPOLOGY_EXCEPTED_QUANTITY"
           },
-          "packing_count": {
+          "packingCount": {
             "type": "integer",
             "x-stoplight": {
               "id": "vt7lmu7m5zeu2"
@@ -13454,7 +13454,7 @@
             "maximum": 999,
             "description": "Indicate the packing of dangerous products.\n\n"
           },
-          "environmental_risk": {
+          "environmentalRisk": {
             "type": "boolean",
             "x-stoplight": {
               "id": "pqx01joo59qnq"
@@ -13479,7 +13479,7 @@
         "required": [
           "type",
           "volume_weight",
-          "environmental_risk"
+          "environmentalRisk"
         ],
         "properties": {
           "type": {
@@ -13499,7 +13499,7 @@
             "example": 15.3,
             "description": "Weight MD Limited Quantity"
           },
-          "environmental_risk": {
+          "environmentalRisk": {
             "type": "boolean",
             "x-stoplight": {
               "id": "hcje2zijbzy6i"
@@ -13526,13 +13526,13 @@
         "title": "dangerous_goods",
         "required": [
           "type",
-          "onu_code",
-          "adr_classification",
-          "packing_count",
-          "packing_type",
-          "environmental_risk",
-          "technical_name",
-          "quantity_code"
+          "onuCode",
+          "adrClassification",
+          "packingCount",
+          "packingType",
+          "environmentalRisk",
+          "technicalName",
+          "quantityCode"
         ],
         "properties": {
           "type": {
@@ -13544,21 +13544,27 @@
             ],
             "description": "> TYPOLOGY_DANGEROUS"
           },
-          "onu_code": {
+          "onuCode": {
             "type": "string",
             "maxLength": 10,
             "pattern": "[0-9]",
             "description": "Four-digit numbers identifying dangerous goods for international transport\n\n",
-            "example": "UN1203"
+            "example": "UN1203",
+            "x-stoplight": {
+              "id": "6iwjrux96r2sh"
+            }
           },
-          "adr_classification": {
+          "adrClassification": {
             "type": "string",
             "description": "ADR classification\n\n",
             "example": "Class 3",
             "pattern": " [0-9A-Za-z]",
-            "maxLength": 10
+            "maxLength": 10,
+            "x-stoplight": {
+              "id": "n15ako9l2wdne"
+            }
           },
-          "packing_count": {
+          "packingCount": {
             "type": "integer",
             "x-stoplight": {
               "id": "k0hp6srsyzq6h"
@@ -13566,7 +13572,7 @@
             "description": "Indicate the packing of dangerous products.\n\n\n",
             "maximum": 999
           },
-          "packing_type": {
+          "packingType": {
             "type": "string",
             "example": "Metal drum",
             "x-stoplight": {
@@ -13576,23 +13582,32 @@
           "description": {
             "type": "string"
           },
-          "environmental_risk": {
+          "environmentalRisk": {
             "type": "boolean",
-            "description": "Indicate if the product have a environmental risk\n\n"
+            "description": "Indicate if the product have a environmental risk\n\n",
+            "x-stoplight": {
+              "id": "5wig025t66ump"
+            }
           },
-          "technical_name": {
+          "technicalName": {
             "type": "string",
             "example": "Flammable solvent",
             "pattern": "[0-9A-Za-z]",
-            "maxLength": 35
+            "maxLength": 35,
+            "x-stoplight": {
+              "id": "77xfv491sv2kf"
+            }
           },
-          "quantity_code": {
+          "quantityCode": {
             "enum": [
               "PBT",
               "PNT",
               "LTR"
             ],
-            "description": "Quantity code\nPBT : Gross weight\nPNT : Net weight\nLTR : Liters"
+            "description": "Quantity code\nPBT : Gross weight\nPNT : Net weight\nLTR : Liters",
+            "x-stoplight": {
+              "id": "50zxr1o3tq6j3"
+            }
           }
         }
       }
