@@ -8154,7 +8154,28 @@
                               "end": "string",
                               "remainingCapacity": 0
                             }
-                          ]
+                          ],
+                          "promises": {
+                            "noticePeriod": {
+                              "unit": "string",
+                              "value": "string"
+                            },
+                            "minDeliveryTime": {
+                              "unit": "string",
+                              "value": "string"
+                            },
+                            "cutOffs": {
+                              "nextDay": {
+                                "hours": "string",
+                                "minutes": "string"
+                              },
+                              "sameDay": {
+                                "hours": "string",
+                                "minutes": "string"
+                              },
+                              "timezone": "string"
+                            }
+                          }
                         }
                       ]
                     }
