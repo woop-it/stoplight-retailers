@@ -13478,7 +13478,7 @@
         },
         "required": [
           "type",
-          "volume_weight",
+          "volumeWeight",
           "environmentalRisk"
         ],
         "properties": {
@@ -13491,7 +13491,7 @@
             ],
             "description": "> TYPOLOGY_LIMITED_QUANTITY"
           },
-          "volume_weight": {
+          "volumeWeight": {
             "type": "number",
             "x-stoplight": {
               "id": "9wzmco5k354sc"
