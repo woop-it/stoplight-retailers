@@ -5608,6 +5608,38 @@
                           },
                           "workSchedule": {
                             "$ref": "./models/Carrier/workSchedule.json"
+                          },
+                          "tags": {
+                            "x-stoplight": {
+                              "id": "00jzkzfm9ofz7"
+                            },
+                            "type": "array",
+                            "items": {
+                              "x-stoplight": {
+                                "id": "fmwyhsutg1t10"
+                              },
+                              "type": "object",
+                              "properties": {
+                                "key": {
+                                  "type": "string",
+                                  "x-stoplight": {
+                                    "id": "rsp7yfk701bkq"
+                                  }
+                                },
+                                "name": {
+                                  "type": "string",
+                                  "x-stoplight": {
+                                    "id": "3b5o3btv7eb0c"
+                                  }
+                                },
+                                "value": {
+                                  "type": "string",
+                                  "x-stoplight": {
+                                    "id": "51qfw48woeize"
+                                  }
+                                }
+                              }
+                            }
                           }
                         }
                       }
@@ -9284,6 +9316,9 @@
             "items": {
               "$ref": "#/components/schemas/deliveryService"
             }
+          },
+          "tags": {
+            "$ref": "#/components/schemas/tags"
           }
         }
       },
