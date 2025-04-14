@@ -13532,7 +13532,8 @@
           "packingType",
           "environmentalRisk",
           "technicalName",
-          "quantityCode"
+          "quantityCode",
+          "packingCode"
         ],
         "properties": {
           "type": {
@@ -13608,6 +13609,13 @@
             "x-stoplight": {
               "id": "50zxr1o3tq6j3"
             }
+          },
+          "packingCode": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "rvj35nwtqblwg"
+            },
+            "description": "packing code "
           }
         }
       }
