@@ -8302,12 +8302,16 @@
                           "id": "6j31g96s2s2ga"
                         },
                         "description": "Determine whether the returned slots take into account the carriers’ constraints included in the delivery promise.",
+                        "required": [
+                          "active"
+                        ],
                         "properties": {
                           "active": {
                             "type": "boolean",
                             "x-stoplight": {
                               "id": "4rmqs3qsmneid"
-                            }
+                            },
+                            "default": false
                           }
                         }
                       }
@@ -12484,6 +12488,10 @@
                 "x-stoplight": {
                   "id": "z95716yk0k8yp"
                 },
+                "required": [
+                  "unit",
+                  "value"
+                ],
                 "properties": {
                   "unit": {
                     "type": "string",
@@ -12504,6 +12512,10 @@
                 "x-stoplight": {
                   "id": "svqxu2li76rkf"
                 },
+                "required": [
+                  "unit",
+                  "value"
+                ],
                 "properties": {
                   "unit": {
                     "type": "string",
@@ -12530,6 +12542,10 @@
                     "x-stoplight": {
                       "id": "ocibee8kpl0nc"
                     },
+                    "required": [
+                      "hours",
+                      "minutes"
+                    ],
                     "properties": {
                       "hours": {
                         "type": "string",
@@ -12550,6 +12566,10 @@
                     "x-stoplight": {
                       "id": "ba6cgit3nu36y"
                     },
+                    "required": [
+                      "hours",
+                      "minutes"
+                    ],
                     "properties": {
                       "hours": {
                         "type": "string",
