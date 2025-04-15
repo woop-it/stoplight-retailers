@@ -8228,7 +8228,7 @@
                 "properties": {
                   "picking": {
                     "type": "object",
-                    "description": "Information on the collection location",
+                    "description": "Information on the collection location. \nPicking.interval is not required if the deliveryPromise option is set to \"true\". If so the picking.inteval will be calculated automatically.",
                     "required": [
                       "location",
                       "interval"
@@ -8289,6 +8289,33 @@
                     "maximum": 200,
                     "example": 50,
                     "description": "Information sent to the carrier to limit the number of slots. "
+                  },
+                  "options": {
+                    "type": "object",
+                    "x-stoplight": {
+                      "id": "tkqdvc6v4a65t"
+                    },
+                    "properties": {
+                      "deliveryPromise": {
+                        "type": "object",
+                        "x-stoplight": {
+                          "id": "6j31g96s2s2ga"
+                        },
+                        "description": "Determine whether the returned slots take into account the carriers’ constraints included in the delivery promise.",
+                        "required": [
+                          "active"
+                        ],
+                        "properties": {
+                          "active": {
+                            "type": "boolean",
+                            "x-stoplight": {
+                              "id": "4rmqs3qsmneid"
+                            },
+                            "default": false
+                          }
+                        }
+                      }
+                    }
                   }
                 }
               },
@@ -12380,6 +12407,124 @@
             },
             "items": {
               "$ref": "#/components/schemas/availableSlot"
+            }
+          },
+          "promises": {
+            "type": "object",
+            "x-stoplight": {
+              "id": "dv1p6im3fmxyx"
+            },
+            "properties": {
+              "noticePeriod": {
+                "type": "object",
+                "x-stoplight": {
+                  "id": "z95716yk0k8yp"
+                },
+                "required": [
+                  "unit",
+                  "value"
+                ],
+                "properties": {
+                  "unit": {
+                    "type": "string",
+                    "x-stoplight": {
+                      "id": "agztyby6ovs5r"
+                    }
+                  },
+                  "value": {
+                    "type": "string",
+                    "x-stoplight": {
+                      "id": "9bbvlt1jz1wrd"
+                    }
+                  }
+                }
+              },
+              "minDeliveryTime": {
+                "type": "object",
+                "x-stoplight": {
+                  "id": "svqxu2li76rkf"
+                },
+                "required": [
+                  "unit",
+                  "value"
+                ],
+                "properties": {
+                  "unit": {
+                    "type": "string",
+                    "x-stoplight": {
+                      "id": "zspjtznvq5eit"
+                    }
+                  },
+                  "value": {
+                    "type": "string",
+                    "x-stoplight": {
+                      "id": "9l6mu1nk12e55"
+                    }
+                  }
+                }
+              },
+              "cutOffs": {
+                "type": "object",
+                "x-stoplight": {
+                  "id": "b3clyzq9k69zd"
+                },
+                "properties": {
+                  "nextDay": {
+                    "type": "object",
+                    "x-stoplight": {
+                      "id": "ocibee8kpl0nc"
+                    },
+                    "required": [
+                      "hours",
+                      "minutes"
+                    ],
+                    "properties": {
+                      "hours": {
+                        "type": "string",
+                        "x-stoplight": {
+                          "id": "ihjbc0b0n6lm0"
+                        }
+                      },
+                      "minutes": {
+                        "type": "string",
+                        "x-stoplight": {
+                          "id": "99ysqqvw9wcop"
+                        }
+                      }
+                    }
+                  },
+                  "sameDay": {
+                    "type": "object",
+                    "x-stoplight": {
+                      "id": "ba6cgit3nu36y"
+                    },
+                    "required": [
+                      "hours",
+                      "minutes"
+                    ],
+                    "properties": {
+                      "hours": {
+                        "type": "string",
+                        "x-stoplight": {
+                          "id": "qjr1adw4okznw"
+                        }
+                      },
+                      "minutes": {
+                        "type": "string",
+                        "x-stoplight": {
+                          "id": "lxrwcbpnfr507"
+                        }
+                      }
+                    }
+                  },
+                  "timezone": {
+                    "type": "string",
+                    "x-stoplight": {
+                      "id": "9hf6ey7imx4qy"
+                    }
+                  }
+                }
+              }
             }
           }
         }
