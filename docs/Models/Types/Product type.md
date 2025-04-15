@@ -7,8 +7,7 @@ stoplight-id: d6f97240b3560
 For the best delivery service, each product must be attributed a type. This allows the product to be correctly identified and categorised.
 
 | Code                          | Title                                                                     |
-| ----------------------------- | ------------------------------------------------------------------------- |
-| `TYPOLOGY_DANGEROUS`          | Dangerous products                                                        |
+| ----------------------------- | ------------------------------------------------------------------------- |                                                   |
 | `TYPOLOGY_FRAGILE`            | Fragile products                                                          |
 | `TYPOLOGY_FRESH`              | Fresh                                                                     |
 | `TYPOLOGY_FROZEN`             | Frozen                                                                    |
@@ -24,3 +23,6 @@ For the best delivery service, each product must be attributed a type. This allo
 | `TYPOLOGY_SMALL_FURNITURE`         | Small furniture                                                             |
 | `TYPOLOGY_LARGE_FURNITURE` | Bulky and large furniture                                                 |
 | `TYPOLOGY_ASSEMBLED_FURNITURE`       | Furniture delivered assembled                     
+| `TYPOLOGY_DANGEROUS`          | Dangerous goods : ADR     
+| `TYPOLOGY_LIMITED_QUANTITY`          | Dangerous products with limited quantity option
+| `TYPOLOGY_EXCEPTED_QUANTITY`          | Dangerous products with excepted quantity option    
