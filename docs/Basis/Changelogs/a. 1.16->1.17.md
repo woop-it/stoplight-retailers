@@ -43,46 +43,60 @@ title: Versions up to 1.16.0
         }
       ],
 ```
+<!-- type: tab-end -->
+From version 1.17.0 -> 3 type to declare DANGEROUS goods 
+1) TYPOLOGY_DANGEROUS
+2) TYPOLOGY_EXCEPTED_QUANTITY
+3) TYPOLOGY_LIMITED_QUANTITY
+
 
 <!--
 type: tab
-title: From version 1.17.0
+title: DANGEROUS
+-->
+
+```json
+"products": [
+  {
+    "type": "TYPOLOGY_DANGEROUS",
+    "onu_code": "UN1203",
+    "adr_classification": "Class 3",
+    "packing_count": 999,
+    "packing_type": "Metal drum",
+    "description": "string",
+    "environmental_risk": true,
+    "technical_name": "Flammable solvent",
+    "quantity_code": "PBT", 
+    "packingCode": "11G"
+  }
+],
+```
+
+<!--
+type: tab
+title: EXCEPTED_QUANTITY
 -->
 ```json
 "products": [
-        {
-          "label": "Test",
-          "ean": "ean test 12",
-          "type": "TYPOLOGY_DANGEROUS",
-          "onu_code": "UN1234",
-          "adr_classification": "Class 3",
-          "limited_quantity": true,
-          "excepted_quantity": false,
-          "dangerous_goods": true,
-          "package_count": 1,
-          "package_type": "DRUM",
-          "description": "Flammable liquid",
-          "environmental_risk": true,
-          "technical_name": "Flammable solvent",
-          "quantity_code": "F3",
-          "volume_weight": 12.57,
-          "weight": {
-              "unit": "kg",
-              "value": "1"
-          },
-          "lenght": {
-              "unit": "cm",
-              "value": "1"
-          },
-          "width": {
-              "unit": "cm",
-              "value": "1"
-          },
-          "height": {
-              "unit": "cm",
-              "value": "1"
-          }
-        }
-      ],
+  {
+    "type": "TYPOLOGY_EXCEPTED_QUANTITY",
+    "packing_count": 999,
+    "environmental_risk": true
+  }
+],
+```
+
+<!--
+type: tab
+title: EXCEPTED_QUANTITY
+-->
+```json
+"products": [
+  {
+    "type": "TYPOLOGY_LIMITED_QUANTITY",
+    "volume_weight": 15.3,
+    "environmental_risk": true
+  }
+],
 ```
 <!-- type: tab-end -->

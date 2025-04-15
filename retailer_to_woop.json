@@ -13513,14 +13513,15 @@
         "x-examples": {
           "Example 1": {
             "type": "TYPOLOGY_DANGEROUS",
-            "onu_code": "UN1203",
-            "adr_classification": "Class 3",
-            "packing_count": 999,
-            "packing_type": "Metal drum",
+            "onuCode": "UN1203",
+            "adrClassification": "Class 3",
+            "packingCount": 999,
+            "packingType": "Metal drum",
             "description": "string",
-            "environmental_risk": true,
-            "technical_name": "Flammable solvent",
-            "quantity_code": "PBT"
+            "environmentalRisk": true,
+            "technicalName": "Flammable solvent",
+            "quantityCode": "PBT",
+            "packingCode": "string"
           }
         },
         "title": "dangerous_goods",
