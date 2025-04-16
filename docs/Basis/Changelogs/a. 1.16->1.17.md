@@ -88,7 +88,7 @@ title: EXCEPTED_QUANTITY
 
 <!--
 type: tab
-title: EXCEPTED_QUANTITY
+title: LIMITED_QUANTITY
 -->
 ```json
 "products": [
