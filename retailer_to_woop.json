@@ -8152,9 +8152,19 @@
                               "id": "string",
                               "start": "string",
                               "end": "string",
-                              "remainingCapacity": 0
+                              "remainingCapacity": 10
                             }
-                          ]
+                          ],
+                          "promises": {
+                            "cutOffs": {
+                              "nextDay": {
+                                "hours": "16",
+                                "minutes": "00"
+                              },
+                              "sameDay": null,
+                              "timezone": "Europe/Paris"
+                            }
+                          }
                         }
                       ]
                     }
@@ -8437,6 +8447,11 @@
                         "value": "123RD"
                       }
                     ],
+                    "options": {
+                      "deliveryPromise": {
+                        "active": true
+                      }
+                    },
                     "limit": 50
                   }
                 }
