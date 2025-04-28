@@ -9318,7 +9318,31 @@
             }
           },
           "tags": {
-            "$ref": "#/components/schemas/tags"
+            "type": "array",
+            "items": {
+              "x-stoplight": {
+                "id": "mas6ne1430066"
+              },
+              "type": "object",
+              "required": [
+                "key",
+                "value"
+              ],
+              "properties": {
+                "key": {
+                  "type": "string",
+                  "x-stoplight": {
+                    "id": "0q5o1la7061in"
+                  }
+                },
+                "value": {
+                  "type": "string",
+                  "x-stoplight": {
+                    "id": "jeos5u514o2ck"
+                  }
+                }
+              }
+            }
           }
         }
       },
