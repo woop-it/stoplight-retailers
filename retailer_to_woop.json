@@ -5122,7 +5122,8 @@
                         "required": [
                           "carrier",
                           "services",
-                          "promises"
+                          "promises",
+                          "tags"
                         ],
                         "properties": {
                           "carrier": {
@@ -5614,11 +5615,17 @@
                               "id": "00jzkzfm9ofz7"
                             },
                             "type": "array",
+                            "description": "If no tag is set then \"tags\": null will be returned",
                             "items": {
                               "x-stoplight": {
                                 "id": "fmwyhsutg1t10"
                               },
                               "type": "object",
+                              "required": [
+                                "key",
+                                "name",
+                                "value"
+                              ],
                               "properties": {
                                 "key": {
                                   "type": "string",
