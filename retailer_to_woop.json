@@ -13789,7 +13789,7 @@
         "required": true,
         "schema": {
           "type": "string",
-          "example": "1.6.0"
+          "example": "1.17.0"
         }
       },
       "queryDeliveryStatus": {
