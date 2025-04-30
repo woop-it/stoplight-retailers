@@ -13731,7 +13731,7 @@
             "x-stoplight": {
               "id": "k0hp6srsyzq6h"
             },
-            "description": "Indicate the packing of dangerous products.\n\n\n",
+            "description": "Indicate the total number of packing with dangerous products.\n\n",
             "maximum": 999
           },
           "packagingType": {
