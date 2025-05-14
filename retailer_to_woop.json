@@ -5623,7 +5623,6 @@
                               "type": "object",
                               "required": [
                                 "key",
-                                "name",
                                 "value"
                               ],
                               "properties": {
@@ -5631,12 +5630,6 @@
                                   "type": "string",
                                   "x-stoplight": {
                                     "id": "rsp7yfk701bkq"
-                                  }
-                                },
-                                "name": {
-                                  "type": "string",
-                                  "x-stoplight": {
-                                    "id": "3b5o3btv7eb0c"
                                   }
                                 },
                                 "value": {
