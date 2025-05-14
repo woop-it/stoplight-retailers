@@ -5122,7 +5122,8 @@
                         "required": [
                           "carrier",
                           "services",
-                          "promises"
+                          "promises",
+                          "tags"
                         ],
                         "properties": {
                           "carrier": {
@@ -5608,6 +5609,37 @@
                           },
                           "workSchedule": {
                             "$ref": "./models/Carrier/workSchedule.json"
+                          },
+                          "tags": {
+                            "x-stoplight": {
+                              "id": "00jzkzfm9ofz7"
+                            },
+                            "type": "array",
+                            "description": "If no tag is set then \"tags\": null will be returned",
+                            "items": {
+                              "x-stoplight": {
+                                "id": "fmwyhsutg1t10"
+                              },
+                              "type": "object",
+                              "required": [
+                                "key",
+                                "value"
+                              ],
+                              "properties": {
+                                "key": {
+                                  "type": "string",
+                                  "x-stoplight": {
+                                    "id": "rsp7yfk701bkq"
+                                  }
+                                },
+                                "value": {
+                                  "type": "string",
+                                  "x-stoplight": {
+                                    "id": "51qfw48woeize"
+                                  }
+                                }
+                              }
+                            }
                           }
                         }
                       }
@@ -9325,6 +9357,33 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/deliveryService"
+            }
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "x-stoplight": {
+                "id": "mas6ne1430066"
+              },
+              "type": "object",
+              "required": [
+                "key",
+                "value"
+              ],
+              "properties": {
+                "key": {
+                  "type": "string",
+                  "x-stoplight": {
+                    "id": "0q5o1la7061in"
+                  }
+                },
+                "value": {
+                  "type": "string",
+                  "x-stoplight": {
+                    "id": "jeos5u514o2ck"
+                  }
+                }
+              }
             }
           }
         }
