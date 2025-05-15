@@ -100,3 +100,24 @@ title: LIMITED_QUANTITY
 ],
 ```
 <!-- type: tab-end -->
+
+## Eligibility method with order's TAG
+
+### Add order TAG to eligibility search
+
+Add order TAGs to a carrier eligibility search. 
+
+<!--
+type: tab
+title: 1.17.0
+-->
+
+```json
+        "tags": [
+    {
+      "key": "string",
+      "value": "string"
+    }
+  ],
+```
+<!-- type: tab-end -->

@@ -5630,13 +5630,15 @@
                                   "type": "string",
                                   "x-stoplight": {
                                     "id": "rsp7yfk701bkq"
-                                  }
+                                  },
+                                  "description": "Label used to define the tag"
                                 },
                                 "value": {
                                   "type": "string",
                                   "x-stoplight": {
                                     "id": "51qfw48woeize"
-                                  }
+                                  },
+                                  "description": "Value to be applied to the tag"
                                 }
                               }
                             }
@@ -9176,6 +9178,131 @@
                 "limit": 1
               }
             }
+          },
+          "With TAG": {
+            "storeId": "string",
+            "picking": {
+              "location": {
+                "type": "address",
+                "addressLine1": "string",
+                "addressLine2": "string",
+                "elevator": true,
+                "floor": 0,
+                "doorCode": "string",
+                "postalCode": "59800",
+                "city": "LILLE",
+                "district": "string",
+                "country": "FR",
+                "comment": "string",
+                "coordinates": {
+                  "latitude": 0,
+                  "longitude": 0
+                }
+              },
+              "interval": {
+                "start": "2019-12-04T12:30:00+0000",
+                "end": "2019-12-04T14:30:00+0000"
+              }
+            },
+            "delivery": {
+              "location": {
+                "type": "address",
+                "addressLine1": "string",
+                "addressLine2": "string",
+                "elevator": true,
+                "floor": 0,
+                "doorCode": "string",
+                "postalCode": "59800",
+                "city": "LILLE",
+                "district": "string",
+                "country": "FR",
+                "comment": "string",
+                "coordinates": {
+                  "latitude": 0,
+                  "longitude": 0
+                }
+              },
+              "interval": {
+                "start": "2019-12-04T12:30:00+0000",
+                "end": "2019-12-04T14:30:00+0000"
+              }
+            },
+            "packages": [
+              {
+                "category": "string",
+                "length": {
+                  "value": 0,
+                  "unit": "mm"
+                },
+                "width": {
+                  "value": 0,
+                  "unit": "mm"
+                },
+                "height": {
+                  "value": 0,
+                  "unit": "mm"
+                },
+                "weight": {
+                  "value": 0,
+                  "unit": "kg"
+                },
+                "products": [
+                  {
+                    "type": "TYPOLOGY_GENERIC",
+                    "ean": "string",
+                    "cug": "string",
+                    "label": "string",
+                    "quantity": 1
+                  }
+                ],
+                "quantity": 1,
+                "attributes": {
+                  "footprint": {
+                    "value": 13,
+                    "unit": "m2"
+                  }
+                },
+                "type": "PACKAGE"
+              }
+            ],
+            "options": {
+              "distance": {
+                "active": true
+              },
+              "zoning": {
+                "active": true
+              },
+              "price": {
+                "active": true
+              },
+              "slot": {
+                "active": true,
+                "limit": 0,
+                "type": "ORDERS_QUANTITY",
+                "minRemainingCapacity": 0
+              },
+              "carrierScore": {
+                "active": true
+              },
+              "impact": {
+                "active": true
+              },
+              "ineligibleCarriers": {
+                "active": true
+              },
+              "deliveryPromise": {
+                "active": true
+              }
+            },
+            "services": [
+              "SERVICE_ASSEMBLY"
+            ],
+            "tags": [
+              {
+                "key": "string",
+                "value": "string"
+              }
+            ]
           }
         },
         "required": [
@@ -9375,13 +9502,15 @@
                   "type": "string",
                   "x-stoplight": {
                     "id": "0q5o1la7061in"
-                  }
+                  },
+                  "description": "Label used to define the tag"
                 },
                 "value": {
                   "type": "string",
                   "x-stoplight": {
                     "id": "jeos5u514o2ck"
-                  }
+                  },
+                  "description": "Value to be applied to the tag"
                 }
               }
             }
