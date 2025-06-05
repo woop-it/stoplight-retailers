@@ -81,7 +81,7 @@ title: EXCEPTED_QUANTITY
   {
     "type": "TYPOLOGY_DANGEROUS_EXCEPTED_QUANTITY",
     "packing_count": 999,
-    "environmental_risk": true
+    "environmentalRisk": true
   }
 ],
 ```
@@ -95,7 +95,7 @@ title: LIMITED_QUANTITY
   {
     "type": "TYPOLOGY_DANGEROUS_LIMITED_QUANTITY",
     "volume_weight": 15.3,
-    "environmental_risk": true
+    "environmentalRisk": true
   }
 ],
 ```

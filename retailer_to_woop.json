@@ -13821,13 +13821,13 @@
         "x-examples": {
           "Example 1": {
             "type": "TYPOLOGY_DANGEROUS_LIMITED_QUANTITY",
-            "volumeWeight": 15.3,
+            "volume_Weight": 15.3,
             "environmentalRisk": true
           }
         },
         "required": [
           "type",
-          "volumeWeight",
+          "volume_Weight",
           "environmentalRisk"
         ],
         "properties": {
@@ -13840,7 +13840,7 @@
             ],
             "description": "> TYPOLOGY_DANGEROUS_LIMITED_QUANTITY"
           },
-          "volumeWeight": {
+          "volume_Weight": {
             "type": "number",
             "x-stoplight": {
               "id": "9wzmco5k354sc"
