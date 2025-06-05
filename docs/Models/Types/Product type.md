@@ -24,5 +24,5 @@ For the best delivery service, each product must be attributed a type. This allo
 | `TYPOLOGY_LARGE_FURNITURE` | Bulky and large furniture                                                 |
 | `TYPOLOGY_ASSEMBLED_FURNITURE`       | Furniture delivered assembled                     
 | `TYPOLOGY_DANGEROUS`          | Dangerous goods : ADR     
-| `TYPOLOGY_LIMITED_QUANTITY`          | Dangerous products with limited quantity option
-| `TYPOLOGY_EXCEPTED_QUANTITY`          | Dangerous products with excepted quantity option    
+| `TYPOLOGY_DANGEROUS_LIMITED_QUANTITY`          | Dangerous products with limited quantity option
+| `TYPOLOGY_DANGEROUS_EXCEPTED_QUANTITY`          | Dangerous products with excepted quantity option    

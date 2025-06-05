@@ -13775,9 +13775,9 @@
         "type": "object",
         "x-examples": {
           "Example 1": {
-            "type": "TYPOLOGY_EXCEPTED_QUANTITY",
-            "packing_count": 999,
-            "environmental_risk": true
+            "type": "TYPOLOGY_DANGEROUS_EXCEPTED_QUANTITY",
+            "packagingCount": 999,
+            "environmentalRisk": true
           }
         },
         "required": [
@@ -13791,9 +13791,9 @@
               "id": "qiic42pa359my"
             },
             "enum": [
-              "TYPOLOGY_EXCEPTED_QUANTITY"
+              "TYPOLOGY_DANGEROUS_EXCEPTED_QUANTITY"
             ],
-            "description": "> TYPOLOGY_EXCEPTED_QUANTITY"
+            "description": "> TYPOLOGY_DANGEROUS_EXCEPTED_QUANTITY"
           },
           "packagingCount": {
             "type": "integer",
@@ -13820,9 +13820,9 @@
         "type": "object",
         "x-examples": {
           "Example 1": {
-            "type": "TYPOLOGY_LIMITED_QUANTITY",
-            "volume_weight": 15.3,
-            "environmental_risk": true
+            "type": "TYPOLOGY_DANGEROUS_LIMITED_QUANTITY",
+            "volumeWeight": 15.3,
+            "environmentalRisk": true
           }
         },
         "required": [
@@ -13836,9 +13836,9 @@
               "id": "w8fohqzh5feqa"
             },
             "enum": [
-              "TYPOLOGY_LIMITED_QUANTITY"
+              "TYPOLOGY_DANGEROUS_LIMITED_QUANTITY"
             ],
-            "description": "> TYPOLOGY_LIMITED_QUANTITY"
+            "description": "> TYPOLOGY_DANGEROUS_LIMITED_QUANTITY"
           },
           "volumeWeight": {
             "type": "number",
@@ -13861,16 +13861,16 @@
         "type": "object",
         "x-examples": {
           "Example 1": {
-            "type": "TYPOLOGY_DANGEROUS",
+            "type": "TYPOLOGYg_DANGEROUS",
             "onuCode": "UN1203",
             "adrClassification": "Class 3",
-            "packingCount": 999,
-            "packingType": "Metal drum",
+            "packagingCount": 999,
+            "packagingType": "Metal drum",
             "description": "string",
             "environmentalRisk": true,
             "technicalName": "Flammable solvent",
             "quantityCode": "PBT",
-            "packingCode": "string"
+            "packagingCode": "11G"
           }
         },
         "title": "dangerous_goods",

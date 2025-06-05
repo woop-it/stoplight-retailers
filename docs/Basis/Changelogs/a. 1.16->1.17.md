@@ -46,8 +46,8 @@ title: Versions up to 1.16.0
 <!-- type: tab-end -->
 From version 1.17.0 -> 3 type to declare DANGEROUS goods 
 1) TYPOLOGY_DANGEROUS
-2) TYPOLOGY_EXCEPTED_QUANTITY
-3) TYPOLOGY_LIMITED_QUANTITY
+2) TYPOLOGY_DANGEROUS_EXCEPTED_QUANTITY
+3) TYPOLOGY_DANGEROUS_LIMITED_QUANTITY
 
 
 <!--
@@ -59,15 +59,15 @@ title: DANGEROUS
 "products": [
   {
     "type": "TYPOLOGY_DANGEROUS",
-    "onu_code": "UN1203",
-    "adr_classification": "Class 3",
-    "packing_count": 999,
-    "packing_type": "Metal drum",
+    "onuCode": "UN1203",
+    "adrClassification": "Class 3",
+    "packagingCount": 999,
+    "packagingType": "Metal drum",
     "description": "string",
-    "environmental_risk": true,
-    "technical_name": "Flammable solvent",
-    "quantity_code": "PBT", 
-    "packingCode": "11G"
+    "environmentalRisk": true,
+    "technicalName": "Flammable solvent",
+    "quantityCode": "PBT",
+    "packagingCode": "11G"
   }
 ],
 ```
@@ -79,7 +79,7 @@ title: EXCEPTED_QUANTITY
 ```json
 "products": [
   {
-    "type": "TYPOLOGY_EXCEPTED_QUANTITY",
+    "type": "TYPOLOGY_DANGEROUS_EXCEPTED_QUANTITY",
     "packing_count": 999,
     "environmental_risk": true
   }
@@ -93,7 +93,7 @@ title: LIMITED_QUANTITY
 ```json
 "products": [
   {
-    "type": "TYPOLOGY_LIMITED_QUANTITY",
+    "type": "TYPOLOGY_DANGEROUS_LIMITED_QUANTITY",
     "volume_weight": 15.3,
     "environmental_risk": true
   }
