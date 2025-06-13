@@ -8272,10 +8272,9 @@
                 "properties": {
                   "picking": {
                     "type": "object",
-                    "description": "Information on the collection location. \nPicking.interval is not required if the deliveryPromise option is set to \"true\". If so the picking.inteval will be calculated automatically.",
+                    "description": "Information on the collection location.",
                     "required": [
-                      "location",
-                      "interval"
+                      "location"
                     ],
                     "properties": {
                       "location": {
