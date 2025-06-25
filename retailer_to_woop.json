@@ -10649,7 +10649,11 @@
         "required": [
           "ean",
           "quantity",
-          "type"
+          "type",
+          "weight",
+          "length",
+          "width",
+          "height"
         ],
         "properties": {
           "ean": {
@@ -13825,9 +13829,7 @@
           }
         },
         "required": [
-          "type",
-          "volume_Weight",
-          "environmentalRisk"
+          "type"
         ],
         "properties": {
           "type": {
@@ -13839,20 +13841,13 @@
             ],
             "description": "> TYPOLOGY_DANGEROUS_LIMITED_QUANTITY"
           },
-          "volume_Weight": {
-            "type": "number",
-            "x-stoplight": {
-              "id": "9wzmco5k354sc"
-            },
-            "example": 15.3,
-            "description": "Weight MD Limited Quantity"
-          },
           "environmentalRisk": {
             "type": "boolean",
             "x-stoplight": {
               "id": "hcje2zijbzy6i"
             },
-            "description": "Indicate if the product have a environmental risk\n\n"
+            "description": "Indicate if the product have a environmental risk\n\n",
+            "default": false
           }
         }
       },
@@ -13879,7 +13874,6 @@
           "adrClassification",
           "packagingCount",
           "packagingType",
-          "environmentalRisk",
           "technicalName",
           "quantityCode",
           "packagingCode"
@@ -13937,7 +13931,8 @@
             "description": "Indicate if the product have a environmental risk\n\n",
             "x-stoplight": {
               "id": "5wig025t66ump"
-            }
+            },
+            "default": false
           },
           "technicalName": {
             "type": "string",
