@@ -10650,10 +10650,7 @@
           "ean",
           "quantity",
           "type",
-          "weight",
-          "length",
-          "width",
-          "height"
+          "weight"
         ],
         "properties": {
           "ean": {
@@ -13960,6 +13957,13 @@
               "id": "rvj35nwtqblwg"
             },
             "description": "packing code "
+          },
+          "volumeWeight": {
+            "type": "number",
+            "x-stoplight": {
+              "id": "yglp3fvpixm7v"
+            },
+            "description": "Calculated weight based on the length, width and height of a parcel converted to volumetric kilograms."
           }
         }
       }
