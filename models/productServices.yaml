@@ -1,0 +1,10 @@
+title: productServices
+x-stoplight:
+  id: okk4llu44dfc9
+type: array
+items:
+  x-stoplight:
+    id: e44eki3f8l9v8
+  type: string
+  example: SERVICE_FRONT_HOME
+description: Specifies the delivery service that will be sent to the quote engine. These productServices will not be used as a filter within the postEligibilities method.
