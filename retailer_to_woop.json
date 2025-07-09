@@ -9386,6 +9386,16 @@
                 "properties": {
                   "active": {
                     "type": "boolean"
+                  },
+                  "timeout": {
+                    "type": "integer",
+                    "x-stoplight": {
+                      "id": "81czo3svamhgf"
+                    },
+                    "default": 500,
+                    "minimum": 0,
+                    "maximum": 10000,
+                    "description": "Allows dynamic configuration of the maximum timeout (in ms) for calls to external adapters during quote calculation."
                   }
                 }
               },
