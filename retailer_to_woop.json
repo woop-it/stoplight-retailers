@@ -9486,20 +9486,6 @@
                     }
                   }
                 }
-              },
-              "withOnGoingSlots": {
-                "type": "object",
-                "x-stoplight": {
-                  "id": "kwtvvmnhua2v7"
-                },
-                "properties": {
-                  "active": {
-                    "type": "boolean",
-                    "x-stoplight": {
-                      "id": "o497x9rp45a3i"
-                    }
-                  }
-                }
               }
             }
           },
