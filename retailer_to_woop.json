@@ -8357,6 +8357,23 @@
                             "default": false
                           }
                         }
+                      },
+                      "withOnGoingSlots": {
+                        "type": "object",
+                        "x-stoplight": {
+                          "id": "d32c0a1g1yhii"
+                        },
+                        "required": [
+                          "active"
+                        ],
+                        "properties": {
+                          "active": {
+                            "type": "boolean",
+                            "x-stoplight": {
+                              "id": "8gltyrdg9f7mj"
+                            }
+                          }
+                        }
                       }
                     }
                   }
