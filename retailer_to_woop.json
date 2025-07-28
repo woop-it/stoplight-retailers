@@ -10576,6 +10576,20 @@
       },
       "product": {
         "type": "object",
+        "x-examples": {
+          "Example 1": {
+            "type": "TYPOLOGY_GENERIC",
+            "ean": "12345JFDFD",
+            "cug": "234J",
+            "label": "Mon produit",
+            "quantity": 1
+          }
+        },
+        "description": "Specifies the information needed to update a product",
+        "title": "Standard",
+        "required": [
+          "type"
+        ],
         "properties": {
           "type": {
             "$ref": "#/components/schemas/productType"
@@ -10596,22 +10610,14 @@
             "type": "integer",
             "default": 1,
             "description": "Product quantity"
+          },
+          "productFamilies": {
+            "$ref": "./models/productFamilies.yaml"
+          },
+          "productServices": {
+            "$ref": "./models/productServices.yaml"
           }
-        },
-        "required": [
-          "type"
-        ],
-        "x-examples": {
-          "Example 1": {
-            "type": "TYPOLOGY_GENERIC",
-            "ean": "12345JFDFD",
-            "cug": "234J",
-            "label": "Mon produit",
-            "quantity": 1
-          }
-        },
-        "description": "Specifies the information needed to update a product",
-        "title": "Standard"
+        }
       },
       "productWithADROptions": {
         "type": "object",
