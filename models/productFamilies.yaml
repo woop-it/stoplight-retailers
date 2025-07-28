@@ -1,0 +1,10 @@
+title: productFamilies
+x-stoplight:
+  id: q8c334rb174ud
+type: array
+items:
+  x-stoplight:
+    id: awc5ch1mvxel4
+  type: string
+  example: MUEBLES
+description: Specifies the family of products that will be sent to the rate engine. These productFamilies will not be used as a filter within the postEligibilities method.
