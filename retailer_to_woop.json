@@ -10584,7 +10584,7 @@
             "default": 1,
             "description": "Product quantity"
           },
-          "productFamily": {
+          "productFamilies": {
             "$ref": "./models/productFamilies.yaml"
           },
           "productServices": {
