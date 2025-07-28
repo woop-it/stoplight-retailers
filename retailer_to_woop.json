@@ -10585,7 +10585,7 @@
             "description": "Product quantity"
           },
           "productFamily": {
-            "$ref": "./models/productFamily.yaml"
+            "$ref": "./models/productFamilies.yaml"
           },
           "productServices": {
             "$ref": "./models/productServices.yaml"
