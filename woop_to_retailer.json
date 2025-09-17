@@ -2717,6 +2717,15 @@
           }
         },
         "title": "Specifications (specifications)",
+        "required": [
+          "updateOrder",
+          "cancelOrder",
+          "label",
+          "storageCapacity",
+          "weightMin",
+          "weightMax",
+          "distanceMax"
+        ],
         "properties": {
           "updateOrder": {
             "type": "boolean",
@@ -2726,9 +2735,12 @@
             "type": "boolean",
             "description": "Indicates whether the order cancellation is allowed"
           },
-          "carrierLabel": {
+          "label": {
             "type": "boolean",
-            "description": "Indicates whether the carrier has a carrier label"
+            "description": "Indicates whether the carrier has a carrier label",
+            "x-stoplight": {
+              "id": "uas7pl530f5kk"
+            }
           },
           "storageCapacity": {
             "type": "boolean",
@@ -2748,16 +2760,7 @@
             "description": "Claim for url",
             "example": "https://myClaimFormUrl.com"
           }
-        },
-        "required": [
-          "updateOrder",
-          "cancelOrder",
-          "carrierLabel",
-          "storageCapacity",
-          "weightMin",
-          "weightMax",
-          "distanceMax"
-        ]
+        }
       },
       "weight": {
         "description": "Specifies the weight allowance",
