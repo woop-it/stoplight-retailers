@@ -11923,6 +11923,7 @@
         "required": [
           "firstName",
           "lastName",
+          "phone",
           "email",
           "language",
           "timezone"
