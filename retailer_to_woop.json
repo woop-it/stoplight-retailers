@@ -10031,7 +10031,7 @@
           }
         },
         "title": "exchangePlace",
-        "description": "Here, 3 location.types are possible (`address`, `pickupPoint` and `exchangePlace`). The request must be made using one of these three options.\n\n> If location.type = `exchangePlace` then the identifier of the collection point configured and registered on the WOOP platform. ",
+        "description": "Here, 3 location.types are possible (`address`, `pickupPoint` and `exchangePlace`). The request must be made using one of these three options.\n\n> If location.type = `exchangePlace` then the identifier of the collection point configured and registered on the WOOP platform.\n\n> If options.withRankSlots is set to true, then only the exchangePlace type will be accepted",
         "required": [
           "id",
           "storeId",
