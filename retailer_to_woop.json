@@ -8374,6 +8374,24 @@
                             }
                           }
                         }
+                      },
+                      "ranking": {
+                        "type": "object",
+                        "x-stoplight": {
+                          "id": "73h4h2x2z1cj7"
+                        },
+                        "description": "Highlight the most efficient time slots, i.e., those that cause the least deviation from already planned orders. If the parameter is set to ‘true’, a call is made to a route-optimization API",
+                        "required": [
+                          "active"
+                        ],
+                        "properties": {
+                          "active": {
+                            "type": "boolean",
+                            "x-stoplight": {
+                              "id": "f12rlfta3gu01"
+                            }
+                          }
+                        }
                       }
                     }
                   }
@@ -10013,7 +10031,7 @@
           }
         },
         "title": "exchangePlace",
-        "description": "Here, 3 location.types are possible (`address`, `pickupPoint` and `exchangePlace`). The request must be made using one of these three options.\n\n> If location.type = `exchangePlace` then the identifier of the collection point configured and registered on the WOOP platform. ",
+        "description": "Here, 3 location.types are possible (`address`, `pickupPoint` and `exchangePlace`). The request must be made using one of these three options.\n\n> If location.type = `exchangePlace` then the identifier of the collection point configured and registered on the WOOP platform.\n\n> If options.withRankSlots is set to true, then only the exchangePlace type will be accepted",
         "required": [
           "id",
           "storeId",
@@ -11528,6 +11546,63 @@
           "remainingCapacity": {
             "type": "number",
             "description": "Remaining availability for this time slot"
+          },
+          "rank": {
+            "type": "object",
+            "x-stoplight": {
+              "id": "dwarg6epadrdt"
+            },
+            "properties": {
+              "score": {
+                "type": "number",
+                "x-stoplight": {
+                  "id": "33776l3c28iiv"
+                },
+                "description": "Number between 0 and 1 based on geographical proximity"
+              },
+              "matchingDeliveriesCount": {
+                "type": "number",
+                "x-stoplight": {
+                  "id": "5ujk965c6iuqy"
+                },
+                "description": "Number of nearby deliveries"
+              },
+              "minTravelTime": {
+                "type": "string",
+                "x-stoplight": {
+                  "id": "thdyx8twprmfe"
+                },
+                "description": "Time to the nearest point"
+              },
+              "meanTravelTime": {
+                "type": "string",
+                "x-stoplight": {
+                  "id": "22tgh7c8tih02"
+                },
+                "description": "Average travel time to all nearby points"
+              },
+              "minDistance": {
+                "type": "string",
+                "x-stoplight": {
+                  "id": "ravkaergb366q"
+                },
+                "description": "Distance to the nearest point"
+              },
+              "meanDistance": {
+                "type": "string",
+                "x-stoplight": {
+                  "id": "o6r95ksjyupk4"
+                },
+                "description": "Average distance to nearby points"
+              },
+              "estimatedDistanceIncrease": {
+                "type": "string",
+                "x-stoplight": {
+                  "id": "geduq0a9eokh5"
+                },
+                "description": "Estimated additional distance"
+              }
+            }
           }
         }
       },
