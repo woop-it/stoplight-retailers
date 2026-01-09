@@ -8375,7 +8375,7 @@
                           }
                         }
                       },
-                      "withRankSlots": {
+                      "ranking": {
                         "type": "object",
                         "x-stoplight": {
                           "id": "73h4h2x2z1cj7"
