@@ -10730,6 +10730,9 @@
               },
               "interval": {
                 "$ref": "#/components/schemas/pickingInterval"
+              },
+              "contact": {
+                "$ref": "#/components/schemas/contact_eligibility"
               }
             }
           },
@@ -10745,6 +10748,9 @@
               },
               "interval": {
                 "$ref": "#/components/schemas/interval"
+              },
+              "contact": {
+                "$ref": "#/components/schemas/contact_eligibility"
               }
             }
           },
@@ -10829,6 +10835,13 @@
                   "minRemainingCapacity": {
                     "type": "number",
                     "description": "Minimum remaining capacity for this slot"
+                  },
+                  "withOngoingSlots": {
+                    "type": "boolean",
+                    "x-stoplight": {
+                      "id": "lgxci3jzh457s"
+                    },
+                    "description": "Display the slots already started"
                   }
                 }
               },
@@ -11213,6 +11226,9 @@
               },
               "interval": {
                 "$ref": "#/components/schemas/pickingInterval"
+              },
+              "contact": {
+                "$ref": "#/components/schemas/contact_eligibility"
               }
             }
           },
@@ -11228,6 +11244,9 @@
               },
               "interval": {
                 "$ref": "#/components/schemas/interval"
+              },
+              "contact": {
+                "$ref": "#/components/schemas/contact_eligibility"
               }
             }
           },
@@ -11303,6 +11322,13 @@
                   "minRemainingCapacity": {
                     "type": "number",
                     "description": "Minimum remaining capacity for this slot"
+                  },
+                  "withOngoingSlots": {
+                    "type": "boolean",
+                    "x-stoplight": {
+                      "id": "542i4a8mlof54"
+                    },
+                    "description": "Display the slots already started"
                   }
                 }
               },
@@ -12398,6 +12424,26 @@
             "description": "Is used to indicate the company name if the contact is a professional.\n\n",
             "maxLength": 50,
             "example": "woop"
+          }
+        }
+      },
+      "contact_eligibility": {
+        "title": "Contact",
+        "x-stoplight": {
+          "id": "4nj8k96jctwkw"
+        },
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "Example": {
+            "isProfessional": true
+          }
+        },
+        "properties": {
+          "isProfessional": {
+            "type": "boolean",
+            "description": "Indicates if the contact is a professional",
+            "default": false
           }
         }
       },
