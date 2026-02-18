@@ -9660,7 +9660,7 @@
                     "x-stoplight": {
                       "id": "0wp0cy8xi731j"
                     },
-                    "description": "Information on the delivery location \nIs limited to a 300-day interval.",
+                    "description": "Information on the delivery location. \nThe interval is limited to 300 days.",
                     "required": [
                       "location",
                       "interval"
