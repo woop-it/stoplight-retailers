@@ -9660,7 +9660,7 @@
                     "x-stoplight": {
                       "id": "0wp0cy8xi731j"
                     },
-                    "description": "Information on the delivery location ",
+                    "description": "Information on the delivery location \nIs limited to a 300-day interval.",
                     "required": [
                       "location",
                       "interval"
@@ -10811,7 +10811,7 @@
               },
               "slot": {
                 "type": "object",
-                "description": "Allows you to define slot reservation criteria. \nWarning : To use this option, you need to enter the parcel dimensions !",
+                "description": "Allows you to define slot reservation criteria. \nWarning : To use this option, you need to enter the parcel dimensions !\nThis option is limited to a 300-day interval.",
                 "properties": {
                   "active": {
                     "type": "boolean"
@@ -11298,7 +11298,7 @@
               },
               "slot": {
                 "type": "object",
-                "description": "Allows you to define slot reservation criteria. \nWarning : To use this option, you need to enter the parcel dimensions !",
+                "description": "Allows you to define slot reservation criteria. \nWarning : To use this option, you need to enter the parcel dimensions !\nThis option is limited to a 300-day interval.",
                 "properties": {
                   "active": {
                     "type": "boolean"
@@ -12800,7 +12800,7 @@
             "x-stoplight": {
               "id": "e072oi6neiege"
             },
-            "description": "Used to retrieve the sign's parcel category. If this field is not empty, length, width and height are not mandatory"
+            "description": "Used to retrieve the retailer's parcel category. If this field is not empty, length, width and height are not mandatory"
           },
           "length": {
             "$ref": "#/components/schemas/length"
