@@ -9687,10 +9687,7 @@
                     "$ref": "./models/additionalData.yaml"
                   },
                   "carrierCodes": {
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    }
+                    "$ref": "#/components/schemas/carrierCodes"
                   },
                   "limit": {
                     "type": "integer",
@@ -12170,6 +12167,99 @@
           }
         ]
       },
+      "carrierCodes": {
+        "title": "CarrierCodes (CarrierCodes)",
+        "x-stoplight": {
+          "id": "c1kikt8vee88d"
+        },
+        "description": "Here, 2 carrierCodes.types are possible (`simple string` and `deliveryMethod object`). If carrierCodeWithDeliveryMethod selected, response will have a carrierNameWithDeliveryMethod carrier type",
+        "x-examples": {
+          "Adress": {
+            "type": "address",
+            "addressLine1": "179 boulevard de Turin",
+            "elevator": true,
+            "floor": 8,
+            "postalCode": "59000",
+            "city": "Lille",
+            "country": "FR"
+          },
+          "Pickup points": {
+            "type": "pickupPoint",
+            "id": "76761",
+            "carrierCode": "bpost",
+            "boxCategory": {
+              "id": "XXX",
+              "accessibility": "UPPER"
+            }
+          },
+          "Exchange place": {
+            "type": "exchangePlace",
+            "id": "1"
+          },
+          "Coordinates": {
+            "type": "address",
+            "postalCode": "59000",
+            "country": "FR",
+            "coordinates": {
+              "latitude": 0,
+              "longitude": 0
+            }
+          }
+        },
+        "oneOf": [
+          {
+            "x-stoplight": {
+              "id": "em5ds41i53v0r"
+            },
+            "items": {
+              "x-stoplight": {
+                "id": "ewbbb9vlhjefa"
+              },
+              "type": "string"
+            }
+          },
+          {
+            "x-stoplight": {
+              "id": "6j7ktepj66908"
+            },
+            "items": {
+              "$ref": "#/components/schemas/carrierCodeWithDeliveryMethod"
+            }
+          }
+        ],
+        "type": "array"
+      },
+      "carrierCodeWithDeliveryMethod": {
+        "title": "CarrierCodesWithDeliveryMethod",
+        "x-stoplight": {
+          "id": "j6mch2mik4uum"
+        },
+        "x-examples": {
+          "CarrierCodeWithDeliveryMethod": {
+            "code": "myCarrier",
+            "deliveryMethod": "SAMEDAY"
+          }
+        },
+        "type": "object",
+        "required": [
+          "code"
+        ],
+        "properties": {
+          "code": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "j897z30l0ikex"
+            }
+          },
+          "deliveryMethod": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "0hwktmfrlw0p4"
+            }
+          }
+        },
+        "description": "carrier code and deliveryMethod, if selected, response will have a carrier type has carrierNameWithDeliveryMethod"
+      },
       "locationForEligibility": {
         "title": "Location for eligibility method (locationForEligibility)",
         "x-stoplight": {
@@ -14578,7 +14668,14 @@
         ],
         "properties": {
           "carrier": {
-            "$ref": "#/components/schemas/carrierName"
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/carrierName"
+              },
+              {
+                "$ref": "#/components/schemas/carrierNameWithDeliveryMethod"
+              }
+            ]
           },
           "slots": {
             "type": "array",
@@ -15941,6 +16038,64 @@
               "id": "yglp3fvpixm7v"
             },
             "description": "Calculated weight based on the length, width and height of a parcel converted to volumetric kilograms."
+          }
+        }
+      },
+      "DeliveryMethod": {
+        "title": "deliveryMethod",
+        "x-stoplight": {
+          "id": "3vp91vwkje6le"
+        },
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "1aioey1llhinx"
+            }
+          },
+          "name": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "zlfz3rtp3q5km"
+            }
+          }
+        },
+        "description": "deliveryMethod name and code, null if it's the standard carrier",
+        "x-examples": {
+          "Example 1": {
+            "code": "SAMEDAY",
+            "name": "SAMEDAY"
+          }
+        }
+      },
+      "carrierNameWithDeliveryMethod": {
+        "title": "carrierNameWithDeliveryMethod",
+        "x-stoplight": {
+          "id": "rl6fxpvihhp32"
+        },
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "ial40uzzbsbsp"
+            }
+          },
+          "name": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "7u6nkhs6tf9la"
+            }
+          },
+          "type": {
+            "x-stoplight": {
+              "id": "uslcx9wl3is3x"
+            },
+            "enum": []
+          },
+          "deliveryMethod": {
+            "$ref": "#/components/schemas/DeliveryMethod"
           }
         }
       }
