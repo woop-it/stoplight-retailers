@@ -36,16 +36,16 @@
   },
   "servers": [
     {
-      "url": "https://retailer.last-mile.fr",
+      "url": "https://retailer.last-mile.fr/v2",
       "description": "Production URL"
     },
     {
-      "url": "https://ret-api.preprod.gcp.last-mile.fr",
+      "url": "https://ret-api.preprod.gcp.last-mile.fr/v2",
       "description": "Pre-production URL"
     },
     {
       "description": "Staging URL",
-      "url": "https://ret-api.recette.gcp.last-mile.fr"
+      "url": "https://ret-api.recette.gcp.last-mile.fr/v2"
     }
   ],
   "paths": {
