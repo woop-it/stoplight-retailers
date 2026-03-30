@@ -2243,7 +2243,7 @@
         ]
       }
     },
-    "/v2/orders": {
+    "/orders": {
       "post": {
         "tags": [
           "Order"
@@ -5109,7 +5109,7 @@
         "summary": "Subscription management"
       }
     },
-    "/v2/eligibilities": {
+    "/eligibilities": {
       "post": {
         "summary": "Delivery method by eligibility ",
         "operationId": "postEligibilities",
