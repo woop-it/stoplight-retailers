@@ -6633,7 +6633,7 @@
       },
       "parameters": []
     },
-    "/v2/eligibilities": {
+    "eligibilities": {
       "post": {
         "summary": "Delivery method by eligibility ",
         "operationId": "postEligibilities",
@@ -7998,7 +7998,8 @@
         ],
         "x-stoplight": {
           "id": "l7n6hsqfwzej6"
-        }
+        },
+        "x-internal": true
       },
       "parameters": []
     },
@@ -11407,7 +11408,8 @@
               }
             }
           }
-        }
+        },
+        "x-internal": false
       },
       "postOrders": {
         "type": "object",
