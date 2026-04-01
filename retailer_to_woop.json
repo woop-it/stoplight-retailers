@@ -65,7 +65,7 @@
         "summary": "Health"
       }
     },
-    "/orders/package/state": {
+    "/v2/orders/package/state": {
       "parameters": [],
       "put": {
         "summary": "Change Package state",
@@ -472,7 +472,10 @@
             }
           }
         },
-        "summary": "Create collect"
+        "summary": "Create collect",
+        "x-stoplight": {
+          "id": "mi0zcx5ssjdr2"
+        }
       },
       "get": {
         "summary": "",
@@ -491,7 +494,7 @@
                         "type": "string"
                       },
                       "status": {
-                        "$ref": "#/components/schemas/collectStatus"
+                        "$ref": "#/components/schemas/collectstatus"
                       },
                       "slot": {
                         "$ref": "#/components/schemas/slot"
@@ -620,7 +623,10 @@
         ],
         "tags": [
           "Collect"
-        ]
+        ],
+        "x-stoplight": {
+          "id": "x7hkcv2ogejyt"
+        }
       }
     },
     "/slots": {
@@ -878,7 +884,7 @@
         ]
       }
     },
-    "/enhancedLabel": {
+    "/v2/enhancedLabel": {
       "post": {
         "summary": "Enhanced Label",
         "description": "This method allows you to add specific info below a carrier's label according to a given template.",
@@ -1020,7 +1026,7 @@
       },
       "parameters": []
     },
-    "/deliveries/bookings": {
+    "/v2/deliveries/bookings": {
       "post": {
         "summary": "Book a delivery slot",
         "description": "This method allows you to reserve an available time slot for a delivery request from the schedule of one or more given carriers.",
@@ -1133,7 +1139,10 @@
         "operationId": "postDeliveriesBookings",
         "tags": [
           "Delivery Booking"
-        ]
+        ],
+        "x-stoplight": {
+          "id": "ptm517yhllj5w"
+        }
       },
       "parameters": []
     },
@@ -1207,7 +1216,7 @@
         ]
       }
     },
-    "/deliveries/bookings/{bookingId}": {
+    "/v2/deliveries/bookings/{bookingId}": {
       "parameters": [
         {
           "schema": {
@@ -1264,7 +1273,10 @@
           {
             "$ref": "#/components/parameters/apiVersion"
           }
-        ]
+        ],
+        "x-stoplight": {
+          "id": "rinodbia106yz"
+        }
       }
     },
     "/collects/{collectId}": {
@@ -1382,7 +1394,10 @@
         "summary": "Update collect",
         "tags": [
           "Collect"
-        ]
+        ],
+        "x-stoplight": {
+          "id": "1pzf1sahib2kq"
+        }
       },
       "delete": {
         "description": "This method allows you to cancel a collection request initially created by the retailer.\n\nThe method removes the time slot reservation as well as the collection request from the store. \n",
@@ -1450,7 +1465,10 @@
         "summary": "Cancel collect",
         "tags": [
           "Collect"
-        ]
+        ],
+        "x-stoplight": {
+          "id": "cjjq4km20e250"
+        }
       },
       "get": {
         "summary": "Get a collect",
@@ -1499,10 +1517,13 @@
         "description": "Returns collection information.",
         "tags": [
           "Collect"
-        ]
+        ],
+        "x-stoplight": {
+          "id": "95k3nryckvemh"
+        }
       }
     },
-    "/orders/{orderId}": {
+    "/v2/orders/{orderId}": {
       "delete": {
         "tags": [
           "Order"
@@ -1595,7 +1616,10 @@
             "description": "The order is already cancelled or an action is already in progress on this order"
           }
         },
-        "summary": "Delete order"
+        "summary": "Delete order",
+        "x-stoplight": {
+          "id": "1lk0nl5mw6lj8"
+        }
       },
       "get": {
         "tags": [
@@ -1805,7 +1829,10 @@
             }
           }
         },
-        "summary": "Get an order"
+        "summary": "Get an order",
+        "x-stoplight": {
+          "id": "mw28mb6q99o68"
+        }
       },
       "patch": {
         "tags": [
@@ -1958,10 +1985,13 @@
             "description": "An action is already in progress on this delivery\n\n[See the list of reasons](https://woop.stoplight.io/docs/retailer/docs/Models/Error_reasons.md)"
           }
         },
-        "summary": "Patch order"
+        "summary": "Patch order",
+        "x-stoplight": {
+          "id": "pwwcx1dol1hhc"
+        }
       }
     },
-    "/zoning/geoShape/{id}": {
+    "/v2/zoning/geoShape/{id}": {
       "delete": {
         "description": "Delete a geoShape",
         "operationId": "deleteGeoShape",
@@ -2020,7 +2050,7 @@
         }
       ]
     },
-    "/zoning/geoShape": {
+    "/v2/zoning/geoShape": {
       "get": {
         "description": "This method returns the geoShape details",
         "operationId": "getGeoShape",
@@ -2152,7 +2182,7 @@
         }
       }
     },
-    "/orders/{orderId}/retry": {
+    "/v2/orders/{orderId}/retry": {
       "parameters": [
         {
           "schema": {
@@ -2240,10 +2270,13 @@
         "description": "The aim of this method is to perform a retry if an order has a functional error status (ORDER_WITH_NO_CARRIER_ELIGIBLE, ORDER_WITH_NO_QUOTE, ORDER_WITH_NO_CARRIER_AVAILABLE, ORDER_REFUSED_DELIVERY).\nThis API will use exactly the same data sent for the POST /orders initial call (if part of the order data has change, then the PATCH /orders/{orderId} API has to be called instead).",
         "tags": [
           "Order"
-        ]
+        ],
+        "x-stoplight": {
+          "id": "3psu7cllzoyks"
+        }
       }
     },
-    "/orders": {
+    "/v2/orders": {
       "post": {
         "tags": [
           "Order"
@@ -3216,7 +3249,10 @@
           }
         },
         "summary": "Create order",
-        "x-internal": false
+        "x-internal": false,
+        "x-stoplight": {
+          "id": "di0j5w4q07rh2"
+        }
       },
       "get": {
         "tags": [
@@ -3302,10 +3338,13 @@
             }
           }
         },
-        "summary": "Get orders"
+        "summary": "Get orders",
+        "x-stoplight": {
+          "id": "mqwficgjikc81"
+        }
       }
     },
-    "/orders/{orderId}/label": {
+    "/v2/orders/{orderId}/label": {
       "get": {
         "tags": [
           "Label"
@@ -3430,7 +3469,10 @@
             }
           }
         },
-        "summary": "Retrieve label"
+        "summary": "Retrieve label",
+        "x-stoplight": {
+          "id": "6w30xk6i4ngma"
+        }
       },
       "parameters": [
         {
@@ -3444,7 +3486,7 @@
         }
       ]
     },
-    "/orders/{orderId}/return": {
+    "/v2/orders/{orderId}/return": {
       "post": {
         "tags": [
           "Product return"
@@ -3632,10 +3674,13 @@
             }
           }
         },
-        "summary": "Create product return"
+        "summary": "Create product return",
+        "x-stoplight": {
+          "id": "oeagv4gb0ur1y"
+        }
       }
     },
-    "/orders/{orderId}/documents": {
+    "/v2/orders/{orderId}/documents": {
       "get": {
         "tags": [
           "Document"
@@ -3744,7 +3789,10 @@
             }
           }
         },
-        "summary": "Retrieve documents"
+        "summary": "Retrieve documents",
+        "x-stoplight": {
+          "id": "pub7ar54y29jb"
+        }
       },
       "post": {
         "summary": "Add an order document",
@@ -3820,10 +3868,13 @@
               }
             }
           }
+        },
+        "x-stoplight": {
+          "id": "9vbkh6k2dv9ny"
         }
       }
     },
-    "/orders/{orderId}/documents/download": {
+    "/v2/orders/{orderId}/documents/download": {
       "get": {
         "tags": [
           "Document"
@@ -3882,10 +3933,13 @@
             }
           }
         },
-        "summary": "Download all documents"
+        "summary": "Download all documents",
+        "x-stoplight": {
+          "id": "l878gla2o78qw"
+        }
       }
     },
-    "/orders/{orderId}/documents/{documentId}/download": {
+    "/v2/orders/{orderId}/documents/{documentId}/download": {
       "get": {
         "tags": [
           "Document"
@@ -3942,10 +3996,13 @@
             }
           }
         },
-        "summary": "Download an order document"
+        "summary": "Download an order document",
+        "x-stoplight": {
+          "id": "8ki79k7wjuoc2"
+        }
       }
     },
-    "/pickupPoints": {
+    "/v2/pickupPoints": {
       "post": {
         "tags": [
           "Pickup points"
@@ -4307,10 +4364,13 @@
             }
           }
         },
-        "summary": "Search pickup points"
+        "summary": "Search pickup points",
+        "x-stoplight": {
+          "id": "mfdte4j8tfux6"
+        }
       }
     },
-    "/pickupPoints/{pickupPointId}": {
+    "/v2/pickupPoints/{pickupPointId}": {
       "get": {
         "tags": [
           "Pickup points"
@@ -4502,10 +4562,13 @@
             }
           }
         },
-        "summary": "Pickup point detail"
+        "summary": "Pickup point detail",
+        "x-stoplight": {
+          "id": "ibpdveipekfu5"
+        }
       }
     },
-    "/subscriptions": {
+    "/v2/subscriptions": {
       "post": {
         "tags": [
           "Subscription"
@@ -4900,31 +4963,31 @@
                   "value": {
                     "callbacks": {
                       "carrier": {
-                        "url": "https://my_url/orders/{orderId}/carrier",
+                        "url": "https://my_url/v2/orders/{orderId}/carrier",
                         "version": "1.1.0"
                       },
                       "status": {
-                        "url": "https://my_url/orders/{orderId}/status",
+                        "url": "https://my_url/v2/orders/{orderId}/status",
                         "version": "1.1.0"
                       },
                       "score": {
-                        "url": "https://my_url/orders/{orderId}/score",
+                        "url": "https://my_url/v2/orders/{orderId}/score",
                         "version": "1.1.0"
                       },
                       "deliveryClosure": {
-                        "url": "https://my_url/orders/{orderId}/deliveryClosure",
+                        "url": "https://my_url/v2/orders/{orderId}/deliveryClosure",
                         "version": "1.1.0"
                       },
                       "event": {
-                        "url": "https://my_url/orders/{orderId}/event",
+                        "url": "https://my_url/v2/orders/{orderId}/event",
                         "version": "1.1.0"
                       },
                       "deliveryStop": {
-                        "url": "https://my_url/orders/{orderId}/stops",
+                        "url": "https://my_url/v2/orders/{orderId}/stops",
                         "version": "1.8.0"
                       },
                       "tracking": {
-                        "url": "https://my_url/orders/{orderId}/trackingPageUrl",
+                        "url": "https://my_url/v2/orders/{orderId}/trackingPageUrl",
                         "version": "1.9.0"
                       },
                       "collectStatus": {
@@ -4932,11 +4995,11 @@
                         "version": "1.1.0"
                       },
                       "loadingIdentifications": {
-                        "url": "https://my_url/orders/{orderId}/bookings/{bookingId}/loadingIdentifications",
+                        "url": "https://my_url/v2/orders/{orderId}/bookings/{bookingId}/loadingIdentifications",
                         "version": "1.1.0"
                       },
                       "bookingStatus": {
-                        "url": "https://my_url/orders/{orderId}/bookings/{bookingId}/status",
+                        "url": "https://my_url/v2/orders/{orderId}/bookings/{bookingId}/status",
                         "version": "1.1.0"
                       }
                     },
@@ -4958,31 +5021,31 @@
                   "value": {
                     "callbacks": {
                       "carrier": {
-                        "url": "https://my_url/orders/{orderId}/carrier",
+                        "url": "https://my_url/v2/orders/{orderId}/carrier",
                         "version": "1.1.0"
                       },
                       "status": {
-                        "url": "https://my_url/orders/{orderId}/status",
+                        "url": "https://my_url/v2/orders/{orderId}/status",
                         "version": "1.1.0"
                       },
                       "score": {
-                        "url": "https://my_url/orders/{orderId}/score",
+                        "url": "https://my_url/v2/orders/{orderId}/score",
                         "version": "1.1.0"
                       },
                       "deliveryClosure": {
-                        "url": "https://my_url/orders/{orderId}/deliveryClosure",
+                        "url": "https://my_url/v2/orders/{orderId}/deliveryClosure",
                         "version": "1.1.0"
                       },
                       "event": {
-                        "url": "https://my_url/orders/{orderId}/event",
+                        "url": "https://my_url/v2/orders/{orderId}/event",
                         "version": "1.1.0"
                       },
                       "deliveryStop": {
-                        "url": "https://my_url/orders/{orderId}/stops",
+                        "url": "https://my_url/v2/orders/{orderId}/stops",
                         "version": "1.8.0"
                       },
                       "tracking": {
-                        "url": "https://my_url/orders/{orderId}/trackingPageUrl",
+                        "url": "https://my_url/v2/orders/{orderId}/trackingPageUrl",
                         "version": "1.9.0"
                       },
                       "collectStatus": {
@@ -4990,11 +5053,11 @@
                         "version": "1.1.0"
                       },
                       "loadingIdentifications": {
-                        "url": "https://my_url/orders/{orderId}/bookings/{bookingId}/loadingIdentifications",
+                        "url": "https://my_url/v2/orders/{orderId}/bookings/{bookingId}/loadingIdentifications",
                         "version": "1.1.0"
                       },
                       "bookingStatus": {
-                        "url": "https://my_url/orders/{orderId}/bookings/{bookingId}/status",
+                        "url": "https://my_url/v2/orders/{orderId}/bookings/{bookingId}/status",
                         "version": "1.1.0"
                       }
                     },
@@ -5013,31 +5076,31 @@
                   "value": {
                     "callbacks": {
                       "carrier": {
-                        "url": "https://my_url/orders/{orderId}/carrier",
+                        "url": "https://my_url/v2/orders/{orderId}/carrier",
                         "version": "1.1.0"
                       },
                       "status": {
-                        "url": "https://my_url/orders/{orderId}/status",
+                        "url": "https://my_url/v2/orders/{orderId}/status",
                         "version": "1.1.0"
                       },
                       "score": {
-                        "url": "https://my_url/orders/{orderId}/score",
+                        "url": "https://my_url/v2/orders/{orderId}/score",
                         "version": "1.1.0"
                       },
                       "deliveryClosure": {
-                        "url": "https://my_url/orders/{orderId}/deliveryClosure",
+                        "url": "https://my_url/v2/orders/{orderId}/deliveryClosure",
                         "version": "1.1.0"
                       },
                       "event": {
-                        "url": "https://my_url/orders/{orderId}/event",
+                        "url": "https://my_url/v2/orders/{orderId}/event",
                         "version": "1.1.0"
                       },
                       "deliveryStop": {
-                        "url": "https://my_url/orders/{orderId}/stops",
+                        "url": "https://my_url/v2/orders/{orderId}/stops",
                         "version": "1.8.0"
                       },
                       "tracking": {
-                        "url": "https://my_url/orders/{orderId}/trackingPageUrl",
+                        "url": "https://my_url/v2/orders/{orderId}/trackingPageUrl",
                         "version": "1.9.0"
                       },
                       "collectStatus": {
@@ -5045,11 +5108,11 @@
                         "version": "1.1.0"
                       },
                       "loadingIdentifications": {
-                        "url": "https://my_url/orders/{orderId}/bookings/{bookingId}/loadingIdentifications",
+                        "url": "https://my_url/v2/orders/{orderId}/bookings/{bookingId}/loadingIdentifications",
                         "version": "1.1.0"
                       },
                       "bookingStatus": {
-                        "url": "https://my_url/orders/{orderId}/bookings/{bookingId}/status",
+                        "url": "https://my_url/v2/orders/{orderId}/bookings/{bookingId}/status",
                         "version": "1.1.0"
                       }
                     },
@@ -5099,7 +5162,10 @@
             }
           }
         },
-        "summary": "Subscription management"
+        "summary": "Subscription management",
+        "x-stoplight": {
+          "id": "qe7nlty3c1yp7"
+        }
       }
     },
     "/eligibilities": {
@@ -6633,7 +6699,7 @@
       },
       "parameters": []
     },
-    "eligibilities": {
+    "/v2/eligibilities": {
       "post": {
         "summary": "Delivery method by eligibility ",
         "operationId": "postEligibilities",
@@ -8003,7 +8069,7 @@
       },
       "parameters": []
     },
-    "/orders/download": {
+    "/v2/orders/download": {
       "get": {
         "summary": "Download delivery slip by carrier",
         "tags": [
@@ -8116,10 +8182,13 @@
             "name": "deliverySubStatus",
             "description": "SubStatus de la livraison"
           }
-        ]
+        ],
+        "x-stoplight": {
+          "id": "6l0ahxt5xbbmx"
+        }
       }
     },
-    "/orders/{orderId}/packages/{packageId}/label": {
+    "/v2/orders/{orderId}/packages/{packageId}/label": {
       "parameters": [
         {
           "schema": {
@@ -8272,7 +8341,10 @@
             "name": "resize",
             "description": "Label size"
           }
-        ]
+        ],
+        "x-stoplight": {
+          "id": "zscxeat6ui6sg"
+        }
       }
     },
     "/collects/{collectId}/status": {
@@ -8362,10 +8434,13 @@
         "tags": [
           "Collect"
         ],
-        "description": "This method allows the retailer to send an update on the collection status.\n\nThe retailer must enter the next collection tracking status to progress the collection request. This delivery tracking status must be consistent with the defined workflow. <a href=\"/docs/retailer/docs/Modèles/Statuts-de-retrait-C&C.md\">Workflow and status list</a>"
+        "description": "This method allows the retailer to send an update on the collection status.\n\nThe retailer must enter the next collection tracking status to progress the collection request. This delivery tracking status must be consistent with the defined workflow. <a href=\"/docs/retailer/docs/Modèles/Statuts-de-retrait-C&C.md\">Workflow and status list</a>",
+        "x-stoplight": {
+          "id": "ar4jqw0uuxlrq"
+        }
       }
     },
-    "/orders/{orderId}/packages/states": {
+    "/v2/orders/{orderId}/packages/states": {
       "patch": {
         "x-stoplight": {
           "id": "sd2j890dk4csc"
@@ -8383,7 +8458,7 @@
         ]
       }
     },
-    "/stores": {
+    "/v2/stores": {
       "post": {
         "summary": "Create a store",
         "tags": [
@@ -8451,7 +8526,7 @@
         }
       }
     },
-    "/stores/{storeId}": {
+    "/v2/stores/{storeId}": {
       "parameters": [
         {
           "schema": {
@@ -8527,7 +8602,7 @@
         }
       }
     },
-    "/deliveryPromise": {
+    "/v2/deliveryPromise": {
       "post": {
         "summary": "Determine the delivery promise",
         "tags": [
@@ -8615,7 +8690,7 @@
         }
       }
     },
-    "/orders/{orderId}/events": {
+    "/v2/orders/{orderId}/events": {
       "get": {
         "summary": "Retrieve notifications sent by Woop",
         "responses": {
@@ -8784,7 +8859,7 @@
         }
       ]
     },
-    "/orders/{orderId}/labels/list": {
+    "/v2/orders/{orderId}/labels/list": {
       "parameters": [
         {
           "schema": {
@@ -8937,7 +9012,7 @@
         "description": "This method retrieves a download link for all the package labels in a customer order. \n\nThe labels retrieved are either unique or consolidated for the entire order. "
       }
     },
-    "/shipments": {
+    "/v2/shipments": {
       "post": {
         "summary": "Create shipment",
         "tags": [
@@ -9011,7 +9086,7 @@
         ]
       }
     },
-    "/shipments/fulfillments": {
+    "/v2/shipments/fulfillments": {
       "parameters": [],
       "post": {
         "summary": "Declare the contents of an order",
@@ -9228,7 +9303,7 @@
         ]
       }
     },
-    "/shipments/fulfillment/{fulfillmentId}": {
+    "/v2/shipments/fulfillment/{fulfillmentId}": {
       "parameters": [
         {
           "schema": {
@@ -9492,7 +9567,7 @@
         }
       }
     },
-    "/timeslots/search": {
+    "/v2/timeslots/search": {
       "post": {
         "summary": "Search a timeslots",
         "tags": [
