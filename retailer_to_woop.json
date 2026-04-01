@@ -5415,26 +5415,6 @@
                               }
                             }
                           },
-                          "durationSlot": {
-                            "type": "object",
-                            "description": "Duration of the delivery slot",
-                            "required": [
-                              "value",
-                              "unit"
-                            ],
-                            "properties": {
-                              "value": {
-                                "type": "number"
-                              },
-                              "unit": {
-                                "type": "string",
-                                "enum": [
-                                  "day",
-                                  "hour"
-                                ]
-                              }
-                            }
-                          },
                           "services": {
                             "type": "array",
                             "description": "List of delivery services",
@@ -9746,6 +9726,7 @@
             ]
           }
         },
+        "x-internal": false,
         "required": [
           "storeId",
           "picking",
@@ -9838,42 +9819,6 @@
                   }
                 }
               },
-              "slot": {
-                "type": "object",
-                "description": "Allows you to define slot reservation criteria. \nWarning : To use this option, you need to enter the parcel dimensions !\nThis option is limited to a 300-day interval.",
-                "properties": {
-                  "active": {
-                    "type": "boolean"
-                  },
-                  "limit": {
-                    "type": "number",
-                    "description": "Max number of slot "
-                  },
-                  "type": {
-                    "type": "string",
-                    "example": "ORDERS_QUANTITY",
-                    "description": "Type of capacitance in the delivery week",
-                    "enum": [
-                      "ORDERS_QUANTITY",
-                      "PACKAGES_QUANTITY",
-                      "PALLETS_QUANTITY",
-                      "TRAYS_QUANTITY"
-                    ],
-                    "default": "ORDERS_QUANTITY"
-                  },
-                  "minRemainingCapacity": {
-                    "type": "number",
-                    "description": "Minimum remaining capacity for this slot"
-                  },
-                  "withOngoingSlots": {
-                    "type": "boolean",
-                    "x-stoplight": {
-                      "id": "542i4a8mlof54"
-                    },
-                    "description": "Display the slots already started"
-                  }
-                }
-              },
               "carrierScore": {
                 "type": "object",
                 "properties": {
@@ -9949,8 +9894,7 @@
               }
             }
           }
-        },
-        "x-internal": false
+        }
       },
       "postOrders": {
         "type": "object",
