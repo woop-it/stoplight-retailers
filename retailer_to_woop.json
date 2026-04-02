@@ -6514,7 +6514,7 @@
         "x-stoplight": {
           "id": "l7n6hsqfwzej6"
         },
-        "x-internal": true
+        "x-internal": false
       },
       "parameters": []
     },
