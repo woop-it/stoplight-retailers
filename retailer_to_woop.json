@@ -8212,7 +8212,10 @@
                     "$ref": "./models/additionalData.yaml"
                   },
                   "carrierCodes": {
-                    "$ref": "#/components/schemas/carrierCodeWithDeliveryMethod"
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/carrierCodeWithDeliveryMethod"
+                    }
                   },
                   "limit": {
                     "type": "integer",
