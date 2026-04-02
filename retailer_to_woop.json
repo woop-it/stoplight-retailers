@@ -5509,9 +5509,6 @@
                               }
                             }
                           },
-                          "slots": {
-                            "$ref": "#/components/schemas/eligibilitySlot"
-                          },
                           "price": {
                             "$ref": "./models/price.yaml"
                           },
