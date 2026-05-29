@@ -9467,7 +9467,7 @@
                     "type": "number",
                     "description": "Minimum remaining capacity for this slot"
                   },
-                  "withOngoingSlots": {
+                  "withOnGoingSlots": {
                     "type": "boolean",
                     "x-stoplight": {
                       "id": "lgxci3jzh457s"
