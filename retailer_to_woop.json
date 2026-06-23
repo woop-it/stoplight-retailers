@@ -9939,7 +9939,7 @@
               },
               "interval": {
                 "type": "array",
-                "description": "Collection time slots",
+                "description": "Picking time slot. Only the first element of the array is used. Additional entries are ignored. If omitted on v2, the slot is automatically calculated from the delivery promise service.",
                 "items": {
                   "$ref": "#/components/schemas/pickingInterval"
                 }
@@ -10798,7 +10798,7 @@
         ]
       },
       "deliveryInterval": {
-        "description": "Specifies the date range for a collection/delivery.",
+        "description": "Delivery time slot. Only the first element of the array is used — either a date range (start/end) or a booking reference (bookingId). If a bookingId is provided, it is resolved to actual dates at processing time. If omitted on v2, the slot is automatically calculated from the delivery promise service.",
         "x-examples": {
           "Example": {
             "start": "2019-05-02T15:52:01+0000",
