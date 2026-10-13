@@ -5219,25 +5219,12 @@
                                 }
                               },
                               "deliveryMethod": {
-                                "type": "object",
-                                "x-stoplight": {
-                                  "id": "703o3mklj0qem"
-                                },
-                                "description": "Delivery method by carrier",
-                                "properties": {
-                                  "name": {
-                                    "type": "string",
-                                    "x-stoplight": {
-                                      "id": "8t1vi65henc0h"
-                                    }
-                                  },
-                                  "code": {
-                                    "type": "string",
-                                    "x-stoplight": {
-                                      "id": "sayyvb24e09xj"
-                                    }
+                                "allOf": [
+                                  {
+                                    "$ref": "#/components/schemas/DeliveryMethod"
                                   }
-                                }
+                                ],
+                                "description": "Delivery method of the eligibility. Returned only for a delivery method other than the standard service: the key is absent for the standard service of the carrier. With `options.withDeliveryMethods.active` enabled, a carrier can appear several times in `eligibilities` (standard service, then one entry per delivery method)."
                               },
                               "impact": {
                                 "type": "object",
@@ -5512,6 +5499,14 @@
                           "price": {
                             "$ref": "./models/price.yaml"
                           },
+                          "sellingPrice": {
+                            "allOf": [
+                              {
+                                "$ref": "./models/sellingPrice.yaml"
+                              }
+                            ],
+                            "description": "Final selling price of the delivery for the retailer, resolved for each carrier from the retailer's selling grids. Returned only when `options.sellingPrice.active` is `true`, and then present on every returned eligibility: a carrier without a selling price is excluded from `eligibilities` (and listed in `ineligibleCarriers` when `options.ineligibleCarriers.active` is `true`). The delivery methods of a same carrier share the same selling price. Not to be confused with `price`, which is the carrier cost."
+                          },
                           "workSchedule": {
                             "$ref": "./models/Carrier/workSchedule.json"
                           },
@@ -5547,12 +5542,33 @@
                           "carrierName": {
                             "type": "string"
                           },
-                          "reason": {
+                          "deliveryMethod": {
+                            "allOf": [
+                              {
+                                "$ref": "#/components/schemas/DeliveryMethod"
+                              }
+                            ],
+                            "description": "Delivery method concerned, when the exclusion targets a delivery method rather than the standard service."
+                          },
+                          "reasons": {
                             "type": "array",
-                            "items": {}
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "reason": {
+                                  "type": "string",
+                                  "description": "Reason code, e.g. `technical.incidents.carrier.noSellingPriceAvailable`"
+                                },
+                                "message": {
+                                  "type": "string",
+                                  "description": "Readable explanation of the reason"
+                                }
+                              }
+                            }
                           }
                         }
-                      }
+                      },
+                      "description": "Carriers excluded from the result, with the reasons. Returned only when `options.ineligibleCarriers.active` is `true`. When `options.sellingPrice.active` is `true`, a carrier without a selling price is listed here with the reason `technical.incidents.carrier.noSellingPriceAvailable`."
                     }
                   }
                 },
@@ -6154,8 +6170,96 @@
                       "ineligibleCarriers": [
                         {
                           "carrierName": "string",
-                          "reason": [
-                            null
+                          "reasons": [
+                            {
+                              "reason": "string",
+                              "message": "string"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "Example with sellingPrice and delivery methods": {
+                    "value": {
+                      "eligibilities": [
+                        {
+                          "carrier": {
+                            "code": "chronopost",
+                            "name": "Chronopost"
+                          },
+                          "services": [
+                            {
+                              "name": "SERVICE_FRONT_HOME"
+                            }
+                          ],
+                          "sellingPrice": {
+                            "taxExcludedAmount": 6.9,
+                            "taxIncludedAmount": 8.28,
+                            "taxAmount": 1.38,
+                            "currency": "EUR"
+                          },
+                          "tags": [],
+                          "promises": {
+                            "picking": {
+                              "interval": {
+                                "start": "2026-10-14T08:00:00+0000",
+                                "end": "2026-10-14T12:00:00+0000"
+                              }
+                            },
+                            "delivery": {
+                              "interval": {
+                                "start": "2026-10-15T08:00:00+0000",
+                                "end": "2026-10-15T18:00:00+0000"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "carrier": {
+                            "code": "chronopost",
+                            "name": "Chronopost",
+                            "deliveryMethod": {
+                              "code": "SAMEDAY",
+                              "name": "SAMEDAY"
+                            }
+                          },
+                          "services": [
+                            {
+                              "name": "SERVICE_FRONT_HOME"
+                            }
+                          ],
+                          "sellingPrice": {
+                            "taxExcludedAmount": 6.9,
+                            "taxIncludedAmount": 8.28,
+                            "taxAmount": 1.38,
+                            "currency": "EUR"
+                          },
+                          "tags": [],
+                          "promises": {
+                            "picking": {
+                              "interval": {
+                                "start": "2026-10-14T08:00:00+0000",
+                                "end": "2026-10-14T12:00:00+0000"
+                              }
+                            },
+                            "delivery": {
+                              "interval": {
+                                "start": "2026-10-15T08:00:00+0000",
+                                "end": "2026-10-15T18:00:00+0000"
+                              }
+                            }
+                          }
+                        }
+                      ],
+                      "ineligibleCarriers": [
+                        {
+                          "carrierName": "Carrier number two",
+                          "reasons": [
+                            {
+                              "reason": "technical.incidents.carrier.noSellingPriceAvailable",
+                              "message": "No selling price available for this carrier"
+                            }
                           ]
                         }
                       ]
@@ -6496,6 +6600,128 @@
                     "options": {
                       "impact": {
                         "active": true
+                      }
+                    }
+                  }
+                },
+                "Example with sellingPrice": {
+                  "value": {
+                    "picking": {
+                      "location": {
+                        "type": "address",
+                        "addressLine1": "237 rue du ballon",
+                        "postalCode": "59110",
+                        "city": "La Madeleine",
+                        "country": "FR"
+                      }
+                    },
+                    "delivery": {
+                      "location": {
+                        "type": "address",
+                        "addressLine1": "179 Boulevard de Turin",
+                        "postalCode": "59000",
+                        "city": "Lille",
+                        "country": "FR"
+                      }
+                    },
+                    "packages": [
+                      {
+                        "length": {
+                          "value": 15,
+                          "unit": "cm"
+                        },
+                        "width": {
+                          "value": 15,
+                          "unit": "cm"
+                        },
+                        "height": {
+                          "value": 1.2,
+                          "unit": "m"
+                        },
+                        "weight": {
+                          "value": 560,
+                          "unit": "g"
+                        },
+                        "products": [
+                          {
+                            "type": "TYPOLOGY_GENERIC",
+                            "ean": "4dq86zd4q6zd4q64",
+                            "cug": "q56zd4q65d4q",
+                            "label": "Lamp",
+                            "quantity": 1
+                          }
+                        ],
+                        "quantity": 1
+                      }
+                    ],
+                    "storeId": "MAG01",
+                    "options": {
+                      "sellingPrice": {
+                        "active": true
+                      },
+                      "ineligibleCarriers": {
+                        "active": true
+                      },
+                      "deliveryPromise": {
+                        "active": true
+                      }
+                    }
+                  }
+                },
+                "Example without delivery methods": {
+                  "value": {
+                    "picking": {
+                      "location": {
+                        "type": "address",
+                        "addressLine1": "237 rue du ballon",
+                        "postalCode": "59110",
+                        "city": "La Madeleine",
+                        "country": "FR"
+                      }
+                    },
+                    "delivery": {
+                      "location": {
+                        "type": "address",
+                        "addressLine1": "179 Boulevard de Turin",
+                        "postalCode": "59000",
+                        "city": "Lille",
+                        "country": "FR"
+                      }
+                    },
+                    "packages": [
+                      {
+                        "length": {
+                          "value": 15,
+                          "unit": "cm"
+                        },
+                        "width": {
+                          "value": 15,
+                          "unit": "cm"
+                        },
+                        "height": {
+                          "value": 1.2,
+                          "unit": "m"
+                        },
+                        "weight": {
+                          "value": 560,
+                          "unit": "g"
+                        },
+                        "products": [
+                          {
+                            "type": "TYPOLOGY_GENERIC",
+                            "ean": "4dq86zd4q6zd4q64",
+                            "cug": "q56zd4q65d4q",
+                            "label": "Lamp",
+                            "quantity": 1
+                          }
+                        ],
+                        "quantity": 1
+                      }
+                    ],
+                    "storeId": "MAG01",
+                    "options": {
+                      "withDeliveryMethods": {
+                        "active": false
                       }
                     }
                   }
@@ -8211,8 +8437,17 @@
                   "carrierCodes": {
                     "type": "array",
                     "items": {
-                      "$ref": "#/components/schemas/carrierCodeWithDeliveryMethod"
-                    }
+                      "oneOf": [
+                        {
+                          "type": "string",
+                          "description": "Carrier code (standard service)"
+                        },
+                        {
+                          "$ref": "#/components/schemas/carrierCodeWithDeliveryMethod"
+                        }
+                      ]
+                    },
+                    "description": "Carriers to search, each given as a carrier code (string) or as an object `{code, deliveryMethod}`.\n\n- A code alone (string, or object without `deliveryMethod`) designates the standard service of the carrier only. The slots of a delivery method are returned only when it is requested explicitly.\n- A carrier code / delivery method pair that is not eligible for the retailer is rejected with a 403 (`UNKNOWN_CARRIER_CODE`) for the whole request.\n- Delivery methods are taken into account as soon as at least one item carries a `deliveryMethod`: `carrierSlots[].carrier.deliveryMethod` is then returned (`null` for the standard service)."
                   },
                   "limit": {
                     "type": "integer",
@@ -9819,6 +10054,26 @@
                   }
                 }
               },
+              "sellingPrice": {
+                "type": "object",
+                "description": "Returns, for each eligible carrier, the final selling price of the delivery for the retailer (`sellingPrice` in the response). Unlike `price`, which is the carrier cost, the selling price comes from the selling grids configured for the retailer. A carrier for which no selling price can be determined (no applicable selling grid, calculation error or timeout) is not returned as eligible.",
+                "required": [
+                  "active"
+                ],
+                "properties": {
+                  "active": {
+                    "type": "boolean",
+                    "description": "Enables the selling price calculation."
+                  },
+                  "timeout": {
+                    "type": "integer",
+                    "default": 5000,
+                    "minimum": 0,
+                    "maximum": 10000,
+                    "description": "Maximum duration (in ms) of the selling price calculation. Past this delay, the carriers without a selling price are excluded from the result."
+                  }
+                }
+              },
               "carrierScore": {
                 "type": "object",
                 "properties": {
@@ -9856,13 +10111,14 @@
               },
               "withDeliveryMethods": {
                 "type": "object",
-                "description": "Include delivery methods",
+                "description": "Includes the delivery methods of the carriers. Enabled by default.\n\n- `true` (default): the standard service and each delivery method of a carrier are returned as separate eligibilities, the latter with their `carrier.deliveryMethod`.\n- `false`: only the standard service of each carrier is returned.",
                 "x-stoplight": {
                   "id": "5j9cn8e3469ni"
                 },
                 "properties": {
                   "active": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "default": true
                   }
                 }
               }
@@ -10728,13 +10984,15 @@
             "type": "string",
             "x-stoplight": {
               "id": "j897z30l0ikex"
-            }
+            },
+            "description": "Carrier code"
           },
           "deliveryMethod": {
             "type": "string",
             "x-stoplight": {
               "id": "0hwktmfrlw0p4"
-            }
+            },
+            "description": "Delivery method code (e.g. `SAMEDAY`). Omitted for the standard service of the carrier."
           }
         },
         "description": ""
@@ -12506,7 +12764,7 @@
           "id": "xe3fbbamllx4n"
         },
         "type": "object",
-        "description": "contains all the data regarding the selection or exclusion of some carriers from the process involved",
+        "description": "Restriction applied to the choice of the carrier of the order. Each item of `carrierCodes` is a carrier code (string) or an object `{code, deliveryMethod}`.\n\n- `INCLUSION`: only the listed carriers are candidates. A code alone keeps the carrier with all its delivery methods; an object with `deliveryMethod` keeps only that delivery method.\n- `EXCLUSION`: a code alone excludes the carrier entirely; an object with `deliveryMethod` excludes only that delivery method, the standard service and the other delivery methods of the carrier remaining candidates.\n\nDelivery methods are candidates for the automatic choice of the carrier only if at least one item carries a `deliveryMethod`. Otherwise, only the standard service of the carriers is considered.\n\nWith the state `WITHOUT_SHIPMENT`, only the code of the carrier is used: `deliveryMethod` is ignored.",
         "required": [
           "carrierCodes",
           "mode"
@@ -12516,25 +12774,16 @@
             "type": "array",
             "description": "list of carrierCodes concerned by the selection",
             "items": {
-              "type": "object",
-              "example": "chronopost",
-              "required": [
-                "code"
-              ],
-              "properties": {
-                "code": {
+              "oneOf": [
+                {
                   "type": "string",
-                  "x-stoplight": {
-                    "id": "lyigrderavstu"
-                  }
+                  "description": "Carrier code",
+                  "example": "chronopost"
                 },
-                "deliveryMethod": {
-                  "type": "string",
-                  "x-stoplight": {
-                    "id": "h9txi0qz49o1u"
-                  }
+                {
+                  "$ref": "#/components/schemas/carrierCodeWithDeliveryMethod"
                 }
-              }
+              ]
             }
           },
           "mode": {
@@ -14551,7 +14800,7 @@
             }
           }
         },
-        "description": "deliveryMethod name and code, null if it's the standard carrier",
+        "description": "Delivery method name and code",
         "x-examples": {
           "Example 1": {
             "code": "SAMEDAY",
@@ -14590,7 +14839,14 @@
             "description": "Type of carrier slot \n- static : week type of carrier delivery slot \n- dynamic : availability slots retrieved by carrier API\n- smart : optimized smart delivery slots"
           },
           "deliveryMethod": {
-            "$ref": "#/components/schemas/DeliveryMethod"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DeliveryMethod"
+              }
+            ],
+            "nullable": true,
+            "description": "Delivery method of the slots. `null` for the standard service of the carrier. Returned only when at least one item of the request's `carrierCodes` carries a `deliveryMethod`.",
+            "type": "object"
           }
         }
       }

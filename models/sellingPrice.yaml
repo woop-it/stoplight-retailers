@@ -1,0 +1,18 @@
+title: SellingPrice
+type: object
+description: Final selling price of the delivery for the retailer. Distinct from `price`, which is the carrier cost.
+required:
+  - taxExcludedAmount
+  - currency
+properties:
+  taxExcludedAmount:
+    type: number
+    description: Selling price excluding taxes
+  taxIncludedAmount:
+    type: number
+    description: Selling price including taxes
+  taxAmount:
+    type: number
+    description: Amount of taxes
+  currency:
+    $ref: ./currency.yaml
