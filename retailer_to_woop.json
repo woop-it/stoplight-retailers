@@ -8408,7 +8408,7 @@
                     "x-stoplight": {
                       "id": "0wp0cy8xi731j"
                     },
-                    "description": "Information on the delivery location. \nThe interval is limited to 300 days.",
+                    "description": "Information on the delivery location. \nThe interval is limited to 15 days.",
                     "required": [
                       "location",
                       "interval"
@@ -9568,7 +9568,7 @@
               },
               "slot": {
                 "type": "object",
-                "description": "Allows you to define slot reservation criteria. \nWarning : To use this option, you need to enter the parcel dimensions !\nThis option is limited to a 300-day interval.",
+                "description": "Allows you to define slot reservation criteria. \nWarning : To use this option, you need to enter the parcel dimensions !\nThis option is limited to a 15-day interval.",
                 "properties": {
                   "active": {
                     "type": "boolean"
