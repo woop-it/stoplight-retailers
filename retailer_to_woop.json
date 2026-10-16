@@ -5205,18 +5205,7 @@
                                 "description": "Internal carrier code"
                               },
                               "score": {
-                                "type": "object",
-                                "properties": {
-                                  "satisfaction": {
-                                    "type": "string"
-                                  },
-                                  "nps": {
-                                    "type": "string"
-                                  },
-                                  "onTimeDeliveryScore": {
-                                    "type": "string"
-                                  }
-                                }
+                                "$ref": "#/components/schemas/eligibilityCarrierScore"
                               },
                               "deliveryMethod": {
                                 "allOf": [
@@ -5403,25 +5392,7 @@
                             }
                           },
                           "services": {
-                            "type": "array",
-                            "description": "List of delivery services",
-                            "items": {
-                              "type": "object",
-                              "properties": {
-                                "name": {
-                                  "type": "string"
-                                },
-                                "types": {
-                                  "$ref": "#/components/schemas/pickupPointType"
-                                },
-                                "categories": {
-                                  "type": "array",
-                                  "items": {
-                                    "type": "string"
-                                  }
-                                }
-                              }
-                            }
+                            "$ref": "#/components/schemas/eligibilityServices"
                           },
                           "promises": {
                             "type": "object",
@@ -5511,25 +5482,7 @@
                             "$ref": "./models/Carrier/workSchedule.json"
                           },
                           "tags": {
-                            "type": "array",
-                            "description": "If no tag is set then \"tags\": null will be returned",
-                            "items": {
-                              "type": "object",
-                              "required": [
-                                "key",
-                                "value"
-                              ],
-                              "properties": {
-                                "key": {
-                                  "type": "string",
-                                  "description": "Label used to define the tag"
-                                },
-                                "value": {
-                                  "type": "string",
-                                  "description": "Value to be applied to the tag"
-                                }
-                              }
-                            }
+                            "$ref": "#/components/schemas/eligibilityTags"
                           }
                         }
                       }
@@ -6738,6 +6691,366 @@
           "id": "l7n6hsqfwzej6"
         },
         "x-internal": false
+      },
+      "parameters": []
+    },
+    "/v2/eligibilities/exchangePlaces": {
+      "post": {
+        "summary": "Eligibilities by exchange place",
+        "operationId": "postEligibilitiesExchangePlaces",
+        "description": "Returns, in a single request, the carriers eligible from each active exchange place (hub) of a store. Designed for multi-hub retailers: the exchange place to query does not need to be known beforehand.\n\n- There is no `picking` location: every active exchange place of the store is a departure point.\n- One entry per carrier / delivery method / exchange place combination: a same carrier can appear several times, with a different `exchangePlaceId`.\n- No delivery promise is computed: the response contains no `promises`, and `delivery.interval` is not expected.\n- The `services` field is optional.",
+        "tags": [
+          "Eligibility"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/postEligibilitiesExchangePlaces"
+              },
+              "examples": {
+                "Default example": {
+                  "value": {
+                    "delivery": {
+                      "location": {
+                        "type": "address",
+                        "addressLine1": "179 Boulevard de Turin",
+                        "postalCode": "59000",
+                        "city": "Lille",
+                        "country": "FR"
+                      }
+                    },
+                    "packages": [
+                      {
+                        "length": {
+                          "value": 15,
+                          "unit": "cm"
+                        },
+                        "width": {
+                          "value": 15,
+                          "unit": "cm"
+                        },
+                        "height": {
+                          "value": 1.2,
+                          "unit": "m"
+                        },
+                        "weight": {
+                          "value": 560,
+                          "unit": "g"
+                        },
+                        "products": [
+                          {
+                            "type": "TYPOLOGY_GENERIC",
+                            "ean": "4dq86zd4q6zd4q64",
+                            "cug": "q56zd4q65d4q",
+                            "label": "Lamp",
+                            "quantity": 1
+                          }
+                        ],
+                        "quantity": 1
+                      }
+                    ],
+                    "storeId": "MAG01"
+                  }
+                },
+                "Example with carrier selection": {
+                  "value": {
+                    "delivery": {
+                      "location": {
+                        "type": "address",
+                        "addressLine1": "179 Boulevard de Turin",
+                        "postalCode": "59000",
+                        "city": "Lille",
+                        "country": "FR"
+                      }
+                    },
+                    "packages": [
+                      {
+                        "length": {
+                          "value": 15,
+                          "unit": "cm"
+                        },
+                        "width": {
+                          "value": 15,
+                          "unit": "cm"
+                        },
+                        "height": {
+                          "value": 1.2,
+                          "unit": "m"
+                        },
+                        "weight": {
+                          "value": 560,
+                          "unit": "g"
+                        },
+                        "products": [
+                          {
+                            "type": "TYPOLOGY_GENERIC",
+                            "ean": "4dq86zd4q6zd4q64",
+                            "cug": "q56zd4q65d4q",
+                            "label": "Lamp",
+                            "quantity": 1
+                          }
+                        ],
+                        "quantity": 1
+                      }
+                    ],
+                    "storeId": "MAG01",
+                    "carrierSelection": {
+                      "mode": "EXCLUSION",
+                      "carrierCodes": [
+                        "chronopost"
+                      ]
+                    }
+                  }
+                },
+                "Example with an exchange place as delivery location": {
+                  "value": {
+                    "delivery": {
+                      "location": {
+                        "type": "exchangePlace",
+                        "id": "HUB-123"
+                      }
+                    },
+                    "packages": [
+                      {
+                        "length": {
+                          "value": 15,
+                          "unit": "cm"
+                        },
+                        "width": {
+                          "value": 15,
+                          "unit": "cm"
+                        },
+                        "height": {
+                          "value": 1.2,
+                          "unit": "m"
+                        },
+                        "weight": {
+                          "value": 560,
+                          "unit": "g"
+                        },
+                        "products": [
+                          {
+                            "type": "TYPOLOGY_GENERIC",
+                            "ean": "4dq86zd4q6zd4q64",
+                            "cug": "q56zd4q65d4q",
+                            "label": "Lamp",
+                            "quantity": 1
+                          }
+                        ],
+                        "quantity": 1
+                      }
+                    ],
+                    "storeId": "MAG01"
+                  }
+                },
+                "Example with zoning, ineligible carriers and carrier score": {
+                  "value": {
+                    "delivery": {
+                      "location": {
+                        "type": "address",
+                        "addressLine1": "179 Boulevard de Turin",
+                        "postalCode": "59000",
+                        "city": "Lille",
+                        "country": "FR"
+                      }
+                    },
+                    "packages": [
+                      {
+                        "length": {
+                          "value": 15,
+                          "unit": "cm"
+                        },
+                        "width": {
+                          "value": 15,
+                          "unit": "cm"
+                        },
+                        "height": {
+                          "value": 1.2,
+                          "unit": "m"
+                        },
+                        "weight": {
+                          "value": 560,
+                          "unit": "g"
+                        },
+                        "products": [
+                          {
+                            "type": "TYPOLOGY_GENERIC",
+                            "ean": "4dq86zd4q6zd4q64",
+                            "cug": "q56zd4q65d4q",
+                            "label": "Lamp",
+                            "quantity": 1
+                          }
+                        ],
+                        "quantity": 1
+                      }
+                    ],
+                    "storeId": "MAG01",
+                    "options": {
+                      "zoning": {
+                        "active": true
+                      },
+                      "ineligibleCarriers": {
+                        "active": true
+                      },
+                      "carrierScore": {
+                        "active": true
+                      }
+                    }
+                  }
+                },
+                "Example without delivery methods": {
+                  "value": {
+                    "delivery": {
+                      "location": {
+                        "type": "address",
+                        "addressLine1": "179 Boulevard de Turin",
+                        "postalCode": "59000",
+                        "city": "Lille",
+                        "country": "FR"
+                      }
+                    },
+                    "packages": [
+                      {
+                        "length": {
+                          "value": 15,
+                          "unit": "cm"
+                        },
+                        "width": {
+                          "value": 15,
+                          "unit": "cm"
+                        },
+                        "height": {
+                          "value": 1.2,
+                          "unit": "m"
+                        },
+                        "weight": {
+                          "value": 560,
+                          "unit": "g"
+                        },
+                        "products": [
+                          {
+                            "type": "TYPOLOGY_GENERIC",
+                            "ean": "4dq86zd4q6zd4q64",
+                            "cug": "q56zd4q65d4q",
+                            "label": "Lamp",
+                            "quantity": 1
+                          }
+                        ],
+                        "quantity": 1
+                      }
+                    ],
+                    "storeId": "MAG01",
+                    "options": {
+                      "withDeliveryMethods": {
+                        "active": false
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "List of eligible carriers, by exchange place.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/eligibilitiesExchangePlaces"
+                },
+                "examples": {
+                  "Example with two exchange places": {
+                    "value": {
+                      "eligibilities": [
+                        {
+                          "carrier": {
+                            "code": "chronopost",
+                            "name": "Chronopost"
+                          },
+                          "exchangePlaceId": "LMMP-HUB-A",
+                          "tags": null,
+                          "services": [
+                            {
+                              "name": "SERVICE_FRONT_HOME"
+                            }
+                          ]
+                        },
+                        {
+                          "carrier": {
+                            "code": "chronopost",
+                            "name": "Chronopost"
+                          },
+                          "exchangePlaceId": "LMMP-HUB-B",
+                          "tags": null,
+                          "services": [
+                            {
+                              "name": "SERVICE_FRONT_HOME"
+                            }
+                          ]
+                        },
+                        {
+                          "carrier": {
+                            "code": "chronopost",
+                            "name": "Chronopost",
+                            "deliveryMethod": {
+                              "code": "SAMEDAY",
+                              "name": "SAMEDAY"
+                            }
+                          },
+                          "exchangePlaceId": "LMMP-HUB-A",
+                          "tags": null,
+                          "services": [
+                            {
+                              "name": "SERVICE_FRONT_HOME"
+                            }
+                          ]
+                        }
+                      ],
+                      "ineligibleCarriers": [
+                        {
+                          "carrierName": "Colissimo",
+                          "exchangePlace": {
+                            "id": "LMMP-HUB-B",
+                            "name": "Hub Paris Nord"
+                          },
+                          "reasons": [
+                            {
+                              "reason": "technical.incidents.carrier.noCarrierZoning",
+                              "message": "Carrier not eligible due to zoning restrictions"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Missing and/or incorrect elements in the body.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "You are not allowed to access this item.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorCode"
+                }
+              }
+            }
+          }
+        }
       },
       "parameters": []
     },
@@ -14847,6 +15160,254 @@
             "nullable": true,
             "description": "Delivery method of the slots. `null` for the standard service of the carrier. Returned only when at least one item of the request's `carrierCodes` carries a `deliveryMethod`.",
             "type": "object"
+          }
+        }
+      },
+      "postEligibilitiesExchangePlaces": {
+        "title": "Eligibilities by exchange place (postEligibilitiesExchangePlaces)",
+        "type": "object",
+        "required": [
+          "storeId",
+          "delivery",
+          "packages"
+        ],
+        "description": "Body of the multi-hub eligibility request. Any field outside this contract (e.g. `picking`, `delivery.interval`, `options.price`) is ignored without error.",
+        "properties": {
+          "storeId": {
+            "type": "string",
+            "description": "Identifier of the store whose active exchange places are queried"
+          },
+          "delivery": {
+            "type": "object",
+            "required": [
+              "location"
+            ],
+            "description": "Information on the delivery location. The `interval` is not expected and is ignored.",
+            "properties": {
+              "location": {
+                "$ref": "#/components/schemas/locationForEligibility"
+              },
+              "contact": {
+                "$ref": "#/components/schemas/contact_eligibility"
+              }
+            }
+          },
+          "packages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/packagesForEligibility"
+            }
+          },
+          "services": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/services"
+              }
+            ],
+            "description": "Delivery services requested. Optional on this route."
+          },
+          "tags": {
+            "$ref": "#/components/schemas/postEligibilitiesV2/properties/tags"
+          },
+          "carrierSelection": {
+            "type": "object",
+            "description": "Restricts the carriers considered. Carriers are designated by code only: a delivery method cannot be targeted on this route.",
+            "properties": {
+              "mode": {
+                "type": "string",
+                "enum": [
+                  "INCLUSION",
+                  "EXCLUSION"
+                ],
+                "description": "`INCLUSION`: only the listed carriers. `EXCLUSION`: all carriers except the listed ones."
+              },
+              "carrierCodes": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Carrier codes"
+              }
+            }
+          },
+          "options": {
+            "type": "object",
+            "description": "List of options. The other options of `POST /v2/eligibilities` (`price`, `sellingPrice`, `distance`, `impact`, `deliveryPromise`, `slot`) are not available on this route and are ignored.\n\nOn this route, `zoning` is evaluated for each exchange place (a carrier can be eligible from one exchange place and not from another), and `ineligibleCarriers` returns the exchange place concerned by each exclusion.",
+            "properties": {
+              "zoning": {
+                "$ref": "#/components/schemas/postEligibilitiesV2/properties/options/properties/zoning"
+              },
+              "ineligibleCarriers": {
+                "$ref": "#/components/schemas/postEligibilitiesV2/properties/options/properties/ineligibleCarriers"
+              },
+              "carrierScore": {
+                "$ref": "#/components/schemas/postEligibilitiesV2/properties/options/properties/carrierScore"
+              },
+              "withDeliveryMethods": {
+                "$ref": "#/components/schemas/postEligibilitiesV2/properties/options/properties/withDeliveryMethods"
+              }
+            }
+          }
+        }
+      },
+      "eligibilitiesExchangePlaces": {
+        "title": "Eligibilities by exchange place (eligibilitiesExchangePlaces)",
+        "type": "object",
+        "description": "A carrier can appear several times: one entry per carrier / delivery method / exchange place combination.",
+        "properties": {
+          "eligibilities": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "carrier",
+                "services"
+              ],
+              "properties": {
+                "carrier": {
+                  "type": "object",
+                  "description": "Eligible carrier",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "description": "Internal carrier code"
+                    },
+                    "name": {
+                      "type": "string",
+                      "description": "Carrier name"
+                    },
+                    "deliveryMethod": {
+                      "allOf": [
+                        {
+                          "$ref": "#/components/schemas/DeliveryMethod"
+                        }
+                      ],
+                      "description": "Delivery method of the eligibility. Returned only for a delivery method other than the standard service."
+                    },
+                    "score": {
+                      "$ref": "#/components/schemas/eligibilityCarrierScore"
+                    }
+                  }
+                },
+                "exchangePlaceId": {
+                  "type": "string",
+                  "description": "Identifier of the exchange place (hub) from which the carrier is eligible. Same value as the `externalPlaceId` of the exchange place."
+                },
+                "tags": {
+                  "$ref": "#/components/schemas/eligibilityTags"
+                },
+                "services": {
+                  "$ref": "#/components/schemas/eligibilityServices"
+                }
+              }
+            }
+          },
+          "ineligibleCarriers": {
+            "type": "array",
+            "description": "Returned only when `options.ineligibleCarriers.active` is `true`.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "carrierName": {
+                  "type": "string"
+                },
+                "deliveryMethod": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/DeliveryMethod"
+                    }
+                  ],
+                  "description": "Delivery method concerned, when the exclusion targets a delivery method rather than the standard service."
+                },
+                "exchangePlace": {
+                  "type": "object",
+                  "description": "Exchange place for which the carrier is ineligible",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "Identifier of the exchange place (`externalPlaceId`)"
+                    },
+                    "name": {
+                      "type": "string",
+                      "nullable": true
+                    }
+                  }
+                },
+                "reasons": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "reason": {
+                        "type": "string",
+                        "description": "Reason code, e.g. `technical.incidents.carrier.noCarrierZoning`"
+                      },
+                      "message": {
+                        "type": "string",
+                        "description": "Readable explanation of the reason"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "eligibilityServices": {
+        "type": "array",
+        "description": "List of delivery services",
+        "items": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "types": {
+              "$ref": "#/components/schemas/pickupPointType"
+            },
+            "categories": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "eligibilityTags": {
+        "type": "array",
+        "description": "If no tag is set then \"tags\": null will be returned",
+        "items": {
+          "type": "object",
+          "required": [
+            "key",
+            "value"
+          ],
+          "properties": {
+            "key": {
+              "type": "string",
+              "description": "Label used to define the tag"
+            },
+            "value": {
+              "type": "string",
+              "description": "Value to be applied to the tag"
+            }
+          }
+        },
+        "nullable": true
+      },
+      "eligibilityCarrierScore": {
+        "type": "object",
+        "properties": {
+          "satisfaction": {
+            "type": "string"
+          },
+          "nps": {
+            "type": "string"
+          },
+          "onTimeDeliveryScore": {
+            "type": "string"
           }
         }
       }
