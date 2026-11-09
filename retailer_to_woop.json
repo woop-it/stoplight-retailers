@@ -3109,6 +3109,155 @@
                       "SERVICE_ASSEMBLY"
                     ]
                   }
+                },
+                "Example with dangerous product": {
+                  "value": {
+                    "orderId": "65z4eq1d6q54zd1",
+                    "referenceNumber": "65q41zdq65z14",
+                    "storeId": "AX645",
+                    "picking": {
+                      "location": {
+                        "type": "address",
+                        "addressLine1": "237 rue du ballon",
+                        "postalCode": "59110",
+                        "city": "La Madeleine",
+                        "country": "FR"
+                      },
+                      "interval": [
+                        {
+                          "start": "2019-11-27T12:00:00+0000",
+                          "end": "2019-11-27T14:00:00+0000"
+                        }
+                      ],
+                      "contact": {
+                        "firstName": "Michel",
+                        "lastName": "Dupont",
+                        "phone": "+33600000000",
+                        "email": "michel.dupont@mail.fr",
+                        "language": "fr",
+                        "timezone": "Europe/Paris"
+                      }
+                    },
+                    "delivery": {
+                      "location": {
+                        "type": "address",
+                        "addressLine1": "165 avenue de Bretagne",
+                        "elevator": true,
+                        "floor": 3,
+                        "postalCode": "59000",
+                        "city": "Lille",
+                        "country": "FR"
+                      },
+                      "interval": [
+                        {
+                          "start": "2019-11-28T13:30:00+0000",
+                          "end": "2019-11-28T14:30:00+0000"
+                        }
+                      ],
+                      "contact": {
+                        "firstName": "Pierre",
+                        "lastName": "Dupond",
+                        "phone": "+33600000000",
+                        "email": "pierre.dupond@mail.fr",
+                        "optIn": {
+                          "survey": [
+                            "MAIL"
+                          ],
+                          "delivery": [
+                            "MAIL",
+                            "SMS"
+                          ]
+                        },
+                        "language": "fr",
+                        "timezone": "Europe/Paris"
+                      }
+                    },
+                    "packages": [
+                      {
+                        "length": {
+                          "value": 40,
+                          "unit": "cm"
+                        },
+                        "width": {
+                          "value": 30,
+                          "unit": "cm"
+                        },
+                        "height": {
+                          "value": 30,
+                          "unit": "cm"
+                        },
+                        "weight": {
+                          "value": 12,
+                          "unit": "kg"
+                        },
+                        "references": [
+                          {
+                            "reference": "123456789A",
+                            "barcode": {
+                              "value": "54fd56g4f5gfd456sd",
+                              "type": "barcode",
+                              "format": "128"
+                            }
+                          },
+                          {
+                            "reference": "123456789B",
+                            "barcode": {
+                              "value": "54fd56g4f5gfd456sdsdsd",
+                              "type": "barcode",
+                              "format": "128"
+                            }
+                          }
+                        ],
+                        "products": [
+                          {
+                            "type": "TYPOLOGY_DANGEROUS",
+                            "ean": "3330000000017",
+                            "cug": "PEINT-GLY-5L",
+                            "label": "Peinture glycéro 5L",
+                            "quantity": 2,
+                            "onuCode": "1263",
+                            "adrClassification": "3",
+                            "technicalName": "PEINTURES",
+                            "packagingCode": "4G",
+                            "packagingType": "III",
+                            "packagingCount": 2,
+                            "quantityCode": "PBT",
+                            "volumeWeight": 10,
+                            "environmentalRisk": false,
+                            "description": "Peinture inflammable"
+                          },
+                          {
+                            "type": "TYPOLOGY_DANGEROUS_LIMITED_QUANTITY",
+                            "ean": "3330000000024",
+                            "cug": "AERO-DEG-400",
+                            "label": "Aérosol dégraissant 400ml",
+                            "quantity": 6,
+                            "environmentalRisk": true
+                          },
+                          {
+                            "type": "TYPOLOGY_DANGEROUS_EXCEPTED_QUANTITY",
+                            "ean": "3330000000031",
+                            "cug": "SOLV-ECH-30",
+                            "label": "Échantillon solvant 30ml",
+                            "quantity": 1,
+                            "packagingCount": 1,
+                            "environmentalRisk": false
+                          }
+                        ],
+                        "quantity": 2,
+                        "attributes": {
+                          "footprint": {
+                            "value": 13,
+                            "unit": "m2"
+                          }
+                        },
+                        "type": "PACKAGE"
+                      }
+                    ],
+                    "services": [
+                      "SERVICE_SELECTED_ROOM"
+                    ]
+                  }
                 }
               }
             }
